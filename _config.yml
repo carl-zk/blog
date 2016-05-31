@@ -68,4 +68,9 @@ theme: landscape
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
-  type:
+  type: git
+  repo: https://github.com/carl-zk/blog
+  branch: gh-pages
+  message: auto-deploy
+  name: carl-zk
+  email: zxfspace@163.com
