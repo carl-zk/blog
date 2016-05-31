@@ -4,7 +4,7 @@
 
 # Site
 title: 一叶轻舟渡万江
-subtitle: 泰山不拒细壤故能成其高；江海不择细流故能就其深
+subtitle: 泰山不拒细壤故能成其高 江海不择细流故能就其深
 description:
 author: carl-zk
 language: 
@@ -63,7 +63,11 @@ pagination_dir: page
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: landscape
+theme: jekyll
+feed:
+  type: atom
+  path: atom.xml
+  limit: 20
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
