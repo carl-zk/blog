@@ -8,7 +8,7 @@ subtitle: 泰山不拒细壤故能成其高 江海不择细流故能就其深
 description:
 author: carl-zk
 language: zh-CN
-timezone:
+timezone: Asia/Shanghai
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'

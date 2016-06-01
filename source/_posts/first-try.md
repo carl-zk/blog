@@ -2,6 +2,7 @@
 title: first try
 date: 2016-06-01 01:09:17
 tags:
+index:
 ---
 
 ### hello world
