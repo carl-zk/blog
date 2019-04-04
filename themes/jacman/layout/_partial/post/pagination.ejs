@@ -21,21 +21,22 @@
 </nav>
 <% } %>
 
-<!-- LiveRe City install code -->
-<div id="lv-container" data-id="city" data-uid="MTAyMC8zMTU5NS84MTU5">
-<script type="text/javascript">
-   (function(d, s) {
-       var j, e = d.getElementsByTagName(s)[0];
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
 
-       if (typeof LivereTower === 'function') { return; }
+<% if(page.comments && theme.comments && theme.comments.gitment){ %>
+    <div id="gitment-comments"></div>    
+<% } %>
 
-       j = d.createElement(s);
-       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
-       j.async = true;
-
-       e.parentNode.insertBefore(j, e);
-   })(document, 'script');
+<script>
+const gitment = new Gitment({
+    id: '<%= page.title.replace(/[^\w\s]/gi, '').substring(0, 49) %>',
+    owner: 'carl-zk',
+    repo: 'comments-store',
+    oauth: {
+        client_id: '<%= theme.comments.gitment.clientId %>',
+        client_secret: '<%= theme.comments.gitment.clientSecret %>'
+    }
+});
+gitment.render(document.getElementById('gitment-comments'));
 </script>
-<noscript>Please activate JavaScript for write a comment in LiveRe</noscript>
-</div>
-<!-- completed City install code -->

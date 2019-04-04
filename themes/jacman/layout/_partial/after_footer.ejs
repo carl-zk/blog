@@ -213,7 +213,8 @@ $(document).ready(function(){
 </script>
 <% } %>
 <% if (theme.mermaid.enable) { %>
-  <script src="<%- config.root %>js/mermaid.min.js"></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/mermaid/<%= theme.mermaid.version %>/mermaid.min.js'></script>
+  <!-- script src="<%- config.root %>js/mermaid.min.js" -->
   <script>
     if (window.mermaid) {
       mermaid.initialize({theme: 'forest'});

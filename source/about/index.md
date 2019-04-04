@@ -11,9 +11,9 @@ date: 2017-03-02 22:38:35
 <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
 <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
-<img src="/blog/about/index/running.jpg" alt="我是驽马" class="img-rounded">
+<img src="http://ppdxz524p.bkt.clouddn.com/about/running.jpg" alt="我是驽马" class="img-rounded">
 <h1>zxfspace@163.com</h1>
-<img src="/blog/about/index/weixin.jpg" alt="不是打赏不是打赏不是打赏" class="img-rounded">
+<img src="http://ppdxz524p.bkt.clouddn.com/about/weixin.jpg" alt="不是打赏不是打赏不是打赏" class="img-rounded">
 <div class="page-header">
   <h1>好了歌 <small><span class="label label-default">红楼梦</span></small></h1>
   <p>世人都晓神仙好，惟有功名忘不了！
@@ -27,7 +27,7 @@ date: 2017-03-02 22:38:35
 
 <center><h1>荣誉截图</h1></center>
 
-<img src="/blog/about/index/p1.jpg" class="img-thumbnail">
-<img src="/blog/about/index/p2.jpg" class="img-thumbnail">
-<img src="/blog/about/index/p3.jpg" class="img-thumbnail">
+<img src="http://ppdxz524p.bkt.clouddn.com/about/p1.jpg" class="img-thumbnail">
+<img src="http://ppdxz524p.bkt.clouddn.com/about/p2.jpg" class="img-thumbnail">
+<img src="http://ppdxz524p.bkt.clouddn.com/about/p3.jpg" class="img-thumbnail">
 </div>
