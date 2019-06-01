@@ -79,22 +79,27 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/blog/2017/08/27/网络编程一/" title="网络编程一" itemprop="url">网络编程一</a>
+      <a href="/blog/2017/09/03/shiro/" title="Shiro" itemprop="url">Shiro</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/blog/about" title="carl-zk" target="_blank" itemprop="author">carl-zk</a>
 		
   </p><p class="article-time">
-    <time datetime="2017-08-27T07:51:45.000Z" itemprop="datePublished"> 发表于 2017-08-27</time>
+    <time datetime="2017-09-03T06:23:57.000Z" itemprop="datePublished"> 发表于 2017-09-03</time>
     
   </p>
 </header>
     <div class="article-content">
         
-        <h3 id="网络不同层的协议"><a href="#网络不同层的协议" class="headerlink" title="网络不同层的协议"></a>网络不同层的协议</h3><p><img src="/blog/2017/08/27/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%E4%B8%80/net-protocol.png" alt></p>
-<p>传输层主要协议：<br>TCP(Transmission Control Protocol)<br>UDP(User Datagram Protocol)</p>
-<p>Java支持的协议只有TCP和UDP，以及建立在它们之上的应用层协议。</p>
+        <blockquote>
+<p>好的老师，能让你事半功倍、信心倍增。</p>
+</blockquote>
+<p><a href="https://shiro.apache.org/" target="_blank" rel="noopener">shiro.apache.org</a><br><a href="http://jinnianshilongnian.iteye.com/blog/2018398" target="_blank" rel="noopener">跟我学shiro</a></p>
+<p>shiro是一个安全框架，主要模块有认证(Authentication)、授权(Authorization)、加密(Cryptography)、会话管理(Session Management).</p>
+<p>/WEB-INF/shiro.ini<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">[main]</span><br><span class="line">securityManager = auth.MySecurityManager</span><br><span class="line">myRealm = auth.MyRealm</span><br><span class="line">securityManager.realm = $myRealm</span><br><span class="line">sessionManager = org.apache.shiro.web.session.mgt.DefaultWebSessionManager</span><br><span class="line">securityManager.sessionManager = $sessionManager</span><br><span class="line">cacheManager = org.apache.shiro.cache.MemoryConstrainedCacheManager</span><br><span class="line">securityManager.cacheManager = $cacheManager</span><br><span class="line">authc.loginUrl = /login</span><br><span class="line"></span><br><span class="line">[urls]</span><br><span class="line">/login = authc</span><br><span class="line">/houses/cowshed.jsp = perms[visit:cowshed]</span><br><span class="line">/houses/palace.jsp = authc,roles[admin]</span><br><span class="line">/users/** = authc,roles[admin]</span><br><span class="line">/pages/** = authc,roles[admin]</span><br><span class="line">/logout = logout</span><br><span class="line"></span><br><span class="line"># -----------------------------------------------------------------------------</span><br><span class="line"># Users and their (optional) assigned roles</span><br><span class="line"># username = password, role1, role2, ..., roleN</span><br><span class="line"># -----------------------------------------------------------------------------</span><br><span class="line">[users]</span><br><span class="line">root = passwd, admin</span><br><span class="line">guest = guest, guest</span><br><span class="line">presidentskroob = 12345, president</span><br><span class="line">darkhelmet = ludicrousspeed, darklord, schwartz</span><br><span class="line">lonestarr = vespa, goodguy, schwartz</span><br><span class="line"></span><br><span class="line"># -----------------------------------------------------------------------------</span><br><span class="line"># Roles with assigned permissions</span><br><span class="line"># roleName = perm1, perm2, ..., permN</span><br><span class="line"># -----------------------------------------------------------------------------</span><br><span class="line">[roles]</span><br><span class="line">admin = *</span><br><span class="line">guest = visit:cowshed</span><br><span class="line">schwartz = lightsaber:*</span><br><span class="line">goodguy = winnebago:drive:eagle5</span><br></pre></td></tr></table></figure></p>
+<h4 id="main"><a href="#main" class="headerlink" title="[main]"></a>[main]</h4><p><code>securityManager.realm = $myRealm</code>  通过反射调用manager的setRealm方法</p>
+<h4 id="urls"><a href="#urls" class="headerlink" title="[urls]"></a>[urls]</h4><p><code>/login = authc</code>  有authc就每次都触发一次认证<br><code>/houses/cowshed.jsp = perms[visit:cowshed]</code> 多个用逗号隔开<br><code>/houses/palace.jsp = authc,roles[admin]</code>  多个用逗号隔开<br>这里的urls是有顺序的，从上到下依次匹配，所以写时要注意。</p>
 
         
         
@@ -104,11 +109,6 @@
     </div>
     <footer class="article-footer clearfix">
 <div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/blog/categories/java/">java</a>
-</div>
 
 
 </div>
@@ -132,7 +132,7 @@
 
 
   <nav id="page-nav" class="clearfix">
-    <a class="extend prev" rel="prev" href="/blog/page/58/"><span></span>Prev</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/57/">57</a><a class="page-number" href="/blog/page/58/">58</a><span class="page-number current">59</span><a class="page-number" href="/blog/page/60/">60</a><a class="page-number" href="/blog/page/61/">61</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/175/">175</a><a class="extend next" rel="next" href="/blog/page/60/">Next<span></span></a>
+    <a class="extend prev" rel="prev" href="/blog/page/58/"><span></span>Prev</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/57/">57</a><a class="page-number" href="/blog/page/58/">58</a><span class="page-number current">59</span><a class="page-number" href="/blog/page/60/">60</a><a class="page-number" href="/blog/page/61/">61</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/176/">176</a><a class="extend next" rel="next" href="/blog/page/60/">Next<span></span></a>
   </nav>
 
 </div>
@@ -192,11 +192,11 @@
 			
 		
 			
-				<li><a href="/blog/tags/oracle/" title="oracle">oracle<sup>6</sup></a></li>
+				<li><a href="/blog/tags/javascript/" title="javascript">javascript<sup>6</sup></a></li>
 			
 		
 			
-				<li><a href="/blog/tags/javascript/" title="javascript">javascript<sup>6</sup></a></li>
+				<li><a href="/blog/tags/oracle/" title="oracle">oracle<sup>6</sup></a></li>
 			
 		
 			
@@ -208,7 +208,7 @@
 			
 		
 			
-				<li><a href="/blog/tags/spring/" title="spring">spring<sup>3</sup></a></li>
+				<li><a href="/blog/tags/LeetCode/" title="LeetCode">LeetCode<sup>3</sup></a></li>
 			
 		
 			
@@ -216,11 +216,7 @@
 			
 		
 			
-				<li><a href="/blog/tags/LeetCode/" title="LeetCode">LeetCode<sup>3</sup></a></li>
-			
-		
-			
-				<li><a href="/blog/tags/python/" title="python">python<sup>2</sup></a></li>
+				<li><a href="/blog/tags/spring/" title="spring">spring<sup>3</sup></a></li>
 			
 		
 			
@@ -229,6 +225,10 @@
 		
 			
 				<li><a href="/blog/tags/jenkins/" title="jenkins">jenkins<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/blog/tags/python/" title="python">python<sup>2</sup></a></li>
 			
 		
 			
@@ -244,11 +244,11 @@
 			
 		
 			
-				<li><a href="/blog/tags/oauth2/" title="oauth2">oauth2<sup>1</sup></a></li>
+				<li><a href="/blog/tags/mockito/" title="mockito">mockito<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/blog/tags/redis/" title="redis">redis<sup>1</sup></a></li>
+				<li><a href="/blog/tags/oauth2/" title="oauth2">oauth2<sup>1</sup></a></li>
 			
 		
 			

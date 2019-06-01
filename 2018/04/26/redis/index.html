@@ -11,18 +11,18 @@
     
 
     
-    <meta name="description" content="Redis 安装启动download123456789mv redis.tar.gz /redistar xvzf redis.tar.gzmv redis-4.0 servercd servermakemake testcd ..cp server/redis.conf .cp server/utils/redis_init_script . 目录结构：1234567/redis    /ser">
+    <meta name="description" content="docker run –rm -p 6379:6379 redis –requirepass “password”注意：redis-cli 连接需密码的server时，不输密码也可以进入命令模式，只有当执行命令时才报错。  Redis 安装启动download123456789mv redis.tar.gz /redistar xvzf redis.tar.gzmv redis-4.0 serv">
 <meta name="keywords" content="redis">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Redis">
 <meta property="og:url" content="https://github.com/carl-zk/blog/2018/04/26/redis/index.html">
 <meta property="og:site_name" content="一叶轻舟渡万江">
-<meta property="og:description" content="Redis 安装启动download123456789mv redis.tar.gz /redistar xvzf redis.tar.gzmv redis-4.0 servercd servermakemake testcd ..cp server/redis.conf .cp server/utils/redis_init_script . 目录结构：1234567/redis    /ser">
+<meta property="og:description" content="docker run –rm -p 6379:6379 redis –requirepass “password”注意：redis-cli 连接需密码的server时，不输密码也可以进入命令模式，只有当执行命令时才报错。  Redis 安装启动download123456789mv redis.tar.gz /redistar xvzf redis.tar.gzmv redis-4.0 serv">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-04-21T10:16:30.534Z">
+<meta property="og:updated_time" content="2019-05-16T14:46:43.326Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Redis">
-<meta name="twitter:description" content="Redis 安装启动download123456789mv redis.tar.gz /redistar xvzf redis.tar.gzmv redis-4.0 servercd servermakemake testcd ..cp server/redis.conf .cp server/utils/redis_init_script . 目录结构：1234567/redis    /ser">
+<meta name="twitter:description" content="docker run –rm -p 6379:6379 redis –requirepass “password”注意：redis-cli 连接需密码的server时，不输密码也可以进入命令模式，只有当执行命令时才报错。  Redis 安装启动download123456789mv redis.tar.gz /redistar xvzf redis.tar.gzmv redis-4.0 serv">
 
     
     <link rel="alternative" href="/atom.xml" title="一叶轻舟渡万江" type="application/atom+xml">
@@ -102,7 +102,10 @@
 		
 		</div>
 		
-		<h2 id="Redis-安装启动"><a href="#Redis-安装启动" class="headerlink" title="Redis 安装启动"></a>Redis 安装启动</h2><p><a href="https://redis.io/download" target="_blank" rel="noopener">download</a><br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">mv redis.tar.gz /redis</span><br><span class="line">tar xvzf redis.tar.gz</span><br><span class="line">mv redis-4.0 server</span><br><span class="line"><span class="built_in">cd</span> server</span><br><span class="line">make</span><br><span class="line">make <span class="built_in">test</span></span><br><span class="line"><span class="built_in">cd</span> ..</span><br><span class="line">cp server/redis.conf .</span><br><span class="line">cp server/utils/redis_init_script .</span><br></pre></td></tr></table></figure></p>
+		<blockquote>
+<p>docker run –rm -p 6379:6379 redis –requirepass “password”<br>注意：redis-cli 连接需密码的server时，不输密码也可以进入命令模式，只有当执行命令时才报错。</p>
+</blockquote>
+<h2 id="Redis-安装启动"><a href="#Redis-安装启动" class="headerlink" title="Redis 安装启动"></a>Redis 安装启动</h2><p><a href="https://redis.io/download" target="_blank" rel="noopener">download</a><br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">mv redis.tar.gz /redis</span><br><span class="line">tar xvzf redis.tar.gz</span><br><span class="line">mv redis-4.0 server</span><br><span class="line"><span class="built_in">cd</span> server</span><br><span class="line">make</span><br><span class="line">make <span class="built_in">test</span></span><br><span class="line"><span class="built_in">cd</span> ..</span><br><span class="line">cp server/redis.conf .</span><br><span class="line">cp server/utils/redis_init_script .</span><br></pre></td></tr></table></figure></p>
 <p>目录结构：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">/redis</span><br><span class="line">    /server</span><br><span class="line">    /storage</span><br><span class="line">    redis.conf</span><br><span class="line">    redis_init_script</span><br><span class="line">    start</span><br><span class="line">    stop</span><br></pre></td></tr></table></figure></p>
 <p>redis.conf<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">port 6397</span><br><span class="line">pidfile /redis/redis_<span class="variable">$&#123;port&#125;</span>.pid</span><br><span class="line">logfile <span class="string">"/redis/my.log"</span></span><br><span class="line">dir /redis/storage</span><br><span class="line"><span class="comment">#bind 127.0.0.1</span></span><br><span class="line">requirepass password</span><br></pre></td></tr></table></figure></p>
 <p>redis_init_script<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># Simple Redis init.d script conceived to work on Linux systems</span></span><br><span class="line"><span class="comment"># as it does use of the /proc filesystem.</span></span><br><span class="line"></span><br><span class="line">REDISPORT=6397</span><br><span class="line">PASSWORD=password</span><br><span class="line">EXEC=/redis/server/src/redis-server</span><br><span class="line">CLIEXEC=/redis/server/src/redis-cli</span><br><span class="line"></span><br><span class="line">PIDFILE=/redis/redis_<span class="variable">$&#123;REDISPORT&#125;</span>.pid</span><br><span class="line">CONF=<span class="string">"/redis/redis.conf"</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">case</span> <span class="string">"<span class="variable">$1</span>"</span> <span class="keyword">in</span></span><br><span class="line">    start)</span><br><span class="line">        <span class="keyword">if</span> [ -f <span class="variable">$PIDFILE</span> ]</span><br><span class="line">        <span class="keyword">then</span></span><br><span class="line">                <span class="built_in">echo</span> <span class="string">"<span class="variable">$PIDFILE</span> exists, process is already running or crashed"</span></span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">                <span class="built_in">echo</span> <span class="string">"Starting Redis server..."</span></span><br><span class="line">                <span class="variable">$EXEC</span> <span class="variable">$CONF</span></span><br><span class="line">        <span class="keyword">fi</span></span><br><span class="line">        ;;</span><br><span class="line">    stop)</span><br><span class="line">        <span class="built_in">echo</span> <span class="string">"Stopping ..."</span></span><br><span class="line">        <span class="variable">$CLIEXEC</span> -p <span class="variable">$REDISPORT</span> -a <span class="variable">$PASSWORD</span> shutdown</span><br><span class="line">        <span class="keyword">while</span> [ -x /proc/<span class="variable">$&#123;PID&#125;</span> ]; <span class="keyword">do</span></span><br><span class="line">            <span class="built_in">echo</span> <span class="string">"Waiting for Redis to shutdown ..."</span></span><br><span class="line">            sleep 1</span><br><span class="line">            <span class="keyword">done</span></span><br><span class="line">        <span class="built_in">echo</span> <span class="string">"Redis stopped"</span></span><br><span class="line">        ;;</span><br><span class="line">    *)</span><br><span class="line">        <span class="built_in">echo</span> <span class="string">"Please use start or stop as first argument"</span></span><br><span class="line">        ;;</span><br><span class="line"><span class="keyword">esac</span></span><br></pre></td></tr></table></figure></p>
@@ -278,11 +281,11 @@ gitment.render(document.getElementById('gitment-comments'));
 			
 		
 			
-				<li><a href="/blog/tags/oracle/" title="oracle">oracle<sup>6</sup></a></li>
+				<li><a href="/blog/tags/javascript/" title="javascript">javascript<sup>6</sup></a></li>
 			
 		
 			
-				<li><a href="/blog/tags/javascript/" title="javascript">javascript<sup>6</sup></a></li>
+				<li><a href="/blog/tags/oracle/" title="oracle">oracle<sup>6</sup></a></li>
 			
 		
 			
@@ -294,7 +297,7 @@ gitment.render(document.getElementById('gitment-comments'));
 			
 		
 			
-				<li><a href="/blog/tags/spring/" title="spring">spring<sup>3</sup></a></li>
+				<li><a href="/blog/tags/LeetCode/" title="LeetCode">LeetCode<sup>3</sup></a></li>
 			
 		
 			
@@ -302,11 +305,7 @@ gitment.render(document.getElementById('gitment-comments'));
 			
 		
 			
-				<li><a href="/blog/tags/LeetCode/" title="LeetCode">LeetCode<sup>3</sup></a></li>
-			
-		
-			
-				<li><a href="/blog/tags/python/" title="python">python<sup>2</sup></a></li>
+				<li><a href="/blog/tags/spring/" title="spring">spring<sup>3</sup></a></li>
 			
 		
 			
@@ -315,6 +314,10 @@ gitment.render(document.getElementById('gitment-comments'));
 		
 			
 				<li><a href="/blog/tags/jenkins/" title="jenkins">jenkins<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/blog/tags/python/" title="python">python<sup>2</sup></a></li>
 			
 		
 			
@@ -330,11 +333,11 @@ gitment.render(document.getElementById('gitment-comments'));
 			
 		
 			
-				<li><a href="/blog/tags/oauth2/" title="oauth2">oauth2<sup>1</sup></a></li>
+				<li><a href="/blog/tags/mockito/" title="mockito">mockito<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/blog/tags/redis/" title="redis">redis<sup>1</sup></a></li>
+				<li><a href="/blog/tags/oauth2/" title="oauth2">oauth2<sup>1</sup></a></li>
 			
 		
 			

@@ -79,28 +79,28 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/blog/2017/02/18/外观模式/" title="外观模式" itemprop="url">外观模式</a>
+      <a href="/blog/2017/02/18/建造者模式/" title="建造者模式" itemprop="url">建造者模式</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/blog/about" title="carl-zk" target="_blank" itemprop="author">carl-zk</a>
 		
   </p><p class="article-time">
-    <time datetime="2017-02-18T05:49:13.000Z" itemprop="datePublished"> 发表于 2017-02-18</time>
+    <time datetime="2017-02-18T06:37:42.000Z" itemprop="datePublished"> 发表于 2017-02-18</time>
     
   </p>
 </header>
     <div class="article-content">
         
         <blockquote>
-<p>为子系统中的一组接口提供一个一致的界面,此模式定义了一个高层接口,这个接口使得这一子系统更加容易使用.<br>首先,在设计初期阶段应该要有意识的将不同的两个层分离.(如经典三层架构)<br>其次,在开发阶段,子系统往往因为不断的重构演化而变的越来越复杂,增加外观Facade可以提供一个简单的接口,减少它们之间的依赖.<br>第三,在维护一个遗留的大型系统时,可能这个系统已经非常难以维护和扩展了,为新系统开发一个外观Facade类,来提供设计粗糙或高度复杂的遗留代码的比较清晰简单的接口,让新系统与Facade对象交互,Facade与遗留代码交互所有复杂的工作.</p>
+<p>将一个复杂对象的构建和它的表示分离,使得同样的构建过程可以创建不同的表示.<br>用户只需指定需要构建的类型,过程和细节不需知道.</p>
 </blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> facade;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by hero on 17-2-18.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StockA</span> </span>&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> facade;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by hero on 17-2-18.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StockB</span> </span>&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> facade;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by hero on 17-2-18.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">NationalDebt</span> </span>&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> facade;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by hero on 17-2-18.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Fund</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> StockA stockA;</span><br><span class="line">    <span class="keyword">private</span> StockB stockB;</span><br><span class="line">    <span class="keyword">private</span> NationalDebt nationalDebt;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">buy</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="comment">//买入3支股票</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sell</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="comment">//卖出国债</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> facade;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by hero on 17-2-18.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Fund fund = <span class="keyword">new</span> Fund();</span><br><span class="line"></span><br><span class="line">        fund.buy();</span><br><span class="line">        fund.sell();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><img src="facade.svg" alt></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> builder;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by hero on 17-2-18.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Builder</span> </span>&#123;</span><br><span class="line">    <span class="comment">/** 不可缺少的步骤 */</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">hands</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">legs</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> builder;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by hero on 17-2-18.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FatBuilder</span> <span class="keyword">implements</span> <span class="title">Builder</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">hands</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"胖手"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">legs</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"胖腿"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> builder;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by hero on 17-2-18.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ThinBuilder</span> <span class="keyword">implements</span> <span class="title">Builder</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">hands</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"瘦手"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">legs</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"瘦腿"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> builder;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by hero on 17-2-18.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Director</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Builder builder;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Director</span><span class="params">(Builder builder)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.builder = builder;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/** 封装具体过程 */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">build</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        builder.hands();</span><br><span class="line">        builder.legs();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setBuilder</span><span class="params">(Builder builder)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.builder = builder;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> builder;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by hero on 17-2-18.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Director director = <span class="keyword">new</span> Director(<span class="keyword">new</span> FatBuilder());</span><br><span class="line">        director.build();</span><br><span class="line"></span><br><span class="line">        director.setBuilder(<span class="keyword">new</span> ThinBuilder());</span><br><span class="line">        director.build();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="builder.svg" alt></p>
 
         
         
@@ -138,7 +138,7 @@
 
 
   <nav id="page-nav" class="clearfix">
-    <a class="extend prev" rel="prev" href="/blog/page/114/"><span></span>Prev</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/113/">113</a><a class="page-number" href="/blog/page/114/">114</a><span class="page-number current">115</span><a class="page-number" href="/blog/page/116/">116</a><a class="page-number" href="/blog/page/117/">117</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/175/">175</a><a class="extend next" rel="next" href="/blog/page/116/">Next<span></span></a>
+    <a class="extend prev" rel="prev" href="/blog/page/114/"><span></span>Prev</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/113/">113</a><a class="page-number" href="/blog/page/114/">114</a><span class="page-number current">115</span><a class="page-number" href="/blog/page/116/">116</a><a class="page-number" href="/blog/page/117/">117</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/176/">176</a><a class="extend next" rel="next" href="/blog/page/116/">Next<span></span></a>
   </nav>
 
 </div>
@@ -198,11 +198,11 @@
 			
 		
 			
-				<li><a href="/blog/tags/oracle/" title="oracle">oracle<sup>6</sup></a></li>
+				<li><a href="/blog/tags/javascript/" title="javascript">javascript<sup>6</sup></a></li>
 			
 		
 			
-				<li><a href="/blog/tags/javascript/" title="javascript">javascript<sup>6</sup></a></li>
+				<li><a href="/blog/tags/oracle/" title="oracle">oracle<sup>6</sup></a></li>
 			
 		
 			
@@ -214,7 +214,7 @@
 			
 		
 			
-				<li><a href="/blog/tags/spring/" title="spring">spring<sup>3</sup></a></li>
+				<li><a href="/blog/tags/LeetCode/" title="LeetCode">LeetCode<sup>3</sup></a></li>
 			
 		
 			
@@ -222,11 +222,7 @@
 			
 		
 			
-				<li><a href="/blog/tags/LeetCode/" title="LeetCode">LeetCode<sup>3</sup></a></li>
-			
-		
-			
-				<li><a href="/blog/tags/python/" title="python">python<sup>2</sup></a></li>
+				<li><a href="/blog/tags/spring/" title="spring">spring<sup>3</sup></a></li>
 			
 		
 			
@@ -235,6 +231,10 @@
 		
 			
 				<li><a href="/blog/tags/jenkins/" title="jenkins">jenkins<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/blog/tags/python/" title="python">python<sup>2</sup></a></li>
 			
 		
 			
@@ -250,11 +250,11 @@
 			
 		
 			
-				<li><a href="/blog/tags/oauth2/" title="oauth2">oauth2<sup>1</sup></a></li>
+				<li><a href="/blog/tags/mockito/" title="mockito">mockito<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/blog/tags/redis/" title="redis">redis<sup>1</sup></a></li>
+				<li><a href="/blog/tags/oauth2/" title="oauth2">oauth2<sup>1</sup></a></li>
 			
 		
 			

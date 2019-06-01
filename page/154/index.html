@@ -79,36 +79,31 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/blog/2016/06/22/Leftmost-Digit/" title="Leftmost Digit" itemprop="url">Leftmost Digit</a>
+      <a href="/blog/2016/06/22/Largest-prime-factor/" title="Largest Prime Factor" itemprop="url">Largest Prime Factor</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/blog/about" title="carl-zk" target="_blank" itemprop="author">carl-zk</a>
 		
   </p><p class="article-time">
-    <time datetime="2016-06-22T09:08:07.000Z" itemprop="datePublished"> 发表于 2016-06-22</time>
+    <time datetime="2016-06-22T09:45:58.000Z" itemprop="datePublished"> 发表于 2016-06-22</time>
     
   </p>
 </header>
     <div class="article-content">
         
-        <p><a href="http://acm.hdu.edu.cn/game/entry/problem/show.php?chapterid=2&amp;sectionid=1&amp;problemid=11" target="_blank" rel="noopener">题目链接</a><br>Leftmost Digit</p>
-<p>Time Limit: 2000/1000 MS (Java/Others) Memory Limit: 65536/32768 K (Java/Others)<br>Total Submission(s): 3331 Accepted Submission(s): 1464</p>
-<p>Problem Description<br>Given a positive integer N, you should output the leftmost digit of N^N.</p>
-<p>Input<br>The input contains several test cases. The first line of the input is a single integer T which is the number of test cases. T test cases follow.<br>Each test case contains a single positive integer N(1&lt;=N&lt;=1,000,000,000).</p>
-<p>Output<br>For each test case, you should output the leftmost digit of N^N.</p>
-<p>Sample Input<br>2<br>3<br>4</p>
-<p>Sample Output<br>2<br>2</p>
-<p>Hint</p>
-<p>In the first case, 3 <em> 3 </em> 3 = 27, so the leftmost digit is 2.<br>In the second case, 4 <em> 4 </em> 4 * 4 = 256, so the leftmost digit is 2.</p>
+        <p><a href="http://acm.hdu.edu.cn/game/entry/problem/show.php?chapterid=2&amp;sectionid=1&amp;problemid=5" target="_blank" rel="noopener">题目链接</a><br>Problem Description<br>Everybody knows any number can be combined by the prime number.<br>Now, your task is telling me what position of the largest prime factor.<br>The position of prime 2 is 1, prime 3 is 2, and prime 5 is 3, etc.<br>Specially, LPF(1) = 0.</p>
+<p>Input<br>Each line will contain one integer n(0 &lt; n &lt; 1000000).</p>
+<p>Output<br>Output the LPF(n).</p>
+<p>Sample Input<br>1<br>2<br>3<br>4<br>5</p>
+<p>Sample Output<br>0<br>1<br>2<br>1<br>3</p>
 <hr>
 
+<p>求一个数的最大质因数!<br>我看完题目后理解成了,一个数可以由质数组合而成,求组合的最大质数.结果就陷入了无尽的深渊,什么整数划分动态规划都想了,结果一搜原来是求的最大质因数.kill me.</p>
 <blockquote>
-<p>给参考博主点赞!感觉我的数学已经废了,忘记log函数了.<br>对double类型取整要用long long 类型, 否则AC不过.</p>
+<p>这里直接将下标写为最大质数的下标.</p>
 </blockquote>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;set&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAX 1000001</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">leftMostDigit</span><span class="params">(<span class="keyword">long</span> <span class="keyword">long</span> d)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">double</span> p = d * <span class="built_in">log10</span>(d);</span><br><span class="line">    p -= (<span class="keyword">long</span> <span class="keyword">long</span>) p;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">pow</span>(<span class="number">10</span>, p);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n, d;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;n);</span><br><span class="line">    <span class="keyword">while</span>(n--)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;d);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, leftMostDigit(d));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><a href="http://blog.sina.com.cn/s/blog_64e467d60100zznb.html" target="_blank" rel="noopener">参考链接</a></p>
-
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;set&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAX 1000001</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> prime[MAX];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">memset</span>(prime, <span class="number">0</span>, <span class="keyword">sizeof</span>(prime));</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">2</span>, k = <span class="number">1</span>; i&lt;MAX; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(!prime[i])</span><br><span class="line">        &#123;</span><br><span class="line">            prime[i] = k++;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">2</span>; j * i &lt; MAX; j++)</span><br><span class="line">            &#123;</span><br><span class="line">                prime[j * i] = prime[i];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n;</span><br><span class="line">    init();</span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;n)!=EOF)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, prime[n]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
         
         
         <p class="article-more-link">
@@ -145,7 +140,7 @@
 
 
   <nav id="page-nav" class="clearfix">
-    <a class="extend prev" rel="prev" href="/blog/page/153/"><span></span>Prev</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/152/">152</a><a class="page-number" href="/blog/page/153/">153</a><span class="page-number current">154</span><a class="page-number" href="/blog/page/155/">155</a><a class="page-number" href="/blog/page/156/">156</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/175/">175</a><a class="extend next" rel="next" href="/blog/page/155/">Next<span></span></a>
+    <a class="extend prev" rel="prev" href="/blog/page/153/"><span></span>Prev</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/152/">152</a><a class="page-number" href="/blog/page/153/">153</a><span class="page-number current">154</span><a class="page-number" href="/blog/page/155/">155</a><a class="page-number" href="/blog/page/156/">156</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/176/">176</a><a class="extend next" rel="next" href="/blog/page/155/">Next<span></span></a>
   </nav>
 
 </div>
@@ -205,11 +200,11 @@
 			
 		
 			
-				<li><a href="/blog/tags/oracle/" title="oracle">oracle<sup>6</sup></a></li>
+				<li><a href="/blog/tags/javascript/" title="javascript">javascript<sup>6</sup></a></li>
 			
 		
 			
-				<li><a href="/blog/tags/javascript/" title="javascript">javascript<sup>6</sup></a></li>
+				<li><a href="/blog/tags/oracle/" title="oracle">oracle<sup>6</sup></a></li>
 			
 		
 			
@@ -221,7 +216,7 @@
 			
 		
 			
-				<li><a href="/blog/tags/spring/" title="spring">spring<sup>3</sup></a></li>
+				<li><a href="/blog/tags/LeetCode/" title="LeetCode">LeetCode<sup>3</sup></a></li>
 			
 		
 			
@@ -229,11 +224,7 @@
 			
 		
 			
-				<li><a href="/blog/tags/LeetCode/" title="LeetCode">LeetCode<sup>3</sup></a></li>
-			
-		
-			
-				<li><a href="/blog/tags/python/" title="python">python<sup>2</sup></a></li>
+				<li><a href="/blog/tags/spring/" title="spring">spring<sup>3</sup></a></li>
 			
 		
 			
@@ -242,6 +233,10 @@
 		
 			
 				<li><a href="/blog/tags/jenkins/" title="jenkins">jenkins<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/blog/tags/python/" title="python">python<sup>2</sup></a></li>
 			
 		
 			
@@ -257,11 +252,11 @@
 			
 		
 			
-				<li><a href="/blog/tags/oauth2/" title="oauth2">oauth2<sup>1</sup></a></li>
+				<li><a href="/blog/tags/mockito/" title="mockito">mockito<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/blog/tags/redis/" title="redis">redis<sup>1</sup></a></li>
+				<li><a href="/blog/tags/oauth2/" title="oauth2">oauth2<sup>1</sup></a></li>
 			
 		
 			

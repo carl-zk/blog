@@ -79,27 +79,35 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/blog/2018/04/01/Add-Two-Numbers/" title="Add Two Numbers" itemprop="url">Add Two Numbers</a>
+      <a href="/blog/2018/04/01/Longest-Substring-no-Repeat/" title="Longest Substring No Repeat" itemprop="url">Longest Substring No Repeat</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/blog/about" title="carl-zk" target="_blank" itemprop="author">carl-zk</a>
 		
   </p><p class="article-time">
-    <time datetime="2018-03-31T17:25:04.000Z" itemprop="datePublished"> 发表于 2018-04-01</time>
+    <time datetime="2018-04-01T02:46:40.000Z" itemprop="datePublished"> 发表于 2018-04-01</time>
     
   </p>
 </header>
     <div class="article-content">
         
         <blockquote>
-<p>水题系列</p>
+<p>没有所谓的水题，只有解题的思想够不够先进。</p>
 </blockquote>
-<p>You are given two non-empty linked lists representing two non-negative integers. The digits are stored in reverse order and each of their nodes contain a single digit. Add the two numbers and return it as a linked list.</p>
-<p>You may assume the two numbers do not contain any leading zero, except the number 0 itself.</p>
-<p>Example<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Input: (2 -&gt; 4 -&gt; 3) + (5 -&gt; 6 -&gt; 4)</span><br><span class="line">Output: 7 -&gt; 0 -&gt; 8</span><br><span class="line">Explanation: 342 + 465 = 807.</span><br></pre></td></tr></table></figure></p>
-<p>两个 list 相加，考虑进位即可。</p>
-<p><a href="https://leetcode.com/problems/add-two-numbers/description/" target="_blank" rel="noopener">add-two-numbers</a><br><code>AC code</code><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * public class ListNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     ListNode next;</span></span><br><span class="line"><span class="comment"> *     ListNode(int x) &#123; val = x; &#125;</span></span><br><span class="line"><span class="comment"> * &#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">            <span class="function"><span class="keyword">public</span> ListNode <span class="title">addTwoNumbers</span><span class="params">(ListNode l1, ListNode l2)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (l1 == <span class="keyword">null</span>) <span class="keyword">return</span> l2;</span><br><span class="line">        <span class="keyword">if</span> (l2 == <span class="keyword">null</span>) <span class="keyword">return</span> l1;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> upper = <span class="number">0</span>;</span><br><span class="line">        ListNode list = <span class="keyword">new</span> ListNode(l1.val + l2.val), t = list;</span><br><span class="line">        <span class="keyword">if</span> (list.val &gt; <span class="number">9</span>) &#123;</span><br><span class="line">            list.val -= <span class="number">10</span>;</span><br><span class="line">            upper = <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        l1 = l1.next;</span><br><span class="line">        l2 = l2.next;</span><br><span class="line">        <span class="keyword">while</span> (l1 != <span class="keyword">null</span> &amp;&amp; l2 != <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">int</span> val = l1.val + l2.val + upper;</span><br><span class="line">            <span class="keyword">if</span> (val &gt; <span class="number">9</span>) &#123;</span><br><span class="line">                upper = <span class="number">1</span>;</span><br><span class="line">                val -= <span class="number">10</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                upper = <span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            ListNode next = <span class="keyword">new</span> ListNode(val);</span><br><span class="line">            t.next = next;</span><br><span class="line">            t = next;</span><br><span class="line">            l1 = l1.next;</span><br><span class="line">            l2 = l2.next;</span><br><span class="line">        &#125;</span><br><span class="line">        l1 = l1 == <span class="keyword">null</span> ? l2 : l1;</span><br><span class="line">        <span class="keyword">while</span> (l1 != <span class="keyword">null</span>) &#123;</span><br><span class="line">            l1.val += upper;</span><br><span class="line">            <span class="keyword">if</span> (l1.val &gt; <span class="number">9</span>) &#123;</span><br><span class="line">                upper = <span class="number">1</span>;</span><br><span class="line">                l1.val -= <span class="number">10</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                upper = <span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            t.next = l1;</span><br><span class="line">            t = l1;</span><br><span class="line">            l1 = l1.next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (upper &gt; <span class="number">0</span>) &#123;</span><br><span class="line">            t.next = <span class="keyword">new</span> ListNode(<span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> list;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>Given a string, find the length of the longest substring without repeating characters.</p>
+<p>Examples:<br>Given “abcabcbb”, the answer is “abc”, which the length is 3.<br>Given “bbbbb”, the answer is “b”, with the length of 1.<br>Given “pwwkew”, the answer is “wke”, with the length of 3. Note that the answer must be a substring, “pwke” is a subsequence and not a substring.</p>
+<p>需要做两项工作：</p>
+<ol>
+<li>查字符是否与当前连续子串重复；</li>
+<li>计算当前子串长度；</li>
+</ol>
+<p>用一个 HashMap&lt;char, int&gt; 来保存 &lt;字符, 字符所在位置下标&gt;，用 maxlen 来保存最长不重复子串长度，用 i 保存当前子串起始坐标，遍历字符串数组：</p>
+<ol>
+<li>根据 Integer loc = map.get(char), loc == null || loc &lt; i 来判断是否重复;</li>
+<li>当重复时，子串长度不可能增加；当不重复时，更新最大长度 maxlen = max(maxlen, j-i+1);</li>
+</ol>
+<p><a href="https://leetcode.com/problems/longest-substring-without-repeating-characters/description/" target="_blank" rel="noopener">Longest Substring Without Repeating Characters</a><br><code>AC code</code><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">lengthOfLongestSubstring</span><span class="params">(String s)</span> </span>&#123;</span><br><span class="line">        HashMap&lt;Character, Integer&gt; map = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">        <span class="keyword">char</span>[] chars = s.toCharArray();</span><br><span class="line">        <span class="keyword">int</span> maxlen = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; chars.length; j++) &#123;</span><br><span class="line">            Integer k = map.get(chars[j]);</span><br><span class="line">            <span class="keyword">if</span> (k == <span class="keyword">null</span> || k &lt; i) &#123;</span><br><span class="line">                maxlen = Math.max(maxlen, j - i + <span class="number">1</span>);</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                i = k + <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            map.put(chars[j], j);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> maxlen;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 
         
         
@@ -137,7 +145,7 @@
 
 
   <nav id="page-nav" class="clearfix">
-    <a class="extend prev" rel="prev" href="/blog/page/25/"><span></span>Prev</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/24/">24</a><a class="page-number" href="/blog/page/25/">25</a><span class="page-number current">26</span><a class="page-number" href="/blog/page/27/">27</a><a class="page-number" href="/blog/page/28/">28</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/175/">175</a><a class="extend next" rel="next" href="/blog/page/27/">Next<span></span></a>
+    <a class="extend prev" rel="prev" href="/blog/page/25/"><span></span>Prev</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/24/">24</a><a class="page-number" href="/blog/page/25/">25</a><span class="page-number current">26</span><a class="page-number" href="/blog/page/27/">27</a><a class="page-number" href="/blog/page/28/">28</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/176/">176</a><a class="extend next" rel="next" href="/blog/page/27/">Next<span></span></a>
   </nav>
 
 </div>
@@ -197,11 +205,11 @@
 			
 		
 			
-				<li><a href="/blog/tags/oracle/" title="oracle">oracle<sup>6</sup></a></li>
+				<li><a href="/blog/tags/javascript/" title="javascript">javascript<sup>6</sup></a></li>
 			
 		
 			
-				<li><a href="/blog/tags/javascript/" title="javascript">javascript<sup>6</sup></a></li>
+				<li><a href="/blog/tags/oracle/" title="oracle">oracle<sup>6</sup></a></li>
 			
 		
 			
@@ -213,7 +221,7 @@
 			
 		
 			
-				<li><a href="/blog/tags/spring/" title="spring">spring<sup>3</sup></a></li>
+				<li><a href="/blog/tags/LeetCode/" title="LeetCode">LeetCode<sup>3</sup></a></li>
 			
 		
 			
@@ -221,11 +229,7 @@
 			
 		
 			
-				<li><a href="/blog/tags/LeetCode/" title="LeetCode">LeetCode<sup>3</sup></a></li>
-			
-		
-			
-				<li><a href="/blog/tags/python/" title="python">python<sup>2</sup></a></li>
+				<li><a href="/blog/tags/spring/" title="spring">spring<sup>3</sup></a></li>
 			
 		
 			
@@ -234,6 +238,10 @@
 		
 			
 				<li><a href="/blog/tags/jenkins/" title="jenkins">jenkins<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/blog/tags/python/" title="python">python<sup>2</sup></a></li>
 			
 		
 			
@@ -249,11 +257,11 @@
 			
 		
 			
-				<li><a href="/blog/tags/oauth2/" title="oauth2">oauth2<sup>1</sup></a></li>
+				<li><a href="/blog/tags/mockito/" title="mockito">mockito<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/blog/tags/redis/" title="redis">redis<sup>1</sup></a></li>
+				<li><a href="/blog/tags/oauth2/" title="oauth2">oauth2<sup>1</sup></a></li>
 			
 		
 			

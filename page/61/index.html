@@ -79,45 +79,21 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/blog/2017/08/20/nginx/" title="Nginx" itemprop="url">Nginx</a>
+      <a href="/blog/2017/08/21/ajax/" title="Ajax" itemprop="url">Ajax</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/blog/about" title="carl-zk" target="_blank" itemprop="author">carl-zk</a>
 		
   </p><p class="article-time">
-    <time datetime="2017-08-20T13:09:08.000Z" itemprop="datePublished"> 发表于 2017-08-20</time>
+    <time datetime="2017-08-21T15:59:47.000Z" itemprop="datePublished"> 发表于 2017-08-21</time>
     
   </p>
 </header>
     <div class="article-content">
         
-        <p><a href="http://nginx.org" target="_blank" rel="noopener">官网</a></p>
-<h4 id="安装步骤"><a href="#安装步骤" class="headerlink" title="安装步骤"></a>安装步骤</h4><blockquote>
-<p>nginx安装跟系统版本有关</p>
-</blockquote>
-<p>我的系统是ubuntu 16.04 LTS<br>1、修改/etc/apt/sources.list<br>文件末尾添加：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">deb http://nginx.org/packages/ubuntu/ xenial nginx</span><br><span class="line">deb-src http://nginx.org/packages/ubuntu/ xenial nginx</span><br></pre></td></tr></table></figure></p>
-<p>2、<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install nginx</span><br></pre></td></tr></table></figure></p>
-<p>又是遇到<a href="https://carl-zk.github.io/blog/2017/05/17/NO-PUBKEY/" target="_blank" rel="noopener">NO_PUBKEY</a><br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-key adv --keyserver hkp://keys.gnupg.net --recv-keys 提示中的key</span><br><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install nginx</span><br></pre></td></tr></table></figure></p>
-<p>3、检查版本<br><code>nginx -v</code><br>4、查找nginx安装目录<br><code>sudo find / -type d -name &#39;*nginx*&#39;</code></p>
-<p>/etc/nginx<br>/usr/lib/nginx<br>/usr/share/doc/nginx<br>/usr/share/nginx<br>/var/cache/nginx<br>/var/log/nginx</p>
-<h5 id="Mac安装nginx"><a href="#Mac安装nginx" class="headerlink" title="Mac安装nginx"></a>Mac安装nginx</h5><p>下载nginx源码，正则匹配需要<a href="http://mac-dev-env.patrickbougie.com/pcre/" target="_blank" rel="noopener">pcre</a>库，需要下载<a href="ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre" target="_blank" rel="noopener">pcre源码</a>共同编译<br><code>./configure --prefix=/etc/nginx --with-pcre=/Users/hero/tmp/pcre-8.41</code><br><code>make</code><br><code>sudo make install</code></p>
-<h4 id="入门"><a href="#入门" class="headerlink" title="入门"></a>入门</h4><ol>
-<li>启动nginx<br><code>sudo service nginx start</code><br><code>sudo nginx</code></li>
-<li>配置静态资源服务器</li>
-</ol>
-<ul>
-<li>备份<ul>
-<li><strong>/etc/nginx/conf.d/default.conf</strong></li>
-<li><strong>/etc/nginx/nginx.conf</strong></li>
-</ul>
-</li>
-<li>注释掉<strong>/etc/nginx/conf.d/default.conf</strong>内容<br>因为nginx会同时读default和nginx.conf，导致在nginx.conf中某些配置无效，例如重复的url。<br><a href="/blog/2017/08/20/nginx/default.conf">default.conf</a>、<a href="/blog/2017/08/20/nginx/nginx.conf">nginx.conf</a></li>
-<li>目录结构<br><strong>/home/hero/tmp/nginxdemo</strong><br>—<strong>img</strong><br>——qtds.png<br>—index.html</li>
-<li>重新加载配置<br><code>sudo nginx -s reload</code><br>访问<code>http://localhost/</code></li>
-</ul>
-<p>3.nginx.conf 配置代理和url匹配规则<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">server&#123;</span><br><span class="line">listen 8090;</span><br><span class="line">root /home/hero/tmp/nginxdemo;</span><br><span class="line">&#125;</span><br><span class="line">server &#123;</span><br><span class="line">listen 80;</span><br><span class="line">server_name localhost;</span><br><span class="line">location / &#123;</span><br><span class="line">  proxy_pass http://localhost:8090;</span><br><span class="line">&#125;</span><br><span class="line">location ~ /img/*\.(png|jpg|gif)$ &#123;</span><br><span class="line">  root /home/hero/tmp/nginxdemo;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>这样对80端口的请求就被8090代理了。<br>匹配规则：～代表匹配尽可能长的前缀，后面是一个正则表达式，只要满足正则就从这个location获取，否则就交给其它满足的去处理。</p>
+        <p>配起来nginx就可以学ajax了<br><a href="https://www.w3schools.com/xml/ajax_intro.asp" target="_blank" rel="noopener">ajax w3schools</a></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"utf-8"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">title</span>&gt;</span>天文望远镜<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"demo"</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">h1</span>&gt;</span>XMLHttpRequest<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">"button"</span> <span class="attr">onclick</span>=<span class="string">"loadDoc()"</span>&gt;</span>Change Content<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="javascript">	<span class="function"><span class="keyword">function</span> <span class="title">loadDoc</span>(<span class="params"></span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">		<span class="keyword">var</span> xhttp = <span class="keyword">new</span> XMLHttpRequest();</span></span><br><span class="line"><span class="javascript">		xhttp.onreadystatechange = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">			<span class="keyword">if</span>(<span class="keyword">this</span>.readyState == <span class="number">4</span> &amp;&amp; <span class="keyword">this</span>.status == <span class="number">200</span>)&#123;</span></span><br><span class="line"><span class="javascript">				<span class="built_in">document</span>.getElementById(<span class="string">"demo"</span>).innerHTML = <span class="keyword">this</span>.responseText;</span></span><br><span class="line"><span class="undefined">			&#125;</span></span><br><span class="line"><span class="undefined">		&#125;;</span></span><br><span class="line"><span class="javascript">		xhttp.open(<span class="string">"GET"</span>, <span class="string">"ajax_info.txt"</span>, <span class="literal">true</span>);</span></span><br><span class="line"><span class="undefined">		xhttp.send();</span></span><br><span class="line"><span class="undefined">	&#125;</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
         
         
@@ -128,11 +104,6 @@
     <footer class="article-footer clearfix">
 <div class="article-catetags">
 
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/blog/tags/nginx/">nginx</a>
-  </div>
 
 </div>
 
@@ -155,7 +126,7 @@
 
 
   <nav id="page-nav" class="clearfix">
-    <a class="extend prev" rel="prev" href="/blog/page/60/"><span></span>Prev</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/59/">59</a><a class="page-number" href="/blog/page/60/">60</a><span class="page-number current">61</span><a class="page-number" href="/blog/page/62/">62</a><a class="page-number" href="/blog/page/63/">63</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/175/">175</a><a class="extend next" rel="next" href="/blog/page/62/">Next<span></span></a>
+    <a class="extend prev" rel="prev" href="/blog/page/60/"><span></span>Prev</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/59/">59</a><a class="page-number" href="/blog/page/60/">60</a><span class="page-number current">61</span><a class="page-number" href="/blog/page/62/">62</a><a class="page-number" href="/blog/page/63/">63</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/176/">176</a><a class="extend next" rel="next" href="/blog/page/62/">Next<span></span></a>
   </nav>
 
 </div>
@@ -215,11 +186,11 @@
 			
 		
 			
-				<li><a href="/blog/tags/oracle/" title="oracle">oracle<sup>6</sup></a></li>
+				<li><a href="/blog/tags/javascript/" title="javascript">javascript<sup>6</sup></a></li>
 			
 		
 			
-				<li><a href="/blog/tags/javascript/" title="javascript">javascript<sup>6</sup></a></li>
+				<li><a href="/blog/tags/oracle/" title="oracle">oracle<sup>6</sup></a></li>
 			
 		
 			
@@ -231,7 +202,7 @@
 			
 		
 			
-				<li><a href="/blog/tags/spring/" title="spring">spring<sup>3</sup></a></li>
+				<li><a href="/blog/tags/LeetCode/" title="LeetCode">LeetCode<sup>3</sup></a></li>
 			
 		
 			
@@ -239,11 +210,7 @@
 			
 		
 			
-				<li><a href="/blog/tags/LeetCode/" title="LeetCode">LeetCode<sup>3</sup></a></li>
-			
-		
-			
-				<li><a href="/blog/tags/python/" title="python">python<sup>2</sup></a></li>
+				<li><a href="/blog/tags/spring/" title="spring">spring<sup>3</sup></a></li>
 			
 		
 			
@@ -252,6 +219,10 @@
 		
 			
 				<li><a href="/blog/tags/jenkins/" title="jenkins">jenkins<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/blog/tags/python/" title="python">python<sup>2</sup></a></li>
 			
 		
 			
@@ -267,11 +238,11 @@
 			
 		
 			
-				<li><a href="/blog/tags/oauth2/" title="oauth2">oauth2<sup>1</sup></a></li>
+				<li><a href="/blog/tags/mockito/" title="mockito">mockito<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/blog/tags/redis/" title="redis">redis<sup>1</sup></a></li>
+				<li><a href="/blog/tags/oauth2/" title="oauth2">oauth2<sup>1</sup></a></li>
 			
 		
 			

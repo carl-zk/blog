@@ -79,49 +79,24 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/blog/2017/09/16/存储过程分页/" title="存储过程分页" itemprop="url">存储过程分页</a>
+      <a href="/blog/2017/09/17/使用sql-developer调试/" title="使用Sql Developer调试" itemprop="url">使用Sql Developer调试</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/blog/about" title="carl-zk" target="_blank" itemprop="author">carl-zk</a>
 		
   </p><p class="article-time">
-    <time datetime="2017-09-16T14:08:08.000Z" itemprop="datePublished"> 发表于 2017-09-16</time>
+    <time datetime="2017-09-17T02:57:28.000Z" itemprop="datePublished"> 发表于 2017-09-17</time>
     
   </p>
 </header>
     <div class="article-content">
         
-        <p><a href="http://xurichusheng.iteye.com/blog/1963741" target="_blank" rel="noopener">参考</a></p>
-<h3 id="创建分页存储过程"><a href="#创建分页存储过程" class="headerlink" title="创建分页存储过程"></a>创建分页存储过程</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">OR</span> <span class="keyword">REPLACE</span> <span class="keyword">PROCEDURE</span> split_page (</span><br><span class="line">    qsql         <span class="keyword">IN</span> VARCHAR2,</span><br><span class="line">    page_index   <span class="keyword">IN</span> <span class="built_in">NUMBER</span>,</span><br><span class="line">    page_size    <span class="keyword">IN</span> <span class="built_in">NUMBER</span>,</span><br><span class="line">    total        <span class="keyword">OUT</span> <span class="built_in">NUMBER</span>,</span><br><span class="line">    res          <span class="keyword">OUT</span> SYS_REFCURSOR</span><br><span class="line">)</span><br><span class="line">    <span class="keyword">AS</span></span><br><span class="line">    qurry varchar2(<span class="number">2000</span>);</span><br><span class="line">    las NUMBER := page_index * page_size;</span><br><span class="line">    fir NUMBER := las - page_size;</span><br><span class="line"><span class="keyword">BEGIN</span></span><br><span class="line">    qurry := <span class="string">'select max(rownum) from ( '</span> || qsql || <span class="string">' )'</span>;</span><br><span class="line">    <span class="keyword">EXECUTE</span> <span class="keyword">IMMEDIATE</span> qurry <span class="keyword">INTO</span> total;</span><br><span class="line">    qurry := '<span class="keyword">select</span> B.* <span class="keyword">from</span> (<span class="keyword">select</span> A.*, <span class="keyword">rownum</span> rownumber <span class="keyword">from</span> (<span class="string">' || qsql || '</span>) A <span class="keyword">where</span> <span class="keyword">rownum</span> &lt;=<span class="string">' || las || '</span>) B <span class="keyword">where</span> rownumber &gt; <span class="string">' || fir;</span></span><br><span class="line"><span class="string">    OPEN res FOR qurry;</span></span><br><span class="line"><span class="string">END;</span></span><br></pre></td></tr></table></figure>
-<p>qsql: 查询语句<br>page_index: 查询第几页<br>page_size: 每页大小<br>total: 总条数<br>res: 结果集游标</p>
-<p><strong>注意：qsql结果集中列名不能与rownum别名<code>rownumber</code>重复</strong></p>
-<h3 id="java-调用"><a href="#java-调用" class="headerlink" title="java 调用"></a>java 调用</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">db.dirver=oracle.jdbc.driver.OracleDriver</span><br><span class="line">db.url=jdbc:oracle:thin:@192.168.1.11:1521:xe</span><br><span class="line">db.user=hr</span><br><span class="line">db.password=hr</span><br></pre></td></tr></table></figure>
-<pre><code class="java">Connection conn = <span class="keyword">null</span>;
-CallableStatement cstmt = <span class="keyword">null</span>;
-ResultSet res = <span class="keyword">null</span>;
-<span class="keyword">try</span> {
-    conn = DBUtil.getConnection();
-    cstmt = conn.prepareCall(<span class="string">"{call split_page(?,?,?,?,?)}"</span>);
-    cstmt.setString(<span class="number">1</span>, <span class="string">"select * from student order by age asc"</span>);
-    cstmt.setInt(<span class="number">2</span>, <span class="number">2</span>);
-    cstmt.setInt(<span class="number">3</span>, <span class="number">2</span>);
-    cstmt.registerOutParameter(<span class="number">4</span>, OracleTypes.INTEGER);
-    cstmt.registerOutParameter(<span class="number">5</span>, OracleTypes.CURSOR);
-    cstmt.execute();
-    System.out.println(cstmt.getObject(<span class="number">4</span>));
-    res = (ResultSet) cstmt.getObject(<span class="number">5</span>);
-    <span class="keyword">while</span> (res.next()) {
-        System.out.println(res.getString(<span class="string">"name"</span>));
-    }
-
-} <span class="keyword">catch</span> (Exception e) {
-    e.printStackTrace();
-} <span class="keyword">finally</span> {
-    DBUtil.closeAll(res, cstmt, conn);
-}
-</code></pre>
-<p>rownum 和 group by 的关系，当group by 中存在非主键，则oracle会先给列加rownum然后再group by.<br>如果主键类型是char、varchar2而非int,number等,则先rownum再group by.</p>
+        <p><a href="http://www.oracle.com/technetwork/cn/tutorials/plsql-debug-088880-zhs.html#p" target="_blank" rel="noopener">参考</a></p>
+<h4 id="前提条件"><a href="#前提条件" class="headerlink" title="前提条件"></a>前提条件</h4><p>1.解锁hr用户<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">USER</span> hr <span class="keyword">UNLOCK</span> <span class="keyword">ACCOUNT</span>; <span class="comment">-- or alter user xx account unlock</span></span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">USER</span> hr <span class="keyword">IDENTIFIED</span> <span class="keyword">BY</span> hr;</span><br></pre></td></tr></table></figure></p>
+<p>2.授予debug权限<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">GRANT</span> debug <span class="keyword">any</span> <span class="keyword">procedure</span>, debug <span class="keyword">connect</span> <span class="keyword">session</span> <span class="keyword">TO</span> hr;</span><br></pre></td></tr></table></figure></p>
+<h4 id="调试存储过程"><a href="#调试存储过程" class="headerlink" title="调试存储过程"></a>调试存储过程</h4><p>1.单击一个存储过程;<br>2.右键选择<code>compile for debug</code><br>  此时左侧该存储过程会出现一个绿色的小虫。<br>3.单击行首设置断点<br>4.单击红色<code>debug</code>按钮<br>5.在<code>Parameters/Input Value</code>中填入<code>IN</code>的参数，<code>OUT</code>可以不管<br>6.单击<code>OK</code></p>
+<h4 id="truncate等待锁"><a href="#truncate等待锁" class="headerlink" title="truncate等待锁"></a>truncate等待锁</h4><p>默认情况下truncate没有获取锁会立即报错，需要设置DDL_LOCK_TIMEOUT，默认0，即NOWAIT，最大1000000（秒），大约11.5天。<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> parameter ddl_lock_time;</span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">session</span> <span class="keyword">set</span> ddl_lock_timeout=<span class="number">5</span>;</span><br></pre></td></tr></table></figure></p>
 
         
         
@@ -159,7 +134,7 @@ ResultSet res = <span class="keyword">null</span>;
 
 
   <nav id="page-nav" class="clearfix">
-    <a class="extend prev" rel="prev" href="/blog/page/54/"><span></span>Prev</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/53/">53</a><a class="page-number" href="/blog/page/54/">54</a><span class="page-number current">55</span><a class="page-number" href="/blog/page/56/">56</a><a class="page-number" href="/blog/page/57/">57</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/175/">175</a><a class="extend next" rel="next" href="/blog/page/56/">Next<span></span></a>
+    <a class="extend prev" rel="prev" href="/blog/page/54/"><span></span>Prev</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/53/">53</a><a class="page-number" href="/blog/page/54/">54</a><span class="page-number current">55</span><a class="page-number" href="/blog/page/56/">56</a><a class="page-number" href="/blog/page/57/">57</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/176/">176</a><a class="extend next" rel="next" href="/blog/page/56/">Next<span></span></a>
   </nav>
 
 </div>
@@ -219,11 +194,11 @@ ResultSet res = <span class="keyword">null</span>;
 			
 		
 			
-				<li><a href="/blog/tags/oracle/" title="oracle">oracle<sup>6</sup></a></li>
+				<li><a href="/blog/tags/javascript/" title="javascript">javascript<sup>6</sup></a></li>
 			
 		
 			
-				<li><a href="/blog/tags/javascript/" title="javascript">javascript<sup>6</sup></a></li>
+				<li><a href="/blog/tags/oracle/" title="oracle">oracle<sup>6</sup></a></li>
 			
 		
 			
@@ -235,7 +210,7 @@ ResultSet res = <span class="keyword">null</span>;
 			
 		
 			
-				<li><a href="/blog/tags/spring/" title="spring">spring<sup>3</sup></a></li>
+				<li><a href="/blog/tags/LeetCode/" title="LeetCode">LeetCode<sup>3</sup></a></li>
 			
 		
 			
@@ -243,11 +218,7 @@ ResultSet res = <span class="keyword">null</span>;
 			
 		
 			
-				<li><a href="/blog/tags/LeetCode/" title="LeetCode">LeetCode<sup>3</sup></a></li>
-			
-		
-			
-				<li><a href="/blog/tags/python/" title="python">python<sup>2</sup></a></li>
+				<li><a href="/blog/tags/spring/" title="spring">spring<sup>3</sup></a></li>
 			
 		
 			
@@ -256,6 +227,10 @@ ResultSet res = <span class="keyword">null</span>;
 		
 			
 				<li><a href="/blog/tags/jenkins/" title="jenkins">jenkins<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/blog/tags/python/" title="python">python<sup>2</sup></a></li>
 			
 		
 			
@@ -271,11 +246,11 @@ ResultSet res = <span class="keyword">null</span>;
 			
 		
 			
-				<li><a href="/blog/tags/oauth2/" title="oauth2">oauth2<sup>1</sup></a></li>
+				<li><a href="/blog/tags/mockito/" title="mockito">mockito<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/blog/tags/redis/" title="redis">redis<sup>1</sup></a></li>
+				<li><a href="/blog/tags/oauth2/" title="oauth2">oauth2<sup>1</sup></a></li>
 			
 		
 			
