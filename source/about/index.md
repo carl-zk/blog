@@ -15,7 +15,8 @@ date: 2017-03-02 22:38:35
 梦想成为大牛，读完那个永远读不完的书单。
 
 <img src="index/weixin.jpg" alt="个人微信" class="img-rounded" width="200" height="200">
-<h5>zxfspace@163.com</h5>
+zxfspace@163.com
+[https://github.com/carl-zk](https://github.com/carl-zk)
 <!--div class="page-header" -->
 
 <h4>好了歌 <small><span class="label label-default">红楼梦</span></small></h4>

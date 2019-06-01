@@ -4,6 +4,9 @@ date: 2018-04-26 09:14:31
 category:
 tags: redis
 ---
+> docker run --rm -p 6379:6379 redis --requirepass "password"
+> 注意：redis-cli 连接需密码的server时，不输密码也可以进入命令模式，只有当执行命令时才报错。
+
 ## Redis 安装启动
 [download](https://redis.io/download)
 ```sh
