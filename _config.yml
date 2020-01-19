@@ -57,13 +57,14 @@ time_format: HH:mm:ss
 
 # Pagination
 ## Set per_page to 0 to disable pagination
-per_page: 40
+per_page: 50
 pagination_dir: page
 
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: jacman
+theme: cafe
+#theme: jacman
 # theme: maupassant
 # compress css
 stylus: 
