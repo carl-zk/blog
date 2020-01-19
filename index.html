@@ -107,7 +107,7 @@
 <h3 id="集成测试："><a href="#集成测试：" class="headerlink" title="集成测试："></a>集成测试：</h3><p>一组测试单元。</p>
 <h2 id="术语"><a href="#术语" class="headerlink" title="术语"></a>术语</h2><p><a href="http://xunitpatterns.com/Mocks,%20Fakes,%20Stubs%20and%20Dummies.html" target="_blank" rel="noopener">http://xunitpatterns.com/Mocks,%20Fakes,%20Stubs%20and%20Dummies.html</a></p>
 <p>system under test<a href="http://xunitpatterns.com/SUT.html" target="_blank" rel="noopener">(SUT)</a>: whatever we are testing.<br>Dummy Object: 在SUT中某个方法需要一个实例对象作为参数，但是该参数只是为了可以正常调用该方法，而不对该测试起任何影响。<br>Test Stub: 在一个SUT中，需要依赖外部的接口，为了稳定控制测试流程（Unit testing 需要保证repeatable），可以fake一个该外部接口的实现类，根据设定的参数返回指定的值。<br>Test Spy: 与Test Stub类似，区别在于Test Spy可以记录方法的入参，在result verification阶段可以验证参数是否与预期一致。<br>Mock Object: 与Test Stub类似，区别在于Mock Object预先设置了期望的接收参数，当参数与预期不符则测试失败。<br>Fake Object: 术语搞这么多，唉！Test Stub为了流程控制（control point）; Test Spy/Mock Object 为了验证（observation point）; 而Fake Object仅仅为了提供一个外部接口简单的实现，并不记录或验证什么，例如database。</p>
-<h2 id="怎么写单元测试？"><a href="#怎么写单元测试？" class="headerlink" title="怎么写单元测试？"></a>怎么写单元测试？</h2><p><a href="https://www.baeldung.com/mockito-series" target="_blank" rel="noopener">https://www.baeldung.com/mockito-series</a></p>
+<h2 id="怎么写单元测试？"><a href="#怎么写单元测试？" class="headerlink" title="怎么写单元测试？"></a>怎么写单元测试？</h2><p><a href="https://github.com/mockito/mockito/wiki/How-to-write-good-tests">How to write good tests</a><br><a href="https://www.baeldung.com/mockito-series" target="_blank" rel="noopener">https://www.baeldung.com/mockito-series</a></p>
 <p>单元测试的阶段：<br>Setup<br>Exercise<br>Verify<br>Teardown</p>
 <p>Rock同学推荐的好网站：<a href="https://cyber-dojo.org/" target="_blank" rel="noopener">https://cyber-dojo.org/</a></p>
 
@@ -352,7 +352,7 @@
 		
 
 		<p class="copyright">
-		All Rights Reserved © 2019 
+		All Rights Reserved © 2020 
 		
 		<a href="/blog/about" target="_blank" title="carl-zk">carl-zk</a>
 		
@@ -360,9 +360,8 @@
 		</p>
 </div>
 
-<script type="text/javascript" color="255,255,0" opacity="0.9" zindex="-3" count="80" src="https://cdnjs.cloudflare.com/ajax/libs/canvas-nest.js/1.0.1/canvas-nest.min.js"></script>
-<script type="text/javascript" color="44,166,203" opacity="0.9" zindex="-1" count="80" src="https://cdnjs.cloudflare.com/ajax/libs/canvas-nest.js/1.0.1/canvas-nest.min.js"></script>
-<script type="text/javascript" color="255,0,0" opacity="0.9" zindex="-2" count="80" src="https://cdnjs.cloudflare.com/ajax/libs/canvas-nest.js/1.0.1/canvas-nest.min.js"></script></footer>
+<script type="text/javascript" color="168, 168, 168" opacity="0.6" zindex="-2" count="200" src="https://cdnjs.cloudflare.com/ajax/libs/canvas-nest.js/1.0.1/canvas-nest.min.js"></script>
+</footer>
     <script src="/blog/js/jquery-2.0.3.min.js"></script>
 <script src="/blog/js/jquery.imagesloaded.min.js"></script>
 <script src="/blog/js/gallery.js"></script>
