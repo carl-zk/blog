@@ -1,403 +1,237 @@
-
- <!DOCTYPE HTML>
-<html lang="zh-CN">
-<head><meta name="generator" content="Hexo 3.8.0">
-  <meta charset="UTF-8">
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
   
-    <title>一叶轻舟渡万江</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
-    
-    <meta name="author" content="carl-zk">
-    
-
-    
-    <meta property="og:type" content="website">
+  <title>一叶轻舟渡万江</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:type" content="website">
 <meta property="og:title" content="一叶轻舟渡万江">
 <meta property="og:url" content="https://github.com/carl-zk/blog/page/10/index.html">
 <meta property="og:site_name" content="一叶轻舟渡万江">
-<meta property="og:locale" content="zh-CN">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="carl-zk">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="一叶轻舟渡万江">
-
-    
-    <link rel="alternative" href="/atom.xml" title="一叶轻舟渡万江" type="application/atom+xml">
-    
-    
-    <link rel="icon" href="/blog/img/favicon2.ico">
-    
-    
-    <link rel="apple-touch-icon" href="/blog/img/tx2.jpg">
-    <link rel="apple-touch-icon-precomposed" href="/blog/img/tx2.jpg">
-    
-    <link rel="stylesheet" href="/blog/css/style.css">
-</head>
-</html>
-  <body>
-    <header>
-      
-<div>
-		
-			<div id="imglogo">
-				<a href="/blog/"><img src="/blog/img/fav.png" alt="一叶轻舟渡万江" title="一叶轻舟渡万江"></a>
-			</div>
-			
-			<div id="textlogo">
-				<h1 class="site-name"><a href="/blog/" title="一叶轻舟渡万江">一叶轻舟渡万江</a></h1>
-				<h2 class="blog-motto">泰山不拒细壤故能成其高 江海不择细流故能就其深</h2>
-			</div>
-			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
-			</a></div>
-			<nav class="animated">
-				<ul>
-					<ul>
-					 
-						<li><a href="/blog/">主页</a></li>
-					
-						<li><a href="/blog/archives">归档</a></li>
-					
-						<li><a href="/blog/about">关于</a></li>
-					
-					<li>
- 					
-					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
-						<label>Search</label>
-						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索">
-						<input type="hidden" name="q" value="site:github.com/carl-zk/blog">
-					</form>
-					
-					</li>
-				</ul>
-			</ul></nav>			
-</div>
-    </header>
-    <div id="container">
-      <div id="main">
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/blog/2018/09/23/MySQL-存储过程分页/" title="MySQL 存储过程分页" itemprop="url">MySQL 存储过程分页</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/blog/about" title="carl-zk" target="_blank" itemprop="author">carl-zk</a>
-		
-  </p><p class="article-time">
-    <time datetime="2018-09-23T09:19:40.000Z" itemprop="datePublished"> 发表于 2018-09-23</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p><a href="https://www.w3resource.com/mysql/mysql-procedure.php" target="_blank" rel="noopener">https://www.w3resource.com/mysql/mysql-procedure.php</a><br><a href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_substr" target="_blank" rel="noopener">https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_substr</a><br><a href></a></p>
-<p><code>MySQL version: 5.7.9</code></p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">drop</span> <span class="keyword">procedure</span> <span class="keyword">if</span> <span class="keyword">exists</span> pagination;</span><br><span class="line"><span class="keyword">create</span> <span class="keyword">procedure</span> pagination(<span class="keyword">in</span> i_query <span class="built_in">varchar</span>(<span class="number">8000</span>), <span class="keyword">in</span> i_page <span class="built_in">int</span>, <span class="keyword">in</span> i_size <span class="built_in">int</span>, <span class="keyword">out</span> o_total <span class="built_in">int</span>)</span><br><span class="line">  <span class="keyword">begin</span></span><br><span class="line">    <span class="keyword">set</span> @limit_start = (i_page - <span class="number">1</span>) * i_size;</span><br><span class="line">    <span class="keyword">set</span> @limit_size = i_size;</span><br><span class="line">    <span class="keyword">set</span> @tmp_query = <span class="keyword">concat</span>(<span class="string">'select * from ('</span>, i_query, <span class="string">') t limit ?, ?'</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">set</span> @tmp_total = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">set</span> @tmp_stat = <span class="keyword">concat</span>(<span class="string">'select count(1) into @tmp_total from ('</span>, i_query, <span class="string">') t '</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">prepare</span> stmt_query <span class="keyword">from</span> @tmp_query;</span><br><span class="line">    <span class="keyword">execute</span> stmt_query <span class="keyword">using</span> @limit_start, @limit_size;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">prepare</span> stmt_count <span class="keyword">from</span> @tmp_stat;</span><br><span class="line">    <span class="keyword">execute</span> stmt_count;</span><br><span class="line">    <span class="keyword">set</span> o_total = @tmp_total;</span><br><span class="line">  <span class="keyword">end</span>;</span><br></pre></td></tr></table></figure>
-<p>参照之前写的 Oracle 版的分页，思路是一样的；比较坑的是从括号里传的变量前面不加@，在拼接SQL的时候需要另外定义变量才能使用 select count(1) into 。</p>
-<p><code>show VARIABLES like &#39;%max_allowed_packet%&#39;;</code> SQL长度限制，单位 byte.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        Class.forName(<span class="string">"com.mysql.cj.jdbc.Driver"</span>);</span><br><span class="line">        Connection connect = DriverManager</span><br><span class="line">                .getConnection(<span class="string">"jdbc:mysql://localhost:3306/mydb?"</span></span><br><span class="line">                        + <span class="string">"user=root&amp;password=password"</span>);</span><br><span class="line">        <span class="keyword">int</span> total = <span class="number">0</span>;</span><br><span class="line">        CallableStatement callableStatement = connect.prepareCall(<span class="string">"&#123;call pagination(?,?,?,?)&#125;"</span>);</span><br><span class="line">        callableStatement.setString(<span class="number">1</span>, <span class="string">"select * from tbl_user order by id desc"</span>);</span><br><span class="line">        callableStatement.setInt(<span class="number">2</span>, <span class="number">1</span>);</span><br><span class="line">        callableStatement.setInt(<span class="number">3</span>, <span class="number">6</span>);</span><br><span class="line">        callableStatement.registerOutParameter(<span class="number">4</span>, MysqlType.INT);</span><br><span class="line">        ResultSet resultSet = callableStatement.executeQuery();</span><br><span class="line">        total = callableStatement.getInt(<span class="number">4</span>);</span><br><span class="line">        System.out.println(<span class="string">"total = "</span> + total);</span><br><span class="line">        <span class="keyword">while</span> (resultSet.next()) &#123;</span><br><span class="line">            System.out.println(resultSet.getInt(<span class="string">"id"</span>) + <span class="string">", "</span> + resultSet.getString(<span class="string">"name"</span>));</span><br><span class="line">        &#125;</span><br><span class="line">        connect.close();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-
-  <div class="article-tags">
   
-  <span></span> <a href="/blog/tags/MySQL/">MySQL</a>
+    <link rel="alternate" href="/atom.xml" title="一叶轻舟渡万江" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="img/favicon2.ico">
+  
+  
+    
+  
+  
+<link rel="stylesheet" href="/blog/css/style.css">
+
+  
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    
+    <div id="header-inner" class="inner">
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://github.com/carl-zk/blog"></form>
+      </div>
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/blog/">首页</a>
+        
+          <a class="main-nav-link" href="/blog/archives">归档</a>
+        
+          <a class="main-nav-link" href="/blog/about">关于</a>
+        
+      </nav>
+      
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/blog/" id="logo">一叶轻舟渡万江</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/blog/" id="subtitle">泰山不拒细壤故能成其高 江海不择细流故能就其深</a>
+        </h2>
+      
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-elasticsearch" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2018/10/10/elasticsearch/" class="article-date">
+  <time datetime="2018-10-10T01:34:33.000Z" itemprop="datePublished">2018-10-10</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2018/10/10/elasticsearch/">Elasticsearch</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <h2 id="install-es-and-plugins"><a href="#install-es-and-plugins" class="headerlink" title="install es and plugins"></a>install es and plugins</h2><p><a href="https://www.elastic.co/downloads" target="_blank" rel="noopener">elasticsearch-6.4.1 download</a><br>plugin:<br><a href="https://www.elastic.co/guide/en/elasticsearch/plugins/6.0/analysis-smartcn.html" target="_blank" rel="noopener">analysis-smartcn</a> (eg: ./bin/elasticsearch-plugin install analysis-smartcn)<br><a href="https://github.com/medcl/elasticsearch-analysis-ik">ik</a></p>
+<p>then start es: bin/elasticsearch</p>
+<h2 id="surfing"><a href="#surfing" class="headerlink" title="surfing"></a>surfing</h2><h3 id="验证分词器是否生效"><a href="#验证分词器是否生效" class="headerlink" title="验证分词器是否生效"></a>验证分词器是否生效</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">curl --request POST \</span><br><span class="line">  --url http://localhost:9200/_analyze \</span><br><span class="line">  --header <span class="string">'Content-Type: application/json'</span>  -d \</span><br><span class="line"><span class="string">'&#123;</span></span><br><span class="line"><span class="string">    "analyzer": "pinyin",</span></span><br><span class="line"><span class="string">    "text": "小明"</span></span><br><span class="line"><span class="string">&#125;'</span></span><br></pre></td></tr></table></figure>
+<h3 id="hibernate-search-elasticsearch"><a href="#hibernate-search-elasticsearch" class="headerlink" title="hibernate-search-elasticsearch"></a>hibernate-search-elasticsearch</h3><p><a href="https://github.com/carl-zk/JavaJava/tree/master/search-service">code</a></p>
+<h3 id="config-index-and-mapping"><a href="#config-index-and-mapping" class="headerlink" title="config index and mapping"></a>config index and mapping</h3><ol>
+<li>设置analyzer<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">curl --request PUT \</span><br><span class="line">  --url http://localhost:9200/com.wework.entity.company -d \</span><br><span class="line"><span class="string">'&#123;</span></span><br><span class="line"><span class="string">    "index": &#123;</span></span><br><span class="line"><span class="string">        "analysis": &#123;</span></span><br><span class="line"><span class="string">        "analyzer": &#123;</span></span><br><span class="line"><span class="string">            "pinyin_analyzer": &#123;</span></span><br><span class="line"><span class="string">                "tokenizer": "my_pinyin"</span></span><br><span class="line"><span class="string">            &#125;</span></span><br><span class="line"><span class="string">        &#125;,</span></span><br><span class="line"><span class="string">        "tokenizer": &#123;</span></span><br><span class="line"><span class="string">            "my_pinyin": &#123;</span></span><br><span class="line"><span class="string">                "type": "pinyin",</span></span><br><span class="line"><span class="string">                "keep_separate_first_letter" : false,</span></span><br><span class="line"><span class="string">                "keep_full_pinyin" : true,</span></span><br><span class="line"><span class="string">                "keep_original" : true,</span></span><br><span class="line"><span class="string">                "limit_first_letter_length" : 16,</span></span><br><span class="line"><span class="string">                "lowercase" : true,</span></span><br><span class="line"><span class="string">                "remove_duplicated_term" : true</span></span><br><span class="line"><span class="string">                &#125;</span></span><br><span class="line"><span class="string">            &#125;</span></span><br><span class="line"><span class="string">        &#125;</span></span><br><span class="line"><span class="string">    &#125;</span></span><br><span class="line"><span class="string">&#125;'</span></span><br></pre></td></tr></table></figure></li>
+<li>设置mapping<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">curl --request PUT \</span><br><span class="line">  --url http://localhost:9200/com.wework.entity.company/_mapping/com.wework.entity.Company -d \</span><br><span class="line"><span class="string">'&#123;</span></span><br><span class="line"><span class="string">    "properties": &#123;</span></span><br><span class="line"><span class="string">        "name": &#123;</span></span><br><span class="line"><span class="string">            "type": "text",</span></span><br><span class="line"><span class="string">            "analyzer": "ik_smart",</span></span><br><span class="line"><span class="string">            "fields": &#123;</span></span><br><span class="line"><span class="string">                "pinyin": &#123;</span></span><br><span class="line"><span class="string">                    "type": "text",</span></span><br><span class="line"><span class="string">                    "store": false,</span></span><br><span class="line"><span class="string">                    "term_vector": "with_offsets",</span></span><br><span class="line"><span class="string">                    "analyzer": "pinyin_analyzer",</span></span><br><span class="line"><span class="string">                    "boost": 10</span></span><br><span class="line"><span class="string">                &#125;,</span></span><br><span class="line"><span class="string">                "keyword": &#123;</span></span><br><span class="line"><span class="string">                    "type": "keyword",</span></span><br><span class="line"><span class="string">                    "ignore_above": 256</span></span><br><span class="line"><span class="string">                &#125;</span></span><br><span class="line"><span class="string">            &#125;</span></span><br><span class="line"><span class="string">        &#125;</span></span><br><span class="line"><span class="string">    &#125;</span></span><br><span class="line"><span class="string">&#125;'</span></span><br></pre></td></tr></table></figure></li>
+<li>查看mapping<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">curl --request GET \</span><br><span class="line">  --url http://localhost:9200/com.wework.entity.user/_mapping \</span><br></pre></td></tr></table></figure></li>
+<li>搜索<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">curl --request POST \</span><br><span class="line">  --url <span class="string">'http://localhost:9200/com.wework.entity.user/_search?pretty='</span> -d \</span><br><span class="line"><span class="string">'&#123;</span></span><br><span class="line"><span class="string">    "query": &#123;</span></span><br><span class="line"><span class="string">        "match": &#123;</span></span><br><span class="line"><span class="string">            "name.pinyin": "xiao明"</span></span><br><span class="line"><span class="string">        &#125;</span></span><br><span class="line"><span class="string">    &#125;,</span></span><br><span class="line"><span class="string">    "from": 0,</span></span><br><span class="line"><span class="string">    "size": 10,</span></span><br><span class="line"><span class="string">    "sort": ["_score"]</span></span><br><span class="line"><span class="string">&#125;'</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/carl-zk/blog/2018/10/10/elasticsearch/" data-id="ck5kvchzs003jdmps9zhd4ga8" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/elasticsearch/" rel="tag">elasticsearch</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+ 
+
+
+  
+
+
+  <nav id="page-nav">
+    <a class="extend prev" rel="prev" href="/blog/page/9/">&amp;laquo; 上一页</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/8/">8</a><a class="page-number" href="/blog/page/9/">9</a><span class="page-number current">10</span><a class="page-number" href="/blog/page/11/">11</a><a class="page-number" href="/blog/page/12/">12</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/177/">177</a><a class="extend next" rel="next" href="/blog/page/11/">下一页&amp;raquo;</a>
+  </nav>
+</section>
+           
+    <aside id="sidebar">
+  
+    
+
+  
+    
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title recent-posts">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/blog/2020/01/19/%E5%88%B7%E9%A2%98%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%9C%A8%E4%B8%8D%E5%90%8C%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84%E8%A1%A8%E7%A4%BA/">刷题常用数据结构在不同语言中的表示</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2019/06/01/%E5%A6%82%E4%BD%95%E5%86%99%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/">如何写单元测试</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2019/05/02/Jenkins-CI-CD/">Jenkins CI/CD</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2019/04/21/Jenkins-Starter/">Jenkins Starter</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2019/04/04/MacBook-%E7%A3%81%E7%9B%98%E6%B8%85%E7%90%86/">MacBook 磁盘清理</a>
+          </li>
+        
+      </ul>
+    </div>
   </div>
 
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-
-  <nav id="page-nav" class="clearfix">
-    <a class="extend prev" rel="prev" href="/blog/page/9/"><span></span>Prev</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/8/">8</a><a class="page-number" href="/blog/page/9/">9</a><span class="page-number current">10</span><a class="page-number" href="/blog/page/11/">11</a><a class="page-number" href="/blog/page/12/">12</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/176/">176</a><a class="extend next" rel="next" href="/blog/page/11/">Next<span></span></a>
-  </nav>
-
-</div>
-      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
-
-<div id="asidepart">
-<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
-<aside class="clearfix">
+  
+    
 
   
+    
+  
+    <!--微信公众号二维码-->
 
 
   
-<div class="categorieslist">
-	<p class="asidetitle">分类</p>
-		<ul>
-		
-		  
-			<li><a href="/blog/categories/OFBiz/" title="OFBiz">OFBiz<sup>3</sup></a></li>
-		  
-		
-		  
-			<li><a href="/blog/categories/hdu/" title="hdu">hdu<sup>35</sup></a></li>
-		  
-		
-		  
-			<li><a href="/blog/categories/java/" title="java">java<sup>15</sup></a></li>
-		  
-		
-		  
-			<li><a href="/blog/categories/并发编程的艺术/" title="并发编程的艺术">并发编程的艺术<sup>7</sup></a></li>
-		  
-		
-		  
-			<li><a href="/blog/categories/数据结构/" title="数据结构">数据结构<sup>15</sup></a></li>
-		  
-		
-		  
-			<li><a href="/blog/categories/系统配置/" title="系统配置">系统配置<sup>12</sup></a></li>
-		  
-		
-		  
-			<li><a href="/blog/categories/设计模式/" title="设计模式">设计模式<sup>24</sup></a></li>
-		  
-		
-		</ul>
-</div>
-
-
-  
-<div class="tagslist">
-	<p class="asidetitle">标签</p>
-		<ul class="clearfix">
-		
-			
-				<li><a href="/blog/tags/递归/" title="递归">递归<sup>6</sup></a></li>
-			
-		
-			
-				<li><a href="/blog/tags/javascript/" title="javascript">javascript<sup>6</sup></a></li>
-			
-		
-			
-				<li><a href="/blog/tags/oracle/" title="oracle">oracle<sup>6</sup></a></li>
-			
-		
-			
-				<li><a href="/blog/tags/reflect/" title="reflect">reflect<sup>4</sup></a></li>
-			
-		
-			
-				<li><a href="/blog/tags/MySQL/" title="MySQL">MySQL<sup>4</sup></a></li>
-			
-		
-			
-				<li><a href="/blog/tags/LeetCode/" title="LeetCode">LeetCode<sup>3</sup></a></li>
-			
-		
-			
-				<li><a href="/blog/tags/Servlet/" title="Servlet">Servlet<sup>3</sup></a></li>
-			
-		
-			
-				<li><a href="/blog/tags/spring/" title="spring">spring<sup>3</sup></a></li>
-			
-		
-			
-				<li><a href="/blog/tags/weblogic/" title="weblogic">weblogic<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/blog/tags/jenkins/" title="jenkins">jenkins<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/blog/tags/python/" title="python">python<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/blog/tags/shell/" title="shell">shell<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/blog/tags/sql/" title="sql">sql<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/blog/tags/docker/" title="docker">docker<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/blog/tags/mockito/" title="mockito">mockito<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/blog/tags/oauth2/" title="oauth2">oauth2<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/blog/tags/elasticsearch/" title="elasticsearch">elasticsearch<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/blog/tags/hibernate/" title="hibernate">hibernate<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/blog/tags/log4j2/" title="log4j2">log4j2<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/blog/tags/maven/" title="maven">maven<sup>1</sup></a></li>
-			
-		
-		</ul>
-</div>
-
-
-  <div class="linkslist">
-  <p class="asidetitle">友情链接</p>
-    <ul>
-        
-          <li>
-            
-            	<a href="http://www.ruanyifeng.com/blog/archives.html" target="_blank" title="阮一峰">阮一峰</a>
-            
-          </li>
-        
-          <li>
-            
-            	<a href="https://blog.csdn.net/wo541075754" target="_blank" title="丑胖侠">丑胖侠</a>
-            
-          </li>
-        
-          <li>
-            
-            	<a href="http://it.deepinmind.com/index.html" target="_blank" title="deepinmind">deepinmind</a>
-            
-          </li>
-        
-          <li>
-            
-            	<a href="https://www.cnblogs.com/xrq730/" target="_blank" title="五月的仓颉">五月的仓颉</a>
-            
-          </li>
-        
-          <li>
-            
-            	<a href="http://ifeve.com/category/java/" target="_blank" title="并发编程网">并发编程网</a>
-            
-          </li>
-        
-          <li>
-            
-            	<a href="https://github.com/carl-zk" target="_blank" title="git主页">git主页</a>
-            
-          </li>
-        
-    </ul>
-</div>
-
 </aside>
-</div>
-    </div>
-    <footer><div id="footer">
-	
-	<div class="line">
-		<span></span>
-		<div class="author"></div>
-	</div>
-	
-	
-	<section class="info">
-		<p>  <br>
-			STAY FOOLISH, STAY HUNGRY.</p>
-	</section>
-	 
-	<div class="social-font">
 
-	</div>
-			
-		
-
-		<p class="copyright">
-		All Rights Reserved © 2020 
-		
-		<a href="/blog/about" target="_blank" title="carl-zk">carl-zk</a>
-		
-		
-		</p>
-</div>
-
-<script type="text/javascript" color="168, 168, 168" opacity="0.6" zindex="-2" count="200" src="https://cdnjs.cloudflare.com/ajax/libs/canvas-nest.js/1.0.1/canvas-nest.min.js"></script>
-</footer>
-    <script src="/blog/js/jquery-2.0.3.min.js"></script>
-<script src="/blog/js/jquery.imagesloaded.min.js"></script>
-<script src="/blog/js/gallery.js"></script>
-<script src="/blog/js/jquery.qrcode-0.12.0.min.js"></script>
-
-<script type="text/javascript">
-$(document).ready(function(){ 
-  $('.navbar').click(function(){
-    $('header nav').toggleClass('shownav');
-  });
-  var myWidth = 0;
-  function getSize(){
-    if( typeof( window.innerWidth ) == 'number' ) {
-      myWidth = window.innerWidth;
-    } else if( document.documentElement && document.documentElement.clientWidth) {
-      myWidth = document.documentElement.clientWidth;
-    };
-  };
-  var m = $('#main'),
-      a = $('#asidepart'),
-      c = $('.closeaside'),
-      o = $('.openaside');
-  c.click(function(){
-    a.addClass('fadeOut').css('display', 'none');
-    o.css('display', 'block').addClass('fadeIn');
-    m.addClass('moveMain');
-  });
-  o.click(function(){
-    o.css('display', 'none').removeClass('beforeFadeIn');
-    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
-    m.removeClass('moveMain');
-  });
-  $(window).scroll(function(){
-    o.css("top",Math.max(80,260-$(this).scrollTop()));
-  });
+      </div>
+      <footer id="footer">
   
-  $(window).resize(function(){
-    getSize(); 
-    if (myWidth >= 1024) {
-      $('header nav').removeClass('shownav');
-    }else{
-      m.removeClass('moveMain');
-      a.css('display', 'block').removeClass('fadeOut');
-      o.css('display', 'none');
-        
-    }
+  <div class="outer">
+    <div id="footer-left">
+      &copy; 2016 - 2020 carl-zk<!--&nbsp;|&nbsp;
+      主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a> -->
+    </div>
+  
+     <div id="footer-right">
+      <!--联系方式&nbsp;|&nbsp; -->
+      富强民主文明和谐自由平等公正法治爱国敬业诚信友善
+    </div>
+  </div>
+</footer>
+ 
+<script src="/blog/jquery/jquery.min.js"></script>
+
+ <script type="text/javascript" color="168, 168, 168" opacity='0.6' zIndex="-2" count="20" src="https://cdnjs.cloudflare.com/ajax/libs/canvas-nest.js/1.0.1/canvas-nest.min.js"></script>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/blog/" class="mobile-nav-link">首页</a>
+  
+    <a href="/blog/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/blog/about" class="mobile-nav-link">关于</a>
+  
+</nav>
+    <img class="back-to-top-btn" src="/blog/images/fly-to-top.png"/>
+<script>
+// Elevator script included on the page, already.
+window.onload = function() {
+  var elevator = new Elevator({
+    selector:'.back-to-top-btn',
+    element: document.querySelector('.back-to-top-btn'),
+    duration: 1000 // milliseconds
   });
-});
+}
 </script>
+      
+
+  
+
+  
 
 
 
@@ -405,32 +239,51 @@ $(document).ready(function(){
 
 
 
+<!-- author:forvoid begin -->
+<!-- author:forvoid begin -->
+
+<!-- author:forvoid end -->
+
+<!-- author:forvoid end -->
+
+
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      })
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      })
+    </script>
+    <script type="text/javascript" src="https://cdn.rawgit.com/mathjax/MathJax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+ 
+<script src="/blog/js/is.js"></script>
 
 
 
-<link rel="stylesheet" href="/blog/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+  
+<link rel="stylesheet" href="/blog/fancybox/jquery.fancybox.css">
+
+  
 <script src="/blog/fancybox/jquery.fancybox.pack.js"></script>
-<script type="text/javascript">
-$(document).ready(function(){ 
-  $('.article-content').each(function(i){
-    $(this).find('img').each(function(){
-      if ($(this).parent().hasClass('fancybox')) return;
-      var alt = this.alt;
-      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
-      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
-    });
-    $(this).find('.fancybox').each(function(){
-      $(this).attr('rel', 'article' + i);
-    });
-  });
-  if($.fancybox){
-    $('.fancybox').fancybox();
-  }
-}); 
-</script>
 
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/7.1.2/mermaid.min.js"></script>
+
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/mermaid/7.1.2/mermaid.min.js'></script>
   <!-- script src="/blog/js/mermaid.min.js" -->
   <script>
     if (window.mermaid) {
@@ -439,33 +292,11 @@ $(document).ready(function(){
   </script>
 
 
-<!-- Analytics Begin -->
+<script src="/blog/js/script.js"></script>
 
 
+<script src="/blog/js/elevator.js"></script>
 
-
-
-<!-- Analytics End -->
-
-<!-- Totop Begin -->
-
-	<div id="totop">
-	<a title="返回顶部"><img src="/blog/img/scrollup.png"></a>
-	</div>
-	<script src="/blog/js/totop.js"></script>
-
-<!-- Totop End -->
-
-<!-- MathJax Begin -->
-<!-- mathjax config similar to math.stackexchange -->
-
-
-<!-- MathJax End -->
-
-<!-- Tiny_search Begin -->
-
-<!-- Tiny_search End -->
-
-  </body>
- </html>
-
+  </div>
+</body>
+</html>

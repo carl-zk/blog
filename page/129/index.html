@@ -1,413 +1,241 @@
-
- <!DOCTYPE HTML>
-<html lang="zh-CN">
-<head><meta name="generator" content="Hexo 3.8.0">
-  <meta charset="UTF-8">
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
   
-    <title>一叶轻舟渡万江</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
-    
-    <meta name="author" content="carl-zk">
-    
-
-    
-    <meta property="og:type" content="website">
+  <title>一叶轻舟渡万江</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:type" content="website">
 <meta property="og:title" content="一叶轻舟渡万江">
 <meta property="og:url" content="https://github.com/carl-zk/blog/page/129/index.html">
 <meta property="og:site_name" content="一叶轻舟渡万江">
-<meta property="og:locale" content="zh-CN">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="carl-zk">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="一叶轻舟渡万江">
-
-    
-    <link rel="alternative" href="/atom.xml" title="一叶轻舟渡万江" type="application/atom+xml">
-    
-    
-    <link rel="icon" href="/blog/img/favicon2.ico">
-    
-    
-    <link rel="apple-touch-icon" href="/blog/img/tx2.jpg">
-    <link rel="apple-touch-icon-precomposed" href="/blog/img/tx2.jpg">
-    
-    <link rel="stylesheet" href="/blog/css/style.css">
-</head>
-</html>
-  <body>
-    <header>
-      
-<div>
-		
-			<div id="imglogo">
-				<a href="/blog/"><img src="/blog/img/fav.png" alt="一叶轻舟渡万江" title="一叶轻舟渡万江"></a>
-			</div>
-			
-			<div id="textlogo">
-				<h1 class="site-name"><a href="/blog/" title="一叶轻舟渡万江">一叶轻舟渡万江</a></h1>
-				<h2 class="blog-motto">泰山不拒细壤故能成其高 江海不择细流故能就其深</h2>
-			</div>
-			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
-			</a></div>
-			<nav class="animated">
-				<ul>
-					<ul>
-					 
-						<li><a href="/blog/">主页</a></li>
-					
-						<li><a href="/blog/archives">归档</a></li>
-					
-						<li><a href="/blog/about">关于</a></li>
-					
-					<li>
- 					
-					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
-						<label>Search</label>
-						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索">
-						<input type="hidden" name="q" value="site:github.com/carl-zk/blog">
-					</form>
-					
-					</li>
-				</ul>
-			</ul></nav>			
-</div>
-    </header>
-    <div id="container">
-      <div id="main">
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/blog/2016/07/04/JavaScript对象、继承和原型链/" title="JavaScript对象、继承和原型链" itemprop="url">JavaScript对象、继承和原型链</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/blog/about" title="carl-zk" target="_blank" itemprop="author">carl-zk</a>
-		
-  </p><p class="article-time">
-    <time datetime="2016-07-04T08:04:07.000Z" itemprop="datePublished"> 发表于 2016-07-04</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>JavaScript 与 Java 在面向对象编程方面类似，都是引用传递。如<br>name = ‘小明’<br>字符串是一个对象，属性字段是指向这个字符串对象的引用。<br>Java 中的继承，在 JavaScript 中成了原型链，原型链上的每个节点都是一个对象实例，这是与 Java 不同的地方。</p>
-<h2 id="对象"><a href="#对象" class="headerlink" title="对象"></a>对象</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> person = &#123;</span><br><span class="line">    name: <span class="string">''</span>, <span class="comment">// 共有变量</span></span><br><span class="line">    $age: <span class="number">0</span>, <span class="comment">// 私有变量</span></span><br><span class="line">    <span class="keyword">get</span> getAge() &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.$age;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="keyword">set</span> setAge(age) &#123;</span><br><span class="line">        <span class="keyword">if</span> (age &lt; <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'age can\'t be smaller than 0 : '</span> + age);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">this</span>.$age = age * <span class="number">10</span>;</span><br><span class="line">    &#125;,</span><br><span class="line">    sing: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        alert(<span class="keyword">this</span>.name + <span class="string">" is singing"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    person.name = <span class="string">'小明'</span>;</span><br><span class="line">    person.setAge = <span class="number">2</span>;</span><br><span class="line">    alert(person.getAge);</span><br><span class="line">    person.sing();</span><br><span class="line">&#125; <span class="keyword">catch</span> (e) &#123;</span><br><span class="line">    alert(e.message);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>在属性前加<strong>$</strong>，则此属性为私有属性，并不会被子类继承。get、set 方法与 function 不同，set 会按照指定逻辑赋值。</p>
-<h2 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Student</span>(<span class="params">id</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.id = id;</span><br><span class="line">&#125;</span><br><span class="line">Student.prototype = person;</span><br><span class="line"><span class="keyword">var</span> stu = <span class="keyword">new</span> Student(<span class="number">1</span>);</span><br><span class="line">alert(stu.name);	<span class="comment">// 小明</span></span><br><span class="line">alert(stu.age);		<span class="comment">// undefined，说明私有属性不能被继承</span></span><br><span class="line">stu.name = <span class="string">'小红'</span>;</span><br><span class="line">alert(stu.sing()).  <span class="comment">// 小红 is singing</span></span><br><span class="line">alert(person.name);	<span class="comment">//小明，说明修改子类中继承的属性，原型并不会被修改</span></span><br><span class="line">alert(<span class="built_in">JSON</span>.stringify(stu)); <span class="comment">// &#123;"id":1&#125; 对象的序列化，即对象-&gt;字符串,它会调用对象自身的 toJSON() 方法；反序列化为JSON.parse()</span></span><br></pre></td></tr></table></figure>
-<p>将 person 设为 Student 的原型，则 Student 继承了 person 的公有方法和公有属性。<br>修改子类中继承的属性并不会影响到原型的属性，但是如果修改原型的属性，则所有子类的属性都会改变。（跟 Java 内存模型一模一样）</p>
-<p>将方法设为prototype可以让浏览器只加载一次方法（为什么？）<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">User</span>(<span class="params">first, last</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.first = first;</span><br><span class="line">    <span class="keyword">this</span>.last = last;</span><br><span class="line">&#125;</span><br><span class="line">User.prototype.getFullName = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.first + <span class="string">" "</span> + <span class="keyword">this</span>.last;</span><br><span class="line">&#125;;</span><br><span class="line">User.prototype.getLastName = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.last;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">var</span> him = <span class="keyword">new</span> User(<span class="string">"wang"</span>, <span class="string">"yang"</span>);</span><br><span class="line"><span class="built_in">console</span>.log(him.getFullName())</span><br></pre></td></tr></table></figure></p>
-<p>可能就是因为所有 new User 的对象的原型都指向同一个对象，所以这些 new 出来的对象就不必每个都单独加载 getFullName、getLastName 方法了吧。<br>这里有更专业的解释<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Details_of_the_Object_Model" target="_blank" rel="noopener">Class-based vs. prototype-based languages</a></p>
-<h2 id="原型链"><a href="#原型链" class="headerlink" title="原型链"></a>原型链</h2><p>从上面的链接中可以看出 prototype-base 的 JavaScript 一些独特的性质，</p>
-<ol>
-<li>单继承；一个对象的原型只有一个。</li>
-<li>运行时对象的属性可以动态增减。</li>
-</ol>
-<h2 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h2><p>闭包更像是一个拥有字段和方法的对象实例。<br><a href="http://www.ruanyifeng.com/blog/2009/08/learning_javascript_closures.html" target="_blank" rel="noopener">阮一峰</a><br><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures" target="_blank" rel="noopener">MDN Closure</a><br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">v = <span class="string">'global'</span>;</span><br><span class="line"><span class="keyword">var</span> t = &#123;</span><br><span class="line">    v: <span class="string">'local'</span>,</span><br><span class="line">    f: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">this</span>.v;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="built_in">console</span>.log(t.f()())</span><br></pre></td></tr></table></figure></p>
-<p>f 是 t 的方法，它返回的是一个方法。由于这个返回的方法是在外部被调用，并且 this 关键字会随调用上下文发生变化，所以才会打印 global （this在严格模式下为 undefined,非严格模式下为全局对象）<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">v = <span class="string">'global'</span>;</span><br><span class="line"><span class="keyword">var</span> t = &#123;</span><br><span class="line">    v: <span class="string">'local'</span>,</span><br><span class="line">    f: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">var</span> that = <span class="keyword">this</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">            <span class="keyword">return</span> that.v;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="built_in">console</span>.log(t.f()())</span><br></pre></td></tr></table></figure></p>
-<p>虽然这里也是在外部调用，但是返回值的函数定义上下文的 that 没有被垃圾回收，它指向 t，所以打印的是 local</p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-
-  <div class="article-tags">
   
-  <span></span> <a href="/blog/tags/javascript/">javascript</a>
+    <link rel="alternate" href="/atom.xml" title="一叶轻舟渡万江" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="img/favicon2.ico">
+  
+  
+    
+  
+  
+<link rel="stylesheet" href="/blog/css/style.css">
+
+  
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    
+    <div id="header-inner" class="inner">
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://github.com/carl-zk/blog"></form>
+      </div>
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/blog/">首页</a>
+        
+          <a class="main-nav-link" href="/blog/archives">归档</a>
+        
+          <a class="main-nav-link" href="/blog/about">关于</a>
+        
+      </nav>
+      
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/blog/" id="logo">一叶轻舟渡万江</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/blog/" id="subtitle">泰山不拒细壤故能成其高 江海不择细流故能就其深</a>
+        </h2>
+      
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-万进制" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2016/07/07/%E4%B8%87%E8%BF%9B%E5%88%B6/" class="article-date">
+  <time datetime="2016-07-06T17:20:06.000Z" itemprop="datePublished">2016-07-07</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/hdu/">hdu</a>
   </div>
 
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-
-  <nav id="page-nav" class="clearfix">
-    <a class="extend prev" rel="prev" href="/blog/page/128/"><span></span>Prev</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/127/">127</a><a class="page-number" href="/blog/page/128/">128</a><span class="page-number current">129</span><a class="page-number" href="/blog/page/130/">130</a><a class="page-number" href="/blog/page/131/">131</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/176/">176</a><a class="extend next" rel="next" href="/blog/page/130/">Next<span></span></a>
-  </nav>
-
-</div>
-      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
-
-<div id="asidepart">
-<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
-<aside class="clearfix">
-
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2016/07/07/%E4%B8%87%E8%BF%9B%E5%88%B6/">万进制</a>
+    </h1>
   
 
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <p><a href="http://acm.hdu.edu.cn/showproblem.php?pid=1041" target="_blank" rel="noopener">题目链接</a></p>
+<p>Computer Transformation</p>
+<p>Problem Description<br>A sequence consisting of one digit, the number 1 is initially written into a computer. At each successive time step, the computer simultaneously tranforms each digit 0 into the sequence 1 0 and each digit 1 into the sequence 0 1. So, after the first time step, the sequence 0 1 is obtained; after the second, the sequence 1 0 0 1, after the third, the sequence 0 1 1 0 1 0 0 1 and so on. </p>
+<p>How many pairs of consequitive zeroes will appear in the sequence after n steps? </p>
+<p>Input<br>Every input line contains one natural number n (0 &lt; n ≤1000).</p>
+<p>Output<br>For each input n print the number of consecutive zeroes pairs that will appear in the sequence after n steps.</p>
+<p>Sample Input<br>2<br>3</p>
+<p>Sample Output<br>1<br>1</p>
+<p>计算机会把数字1转换为01,把0转换为10,初始时数组中只有1.所以执行第1次后数组变成01,第2次变成1001,以此类推.问执行到第n步时有几对连续的00存在.</p>
+<hr/>
+这道题属于大数处理,基本上规律是很容易得到的.做了两道,就贴这一道留个纪念.
+这里是每10000进1,即传说中的万进制.计算时要注意余数用后清零.打印时高位补0.
+f[k] = f[k-1] + 2 * f[k-2] 
 
-  
-<div class="categorieslist">
-	<p class="asidetitle">分类</p>
-		<ul>
-		
-		  
-			<li><a href="/blog/categories/OFBiz/" title="OFBiz">OFBiz<sup>3</sup></a></li>
-		  
-		
-		  
-			<li><a href="/blog/categories/hdu/" title="hdu">hdu<sup>35</sup></a></li>
-		  
-		
-		  
-			<li><a href="/blog/categories/java/" title="java">java<sup>15</sup></a></li>
-		  
-		
-		  
-			<li><a href="/blog/categories/并发编程的艺术/" title="并发编程的艺术">并发编程的艺术<sup>7</sup></a></li>
-		  
-		
-		  
-			<li><a href="/blog/categories/数据结构/" title="数据结构">数据结构<sup>15</sup></a></li>
-		  
-		
-		  
-			<li><a href="/blog/categories/系统配置/" title="系统配置">系统配置<sup>12</sup></a></li>
-		  
-		
-		  
-			<li><a href="/blog/categories/设计模式/" title="设计模式">设计模式<sup>24</sup></a></li>
-		  
-		
-		</ul>
-</div>
-
-
-  
-<div class="tagslist">
-	<p class="asidetitle">标签</p>
-		<ul class="clearfix">
-		
-			
-				<li><a href="/blog/tags/递归/" title="递归">递归<sup>6</sup></a></li>
-			
-		
-			
-				<li><a href="/blog/tags/javascript/" title="javascript">javascript<sup>6</sup></a></li>
-			
-		
-			
-				<li><a href="/blog/tags/oracle/" title="oracle">oracle<sup>6</sup></a></li>
-			
-		
-			
-				<li><a href="/blog/tags/reflect/" title="reflect">reflect<sup>4</sup></a></li>
-			
-		
-			
-				<li><a href="/blog/tags/MySQL/" title="MySQL">MySQL<sup>4</sup></a></li>
-			
-		
-			
-				<li><a href="/blog/tags/LeetCode/" title="LeetCode">LeetCode<sup>3</sup></a></li>
-			
-		
-			
-				<li><a href="/blog/tags/Servlet/" title="Servlet">Servlet<sup>3</sup></a></li>
-			
-		
-			
-				<li><a href="/blog/tags/spring/" title="spring">spring<sup>3</sup></a></li>
-			
-		
-			
-				<li><a href="/blog/tags/weblogic/" title="weblogic">weblogic<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/blog/tags/jenkins/" title="jenkins">jenkins<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/blog/tags/python/" title="python">python<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/blog/tags/shell/" title="shell">shell<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/blog/tags/sql/" title="sql">sql<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/blog/tags/docker/" title="docker">docker<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/blog/tags/mockito/" title="mockito">mockito<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/blog/tags/oauth2/" title="oauth2">oauth2<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/blog/tags/elasticsearch/" title="elasticsearch">elasticsearch<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/blog/tags/hibernate/" title="hibernate">hibernate<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/blog/tags/log4j2/" title="log4j2">log4j2<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/blog/tags/maven/" title="maven">maven<sup>1</sup></a></li>
-			
-		
-		</ul>
-</div>
-
-
-  <div class="linkslist">
-  <p class="asidetitle">友情链接</p>
-    <ul>
-        
-          <li>
-            
-            	<a href="http://www.ruanyifeng.com/blog/archives.html" target="_blank" title="阮一峰">阮一峰</a>
-            
-          </li>
-        
-          <li>
-            
-            	<a href="https://blog.csdn.net/wo541075754" target="_blank" title="丑胖侠">丑胖侠</a>
-            
-          </li>
-        
-          <li>
-            
-            	<a href="http://it.deepinmind.com/index.html" target="_blank" title="deepinmind">deepinmind</a>
-            
-          </li>
-        
-          <li>
-            
-            	<a href="https://www.cnblogs.com/xrq730/" target="_blank" title="五月的仓颉">五月的仓颉</a>
-            
-          </li>
-        
-          <li>
-            
-            	<a href="http://ifeve.com/category/java/" target="_blank" title="并发编程网">并发编程网</a>
-            
-          </li>
-        
-          <li>
-            
-            	<a href="https://github.com/carl-zk" target="_blank" title="git主页">git主页</a>
-            
-          </li>
-        
-    </ul>
-</div>
-
-</aside>
-</div>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAX 1001</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MOD 10000</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> a[MAX][<span class="number">500</span>]; <span class="comment">//&#123;0,0,1,1,3,5,11,21,43,85,171&#125;;</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">//freopen("in.txt", "r", stdin);</span></span><br><span class="line">    <span class="comment">//freopen("out.txt", "w", stdout);</span></span><br><span class="line">    <span class="keyword">int</span> n, i,j,y;</span><br><span class="line">    <span class="built_in">memset</span>(a, <span class="number">0</span>, <span class="keyword">sizeof</span>(a));</span><br><span class="line">    a[<span class="number">1</span>][<span class="number">0</span>] = <span class="number">1</span>; <span class="comment">//length of a[1]</span></span><br><span class="line">    a[<span class="number">1</span>][<span class="number">1</span>] = <span class="number">0</span>;</span><br><span class="line">    a[<span class="number">2</span>][<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">    a[<span class="number">2</span>][<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(i = <span class="number">3</span>; i &lt; MAX; i++)&#123;</span><br><span class="line">        <span class="built_in">memcpy</span>(a[i], a[i<span class="number">-1</span>], <span class="number">4</span>*(a[i<span class="number">-1</span>][<span class="number">0</span>]+<span class="number">1</span>));<span class="comment">//memcpy(dis, src, size of byte)</span></span><br><span class="line">        y = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(j = <span class="number">1</span>; j &lt;= a[i<span class="number">-2</span>][<span class="number">0</span>]; j++)&#123;</span><br><span class="line">            a[i][j] += (a[i<span class="number">-2</span>][j]&lt;&lt;<span class="number">1</span>) + y;</span><br><span class="line">            y = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">if</span>(a[i][j] &gt;= MOD)&#123;</span><br><span class="line">                y = a[i][j] / MOD;</span><br><span class="line">                a[i][j] %= MOD;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(y)&#123;</span><br><span class="line">            a[i][j] += y;</span><br><span class="line">            <span class="keyword">if</span>(j &gt; a[i][<span class="number">0</span>])a[i][<span class="number">0</span>] = j;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span>(~<span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;n))&#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d"</span>, a[n][a[n][<span class="number">0</span>]]);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = a[n][<span class="number">0</span>]<span class="number">-1</span>; i &gt; <span class="number">0</span>; i--)&#123;</span><br><span class="line">            <span class="keyword">if</span>(a[n][i] &gt;= <span class="number">1000</span>)&#123;</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">"%d"</span>, a[n][i]);</span><br><span class="line">            &#125;<span class="keyword">else</span> <span class="keyword">if</span>(a[n][i] &gt;= <span class="number">100</span>)&#123;</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">"0%d"</span>, a[n][i]);</span><br><span class="line">            &#125;<span class="keyword">else</span> <span class="keyword">if</span>(a[n][i]&gt;=<span class="number">10</span>)&#123;</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">"00%d"</span>, a[n][i]);</span><br><span class="line">            &#125;<span class="keyword">else</span> <span class="built_in">printf</span>(<span class="string">"000%d"</span>, a[n][i]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"\n"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">   <span class="comment">// fclose(stdin);</span></span><br><span class="line">   <span class="comment">// fclose(stdout);</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
     </div>
-    <footer><div id="footer">
-	
-	<div class="line">
-		<span></span>
-		<div class="author"></div>
-	</div>
-	
-	
-	<section class="info">
-		<p>  <br>
-			STAY FOOLISH, STAY HUNGRY.</p>
-	</section>
-	 
-	<div class="social-font">
-
-	</div>
-			
-		
-
-		<p class="copyright">
-		All Rights Reserved © 2020 
-		
-		<a href="/blog/about" target="_blank" title="carl-zk">carl-zk</a>
-		
-		
-		</p>
-</div>
-
-<script type="text/javascript" color="168, 168, 168" opacity="0.6" zindex="-2" count="200" src="https://cdnjs.cloudflare.com/ajax/libs/canvas-nest.js/1.0.1/canvas-nest.min.js"></script>
-</footer>
-    <script src="/blog/js/jquery-2.0.3.min.js"></script>
-<script src="/blog/js/jquery.imagesloaded.min.js"></script>
-<script src="/blog/js/gallery.js"></script>
-<script src="/blog/js/jquery.qrcode-0.12.0.min.js"></script>
-
-<script type="text/javascript">
-$(document).ready(function(){ 
-  $('.navbar').click(function(){
-    $('header nav').toggleClass('shownav');
-  });
-  var myWidth = 0;
-  function getSize(){
-    if( typeof( window.innerWidth ) == 'number' ) {
-      myWidth = window.innerWidth;
-    } else if( document.documentElement && document.documentElement.clientWidth) {
-      myWidth = document.documentElement.clientWidth;
-    };
-  };
-  var m = $('#main'),
-      a = $('#asidepart'),
-      c = $('.closeaside'),
-      o = $('.openaside');
-  c.click(function(){
-    a.addClass('fadeOut').css('display', 'none');
-    o.css('display', 'block').addClass('fadeIn');
-    m.addClass('moveMain');
-  });
-  o.click(function(){
-    o.css('display', 'none').removeClass('beforeFadeIn');
-    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
-    m.removeClass('moveMain');
-  });
-  $(window).scroll(function(){
-    o.css("top",Math.max(80,260-$(this).scrollTop()));
-  });
+    <footer class="article-footer">
+      <a data-url="https://github.com/carl-zk/blog/2016/07/07/%E4%B8%87%E8%BF%9B%E5%88%B6/" data-id="ck5kvci0a0058dmpsf5j86lj6" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
   
-  $(window).resize(function(){
-    getSize(); 
-    if (myWidth >= 1024) {
-      $('header nav').removeClass('shownav');
-    }else{
-      m.removeClass('moveMain');
-      a.css('display', 'block').removeClass('fadeOut');
-      o.css('display', 'none');
+</article>
+ 
+
+
+  
+
+
+  <nav id="page-nav">
+    <a class="extend prev" rel="prev" href="/blog/page/128/">&amp;laquo; 上一页</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/127/">127</a><a class="page-number" href="/blog/page/128/">128</a><span class="page-number current">129</span><a class="page-number" href="/blog/page/130/">130</a><a class="page-number" href="/blog/page/131/">131</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/177/">177</a><a class="extend next" rel="next" href="/blog/page/130/">下一页&amp;raquo;</a>
+  </nav>
+</section>
+           
+    <aside id="sidebar">
+  
+    
+
+  
+    
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title recent-posts">最新文章</h3>
+    <div class="widget">
+      <ul>
         
-    }
+          <li>
+            <a href="/blog/2020/01/19/%E5%88%B7%E9%A2%98%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%9C%A8%E4%B8%8D%E5%90%8C%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84%E8%A1%A8%E7%A4%BA/">刷题常用数据结构在不同语言中的表示</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2019/06/01/%E5%A6%82%E4%BD%95%E5%86%99%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/">如何写单元测试</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2019/05/02/Jenkins-CI-CD/">Jenkins CI/CD</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2019/04/21/Jenkins-Starter/">Jenkins Starter</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2019/04/04/MacBook-%E7%A3%81%E7%9B%98%E6%B8%85%E7%90%86/">MacBook 磁盘清理</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+
+  
+    
+  
+    <!--微信公众号二维码-->
+
+
+  
+</aside>
+
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-left">
+      &copy; 2016 - 2020 carl-zk<!--&nbsp;|&nbsp;
+      主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a> -->
+    </div>
+  
+     <div id="footer-right">
+      <!--联系方式&nbsp;|&nbsp; -->
+      富强民主文明和谐自由平等公正法治爱国敬业诚信友善
+    </div>
+  </div>
+</footer>
+ 
+<script src="/blog/jquery/jquery.min.js"></script>
+
+ <script type="text/javascript" color="168, 168, 168" opacity='0.6' zIndex="-2" count="20" src="https://cdnjs.cloudflare.com/ajax/libs/canvas-nest.js/1.0.1/canvas-nest.min.js"></script>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/blog/" class="mobile-nav-link">首页</a>
+  
+    <a href="/blog/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/blog/about" class="mobile-nav-link">关于</a>
+  
+</nav>
+    <img class="back-to-top-btn" src="/blog/images/fly-to-top.png"/>
+<script>
+// Elevator script included on the page, already.
+window.onload = function() {
+  var elevator = new Elevator({
+    selector:'.back-to-top-btn',
+    element: document.querySelector('.back-to-top-btn'),
+    duration: 1000 // milliseconds
   });
-});
+}
 </script>
+      
+
+  
+
+  
 
 
 
@@ -415,32 +243,51 @@ $(document).ready(function(){
 
 
 
+<!-- author:forvoid begin -->
+<!-- author:forvoid begin -->
+
+<!-- author:forvoid end -->
+
+<!-- author:forvoid end -->
+
+
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      })
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      })
+    </script>
+    <script type="text/javascript" src="https://cdn.rawgit.com/mathjax/MathJax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+ 
+<script src="/blog/js/is.js"></script>
 
 
 
-<link rel="stylesheet" href="/blog/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+  
+<link rel="stylesheet" href="/blog/fancybox/jquery.fancybox.css">
+
+  
 <script src="/blog/fancybox/jquery.fancybox.pack.js"></script>
-<script type="text/javascript">
-$(document).ready(function(){ 
-  $('.article-content').each(function(i){
-    $(this).find('img').each(function(){
-      if ($(this).parent().hasClass('fancybox')) return;
-      var alt = this.alt;
-      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
-      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
-    });
-    $(this).find('.fancybox').each(function(){
-      $(this).attr('rel', 'article' + i);
-    });
-  });
-  if($.fancybox){
-    $('.fancybox').fancybox();
-  }
-}); 
-</script>
 
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/7.1.2/mermaid.min.js"></script>
+
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/mermaid/7.1.2/mermaid.min.js'></script>
   <!-- script src="/blog/js/mermaid.min.js" -->
   <script>
     if (window.mermaid) {
@@ -449,33 +296,11 @@ $(document).ready(function(){
   </script>
 
 
-<!-- Analytics Begin -->
+<script src="/blog/js/script.js"></script>
 
 
+<script src="/blog/js/elevator.js"></script>
 
-
-
-<!-- Analytics End -->
-
-<!-- Totop Begin -->
-
-	<div id="totop">
-	<a title="返回顶部"><img src="/blog/img/scrollup.png"></a>
-	</div>
-	<script src="/blog/js/totop.js"></script>
-
-<!-- Totop End -->
-
-<!-- MathJax Begin -->
-<!-- mathjax config similar to math.stackexchange -->
-
-
-<!-- MathJax End -->
-
-<!-- Tiny_search Begin -->
-
-<!-- Tiny_search End -->
-
-  </body>
- </html>
-
+  </div>
+</body>
+</html>

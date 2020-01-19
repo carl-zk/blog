@@ -1,107 +1,108 @@
-
- <!DOCTYPE HTML>
-<html lang="zh-CN">
-<head><meta name="generator" content="Hexo 3.8.0">
-  <meta charset="UTF-8">
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
   
-    <title>位运算检查加减乘除溢出 | 一叶轻舟渡万江</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
-    
-    <meta name="author" content="carl-zk">
-    
-
-    
-    <meta name="description" content="位运算&amp;amp;|~^&amp;lt;&amp;lt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;检查溢出最贵的溢出代价：一行代码蒸发了¥6,447,277,680 人民币！以减法为例：A - B = C    A B 正常结果 溢出结果     &amp;gt;0 &amp;gt;0 不会溢出   &amp;lt;0 &amp;lt;0 不会溢出   &amp;gt;0 &amp;lt;0 &amp;gt;0 &amp;lt;0   &amp;lt;0 &amp;gt;0 &amp;lt;0 &amp;gt;">
+  <title>位运算检查加减乘除溢出 | 一叶轻舟渡万江</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="位运算&amp;|~^&lt;&lt;&gt;&gt;&gt;&gt;&gt;检查溢出最贵的溢出代价：一行代码蒸发了¥6,447,277,680 人民币！以减法为例：A - B &#x3D; C    A B 正常结果 溢出结果    &gt;0 &gt;0 不会溢出    &lt;0 &lt;0 不会溢出    &gt;0 &lt;0 &gt;0 &lt;0   &lt;0 &gt;0 &lt;0 &amp;gt">
 <meta property="og:type" content="article">
 <meta property="og:title" content="位运算检查加减乘除溢出">
-<meta property="og:url" content="https://github.com/carl-zk/blog/2018/05/09/位运算防越界/index.html">
+<meta property="og:url" content="https://github.com/carl-zk/blog/2018/05/09/%E4%BD%8D%E8%BF%90%E7%AE%97%E9%98%B2%E8%B6%8A%E7%95%8C/index.html">
 <meta property="og:site_name" content="一叶轻舟渡万江">
-<meta property="og:description" content="位运算&amp;amp;|~^&amp;lt;&amp;lt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;检查溢出最贵的溢出代价：一行代码蒸发了¥6,447,277,680 人民币！以减法为例：A - B = C    A B 正常结果 溢出结果     &amp;gt;0 &amp;gt;0 不会溢出   &amp;lt;0 &amp;lt;0 不会溢出   &amp;gt;0 &amp;lt;0 &amp;gt;0 &amp;lt;0   &amp;lt;0 &amp;gt;0 &amp;lt;0 &amp;gt;">
-<meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-02-16T01:58:27.846Z">
+<meta property="og:description" content="位运算&amp;|~^&lt;&lt;&gt;&gt;&gt;&gt;&gt;检查溢出最贵的溢出代价：一行代码蒸发了¥6,447,277,680 人民币！以减法为例：A - B &#x3D; C    A B 正常结果 溢出结果    &gt;0 &gt;0 不会溢出    &lt;0 &lt;0 不会溢出    &gt;0 &lt;0 &gt;0 &lt;0   &lt;0 &gt;0 &lt;0 &amp;gt">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2018-05-09T01:23:47.000Z">
+<meta property="article:modified_time" content="2019-02-16T01:58:27.846Z">
+<meta property="article:author" content="carl-zk">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="位运算检查加减乘除溢出">
-<meta name="twitter:description" content="位运算&amp;amp;|~^&amp;lt;&amp;lt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;检查溢出最贵的溢出代价：一行代码蒸发了¥6,447,277,680 人民币！以减法为例：A - B = C    A B 正常结果 溢出结果     &amp;gt;0 &amp;gt;0 不会溢出   &amp;lt;0 &amp;lt;0 不会溢出   &amp;gt;0 &amp;lt;0 &amp;gt;0 &amp;lt;0   &amp;lt;0 &amp;gt;0 &amp;lt;0 &amp;gt;">
-
-    
-    <link rel="alternative" href="/atom.xml" title="一叶轻舟渡万江" type="application/atom+xml">
-    
-    
-    <link rel="icon" href="/blog/img/favicon2.ico">
-    
-    
-    <link rel="apple-touch-icon" href="/blog/img/tx2.jpg">
-    <link rel="apple-touch-icon-precomposed" href="/blog/img/tx2.jpg">
-    
-    <link rel="stylesheet" href="/blog/css/style.css">
-</head>
-</html>
-  <body>
-    <header>
-      
-<div>
-		
-			<div id="imglogo">
-				<a href="/blog/"><img src="/blog/img/fav.png" alt="一叶轻舟渡万江" title="一叶轻舟渡万江"></a>
-			</div>
-			
-			<div id="textlogo">
-				<h1 class="site-name"><a href="/blog/" title="一叶轻舟渡万江">一叶轻舟渡万江</a></h1>
-				<h2 class="blog-motto">泰山不拒细壤故能成其高 江海不择细流故能就其深</h2>
-			</div>
-			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
-			</a></div>
-			<nav class="animated">
-				<ul>
-					<ul>
-					 
-						<li><a href="/blog/">主页</a></li>
-					
-						<li><a href="/blog/archives">归档</a></li>
-					
-						<li><a href="/blog/about">关于</a></li>
-					
-					<li>
- 					
-					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
-						<label>Search</label>
-						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索">
-						<input type="hidden" name="q" value="site:github.com/carl-zk/blog">
-					</form>
-					
-					</li>
-				</ul>
-			</ul></nav>			
-</div>
-    </header>
-    <div id="container">
-      <div id="main" class="post" itemscope itemprop="blogPost">
   
-	<article itemprop="articleBody"> 
-		<header class="article-info clearfix">
-  <h1 itemprop="name">
+    <link rel="alternate" href="/atom.xml" title="一叶轻舟渡万江" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="img/favicon2.ico">
+  
+  
     
-      <a href="/blog/2018/05/09/位运算防越界/" title="位运算检查加减乘除溢出" itemprop="url">位运算检查加减乘除溢出</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/blog/about" title="carl-zk" target="_blank" itemprop="author">carl-zk</a>
-		
-  </p><p class="article-time">
-    <time datetime="2018-05-09T01:23:47.000Z" itemprop="datePublished"> 发表于 2018-05-09</time>
+  
+  
+<link rel="stylesheet" href="/blog/css/style.css">
+
+  
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
     
-  </p>
+    <div id="header-inner" class="inner">
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://github.com/carl-zk/blog"></form>
+      </div>
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/blog/">首页</a>
+        
+          <a class="main-nav-link" href="/blog/archives">归档</a>
+        
+          <a class="main-nav-link" href="/blog/about">关于</a>
+        
+      </nav>
+      
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/blog/" id="logo">一叶轻舟渡万江</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/blog/" id="subtitle">泰山不拒细壤故能成其高 江海不择细流故能就其深</a>
+        </h2>
+      
+    </div>
+  </div>
 </header>
-	<div class="article-content">
-		
-		<div id="toc" class="toc-article">
-			<strong class="toc-title">文章目录</strong>
-		
-			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#位运算"><span class="toc-number">1.</span> <span class="toc-text">位运算</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#amp"><span class="toc-number">1.1.</span> <span class="toc-text">&amp;</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.2.</span> <span class="toc-text">|</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#-1"><span class="toc-number">1.3.</span> <span class="toc-text">~</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#-2"><span class="toc-number">1.4.</span> <span class="toc-text">^</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#lt-lt"><span class="toc-number">1.5.</span> <span class="toc-text">&lt;&lt;</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#gt-gt"><span class="toc-number">1.6.</span> <span class="toc-text">&gt;&gt;</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#gt-gt-gt"><span class="toc-number">1.7.</span> <span class="toc-text">&gt;&gt;&gt;</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#检查溢出"><span class="toc-number">2.</span> <span class="toc-text">检查溢出</span></a></li></ol>
-		
-		</div>
-		
-		<h1 id="位运算"><a href="#位运算" class="headerlink" title="位运算"></a>位运算</h1><h2 id="amp"><a href="#amp" class="headerlink" title="&amp;"></a>&amp;</h2><h2 id><a href="#" class="headerlink" title="|"></a>|</h2><h2 id="-1"><a href="#-1" class="headerlink" title="~"></a>~</h2><h2 id="-2"><a href="#-2" class="headerlink" title="^"></a>^</h2><h2 id="lt-lt"><a href="#lt-lt" class="headerlink" title="&lt;&lt;"></a>&lt;&lt;</h2><h2 id="gt-gt"><a href="#gt-gt" class="headerlink" title="&gt;&gt;"></a>&gt;&gt;</h2><h2 id="gt-gt-gt"><a href="#gt-gt-gt" class="headerlink" title="&gt;&gt;&gt;"></a>&gt;&gt;&gt;</h2><h1 id="检查溢出"><a href="#检查溢出" class="headerlink" title="检查溢出"></a>检查溢出</h1><p>最贵的溢出代价：<a href="https://mp.weixin.qq.com/s/wbC9nkMnEQp5ixP3HVZmpg" target="_blank" rel="noopener">一行代码蒸发了¥6,447,277,680 人民币！</a><br>以减法为例：<br>A - B = C</p>
+      <div class="outer">
+        <section id="main"><article id="post-位运算防越界" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2018/05/09/%E4%BD%8D%E8%BF%90%E7%AE%97%E9%98%B2%E8%B6%8A%E7%95%8C/" class="article-date">
+  <time datetime="2018-05-09T01:23:47.000Z" itemprop="datePublished">2018-05-09</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/java/">java</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      位运算检查加减乘除溢出
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <h1 id="位运算"><a href="#位运算" class="headerlink" title="位运算"></a>位运算</h1><h2 id="amp"><a href="#amp" class="headerlink" title="&amp;"></a>&amp;</h2><h2 id=""><a href="#" class="headerlink" title="|"></a>|</h2><h2 id="-1"><a href="#-1" class="headerlink" title="~"></a>~</h2><h2 id="-2"><a href="#-2" class="headerlink" title="^"></a>^</h2><h2 id="lt-lt"><a href="#lt-lt" class="headerlink" title="&lt;&lt;"></a>&lt;&lt;</h2><h2 id="gt-gt"><a href="#gt-gt" class="headerlink" title="&gt;&gt;"></a>&gt;&gt;</h2><h2 id="gt-gt-gt"><a href="#gt-gt-gt" class="headerlink" title="&gt;&gt;&gt;"></a>&gt;&gt;&gt;</h2><h1 id="检查溢出"><a href="#检查溢出" class="headerlink" title="检查溢出"></a>检查溢出</h1><p>最贵的溢出代价：<a href="https://mp.weixin.qq.com/s/wbC9nkMnEQp5ixP3HVZmpg" target="_blank" rel="noopener">一行代码蒸发了¥6,447,277,680 人民币！</a><br>以减法为例：<br>A - B = C</p>
 <table>
 <thead>
 <tr>
@@ -111,16 +112,17 @@
 <th>溢出结果</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>&gt;0</td>
 <td>&gt;0</td>
 <td>不会溢出</td>
+<td></td>
 </tr>
 <tr>
 <td>&lt;0</td>
 <td>&lt;0</td>
 <td>不会溢出</td>
+<td></td>
 </tr>
 <tr>
 <td>&gt;0</td>
@@ -138,433 +140,193 @@
 <td>0</td>
 <td>-</td>
 <td>不会溢出</td>
+<td></td>
 </tr>
 <tr>
 <td>-</td>
 <td>0</td>
 <td>不会溢出</td>
+<td></td>
 </tr>
-</tbody>
-</table>
-<p>只有当A、B异号才有可能出现溢出，则<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">long</span> <span class="title">safeSubtract</span><span class="params">(<span class="keyword">long</span> val1, <span class="keyword">long</span> val2)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">long</span> diff = val1 - val2;</span><br><span class="line">    <span class="comment">// If there is a sign change, but the two values have different signs...</span></span><br><span class="line">    <span class="keyword">if</span> ((val1 ^ diff) &lt; <span class="number">0</span> &amp;&amp; (val1 ^ val2) &lt; <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> ArithmeticException</span><br><span class="line">            (<span class="string">"The calculation caused an overflow: "</span> + val1 + <span class="string">" - "</span> + val2);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> diff;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>更多示例参考：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br><span class="line">293</span><br><span class="line">294</span><br><span class="line">295</span><br><span class="line">296</span><br><span class="line">297</span><br><span class="line">298</span><br><span class="line">299</span><br><span class="line">300</span><br><span class="line">301</span><br><span class="line">302</span><br><span class="line">303</span><br><span class="line">304</span><br><span class="line">305</span><br><span class="line">306</span><br><span class="line">307</span><br><span class="line">308</span><br><span class="line">309</span><br><span class="line">310</span><br><span class="line">311</span><br><span class="line">312</span><br><span class="line">313</span><br><span class="line">314</span><br><span class="line">315</span><br><span class="line">316</span><br><span class="line">317</span><br><span class="line">318</span><br><span class="line">319</span><br><span class="line">320</span><br><span class="line">321</span><br><span class="line">322</span><br><span class="line">323</span><br><span class="line">324</span><br><span class="line">325</span><br><span class="line">326</span><br><span class="line">327</span><br><span class="line">328</span><br><span class="line">329</span><br><span class="line">330</span><br><span class="line">331</span><br><span class="line">332</span><br><span class="line">333</span><br><span class="line">334</span><br><span class="line">335</span><br><span class="line">336</span><br><span class="line">337</span><br><span class="line">338</span><br><span class="line">339</span><br><span class="line">340</span><br><span class="line">341</span><br><span class="line">342</span><br><span class="line">343</span><br><span class="line">344</span><br><span class="line">345</span><br><span class="line">346</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> *  Copyright 2001-2005 Stephen Colebourne</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> *  Licensed under the Apache License, Version 2.0 (the "License");</span></span><br><span class="line"><span class="comment"> *  you may not use this file except in compliance with the License.</span></span><br><span class="line"><span class="comment"> *  You may obtain a copy of the License at</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> *      http://www.apache.org/licenses/LICENSE-2.0</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> *  Unless required by applicable law or agreed to in writing, software</span></span><br><span class="line"><span class="comment"> *  distributed under the License is distributed on an "AS IS" BASIS,</span></span><br><span class="line"><span class="comment"> *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span></span><br><span class="line"><span class="comment"> *  See the License for the specific language governing permissions and</span></span><br><span class="line"><span class="comment"> *  limitations under the License.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">package</span> org.joda.time.field;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.joda.time.DateTimeField;</span><br><span class="line"><span class="keyword">import</span> org.joda.time.DateTimeFieldType;</span><br><span class="line"><span class="keyword">import</span> org.joda.time.IllegalFieldValueException;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * General utilities that don't fit elsewhere.</span></span><br><span class="line"><span class="comment"> * &lt;p&gt;</span></span><br><span class="line"><span class="comment"> * FieldUtils is thread-safe and immutable.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> Stephen Colebourne</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@since</span> 1.0</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FieldUtils</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Restricted constructor.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">FieldUtils</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//------------------------------------------------------------------------</span></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Negates the input throwing an exception if it can't negate it.</span></span><br><span class="line"><span class="comment">     * </span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> value  the value to negate</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> the negated value</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> ArithmeticException if the value is Integer.MIN_VALUE</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@since</span> 1.1</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">safeNegate</span><span class="params">(<span class="keyword">int</span> value)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (value == Integer.MIN_VALUE) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> ArithmeticException(<span class="string">"Integer.MIN_VALUE cannot be negated"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> -value;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Add two values throwing an exception if overflow occurs.</span></span><br><span class="line"><span class="comment">     * </span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> val1  the first value</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> val2  the second value</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> the new total</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> ArithmeticException if the value is too big or too small</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">safeAdd</span><span class="params">(<span class="keyword">int</span> val1, <span class="keyword">int</span> val2)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> sum = val1 + val2;</span><br><span class="line">        <span class="comment">// If there is a sign change, but the two values have the same sign...</span></span><br><span class="line">        <span class="keyword">if</span> ((val1 ^ sum) &lt; <span class="number">0</span> &amp;&amp; (val1 ^ val2) &gt;= <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> ArithmeticException</span><br><span class="line">                (<span class="string">"The calculation caused an overflow: "</span> + val1 + <span class="string">" + "</span> + val2);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> sum;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Add two values throwing an exception if overflow occurs.</span></span><br><span class="line"><span class="comment">     * </span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> val1  the first value</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> val2  the second value</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> the new total</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> ArithmeticException if the value is too big or too small</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">long</span> <span class="title">safeAdd</span><span class="params">(<span class="keyword">long</span> val1, <span class="keyword">long</span> val2)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">long</span> sum = val1 + val2;</span><br><span class="line">        <span class="comment">// If there is a sign change, but the two values have the same sign...</span></span><br><span class="line">        <span class="keyword">if</span> ((val1 ^ sum) &lt; <span class="number">0</span> &amp;&amp; (val1 ^ val2) &gt;= <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> ArithmeticException</span><br><span class="line">                (<span class="string">"The calculation caused an overflow: "</span> + val1 + <span class="string">" + "</span> + val2);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> sum;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Subtracts two values throwing an exception if overflow occurs.</span></span><br><span class="line"><span class="comment">     * </span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> val1  the first value, to be taken away from</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> val2  the second value, the amount to take away</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> the new total</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> ArithmeticException if the value is too big or too small</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">long</span> <span class="title">safeSubtract</span><span class="params">(<span class="keyword">long</span> val1, <span class="keyword">long</span> val2)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">long</span> diff = val1 - val2;</span><br><span class="line">        <span class="comment">// If there is a sign change, but the two values have different signs...</span></span><br><span class="line">        <span class="keyword">if</span> ((val1 ^ diff) &lt; <span class="number">0</span> &amp;&amp; (val1 ^ val2) &lt; <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> ArithmeticException</span><br><span class="line">                (<span class="string">"The calculation caused an overflow: "</span> + val1 + <span class="string">" - "</span> + val2);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> diff;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Multiply two values throwing an exception if overflow occurs.</span></span><br><span class="line"><span class="comment">     * </span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> val1  the first value</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> val2  the second value</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> the new total</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> ArithmeticException if the value is too big or too small</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@since</span> 1.2</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">safeMultiply</span><span class="params">(<span class="keyword">int</span> val1, <span class="keyword">int</span> val2)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">long</span> total = (<span class="keyword">long</span>) val1 * (<span class="keyword">long</span>) val2;</span><br><span class="line">        <span class="keyword">if</span> (total &lt; Integer.MIN_VALUE || total &gt; Integer.MAX_VALUE) &#123;</span><br><span class="line">          <span class="keyword">throw</span> <span class="keyword">new</span> ArithmeticException(<span class="string">"Multiplication overflows an int: "</span> + val1 + <span class="string">" * "</span> + val2);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> (<span class="keyword">int</span>) total;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Multiply two values throwing an exception if overflow occurs.</span></span><br><span class="line"><span class="comment">     * </span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> val1  the first value</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> val2  the second value</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> the new total</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> ArithmeticException if the value is too big or too small</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@since</span> 1.2</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">long</span> <span class="title">safeMultiply</span><span class="params">(<span class="keyword">long</span> val1, <span class="keyword">int</span> val2)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">switch</span> (val2) &#123;</span><br><span class="line">            <span class="keyword">case</span> -<span class="number">1</span>:</span><br><span class="line">                <span class="keyword">if</span> (val1 == Long.MIN_VALUE) &#123;</span><br><span class="line">                    <span class="keyword">throw</span> <span class="keyword">new</span> ArithmeticException(<span class="string">"Multiplication overflows a long: "</span> + val1 + <span class="string">" * "</span> + val2);</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">return</span> -val1;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">0</span>:</span><br><span class="line">                <span class="keyword">return</span> <span class="number">0L</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">                <span class="keyword">return</span> val1;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">long</span> total = val1 * val2;</span><br><span class="line">        <span class="keyword">if</span> (total / val2 != val1) &#123;</span><br><span class="line">          <span class="keyword">throw</span> <span class="keyword">new</span> ArithmeticException(<span class="string">"Multiplication overflows a long: "</span> + val1 + <span class="string">" * "</span> + val2);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> total;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Multiply two values throwing an exception if overflow occurs.</span></span><br><span class="line"><span class="comment">     * </span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> val1  the first value</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> val2  the second value</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> the new total</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> ArithmeticException if the value is too big or too small</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">long</span> <span class="title">safeMultiply</span><span class="params">(<span class="keyword">long</span> val1, <span class="keyword">long</span> val2)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (val2 == <span class="number">1</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> val1;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (val1 == <span class="number">1</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> val2;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (val1 == <span class="number">0</span> || val2 == <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">long</span> total = val1 * val2;</span><br><span class="line">        <span class="keyword">if</span> (total / val2 != val1 || val1 == Long.MIN_VALUE &amp;&amp; val2 == -<span class="number">1</span> || val2 == Long.MIN_VALUE &amp;&amp; val1 == -<span class="number">1</span>) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> ArithmeticException(<span class="string">"Multiplication overflows a long: "</span> + val1 + <span class="string">" * "</span> + val2);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> total;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Divides the dividend by the divisor throwing an exception if </span></span><br><span class="line"><span class="comment">     * overflow occurs or the divisor is zero.</span></span><br><span class="line"><span class="comment">     * </span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> dividend  the dividend</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> divisor  the divisor</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> the new total</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> ArithmeticException if the operation overflows or the divisor is zero</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">long</span> <span class="title">safeDivide</span><span class="params">(<span class="keyword">long</span> dividend, <span class="keyword">long</span> divisor)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (dividend == Long.MIN_VALUE &amp;&amp; divisor == -<span class="number">1L</span>) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> ArithmeticException(<span class="string">"Multiplication overflows a long: "</span> + dividend + <span class="string">" / "</span> + divisor);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dividend / divisor;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Casts to an int throwing an exception if overflow occurs.</span></span><br><span class="line"><span class="comment">     * </span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> value  the value</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> the value as an int</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> ArithmeticException if the value is too big or too small</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">safeToInt</span><span class="params">(<span class="keyword">long</span> value)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (Integer.MIN_VALUE &lt;= value &amp;&amp; value &lt;= Integer.MAX_VALUE) &#123;</span><br><span class="line">            <span class="keyword">return</span> (<span class="keyword">int</span>) value;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> ArithmeticException(<span class="string">"Value cannot fit in an int: "</span> + value);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Multiply two values to return an int throwing an exception if overflow occurs.</span></span><br><span class="line"><span class="comment">     * </span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> val1  the first value</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> val2  the second value</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> the new total</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> ArithmeticException if the value is too big or too small</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">safeMultiplyToInt</span><span class="params">(<span class="keyword">long</span> val1, <span class="keyword">long</span> val2)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">long</span> val = FieldUtils.safeMultiply(val1, val2);</span><br><span class="line">        <span class="keyword">return</span> FieldUtils.safeToInt(val);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//-----------------------------------------------------------------------</span></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Verify that input values are within specified bounds.</span></span><br><span class="line"><span class="comment">     * </span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> value  the value to check</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> lowerBound  the lower bound allowed for value</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> upperBound  the upper bound allowed for value</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> IllegalFieldValueException if value is not in the specified bounds</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">verifyValueBounds</span><span class="params">(DateTimeField field, </span></span></span><br><span class="line"><span class="function"><span class="params">                                         <span class="keyword">int</span> value, <span class="keyword">int</span> lowerBound, <span class="keyword">int</span> upperBound)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> ((value &lt; lowerBound) || (value &gt; upperBound)) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> IllegalFieldValueException</span><br><span class="line">                (field.getType(), Integer.valueOf(value),</span><br><span class="line">                 Integer.valueOf(lowerBound), Integer.valueOf(upperBound));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Verify that input values are within specified bounds.</span></span><br><span class="line"><span class="comment">     * </span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> value  the value to check</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> lowerBound  the lower bound allowed for value</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> upperBound  the upper bound allowed for value</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> IllegalFieldValueException if value is not in the specified bounds</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@since</span> 1.1</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">verifyValueBounds</span><span class="params">(DateTimeFieldType fieldType, </span></span></span><br><span class="line"><span class="function"><span class="params">                                         <span class="keyword">int</span> value, <span class="keyword">int</span> lowerBound, <span class="keyword">int</span> upperBound)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> ((value &lt; lowerBound) || (value &gt; upperBound)) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> IllegalFieldValueException</span><br><span class="line">                (fieldType, Integer.valueOf(value),</span><br><span class="line">                 Integer.valueOf(lowerBound), Integer.valueOf(upperBound));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Verify that input values are within specified bounds.</span></span><br><span class="line"><span class="comment">     * </span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> value  the value to check</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> lowerBound  the lower bound allowed for value</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> upperBound  the upper bound allowed for value</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> IllegalFieldValueException if value is not in the specified bounds</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">verifyValueBounds</span><span class="params">(String fieldName,</span></span></span><br><span class="line"><span class="function"><span class="params">                                         <span class="keyword">int</span> value, <span class="keyword">int</span> lowerBound, <span class="keyword">int</span> upperBound)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> ((value &lt; lowerBound) || (value &gt; upperBound)) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> IllegalFieldValueException</span><br><span class="line">                (fieldName, Integer.valueOf(value),</span><br><span class="line">                 Integer.valueOf(lowerBound), Integer.valueOf(upperBound));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Utility method used by addWrapField implementations to ensure the new</span></span><br><span class="line"><span class="comment">     * value lies within the field's legal value range.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> currentValue the current value of the data, which may lie outside</span></span><br><span class="line"><span class="comment">     * the wrapped value range</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> wrapValue  the value to add to current value before</span></span><br><span class="line"><span class="comment">     *  wrapping.  This may be negative.</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> minValue the wrap range minimum value.</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> maxValue the wrap range maximum value.  This must be</span></span><br><span class="line"><span class="comment">     *  greater than minValue (checked by the method).</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> the wrapped value</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> IllegalArgumentException if minValue is greater</span></span><br><span class="line"><span class="comment">     *  than or equal to maxValue</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">getWrappedValue</span><span class="params">(<span class="keyword">int</span> currentValue, <span class="keyword">int</span> wrapValue,</span></span></span><br><span class="line"><span class="function"><span class="params">                                      <span class="keyword">int</span> minValue, <span class="keyword">int</span> maxValue)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> getWrappedValue(currentValue + wrapValue, minValue, maxValue);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Utility method that ensures the given value lies within the field's</span></span><br><span class="line"><span class="comment">     * legal value range.</span></span><br><span class="line"><span class="comment">     * </span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> value  the value to fit into the wrapped value range</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> minValue the wrap range minimum value.</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> maxValue the wrap range maximum value.  This must be</span></span><br><span class="line"><span class="comment">     *  greater than minValue (checked by the method).</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> the wrapped value</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> IllegalArgumentException if minValue is greater</span></span><br><span class="line"><span class="comment">     *  than or equal to maxValue</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">getWrappedValue</span><span class="params">(<span class="keyword">int</span> value, <span class="keyword">int</span> minValue, <span class="keyword">int</span> maxValue)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (minValue &gt;= maxValue) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">"MIN &gt; MAX"</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> wrapRange = maxValue - minValue + <span class="number">1</span>;</span><br><span class="line">        value -= minValue;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (value &gt;= <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> (value % wrapRange) + minValue;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> remByRange = (-value) % wrapRange;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (remByRange == <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span> + minValue;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> (wrapRange - remByRange) + minValue;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//-----------------------------------------------------------------------</span></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Compares two objects as equals handling null.</span></span><br><span class="line"><span class="comment">     * </span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> object1  the first object</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> object2  the second object</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> true if equal</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@since</span> 1.4</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">equals</span><span class="params">(Object object1, Object object2)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (object1 == object2) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (object1 == <span class="keyword">null</span> || object2 == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> object1.equals(object2);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</tbody></table>
+<p>只有当A、B异号才有可能出现溢出，则</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">long</span> <span class="title">safeSubtract</span><span class="params">(<span class="keyword">long</span> val1, <span class="keyword">long</span> val2)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">long</span> diff = val1 - val2;</span><br><span class="line">    <span class="comment">// If there is a sign change, but the two values have different signs...</span></span><br><span class="line">    <span class="keyword">if</span> ((val1 ^ diff) &lt; <span class="number">0</span> &amp;&amp; (val1 ^ val2) &lt; <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> ArithmeticException</span><br><span class="line">            (<span class="string">"The calculation caused an overflow: "</span> + val1 + <span class="string">" - "</span> + val2);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> diff;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<p>更多示例参考：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br><span class="line">293</span><br><span class="line">294</span><br><span class="line">295</span><br><span class="line">296</span><br><span class="line">297</span><br><span class="line">298</span><br><span class="line">299</span><br><span class="line">300</span><br><span class="line">301</span><br><span class="line">302</span><br><span class="line">303</span><br><span class="line">304</span><br><span class="line">305</span><br><span class="line">306</span><br><span class="line">307</span><br><span class="line">308</span><br><span class="line">309</span><br><span class="line">310</span><br><span class="line">311</span><br><span class="line">312</span><br><span class="line">313</span><br><span class="line">314</span><br><span class="line">315</span><br><span class="line">316</span><br><span class="line">317</span><br><span class="line">318</span><br><span class="line">319</span><br><span class="line">320</span><br><span class="line">321</span><br><span class="line">322</span><br><span class="line">323</span><br><span class="line">324</span><br><span class="line">325</span><br><span class="line">326</span><br><span class="line">327</span><br><span class="line">328</span><br><span class="line">329</span><br><span class="line">330</span><br><span class="line">331</span><br><span class="line">332</span><br><span class="line">333</span><br><span class="line">334</span><br><span class="line">335</span><br><span class="line">336</span><br><span class="line">337</span><br><span class="line">338</span><br><span class="line">339</span><br><span class="line">340</span><br><span class="line">341</span><br><span class="line">342</span><br><span class="line">343</span><br><span class="line">344</span><br><span class="line">345</span><br><span class="line">346</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> *  Copyright 2001-2005 Stephen Colebourne</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> *  Licensed under the Apache License, Version 2.0 (the "License");</span></span><br><span class="line"><span class="comment"> *  you may not use this file except in compliance with the License.</span></span><br><span class="line"><span class="comment"> *  You may obtain a copy of the License at</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> *      http://www.apache.org/licenses/LICENSE-2.0</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> *  Unless required by applicable law or agreed to in writing, software</span></span><br><span class="line"><span class="comment"> *  distributed under the License is distributed on an "AS IS" BASIS,</span></span><br><span class="line"><span class="comment"> *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span></span><br><span class="line"><span class="comment"> *  See the License for the specific language governing permissions and</span></span><br><span class="line"><span class="comment"> *  limitations under the License.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">package</span> org.joda.time.field;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.joda.time.DateTimeField;</span><br><span class="line"><span class="keyword">import</span> org.joda.time.DateTimeFieldType;</span><br><span class="line"><span class="keyword">import</span> org.joda.time.IllegalFieldValueException;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * General utilities that don't fit elsewhere.</span></span><br><span class="line"><span class="comment"> * &lt;p&gt;</span></span><br><span class="line"><span class="comment"> * FieldUtils is thread-safe and immutable.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> Stephen Colebourne</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@since</span> 1.0</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FieldUtils</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Restricted constructor.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">FieldUtils</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//------------------------------------------------------------------------</span></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Negates the input throwing an exception if it can't negate it.</span></span><br><span class="line"><span class="comment">     * </span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> value  the value to negate</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> the negated value</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> ArithmeticException if the value is Integer.MIN_VALUE</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@since</span> 1.1</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">safeNegate</span><span class="params">(<span class="keyword">int</span> value)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (value == Integer.MIN_VALUE) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> ArithmeticException(<span class="string">"Integer.MIN_VALUE cannot be negated"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> -value;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Add two values throwing an exception if overflow occurs.</span></span><br><span class="line"><span class="comment">     * </span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> val1  the first value</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> val2  the second value</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> the new total</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> ArithmeticException if the value is too big or too small</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">safeAdd</span><span class="params">(<span class="keyword">int</span> val1, <span class="keyword">int</span> val2)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> sum = val1 + val2;</span><br><span class="line">        <span class="comment">// If there is a sign change, but the two values have the same sign...</span></span><br><span class="line">        <span class="keyword">if</span> ((val1 ^ sum) &lt; <span class="number">0</span> &amp;&amp; (val1 ^ val2) &gt;= <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> ArithmeticException</span><br><span class="line">                (<span class="string">"The calculation caused an overflow: "</span> + val1 + <span class="string">" + "</span> + val2);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> sum;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Add two values throwing an exception if overflow occurs.</span></span><br><span class="line"><span class="comment">     * </span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> val1  the first value</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> val2  the second value</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> the new total</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> ArithmeticException if the value is too big or too small</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">long</span> <span class="title">safeAdd</span><span class="params">(<span class="keyword">long</span> val1, <span class="keyword">long</span> val2)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">long</span> sum = val1 + val2;</span><br><span class="line">        <span class="comment">// If there is a sign change, but the two values have the same sign...</span></span><br><span class="line">        <span class="keyword">if</span> ((val1 ^ sum) &lt; <span class="number">0</span> &amp;&amp; (val1 ^ val2) &gt;= <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> ArithmeticException</span><br><span class="line">                (<span class="string">"The calculation caused an overflow: "</span> + val1 + <span class="string">" + "</span> + val2);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> sum;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Subtracts two values throwing an exception if overflow occurs.</span></span><br><span class="line"><span class="comment">     * </span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> val1  the first value, to be taken away from</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> val2  the second value, the amount to take away</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> the new total</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> ArithmeticException if the value is too big or too small</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">long</span> <span class="title">safeSubtract</span><span class="params">(<span class="keyword">long</span> val1, <span class="keyword">long</span> val2)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">long</span> diff = val1 - val2;</span><br><span class="line">        <span class="comment">// If there is a sign change, but the two values have different signs...</span></span><br><span class="line">        <span class="keyword">if</span> ((val1 ^ diff) &lt; <span class="number">0</span> &amp;&amp; (val1 ^ val2) &lt; <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> ArithmeticException</span><br><span class="line">                (<span class="string">"The calculation caused an overflow: "</span> + val1 + <span class="string">" - "</span> + val2);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> diff;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Multiply two values throwing an exception if overflow occurs.</span></span><br><span class="line"><span class="comment">     * </span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> val1  the first value</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> val2  the second value</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> the new total</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> ArithmeticException if the value is too big or too small</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@since</span> 1.2</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">safeMultiply</span><span class="params">(<span class="keyword">int</span> val1, <span class="keyword">int</span> val2)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">long</span> total = (<span class="keyword">long</span>) val1 * (<span class="keyword">long</span>) val2;</span><br><span class="line">        <span class="keyword">if</span> (total &lt; Integer.MIN_VALUE || total &gt; Integer.MAX_VALUE) &#123;</span><br><span class="line">          <span class="keyword">throw</span> <span class="keyword">new</span> ArithmeticException(<span class="string">"Multiplication overflows an int: "</span> + val1 + <span class="string">" * "</span> + val2);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> (<span class="keyword">int</span>) total;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Multiply two values throwing an exception if overflow occurs.</span></span><br><span class="line"><span class="comment">     * </span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> val1  the first value</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> val2  the second value</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> the new total</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> ArithmeticException if the value is too big or too small</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@since</span> 1.2</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">long</span> <span class="title">safeMultiply</span><span class="params">(<span class="keyword">long</span> val1, <span class="keyword">int</span> val2)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">switch</span> (val2) &#123;</span><br><span class="line">            <span class="keyword">case</span> -<span class="number">1</span>:</span><br><span class="line">                <span class="keyword">if</span> (val1 == Long.MIN_VALUE) &#123;</span><br><span class="line">                    <span class="keyword">throw</span> <span class="keyword">new</span> ArithmeticException(<span class="string">"Multiplication overflows a long: "</span> + val1 + <span class="string">" * "</span> + val2);</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">return</span> -val1;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">0</span>:</span><br><span class="line">                <span class="keyword">return</span> <span class="number">0L</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">                <span class="keyword">return</span> val1;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">long</span> total = val1 * val2;</span><br><span class="line">        <span class="keyword">if</span> (total / val2 != val1) &#123;</span><br><span class="line">          <span class="keyword">throw</span> <span class="keyword">new</span> ArithmeticException(<span class="string">"Multiplication overflows a long: "</span> + val1 + <span class="string">" * "</span> + val2);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> total;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Multiply two values throwing an exception if overflow occurs.</span></span><br><span class="line"><span class="comment">     * </span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> val1  the first value</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> val2  the second value</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> the new total</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> ArithmeticException if the value is too big or too small</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">long</span> <span class="title">safeMultiply</span><span class="params">(<span class="keyword">long</span> val1, <span class="keyword">long</span> val2)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (val2 == <span class="number">1</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> val1;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (val1 == <span class="number">1</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> val2;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (val1 == <span class="number">0</span> || val2 == <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">long</span> total = val1 * val2;</span><br><span class="line">        <span class="keyword">if</span> (total / val2 != val1 || val1 == Long.MIN_VALUE &amp;&amp; val2 == -<span class="number">1</span> || val2 == Long.MIN_VALUE &amp;&amp; val1 == -<span class="number">1</span>) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> ArithmeticException(<span class="string">"Multiplication overflows a long: "</span> + val1 + <span class="string">" * "</span> + val2);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> total;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Divides the dividend by the divisor throwing an exception if </span></span><br><span class="line"><span class="comment">     * overflow occurs or the divisor is zero.</span></span><br><span class="line"><span class="comment">     * </span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> dividend  the dividend</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> divisor  the divisor</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> the new total</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> ArithmeticException if the operation overflows or the divisor is zero</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">long</span> <span class="title">safeDivide</span><span class="params">(<span class="keyword">long</span> dividend, <span class="keyword">long</span> divisor)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (dividend == Long.MIN_VALUE &amp;&amp; divisor == -<span class="number">1L</span>) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> ArithmeticException(<span class="string">"Multiplication overflows a long: "</span> + dividend + <span class="string">" / "</span> + divisor);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dividend / divisor;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Casts to an int throwing an exception if overflow occurs.</span></span><br><span class="line"><span class="comment">     * </span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> value  the value</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> the value as an int</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> ArithmeticException if the value is too big or too small</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">safeToInt</span><span class="params">(<span class="keyword">long</span> value)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (Integer.MIN_VALUE &lt;= value &amp;&amp; value &lt;= Integer.MAX_VALUE) &#123;</span><br><span class="line">            <span class="keyword">return</span> (<span class="keyword">int</span>) value;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> ArithmeticException(<span class="string">"Value cannot fit in an int: "</span> + value);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Multiply two values to return an int throwing an exception if overflow occurs.</span></span><br><span class="line"><span class="comment">     * </span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> val1  the first value</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> val2  the second value</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> the new total</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> ArithmeticException if the value is too big or too small</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">safeMultiplyToInt</span><span class="params">(<span class="keyword">long</span> val1, <span class="keyword">long</span> val2)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">long</span> val = FieldUtils.safeMultiply(val1, val2);</span><br><span class="line">        <span class="keyword">return</span> FieldUtils.safeToInt(val);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//-----------------------------------------------------------------------</span></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Verify that input values are within specified bounds.</span></span><br><span class="line"><span class="comment">     * </span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> value  the value to check</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> lowerBound  the lower bound allowed for value</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> upperBound  the upper bound allowed for value</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> IllegalFieldValueException if value is not in the specified bounds</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">verifyValueBounds</span><span class="params">(DateTimeField field, </span></span></span><br><span class="line"><span class="function"><span class="params">                                         <span class="keyword">int</span> value, <span class="keyword">int</span> lowerBound, <span class="keyword">int</span> upperBound)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> ((value &lt; lowerBound) || (value &gt; upperBound)) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> IllegalFieldValueException</span><br><span class="line">                (field.getType(), Integer.valueOf(value),</span><br><span class="line">                 Integer.valueOf(lowerBound), Integer.valueOf(upperBound));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Verify that input values are within specified bounds.</span></span><br><span class="line"><span class="comment">     * </span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> value  the value to check</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> lowerBound  the lower bound allowed for value</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> upperBound  the upper bound allowed for value</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> IllegalFieldValueException if value is not in the specified bounds</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@since</span> 1.1</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">verifyValueBounds</span><span class="params">(DateTimeFieldType fieldType, </span></span></span><br><span class="line"><span class="function"><span class="params">                                         <span class="keyword">int</span> value, <span class="keyword">int</span> lowerBound, <span class="keyword">int</span> upperBound)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> ((value &lt; lowerBound) || (value &gt; upperBound)) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> IllegalFieldValueException</span><br><span class="line">                (fieldType, Integer.valueOf(value),</span><br><span class="line">                 Integer.valueOf(lowerBound), Integer.valueOf(upperBound));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Verify that input values are within specified bounds.</span></span><br><span class="line"><span class="comment">     * </span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> value  the value to check</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> lowerBound  the lower bound allowed for value</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> upperBound  the upper bound allowed for value</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> IllegalFieldValueException if value is not in the specified bounds</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">verifyValueBounds</span><span class="params">(String fieldName,</span></span></span><br><span class="line"><span class="function"><span class="params">                                         <span class="keyword">int</span> value, <span class="keyword">int</span> lowerBound, <span class="keyword">int</span> upperBound)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> ((value &lt; lowerBound) || (value &gt; upperBound)) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> IllegalFieldValueException</span><br><span class="line">                (fieldName, Integer.valueOf(value),</span><br><span class="line">                 Integer.valueOf(lowerBound), Integer.valueOf(upperBound));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Utility method used by addWrapField implementations to ensure the new</span></span><br><span class="line"><span class="comment">     * value lies within the field's legal value range.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> currentValue the current value of the data, which may lie outside</span></span><br><span class="line"><span class="comment">     * the wrapped value range</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> wrapValue  the value to add to current value before</span></span><br><span class="line"><span class="comment">     *  wrapping.  This may be negative.</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> minValue the wrap range minimum value.</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> maxValue the wrap range maximum value.  This must be</span></span><br><span class="line"><span class="comment">     *  greater than minValue (checked by the method).</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> the wrapped value</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> IllegalArgumentException if minValue is greater</span></span><br><span class="line"><span class="comment">     *  than or equal to maxValue</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">getWrappedValue</span><span class="params">(<span class="keyword">int</span> currentValue, <span class="keyword">int</span> wrapValue,</span></span></span><br><span class="line"><span class="function"><span class="params">                                      <span class="keyword">int</span> minValue, <span class="keyword">int</span> maxValue)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> getWrappedValue(currentValue + wrapValue, minValue, maxValue);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Utility method that ensures the given value lies within the field's</span></span><br><span class="line"><span class="comment">     * legal value range.</span></span><br><span class="line"><span class="comment">     * </span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> value  the value to fit into the wrapped value range</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> minValue the wrap range minimum value.</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> maxValue the wrap range maximum value.  This must be</span></span><br><span class="line"><span class="comment">     *  greater than minValue (checked by the method).</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> the wrapped value</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> IllegalArgumentException if minValue is greater</span></span><br><span class="line"><span class="comment">     *  than or equal to maxValue</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">getWrappedValue</span><span class="params">(<span class="keyword">int</span> value, <span class="keyword">int</span> minValue, <span class="keyword">int</span> maxValue)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (minValue &gt;= maxValue) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">"MIN &gt; MAX"</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> wrapRange = maxValue - minValue + <span class="number">1</span>;</span><br><span class="line">        value -= minValue;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (value &gt;= <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> (value % wrapRange) + minValue;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> remByRange = (-value) % wrapRange;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (remByRange == <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span> + minValue;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> (wrapRange - remByRange) + minValue;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//-----------------------------------------------------------------------</span></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Compares two objects as equals handling null.</span></span><br><span class="line"><span class="comment">     * </span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> object1  the first object</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> object2  the second object</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> true if equal</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@since</span> 1.4</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">equals</span><span class="params">(Object object1, Object object2)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (object1 == object2) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (object1 == <span class="keyword">null</span> || object2 == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> object1.equals(object2);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/carl-zk/blog/2018/05/09/%E4%BD%8D%E8%BF%90%E7%AE%97%E9%98%B2%E8%B6%8A%E7%95%8C/" data-id="ck5kvci2300a6dmpsd2t15cc9" class="article-share-link">分享</a>
+      
+      
+      
+    </footer>
+  </div>
   
-	</div>
-		<footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/blog/categories/java/">java</a>
-</div>
-
-
-</div>
-
-
-
-	<div class="article-share" id="share">
-	
-	  <div data-url="https://github.com/carl-zk/blog/2018/05/09/位运算防越界/" data-title="位运算检查加减乘除溢出 | 一叶轻舟渡万江" data-tsina class="share clearfix">
-	  </div>
-	
-	</div>
-
-
-</footer>
-
-   	       
-	</article>
-	
-<nav class="article-nav clearfix">
+    
  
- <div class="prev">
- <a href="/blog/2018/05/12/Java动态代理/" title="Java动态代理">
-  <strong>上一篇：</strong><br>
-  <span>
-  Java动态代理</span>
-</a>
-</div>
+<script src="/blog/jquery/jquery.min.js"></script>
 
-
-<div class="next">
-<a href="/blog/2018/05/09/神器：查class所在jar包/" title="神器：查Class所在jar包">
- <strong>下一篇：</strong><br> 
- <span>神器：查Class所在jar包
-</span>
-</a>
-</div>
-
-</nav>
-
-
-<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
-<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
-
-
-    <div id="gitment-comments"></div>    
-
-
-<script>
-const gitment = new Gitment({
-    id: '',
-    owner: 'carl-zk',
-    repo: 'comments-store',
-    oauth: {
-        client_id: 'd1262e8923cd7f8e0196',
-        client_secret: 'ef46a4afe7dca3fe5fa7e0038a08b99da41b20ba'
-    }
-});
-gitment.render(document.getElementById('gitment-comments'));
-</script>
-	
-
-</div>  
-      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
-
-  <div id="toc" class="toc-aside">
-  <strong class="toc-title">文章目录</strong>
- 
- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#位运算"><span class="toc-number">1.</span> <span class="toc-text">位运算</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#amp"><span class="toc-number">1.1.</span> <span class="toc-text">&amp;</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-number">1.2.</span> <span class="toc-text">|</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#-1"><span class="toc-number">1.3.</span> <span class="toc-text">~</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#-2"><span class="toc-number">1.4.</span> <span class="toc-text">^</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#lt-lt"><span class="toc-number">1.5.</span> <span class="toc-text">&lt;&lt;</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#gt-gt"><span class="toc-number">1.6.</span> <span class="toc-text">&gt;&gt;</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#gt-gt-gt"><span class="toc-number">1.7.</span> <span class="toc-text">&gt;&gt;&gt;</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#检查溢出"><span class="toc-number">2.</span> <span class="toc-text">检查溢出</span></a></li></ol>
- 
+  <div id="random_posts">
+    <h2>推荐文章</h2>
+    <div class="random_posts_ul">
+      <script>
+          var random_count =4
+          var site = {BASE_URI:'/blog/'};
+          function load_random_posts(obj) {
+              var arr=site.posts;
+              if (!obj) return;
+              // var count = $(obj).attr('data-count') || 6;
+              for (var i, tmp, n = arr.length; n; i = Math.floor(Math.random() * n), tmp = arr[--n], arr[n] = arr[i], arr[i] = tmp);
+              arr = arr.slice(0, random_count);
+              var html = '<ul>';
+            
+              for(var j=0;j<arr.length;j++){
+                var item=arr[j];
+                html += '<li><strong>' + 
+                item.date + ':&nbsp;&nbsp;<a href="' + (site.BASE_URI+item.uri) + '">' + 
+                (item.title || item.uri) + '</a></strong>';
+                if(item.excerpt){
+                  html +='<div class="post-excerpt">'+item.excerpt+'</div>';
+                }
+                html +='</li>';
+                
+              }
+              $(obj).html(html + '</ul>');
+          }
+          $('.random_posts_ul').each(function () {
+              var c = this;
+              if (!site.posts || !site.posts.length){
+                  $.getJSON(site.BASE_URI + 'js/posts.js',function(json){site.posts = json;load_random_posts(c)});
+              } 
+               else{
+                load_random_posts(c);
+              }
+          });
+      </script>
+    </div>
   </div>
 
-<div id="asidepart">
-<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
-<aside class="clearfix">
+    
+<nav id="article-nav">
+  
+    <a href="/blog/2018/05/12/Java%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          Java动态代理
+        
+      </div>
+    </a>
+  
+  
+    <a href="/blog/2018/05/09/%E7%A5%9E%E5%99%A8%EF%BC%9A%E6%9F%A5class%E6%89%80%E5%9C%A8jar%E5%8C%85/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">神器：查Class所在jar包</div>
+    </a>
+  
+</nav>
 
   
-
-
-  
-<div class="categorieslist">
-	<p class="asidetitle">分类</p>
-		<ul>
-		
-		  
-			<li><a href="/blog/categories/OFBiz/" title="OFBiz">OFBiz<sup>3</sup></a></li>
-		  
-		
-		  
-			<li><a href="/blog/categories/hdu/" title="hdu">hdu<sup>35</sup></a></li>
-		  
-		
-		  
-			<li><a href="/blog/categories/java/" title="java">java<sup>15</sup></a></li>
-		  
-		
-		  
-			<li><a href="/blog/categories/并发编程的艺术/" title="并发编程的艺术">并发编程的艺术<sup>7</sup></a></li>
-		  
-		
-		  
-			<li><a href="/blog/categories/数据结构/" title="数据结构">数据结构<sup>15</sup></a></li>
-		  
-		
-		  
-			<li><a href="/blog/categories/系统配置/" title="系统配置">系统配置<sup>12</sup></a></li>
-		  
-		
-		  
-			<li><a href="/blog/categories/设计模式/" title="设计模式">设计模式<sup>24</sup></a></li>
-		  
-		
-		</ul>
-</div>
-
-
-  
-<div class="tagslist">
-	<p class="asidetitle">标签</p>
-		<ul class="clearfix">
-		
-			
-				<li><a href="/blog/tags/递归/" title="递归">递归<sup>6</sup></a></li>
-			
-		
-			
-				<li><a href="/blog/tags/javascript/" title="javascript">javascript<sup>6</sup></a></li>
-			
-		
-			
-				<li><a href="/blog/tags/oracle/" title="oracle">oracle<sup>6</sup></a></li>
-			
-		
-			
-				<li><a href="/blog/tags/reflect/" title="reflect">reflect<sup>4</sup></a></li>
-			
-		
-			
-				<li><a href="/blog/tags/MySQL/" title="MySQL">MySQL<sup>4</sup></a></li>
-			
-		
-			
-				<li><a href="/blog/tags/LeetCode/" title="LeetCode">LeetCode<sup>3</sup></a></li>
-			
-		
-			
-				<li><a href="/blog/tags/Servlet/" title="Servlet">Servlet<sup>3</sup></a></li>
-			
-		
-			
-				<li><a href="/blog/tags/spring/" title="spring">spring<sup>3</sup></a></li>
-			
-		
-			
-				<li><a href="/blog/tags/weblogic/" title="weblogic">weblogic<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/blog/tags/jenkins/" title="jenkins">jenkins<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/blog/tags/python/" title="python">python<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/blog/tags/shell/" title="shell">shell<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/blog/tags/sql/" title="sql">sql<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/blog/tags/docker/" title="docker">docker<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/blog/tags/mockito/" title="mockito">mockito<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/blog/tags/oauth2/" title="oauth2">oauth2<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/blog/tags/elasticsearch/" title="elasticsearch">elasticsearch<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/blog/tags/hibernate/" title="hibernate">hibernate<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/blog/tags/log4j2/" title="log4j2">log4j2<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/blog/tags/maven/" title="maven">maven<sup>1</sup></a></li>
-			
-		
-		</ul>
-</div>
-
-
-  <div class="linkslist">
-  <p class="asidetitle">友情链接</p>
-    <ul>
-        
-          <li>
-            
-            	<a href="http://www.ruanyifeng.com/blog/archives.html" target="_blank" title="阮一峰">阮一峰</a>
-            
-          </li>
-        
-          <li>
-            
-            	<a href="https://blog.csdn.net/wo541075754" target="_blank" title="丑胖侠">丑胖侠</a>
-            
-          </li>
-        
-          <li>
-            
-            	<a href="http://it.deepinmind.com/index.html" target="_blank" title="deepinmind">deepinmind</a>
-            
-          </li>
-        
-          <li>
-            
-            	<a href="https://www.cnblogs.com/xrq730/" target="_blank" title="五月的仓颉">五月的仓颉</a>
-            
-          </li>
-        
-          <li>
-            
-            	<a href="http://ifeve.com/category/java/" target="_blank" title="并发编程网">并发编程网</a>
-            
-          </li>
-        
-          <li>
-            
-            	<a href="https://github.com/carl-zk" target="_blank" title="git主页">git主页</a>
-            
-          </li>
-        
-    </ul>
-</div>
-
-</aside>
-</div>
-    </div>
-    <footer><div id="footer">
-	
-	<div class="line">
-		<span></span>
-		<div class="author"></div>
-	</div>
-	
-	
-	<section class="info">
-		<p>  <br>
-			STAY FOOLISH, STAY HUNGRY.</p>
-	</section>
-	 
-	<div class="social-font">
-
-	</div>
-			
-		
-
-		<p class="copyright">
-		All Rights Reserved © 2020 
-		
-		<a href="/blog/about" target="_blank" title="carl-zk">carl-zk</a>
-		
-		
-		</p>
-</div>
-
-<script type="text/javascript" color="168, 168, 168" opacity="0.6" zindex="-2" count="200" src="https://cdnjs.cloudflare.com/ajax/libs/canvas-nest.js/1.0.1/canvas-nest.min.js"></script>
-</footer>
-    <script src="/blog/js/jquery-2.0.3.min.js"></script>
-<script src="/blog/js/jquery.imagesloaded.min.js"></script>
-<script src="/blog/js/gallery.js"></script>
-<script src="/blog/js/jquery.qrcode-0.12.0.min.js"></script>
-
-<script type="text/javascript">
-$(document).ready(function(){ 
-  $('.navbar').click(function(){
-    $('header nav').toggleClass('shownav');
-  });
-  var myWidth = 0;
-  function getSize(){
-    if( typeof( window.innerWidth ) == 'number' ) {
-      myWidth = window.innerWidth;
-    } else if( document.documentElement && document.documentElement.clientWidth) {
-      myWidth = document.documentElement.clientWidth;
-    };
-  };
-  var m = $('#main'),
-      a = $('#asidepart'),
-      c = $('.closeaside'),
-      o = $('.openaside');
-  c.click(function(){
-    a.addClass('fadeOut').css('display', 'none');
-    o.css('display', 'block').addClass('fadeIn');
-    m.addClass('moveMain');
-  });
-  o.click(function(){
-    o.css('display', 'none').removeClass('beforeFadeIn');
-    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
-    m.removeClass('moveMain');
-  });
-  $(window).scroll(function(){
-    o.css("top",Math.max(80,260-$(this).scrollTop()));
-  });
-  
-  $(window).resize(function(){
-    getSize(); 
-    if (myWidth >= 1024) {
-      $('header nav').removeClass('shownav');
-    }else{
-      m.removeClass('moveMain');
-      a.css('display', 'block').removeClass('fadeOut');
-      o.css('display', 'none');
+</article>
+ 
+     
+  <div class="comments" id="comments">
+    
+     
+       
+       
       
-      $('#toc.toc-aside').css('display', 'none');
-        
-    }
+      
+  </div>
+ 
+  
+
+</section>
+           
+    <aside id="sidebar">
+  
+    
+
+  
+    
+    <div class="widget-wrap">
+    
+      <div class="widget" id="toc-widget-fixed">
+      
+        <strong class="toc-title">文章目录</strong>
+        <div class="toc-widget-list">
+              <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#位运算"><span class="toc-number">1.</span> <span class="toc-text">位运算</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#amp"><span class="toc-number">1.1.</span> <span class="toc-text">&amp;</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#null"><span class="toc-number">1.2.</span> <span class="toc-text">|</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#-1"><span class="toc-number">1.3.</span> <span class="toc-text">~</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#-2"><span class="toc-number">1.4.</span> <span class="toc-text">^</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#lt-lt"><span class="toc-number">1.5.</span> <span class="toc-text">&lt;&lt;</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#gt-gt"><span class="toc-number">1.6.</span> <span class="toc-text">&gt;&gt;</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#gt-gt-gt"><span class="toc-number">1.7.</span> <span class="toc-text">&gt;&gt;&gt;</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#检查溢出"><span class="toc-number">2.</span> <span class="toc-text">检查溢出</span></a></li></ol>
+          </div>
+      </div>
+    </div>
+
+  
+    
+
+  
+    
+  
+    
+  
+    
+
+  
+    
+  
+    <!--微信公众号二维码-->
+
+
+  
+</aside>
+
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-left">
+      &copy; 2016 - 2020 carl-zk<!--&nbsp;|&nbsp;
+      主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a> -->
+    </div>
+  
+     <div id="footer-right">
+      <!--联系方式&nbsp;|&nbsp; -->
+      富强民主文明和谐自由平等公正法治爱国敬业诚信友善
+    </div>
+  </div>
+</footer>
+ 
+<script src="/blog/jquery/jquery.min.js"></script>
+
+ <script type="text/javascript" color="168, 168, 168" opacity='0.6' zIndex="-2" count="20" src="https://cdnjs.cloudflare.com/ajax/libs/canvas-nest.js/1.0.1/canvas-nest.min.js"></script>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/blog/" class="mobile-nav-link">首页</a>
+  
+    <a href="/blog/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/blog/about" class="mobile-nav-link">关于</a>
+  
+</nav>
+    <img class="back-to-top-btn" src="/blog/images/fly-to-top.png"/>
+<script>
+// Elevator script included on the page, already.
+window.onload = function() {
+  var elevator = new Elevator({
+    selector:'.back-to-top-btn',
+    element: document.querySelector('.back-to-top-btn'),
+    duration: 1000 // milliseconds
   });
-});
+}
 </script>
+      
 
-<script type="text/javascript">
-$(document).ready(function(){ 
-  var ai = $('.article-content>iframe'),
-      ae = $('.article-content>embed'),
-      t  = $('#toc'),
-      ta = $('#toc.toc-aside'),
-      o  = $('.openaside'),
-      c  = $('.closeaside');
-  if(ai.length>0){
-    ai.wrap('<div class="video-container" />');
-  };
-  if(ae.length>0){
-   ae.wrap('<div class="video-container" />');
-  };
-  c.click(function(){
-    ta.css('display', 'block').addClass('fadeIn');
-  });
-  o.click(function(){
-    ta.css('display', 'none');
-  });
-  $(window).scroll(function(){
-    ta.css("top",Math.max(140,320-$(this).scrollTop()));
-  });
-});
-</script>
+  
 
-
-<script type="text/javascript">
-$(document).ready(function(){ 
-  var $this = $('.share'),
-      url = $this.attr('data-url'),
-      encodedUrl = encodeURIComponent(url),
-      title = $this.attr('data-title'),
-      tsina = $this.attr('data-tsina'),
-      description = $this.attr('description');
-  var html = [
-  '<div class="hoverqrcode clearfix"></div>',
-  '<a class="overlay" id="qrcode"></a>',
-  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
-  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
-  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
-  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
-  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
-  '<span title="Share to"></span>'
-  ].join('');
-  $this.append(html);
-
-  $('.hoverqrcode').hide();
-
-  var myWidth = 0;
-  function updatehoverqrcode(){
-    if( typeof( window.innerWidth ) == 'number' ) {
-      myWidth = window.innerWidth;
-    } else if( document.documentElement && document.documentElement.clientWidth) {
-      myWidth = document.documentElement.clientWidth;
-    };
-    var qrsize = myWidth > 1024 ? 200:100;
-    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
-    var p = $('.article-share-qrcode').position();
-    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
-                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
-                          .qrcode(options);
-  };
-  $(window).resize(function(){
-    $('.hoverqrcode').hide();
-  });
-  $('.article-share-qrcode').click(function(){
-    updatehoverqrcode();
-    $('.hoverqrcode').toggle();
-  });
-  $('.article-share-qrcode').hover(function(){}, function(){
-      $('.hoverqrcode').hide();
-  });
-});   
-</script>
+  
 
 
 
@@ -572,31 +334,51 @@ $(document).ready(function(){
 
 
 
+<!-- author:forvoid begin -->
+<!-- author:forvoid begin -->
+
+<!-- author:forvoid end -->
+
+<!-- author:forvoid end -->
 
 
-<link rel="stylesheet" href="/blog/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      })
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      })
+    </script>
+    <script type="text/javascript" src="https://cdn.rawgit.com/mathjax/MathJax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+ 
+<script src="/blog/js/is.js"></script>
+
+
+
+  
+<link rel="stylesheet" href="/blog/fancybox/jquery.fancybox.css">
+
+  
 <script src="/blog/fancybox/jquery.fancybox.pack.js"></script>
-<script type="text/javascript">
-$(document).ready(function(){ 
-  $('.article-content').each(function(i){
-    $(this).find('img').each(function(){
-      if ($(this).parent().hasClass('fancybox')) return;
-      var alt = this.alt;
-      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
-      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
-    });
-    $(this).find('.fancybox').each(function(){
-      $(this).attr('rel', 'article' + i);
-    });
-  });
-  if($.fancybox){
-    $('.fancybox').fancybox();
-  }
-}); 
-</script>
 
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/7.1.2/mermaid.min.js"></script>
+
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/mermaid/7.1.2/mermaid.min.js'></script>
   <!-- script src="/blog/js/mermaid.min.js" -->
   <script>
     if (window.mermaid) {
@@ -605,33 +387,11 @@ $(document).ready(function(){
   </script>
 
 
-<!-- Analytics Begin -->
+<script src="/blog/js/script.js"></script>
 
 
+<script src="/blog/js/elevator.js"></script>
 
-
-
-<!-- Analytics End -->
-
-<!-- Totop Begin -->
-
-	<div id="totop">
-	<a title="返回顶部"><img src="/blog/img/scrollup.png"></a>
-	</div>
-	<script src="/blog/js/totop.js"></script>
-
-<!-- Totop End -->
-
-<!-- MathJax Begin -->
-<!-- mathjax config similar to math.stackexchange -->
-
-
-<!-- MathJax End -->
-
-<!-- Tiny_search Begin -->
-
-<!-- Tiny_search End -->
-
-  </body>
+  </div>
+</body>
 </html>
-

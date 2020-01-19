@@ -1,539 +1,297 @@
-
- <!DOCTYPE HTML>
-<html lang="zh-CN">
-<head><meta name="generator" content="Hexo 3.8.0">
-  <meta charset="UTF-8">
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
   
-    <title>JavaScript对象、继承和原型链 | 一叶轻舟渡万江</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
-    
-    <meta name="author" content="carl-zk">
-    
-
-    
-    <meta name="description" content="JavaScript 与 Java 在面向对象编程方面类似，都是引用传递。如name = ‘小明’字符串是一个对象，属性字段是指向这个字符串对象的引用。Java 中的继承，在 JavaScript 中成了原型链，原型链上的每个节点都是一个对象实例，这是与 Java 不同的地方。 对象123456789101112131415161718192021222324var person = &amp;#123;">
-<meta name="keywords" content="javascript">
+  <title>JavaScript对象、继承和原型链 | 一叶轻舟渡万江</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="JavaScript 与 Java 在面向对象编程方面类似，都是引用传递。如name &#x3D; ‘小明’字符串是一个对象，属性字段是指向这个字符串对象的引用。Java 中的继承，在 JavaScript 中成了原型链，原型链上的每个节点都是一个对象实例，这是与 Java 不同的地方。 对象123456789101112131415161718192021222324var person &#x3D; &amp;#123;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JavaScript对象、继承和原型链">
-<meta property="og:url" content="https://github.com/carl-zk/blog/2016/07/04/JavaScript对象、继承和原型链/index.html">
+<meta property="og:url" content="https://github.com/carl-zk/blog/2016/07/04/JavaScript%E5%AF%B9%E8%B1%A1%E3%80%81%E7%BB%A7%E6%89%BF%E5%92%8C%E5%8E%9F%E5%9E%8B%E9%93%BE/index.html">
 <meta property="og:site_name" content="一叶轻舟渡万江">
-<meta property="og:description" content="JavaScript 与 Java 在面向对象编程方面类似，都是引用传递。如name = ‘小明’字符串是一个对象，属性字段是指向这个字符串对象的引用。Java 中的继承，在 JavaScript 中成了原型链，原型链上的每个节点都是一个对象实例，这是与 Java 不同的地方。 对象123456789101112131415161718192021222324var person = &amp;#123;">
-<meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-02-16T01:58:27.787Z">
+<meta property="og:description" content="JavaScript 与 Java 在面向对象编程方面类似，都是引用传递。如name &#x3D; ‘小明’字符串是一个对象，属性字段是指向这个字符串对象的引用。Java 中的继承，在 JavaScript 中成了原型链，原型链上的每个节点都是一个对象实例，这是与 Java 不同的地方。 对象123456789101112131415161718192021222324var person &#x3D; &amp;#123;">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2016-07-04T08:04:07.000Z">
+<meta property="article:modified_time" content="2019-02-16T01:58:27.787Z">
+<meta property="article:author" content="carl-zk">
+<meta property="article:tag" content="javascript">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="JavaScript对象、继承和原型链">
-<meta name="twitter:description" content="JavaScript 与 Java 在面向对象编程方面类似，都是引用传递。如name = ‘小明’字符串是一个对象，属性字段是指向这个字符串对象的引用。Java 中的继承，在 JavaScript 中成了原型链，原型链上的每个节点都是一个对象实例，这是与 Java 不同的地方。 对象123456789101112131415161718192021222324var person = &amp;#123;">
-
-    
-    <link rel="alternative" href="/atom.xml" title="一叶轻舟渡万江" type="application/atom+xml">
-    
-    
-    <link rel="icon" href="/blog/img/favicon2.ico">
-    
-    
-    <link rel="apple-touch-icon" href="/blog/img/tx2.jpg">
-    <link rel="apple-touch-icon-precomposed" href="/blog/img/tx2.jpg">
-    
-    <link rel="stylesheet" href="/blog/css/style.css">
-</head>
-</html>
-  <body>
-    <header>
-      
-<div>
-		
-			<div id="imglogo">
-				<a href="/blog/"><img src="/blog/img/fav.png" alt="一叶轻舟渡万江" title="一叶轻舟渡万江"></a>
-			</div>
-			
-			<div id="textlogo">
-				<h1 class="site-name"><a href="/blog/" title="一叶轻舟渡万江">一叶轻舟渡万江</a></h1>
-				<h2 class="blog-motto">泰山不拒细壤故能成其高 江海不择细流故能就其深</h2>
-			</div>
-			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
-			</a></div>
-			<nav class="animated">
-				<ul>
-					<ul>
-					 
-						<li><a href="/blog/">主页</a></li>
-					
-						<li><a href="/blog/archives">归档</a></li>
-					
-						<li><a href="/blog/about">关于</a></li>
-					
-					<li>
- 					
-					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
-						<label>Search</label>
-						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索">
-						<input type="hidden" name="q" value="site:github.com/carl-zk/blog">
-					</form>
-					
-					</li>
-				</ul>
-			</ul></nav>			
-</div>
-    </header>
-    <div id="container">
-      <div id="main" class="post" itemscope itemprop="blogPost">
   
-	<article itemprop="articleBody"> 
-		<header class="article-info clearfix">
-  <h1 itemprop="name">
+    <link rel="alternate" href="/atom.xml" title="一叶轻舟渡万江" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="img/favicon2.ico">
+  
+  
     
-      <a href="/blog/2016/07/04/JavaScript对象、继承和原型链/" title="JavaScript对象、继承和原型链" itemprop="url">JavaScript对象、继承和原型链</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/blog/about" title="carl-zk" target="_blank" itemprop="author">carl-zk</a>
-		
-  </p><p class="article-time">
-    <time datetime="2016-07-04T08:04:07.000Z" itemprop="datePublished"> 发表于 2016-07-04</time>
+  
+  
+<link rel="stylesheet" href="/blog/css/style.css">
+
+  
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
     
-  </p>
+    <div id="header-inner" class="inner">
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://github.com/carl-zk/blog"></form>
+      </div>
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/blog/">首页</a>
+        
+          <a class="main-nav-link" href="/blog/archives">归档</a>
+        
+          <a class="main-nav-link" href="/blog/about">关于</a>
+        
+      </nav>
+      
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/blog/" id="logo">一叶轻舟渡万江</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/blog/" id="subtitle">泰山不拒细壤故能成其高 江海不择细流故能就其深</a>
+        </h2>
+      
+    </div>
+  </div>
 </header>
-	<div class="article-content">
-		
-		<div id="toc" class="toc-article">
-			<strong class="toc-title">文章目录</strong>
-		
-			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#对象"><span class="toc-number">1.</span> <span class="toc-text">对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#继承"><span class="toc-number">2.</span> <span class="toc-text">继承</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#原型链"><span class="toc-number">3.</span> <span class="toc-text">原型链</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#闭包"><span class="toc-number">4.</span> <span class="toc-text">闭包</span></a></li></ol>
-		
-		</div>
-		
-		<p>JavaScript 与 Java 在面向对象编程方面类似，都是引用传递。如<br>name = ‘小明’<br>字符串是一个对象，属性字段是指向这个字符串对象的引用。<br>Java 中的继承，在 JavaScript 中成了原型链，原型链上的每个节点都是一个对象实例，这是与 Java 不同的地方。</p>
+      <div class="outer">
+        <section id="main"><article id="post-JavaScript对象、继承和原型链" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2016/07/04/JavaScript%E5%AF%B9%E8%B1%A1%E3%80%81%E7%BB%A7%E6%89%BF%E5%92%8C%E5%8E%9F%E5%9E%8B%E9%93%BE/" class="article-date">
+  <time datetime="2016-07-04T08:04:07.000Z" itemprop="datePublished">2016-07-04</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      JavaScript对象、继承和原型链
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <p>JavaScript 与 Java 在面向对象编程方面类似，都是引用传递。如<br>name = ‘小明’<br>字符串是一个对象，属性字段是指向这个字符串对象的引用。<br>Java 中的继承，在 JavaScript 中成了原型链，原型链上的每个节点都是一个对象实例，这是与 Java 不同的地方。</p>
 <h2 id="对象"><a href="#对象" class="headerlink" title="对象"></a>对象</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> person = &#123;</span><br><span class="line">    name: <span class="string">''</span>, <span class="comment">// 共有变量</span></span><br><span class="line">    $age: <span class="number">0</span>, <span class="comment">// 私有变量</span></span><br><span class="line">    <span class="keyword">get</span> getAge() &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.$age;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="keyword">set</span> setAge(age) &#123;</span><br><span class="line">        <span class="keyword">if</span> (age &lt; <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'age can\'t be smaller than 0 : '</span> + age);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">this</span>.$age = age * <span class="number">10</span>;</span><br><span class="line">    &#125;,</span><br><span class="line">    sing: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        alert(<span class="keyword">this</span>.name + <span class="string">" is singing"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    person.name = <span class="string">'小明'</span>;</span><br><span class="line">    person.setAge = <span class="number">2</span>;</span><br><span class="line">    alert(person.getAge);</span><br><span class="line">    person.sing();</span><br><span class="line">&#125; <span class="keyword">catch</span> (e) &#123;</span><br><span class="line">    alert(e.message);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>在属性前加<strong>$</strong>，则此属性为私有属性，并不会被子类继承。get、set 方法与 function 不同，set 会按照指定逻辑赋值。</p>
 <h2 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Student</span>(<span class="params">id</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.id = id;</span><br><span class="line">&#125;</span><br><span class="line">Student.prototype = person;</span><br><span class="line"><span class="keyword">var</span> stu = <span class="keyword">new</span> Student(<span class="number">1</span>);</span><br><span class="line">alert(stu.name);	<span class="comment">// 小明</span></span><br><span class="line">alert(stu.age);		<span class="comment">// undefined，说明私有属性不能被继承</span></span><br><span class="line">stu.name = <span class="string">'小红'</span>;</span><br><span class="line">alert(stu.sing()).  <span class="comment">// 小红 is singing</span></span><br><span class="line">alert(person.name);	<span class="comment">//小明，说明修改子类中继承的属性，原型并不会被修改</span></span><br><span class="line">alert(<span class="built_in">JSON</span>.stringify(stu)); <span class="comment">// &#123;"id":1&#125; 对象的序列化，即对象-&gt;字符串,它会调用对象自身的 toJSON() 方法；反序列化为JSON.parse()</span></span><br></pre></td></tr></table></figure>
 <p>将 person 设为 Student 的原型，则 Student 继承了 person 的公有方法和公有属性。<br>修改子类中继承的属性并不会影响到原型的属性，但是如果修改原型的属性，则所有子类的属性都会改变。（跟 Java 内存模型一模一样）</p>
-<p>将方法设为prototype可以让浏览器只加载一次方法（为什么？）<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">User</span>(<span class="params">first, last</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.first = first;</span><br><span class="line">    <span class="keyword">this</span>.last = last;</span><br><span class="line">&#125;</span><br><span class="line">User.prototype.getFullName = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.first + <span class="string">" "</span> + <span class="keyword">this</span>.last;</span><br><span class="line">&#125;;</span><br><span class="line">User.prototype.getLastName = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.last;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">var</span> him = <span class="keyword">new</span> User(<span class="string">"wang"</span>, <span class="string">"yang"</span>);</span><br><span class="line"><span class="built_in">console</span>.log(him.getFullName())</span><br></pre></td></tr></table></figure></p>
+<p>将方法设为prototype可以让浏览器只加载一次方法（为什么？）</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">User</span>(<span class="params">first, last</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.first = first;</span><br><span class="line">    <span class="keyword">this</span>.last = last;</span><br><span class="line">&#125;</span><br><span class="line">User.prototype.getFullName = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.first + <span class="string">" "</span> + <span class="keyword">this</span>.last;</span><br><span class="line">&#125;;</span><br><span class="line">User.prototype.getLastName = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.last;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">var</span> him = <span class="keyword">new</span> User(<span class="string">"wang"</span>, <span class="string">"yang"</span>);</span><br><span class="line"><span class="built_in">console</span>.log(him.getFullName())</span><br></pre></td></tr></table></figure>
 <p>可能就是因为所有 new User 的对象的原型都指向同一个对象，所以这些 new 出来的对象就不必每个都单独加载 getFullName、getLastName 方法了吧。<br>这里有更专业的解释<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Details_of_the_Object_Model" target="_blank" rel="noopener">Class-based vs. prototype-based languages</a></p>
 <h2 id="原型链"><a href="#原型链" class="headerlink" title="原型链"></a>原型链</h2><p>从上面的链接中可以看出 prototype-base 的 JavaScript 一些独特的性质，</p>
 <ol>
 <li>单继承；一个对象的原型只有一个。</li>
 <li>运行时对象的属性可以动态增减。</li>
 </ol>
-<h2 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h2><p>闭包更像是一个拥有字段和方法的对象实例。<br><a href="http://www.ruanyifeng.com/blog/2009/08/learning_javascript_closures.html" target="_blank" rel="noopener">阮一峰</a><br><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures" target="_blank" rel="noopener">MDN Closure</a><br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">v = <span class="string">'global'</span>;</span><br><span class="line"><span class="keyword">var</span> t = &#123;</span><br><span class="line">    v: <span class="string">'local'</span>,</span><br><span class="line">    f: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">this</span>.v;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="built_in">console</span>.log(t.f()())</span><br></pre></td></tr></table></figure></p>
-<p>f 是 t 的方法，它返回的是一个方法。由于这个返回的方法是在外部被调用，并且 this 关键字会随调用上下文发生变化，所以才会打印 global （this在严格模式下为 undefined,非严格模式下为全局对象）<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">v = <span class="string">'global'</span>;</span><br><span class="line"><span class="keyword">var</span> t = &#123;</span><br><span class="line">    v: <span class="string">'local'</span>,</span><br><span class="line">    f: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">var</span> that = <span class="keyword">this</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">            <span class="keyword">return</span> that.v;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="built_in">console</span>.log(t.f()())</span><br></pre></td></tr></table></figure></p>
+<h2 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h2><p>闭包更像是一个拥有字段和方法的对象实例。<br><a href="http://www.ruanyifeng.com/blog/2009/08/learning_javascript_closures.html" target="_blank" rel="noopener">阮一峰</a><br><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures" target="_blank" rel="noopener">MDN Closure</a></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">v = <span class="string">'global'</span>;</span><br><span class="line"><span class="keyword">var</span> t = &#123;</span><br><span class="line">    v: <span class="string">'local'</span>,</span><br><span class="line">    f: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">this</span>.v;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="built_in">console</span>.log(t.f()())</span><br></pre></td></tr></table></figure>
+<p>f 是 t 的方法，它返回的是一个方法。由于这个返回的方法是在外部被调用，并且 this 关键字会随调用上下文发生变化，所以才会打印 global （this在严格模式下为 undefined,非严格模式下为全局对象）</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">v = <span class="string">'global'</span>;</span><br><span class="line"><span class="keyword">var</span> t = &#123;</span><br><span class="line">    v: <span class="string">'local'</span>,</span><br><span class="line">    f: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">var</span> that = <span class="keyword">this</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">            <span class="keyword">return</span> that.v;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="built_in">console</span>.log(t.f()())</span><br></pre></td></tr></table></figure>
 <p>虽然这里也是在外部调用，但是返回值的函数定义上下文的 that 没有被垃圾回收，它指向 t，所以打印的是 local</p>
-  
-	</div>
-		<footer class="article-footer clearfix">
-<div class="article-catetags">
 
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/carl-zk/blog/2016/07/04/JavaScript%E5%AF%B9%E8%B1%A1%E3%80%81%E7%BB%A7%E6%89%BF%E5%92%8C%E5%8E%9F%E5%9E%8B%E9%93%BE/" data-id="ck5kvchz4001gdmps0ln5d8fg" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/javascript/" rel="tag">javascript</a></li></ul>
 
-  <div class="article-tags">
+    </footer>
+  </div>
   
-  <span></span> <a href="/blog/tags/javascript/">javascript</a>
+    
+ 
+<script src="/blog/jquery/jquery.min.js"></script>
+
+  <div id="random_posts">
+    <h2>推荐文章</h2>
+    <div class="random_posts_ul">
+      <script>
+          var random_count =4
+          var site = {BASE_URI:'/blog/'};
+          function load_random_posts(obj) {
+              var arr=site.posts;
+              if (!obj) return;
+              // var count = $(obj).attr('data-count') || 6;
+              for (var i, tmp, n = arr.length; n; i = Math.floor(Math.random() * n), tmp = arr[--n], arr[n] = arr[i], arr[i] = tmp);
+              arr = arr.slice(0, random_count);
+              var html = '<ul>';
+            
+              for(var j=0;j<arr.length;j++){
+                var item=arr[j];
+                html += '<li><strong>' + 
+                item.date + ':&nbsp;&nbsp;<a href="' + (site.BASE_URI+item.uri) + '">' + 
+                (item.title || item.uri) + '</a></strong>';
+                if(item.excerpt){
+                  html +='<div class="post-excerpt">'+item.excerpt+'</div>';
+                }
+                html +='</li>';
+                
+              }
+              $(obj).html(html + '</ul>');
+          }
+          $('.random_posts_ul').each(function () {
+              var c = this;
+              if (!site.posts || !site.posts.length){
+                  $.getJSON(site.BASE_URI + 'js/posts.js',function(json){site.posts = json;load_random_posts(c)});
+              } 
+               else{
+                load_random_posts(c);
+              }
+          });
+      </script>
+    </div>
   </div>
 
-</div>
-
-
-
-	<div class="article-share" id="share">
-	
-	  <div data-url="https://github.com/carl-zk/blog/2016/07/04/JavaScript对象、继承和原型链/" data-title="JavaScript对象、继承和原型链 | 一叶轻舟渡万江" data-tsina class="share clearfix">
-	  </div>
-	
-	</div>
-
-
-</footer>
-
-   	       
-	</article>
-	
-<nav class="article-nav clearfix">
- 
- <div class="prev">
- <a href="/blog/2016/07/07/万进制/" title="万进制">
-  <strong>上一篇：</strong><br>
-  <span>
-  万进制</span>
-</a>
-</div>
-
-
-<div class="next">
-<a href="/blog/2016/07/04/The-3n-1-problem/" title="The 3n + 1 Problem">
- <strong>下一篇：</strong><br> 
- <span>The 3n + 1 Problem
-</span>
-</a>
-</div>
-
+    
+<nav id="article-nav">
+  
+    <a href="/blog/2016/07/07/%E4%B8%87%E8%BF%9B%E5%88%B6/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          万进制
+        
+      </div>
+    </a>
+  
+  
+    <a href="/blog/2016/07/04/The-3n-1-problem/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">The 3n + 1 Problem</div>
+    </a>
+  
 </nav>
 
-
-<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
-<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
-
-
-    <div id="gitment-comments"></div>    
-
-
-<script>
-const gitment = new Gitment({
-    id: 'JavaScript',
-    owner: 'carl-zk',
-    repo: 'comments-store',
-    oauth: {
-        client_id: 'd1262e8923cd7f8e0196',
-        client_secret: 'ef46a4afe7dca3fe5fa7e0038a08b99da41b20ba'
-    }
-});
-gitment.render(document.getElementById('gitment-comments'));
-</script>
-	
-
-</div>  
-      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
-
-  <div id="toc" class="toc-aside">
-  <strong class="toc-title">文章目录</strong>
+  
+</article>
  
- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#对象"><span class="toc-number">1.</span> <span class="toc-text">对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#继承"><span class="toc-number">2.</span> <span class="toc-text">继承</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#原型链"><span class="toc-number">3.</span> <span class="toc-text">原型链</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#闭包"><span class="toc-number">4.</span> <span class="toc-text">闭包</span></a></li></ol>
- 
-  </div>
-
-<div id="asidepart">
-<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
-<aside class="clearfix">
-
-  
-
-
-  
-<div class="categorieslist">
-	<p class="asidetitle">分类</p>
-		<ul>
-		
-		  
-			<li><a href="/blog/categories/OFBiz/" title="OFBiz">OFBiz<sup>3</sup></a></li>
-		  
-		
-		  
-			<li><a href="/blog/categories/hdu/" title="hdu">hdu<sup>35</sup></a></li>
-		  
-		
-		  
-			<li><a href="/blog/categories/java/" title="java">java<sup>15</sup></a></li>
-		  
-		
-		  
-			<li><a href="/blog/categories/并发编程的艺术/" title="并发编程的艺术">并发编程的艺术<sup>7</sup></a></li>
-		  
-		
-		  
-			<li><a href="/blog/categories/数据结构/" title="数据结构">数据结构<sup>15</sup></a></li>
-		  
-		
-		  
-			<li><a href="/blog/categories/系统配置/" title="系统配置">系统配置<sup>12</sup></a></li>
-		  
-		
-		  
-			<li><a href="/blog/categories/设计模式/" title="设计模式">设计模式<sup>24</sup></a></li>
-		  
-		
-		</ul>
-</div>
-
-
-  
-<div class="tagslist">
-	<p class="asidetitle">标签</p>
-		<ul class="clearfix">
-		
-			
-				<li><a href="/blog/tags/递归/" title="递归">递归<sup>6</sup></a></li>
-			
-		
-			
-				<li><a href="/blog/tags/javascript/" title="javascript">javascript<sup>6</sup></a></li>
-			
-		
-			
-				<li><a href="/blog/tags/oracle/" title="oracle">oracle<sup>6</sup></a></li>
-			
-		
-			
-				<li><a href="/blog/tags/reflect/" title="reflect">reflect<sup>4</sup></a></li>
-			
-		
-			
-				<li><a href="/blog/tags/MySQL/" title="MySQL">MySQL<sup>4</sup></a></li>
-			
-		
-			
-				<li><a href="/blog/tags/LeetCode/" title="LeetCode">LeetCode<sup>3</sup></a></li>
-			
-		
-			
-				<li><a href="/blog/tags/Servlet/" title="Servlet">Servlet<sup>3</sup></a></li>
-			
-		
-			
-				<li><a href="/blog/tags/spring/" title="spring">spring<sup>3</sup></a></li>
-			
-		
-			
-				<li><a href="/blog/tags/weblogic/" title="weblogic">weblogic<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/blog/tags/jenkins/" title="jenkins">jenkins<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/blog/tags/python/" title="python">python<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/blog/tags/shell/" title="shell">shell<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/blog/tags/sql/" title="sql">sql<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/blog/tags/docker/" title="docker">docker<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/blog/tags/mockito/" title="mockito">mockito<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/blog/tags/oauth2/" title="oauth2">oauth2<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/blog/tags/elasticsearch/" title="elasticsearch">elasticsearch<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/blog/tags/hibernate/" title="hibernate">hibernate<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/blog/tags/log4j2/" title="log4j2">log4j2<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/blog/tags/maven/" title="maven">maven<sup>1</sup></a></li>
-			
-		
-		</ul>
-</div>
-
-
-  <div class="linkslist">
-  <p class="asidetitle">友情链接</p>
-    <ul>
-        
-          <li>
-            
-            	<a href="http://www.ruanyifeng.com/blog/archives.html" target="_blank" title="阮一峰">阮一峰</a>
-            
-          </li>
-        
-          <li>
-            
-            	<a href="https://blog.csdn.net/wo541075754" target="_blank" title="丑胖侠">丑胖侠</a>
-            
-          </li>
-        
-          <li>
-            
-            	<a href="http://it.deepinmind.com/index.html" target="_blank" title="deepinmind">deepinmind</a>
-            
-          </li>
-        
-          <li>
-            
-            	<a href="https://www.cnblogs.com/xrq730/" target="_blank" title="五月的仓颉">五月的仓颉</a>
-            
-          </li>
-        
-          <li>
-            
-            	<a href="http://ifeve.com/category/java/" target="_blank" title="并发编程网">并发编程网</a>
-            
-          </li>
-        
-          <li>
-            
-            	<a href="https://github.com/carl-zk" target="_blank" title="git主页">git主页</a>
-            
-          </li>
-        
-    </ul>
-</div>
-
-</aside>
-</div>
-    </div>
-    <footer><div id="footer">
-	
-	<div class="line">
-		<span></span>
-		<div class="author"></div>
-	</div>
-	
-	
-	<section class="info">
-		<p>  <br>
-			STAY FOOLISH, STAY HUNGRY.</p>
-	</section>
-	 
-	<div class="social-font">
-
-	</div>
-			
-		
-
-		<p class="copyright">
-		All Rights Reserved © 2020 
-		
-		<a href="/blog/about" target="_blank" title="carl-zk">carl-zk</a>
-		
-		
-		</p>
-</div>
-
-<script type="text/javascript" color="168, 168, 168" opacity="0.6" zindex="-2" count="200" src="https://cdnjs.cloudflare.com/ajax/libs/canvas-nest.js/1.0.1/canvas-nest.min.js"></script>
-</footer>
-    <script src="/blog/js/jquery-2.0.3.min.js"></script>
-<script src="/blog/js/jquery.imagesloaded.min.js"></script>
-<script src="/blog/js/gallery.js"></script>
-<script src="/blog/js/jquery.qrcode-0.12.0.min.js"></script>
-
-<script type="text/javascript">
-$(document).ready(function(){ 
-  $('.navbar').click(function(){
-    $('header nav').toggleClass('shownav');
-  });
-  var myWidth = 0;
-  function getSize(){
-    if( typeof( window.innerWidth ) == 'number' ) {
-      myWidth = window.innerWidth;
-    } else if( document.documentElement && document.documentElement.clientWidth) {
-      myWidth = document.documentElement.clientWidth;
-    };
-  };
-  var m = $('#main'),
-      a = $('#asidepart'),
-      c = $('.closeaside'),
-      o = $('.openaside');
-  c.click(function(){
-    a.addClass('fadeOut').css('display', 'none');
-    o.css('display', 'block').addClass('fadeIn');
-    m.addClass('moveMain');
-  });
-  o.click(function(){
-    o.css('display', 'none').removeClass('beforeFadeIn');
-    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
-    m.removeClass('moveMain');
-  });
-  $(window).scroll(function(){
-    o.css("top",Math.max(80,260-$(this).scrollTop()));
-  });
-  
-  $(window).resize(function(){
-    getSize(); 
-    if (myWidth >= 1024) {
-      $('header nav').removeClass('shownav');
-    }else{
-      m.removeClass('moveMain');
-      a.css('display', 'block').removeClass('fadeOut');
-      o.css('display', 'none');
+     
+  <div class="comments" id="comments">
+    
+     
+       
+       
       
-      $('#toc.toc-aside').css('display', 'none');
-        
-    }
+      
+  </div>
+ 
+  
+
+</section>
+           
+    <aside id="sidebar">
+  
+    
+
+  
+    
+    <div class="widget-wrap">
+    
+      <div class="widget" id="toc-widget-fixed">
+      
+        <strong class="toc-title">文章目录</strong>
+        <div class="toc-widget-list">
+              <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#对象"><span class="toc-number">1.</span> <span class="toc-text">对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#继承"><span class="toc-number">2.</span> <span class="toc-text">继承</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#原型链"><span class="toc-number">3.</span> <span class="toc-text">原型链</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#闭包"><span class="toc-number">4.</span> <span class="toc-text">闭包</span></a></li></ol>
+          </div>
+      </div>
+    </div>
+
+  
+    
+
+  
+    
+  
+    
+  
+    
+
+  
+    
+  
+    <!--微信公众号二维码-->
+
+
+  
+</aside>
+
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-left">
+      &copy; 2016 - 2020 carl-zk<!--&nbsp;|&nbsp;
+      主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a> -->
+    </div>
+  
+     <div id="footer-right">
+      <!--联系方式&nbsp;|&nbsp; -->
+      富强民主文明和谐自由平等公正法治爱国敬业诚信友善
+    </div>
+  </div>
+</footer>
+ 
+<script src="/blog/jquery/jquery.min.js"></script>
+
+ <script type="text/javascript" color="168, 168, 168" opacity='0.6' zIndex="-2" count="20" src="https://cdnjs.cloudflare.com/ajax/libs/canvas-nest.js/1.0.1/canvas-nest.min.js"></script>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/blog/" class="mobile-nav-link">首页</a>
+  
+    <a href="/blog/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/blog/about" class="mobile-nav-link">关于</a>
+  
+</nav>
+    <img class="back-to-top-btn" src="/blog/images/fly-to-top.png"/>
+<script>
+// Elevator script included on the page, already.
+window.onload = function() {
+  var elevator = new Elevator({
+    selector:'.back-to-top-btn',
+    element: document.querySelector('.back-to-top-btn'),
+    duration: 1000 // milliseconds
   });
-});
+}
 </script>
+      
 
-<script type="text/javascript">
-$(document).ready(function(){ 
-  var ai = $('.article-content>iframe'),
-      ae = $('.article-content>embed'),
-      t  = $('#toc'),
-      ta = $('#toc.toc-aside'),
-      o  = $('.openaside'),
-      c  = $('.closeaside');
-  if(ai.length>0){
-    ai.wrap('<div class="video-container" />');
-  };
-  if(ae.length>0){
-   ae.wrap('<div class="video-container" />');
-  };
-  c.click(function(){
-    ta.css('display', 'block').addClass('fadeIn');
-  });
-  o.click(function(){
-    ta.css('display', 'none');
-  });
-  $(window).scroll(function(){
-    ta.css("top",Math.max(140,320-$(this).scrollTop()));
-  });
-});
-</script>
+  
 
-
-<script type="text/javascript">
-$(document).ready(function(){ 
-  var $this = $('.share'),
-      url = $this.attr('data-url'),
-      encodedUrl = encodeURIComponent(url),
-      title = $this.attr('data-title'),
-      tsina = $this.attr('data-tsina'),
-      description = $this.attr('description');
-  var html = [
-  '<div class="hoverqrcode clearfix"></div>',
-  '<a class="overlay" id="qrcode"></a>',
-  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
-  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
-  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
-  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
-  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
-  '<span title="Share to"></span>'
-  ].join('');
-  $this.append(html);
-
-  $('.hoverqrcode').hide();
-
-  var myWidth = 0;
-  function updatehoverqrcode(){
-    if( typeof( window.innerWidth ) == 'number' ) {
-      myWidth = window.innerWidth;
-    } else if( document.documentElement && document.documentElement.clientWidth) {
-      myWidth = document.documentElement.clientWidth;
-    };
-    var qrsize = myWidth > 1024 ? 200:100;
-    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
-    var p = $('.article-share-qrcode').position();
-    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
-                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
-                          .qrcode(options);
-  };
-  $(window).resize(function(){
-    $('.hoverqrcode').hide();
-  });
-  $('.article-share-qrcode').click(function(){
-    updatehoverqrcode();
-    $('.hoverqrcode').toggle();
-  });
-  $('.article-share-qrcode').hover(function(){}, function(){
-      $('.hoverqrcode').hide();
-  });
-});   
-</script>
+  
 
 
 
@@ -541,31 +299,51 @@ $(document).ready(function(){
 
 
 
+<!-- author:forvoid begin -->
+<!-- author:forvoid begin -->
+
+<!-- author:forvoid end -->
+
+<!-- author:forvoid end -->
 
 
-<link rel="stylesheet" href="/blog/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      })
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      })
+    </script>
+    <script type="text/javascript" src="https://cdn.rawgit.com/mathjax/MathJax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+ 
+<script src="/blog/js/is.js"></script>
+
+
+
+  
+<link rel="stylesheet" href="/blog/fancybox/jquery.fancybox.css">
+
+  
 <script src="/blog/fancybox/jquery.fancybox.pack.js"></script>
-<script type="text/javascript">
-$(document).ready(function(){ 
-  $('.article-content').each(function(i){
-    $(this).find('img').each(function(){
-      if ($(this).parent().hasClass('fancybox')) return;
-      var alt = this.alt;
-      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
-      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
-    });
-    $(this).find('.fancybox').each(function(){
-      $(this).attr('rel', 'article' + i);
-    });
-  });
-  if($.fancybox){
-    $('.fancybox').fancybox();
-  }
-}); 
-</script>
 
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/7.1.2/mermaid.min.js"></script>
+
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/mermaid/7.1.2/mermaid.min.js'></script>
   <!-- script src="/blog/js/mermaid.min.js" -->
   <script>
     if (window.mermaid) {
@@ -574,33 +352,11 @@ $(document).ready(function(){
   </script>
 
 
-<!-- Analytics Begin -->
+<script src="/blog/js/script.js"></script>
 
 
+<script src="/blog/js/elevator.js"></script>
 
-
-
-<!-- Analytics End -->
-
-<!-- Totop Begin -->
-
-	<div id="totop">
-	<a title="返回顶部"><img src="/blog/img/scrollup.png"></a>
-	</div>
-	<script src="/blog/js/totop.js"></script>
-
-<!-- Totop End -->
-
-<!-- MathJax Begin -->
-<!-- mathjax config similar to math.stackexchange -->
-
-
-<!-- MathJax End -->
-
-<!-- Tiny_search Begin -->
-
-<!-- Tiny_search End -->
-
-  </body>
+  </div>
+</body>
 </html>
-

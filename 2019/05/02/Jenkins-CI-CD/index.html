@@ -1,108 +1,105 @@
-
- <!DOCTYPE HTML>
-<html lang="zh-CN">
-<head><meta name="generator" content="Hexo 3.8.0">
-  <meta charset="UTF-8">
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
   
-    <title>Jenkins CI/CD | 一叶轻舟渡万江</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
-    
-    <meta name="author" content="carl-zk">
-    
-
-    
-    <meta name="description" content="很好奇 Jenkins 是怎么做灰度发布的，我不懂。我根据对 Pipeline 的理解，然后尝试将一个 Spring Boot Web 项目编译，打包，生成镜像和部署。整个下来才发现原来我一直以为自己理解什么是滚动发布，但是实际上我不懂如何用 Jenkins 做到。  Pipelinehttps://jenkins.io/doc/book/pipeline/ Pipeline 是一条流水线，涵盖">
-<meta name="keywords" content="jenkins">
+  <title>Jenkins CI/CD | 一叶轻舟渡万江</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="很好奇 Jenkins 是怎么做灰度发布的，我不懂。我根据对 Pipeline 的理解，然后尝试将一个 Spring Boot Web 项目编译，打包，生成镜像和部署。整个下来才发现原来我一直以为自己理解什么是滚动发布，但是实际上我不懂如何用 Jenkins 做到。  Pipelinehttps:&#x2F;&#x2F;jenkins.io&#x2F;doc&#x2F;book&#x2F;pipeline&#x2F; Pipeline 是一条流水线，涵盖">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Jenkins CI&#x2F;CD">
 <meta property="og:url" content="https://github.com/carl-zk/blog/2019/05/02/Jenkins-CI-CD/index.html">
 <meta property="og:site_name" content="一叶轻舟渡万江">
-<meta property="og:description" content="很好奇 Jenkins 是怎么做灰度发布的，我不懂。我根据对 Pipeline 的理解，然后尝试将一个 Spring Boot Web 项目编译，打包，生成镜像和部署。整个下来才发现原来我一直以为自己理解什么是滚动发布，但是实际上我不懂如何用 Jenkins 做到。  Pipelinehttps://jenkins.io/doc/book/pipeline/ Pipeline 是一条流水线，涵盖">
-<meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-05-02T06:23:09.005Z">
+<meta property="og:description" content="很好奇 Jenkins 是怎么做灰度发布的，我不懂。我根据对 Pipeline 的理解，然后尝试将一个 Spring Boot Web 项目编译，打包，生成镜像和部署。整个下来才发现原来我一直以为自己理解什么是滚动发布，但是实际上我不懂如何用 Jenkins 做到。  Pipelinehttps:&#x2F;&#x2F;jenkins.io&#x2F;doc&#x2F;book&#x2F;pipeline&#x2F; Pipeline 是一条流水线，涵盖">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2019-05-02T04:52:07.000Z">
+<meta property="article:modified_time" content="2019-05-02T06:23:09.005Z">
+<meta property="article:author" content="carl-zk">
+<meta property="article:tag" content="jenkins">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Jenkins CI&#x2F;CD">
-<meta name="twitter:description" content="很好奇 Jenkins 是怎么做灰度发布的，我不懂。我根据对 Pipeline 的理解，然后尝试将一个 Spring Boot Web 项目编译，打包，生成镜像和部署。整个下来才发现原来我一直以为自己理解什么是滚动发布，但是实际上我不懂如何用 Jenkins 做到。  Pipelinehttps://jenkins.io/doc/book/pipeline/ Pipeline 是一条流水线，涵盖">
-
-    
-    <link rel="alternative" href="/atom.xml" title="一叶轻舟渡万江" type="application/atom+xml">
-    
-    
-    <link rel="icon" href="/blog/img/favicon2.ico">
-    
-    
-    <link rel="apple-touch-icon" href="/blog/img/tx2.jpg">
-    <link rel="apple-touch-icon-precomposed" href="/blog/img/tx2.jpg">
-    
-    <link rel="stylesheet" href="/blog/css/style.css">
-</head>
-</html>
-  <body>
-    <header>
-      
-<div>
-		
-			<div id="imglogo">
-				<a href="/blog/"><img src="/blog/img/fav.png" alt="一叶轻舟渡万江" title="一叶轻舟渡万江"></a>
-			</div>
-			
-			<div id="textlogo">
-				<h1 class="site-name"><a href="/blog/" title="一叶轻舟渡万江">一叶轻舟渡万江</a></h1>
-				<h2 class="blog-motto">泰山不拒细壤故能成其高 江海不择细流故能就其深</h2>
-			</div>
-			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
-			</a></div>
-			<nav class="animated">
-				<ul>
-					<ul>
-					 
-						<li><a href="/blog/">主页</a></li>
-					
-						<li><a href="/blog/archives">归档</a></li>
-					
-						<li><a href="/blog/about">关于</a></li>
-					
-					<li>
- 					
-					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
-						<label>Search</label>
-						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索">
-						<input type="hidden" name="q" value="site:github.com/carl-zk/blog">
-					</form>
-					
-					</li>
-				</ul>
-			</ul></nav>			
-</div>
-    </header>
-    <div id="container">
-      <div id="main" class="post" itemscope itemprop="blogPost">
   
-	<article itemprop="articleBody"> 
-		<header class="article-info clearfix">
-  <h1 itemprop="name">
+    <link rel="alternate" href="/atom.xml" title="一叶轻舟渡万江" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="img/favicon2.ico">
+  
+  
     
-      <a href="/blog/2019/05/02/Jenkins-CI-CD/" title="Jenkins CI/CD" itemprop="url">Jenkins CI/CD</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/blog/about" title="carl-zk" target="_blank" itemprop="author">carl-zk</a>
-		
-  </p><p class="article-time">
-    <time datetime="2019-05-02T04:52:07.000Z" itemprop="datePublished"> 发表于 2019-05-02</time>
+  
+  
+<link rel="stylesheet" href="/blog/css/style.css">
+
+  
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
     
-  </p>
+    <div id="header-inner" class="inner">
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://github.com/carl-zk/blog"></form>
+      </div>
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/blog/">首页</a>
+        
+          <a class="main-nav-link" href="/blog/archives">归档</a>
+        
+          <a class="main-nav-link" href="/blog/about">关于</a>
+        
+      </nav>
+      
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/blog/" id="logo">一叶轻舟渡万江</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/blog/" id="subtitle">泰山不拒细壤故能成其高 江海不择细流故能就其深</a>
+        </h2>
+      
+    </div>
+  </div>
 </header>
-	<div class="article-content">
-		
-		<div id="toc" class="toc-article">
-			<strong class="toc-title">文章目录</strong>
-		
-			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Pipeline"><span class="toc-number">1.</span> <span class="toc-text">Pipeline</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Config-Master-Node"><span class="toc-number">2.</span> <span class="toc-text">Config Master Node</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Create-Jenkinsfile"><span class="toc-number">3.</span> <span class="toc-text">Create Jenkinsfile</span></a></li></ol>
-		
-		</div>
-		
-		<blockquote>
+      <div class="outer">
+        <section id="main"><article id="post-Jenkins-CI-CD" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2019/05/02/Jenkins-CI-CD/" class="article-date">
+  <time datetime="2019-05-02T04:52:07.000Z" itemprop="datePublished">2019-05-02</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Jenkins CI/CD
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <blockquote>
 <p>很好奇 Jenkins 是怎么做灰度发布的，我不懂。<br>我根据对 Pipeline 的理解，然后尝试将一个 Spring Boot Web 项目编译，打包，生成镜像和部署。整个下来才发现原来我一直以为自己理解什么是滚动发布，但是实际上我不懂如何用 Jenkins 做到。</p>
 </blockquote>
 <h2 id="Pipeline"><a href="#Pipeline" class="headerlink" title="Pipeline"></a>Pipeline</h2><p><a href="https://jenkins.io/doc/book/pipeline/" target="_blank" rel="noopener">https://jenkins.io/doc/book/pipeline/</a></p>
@@ -114,426 +111,187 @@
 <li>Step<br>一个 task，存在于一个特定的 Stage 中。</li>
 <li><a href="https://jenkins.io/doc/book/pipeline/syntax/#agent" target="_blank" rel="noopener">agent</a><br>pipeline 运行环境，如果定义在最上面表明整个 pipeline 都在同一个 agent 中执行，也可以在每个 Stage 块中单独指定，作用于单个 Stage。</li>
 </ul>
-<h2 id="Config-Master-Node"><a href="#Config-Master-Node" class="headerlink" title="Config Master Node"></a>Config Master Node</h2><p>为了让 pipeline 都跑在 master 节点上，需要额外配置好 maven。<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="built_in">exec</span> -it -u root my-jenkins bash</span><br><span class="line">wget https://www-us.apache.org/dist/maven/maven-3/3.6.1/binaries/apache-maven-3.6.1-bin.tar.gz</span><br><span class="line">tar xvzf apache-maven-3.6.1-bin.tar.gz</span><br><span class="line">ln -s /apache-maven-3.6.1/bin/mvn /usr/bin/mvn</span><br><span class="line">apt-get update &amp;&amp; apt-get install vim</span><br><span class="line">vi /apache-maven-3.6.1/conf/settings.xml</span><br><span class="line">修改仓库地址 &lt;localRepository&gt;/home/.m2/repository&lt;/localRepository&gt;</span><br></pre></td></tr></table></figure></p>
-<h2 id="Create-Jenkinsfile"><a href="#Create-Jenkinsfile" class="headerlink" title="Create Jenkinsfile"></a>Create Jenkinsfile</h2><p><a href="https://github.com/carl-zk/jenkins-demo">github source</a><br>Jenkinsfile<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">pipeline &#123;</span><br><span class="line">    agent &#123; label <span class="string">'master'</span> &#125;</span><br><span class="line"></span><br><span class="line">    environment &#123;</span><br><span class="line">        IMAGE_NAME = <span class="string">'jenkins-demo'</span></span><br><span class="line">        LABEL = <span class="string">'latest'</span></span><br><span class="line">        CONTAINER_NAME = <span class="string">'jenkins-demo'</span></span><br><span class="line">        PORT = 8090</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    stages &#123;</span><br><span class="line">        stage(<span class="string">'Package'</span>) &#123;</span><br><span class="line">            steps &#123;</span><br><span class="line">                sh <span class="string">'mvn -B -DskipTests=true clean package'</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        stage(<span class="string">'Build Image'</span>) &#123;</span><br><span class="line">            steps &#123;</span><br><span class="line">                script &#123;</span><br><span class="line">                    sh <span class="string">'pwd &amp;&amp; cd docker/ &amp;&amp; docker build -t $&#123;IMAGE_NAME&#125;:$&#123;LABEL&#125; .'</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        stage(<span class="string">'Deploy'</span>) &#123;</span><br><span class="line">            steps &#123;</span><br><span class="line">                sh <span class="string">""</span><span class="string">"</span></span><br><span class="line"><span class="string">                    docker ps -f name=<span class="variable">$&#123;CONTAINER_NAME&#125;</span> -q | xargs --no-run-if-empty docker container stop</span></span><br><span class="line"><span class="string">                    docker container ls -a -f name=<span class="variable">$&#123;CONTAINER_NAME&#125;</span> -q | xargs -r docker container rm -v</span></span><br><span class="line"><span class="string">                    docker run -d --name <span class="variable">$&#123;CONTAINER_NAME&#125;</span> -p <span class="variable">$&#123;PORT&#125;</span>:<span class="variable">$&#123;PORT&#125;</span> <span class="variable">$&#123;IMAGE_NAME&#125;</span>:<span class="variable">$&#123;LABEL&#125;</span></span></span><br><span class="line"><span class="string">                "</span><span class="string">""</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="Config-Master-Node"><a href="#Config-Master-Node" class="headerlink" title="Config Master Node"></a>Config Master Node</h2><p>为了让 pipeline 都跑在 master 节点上，需要额外配置好 maven。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="built_in">exec</span> -it -u root my-jenkins bash</span><br><span class="line">wget https://www-us.apache.org/dist/maven/maven-3/3.6.1/binaries/apache-maven-3.6.1-bin.tar.gz</span><br><span class="line">tar xvzf apache-maven-3.6.1-bin.tar.gz</span><br><span class="line">ln -s /apache-maven-3.6.1/bin/mvn /usr/bin/mvn</span><br><span class="line">apt-get update &amp;&amp; apt-get install vim</span><br><span class="line">vi /apache-maven-3.6.1/conf/settings.xml</span><br><span class="line">修改仓库地址 &lt;localRepository&gt;/home/.m2/repository&lt;/localRepository&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Create-Jenkinsfile"><a href="#Create-Jenkinsfile" class="headerlink" title="Create Jenkinsfile"></a>Create Jenkinsfile</h2><p><a href="https://github.com/carl-zk/jenkins-demo">github source</a><br>Jenkinsfile</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">pipeline &#123;</span><br><span class="line">    agent &#123; label <span class="string">'master'</span> &#125;</span><br><span class="line"></span><br><span class="line">    environment &#123;</span><br><span class="line">        IMAGE_NAME = <span class="string">'jenkins-demo'</span></span><br><span class="line">        LABEL = <span class="string">'latest'</span></span><br><span class="line">        CONTAINER_NAME = <span class="string">'jenkins-demo'</span></span><br><span class="line">        PORT = 8090</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    stages &#123;</span><br><span class="line">        stage(<span class="string">'Package'</span>) &#123;</span><br><span class="line">            steps &#123;</span><br><span class="line">                sh <span class="string">'mvn -B -DskipTests=true clean package'</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        stage(<span class="string">'Build Image'</span>) &#123;</span><br><span class="line">            steps &#123;</span><br><span class="line">                script &#123;</span><br><span class="line">                    sh <span class="string">'pwd &amp;&amp; cd docker/ &amp;&amp; docker build -t $&#123;IMAGE_NAME&#125;:$&#123;LABEL&#125; .'</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        stage(<span class="string">'Deploy'</span>) &#123;</span><br><span class="line">            steps &#123;</span><br><span class="line">                sh <span class="string">""</span><span class="string">"</span></span><br><span class="line"><span class="string">                    docker ps -f name=<span class="variable">$&#123;CONTAINER_NAME&#125;</span> -q | xargs --no-run-if-empty docker container stop</span></span><br><span class="line"><span class="string">                    docker container ls -a -f name=<span class="variable">$&#123;CONTAINER_NAME&#125;</span> -q | xargs -r docker container rm -v</span></span><br><span class="line"><span class="string">                    docker run -d --name <span class="variable">$&#123;CONTAINER_NAME&#125;</span> -p <span class="variable">$&#123;PORT&#125;</span>:<span class="variable">$&#123;PORT&#125;</span> <span class="variable">$&#123;IMAGE_NAME&#125;</span>:<span class="variable">$&#123;LABEL&#125;</span></span></span><br><span class="line"><span class="string">                "</span><span class="string">""</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>Jenkins 持续集成/持续发布 待续。</p>
-  
-	</div>
-		<footer class="article-footer clearfix">
-<div class="article-catetags">
 
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/carl-zk/blog/2019/05/02/Jenkins-CI-CD/" data-id="ck5kvchz9001odmps6ptygkb9" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/jenkins/" rel="tag">jenkins</a></li></ul>
 
-  <div class="article-tags">
+    </footer>
+  </div>
   
-  <span></span> <a href="/blog/tags/jenkins/">jenkins</a>
+    
+ 
+<script src="/blog/jquery/jquery.min.js"></script>
+
+  <div id="random_posts">
+    <h2>推荐文章</h2>
+    <div class="random_posts_ul">
+      <script>
+          var random_count =4
+          var site = {BASE_URI:'/blog/'};
+          function load_random_posts(obj) {
+              var arr=site.posts;
+              if (!obj) return;
+              // var count = $(obj).attr('data-count') || 6;
+              for (var i, tmp, n = arr.length; n; i = Math.floor(Math.random() * n), tmp = arr[--n], arr[n] = arr[i], arr[i] = tmp);
+              arr = arr.slice(0, random_count);
+              var html = '<ul>';
+            
+              for(var j=0;j<arr.length;j++){
+                var item=arr[j];
+                html += '<li><strong>' + 
+                item.date + ':&nbsp;&nbsp;<a href="' + (site.BASE_URI+item.uri) + '">' + 
+                (item.title || item.uri) + '</a></strong>';
+                if(item.excerpt){
+                  html +='<div class="post-excerpt">'+item.excerpt+'</div>';
+                }
+                html +='</li>';
+                
+              }
+              $(obj).html(html + '</ul>');
+          }
+          $('.random_posts_ul').each(function () {
+              var c = this;
+              if (!site.posts || !site.posts.length){
+                  $.getJSON(site.BASE_URI + 'js/posts.js',function(json){site.posts = json;load_random_posts(c)});
+              } 
+               else{
+                load_random_posts(c);
+              }
+          });
+      </script>
+    </div>
   </div>
 
-</div>
-
-
-
-	<div class="article-share" id="share">
-	
-	  <div data-url="https://github.com/carl-zk/blog/2019/05/02/Jenkins-CI-CD/" data-title="Jenkins CI/CD | 一叶轻舟渡万江" data-tsina class="share clearfix">
-	  </div>
-	
-	</div>
-
-
-</footer>
-
-   	       
-	</article>
-	
-<nav class="article-nav clearfix">
- 
- <div class="prev">
- <a href="/blog/2019/06/01/如何写单元测试/" title="如何写单元测试">
-  <strong>上一篇：</strong><br>
-  <span>
-  如何写单元测试</span>
-</a>
-</div>
-
-
-<div class="next">
-<a href="/blog/2019/04/21/Jenkins-Starter/" title="Jenkins Starter">
- <strong>下一篇：</strong><br> 
- <span>Jenkins Starter
-</span>
-</a>
-</div>
-
+    
+<nav id="article-nav">
+  
+    <a href="/blog/2019/06/01/%E5%A6%82%E4%BD%95%E5%86%99%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          如何写单元测试
+        
+      </div>
+    </a>
+  
+  
+    <a href="/blog/2019/04/21/Jenkins-Starter/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">Jenkins Starter</div>
+    </a>
+  
 </nav>
 
-
-<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
-<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
-
-
-    <div id="gitment-comments"></div>    
-
-
-<script>
-const gitment = new Gitment({
-    id: 'Jenkins CICD',
-    owner: 'carl-zk',
-    repo: 'comments-store',
-    oauth: {
-        client_id: 'd1262e8923cd7f8e0196',
-        client_secret: 'ef46a4afe7dca3fe5fa7e0038a08b99da41b20ba'
-    }
-});
-gitment.render(document.getElementById('gitment-comments'));
-</script>
-	
-
-</div>  
-      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
-
-  <div id="toc" class="toc-aside">
-  <strong class="toc-title">文章目录</strong>
+  
+</article>
  
- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Pipeline"><span class="toc-number">1.</span> <span class="toc-text">Pipeline</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Config-Master-Node"><span class="toc-number">2.</span> <span class="toc-text">Config Master Node</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Create-Jenkinsfile"><span class="toc-number">3.</span> <span class="toc-text">Create Jenkinsfile</span></a></li></ol>
- 
-  </div>
-
-<div id="asidepart">
-<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
-<aside class="clearfix">
-
-  
-
-
-  
-<div class="categorieslist">
-	<p class="asidetitle">分类</p>
-		<ul>
-		
-		  
-			<li><a href="/blog/categories/OFBiz/" title="OFBiz">OFBiz<sup>3</sup></a></li>
-		  
-		
-		  
-			<li><a href="/blog/categories/hdu/" title="hdu">hdu<sup>35</sup></a></li>
-		  
-		
-		  
-			<li><a href="/blog/categories/java/" title="java">java<sup>15</sup></a></li>
-		  
-		
-		  
-			<li><a href="/blog/categories/并发编程的艺术/" title="并发编程的艺术">并发编程的艺术<sup>7</sup></a></li>
-		  
-		
-		  
-			<li><a href="/blog/categories/数据结构/" title="数据结构">数据结构<sup>15</sup></a></li>
-		  
-		
-		  
-			<li><a href="/blog/categories/系统配置/" title="系统配置">系统配置<sup>12</sup></a></li>
-		  
-		
-		  
-			<li><a href="/blog/categories/设计模式/" title="设计模式">设计模式<sup>24</sup></a></li>
-		  
-		
-		</ul>
-</div>
-
-
-  
-<div class="tagslist">
-	<p class="asidetitle">标签</p>
-		<ul class="clearfix">
-		
-			
-				<li><a href="/blog/tags/递归/" title="递归">递归<sup>6</sup></a></li>
-			
-		
-			
-				<li><a href="/blog/tags/javascript/" title="javascript">javascript<sup>6</sup></a></li>
-			
-		
-			
-				<li><a href="/blog/tags/oracle/" title="oracle">oracle<sup>6</sup></a></li>
-			
-		
-			
-				<li><a href="/blog/tags/reflect/" title="reflect">reflect<sup>4</sup></a></li>
-			
-		
-			
-				<li><a href="/blog/tags/MySQL/" title="MySQL">MySQL<sup>4</sup></a></li>
-			
-		
-			
-				<li><a href="/blog/tags/LeetCode/" title="LeetCode">LeetCode<sup>3</sup></a></li>
-			
-		
-			
-				<li><a href="/blog/tags/Servlet/" title="Servlet">Servlet<sup>3</sup></a></li>
-			
-		
-			
-				<li><a href="/blog/tags/spring/" title="spring">spring<sup>3</sup></a></li>
-			
-		
-			
-				<li><a href="/blog/tags/weblogic/" title="weblogic">weblogic<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/blog/tags/jenkins/" title="jenkins">jenkins<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/blog/tags/python/" title="python">python<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/blog/tags/shell/" title="shell">shell<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/blog/tags/sql/" title="sql">sql<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/blog/tags/docker/" title="docker">docker<sup>2</sup></a></li>
-			
-		
-			
-				<li><a href="/blog/tags/mockito/" title="mockito">mockito<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/blog/tags/oauth2/" title="oauth2">oauth2<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/blog/tags/elasticsearch/" title="elasticsearch">elasticsearch<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/blog/tags/hibernate/" title="hibernate">hibernate<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/blog/tags/log4j2/" title="log4j2">log4j2<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/blog/tags/maven/" title="maven">maven<sup>1</sup></a></li>
-			
-		
-		</ul>
-</div>
-
-
-  <div class="linkslist">
-  <p class="asidetitle">友情链接</p>
-    <ul>
-        
-          <li>
-            
-            	<a href="http://www.ruanyifeng.com/blog/archives.html" target="_blank" title="阮一峰">阮一峰</a>
-            
-          </li>
-        
-          <li>
-            
-            	<a href="https://blog.csdn.net/wo541075754" target="_blank" title="丑胖侠">丑胖侠</a>
-            
-          </li>
-        
-          <li>
-            
-            	<a href="http://it.deepinmind.com/index.html" target="_blank" title="deepinmind">deepinmind</a>
-            
-          </li>
-        
-          <li>
-            
-            	<a href="https://www.cnblogs.com/xrq730/" target="_blank" title="五月的仓颉">五月的仓颉</a>
-            
-          </li>
-        
-          <li>
-            
-            	<a href="http://ifeve.com/category/java/" target="_blank" title="并发编程网">并发编程网</a>
-            
-          </li>
-        
-          <li>
-            
-            	<a href="https://github.com/carl-zk" target="_blank" title="git主页">git主页</a>
-            
-          </li>
-        
-    </ul>
-</div>
-
-</aside>
-</div>
-    </div>
-    <footer><div id="footer">
-	
-	<div class="line">
-		<span></span>
-		<div class="author"></div>
-	</div>
-	
-	
-	<section class="info">
-		<p>  <br>
-			STAY FOOLISH, STAY HUNGRY.</p>
-	</section>
-	 
-	<div class="social-font">
-
-	</div>
-			
-		
-
-		<p class="copyright">
-		All Rights Reserved © 2020 
-		
-		<a href="/blog/about" target="_blank" title="carl-zk">carl-zk</a>
-		
-		
-		</p>
-</div>
-
-<script type="text/javascript" color="168, 168, 168" opacity="0.6" zindex="-2" count="200" src="https://cdnjs.cloudflare.com/ajax/libs/canvas-nest.js/1.0.1/canvas-nest.min.js"></script>
-</footer>
-    <script src="/blog/js/jquery-2.0.3.min.js"></script>
-<script src="/blog/js/jquery.imagesloaded.min.js"></script>
-<script src="/blog/js/gallery.js"></script>
-<script src="/blog/js/jquery.qrcode-0.12.0.min.js"></script>
-
-<script type="text/javascript">
-$(document).ready(function(){ 
-  $('.navbar').click(function(){
-    $('header nav').toggleClass('shownav');
-  });
-  var myWidth = 0;
-  function getSize(){
-    if( typeof( window.innerWidth ) == 'number' ) {
-      myWidth = window.innerWidth;
-    } else if( document.documentElement && document.documentElement.clientWidth) {
-      myWidth = document.documentElement.clientWidth;
-    };
-  };
-  var m = $('#main'),
-      a = $('#asidepart'),
-      c = $('.closeaside'),
-      o = $('.openaside');
-  c.click(function(){
-    a.addClass('fadeOut').css('display', 'none');
-    o.css('display', 'block').addClass('fadeIn');
-    m.addClass('moveMain');
-  });
-  o.click(function(){
-    o.css('display', 'none').removeClass('beforeFadeIn');
-    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
-    m.removeClass('moveMain');
-  });
-  $(window).scroll(function(){
-    o.css("top",Math.max(80,260-$(this).scrollTop()));
-  });
-  
-  $(window).resize(function(){
-    getSize(); 
-    if (myWidth >= 1024) {
-      $('header nav').removeClass('shownav');
-    }else{
-      m.removeClass('moveMain');
-      a.css('display', 'block').removeClass('fadeOut');
-      o.css('display', 'none');
+     
+  <div class="comments" id="comments">
+    
+     
+       
+       
       
-      $('#toc.toc-aside').css('display', 'none');
-        
-    }
+      
+  </div>
+ 
+  
+
+</section>
+           
+    <aside id="sidebar">
+  
+    
+
+  
+    
+    <div class="widget-wrap">
+    
+      <div class="widget" id="toc-widget-fixed">
+      
+        <strong class="toc-title">文章目录</strong>
+        <div class="toc-widget-list">
+              <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Pipeline"><span class="toc-number">1.</span> <span class="toc-text">Pipeline</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Config-Master-Node"><span class="toc-number">2.</span> <span class="toc-text">Config Master Node</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Create-Jenkinsfile"><span class="toc-number">3.</span> <span class="toc-text">Create Jenkinsfile</span></a></li></ol>
+          </div>
+      </div>
+    </div>
+
+  
+    
+
+  
+    
+  
+    
+  
+    
+
+  
+    
+  
+    <!--微信公众号二维码-->
+
+
+  
+</aside>
+
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-left">
+      &copy; 2016 - 2020 carl-zk<!--&nbsp;|&nbsp;
+      主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a> -->
+    </div>
+  
+     <div id="footer-right">
+      <!--联系方式&nbsp;|&nbsp; -->
+      富强民主文明和谐自由平等公正法治爱国敬业诚信友善
+    </div>
+  </div>
+</footer>
+ 
+<script src="/blog/jquery/jquery.min.js"></script>
+
+ <script type="text/javascript" color="168, 168, 168" opacity='0.6' zIndex="-2" count="20" src="https://cdnjs.cloudflare.com/ajax/libs/canvas-nest.js/1.0.1/canvas-nest.min.js"></script>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/blog/" class="mobile-nav-link">首页</a>
+  
+    <a href="/blog/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/blog/about" class="mobile-nav-link">关于</a>
+  
+</nav>
+    <img class="back-to-top-btn" src="/blog/images/fly-to-top.png"/>
+<script>
+// Elevator script included on the page, already.
+window.onload = function() {
+  var elevator = new Elevator({
+    selector:'.back-to-top-btn',
+    element: document.querySelector('.back-to-top-btn'),
+    duration: 1000 // milliseconds
   });
-});
+}
 </script>
+      
 
-<script type="text/javascript">
-$(document).ready(function(){ 
-  var ai = $('.article-content>iframe'),
-      ae = $('.article-content>embed'),
-      t  = $('#toc'),
-      ta = $('#toc.toc-aside'),
-      o  = $('.openaside'),
-      c  = $('.closeaside');
-  if(ai.length>0){
-    ai.wrap('<div class="video-container" />');
-  };
-  if(ae.length>0){
-   ae.wrap('<div class="video-container" />');
-  };
-  c.click(function(){
-    ta.css('display', 'block').addClass('fadeIn');
-  });
-  o.click(function(){
-    ta.css('display', 'none');
-  });
-  $(window).scroll(function(){
-    ta.css("top",Math.max(140,320-$(this).scrollTop()));
-  });
-});
-</script>
+  
 
-
-<script type="text/javascript">
-$(document).ready(function(){ 
-  var $this = $('.share'),
-      url = $this.attr('data-url'),
-      encodedUrl = encodeURIComponent(url),
-      title = $this.attr('data-title'),
-      tsina = $this.attr('data-tsina'),
-      description = $this.attr('description');
-  var html = [
-  '<div class="hoverqrcode clearfix"></div>',
-  '<a class="overlay" id="qrcode"></a>',
-  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
-  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
-  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
-  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
-  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
-  '<span title="Share to"></span>'
-  ].join('');
-  $this.append(html);
-
-  $('.hoverqrcode').hide();
-
-  var myWidth = 0;
-  function updatehoverqrcode(){
-    if( typeof( window.innerWidth ) == 'number' ) {
-      myWidth = window.innerWidth;
-    } else if( document.documentElement && document.documentElement.clientWidth) {
-      myWidth = document.documentElement.clientWidth;
-    };
-    var qrsize = myWidth > 1024 ? 200:100;
-    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
-    var p = $('.article-share-qrcode').position();
-    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
-                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
-                          .qrcode(options);
-  };
-  $(window).resize(function(){
-    $('.hoverqrcode').hide();
-  });
-  $('.article-share-qrcode').click(function(){
-    updatehoverqrcode();
-    $('.hoverqrcode').toggle();
-  });
-  $('.article-share-qrcode').hover(function(){}, function(){
-      $('.hoverqrcode').hide();
-  });
-});   
-</script>
+  
 
 
 
@@ -541,31 +299,51 @@ $(document).ready(function(){
 
 
 
+<!-- author:forvoid begin -->
+<!-- author:forvoid begin -->
+
+<!-- author:forvoid end -->
+
+<!-- author:forvoid end -->
 
 
-<link rel="stylesheet" href="/blog/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      })
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      })
+    </script>
+    <script type="text/javascript" src="https://cdn.rawgit.com/mathjax/MathJax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+ 
+<script src="/blog/js/is.js"></script>
+
+
+
+  
+<link rel="stylesheet" href="/blog/fancybox/jquery.fancybox.css">
+
+  
 <script src="/blog/fancybox/jquery.fancybox.pack.js"></script>
-<script type="text/javascript">
-$(document).ready(function(){ 
-  $('.article-content').each(function(i){
-    $(this).find('img').each(function(){
-      if ($(this).parent().hasClass('fancybox')) return;
-      var alt = this.alt;
-      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
-      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
-    });
-    $(this).find('.fancybox').each(function(){
-      $(this).attr('rel', 'article' + i);
-    });
-  });
-  if($.fancybox){
-    $('.fancybox').fancybox();
-  }
-}); 
-</script>
 
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/7.1.2/mermaid.min.js"></script>
+
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/mermaid/7.1.2/mermaid.min.js'></script>
   <!-- script src="/blog/js/mermaid.min.js" -->
   <script>
     if (window.mermaid) {
@@ -574,33 +352,11 @@ $(document).ready(function(){
   </script>
 
 
-<!-- Analytics Begin -->
+<script src="/blog/js/script.js"></script>
 
 
+<script src="/blog/js/elevator.js"></script>
 
-
-
-<!-- Analytics End -->
-
-<!-- Totop Begin -->
-
-	<div id="totop">
-	<a title="返回顶部"><img src="/blog/img/scrollup.png"></a>
-	</div>
-	<script src="/blog/js/totop.js"></script>
-
-<!-- Totop End -->
-
-<!-- MathJax Begin -->
-<!-- mathjax config similar to math.stackexchange -->
-
-
-<!-- MathJax End -->
-
-<!-- Tiny_search Begin -->
-
-<!-- Tiny_search End -->
-
-  </body>
+  </div>
+</body>
 </html>
-
