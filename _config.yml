@@ -92,3 +92,36 @@ mermaid: ## mermaid url https://github.com/knsv/mermaid
   version: "7.1.2" # default v7.1.2 
   options:  # find more api options from https://github.com/knsv/mermaid/blob/master/src/mermaidAPI.js 
     #startOnload: true  // default true
+
+# hexo-yam
+minify:
+  enable: true
+  html:
+    enable: true
+  css:
+    enable: true
+    exclude:
+      - '*.min.css'
+  js:
+    enable: true
+    exclude:
+      - '*.min.js'
+  svg:
+    enable: true
+    include:
+      - '*.svg'
+      - '!*.min.svg'
+  gzip:
+    enable: true
+    include:
+      - '*.html'
+      - '*.css'
+      - '*.js'
+      - '*.txt'
+      - '*.ttf'
+      - '*.atom'
+      - '*.stl'
+      - '*.xml'
+      - '*.svg'
+      - '*.eot'
+      - '*.json'
