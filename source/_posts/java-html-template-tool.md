@@ -65,6 +65,15 @@ public class Main {
     }
 }
 
+public class Animal {
+    private String name;
+    private String price;
+}
+
+public class DataModel {
+    private String user;
+    private List<Animal> animals;
+}
 ```
 
 console:
@@ -84,5 +93,3 @@ console:
 </html>
 
 ```
-
-[code](https://github.com/carl-zk/JavaJava/tree/master/freemarker)

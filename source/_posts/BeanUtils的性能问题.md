@@ -4,6 +4,9 @@ date: 2018-05-26 15:57:21
 category: java
 tags: reflect
 ---
+> 2019.8.10 
+> BeanUtils替代工具：[mapstruct](https://github.com/mapstruct/mapstruct)
+
 > 由于Joe指出因测试不充分，无法验证BeanUtil是否存在性能问题，故这篇文章可以仅供参考，不作为定论！欢迎更多朋友给出指导，谢谢！
 
 Web项目后台输出一般需要把model转换成vo输出，但是有时候为了取巧不写model转vo的方法，直接利用spring的BeanUtils拷贝字段，那么这么做对性能影响大吗？
