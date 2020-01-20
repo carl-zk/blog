@@ -1,12 +1,373 @@
-<!DOCTYPE html><html><head><meta charset="utf-8"><title>Ignatius and the Princess III | 一叶轻舟渡万江</title><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"><meta name="description" content="题目链接Problem Description“Well, it seems the first problem is too easy. I will let you know how foolish you are later.” feng5166 says.“The second problem is, given an positive integer N, we define an eq"><meta property="og:type" content="article"><meta property="og:title" content="Ignatius and the Princess III"><meta property="og:url" content="https://github.com/carl-zk/blog/2016/07/03/Ignatius-and-the-Princess-III/index.html"><meta property="og:site_name" content="一叶轻舟渡万江"><meta property="og:description" content="题目链接Problem Description“Well, it seems the first problem is too easy. I will let you know how foolish you are later.” feng5166 says.“The second problem is, given an positive integer N, we define an eq"><meta property="og:locale" content="zh_CN"><meta property="article:published_time" content="2016-07-02T21:23:05.000Z"><meta property="article:modified_time" content="2019-02-16T01:58:27.786Z"><meta property="article:author" content="carl-zk"><meta property="article:tag" content="递归"><meta name="twitter:card" content="summary"><link rel="alternate" href="/atom.xml" title="一叶轻舟渡万江" type="application/atom+xml"><link rel="icon" href="img/favicon2.ico"><link rel="stylesheet" href="/blog/css/style.css"><meta name="generator" content="Hexo 4.2.0"></head></html><body><div id="container"><div id="wrap"><header id="header"><div id="banner"></div><div id="header-outer" class="outer"><div id="header-inner" class="inner"><nav id="sub-nav"><a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a> <a id="nav-search-btn" class="nav-icon" title="搜索"></a></nav><div id="search-form-wrap"><form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://github.com/carl-zk/blog"></form></div><nav id="main-nav"><a id="main-nav-toggle" class="nav-icon"></a> <a class="main-nav-link" href="/blog/">首页</a> <a class="main-nav-link" href="/blog/archives">归档</a> <a class="main-nav-link" href="/blog/about">关于</a></nav></div><div id="header-title" class="inner"><h1 id="logo-wrap"><a href="/blog/" id="logo">一叶轻舟渡万江</a></h1><h2 id="subtitle-wrap"><a href="/blog/" id="subtitle">泰山不拒细壤故能成其高 江海不择细流故能就其深</a></h2></div></div></header><div class="outer"><section id="main"><article id="post-Ignatius-and-the-Princess-III" class="article article-type-post" itemscope itemprop="blogPost"><div class="article-meta"><a href="/blog/2016/07/03/Ignatius-and-the-Princess-III/" class="article-date"><time datetime="2016-07-02T21:23:05.000Z" itemprop="datePublished">2016-07-03</time></a><div class="article-category"><a class="article-category-link" href="/blog/categories/hdu/">hdu</a></div></div><div class="article-inner"><header class="article-header"><h1 class="article-title" itemprop="name">Ignatius and the Princess III</h1></header><div class="article-entry" itemprop="articleBody"><p><a href="http://acm.hdu.edu.cn/showproblem.php?pid=1028" target="_blank" rel="noopener">题目链接</a><br>Problem Description<br>“Well, it seems the first problem is too easy. I will let you know how foolish you are later.” feng5166 says.</p><p>“The second problem is, given an positive integer N, we define an equation like this:<br>N=a[1]+a[2]+a[3]+…+a[m];<br>a[i]&gt;0,1&lt;=m&lt;=N;<br>My question is how many different equations you can find for a given N.<br>For example, assume N is 4, we can find:<br>4 = 4;<br>4 = 3 + 1;<br>4 = 2 + 2;<br>4 = 2 + 1 + 1;<br>4 = 1 + 1 + 1 + 1;<br>so the result is 5 when N is 4. Note that “4 = 3 + 1” and “4 = 1 + 3” is the same in this problem. Now, you do it!”</p><p>Input<br>The input contains several test cases. Each test case contains a positive integer N(1&lt;=N&lt;=120) which is mentioned above. The input is terminated by the end of file.</p><p>Output<br>For each test case, you have to output a line contains an integer P which indicate the different equations you have found.</p><p>Sample Input<br>4<br>10<br>20</p><p>Sample Output<br>5<br>42<br>627</p><p>求整数n的划分个数.</p><hr>[递推与分治练习](https://carl-zk.github.io/blog/2016/06/26/%E7%AC%AC2%E7%AB%A0-%E9%80%92%E5%BD%92%E4%B8%8E%E5%88%86%E6%B2%BB%E7%AD%96%E7%95%A5/)<p>主要用了记忆搜索,即将搜索结果保存到矩阵中.</p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;list&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;set&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stack&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAX 121</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> INF 1&lt;&lt;20</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> TEST</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> a[MAX][MAX];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">fun</span><span class="params">(<span class="keyword">int</span> n, <span class="keyword">int</span> m)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(n&lt;=<span class="number">0</span> || m &lt;= <span class="number">0</span>)<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span>(m &lt; n)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(!a[n-m][m])</span><br><span class="line">        &#123;</span><br><span class="line">            a[n-m][m] = fun(n-m, m);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(!a[n][m<span class="number">-1</span>])</span><br><span class="line">        &#123;</span><br><span class="line">            a[n][m<span class="number">-1</span>] = fun(n, m<span class="number">-1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> a[n-m][m] + a[n][m<span class="number">-1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(m&gt;n)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(!a[n][n])</span><br><span class="line">        &#123;</span><br><span class="line">            a[n][n] = fun(n, n);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> a[n][n];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(m == <span class="number">1</span>) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span>(m ==n)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(!a[n][n-m])</span><br><span class="line">        &#123;</span><br><span class="line">            a[n][m<span class="number">-1</span>] = fun(n, m<span class="number">-1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span> + a[n][m<span class="number">-1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> TEST</span></span><br><span class="line">    freopen(<span class="string">"in.txt"</span>, <span class="string">"r"</span>, <span class="built_in">stdin</span>);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line">    <span class="built_in">memset</span>(a, <span class="number">0</span>, <span class="keyword">sizeof</span>(a));</span><br><span class="line">    <span class="keyword">int</span> n;</span><br><span class="line">    <span class="keyword">while</span>(~<span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;n))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, fun(n, n));</span><br><span class="line">    &#125;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> TEST</span></span><br><span class="line">    fclose(<span class="built_in">stdin</span>);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// TEST</span></span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div><footer class="article-footer"><a data-url="https://github.com/carl-zk/blog/2016/07/03/Ignatius-and-the-Princess-III/" data-id="ck5l5fbmo0015q3ps733fey1n" class="article-share-link">分享</a><ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/%E9%80%92%E5%BD%92/" rel="tag">递归</a></li></ul></footer></div><script src="/blog/jquery/jquery.min.js"></script><div id="random_posts"><h2>推荐文章</h2><div class="random_posts_ul"><script>var random_count=4,site={BASE_URI:"/blog/"};function load_random_posts(t){var s=site.posts;if(t){for(var o,r,a=s.length;a;o=Math.floor(Math.random()*a),r=s[--a],s[a]=s[o],s[o]=r);s=s.slice(0,random_count);for(var e="<ul>",n=0;n<s.length;n++){var i=s[n];e+="<li><strong>"+i.date+':&nbsp;&nbsp;<a href="'+(site.BASE_URI+i.uri)+'">'+(i.title||i.uri)+"</a></strong>",i.excerpt&&(e+='<div class="post-excerpt">'+i.excerpt+"</div>"),e+="</li>"}$(t).html(e+"</ul>")}}$(".random_posts_ul").each(function(){var s=this;site.posts&&site.posts.length?load_random_posts(s):$.getJSON(site.BASE_URI+"js/posts.js",function(t){site.posts=t,load_random_posts(s)})})</script></div></div><nav id="article-nav"><a href="/blog/2016/07/04/The-3n-1-problem/" id="article-nav-newer" class="article-nav-link-wrap"><strong class="article-nav-caption">上一篇</strong><div class="article-nav-title">The 3n + 1 Problem</div></a><a href="/blog/2016/07/03/Ignatius-and-the-Princess-II/" id="article-nav-older" class="article-nav-link-wrap"><strong class="article-nav-caption">下一篇</strong><div class="article-nav-title">Ignatius and the Princess II</div></a></nav></article><div class="comments" id="comments"></div></section><aside id="sidebar"><div class="widget-wrap"><h3 class="widget-title recent-posts">最新文章</h3><div class="widget"><ul><li><a href="/blog/2020/01/19/%E5%88%B7%E9%A2%98%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%9C%A8%E4%B8%8D%E5%90%8C%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84%E8%A1%A8%E7%A4%BA/">刷题常用数据结构在不同语言中的表示</a></li><li><a href="/blog/2019/06/01/%E5%A6%82%E4%BD%95%E5%86%99%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/">如何写单元测试</a></li><li><a href="/blog/2019/05/02/Jenkins-CI-CD/">Jenkins CI/CD</a></li><li><a href="/blog/2019/04/21/Jenkins-Starter/">Jenkins Starter</a></li><li><a href="/blog/2019/04/04/MacBook-%E7%A3%81%E7%9B%98%E6%B8%85%E7%90%86/">MacBook 磁盘清理</a></li></ul></div></div></aside></div><footer id="footer"><div class="outer"><div id="footer-left">&copy; 2016 - 2020 carl-zk</div><div id="footer-right">富强民主文明和谐自由平等公正法治爱国敬业诚信友善</div></div></footer><script src="/blog/jquery/jquery.min.js"></script><script color="168, 168, 168" opacity="0.6" zindex="-2" count="20" src="https://cdnjs.cloudflare.com/ajax/libs/canvas-nest.js/1.0.1/canvas-nest.min.js"></script></div><nav id="mobile-nav"><a href="/blog/" class="mobile-nav-link">首页</a> <a href="/blog/archives" class="mobile-nav-link">归档</a> <a href="/blog/about" class="mobile-nav-link">关于</a></nav><img class="back-to-top-btn" src="/blog/images/fly-to-top.png"><script>window.onload=function(){new Elevator({selector:".back-to-top-btn",element:document.querySelector(".back-to-top-btn"),duration:1e3})}</script><script type="text/x-mathjax-config">MathJax.Hub.Config({
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Ignatius and the Princess III | 一叶轻舟渡万江</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="题目链接Problem Description“Well, it seems the first problem is too easy. I will let you know how foolish you are later.” feng5166 says. “The second problem is, given an positive integer N, we define an e">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Ignatius and the Princess III">
+<meta property="og:url" content="https://github.com/carl-zk/blog/2016/07/03/Ignatius-and-the-Princess-III/index.html">
+<meta property="og:site_name" content="一叶轻舟渡万江">
+<meta property="og:description" content="题目链接Problem Description“Well, it seems the first problem is too easy. I will let you know how foolish you are later.” feng5166 says. “The second problem is, given an positive integer N, we define an e">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2016-07-02T21:23:05.000Z">
+<meta property="article:modified_time" content="2019-02-16T01:58:27.786Z">
+<meta property="article:author" content="carl-zk">
+<meta property="article:tag" content="递归">
+<meta name="twitter:card" content="summary">
+  
+  
+    <link rel="icon" href="img/favicon2.ico">
+  
+  
+    
+  
+  
+<link rel="stylesheet" href="/blog/css/style.css">
+
+  
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    
+    <div id="header-inner" class="inner">
+      <nav id="sub-nav">
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://github.com/carl-zk/blog"></form>
+      </div>
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/blog/">首页</a>
+        
+          <a class="main-nav-link" href="/blog/archives">归档</a>
+        
+          <a class="main-nav-link" href="/blog/about">关于</a>
+        
+      </nav>
+      
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/blog/" id="logo">一叶轻舟渡万江</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/blog/" id="subtitle">泰山不拒细壤故能成其高 江海不择细流故能就其深</a>
+        </h2>
+      
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Ignatius-and-the-Princess-III" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2016/07/03/Ignatius-and-the-Princess-III/" class="article-date">
+  <time datetime="2016-07-02T21:23:05.000Z" itemprop="datePublished">2016-07-03</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/hdu/">hdu</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Ignatius and the Princess III
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <p><a href="http://acm.hdu.edu.cn/showproblem.php?pid=1028" target="_blank" rel="noopener">题目链接</a><br>Problem Description<br>“Well, it seems the first problem is too easy. I will let you know how foolish you are later.” feng5166 says.</p>
+<p>“The second problem is, given an positive integer N, we define an equation like this:<br>  N=a[1]+a[2]+a[3]+…+a[m];<br>  a[i]&gt;0,1&lt;=m&lt;=N;<br>My question is how many different equations you can find for a given N.<br>For example, assume N is 4, we can find:<br>  4 = 4;<br>  4 = 3 + 1;<br>  4 = 2 + 2;<br>  4 = 2 + 1 + 1;<br>  4 = 1 + 1 + 1 + 1;<br>so the result is 5 when N is 4. Note that “4 = 3 + 1” and “4 = 1 + 3” is the same in this problem. Now, you do it!”</p>
+<p>Input<br>The input contains several test cases. Each test case contains a positive integer N(1&lt;=N&lt;=120) which is mentioned above. The input is terminated by the end of file.</p>
+<p>Output<br>For each test case, you have to output a line contains an integer P which indicate the different equations you have found.</p>
+<p>Sample Input<br>4<br>10<br>20</p>
+<p>Sample Output<br>5<br>42<br>627</p>
+<p>求整数n的划分个数.</p>
+<hr/>
+[递推与分治练习](https://carl-zk.github.io/blog/2016/06/26/%E7%AC%AC2%E7%AB%A0-%E9%80%92%E5%BD%92%E4%B8%8E%E5%88%86%E6%B2%BB%E7%AD%96%E7%95%A5/)
+
+<p>主要用了记忆搜索,即将搜索结果保存到矩阵中.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;list&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;set&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stack&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAX 121</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> INF 1&lt;&lt;20</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> TEST</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> a[MAX][MAX];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">fun</span><span class="params">(<span class="keyword">int</span> n, <span class="keyword">int</span> m)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(n&lt;=<span class="number">0</span> || m &lt;= <span class="number">0</span>)<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span>(m &lt; n)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(!a[n-m][m])</span><br><span class="line">        &#123;</span><br><span class="line">            a[n-m][m] = fun(n-m, m);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(!a[n][m<span class="number">-1</span>])</span><br><span class="line">        &#123;</span><br><span class="line">            a[n][m<span class="number">-1</span>] = fun(n, m<span class="number">-1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> a[n-m][m] + a[n][m<span class="number">-1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(m&gt;n)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(!a[n][n])</span><br><span class="line">        &#123;</span><br><span class="line">            a[n][n] = fun(n, n);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> a[n][n];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(m == <span class="number">1</span>) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span>(m ==n)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(!a[n][n-m])</span><br><span class="line">        &#123;</span><br><span class="line">            a[n][m<span class="number">-1</span>] = fun(n, m<span class="number">-1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span> + a[n][m<span class="number">-1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> TEST</span></span><br><span class="line">    freopen(<span class="string">"in.txt"</span>, <span class="string">"r"</span>, <span class="built_in">stdin</span>);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line">    <span class="built_in">memset</span>(a, <span class="number">0</span>, <span class="keyword">sizeof</span>(a));</span><br><span class="line">    <span class="keyword">int</span> n;</span><br><span class="line">    <span class="keyword">while</span>(~<span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;n))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, fun(n, n));</span><br><span class="line">    &#125;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> TEST</span></span><br><span class="line">    fclose(<span class="built_in">stdin</span>);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">// TEST</span></span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <!-- <a data-url="https://github.com/carl-zk/blog/2016/07/03/Ignatius-and-the-Princess-III/" data-id="ck5lsdoxo00152fps4vt5doky" class="article-share-link">分享</a> -->
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/%E9%80%92%E5%BD%92/" rel="tag">递归</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+ 
+<script src="/blog/jquery/jquery.min.js"></script>
+
+  <div id="random_posts">
+    <h2>推荐文章</h2>
+    <div class="random_posts_ul">
+      <script>
+          var random_count =4
+          var site = {BASE_URI:'/blog/'};
+          function load_random_posts(obj) {
+              var arr=site.posts;
+              if (!obj) return;
+              // var count = $(obj).attr('data-count') || 6;
+              for (var i, tmp, n = arr.length; n; i = Math.floor(Math.random() * n), tmp = arr[--n], arr[n] = arr[i], arr[i] = tmp);
+              arr = arr.slice(0, random_count);
+              var html = '<ul>';
+            
+              for(var j=0;j<arr.length;j++){
+                var item=arr[j];
+                html += '<li><strong>' + 
+                item.date + ':&nbsp;&nbsp;<a href="' + (site.BASE_URI+item.uri) + '">' + 
+                (item.title || item.uri) + '</a></strong>';
+                if(item.excerpt){
+                  html +='<div class="post-excerpt">'+item.excerpt+'</div>';
+                }
+                html +='</li>';
+                
+              }
+              $(obj).html(html + '</ul>');
+          }
+          $('.random_posts_ul').each(function () {
+              var c = this;
+              if (!site.posts || !site.posts.length){
+                  $.getJSON(site.BASE_URI + 'js/posts.js',function(json){site.posts = json;load_random_posts(c)});
+              } 
+               else{
+                load_random_posts(c);
+              }
+          });
+      </script>
+    </div>
+  </div>
+
+    
+<nav id="article-nav">
+  
+    <a href="/blog/2016/07/04/The-3n-1-problem/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          The 3n + 1 Problem
+        
+      </div>
+    </a>
+  
+  
+    <a href="/blog/2016/07/03/Ignatius-and-the-Princess-II/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">Ignatius and the Princess II</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+ 
+     
+  <div class="comments" id="comments">
+    
+     
+       
+       
+      
+      
+  </div>
+ 
+  
+
+</section>
+           
+    <aside id="sidebar">
+  
+    
+
+  
+    
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title recent-posts">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/blog/2020/01/19/%E5%88%B7%E9%A2%98%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%9C%A8%E4%B8%8D%E5%90%8C%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84%E8%A1%A8%E7%A4%BA/">刷题常用数据结构在不同语言中的表示</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2019/06/01/%E5%A6%82%E4%BD%95%E5%86%99%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/">如何写单元测试</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2019/05/02/Jenkins-CI-CD/">Jenkins CI/CD</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2019/04/21/Jenkins-Starter/">Jenkins Starter</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2019/04/04/MacBook-%E7%A3%81%E7%9B%98%E6%B8%85%E7%90%86/">MacBook 磁盘清理</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+
+  
+    
+  
+    <!--微信公众号二维码-->
+
+
+  
+</aside>
+
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-left">
+      &copy; 2016 - 2020 carl-zk<!--&nbsp;|&nbsp;
+      主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a> -->
+    </div>
+  
+     <div id="footer-right">
+      <!--联系方式&nbsp;|&nbsp; -->
+      富强民主文明和谐自由平等公正法治爱国敬业诚信友善
+    </div>
+  </div>
+</footer>
+ 
+<script src="/blog/jquery/jquery.min.js"></script>
+
+ <script type="text/javascript" color="168, 168, 168" opacity='0.6' zIndex="-2" count="20" src="https://cdnjs.cloudflare.com/ajax/libs/canvas-nest.js/1.0.1/canvas-nest.min.js"></script>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/blog/" class="mobile-nav-link">首页</a>
+  
+    <a href="/blog/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/blog/about" class="mobile-nav-link">关于</a>
+  
+</nav>
+    <img class="back-to-top-btn" src="/blog/images/fly-to-top.png"/>
+<script>
+// Elevator script included on the page, already.
+window.onload = function() {
+  var elevator = new Elevator({
+    selector:'.back-to-top-btn',
+    element: document.querySelector('.back-to-top-btn'),
+    duration: 1000 // milliseconds
+  });
+}
+</script>
+      
+
+  
+
+  
+
+
+
+
+
+
+
+<!-- author:forvoid begin -->
+<!-- author:forvoid begin -->
+
+<!-- author:forvoid end -->
+
+<!-- author:forvoid end -->
+
+
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
         tex2jax: {
           inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
           processEscapes: true,
           skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
         }
-      })</script><script type="text/x-mathjax-config">MathJax.Hub.Queue(function() {
+      })
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
         var all = MathJax.Hub.getAllJax(), i;
         for (i=0; i < all.length; i += 1) {
           all[i].SourceElement().parentNode.className += ' has-jax';
         }
-      })</script><script src="https://cdn.rawgit.com/mathjax/MathJax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script src="/blog/js/is.js"></script><link rel="stylesheet" href="/blog/fancybox/jquery.fancybox.css"><script src="/blog/fancybox/jquery.fancybox.pack.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/7.1.2/mermaid.min.js"></script><script>window.mermaid&&mermaid.initialize({theme:"forest"})</script><script src="/blog/js/script.js"></script><script src="/blog/js/elevator.js"></script></div></body>
+      })
+    </script>
+    <script type="text/javascript" src="https://cdn.rawgit.com/mathjax/MathJax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+ 
+<script src="/blog/js/is.js"></script>
+
+
+
+  
+<link rel="stylesheet" href="/blog/fancybox/jquery.fancybox.css">
+
+  
+<script src="/blog/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/mermaid/7.1.2/mermaid.min.js'></script>
+  <!-- script src="/blog/js/mermaid.min.js" -->
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({theme: 'forest'});
+    }
+  </script>
+
+
+<script src="/blog/js/script.js"></script>
+
+
+<script src="/blog/js/elevator.js"></script>
+
+  </div>
+</body>
+</html>

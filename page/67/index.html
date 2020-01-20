@@ -1,12 +1,339 @@
-<!DOCTYPE html><html><head><meta charset="utf-8"><title>一叶轻舟渡万江</title><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"><meta property="og:type" content="website"><meta property="og:title" content="一叶轻舟渡万江"><meta property="og:url" content="https://github.com/carl-zk/blog/page/67/index.html"><meta property="og:site_name" content="一叶轻舟渡万江"><meta property="og:locale" content="zh_CN"><meta property="article:author" content="carl-zk"><meta name="twitter:card" content="summary"><link rel="alternate" href="/atom.xml" title="一叶轻舟渡万江" type="application/atom+xml"><link rel="icon" href="img/favicon2.ico"><link rel="stylesheet" href="/blog/css/style.css"><meta name="generator" content="Hexo 4.2.0"></head></html><body><div id="container"><div id="wrap"><header id="header"><div id="banner"></div><div id="header-outer" class="outer"><div id="header-inner" class="inner"><nav id="sub-nav"><a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a> <a id="nav-search-btn" class="nav-icon" title="搜索"></a></nav><div id="search-form-wrap"><form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://github.com/carl-zk/blog"></form></div><nav id="main-nav"><a id="main-nav-toggle" class="nav-icon"></a> <a class="main-nav-link" href="/blog/">首页</a> <a class="main-nav-link" href="/blog/archives">归档</a> <a class="main-nav-link" href="/blog/about">关于</a></nav></div><div id="header-title" class="inner"><h1 id="logo-wrap"><a href="/blog/" id="logo">一叶轻舟渡万江</a></h1><h2 id="subtitle-wrap"><a href="/blog/" id="subtitle">泰山不拒细壤故能成其高 江海不择细流故能就其深</a></h2></div></div></header><div class="outer"><section id="main"><article id="post-一站式配置ubuntu" class="article article-type-post" itemscope itemprop="blogPost"><div class="article-meta"><a href="/blog/2017/08/17/%E4%B8%80%E7%AB%99%E5%BC%8F%E9%85%8D%E7%BD%AEubuntu/" class="article-date"><time datetime="2017-08-17T13:45:45.000Z" itemprop="datePublished">2017-08-17</time></a><div class="article-category"><a class="article-category-link" href="/blog/categories/%E7%B3%BB%E7%BB%9F%E9%85%8D%E7%BD%AE/">系统配置</a></div></div><div class="article-inner"><header class="article-header"><h1 itemprop="name"><a class="article-title" href="/blog/2017/08/17/%E4%B8%80%E7%AB%99%E5%BC%8F%E9%85%8D%E7%BD%AEubuntu/">一站式配置Ubuntu</a></h1></header><div class="article-entry" itemprop="articleBody"><blockquote><p>这个是方便我每次重装系统避免再到处翻该下载的东西，所以中间细节不会太多。</p></blockquote><p>在准备重装linux系统之前，先把<a href="https://www.virtualbox.org/wiki/Downloads" target="_blank" rel="noopener">VirtualBox</a>、win7镜像、<a href="http://xl9.xunlei.com/" target="_blank" rel="noopener">迅雷</a>、<a href="https://www.google.com/chrome/browser/desktop/index.html" target="_blank" rel="noopener">chrome</a>、<a href="https://github.com/XX-net/XX-Net">XX-net</a>、<a href="https://nodejs.org/en/download/" target="_blank" rel="noopener">nodejs</a>、<a href="http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html" target="_blank" rel="noopener">jdk</a>、<a href="https://www.jetbrains.com/idea/" target="_blank" rel="noopener">IntelliJ IDEA</a>、<a href="https://maven.apache.org/" target="_blank" rel="noopener">Maven</a>、<a href="https://dev.mysql.com/downloads/mysql/" target="_blank" rel="noopener">mysql</a>、<a href="https://dev.mysql.com/downloads/workbench/" target="_blank" rel="noopener">mysql workbench</a>、<a href="https://www.sublimetext.com/3" target="_blank" rel="noopener">sublime</a>、<a href=""></a>、<a href=""></a>、<a href=""></a>、<a href=""></a>、<a href=""></a>准备好。</p><p>（安装ubuntu的过程跳过,F7或delete开机引导）<br>zxfspace|carl-zk|legenduper</p><h5 id="aliyun更新列表"><a href="#aliyun更新列表" class="headerlink" title="aliyun更新列表"></a>aliyun更新列表</h5><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /etc/apt</span><br><span class="line">sudo cp source.list source.list.bak</span><br><span class="line">替换 http://us.archive.ubuntu.com/ubuntu 为 http://mirrors.aliyun.com/ubuntu</span><br><span class="line">sudo apt-get update</span><br></pre></td></tr></table></figure><h5 id="git、zsh、autojump"><a href="#git、zsh、autojump" class="headerlink" title="git、zsh、autojump"></a>git、zsh、autojump</h5><p><code>sudo apt-get install git</code><br><code>sudo apt-get install zsh</code><br><code>sudo apt-get install autojump</code><br><a href="/blog/2017/08/17/%E4%B8%80%E7%AB%99%E5%BC%8F%E9%85%8D%E7%BD%AEubuntu/zshrc.txt">~/.zshrc</a></p><h5 id="others"><a href="#others" class="headerlink" title="others"></a>others</h5><p>播放器<code>sudo apt-get install vlc browser-plugin-vlc</code></p><p><a href="/blog/2017/08/17/%E4%B8%80%E7%AB%99%E5%BC%8F%E9%85%8D%E7%BD%AEubuntu/idea.sh.txt">idea.sh</a><br><a href="https://blog.csdn.net/qq_35246620/article/details/79050895" target="_blank" rel="noopener">idea激活</a></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">EB101IWSWD-eyJsaWNlbnNlSWQiOiJFQjEwMUlXU1dEIiwibGljZW5zZWVOYW1lIjoibGFuIHl1IiwiYXNzaWduZWVOYW1lIjoiIiwiYXNzaWduZWVFbWFpbCI6IiIsImxpY2Vuc2VSZXN0cmljdGlvbiI6IkZvciBlZHVjYXRpb25hbCB1c2Ugb25seSIsImNoZWNrQ29uY3VycmVudFVzZSI6ZmFsc2UsInByb2R1Y3RzIjpbeyJjb2RlIjoiSUkiLCJwYWlkVXBUbyI6IjIwMTgtMTAtMTQifSx7ImNvZGUiOiJSUzAiLCJwYWlkVXBUbyI6IjIwMTgtMTAtMTQifSx7ImNvZGUiOiJXUyIsInBhaWRVcFRvIjoiMjAxOC0xMC0xNCJ9LHsiY29kZSI6IlJEIiwicGFpZFVwVG8iOiIyMDE4LTEwLTE0In0seyJjb2RlIjoiUkMiLCJwYWlkVXBUbyI6IjIwMTgtMTAtMTQifSx7ImNvZGUiOiJEQyIsInBhaWRVcFRvIjoiMjAxOC0xMC0xNCJ9LHsiY29kZSI6IkRCIiwicGFpZFVwVG8iOiIyMDE4LTEwLTE0In0seyJjb2RlIjoiUk0iLCJwYWlkVXBUbyI6IjIwMTgtMTAtMTQifSx7ImNvZGUiOiJETSIsInBhaWRVcFRvIjoiMjAxOC0xMC0xNCJ9LHsiY29kZSI6IkFDIiwicGFpZFVwVG8iOiIyMDE4LTEwLTE0In0seyJjb2RlIjoiRFBOIiwicGFpZFVwVG8iOiIyMDE4LTEwLTE0In0seyJjb2RlIjoiUFMiLCJwYWlkVXBUbyI6IjIwMTgtMTAtMTQifSx7ImNvZGUiOiJDTCIsInBhaWRVcFRvIjoiMjAxOC0xMC0xNCJ9LHsiY29kZSI6IlBDIiwicGFpZFVwVG8iOiIyMDE4LTEwLTE0In0seyJjb2RlIjoiUlNVIiwicGFpZFVwVG8iOiIyMDE4LTEwLTE0In1dLCJoYXNoIjoiNjk0NDAzMi8wIiwiZ3JhY2VQZXJpb2REYXlzIjowLCJhdXRvUHJvbG9uZ2F0ZWQiOmZhbHNlLCJpc0F1dG9Qcm9sb25nYXRlZCI6ZmFsc2V9-Gbb7jeR8JWOVxdUFaXfJzVU&#x2F;O7c7xHQyaidCnhYLp7v32zdeXiHUU7vlrrm5y9ZX0lmQk3plCCsW+phrC9gGAPd6WDKhkal10qVNg0larCR2tQ3u8jfv1t2JAvWrMOJfFG9kKsJuw1P4TozZ&#x2F;E7Qvj1cupf&#x2F;rldhoOmaXMyABxNN1af1RV3bVhe4FFZe0p7xlIJF&#x2F;ctZkFK62HYmh8V3AyhUNTzrvK2k+t&#x2F;tlDJz2LnW7nYttBLHld8LabPlEEjpTHswhzlthzhVqALIgvF0uNbIJ5Uwpb7NqR4U&#x2F;2ob0Z+FIcRpFUIAHEAw+RLGwkCge5DyZKfx+RoRJ&#x2F;In4q&#x2F;UpA&#x3D;&#x3D;-MIIEPjCCAiagAwIBAgIBBTANBgkqhkiG9w0BAQsFADAYMRYwFAYDVQQDDA1KZXRQcm9maWxlIENBMB4XDTE1MTEwMjA4MjE0OFoXDTE4MTEwMTA4MjE0OFowETEPMA0GA1UEAwwGcHJvZDN5MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAxcQkq+zdxlR2mmRYBPzGbUNdMN6OaXiXzxIWtMEkrJMO&#x2F;5oUfQJbLLuMSMK0QHFmaI37WShyxZcfRCidwXjot4zmNBKnlyHodDij&#x2F;78TmVqFl8nOeD5+07B8VEaIu7c3E1N+e1doC6wht4I4+IEmtsPAdoaj5WCQVQbrI8KeT8M9VcBIWX7fD0fhexfg3ZRt0xqwMcXGNp3DdJHiO0rCdU+Itv7EmtnSVq9jBG1usMSFvMowR25mju2JcPFp1+I4ZI+FqgR8gyG8oiNDyNEoAbsR3lOpI7grUYSvkB&#x2F;xVy&#x2F;VoklPCK2h0f0GJxFjnye8NT1PAywoyl7RmiAVRE&#x2F;EKwIDAQABo4GZMIGWMAkGA1UdEwQCMAAwHQYDVR0OBBYEFGEpG9oZGcfLMGNBkY7SgHiMGgTcMEgGA1UdIwRBMD+AFKOetkhnQhI2Qb1t4Lm0oFKLl&#x2F;GzoRykGjAYMRYwFAYDVQQDDA1KZXRQcm9maWxlIENBggkA0myxg7KDeeEwEwYDVR0lBAwwCgYIKwYBBQUHAwEwCwYDVR0PBAQDAgWgMA0GCSqGSIb3DQEBCwUAA4ICAQC9WZuYgQedSuOc5TOUSrRigMw4&#x2F;+wuC5EtZBfvdl4HT&#x2F;8vzMW&#x2F;oUlIP4YCvA0XKyBaCJ2iX+ZCDKoPfiYXiaSiH+HxAPV6J79vvouxKrWg2XV6ShFtPLP+0gPdGq3x9R3+kJbmAm8w+FOdlWqAfJrLvpzMGNeDU14YGXiZ9bVzmIQbwrBA+c&#x2F;F4tlK&#x2F;DV07dsNExihqFoibnqDiVNTGombaU2dDup2gwKdL81ua8EIcGNExHe82kjF4zwfadHk3bQVvbfdAwxcDy4xBjs3L4raPLU3yenSzr&#x2F;OEur1+jfOxnQSmEcMXKXgrAQ9U55gwjcOFKrgOxEdek&#x2F;Sk1VfOjvS+nuM4eyEruFMfaZHzoQiuw4IqgGc45ohFH0UUyjYcuFxxDSU9lMCv8qdHKm+wnPRb0l9l5vXsCBDuhAGYD6ss+Ga+aDY6f&#x2F;qXZuUCEUOH3QUNbbCUlviSz6+GiRnt1kA9N2Qachl+2yBfaqUqr8h7Z2gsx5LcIf5kYNsqJ0GavXTVyWh7PYiKX4bs354ZQLUwwa&#x2F;cG++2+wNWP+HtBhVxMRNTdVhSm38AknZlD+PTAsWGu9GyLmhti2EnVwGybSD2Dxmhxk3IPCkhKAK+pl0eWYGZWG3tJ9mZ7SowcXLWDFAk0lRJnKGFMTggrWjV8GYpw5bq23VmIqqDLgkNzuoog&#x3D;&#x3D;</span><br></pre></td></tr></table></figure><p><code>0.0.0.0 account.jetbrains.com</code><br><a href="/blog/2017/08/17/%E4%B8%80%E7%AB%99%E5%BC%8F%E9%85%8D%E7%BD%AEubuntu/idea.vmoptions.txt">idea.vmoptions</a></p><p><a href="http://appnee.com/sublime-text-3-universal-license-keys-collection-for-win-mac-linux/" target="_blank" rel="noopener">sublime license</a></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">—– BEGIN LICENSE —–</span><br><span class="line">TwitterInc</span><br><span class="line">200 User License</span><br><span class="line">EA7E-890007</span><br><span class="line">1D77F72E 390CDD93 4DCBA022 FAF60790</span><br><span class="line">61AA12C0 A37081C5 D0316412 4584D136</span><br><span class="line">94D7F7D4 95BC8C1C 527DA828 560BB037</span><br><span class="line">D1EDDD8C AE7B379F 50C9D69D B35179EF</span><br><span class="line">2FE898C4 8E4277A8 555CE714 E1FB0E43</span><br><span class="line">D5D52613 C3D12E98 BC49967F 7652EED2</span><br><span class="line">9D2D2E61 67610860 6D338B72 5CF95C69</span><br><span class="line">E36B85CC 84991F19 7575D828 470A92AB</span><br><span class="line">—— END LICENSE ——</span><br></pre></td></tr></table></figure><p><a href="/blog/2017/08/17/%E4%B8%80%E7%AB%99%E5%BC%8F%E9%85%8D%E7%BD%AEubuntu/libsublime-imfix.so">libsublime-imfix.so</a><br><a href="https://npm.taobao.org/" target="_blank" rel="noopener">淘宝npm镜像</a><br><code>npm install -g cnpm --registry=https://registry.npm.taobao.org</code></p><p><code>sudo apt-get remove &#39;libreoffice-*&#39;</code><br><code>sudo apt-get autoremove</code><br><a href="http://wps-community.org/downloads" target="_blank" rel="noopener">http://wps-community.org/downloads</a></p><h5 id="别人整理的"><a href="#别人整理的" class="headerlink" title="别人整理的"></a>别人整理的</h5><p><a href="http://blog.csdn.net/terence1212/article/details/52270210" target="_blank" rel="noopener">http://blog.csdn.net/terence1212/article/details/52270210</a></p><p><img src="/blog/2017/08/17/%E4%B8%80%E7%AB%99%E5%BC%8F%E9%85%8D%E7%BD%AEubuntu/Screenshot.png" alt=""></p><h5 id="unity-转-gnome"><a href="#unity-转-gnome" class="headerlink" title="unity 转 gnome"></a>unity 转 gnome</h5><p>可以看出来，扁平化是好看了点，但是太占内存！而且桌面系统不稳定，叹！</p><blockquote><p>GNOME Shell，是GNOME桌面环境3.0及其后续版本中的核心用户界面，取代了GNOME 2.0版本中的GNOME Panel与其他相关程序。GNOME shell于2011年4月6日发布。GNOME shell提供窗口切换、载入应用程序等基本功能。GNOME Shell使用mutter作为窗口管理器，Clutter工具箱提供视觉特效与硬件加速。<br>gnome强大在插件，配置之后深有体会。<br>插件位置<em>~/.local/share/gnome-shell/extensions</em></p></blockquote><ol><li><p><code>sudo apt-get install ubuntu-gnome-desktop</code></p></li><li><p>reboot 进入 gnome-desktop</p></li><li><p><code>gnome-shell --version</code></p></li><li><p>安装google插件<strong>GNOME Shell integration</strong></p></li><li><p><a href="https://extensions.gnome.org/" target="_blank" rel="noopener">https://extensions.gnome.org/</a></p></li><li><p>下载theme，使用gnome-tweak-tool进行配置<br><a href="https://github.com/LinxGem33/OSX-Arc-White">OSX-Arc-White</a><br><a href="https://www.gnome-look.org" target="_blank" rel="noopener">更多主题下载</a></p></li><li><p>一些插件<br>TopIcons Plus<br>Dash to Dock<br>Drop Down Terminal<br>Coverflow Alt-Tab<br>Suspend Button</p></li><li><p>移除 unity桌面<br><code>sudo apt-get remove ubuntu-desktop</code><br><code>sudo apt-get remove unity</code><br><code>sudo apt-get remove unity-asset-pool</code><br><code>sudo apt-get remove &#39;unity*&#39;</code><br><code>sudo apt-get autoremove</code><br><code>sudo apt-get install gdm</code></p><blockquote><p>GNOME是一个DE(desktop environment),GNOME shell 是一个官方的 user interface; unity 是一个 graphical shell。gdm (GNOME Display Manager) 是显示管理器，即你同时装了GNOME shel 和 unity 两个桌面，通过它可以管理用哪个桌面登陆。<br>ubuntu默认的桌面是unity，默认的管理器是Unity Greeter(<a href="https://en.wikipedia.org/wiki/LightDM" target="_blank" rel="noopener">lightdm</a>的一种)。卸载unity就不能再用unity greeter了，所以换成gdm。</p></blockquote></li><li><p>修改锁屏背景<br><code>cd /usr/share/images/desktop-base</code><br>我的屏幕大小是1920*1080，拷一张图片到此目录中，修改lines-lockscreen.xml</p></li></ol><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--size width="1920" height="1080"&gt;/usr/share/images/desktop-base/lines-lockscreen_1920x1080.svg&lt;/size--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">size</span> <span class="attr">width</span>=<span class="string">"1920"</span> <span class="attr">height</span>=<span class="string">"1080"</span>&gt;</span>/usr/share/images/desktop-base/dragon_girl_forest_art_96504_1920x1080.jpg<span class="tag">&lt;/<span class="name">size</span>&gt;</span></span><br></pre></td></tr></table></figure><p><img src="/blog/2017/08/17/%E4%B8%80%E7%AB%99%E5%BC%8F%E9%85%8D%E7%BD%AEubuntu/Screenshot3.jpg" alt=""></p><p><img src="/blog/2017/08/17/%E4%B8%80%E7%AB%99%E5%BC%8F%E9%85%8D%E7%BD%AEubuntu/Screenshot2.png" alt=""></p><p>折腾这么多，为何不直接下<a href="https://ubuntugnome.org/download/" target="_blank" rel="noopener">Ubuntu GNOME</a>?</p><p>总结：<br>个人感觉ubunut源比debian源更多，资源列表同步于阿里云ubuntu，折腾的就少了些。不过gnome没有想象的那么稳定，gnome-shell也会报内部错误但是卡一会儿还能恢复过来，听说arch linux不错。。。</p></div><footer class="article-footer"><a data-url="https://github.com/carl-zk/blog/2017/08/17/%E4%B8%80%E7%AB%99%E5%BC%8F%E9%85%8D%E7%BD%AEubuntu/" data-id="ck5l5fbo7005zq3psahzk7z9s" class="article-share-link">分享</a></footer></div></article><nav id="page-nav"><a class="extend prev" rel="prev" href="/blog/page/66/">&amp;laquo; 上一页</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/65/">65</a><a class="page-number" href="/blog/page/66/">66</a><span class="page-number current">67</span><a class="page-number" href="/blog/page/68/">68</a><a class="page-number" href="/blog/page/69/">69</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/177/">177</a><a class="extend next" rel="next" href="/blog/page/68/">下一页&amp;raquo;</a></nav></section><aside id="sidebar"><div class="widget-wrap"><h3 class="widget-title recent-posts">最新文章</h3><div class="widget"><ul><li><a href="/blog/2020/01/19/%E5%88%B7%E9%A2%98%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%9C%A8%E4%B8%8D%E5%90%8C%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84%E8%A1%A8%E7%A4%BA/">刷题常用数据结构在不同语言中的表示</a></li><li><a href="/blog/2019/06/01/%E5%A6%82%E4%BD%95%E5%86%99%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/">如何写单元测试</a></li><li><a href="/blog/2019/05/02/Jenkins-CI-CD/">Jenkins CI/CD</a></li><li><a href="/blog/2019/04/21/Jenkins-Starter/">Jenkins Starter</a></li><li><a href="/blog/2019/04/04/MacBook-%E7%A3%81%E7%9B%98%E6%B8%85%E7%90%86/">MacBook 磁盘清理</a></li></ul></div></div></aside></div><footer id="footer"><div class="outer"><div id="footer-left">&copy; 2016 - 2020 carl-zk</div><div id="footer-right">富强民主文明和谐自由平等公正法治爱国敬业诚信友善</div></div></footer><script src="/blog/jquery/jquery.min.js"></script><script color="168, 168, 168" opacity="0.6" zindex="-2" count="20" src="https://cdnjs.cloudflare.com/ajax/libs/canvas-nest.js/1.0.1/canvas-nest.min.js"></script></div><nav id="mobile-nav"><a href="/blog/" class="mobile-nav-link">首页</a> <a href="/blog/archives" class="mobile-nav-link">归档</a> <a href="/blog/about" class="mobile-nav-link">关于</a></nav><img class="back-to-top-btn" src="/blog/images/fly-to-top.png"><script>window.onload=function(){new Elevator({selector:".back-to-top-btn",element:document.querySelector(".back-to-top-btn"),duration:1e3})}</script><script type="text/x-mathjax-config">MathJax.Hub.Config({
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>一叶轻舟渡万江</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="一叶轻舟渡万江">
+<meta property="og:url" content="https://github.com/carl-zk/blog/page/67/index.html">
+<meta property="og:site_name" content="一叶轻舟渡万江">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="carl-zk">
+<meta name="twitter:card" content="summary">
+  
+  
+    <link rel="icon" href="img/favicon2.ico">
+  
+  
+    
+  
+  
+<link rel="stylesheet" href="/blog/css/style.css">
+
+  
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    
+    <div id="header-inner" class="inner">
+      <nav id="sub-nav">
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://github.com/carl-zk/blog"></form>
+      </div>
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/blog/">首页</a>
+        
+          <a class="main-nav-link" href="/blog/archives">归档</a>
+        
+          <a class="main-nav-link" href="/blog/about">关于</a>
+        
+      </nav>
+      
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/blog/" id="logo">一叶轻舟渡万江</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/blog/" id="subtitle">泰山不拒细壤故能成其高 江海不择细流故能就其深</a>
+        </h2>
+      
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-一站式配置ubuntu" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2017/08/17/%E4%B8%80%E7%AB%99%E5%BC%8F%E9%85%8D%E7%BD%AEubuntu/" class="article-date">
+  <time datetime="2017-08-17T13:45:45.000Z" itemprop="datePublished">2017-08-17</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/%E7%B3%BB%E7%BB%9F%E9%85%8D%E7%BD%AE/">系统配置</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2017/08/17/%E4%B8%80%E7%AB%99%E5%BC%8F%E9%85%8D%E7%BD%AEubuntu/">一站式配置Ubuntu</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <blockquote>
+<p>这个是方便我每次重装系统避免再到处翻该下载的东西，所以中间细节不会太多。</p>
+</blockquote>
+<p>在准备重装linux系统之前，先把<a href="https://www.virtualbox.org/wiki/Downloads" target="_blank" rel="noopener">VirtualBox</a>、win7镜像、<a href="http://xl9.xunlei.com/" target="_blank" rel="noopener">迅雷</a>、<a href="https://www.google.com/chrome/browser/desktop/index.html" target="_blank" rel="noopener">chrome</a>、<a href="https://github.com/XX-net/XX-Net">XX-net</a>、<a href="https://nodejs.org/en/download/" target="_blank" rel="noopener">nodejs</a>、<a href="http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html" target="_blank" rel="noopener">jdk</a>、<a href="https://www.jetbrains.com/idea/" target="_blank" rel="noopener">IntelliJ IDEA</a>、<a href="https://maven.apache.org/" target="_blank" rel="noopener">Maven</a>、<a href="https://dev.mysql.com/downloads/mysql/" target="_blank" rel="noopener">mysql</a>、<a href="https://dev.mysql.com/downloads/workbench/" target="_blank" rel="noopener">mysql workbench</a>、<a href="https://www.sublimetext.com/3" target="_blank" rel="noopener">sublime</a>、<a href=""></a>、<a href=""></a>、<a href=""></a>、<a href=""></a>、<a href=""></a>准备好。</p>
+<p>（安装ubuntu的过程跳过,F7或delete开机引导）<br>zxfspace|carl-zk|legenduper</p>
+<h5 id="aliyun更新列表"><a href="#aliyun更新列表" class="headerlink" title="aliyun更新列表"></a>aliyun更新列表</h5><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /etc/apt</span><br><span class="line">sudo cp source.list source.list.bak</span><br><span class="line">替换 http://us.archive.ubuntu.com/ubuntu 为 http://mirrors.aliyun.com/ubuntu</span><br><span class="line">sudo apt-get update</span><br></pre></td></tr></table></figure>
+
+<h5 id="git、zsh、autojump"><a href="#git、zsh、autojump" class="headerlink" title="git、zsh、autojump"></a>git、zsh、autojump</h5><p><code>sudo apt-get install git</code><br><code>sudo apt-get install zsh</code><br><code>sudo apt-get install autojump</code><br><a href="/blog/2017/08/17/%E4%B8%80%E7%AB%99%E5%BC%8F%E9%85%8D%E7%BD%AEubuntu/zshrc.txt">~/.zshrc</a></p>
+<h5 id="others"><a href="#others" class="headerlink" title="others"></a>others</h5><p>播放器<code>sudo apt-get install vlc browser-plugin-vlc</code></p>
+<p><a href="/blog/2017/08/17/%E4%B8%80%E7%AB%99%E5%BC%8F%E9%85%8D%E7%BD%AEubuntu/idea.sh.txt">idea.sh</a><br><a href="https://blog.csdn.net/qq_35246620/article/details/79050895" target="_blank" rel="noopener">idea激活</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">EB101IWSWD-eyJsaWNlbnNlSWQiOiJFQjEwMUlXU1dEIiwibGljZW5zZWVOYW1lIjoibGFuIHl1IiwiYXNzaWduZWVOYW1lIjoiIiwiYXNzaWduZWVFbWFpbCI6IiIsImxpY2Vuc2VSZXN0cmljdGlvbiI6IkZvciBlZHVjYXRpb25hbCB1c2Ugb25seSIsImNoZWNrQ29uY3VycmVudFVzZSI6ZmFsc2UsInByb2R1Y3RzIjpbeyJjb2RlIjoiSUkiLCJwYWlkVXBUbyI6IjIwMTgtMTAtMTQifSx7ImNvZGUiOiJSUzAiLCJwYWlkVXBUbyI6IjIwMTgtMTAtMTQifSx7ImNvZGUiOiJXUyIsInBhaWRVcFRvIjoiMjAxOC0xMC0xNCJ9LHsiY29kZSI6IlJEIiwicGFpZFVwVG8iOiIyMDE4LTEwLTE0In0seyJjb2RlIjoiUkMiLCJwYWlkVXBUbyI6IjIwMTgtMTAtMTQifSx7ImNvZGUiOiJEQyIsInBhaWRVcFRvIjoiMjAxOC0xMC0xNCJ9LHsiY29kZSI6IkRCIiwicGFpZFVwVG8iOiIyMDE4LTEwLTE0In0seyJjb2RlIjoiUk0iLCJwYWlkVXBUbyI6IjIwMTgtMTAtMTQifSx7ImNvZGUiOiJETSIsInBhaWRVcFRvIjoiMjAxOC0xMC0xNCJ9LHsiY29kZSI6IkFDIiwicGFpZFVwVG8iOiIyMDE4LTEwLTE0In0seyJjb2RlIjoiRFBOIiwicGFpZFVwVG8iOiIyMDE4LTEwLTE0In0seyJjb2RlIjoiUFMiLCJwYWlkVXBUbyI6IjIwMTgtMTAtMTQifSx7ImNvZGUiOiJDTCIsInBhaWRVcFRvIjoiMjAxOC0xMC0xNCJ9LHsiY29kZSI6IlBDIiwicGFpZFVwVG8iOiIyMDE4LTEwLTE0In0seyJjb2RlIjoiUlNVIiwicGFpZFVwVG8iOiIyMDE4LTEwLTE0In1dLCJoYXNoIjoiNjk0NDAzMi8wIiwiZ3JhY2VQZXJpb2REYXlzIjowLCJhdXRvUHJvbG9uZ2F0ZWQiOmZhbHNlLCJpc0F1dG9Qcm9sb25nYXRlZCI6ZmFsc2V9-Gbb7jeR8JWOVxdUFaXfJzVU&#x2F;O7c7xHQyaidCnhYLp7v32zdeXiHUU7vlrrm5y9ZX0lmQk3plCCsW+phrC9gGAPd6WDKhkal10qVNg0larCR2tQ3u8jfv1t2JAvWrMOJfFG9kKsJuw1P4TozZ&#x2F;E7Qvj1cupf&#x2F;rldhoOmaXMyABxNN1af1RV3bVhe4FFZe0p7xlIJF&#x2F;ctZkFK62HYmh8V3AyhUNTzrvK2k+t&#x2F;tlDJz2LnW7nYttBLHld8LabPlEEjpTHswhzlthzhVqALIgvF0uNbIJ5Uwpb7NqR4U&#x2F;2ob0Z+FIcRpFUIAHEAw+RLGwkCge5DyZKfx+RoRJ&#x2F;In4q&#x2F;UpA&#x3D;&#x3D;-MIIEPjCCAiagAwIBAgIBBTANBgkqhkiG9w0BAQsFADAYMRYwFAYDVQQDDA1KZXRQcm9maWxlIENBMB4XDTE1MTEwMjA4MjE0OFoXDTE4MTEwMTA4MjE0OFowETEPMA0GA1UEAwwGcHJvZDN5MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAxcQkq+zdxlR2mmRYBPzGbUNdMN6OaXiXzxIWtMEkrJMO&#x2F;5oUfQJbLLuMSMK0QHFmaI37WShyxZcfRCidwXjot4zmNBKnlyHodDij&#x2F;78TmVqFl8nOeD5+07B8VEaIu7c3E1N+e1doC6wht4I4+IEmtsPAdoaj5WCQVQbrI8KeT8M9VcBIWX7fD0fhexfg3ZRt0xqwMcXGNp3DdJHiO0rCdU+Itv7EmtnSVq9jBG1usMSFvMowR25mju2JcPFp1+I4ZI+FqgR8gyG8oiNDyNEoAbsR3lOpI7grUYSvkB&#x2F;xVy&#x2F;VoklPCK2h0f0GJxFjnye8NT1PAywoyl7RmiAVRE&#x2F;EKwIDAQABo4GZMIGWMAkGA1UdEwQCMAAwHQYDVR0OBBYEFGEpG9oZGcfLMGNBkY7SgHiMGgTcMEgGA1UdIwRBMD+AFKOetkhnQhI2Qb1t4Lm0oFKLl&#x2F;GzoRykGjAYMRYwFAYDVQQDDA1KZXRQcm9maWxlIENBggkA0myxg7KDeeEwEwYDVR0lBAwwCgYIKwYBBQUHAwEwCwYDVR0PBAQDAgWgMA0GCSqGSIb3DQEBCwUAA4ICAQC9WZuYgQedSuOc5TOUSrRigMw4&#x2F;+wuC5EtZBfvdl4HT&#x2F;8vzMW&#x2F;oUlIP4YCvA0XKyBaCJ2iX+ZCDKoPfiYXiaSiH+HxAPV6J79vvouxKrWg2XV6ShFtPLP+0gPdGq3x9R3+kJbmAm8w+FOdlWqAfJrLvpzMGNeDU14YGXiZ9bVzmIQbwrBA+c&#x2F;F4tlK&#x2F;DV07dsNExihqFoibnqDiVNTGombaU2dDup2gwKdL81ua8EIcGNExHe82kjF4zwfadHk3bQVvbfdAwxcDy4xBjs3L4raPLU3yenSzr&#x2F;OEur1+jfOxnQSmEcMXKXgrAQ9U55gwjcOFKrgOxEdek&#x2F;Sk1VfOjvS+nuM4eyEruFMfaZHzoQiuw4IqgGc45ohFH0UUyjYcuFxxDSU9lMCv8qdHKm+wnPRb0l9l5vXsCBDuhAGYD6ss+Ga+aDY6f&#x2F;qXZuUCEUOH3QUNbbCUlviSz6+GiRnt1kA9N2Qachl+2yBfaqUqr8h7Z2gsx5LcIf5kYNsqJ0GavXTVyWh7PYiKX4bs354ZQLUwwa&#x2F;cG++2+wNWP+HtBhVxMRNTdVhSm38AknZlD+PTAsWGu9GyLmhti2EnVwGybSD2Dxmhxk3IPCkhKAK+pl0eWYGZWG3tJ9mZ7SowcXLWDFAk0lRJnKGFMTggrWjV8GYpw5bq23VmIqqDLgkNzuoog&#x3D;&#x3D;</span><br></pre></td></tr></table></figure>
+<p><code>0.0.0.0 account.jetbrains.com</code><br><a href="/blog/2017/08/17/%E4%B8%80%E7%AB%99%E5%BC%8F%E9%85%8D%E7%BD%AEubuntu/idea.vmoptions.txt">idea.vmoptions</a></p>
+<p><a href="http://appnee.com/sublime-text-3-universal-license-keys-collection-for-win-mac-linux/" target="_blank" rel="noopener">sublime license</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">—– BEGIN LICENSE —–</span><br><span class="line">TwitterInc</span><br><span class="line">200 User License</span><br><span class="line">EA7E-890007</span><br><span class="line">1D77F72E 390CDD93 4DCBA022 FAF60790</span><br><span class="line">61AA12C0 A37081C5 D0316412 4584D136</span><br><span class="line">94D7F7D4 95BC8C1C 527DA828 560BB037</span><br><span class="line">D1EDDD8C AE7B379F 50C9D69D B35179EF</span><br><span class="line">2FE898C4 8E4277A8 555CE714 E1FB0E43</span><br><span class="line">D5D52613 C3D12E98 BC49967F 7652EED2</span><br><span class="line">9D2D2E61 67610860 6D338B72 5CF95C69</span><br><span class="line">E36B85CC 84991F19 7575D828 470A92AB</span><br><span class="line">—— END LICENSE ——</span><br></pre></td></tr></table></figure>
+<p><a href="/blog/2017/08/17/%E4%B8%80%E7%AB%99%E5%BC%8F%E9%85%8D%E7%BD%AEubuntu/libsublime-imfix.so">libsublime-imfix.so</a><br><a href="https://npm.taobao.org/" target="_blank" rel="noopener">淘宝npm镜像</a><br><code>npm install -g cnpm --registry=https://registry.npm.taobao.org</code></p>
+<p><code>sudo apt-get remove &#39;libreoffice-*&#39;</code><br><code>sudo apt-get autoremove</code><br><a href="http://wps-community.org/downloads" target="_blank" rel="noopener">http://wps-community.org/downloads</a></p>
+<h5 id="别人整理的"><a href="#别人整理的" class="headerlink" title="别人整理的"></a>别人整理的</h5><p><a href="http://blog.csdn.net/terence1212/article/details/52270210" target="_blank" rel="noopener">http://blog.csdn.net/terence1212/article/details/52270210</a></p>
+<p><img src="/blog/2017/08/17/%E4%B8%80%E7%AB%99%E5%BC%8F%E9%85%8D%E7%BD%AEubuntu/Screenshot.png" alt=""></p>
+<h5 id="unity-转-gnome"><a href="#unity-转-gnome" class="headerlink" title="unity 转 gnome"></a>unity 转 gnome</h5><p>可以看出来，扁平化是好看了点，但是太占内存！而且桌面系统不稳定，叹！</p>
+<blockquote>
+<p>GNOME Shell，是GNOME桌面环境3.0及其后续版本中的核心用户界面，取代了GNOME 2.0版本中的GNOME Panel与其他相关程序。GNOME shell于2011年4月6日发布。GNOME shell提供窗口切换、载入应用程序等基本功能。GNOME Shell使用mutter作为窗口管理器，Clutter工具箱提供视觉特效与硬件加速。<br>gnome强大在插件，配置之后深有体会。<br>插件位置<em>~/.local/share/gnome-shell/extensions</em></p>
+</blockquote>
+<ol>
+<li><p><code>sudo apt-get install ubuntu-gnome-desktop</code></p>
+</li>
+<li><p>reboot 进入 gnome-desktop</p>
+</li>
+<li><p><code>gnome-shell --version</code></p>
+</li>
+<li><p>安装google插件<strong>GNOME Shell integration</strong></p>
+</li>
+<li><p><a href="https://extensions.gnome.org/" target="_blank" rel="noopener">https://extensions.gnome.org/</a></p>
+</li>
+<li><p>下载theme，使用gnome-tweak-tool进行配置<br><a href="https://github.com/LinxGem33/OSX-Arc-White">OSX-Arc-White</a><br><a href="https://www.gnome-look.org" target="_blank" rel="noopener">更多主题下载</a></p>
+</li>
+<li><p>一些插件<br>TopIcons Plus<br>Dash to Dock<br>Drop Down Terminal<br>Coverflow Alt-Tab<br>Suspend Button</p>
+</li>
+<li><p>移除 unity桌面<br><code>sudo apt-get remove ubuntu-desktop</code><br><code>sudo apt-get remove unity</code><br><code>sudo apt-get remove  unity-asset-pool</code><br><code>sudo apt-get remove &#39;unity*&#39;</code><br><code>sudo apt-get autoremove</code><br><code>sudo apt-get install gdm</code></p>
+<blockquote>
+<p>GNOME是一个DE(desktop environment),GNOME shell 是一个官方的 user interface; unity 是一个 graphical shell。gdm (GNOME Display Manager) 是显示管理器，即你同时装了GNOME shel 和 unity 两个桌面，通过它可以管理用哪个桌面登陆。<br>ubuntu默认的桌面是unity，默认的管理器是Unity Greeter(<a href="https://en.wikipedia.org/wiki/LightDM" target="_blank" rel="noopener">lightdm</a>的一种)。卸载unity就不能再用unity greeter了，所以换成gdm。</p>
+</blockquote>
+</li>
+<li><p>修改锁屏背景<br><code>cd /usr/share/images/desktop-base</code><br>我的屏幕大小是1920*1080，拷一张图片到此目录中，修改lines-lockscreen.xml</p>
+</li>
+</ol>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--size width="1920" height="1080"&gt;/usr/share/images/desktop-base/lines-lockscreen_1920x1080.svg&lt;/size--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">size</span> <span class="attr">width</span>=<span class="string">"1920"</span> <span class="attr">height</span>=<span class="string">"1080"</span>&gt;</span>/usr/share/images/desktop-base/dragon_girl_forest_art_96504_1920x1080.jpg<span class="tag">&lt;/<span class="name">size</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><img src="/blog/2017/08/17/%E4%B8%80%E7%AB%99%E5%BC%8F%E9%85%8D%E7%BD%AEubuntu/Screenshot3.jpg" alt=""></p>
+<p><img src="/blog/2017/08/17/%E4%B8%80%E7%AB%99%E5%BC%8F%E9%85%8D%E7%BD%AEubuntu/Screenshot2.png" alt=""></p>
+<p>折腾这么多，为何不直接下<a href="https://ubuntugnome.org/download/" target="_blank" rel="noopener">Ubuntu GNOME</a>?</p>
+<p>总结：<br>个人感觉ubunut源比debian源更多，资源列表同步于阿里云ubuntu，折腾的就少了些。不过gnome没有想象的那么稳定，gnome-shell也会报内部错误但是卡一会儿还能恢复过来，听说arch linux不错。。。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <!-- <a data-url="https://github.com/carl-zk/blog/2017/08/17/%E4%B8%80%E7%AB%99%E5%BC%8F%E9%85%8D%E7%BD%AEubuntu/" data-id="ck5lsdozf005x2fps4ls75yj3" class="article-share-link">分享</a> -->
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+ 
+
+
+  
+
+
+  <nav id="page-nav">
+    <a class="extend prev" rel="prev" href="/blog/page/66/">&lt;&lt;上一页</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/65/">65</a><a class="page-number" href="/blog/page/66/">66</a><span class="page-number current">67</span><a class="page-number" href="/blog/page/68/">68</a><a class="page-number" href="/blog/page/69/">69</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/177/">177</a><a class="extend next" rel="next" href="/blog/page/68/">下一页&gt;&gt;</a>
+  </nav>
+
+</section>
+           
+    <aside id="sidebar">
+  
+    
+
+  
+    
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title recent-posts">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/blog/2020/01/19/%E5%88%B7%E9%A2%98%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%9C%A8%E4%B8%8D%E5%90%8C%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84%E8%A1%A8%E7%A4%BA/">刷题常用数据结构在不同语言中的表示</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2019/06/01/%E5%A6%82%E4%BD%95%E5%86%99%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/">如何写单元测试</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2019/05/02/Jenkins-CI-CD/">Jenkins CI/CD</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2019/04/21/Jenkins-Starter/">Jenkins Starter</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2019/04/04/MacBook-%E7%A3%81%E7%9B%98%E6%B8%85%E7%90%86/">MacBook 磁盘清理</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+
+  
+    
+  
+    <!--微信公众号二维码-->
+
+
+  
+</aside>
+
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-left">
+      &copy; 2016 - 2020 carl-zk<!--&nbsp;|&nbsp;
+      主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a> -->
+    </div>
+  
+     <div id="footer-right">
+      <!--联系方式&nbsp;|&nbsp; -->
+      富强民主文明和谐自由平等公正法治爱国敬业诚信友善
+    </div>
+  </div>
+</footer>
+ 
+<script src="/blog/jquery/jquery.min.js"></script>
+
+ <script type="text/javascript" color="168, 168, 168" opacity='0.6' zIndex="-2" count="20" src="https://cdnjs.cloudflare.com/ajax/libs/canvas-nest.js/1.0.1/canvas-nest.min.js"></script>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/blog/" class="mobile-nav-link">首页</a>
+  
+    <a href="/blog/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/blog/about" class="mobile-nav-link">关于</a>
+  
+</nav>
+    <img class="back-to-top-btn" src="/blog/images/fly-to-top.png"/>
+<script>
+// Elevator script included on the page, already.
+window.onload = function() {
+  var elevator = new Elevator({
+    selector:'.back-to-top-btn',
+    element: document.querySelector('.back-to-top-btn'),
+    duration: 1000 // milliseconds
+  });
+}
+</script>
+      
+
+  
+
+  
+
+
+
+
+
+
+
+<!-- author:forvoid begin -->
+<!-- author:forvoid begin -->
+
+<!-- author:forvoid end -->
+
+<!-- author:forvoid end -->
+
+
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
         tex2jax: {
           inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
           processEscapes: true,
           skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
         }
-      })</script><script type="text/x-mathjax-config">MathJax.Hub.Queue(function() {
+      })
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
         var all = MathJax.Hub.getAllJax(), i;
         for (i=0; i < all.length; i += 1) {
           all[i].SourceElement().parentNode.className += ' has-jax';
         }
-      })</script><script src="https://cdn.rawgit.com/mathjax/MathJax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script src="/blog/js/is.js"></script><link rel="stylesheet" href="/blog/fancybox/jquery.fancybox.css"><script src="/blog/fancybox/jquery.fancybox.pack.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/7.1.2/mermaid.min.js"></script><script>window.mermaid&&mermaid.initialize({theme:"forest"})</script><script src="/blog/js/script.js"></script><script src="/blog/js/elevator.js"></script></div></body>
+      })
+    </script>
+    <script type="text/javascript" src="https://cdn.rawgit.com/mathjax/MathJax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+ 
+<script src="/blog/js/is.js"></script>
+
+
+
+  
+<link rel="stylesheet" href="/blog/fancybox/jquery.fancybox.css">
+
+  
+<script src="/blog/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/mermaid/7.1.2/mermaid.min.js'></script>
+  <!-- script src="/blog/js/mermaid.min.js" -->
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({theme: 'forest'});
+    }
+  </script>
+
+
+<script src="/blog/js/script.js"></script>
+
+
+<script src="/blog/js/elevator.js"></script>
+
+  </div>
+</body>
+</html>

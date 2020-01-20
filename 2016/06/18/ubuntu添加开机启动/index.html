@@ -1,12 +1,350 @@
-<!DOCTYPE html><html><head><meta charset="utf-8"><title>Ubuntu添加开机启动 | 一叶轻舟渡万江</title><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"><meta name="description" content="我将mysql server 的开机启动写成脚本,加到rc.local文件中;XX-Net需要联网,所以设置成为一个启动服务,优先级99;1、方法一，编辑rc.loacl脚本Ubuntu开机之后会执行&#x2F;etc&#x2F;rc.local文件中的脚本，所以我们可以直接在&#x2F;etc&#x2F;rc.local中添加启动脚本。当然要添加到语句：exit 0 前面才行。如：sudo vi &#x2F;etc&#x2F;rc.local然后在 ex"><meta property="og:type" content="article"><meta property="og:title" content="Ubuntu添加开机启动"><meta property="og:url" content="https://github.com/carl-zk/blog/2016/06/18/ubuntu%E6%B7%BB%E5%8A%A0%E5%BC%80%E6%9C%BA%E5%90%AF%E5%8A%A8/index.html"><meta property="og:site_name" content="一叶轻舟渡万江"><meta property="og:description" content="我将mysql server 的开机启动写成脚本,加到rc.local文件中;XX-Net需要联网,所以设置成为一个启动服务,优先级99;1、方法一，编辑rc.loacl脚本Ubuntu开机之后会执行&#x2F;etc&#x2F;rc.local文件中的脚本，所以我们可以直接在&#x2F;etc&#x2F;rc.local中添加启动脚本。当然要添加到语句：exit 0 前面才行。如：sudo vi &#x2F;etc&#x2F;rc.local然后在 ex"><meta property="og:locale" content="zh_CN"><meta property="article:published_time" content="2016-06-18T04:50:27.000Z"><meta property="article:modified_time" content="2019-02-16T01:58:27.798Z"><meta property="article:author" content="carl-zk"><meta name="twitter:card" content="summary"><link rel="alternate" href="/atom.xml" title="一叶轻舟渡万江" type="application/atom+xml"><link rel="icon" href="img/favicon2.ico"><link rel="stylesheet" href="/blog/css/style.css"><meta name="generator" content="Hexo 4.2.0"></head></html><body><div id="container"><div id="wrap"><header id="header"><div id="banner"></div><div id="header-outer" class="outer"><div id="header-inner" class="inner"><nav id="sub-nav"><a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a> <a id="nav-search-btn" class="nav-icon" title="搜索"></a></nav><div id="search-form-wrap"><form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://github.com/carl-zk/blog"></form></div><nav id="main-nav"><a id="main-nav-toggle" class="nav-icon"></a> <a class="main-nav-link" href="/blog/">首页</a> <a class="main-nav-link" href="/blog/archives">归档</a> <a class="main-nav-link" href="/blog/about">关于</a></nav></div><div id="header-title" class="inner"><h1 id="logo-wrap"><a href="/blog/" id="logo">一叶轻舟渡万江</a></h1><h2 id="subtitle-wrap"><a href="/blog/" id="subtitle">泰山不拒细壤故能成其高 江海不择细流故能就其深</a></h2></div></div></header><div class="outer"><section id="main"><article id="post-ubuntu添加开机启动" class="article article-type-post" itemscope itemprop="blogPost"><div class="article-meta"><a href="/blog/2016/06/18/ubuntu%E6%B7%BB%E5%8A%A0%E5%BC%80%E6%9C%BA%E5%90%AF%E5%8A%A8/" class="article-date"><time datetime="2016-06-18T04:50:27.000Z" itemprop="datePublished">2016-06-18</time></a><div class="article-category"><a class="article-category-link" href="/blog/categories/%E7%B3%BB%E7%BB%9F%E9%85%8D%E7%BD%AE/">系统配置</a></div></div><div class="article-inner"><header class="article-header"><h1 class="article-title" itemprop="name">Ubuntu添加开机启动</h1></header><div class="article-entry" itemprop="articleBody"><blockquote><p>我将mysql server 的开机启动写成脚本,加到rc.local文件中;<br>XX-Net需要联网,所以设置成为一个启动服务,优先级99;</p></blockquote><h4 id="1、方法一，编辑rc-loacl脚本"><a href="#1、方法一，编辑rc-loacl脚本" class="headerlink" title="1、方法一，编辑rc.loacl脚本"></a>1、方法一，编辑rc.loacl脚本</h4><p>Ubuntu开机之后会执行/etc/rc.local文件中的脚本，<br>所以我们可以直接在/etc/rc.local中添加启动脚本。<br>当然要添加到语句：exit 0 前面才行。<br>如：<br>sudo vi /etc/rc.local<br>然后在 exit 0 前面添加好脚本代码。</p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/bin/sh -e</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># rc.local</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># This script is executed at the end of each multiuser runlevel.</span></span><br><span class="line"><span class="comment"># Make sure that the script will "exit 0" on success or any other</span></span><br><span class="line"><span class="comment"># value on error.</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># In order to enable or disable this script just change the execution</span></span><br><span class="line"><span class="comment"># bits.</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># By default this script does nothing.</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> never &gt; /sys/kernel/mm/transparent_hugepage/enabled</span><br><span class="line"></span><br><span class="line"><span class="comment"># mysql start with system</span></span><br><span class="line">/usr/<span class="built_in">local</span>/mysql/bin/mysqld_safe --user=root &amp;</span><br><span class="line"></span><br><span class="line"><span class="built_in">exit</span> 0</span><br></pre></td></tr></table></figure><h4 id="2、方法二，添加一个Ubuntu的开机启动服务。"><a href="#2、方法二，添加一个Ubuntu的开机启动服务。" class="headerlink" title="2、方法二，添加一个Ubuntu的开机启动服务。"></a>2、方法二，添加一个Ubuntu的开机启动服务。</h4><p>如果要添加为开机启动执行的脚本文件，<br>可先将脚本复制或者软连接到/etc/init.d/目录下，<br>然后用：update-rc.d xxx defaults NN命令(NN为启动顺序)，<br>将脚本添加到初始化执行的队列中去。<br>注意如果脚本需要用到网络，则NN需设置一个比较大的数字，如99。</p><p>1) 将你的启动脚本复制到 /etc/init.d目录下<br>以下假设你的脚本文件名为 test。<br>2) 设置脚本文件的权限<br>$ sudo chmod 755 /etc/init.d/test<br>3) 执行如下命令将脚本放到启动脚本中去：<br>$ cd /etc/init.d<br>$ sudo update-rc.d test defaults 95<br>注：其中数字95是脚本启动的顺序号，按照自己的需要相应修改即可。在你有多个启动脚本，而它们之间又有先后启动的依赖关系时你就知道这个数字的具体作用了。该命令的输出信息参考如下：<br>update-rc.d: warning: /etc/init.d/test missing LSB information<br>update-rc.d: see <a href="http://wiki.debian.org/LSBInitScripts" target="_blank" rel="noopener">http://wiki.debian.org/LSBInitScripts</a><br>Adding system startup for /etc/init.d/test …<br>/etc/rc0.d/K95test -&gt; ../init.d/test<br>/etc/rc1.d/K95test -&gt; ../init.d/test<br>/etc/rc6.d/K95test -&gt; ../init.d/test<br>/etc/rc2.d/S95test -&gt; ../init.d/test<br>/etc/rc3.d/S95test -&gt; ../init.d/test<br>/etc/rc4.d/S95test -&gt; ../init.d/test<br>/etc/rc5.d/S95test -&gt; ../init.d/test<br>卸载启动脚本的方法：<br>$ cd /etc/init.d<br>$ sudo update-rc.d -f test remove<br>命令输出的信息参考如下：<br>Removing any system startup links for /etc/init.d/test …<br>/etc/rc0.d/K95test<br>/etc/rc1.d/K95test<br>/etc/rc2.d/S95test<br>/etc/rc3.d/S95test<br>/etc/rc4.d/S95test<br>/etc/rc5.d/S95test<br>/etc/rc6.d/K95test</p><p>&gt;sudo update-rc.d xxnet-service defaults 99</p><p>/<em>xxnet-service</em>/</p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"></span><br><span class="line">/opt/XX-Net-3.1.19/start</span><br></pre></td></tr></table></figure></div><footer class="article-footer"><a data-url="https://github.com/carl-zk/blog/2016/06/18/ubuntu%E6%B7%BB%E5%8A%A0%E5%BC%80%E6%9C%BA%E5%90%AF%E5%8A%A8/" data-id="ck5l5fbo3005mq3ps45ea9qn7" class="article-share-link">分享</a></footer></div><script src="/blog/jquery/jquery.min.js"></script><div id="random_posts"><h2>推荐文章</h2><div class="random_posts_ul"><script>var random_count=4,site={BASE_URI:"/blog/"};function load_random_posts(t){var s=site.posts;if(t){for(var o,r,a=s.length;a;o=Math.floor(Math.random()*a),r=s[--a],s[a]=s[o],s[o]=r);s=s.slice(0,random_count);for(var e="<ul>",n=0;n<s.length;n++){var i=s[n];e+="<li><strong>"+i.date+':&nbsp;&nbsp;<a href="'+(site.BASE_URI+i.uri)+'">'+(i.title||i.uri)+"</a></strong>",i.excerpt&&(e+='<div class="post-excerpt">'+i.excerpt+"</div>"),e+="</li>"}$(t).html(e+"</ul>")}}$(".random_posts_ul").each(function(){var s=this;site.posts&&site.posts.length?load_random_posts(s):$.getJSON(site.BASE_URI+"js/posts.js",function(t){site.posts=t,load_random_posts(s)})})</script></div></div><nav id="article-nav"><a href="/blog/2016/06/18/%E5%93%88%E5%A4%AB%E6%9B%BC%E7%BC%96%E7%A0%81/" id="article-nav-newer" class="article-nav-link-wrap"><strong class="article-nav-caption">上一篇</strong><div class="article-nav-title">哈夫曼编码</div></a><a href="/blog/2016/06/17/%E5%89%8D%E5%BA%8F%E5%92%8C%E4%B8%AD%E5%BA%8F%E6%9E%84%E9%80%A0%E4%BA%8C%E5%8F%89%E6%A0%91/" id="article-nav-older" class="article-nav-link-wrap"><strong class="article-nav-caption">下一篇</strong><div class="article-nav-title">前序和中序构造二叉树</div></a></nav></article><div class="comments" id="comments"></div></section><aside id="sidebar"><div class="widget-wrap"><div class="widget" id="toc-widget-fixed"><strong class="toc-title">文章目录</strong><div class="toc-widget-list"><ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#1、方法一，编辑rc-loacl脚本"><span class="toc-number">1.</span> <span class="toc-text">1、方法一，编辑rc.loacl脚本</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2、方法二，添加一个Ubuntu的开机启动服务。"><span class="toc-number">2.</span> <span class="toc-text">2、方法二，添加一个Ubuntu的开机启动服务。</span></a></li></ol></div></div></div></aside></div><footer id="footer"><div class="outer"><div id="footer-left">&copy; 2016 - 2020 carl-zk</div><div id="footer-right">富强民主文明和谐自由平等公正法治爱国敬业诚信友善</div></div></footer><script src="/blog/jquery/jquery.min.js"></script><script color="168, 168, 168" opacity="0.6" zindex="-2" count="20" src="https://cdnjs.cloudflare.com/ajax/libs/canvas-nest.js/1.0.1/canvas-nest.min.js"></script></div><nav id="mobile-nav"><a href="/blog/" class="mobile-nav-link">首页</a> <a href="/blog/archives" class="mobile-nav-link">归档</a> <a href="/blog/about" class="mobile-nav-link">关于</a></nav><img class="back-to-top-btn" src="/blog/images/fly-to-top.png"><script>window.onload=function(){new Elevator({selector:".back-to-top-btn",element:document.querySelector(".back-to-top-btn"),duration:1e3})}</script><script type="text/x-mathjax-config">MathJax.Hub.Config({
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Ubuntu添加开机启动 | 一叶轻舟渡万江</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="我将mysql server 的开机启动写成脚本,加到rc.local文件中;XX-Net需要联网,所以设置成为一个启动服务,优先级99;  1、方法一，编辑rc.loacl脚本Ubuntu开机之后会执行&#x2F;etc&#x2F;rc.local文件中的脚本，所以我们可以直接在&#x2F;etc&#x2F;rc.local中添加启动脚本。当然要添加到语句：exit 0 前面才行。如：sudo vi &#x2F;etc&#x2F;rc.local然后在">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Ubuntu添加开机启动">
+<meta property="og:url" content="https://github.com/carl-zk/blog/2016/06/18/ubuntu%E6%B7%BB%E5%8A%A0%E5%BC%80%E6%9C%BA%E5%90%AF%E5%8A%A8/index.html">
+<meta property="og:site_name" content="一叶轻舟渡万江">
+<meta property="og:description" content="我将mysql server 的开机启动写成脚本,加到rc.local文件中;XX-Net需要联网,所以设置成为一个启动服务,优先级99;  1、方法一，编辑rc.loacl脚本Ubuntu开机之后会执行&#x2F;etc&#x2F;rc.local文件中的脚本，所以我们可以直接在&#x2F;etc&#x2F;rc.local中添加启动脚本。当然要添加到语句：exit 0 前面才行。如：sudo vi &#x2F;etc&#x2F;rc.local然后在">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2016-06-18T04:50:27.000Z">
+<meta property="article:modified_time" content="2019-02-16T01:58:27.798Z">
+<meta property="article:author" content="carl-zk">
+<meta name="twitter:card" content="summary">
+  
+  
+    <link rel="icon" href="img/favicon2.ico">
+  
+  
+    
+  
+  
+<link rel="stylesheet" href="/blog/css/style.css">
+
+  
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    
+    <div id="header-inner" class="inner">
+      <nav id="sub-nav">
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://github.com/carl-zk/blog"></form>
+      </div>
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/blog/">首页</a>
+        
+          <a class="main-nav-link" href="/blog/archives">归档</a>
+        
+          <a class="main-nav-link" href="/blog/about">关于</a>
+        
+      </nav>
+      
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/blog/" id="logo">一叶轻舟渡万江</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/blog/" id="subtitle">泰山不拒细壤故能成其高 江海不择细流故能就其深</a>
+        </h2>
+      
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-ubuntu添加开机启动" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2016/06/18/ubuntu%E6%B7%BB%E5%8A%A0%E5%BC%80%E6%9C%BA%E5%90%AF%E5%8A%A8/" class="article-date">
+  <time datetime="2016-06-18T04:50:27.000Z" itemprop="datePublished">2016-06-18</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/%E7%B3%BB%E7%BB%9F%E9%85%8D%E7%BD%AE/">系统配置</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Ubuntu添加开机启动
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <blockquote>
+<p>我将mysql server 的开机启动写成脚本,加到rc.local文件中;<br>XX-Net需要联网,所以设置成为一个启动服务,优先级99;</p>
+</blockquote>
+<h4 id="1、方法一，编辑rc-loacl脚本"><a href="#1、方法一，编辑rc-loacl脚本" class="headerlink" title="1、方法一，编辑rc.loacl脚本"></a>1、方法一，编辑rc.loacl脚本</h4><p>Ubuntu开机之后会执行/etc/rc.local文件中的脚本，<br>所以我们可以直接在/etc/rc.local中添加启动脚本。<br>当然要添加到语句：exit 0 前面才行。<br>如：<br>sudo vi /etc/rc.local<br>然后在 exit 0 前面添加好脚本代码。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/bin/sh -e</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># rc.local</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># This script is executed at the end of each multiuser runlevel.</span></span><br><span class="line"><span class="comment"># Make sure that the script will "exit 0" on success or any other</span></span><br><span class="line"><span class="comment"># value on error.</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># In order to enable or disable this script just change the execution</span></span><br><span class="line"><span class="comment"># bits.</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># By default this script does nothing.</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> never &gt; /sys/kernel/mm/transparent_hugepage/enabled</span><br><span class="line"></span><br><span class="line"><span class="comment"># mysql start with system</span></span><br><span class="line">/usr/<span class="built_in">local</span>/mysql/bin/mysqld_safe --user=root &amp;</span><br><span class="line"></span><br><span class="line"><span class="built_in">exit</span> 0</span><br></pre></td></tr></table></figure>
+<h4 id="2、方法二，添加一个Ubuntu的开机启动服务。"><a href="#2、方法二，添加一个Ubuntu的开机启动服务。" class="headerlink" title="2、方法二，添加一个Ubuntu的开机启动服务。"></a>2、方法二，添加一个Ubuntu的开机启动服务。</h4><p>如果要添加为开机启动执行的脚本文件，<br>可先将脚本复制或者软连接到/etc/init.d/目录下，<br>然后用：update-rc.d xxx defaults NN命令(NN为启动顺序)，<br>将脚本添加到初始化执行的队列中去。<br>注意如果脚本需要用到网络，则NN需设置一个比较大的数字，如99。</p>
+<p>1) 将你的启动脚本复制到 /etc/init.d目录下<br> 以下假设你的脚本文件名为 test。<br>2) 设置脚本文件的权限<br> $ sudo chmod 755 /etc/init.d/test<br>3) 执行如下命令将脚本放到启动脚本中去：<br> $ cd /etc/init.d<br> $ sudo update-rc.d test defaults 95<br> 注：其中数字95是脚本启动的顺序号，按照自己的需要相应修改即可。在你有多个启动脚本，而它们之间又有先后启动的依赖关系时你就知道这个数字的具体作用了。该命令的输出信息参考如下：<br>update-rc.d: warning: /etc/init.d/test missing LSB information<br>update-rc.d: see <a href="http://wiki.debian.org/LSBInitScripts" target="_blank" rel="noopener">http://wiki.debian.org/LSBInitScripts</a><br>  Adding system startup for /etc/init.d/test …<br>    /etc/rc0.d/K95test -&gt; ../init.d/test<br>    /etc/rc1.d/K95test -&gt; ../init.d/test<br>    /etc/rc6.d/K95test -&gt; ../init.d/test<br>    /etc/rc2.d/S95test -&gt; ../init.d/test<br>    /etc/rc3.d/S95test -&gt; ../init.d/test<br>    /etc/rc4.d/S95test -&gt; ../init.d/test<br>    /etc/rc5.d/S95test -&gt; ../init.d/test<br>卸载启动脚本的方法：<br> $ cd /etc/init.d<br>$ sudo update-rc.d -f test remove<br>命令输出的信息参考如下：<br>Removing any system startup links for /etc/init.d/test …<br>    /etc/rc0.d/K95test<br>    /etc/rc1.d/K95test<br>    /etc/rc2.d/S95test<br>    /etc/rc3.d/S95test<br>    /etc/rc4.d/S95test<br>    /etc/rc5.d/S95test<br>    /etc/rc6.d/K95test</p>
+<p>&gt;sudo update-rc.d xxnet-service defaults 99</p>
+<p>/<em>xxnet-service</em>/</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"></span><br><span class="line">/opt/XX-Net-3.1.19/start</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <!-- <a data-url="https://github.com/carl-zk/blog/2016/06/18/ubuntu%E6%B7%BB%E5%8A%A0%E5%BC%80%E6%9C%BA%E5%90%AF%E5%8A%A8/" data-id="ck5lsdozc005o2fps9553bge9" class="article-share-link">分享</a> -->
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+ 
+<script src="/blog/jquery/jquery.min.js"></script>
+
+  <div id="random_posts">
+    <h2>推荐文章</h2>
+    <div class="random_posts_ul">
+      <script>
+          var random_count =4
+          var site = {BASE_URI:'/blog/'};
+          function load_random_posts(obj) {
+              var arr=site.posts;
+              if (!obj) return;
+              // var count = $(obj).attr('data-count') || 6;
+              for (var i, tmp, n = arr.length; n; i = Math.floor(Math.random() * n), tmp = arr[--n], arr[n] = arr[i], arr[i] = tmp);
+              arr = arr.slice(0, random_count);
+              var html = '<ul>';
+            
+              for(var j=0;j<arr.length;j++){
+                var item=arr[j];
+                html += '<li><strong>' + 
+                item.date + ':&nbsp;&nbsp;<a href="' + (site.BASE_URI+item.uri) + '">' + 
+                (item.title || item.uri) + '</a></strong>';
+                if(item.excerpt){
+                  html +='<div class="post-excerpt">'+item.excerpt+'</div>';
+                }
+                html +='</li>';
+                
+              }
+              $(obj).html(html + '</ul>');
+          }
+          $('.random_posts_ul').each(function () {
+              var c = this;
+              if (!site.posts || !site.posts.length){
+                  $.getJSON(site.BASE_URI + 'js/posts.js',function(json){site.posts = json;load_random_posts(c)});
+              } 
+               else{
+                load_random_posts(c);
+              }
+          });
+      </script>
+    </div>
+  </div>
+
+    
+<nav id="article-nav">
+  
+    <a href="/blog/2016/06/18/%E5%93%88%E5%A4%AB%E6%9B%BC%E7%BC%96%E7%A0%81/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          哈夫曼编码
+        
+      </div>
+    </a>
+  
+  
+    <a href="/blog/2016/06/17/%E5%89%8D%E5%BA%8F%E5%92%8C%E4%B8%AD%E5%BA%8F%E6%9E%84%E9%80%A0%E4%BA%8C%E5%8F%89%E6%A0%91/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">前序和中序构造二叉树</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+ 
+     
+  <div class="comments" id="comments">
+    
+     
+       
+       
+      
+      
+  </div>
+ 
+  
+
+</section>
+           
+    <aside id="sidebar">
+  
+    
+
+  
+    
+    <div class="widget-wrap">
+    
+      <div class="widget" id="toc-widget-fixed">
+      
+        <strong class="toc-title">文章目录</strong>
+        <div class="toc-widget-list">
+              <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#1、方法一，编辑rc-loacl脚本"><span class="toc-number">1.</span> <span class="toc-text">1、方法一，编辑rc.loacl脚本</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2、方法二，添加一个Ubuntu的开机启动服务。"><span class="toc-number">2.</span> <span class="toc-text">2、方法二，添加一个Ubuntu的开机启动服务。</span></a></li></ol>
+          </div>
+      </div>
+    </div>
+
+  
+    
+
+  
+    
+  
+    
+  
+    
+
+  
+    
+  
+    <!--微信公众号二维码-->
+
+
+  
+</aside>
+
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-left">
+      &copy; 2016 - 2020 carl-zk<!--&nbsp;|&nbsp;
+      主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a> -->
+    </div>
+  
+     <div id="footer-right">
+      <!--联系方式&nbsp;|&nbsp; -->
+      富强民主文明和谐自由平等公正法治爱国敬业诚信友善
+    </div>
+  </div>
+</footer>
+ 
+<script src="/blog/jquery/jquery.min.js"></script>
+
+ <script type="text/javascript" color="168, 168, 168" opacity='0.6' zIndex="-2" count="20" src="https://cdnjs.cloudflare.com/ajax/libs/canvas-nest.js/1.0.1/canvas-nest.min.js"></script>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/blog/" class="mobile-nav-link">首页</a>
+  
+    <a href="/blog/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/blog/about" class="mobile-nav-link">关于</a>
+  
+</nav>
+    <img class="back-to-top-btn" src="/blog/images/fly-to-top.png"/>
+<script>
+// Elevator script included on the page, already.
+window.onload = function() {
+  var elevator = new Elevator({
+    selector:'.back-to-top-btn',
+    element: document.querySelector('.back-to-top-btn'),
+    duration: 1000 // milliseconds
+  });
+}
+</script>
+      
+
+  
+
+  
+
+
+
+
+
+
+
+<!-- author:forvoid begin -->
+<!-- author:forvoid begin -->
+
+<!-- author:forvoid end -->
+
+<!-- author:forvoid end -->
+
+
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
         tex2jax: {
           inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
           processEscapes: true,
           skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
         }
-      })</script><script type="text/x-mathjax-config">MathJax.Hub.Queue(function() {
+      })
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
         var all = MathJax.Hub.getAllJax(), i;
         for (i=0; i < all.length; i += 1) {
           all[i].SourceElement().parentNode.className += ' has-jax';
         }
-      })</script><script src="https://cdn.rawgit.com/mathjax/MathJax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script src="/blog/js/is.js"></script><link rel="stylesheet" href="/blog/fancybox/jquery.fancybox.css"><script src="/blog/fancybox/jquery.fancybox.pack.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/7.1.2/mermaid.min.js"></script><script>window.mermaid&&mermaid.initialize({theme:"forest"})</script><script src="/blog/js/script.js"></script><script src="/blog/js/elevator.js"></script></div></body>
+      })
+    </script>
+    <script type="text/javascript" src="https://cdn.rawgit.com/mathjax/MathJax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+ 
+<script src="/blog/js/is.js"></script>
+
+
+
+  
+<link rel="stylesheet" href="/blog/fancybox/jquery.fancybox.css">
+
+  
+<script src="/blog/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/mermaid/7.1.2/mermaid.min.js'></script>
+  <!-- script src="/blog/js/mermaid.min.js" -->
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({theme: 'forest'});
+    }
+  </script>
+
+
+<script src="/blog/js/script.js"></script>
+
+
+<script src="/blog/js/elevator.js"></script>
+
+  </div>
+</body>
+</html>

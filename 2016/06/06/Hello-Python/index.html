@@ -1,12 +1,377 @@
-<!DOCTYPE html><html><head><meta charset="utf-8"><title>Hello Python | 一叶轻舟渡万江</title><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"><meta name="description" content="《Python 核心编程》基于python2.7版本第一章 欢迎来到python世界123#！&#x2F;usr&#x2F;bin&#x2F;env python# -*- coding: utf-8 -*- print &#39;hello world&#39;第二章 快速入门2.1 程序输出1print &quot;%s is number %d!&quot; % (&quot;Python&quot;, 1), &#39;what do you think? %.2f&#39; % (2.5"><meta property="og:type" content="article"><meta property="og:title" content="Hello Python"><meta property="og:url" content="https://github.com/carl-zk/blog/2016/06/06/Hello-Python/index.html"><meta property="og:site_name" content="一叶轻舟渡万江"><meta property="og:description" content="《Python 核心编程》基于python2.7版本第一章 欢迎来到python世界123#！&#x2F;usr&#x2F;bin&#x2F;env python# -*- coding: utf-8 -*- print &#39;hello world&#39;第二章 快速入门2.1 程序输出1print &quot;%s is number %d!&quot; % (&quot;Python&quot;, 1), &#39;what do you think? %.2f&#39; % (2.5"><meta property="og:locale" content="zh_CN"><meta property="article:published_time" content="2016-06-06T15:18:31.000Z"><meta property="article:modified_time" content="2019-02-16T01:58:27.784Z"><meta property="article:author" content="carl-zk"><meta property="article:tag" content="python"><meta name="twitter:card" content="summary"><link rel="alternate" href="/atom.xml" title="一叶轻舟渡万江" type="application/atom+xml"><link rel="icon" href="img/favicon2.ico"><link rel="stylesheet" href="/blog/css/style.css"><meta name="generator" content="Hexo 4.2.0"></head></html><body><div id="container"><div id="wrap"><header id="header"><div id="banner"></div><div id="header-outer" class="outer"><div id="header-inner" class="inner"><nav id="sub-nav"><a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a> <a id="nav-search-btn" class="nav-icon" title="搜索"></a></nav><div id="search-form-wrap"><form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://github.com/carl-zk/blog"></form></div><nav id="main-nav"><a id="main-nav-toggle" class="nav-icon"></a> <a class="main-nav-link" href="/blog/">首页</a> <a class="main-nav-link" href="/blog/archives">归档</a> <a class="main-nav-link" href="/blog/about">关于</a></nav></div><div id="header-title" class="inner"><h1 id="logo-wrap"><a href="/blog/" id="logo">一叶轻舟渡万江</a></h1><h2 id="subtitle-wrap"><a href="/blog/" id="subtitle">泰山不拒细壤故能成其高 江海不择细流故能就其深</a></h2></div></div></header><div class="outer"><section id="main"><article id="post-Hello-Python" class="article article-type-post" itemscope itemprop="blogPost"><div class="article-meta"><a href="/blog/2016/06/06/Hello-Python/" class="article-date"><time datetime="2016-06-06T15:18:31.000Z" itemprop="datePublished">2016-06-06</time></a></div><div class="article-inner"><header class="article-header"><h1 class="article-title" itemprop="name">Hello Python</h1></header><div class="article-entry" itemprop="articleBody"><h3 id="《Python-核心编程》"><a href="#《Python-核心编程》" class="headerlink" title="《Python 核心编程》"></a><strong>《Python 核心编程》</strong></h3><p><strong><em>基于python2.7版本</em></strong></p><h4 id="第一章-欢迎来到python世界"><a href="#第一章-欢迎来到python世界" class="headerlink" title="第一章 欢迎来到python世界"></a>第一章 欢迎来到python世界</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#！/usr/bin/env python</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"> <span class="keyword">print</span> <span class="string">'hello world'</span></span><br></pre></td></tr></table></figure><h4 id="第二章-快速入门"><a href="#第二章-快速入门" class="headerlink" title="第二章 快速入门"></a>第二章 快速入门</h4><h5 id="2-1-程序输出"><a href="#2-1-程序输出" class="headerlink" title="2.1 程序输出"></a>2.1 程序输出</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">print</span> <span class="string">"%s is number %d!"</span> % (<span class="string">"Python"</span>, <span class="number">1</span>), <span class="string">'what do you think? %.2f'</span> % (<span class="number">2.50</span>)</span><br></pre></td></tr></table></figure><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">print</span> &gt;&gt; sys.stderr, <span class="string">'Fatal error: invalid input'</span></span><br></pre></td></tr></table></figure><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line">logfile = open(<span class="string">'/home/hero/workspace/PythonTest/log'</span>, <span class="string">'a'</span>) <span class="comment">#a添加、r读、w写</span></span><br><span class="line"><span class="keyword">print</span> &gt;&gt; logfile, <span class="string">'可以重定向输出到文件log'</span></span><br><span class="line">logfile.close()</span><br></pre></td></tr></table></figure><h5 id="2-2-程序输入和raw-input-内建函数"><a href="#2-2-程序输入和raw-input-内建函数" class="headerlink" title="2.2 程序输入和raw_input()内建函数"></a>2.2 程序输入和raw_input()内建函数</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">user = raw_input(<span class="string">'Enter login name: '</span>)</span><br><span class="line"><span class="keyword">print</span> <span class="string">'Your login name is'</span>, user</span><br></pre></td></tr></table></figure><h5 id="2-4-操作符"><a href="#2-4-操作符" class="headerlink" title="2.4 操作符"></a>2.4 操作符</h5><table><thead><tr><th align="left"><strong>算数操作符</strong></th><th align="center"><strong>方式</strong></th><th align="right"><strong>示例</strong></th></tr></thead><tbody><tr><td align="left">+、-、*、/、%</td><td align="center">标准操作符</td><td align="right"></td></tr><tr><td align="left">//</td><td align="center">浮点除法(四舍五入)</td><td align="right">7//2=3</td></tr><tr><td align="left">**</td><td align="center">乘方操作符</td><td align="right">3**2=9</td></tr></tbody></table><h5 id="2-18-类"><a href="#2-18-类" class="headerlink" title="2.18 类"></a>2.18 类</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Foo</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="string">"""docstring for Foo"""</span></span><br><span class="line">    version = <span class="number">1.0</span></span><br><span class="line">    <span class="string">"""constructor"""</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, nm=<span class="string">'John Doe'</span>)</span>:</span></span><br><span class="line">        self.name = nm</span><br><span class="line">        <span class="keyword">print</span> <span class="string">'create Foo '</span>+ nm</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">showname</span><span class="params">(self)</span>:</span> <span class="comment">#self（java中的this）</span></span><br><span class="line">        <span class="keyword">print</span> self.name</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">showver</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">print</span> self.version</span><br><span class="line"></span><br><span class="line">foo = Foo()</span><br><span class="line">foo.showname()</span><br><span class="line">foo.showver()</span><br><span class="line"></span><br><span class="line">foo = Foo(<span class="string">'Jimy'</span>)</span><br><span class="line">foo.showname()</span><br><span class="line">foo.showver()</span><br></pre></td></tr></table></figure><h5 id="2-19-模块"><a href="#2-19-模块" class="headerlink" title="2.19 模块"></a>2.19 模块</h5><p>module_cap.py</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding:utf-8 -*-</span></span><br><span class="line"><span class="comment">#将每个单词首字母改为大写</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">my_cap</span><span class="params">(s)</span>:</span>  <span class="comment"># my capitalize fun</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> isinstance(s, str):</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    l = s.split(<span class="string">' '</span>)</span><br><span class="line">    res = <span class="string">''</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> l:</span><br><span class="line">        res += i.capitalize() + <span class="string">' '</span></span><br><span class="line">    <span class="keyword">return</span> res</span><br><span class="line">value=<span class="number">999</span></span><br></pre></td></tr></table></figure><p>test_main.py</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="keyword">from</span> module_cap <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">print</span> my_cap(<span class="string">'hello world'</span>)</span><br><span class="line"><span class="keyword">print</span> value</span><br></pre></td></tr></table></figure><h4 id="第三章-语句和语法"><a href="#第三章-语句和语法" class="headerlink" title="第三章 语句和语法"></a>第三章 语句和语法</h4><h5 id="3-6-文件读写"><a href="#3-6-文件读写" class="headerlink" title="3.6 文件读写"></a>3.6 文件读写</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># --*-- coding: utf-8 --*--</span></span><br><span class="line"></span><br><span class="line"><span class="string">"""makeTextFile.py -- create text file"""</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">touch_file</span><span class="params">()</span>:</span></span><br><span class="line">    ls = os.linesep</span><br><span class="line"></span><br><span class="line">    <span class="comment"># get file name</span></span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        fname = raw_input(<span class="string">'Please enter the file name:("q" to quit) '</span>)</span><br><span class="line">        <span class="keyword">if</span> fname == <span class="string">'q'</span>:</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">        <span class="keyword">elif</span> os.path.exists(fname):</span><br><span class="line">            <span class="keyword">print</span> <span class="string">"Error: '%s' already exists"</span> % fname</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># get file content lines</span></span><br><span class="line">    all = []</span><br><span class="line">    <span class="keyword">print</span> <span class="string">'Enter lines ("#" by itself to quit).'</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># loop</span></span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        entry = raw_input(<span class="string">'&gt; '</span>)</span><br><span class="line">        <span class="keyword">if</span> entry == <span class="string">'#'</span>:</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            all.append(entry)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># write to file</span></span><br><span class="line">    fobj = open(fname, <span class="string">'w'</span>)</span><br><span class="line">    fobj.writelines([<span class="string">'%s%s'</span> % (x, ls) <span class="keyword">for</span> x <span class="keyword">in</span> all])</span><br><span class="line">    fobj.close()</span><br><span class="line">    <span class="keyword">print</span> <span class="string">'Done!'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    touch_file()</span><br></pre></td></tr></table></figure><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># --*-- coding: utf-8 --*--</span></span><br><span class="line"></span><br><span class="line"><span class="string">"""readTextFile.py -- read text file"""</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">read_text_file</span><span class="params">()</span>:</span></span><br><span class="line">    fname = raw_input(<span class="string">'Enter file name: '</span>)</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        fobj = open(fname, <span class="string">'r'</span>)</span><br><span class="line">    <span class="keyword">except</span> IOError, e:</span><br><span class="line">        <span class="keyword">print</span> <span class="string">'file open error:'</span>, e</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">for</span> eachLine <span class="keyword">in</span> fobj:</span><br><span class="line">            <span class="keyword">print</span> eachLine,</span><br><span class="line">        fobj.close()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    read_text_file()</span><br></pre></td></tr></table></figure></div><footer class="article-footer"><a data-url="https://github.com/carl-zk/blog/2016/06/06/Hello-Python/" data-id="ck5l5fbmg000oq3psdr23590u" class="article-share-link">分享</a><ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/python/" rel="tag">python</a></li></ul></footer></div><script src="/blog/jquery/jquery.min.js"></script><div id="random_posts"><h2>推荐文章</h2><div class="random_posts_ul"><script>var random_count=4,site={BASE_URI:"/blog/"};function load_random_posts(t){var s=site.posts;if(t){for(var o,r,a=s.length;a;o=Math.floor(Math.random()*a),r=s[--a],s[a]=s[o],s[o]=r);s=s.slice(0,random_count);for(var e="<ul>",n=0;n<s.length;n++){var i=s[n];e+="<li><strong>"+i.date+':&nbsp;&nbsp;<a href="'+(site.BASE_URI+i.uri)+'">'+(i.title||i.uri)+"</a></strong>",i.excerpt&&(e+='<div class="post-excerpt">'+i.excerpt+"</div>"),e+="</li>"}$(t).html(e+"</ul>")}}$(".random_posts_ul").each(function(){var s=this;site.posts&&site.posts.length?load_random_posts(s):$.getJSON(site.BASE_URI+"js/posts.js",function(t){site.posts=t,load_random_posts(s)})})</script></div></div><nav id="article-nav"><a href="/blog/2016/06/08/%E9%9D%A2%E8%AF%95%E7%BB%8F%E9%AA%8C%E6%80%BB%E7%BB%93/" id="article-nav-newer" class="article-nav-link-wrap"><strong class="article-nav-caption">上一篇</strong><div class="article-nav-title">面试经验总结</div></a><a href="/blog/2016/06/01/%E5%BF%83%E7%81%B5%E9%A9%BF%E7%AB%99/" id="article-nav-older" class="article-nav-link-wrap"><strong class="article-nav-caption">下一篇</strong><div class="article-nav-title">迷茫小书童</div></a></nav></article><div class="comments" id="comments"></div></section><aside id="sidebar"><div class="widget-wrap"><div class="widget" id="toc-widget-fixed"><strong class="toc-title">文章目录</strong><div class="toc-widget-list"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#《Python-核心编程》"><span class="toc-number">1.</span> <span class="toc-text">《Python 核心编程》</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#第一章-欢迎来到python世界"><span class="toc-number">1.1.</span> <span class="toc-text">第一章 欢迎来到python世界</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#第二章-快速入门"><span class="toc-number">1.2.</span> <span class="toc-text">第二章 快速入门</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#2-1-程序输出"><span class="toc-number">1.2.1.</span> <span class="toc-text">2.1 程序输出</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-2-程序输入和raw-input-内建函数"><span class="toc-number">1.2.2.</span> <span class="toc-text">2.2 程序输入和raw_input()内建函数</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-4-操作符"><span class="toc-number">1.2.3.</span> <span class="toc-text">2.4 操作符</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-18-类"><span class="toc-number">1.2.4.</span> <span class="toc-text">2.18 类</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-19-模块"><span class="toc-number">1.2.5.</span> <span class="toc-text">2.19 模块</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#第三章-语句和语法"><span class="toc-number">1.3.</span> <span class="toc-text">第三章 语句和语法</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#3-6-文件读写"><span class="toc-number">1.3.1.</span> <span class="toc-text">3.6 文件读写</span></a></li></ol></li></ol></li></ol></div></div></div></aside></div><footer id="footer"><div class="outer"><div id="footer-left">&copy; 2016 - 2020 carl-zk</div><div id="footer-right">富强民主文明和谐自由平等公正法治爱国敬业诚信友善</div></div></footer><script src="/blog/jquery/jquery.min.js"></script><script color="168, 168, 168" opacity="0.6" zindex="-2" count="20" src="https://cdnjs.cloudflare.com/ajax/libs/canvas-nest.js/1.0.1/canvas-nest.min.js"></script></div><nav id="mobile-nav"><a href="/blog/" class="mobile-nav-link">首页</a> <a href="/blog/archives" class="mobile-nav-link">归档</a> <a href="/blog/about" class="mobile-nav-link">关于</a></nav><img class="back-to-top-btn" src="/blog/images/fly-to-top.png"><script>window.onload=function(){new Elevator({selector:".back-to-top-btn",element:document.querySelector(".back-to-top-btn"),duration:1e3})}</script><script type="text/x-mathjax-config">MathJax.Hub.Config({
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Hello Python | 一叶轻舟渡万江</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="《Python 核心编程》基于python2.7版本 第一章 欢迎来到python世界123#！&#x2F;usr&#x2F;bin&#x2F;env python# -*- coding: utf-8 -*- print &#39;hello world&#39; 第二章 快速入门2.1 程序输出1print &quot;%s is number %d!&quot; % (&quot;Python&quot;, 1), &#39;what do you think? %.2f&#39; % (2">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hello Python">
+<meta property="og:url" content="https://github.com/carl-zk/blog/2016/06/06/Hello-Python/index.html">
+<meta property="og:site_name" content="一叶轻舟渡万江">
+<meta property="og:description" content="《Python 核心编程》基于python2.7版本 第一章 欢迎来到python世界123#！&#x2F;usr&#x2F;bin&#x2F;env python# -*- coding: utf-8 -*- print &#39;hello world&#39; 第二章 快速入门2.1 程序输出1print &quot;%s is number %d!&quot; % (&quot;Python&quot;, 1), &#39;what do you think? %.2f&#39; % (2">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2016-06-06T15:18:31.000Z">
+<meta property="article:modified_time" content="2019-02-16T01:58:27.784Z">
+<meta property="article:author" content="carl-zk">
+<meta property="article:tag" content="python">
+<meta name="twitter:card" content="summary">
+  
+  
+    <link rel="icon" href="img/favicon2.ico">
+  
+  
+    
+  
+  
+<link rel="stylesheet" href="/blog/css/style.css">
+
+  
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    
+    <div id="header-inner" class="inner">
+      <nav id="sub-nav">
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://github.com/carl-zk/blog"></form>
+      </div>
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/blog/">首页</a>
+        
+          <a class="main-nav-link" href="/blog/archives">归档</a>
+        
+          <a class="main-nav-link" href="/blog/about">关于</a>
+        
+      </nav>
+      
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/blog/" id="logo">一叶轻舟渡万江</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/blog/" id="subtitle">泰山不拒细壤故能成其高 江海不择细流故能就其深</a>
+        </h2>
+      
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Hello-Python" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2016/06/06/Hello-Python/" class="article-date">
+  <time datetime="2016-06-06T15:18:31.000Z" itemprop="datePublished">2016-06-06</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Hello Python
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <h3 id="《Python-核心编程》"><a href="#《Python-核心编程》" class="headerlink" title="《Python 核心编程》"></a><strong>《Python 核心编程》</strong></h3><p><strong><em>基于python2.7版本</em></strong></p>
+<h4 id="第一章-欢迎来到python世界"><a href="#第一章-欢迎来到python世界" class="headerlink" title="第一章 欢迎来到python世界"></a>第一章 欢迎来到python世界</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#！/usr/bin/env python</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"> <span class="keyword">print</span> <span class="string">'hello world'</span></span><br></pre></td></tr></table></figure>
+<h4 id="第二章-快速入门"><a href="#第二章-快速入门" class="headerlink" title="第二章 快速入门"></a>第二章 快速入门</h4><h5 id="2-1-程序输出"><a href="#2-1-程序输出" class="headerlink" title="2.1 程序输出"></a>2.1 程序输出</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">print</span> <span class="string">"%s is number %d!"</span> % (<span class="string">"Python"</span>, <span class="number">1</span>), <span class="string">'what do you think? %.2f'</span> % (<span class="number">2.50</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">print</span> &gt;&gt; sys.stderr, <span class="string">'Fatal error: invalid input'</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line">logfile = open(<span class="string">'/home/hero/workspace/PythonTest/log'</span>, <span class="string">'a'</span>) <span class="comment">#a添加、r读、w写</span></span><br><span class="line"><span class="keyword">print</span> &gt;&gt; logfile, <span class="string">'可以重定向输出到文件log'</span></span><br><span class="line">logfile.close()</span><br></pre></td></tr></table></figure>
+<h5 id="2-2-程序输入和raw-input-内建函数"><a href="#2-2-程序输入和raw-input-内建函数" class="headerlink" title="2.2 程序输入和raw_input()内建函数"></a>2.2 程序输入和raw_input()内建函数</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">user = raw_input(<span class="string">'Enter login name: '</span>)</span><br><span class="line"><span class="keyword">print</span> <span class="string">'Your login name is'</span>, user</span><br></pre></td></tr></table></figure>
+<h5 id="2-4-操作符"><a href="#2-4-操作符" class="headerlink" title="2.4 操作符"></a>2.4 操作符</h5><table>
+<thead>
+<tr>
+<th align="left"><strong>算数操作符</strong></th>
+<th align="center"><strong>方式</strong></th>
+<th align="right"><strong>示例</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">+、-、*、/、%</td>
+<td align="center">标准操作符</td>
+<td align="right"></td>
+</tr>
+<tr>
+<td align="left">//</td>
+<td align="center">浮点除法(四舍五入)</td>
+<td align="right">7//2=3</td>
+</tr>
+<tr>
+<td align="left">**</td>
+<td align="center">乘方操作符</td>
+<td align="right">3**2=9</td>
+</tr>
+</tbody></table>
+<h5 id="2-18-类"><a href="#2-18-类" class="headerlink" title="2.18 类"></a>2.18 类</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Foo</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="string">"""docstring for Foo"""</span></span><br><span class="line">    version = <span class="number">1.0</span></span><br><span class="line">    <span class="string">"""constructor"""</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, nm=<span class="string">'John Doe'</span>)</span>:</span></span><br><span class="line">        self.name = nm</span><br><span class="line">        <span class="keyword">print</span> <span class="string">'create Foo '</span>+ nm</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">showname</span><span class="params">(self)</span>:</span> <span class="comment">#self（java中的this）</span></span><br><span class="line">        <span class="keyword">print</span> self.name</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">showver</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">print</span> self.version</span><br><span class="line"></span><br><span class="line">foo = Foo()</span><br><span class="line">foo.showname()</span><br><span class="line">foo.showver()</span><br><span class="line"></span><br><span class="line">foo = Foo(<span class="string">'Jimy'</span>)</span><br><span class="line">foo.showname()</span><br><span class="line">foo.showver()</span><br></pre></td></tr></table></figure>
+<h5 id="2-19-模块"><a href="#2-19-模块" class="headerlink" title="2.19 模块"></a>2.19 模块</h5><p>module_cap.py</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding:utf-8 -*-</span></span><br><span class="line"><span class="comment">#将每个单词首字母改为大写</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">my_cap</span><span class="params">(s)</span>:</span>  <span class="comment"># my capitalize fun</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> isinstance(s, str):</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    l = s.split(<span class="string">' '</span>)</span><br><span class="line">    res = <span class="string">''</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> l:</span><br><span class="line">        res += i.capitalize() + <span class="string">' '</span></span><br><span class="line">    <span class="keyword">return</span> res</span><br><span class="line">value=<span class="number">999</span></span><br></pre></td></tr></table></figure>
+<p>test_main.py</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="keyword">from</span> module_cap <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">print</span> my_cap(<span class="string">'hello world'</span>)</span><br><span class="line"><span class="keyword">print</span> value</span><br></pre></td></tr></table></figure>
+<h4 id="第三章-语句和语法"><a href="#第三章-语句和语法" class="headerlink" title="第三章 语句和语法"></a>第三章 语句和语法</h4><h5 id="3-6-文件读写"><a href="#3-6-文件读写" class="headerlink" title="3.6 文件读写"></a>3.6 文件读写</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># --*-- coding: utf-8 --*--</span></span><br><span class="line"></span><br><span class="line"><span class="string">"""makeTextFile.py -- create text file"""</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">touch_file</span><span class="params">()</span>:</span></span><br><span class="line">    ls = os.linesep</span><br><span class="line"></span><br><span class="line">    <span class="comment"># get file name</span></span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        fname = raw_input(<span class="string">'Please enter the file name:("q" to quit) '</span>)</span><br><span class="line">        <span class="keyword">if</span> fname == <span class="string">'q'</span>:</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">        <span class="keyword">elif</span> os.path.exists(fname):</span><br><span class="line">            <span class="keyword">print</span> <span class="string">"Error: '%s' already exists"</span> % fname</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># get file content lines</span></span><br><span class="line">    all = []</span><br><span class="line">    <span class="keyword">print</span> <span class="string">'Enter lines ("#" by itself to quit).'</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># loop</span></span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        entry = raw_input(<span class="string">'&gt; '</span>)</span><br><span class="line">        <span class="keyword">if</span> entry == <span class="string">'#'</span>:</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            all.append(entry)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># write to file</span></span><br><span class="line">    fobj = open(fname, <span class="string">'w'</span>)</span><br><span class="line">    fobj.writelines([<span class="string">'%s%s'</span> % (x, ls) <span class="keyword">for</span> x <span class="keyword">in</span> all])</span><br><span class="line">    fobj.close()</span><br><span class="line">    <span class="keyword">print</span> <span class="string">'Done!'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    touch_file()</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># --*-- coding: utf-8 --*--</span></span><br><span class="line"></span><br><span class="line"><span class="string">"""readTextFile.py -- read text file"""</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">read_text_file</span><span class="params">()</span>:</span></span><br><span class="line">    fname = raw_input(<span class="string">'Enter file name: '</span>)</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        fobj = open(fname, <span class="string">'r'</span>)</span><br><span class="line">    <span class="keyword">except</span> IOError, e:</span><br><span class="line">        <span class="keyword">print</span> <span class="string">'file open error:'</span>, e</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">for</span> eachLine <span class="keyword">in</span> fobj:</span><br><span class="line">            <span class="keyword">print</span> eachLine,</span><br><span class="line">        fobj.close()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    read_text_file()</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <!-- <a data-url="https://github.com/carl-zk/blog/2016/06/06/Hello-Python/" data-id="ck5lsdoxh000u2fps74x00ace" class="article-share-link">分享</a> -->
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/python/" rel="tag">python</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+ 
+<script src="/blog/jquery/jquery.min.js"></script>
+
+  <div id="random_posts">
+    <h2>推荐文章</h2>
+    <div class="random_posts_ul">
+      <script>
+          var random_count =4
+          var site = {BASE_URI:'/blog/'};
+          function load_random_posts(obj) {
+              var arr=site.posts;
+              if (!obj) return;
+              // var count = $(obj).attr('data-count') || 6;
+              for (var i, tmp, n = arr.length; n; i = Math.floor(Math.random() * n), tmp = arr[--n], arr[n] = arr[i], arr[i] = tmp);
+              arr = arr.slice(0, random_count);
+              var html = '<ul>';
+            
+              for(var j=0;j<arr.length;j++){
+                var item=arr[j];
+                html += '<li><strong>' + 
+                item.date + ':&nbsp;&nbsp;<a href="' + (site.BASE_URI+item.uri) + '">' + 
+                (item.title || item.uri) + '</a></strong>';
+                if(item.excerpt){
+                  html +='<div class="post-excerpt">'+item.excerpt+'</div>';
+                }
+                html +='</li>';
+                
+              }
+              $(obj).html(html + '</ul>');
+          }
+          $('.random_posts_ul').each(function () {
+              var c = this;
+              if (!site.posts || !site.posts.length){
+                  $.getJSON(site.BASE_URI + 'js/posts.js',function(json){site.posts = json;load_random_posts(c)});
+              } 
+               else{
+                load_random_posts(c);
+              }
+          });
+      </script>
+    </div>
+  </div>
+
+    
+<nav id="article-nav">
+  
+    <a href="/blog/2016/06/08/%E9%9D%A2%E8%AF%95%E7%BB%8F%E9%AA%8C%E6%80%BB%E7%BB%93/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          面试经验总结
+        
+      </div>
+    </a>
+  
+  
+    <a href="/blog/2016/06/01/%E5%BF%83%E7%81%B5%E9%A9%BF%E7%AB%99/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">迷茫小书童</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+ 
+     
+  <div class="comments" id="comments">
+    
+     
+       
+       
+      
+      
+  </div>
+ 
+  
+
+</section>
+           
+    <aside id="sidebar">
+  
+    
+
+  
+    
+    <div class="widget-wrap">
+    
+      <div class="widget" id="toc-widget-fixed">
+      
+        <strong class="toc-title">文章目录</strong>
+        <div class="toc-widget-list">
+              <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#《Python-核心编程》"><span class="toc-number">1.</span> <span class="toc-text">《Python 核心编程》</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#第一章-欢迎来到python世界"><span class="toc-number">1.1.</span> <span class="toc-text">第一章 欢迎来到python世界</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#第二章-快速入门"><span class="toc-number">1.2.</span> <span class="toc-text">第二章 快速入门</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#2-1-程序输出"><span class="toc-number">1.2.1.</span> <span class="toc-text">2.1 程序输出</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-2-程序输入和raw-input-内建函数"><span class="toc-number">1.2.2.</span> <span class="toc-text">2.2 程序输入和raw_input()内建函数</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-4-操作符"><span class="toc-number">1.2.3.</span> <span class="toc-text">2.4 操作符</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-18-类"><span class="toc-number">1.2.4.</span> <span class="toc-text">2.18 类</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-19-模块"><span class="toc-number">1.2.5.</span> <span class="toc-text">2.19 模块</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#第三章-语句和语法"><span class="toc-number">1.3.</span> <span class="toc-text">第三章 语句和语法</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#3-6-文件读写"><span class="toc-number">1.3.1.</span> <span class="toc-text">3.6 文件读写</span></a></li></ol></li></ol></li></ol>
+          </div>
+      </div>
+    </div>
+
+  
+    
+
+  
+    
+  
+    
+  
+    
+
+  
+    
+  
+    <!--微信公众号二维码-->
+
+
+  
+</aside>
+
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-left">
+      &copy; 2016 - 2020 carl-zk<!--&nbsp;|&nbsp;
+      主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a> -->
+    </div>
+  
+     <div id="footer-right">
+      <!--联系方式&nbsp;|&nbsp; -->
+      富强民主文明和谐自由平等公正法治爱国敬业诚信友善
+    </div>
+  </div>
+</footer>
+ 
+<script src="/blog/jquery/jquery.min.js"></script>
+
+ <script type="text/javascript" color="168, 168, 168" opacity='0.6' zIndex="-2" count="20" src="https://cdnjs.cloudflare.com/ajax/libs/canvas-nest.js/1.0.1/canvas-nest.min.js"></script>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/blog/" class="mobile-nav-link">首页</a>
+  
+    <a href="/blog/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/blog/about" class="mobile-nav-link">关于</a>
+  
+</nav>
+    <img class="back-to-top-btn" src="/blog/images/fly-to-top.png"/>
+<script>
+// Elevator script included on the page, already.
+window.onload = function() {
+  var elevator = new Elevator({
+    selector:'.back-to-top-btn',
+    element: document.querySelector('.back-to-top-btn'),
+    duration: 1000 // milliseconds
+  });
+}
+</script>
+      
+
+  
+
+  
+
+
+
+
+
+
+
+<!-- author:forvoid begin -->
+<!-- author:forvoid begin -->
+
+<!-- author:forvoid end -->
+
+<!-- author:forvoid end -->
+
+
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
         tex2jax: {
           inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
           processEscapes: true,
           skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
         }
-      })</script><script type="text/x-mathjax-config">MathJax.Hub.Queue(function() {
+      })
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
         var all = MathJax.Hub.getAllJax(), i;
         for (i=0; i < all.length; i += 1) {
           all[i].SourceElement().parentNode.className += ' has-jax';
         }
-      })</script><script src="https://cdn.rawgit.com/mathjax/MathJax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script src="/blog/js/is.js"></script><link rel="stylesheet" href="/blog/fancybox/jquery.fancybox.css"><script src="/blog/fancybox/jquery.fancybox.pack.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/7.1.2/mermaid.min.js"></script><script>window.mermaid&&mermaid.initialize({theme:"forest"})</script><script src="/blog/js/script.js"></script><script src="/blog/js/elevator.js"></script></div></body>
+      })
+    </script>
+    <script type="text/javascript" src="https://cdn.rawgit.com/mathjax/MathJax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+ 
+<script src="/blog/js/is.js"></script>
+
+
+
+  
+<link rel="stylesheet" href="/blog/fancybox/jquery.fancybox.css">
+
+  
+<script src="/blog/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/mermaid/7.1.2/mermaid.min.js'></script>
+  <!-- script src="/blog/js/mermaid.min.js" -->
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({theme: 'forest'});
+    }
+  </script>
+
+
+<script src="/blog/js/script.js"></script>
+
+
+<script src="/blog/js/elevator.js"></script>
+
+  </div>
+</body>
+</html>

@@ -1,12 +1,394 @@
-<!DOCTYPE html><html><head><meta charset="utf-8"><title>Sql查询 | 一叶轻舟渡万江</title><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"><meta name="description" content="Group By 和 Having, Where ,Order by语句的执行顺序：Where&gt; Group By&gt; Having&gt; Order by。首先where将最原始记录中不满足条件的记录删除(所以应该在where语句中尽量的将不符合条件的记录筛选掉，这样可以减少分组的次数)，然后通过Group By关键字后面指定的分组条件将筛选得到的视图进行分组，接着系统根据Havin"><meta property="og:type" content="article"><meta property="og:title" content="Sql查询"><meta property="og:url" content="https://github.com/carl-zk/blog/2016/06/19/sql%E6%9F%A5%E8%AF%A2/index.html"><meta property="og:site_name" content="一叶轻舟渡万江"><meta property="og:description" content="Group By 和 Having, Where ,Order by语句的执行顺序：Where&gt; Group By&gt; Having&gt; Order by。首先where将最原始记录中不满足条件的记录删除(所以应该在where语句中尽量的将不符合条件的记录筛选掉，这样可以减少分组的次数)，然后通过Group By关键字后面指定的分组条件将筛选得到的视图进行分组，接着系统根据Havin"><meta property="og:locale" content="zh_CN"><meta property="article:published_time" content="2016-06-19T04:17:30.000Z"><meta property="article:modified_time" content="2019-02-16T01:58:27.798Z"><meta property="article:author" content="carl-zk"><meta property="article:tag" content="sql"><meta name="twitter:card" content="summary"><link rel="alternate" href="/atom.xml" title="一叶轻舟渡万江" type="application/atom+xml"><link rel="icon" href="img/favicon2.ico"><link rel="stylesheet" href="/blog/css/style.css"><meta name="generator" content="Hexo 4.2.0"></head></html><body><div id="container"><div id="wrap"><header id="header"><div id="banner"></div><div id="header-outer" class="outer"><div id="header-inner" class="inner"><nav id="sub-nav"><a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a> <a id="nav-search-btn" class="nav-icon" title="搜索"></a></nav><div id="search-form-wrap"><form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://github.com/carl-zk/blog"></form></div><nav id="main-nav"><a id="main-nav-toggle" class="nav-icon"></a> <a class="main-nav-link" href="/blog/">首页</a> <a class="main-nav-link" href="/blog/archives">归档</a> <a class="main-nav-link" href="/blog/about">关于</a></nav></div><div id="header-title" class="inner"><h1 id="logo-wrap"><a href="/blog/" id="logo">一叶轻舟渡万江</a></h1><h2 id="subtitle-wrap"><a href="/blog/" id="subtitle">泰山不拒细壤故能成其高 江海不择细流故能就其深</a></h2></div></div></header><div class="outer"><section id="main"><article id="post-sql查询" class="article article-type-post" itemscope itemprop="blogPost"><div class="article-meta"><a href="/blog/2016/06/19/sql%E6%9F%A5%E8%AF%A2/" class="article-date"><time datetime="2016-06-19T04:17:30.000Z" itemprop="datePublished">2016-06-19</time></a></div><div class="article-inner"><header class="article-header"><h1 class="article-title" itemprop="name">Sql查询</h1></header><div class="article-entry" itemprop="articleBody"><p><a href="http://tangwenchao86.iteye.com/blog/1107795" target="_blank" rel="noopener">Group By 和 Having, Where ,Order by语句的执行顺序：</a><br>Where&gt; Group By&gt; Having&gt; Order by。首先where将最原始记录中不满足条件的记录删除(所以应该在where语句中尽量的将不符合条件的记录筛选掉，这样可以减少分组的次数)，然后通过Group By关键字后面指定的分组条件将筛选得到的视图进行分组，接着系统根据Having关键字后面指定的筛选条件，将分组视图后不满足条件的记录筛选掉，然后按照Order By语句对视图进行排序，这样最终的结果就产生了。在这四个关键字中，只有在Order By语句中才可以使用最终视图的列名，如： 　　SELECT FruitName, ProductPlace, Price, ID AS IDE, Discount 　　FROM T_TEST_FRUITINFO 　　WHERE (ProductPlace = N’china’) 　　ORDER BY IDE 　　这里只有在ORDER BY语句中才可以使用IDE，其他条件语句中如果需要引用列名则只能使用ID，而不能使用IDE。</p><h1 id="删除重复数据"><a href="#删除重复数据" class="headerlink" title="删除重复数据"></a>删除重复数据</h1><blockquote><p>Person表</p></blockquote><table><thead><tr><th>id</th><th align="center">name</th></tr></thead><tbody><tr><td>1</td><td align="center">a</td></tr><tr><td>2</td><td align="center">b</td></tr><tr><td>3</td><td align="center">a</td></tr></tbody></table><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SET SQL_SAFE_UPDATES&#x3D;0; #防止safe模式下where未指定disdinct column不能执行delete语句</span><br><span class="line">delete from Person where id not in (select minId from (select min(id) as minId FROM Person group by name) as T); #delete不允许表同时在select条件中,故as一个新表</span><br></pre></td></tr></table></figure><h1 id="列出各个部门中工资高于本部门的平均"><a href="#列出各个部门中工资高于本部门的平均" class="headerlink" title="列出各个部门中工资高于本部门的平均"></a>列出各个部门中工资高于本部门的平均</h1><h1 id="工资的员工数和部门号，并按部门号排序"><a href="#工资的员工数和部门号，并按部门号排序" class="headerlink" title="工资的员工数和部门号，并按部门号排序"></a>工资的员工数和部门号，并按部门号排序</h1><p>department表结构: id, employee_id, salary;</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select count(ta.employee_id), ta.id from summery.department ta right join (select avg(tb.salary) as avgs, tb.id as tbid from summery.department tb group by tb.id) as tc on ta.id&#x3D;tc.tbid and ta.salary &gt; tc.avgs group by ta.id desc;</span><br></pre></td></tr></table></figure><p>思路: 先找出部门号和平均工资,然后join相同部门号并且工资&gt;平均值的行,group by id即可.</p><h1 id="取每组的前N条数据"><a href="#取每组的前N条数据" class="headerlink" title="取每组的前N条数据"></a>取每组的前N条数据</h1><p>参考:<a href="http://huanghualiang.blog.51cto.com/6782683/1252630" target="_blank" rel="noopener">http://huanghualiang.blog.51cto.com/6782683/1252630</a></p><p>分自连接和半连接:</p><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">自连接:<span class="keyword">select</span> * <span class="keyword">from</span> t2 a <span class="keyword">where</span> <span class="number">3</span>&gt;(<span class="keyword">select</span> <span class="keyword">count</span>(*) <span class="keyword">from</span> t2 <span class="keyword">where</span> gid=a.gid <span class="keyword">and</span> col2&gt;a.col2) <span class="keyword">order</span> <span class="keyword">by</span> a.gid,a.col2 <span class="keyword">desc</span>;</span><br><span class="line">半连接:<span class="keyword">select</span> * <span class="keyword">from</span> t2 a <span class="keyword">where</span> <span class="keyword">exists</span>(<span class="keyword">select</span> <span class="keyword">count</span>(*) <span class="keyword">from</span> t2 b <span class="keyword">where</span> b.gid=a.gid <span class="keyword">and</span> a.col2&lt;b.col2 <span class="keyword">having</span>(<span class="keyword">count</span>(*))&lt;<span class="number">3</span>) <span class="keyword">order</span> <span class="keyword">by</span> a.gid,a.col2 <span class="keyword">desc</span></span><br></pre></td></tr></table></figure><p><strong>这两种方法刚开始没懂,后来看懂了,才发现真是碉堡了.值得玩味.</strong></p><blockquote><p>原文中一处错误—&gt;<br>*N=1时：<br>自连接：降序排好后group by取每组最大的一条。<br>select * from (select * from t2 order by col2 desc)as a group by gid order by gid;</p></blockquote><p>group by 要将 select 之后全部的非聚合列都加进来,所以这条语句已经不能用了.</p><p><a href="https://www.cnblogs.com/eflylab/archive/2007/06/25/794278.html" target="_blank" rel="noopener">左连接，右连接，全连接，内连接，交叉连接，自连接</a><br>左连接就是以左表为准，右连接就是以右表为准。select * from tbla, tblb:这里的,就是笛卡尔积。</p><p>mysql面试题<br>学生表<br>create table student(<br>id int primary key auto_increment,<br>group_id int,<br>name nvarchar(250),<br>score numeric(4, 1)<br>);<br>兴趣小组表<br>create table study_group(<br>id int primary key auto_increment,<br>name nvarchar(250)<br>);<br>student<br>sutdentId groupId sutdentName score<br>1 1 Tom1 65<br>2 2 Tom2 60<br>3 3 Tom3 70<br>4 2 Tom4 80<br>5 1 Tom5 75<br>6 3 Tom6 85<br>7 3 Tom7 78<br>8 1 Tom8 97<br>9 2 Tom9 88<br>10 4 Aaa1 88<br>11 4 Aaa2 56<br>12 5 Aaa3 76<br>13 5 Aaa4 77<br>14 2 Aaa5 90<br>15 4 Ddd3 45<br>16 5 Ddd2 78<br>17 3 Ddd1 90<br>18 1 Eee3 0<br>19 3 Ggg1 0<br>20 4 Ttt1 0<br>21 2 Rrr2 0<br>Study_group<br>groupId groupName<br>1 音乐小组<br>2 绘画小组<br>3 体育小组<br>4 养生小组<br>5 环卫小组<br>6 没有参加小组</p><p>可存在txt中导入mysql<br>导入命令：<br>mysql&gt; load data infile ‘/home/lujing/student.txt’ into table student<br>-&gt; fields terminated by’ ‘<br>-&gt; lines terminated by’\n’ (windows中换行为\r\n)</p><p>1、用一条sql查询出个小组成绩最优秀的学生，需要查询出小组名称，学生名称，成绩</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select tc.name,ta.name,ta.score from summery.student ta join summery.study_group tc on ta.group_id&#x3D;tc.id where (ta.score, ta.group_id) in (select max(tb.score) as mxs, tb.group_id as gid from summery.student tb group by tb.group_id);</span><br></pre></td></tr></table></figure><p>思路:先找每组的最高分,然后(ta.score, ta.group_id)匹配.<br>优化:要对student的group_id加索引.</p><p>​2、将所有没有参加的小组的学生的活动成绩更新为-1</p><p>update summery.student set score=-1 where group_id=6;</p><p>3、用一条sql语句查出所有学生参加兴趣小组的情况，需要查出学生名称，小组名称，如果学生没有参加小组，则小组名称返回“没有参加小组”</p><p>select ta.name, tb.name from summery.student ta join summery.study_group tb on ta.group_id=tb.id;</p><h1 id="union-和-union-all-的区别"><a href="#union-和-union-all-的区别" class="headerlink" title="union 和 union all 的区别"></a>union 和 union all 的区别</h1><p>这俩个没怎么用过,<a href="http://www.5idev.com/p-mysql_union.shtml" target="_blank" rel="noopener">http://www.5idev.com/p-mysql_union.shtml</a></p><h1 id="选出2040-4080-80-100分数的学生人数"><a href="#选出2040-4080-80-100分数的学生人数" class="headerlink" title="选出2040,4080,80~100分数的学生人数"></a>选出20<del>40,40</del>80,80~100分数的学生人数</h1><p>case when 条件 then 行名 else 行名 end as 列名</p><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">case</span> <span class="keyword">when</span> score &gt; <span class="number">70</span> <span class="keyword">then</span> <span class="string">'&gt;70'</span> <span class="keyword">else</span> <span class="string">'≤70'</span> <span class="keyword">end</span> <span class="keyword">as</span> <span class="string">'范围'</span>, <span class="keyword">count</span>(score) <span class="keyword">as</span> <span class="string">'人数'</span> <span class="keyword">FROM</span> summery.student </span><br><span class="line"><span class="keyword">group</span> <span class="keyword">by</span> <span class="keyword">case</span> <span class="keyword">when</span> score&gt;<span class="number">70</span> <span class="keyword">then</span> <span class="string">'&gt;70'</span> <span class="keyword">else</span> <span class="string">'≤70'</span> <span class="keyword">end</span>;</span><br></pre></td></tr></table></figure><h1 id="之前没想出来的sql"><a href="#之前没想出来的sql" class="headerlink" title="之前没想出来的sql"></a>之前没想出来的sql</h1><p>一个用户有多个保单，每个保单有一个机构号，保单有日期。<br>找出每个用户保单最多的那个机构，如果保单数目相同就取最近保单的那个机构。</p><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> TRY</span><br><span class="line">(</span><br><span class="line">  user_id    <span class="built_in">INTEGER</span>,</span><br><span class="line">  stock_code <span class="built_in">INTEGER</span>,</span><br><span class="line">  bank_id    <span class="built_in">INTEGER</span>,</span><br><span class="line">  ts         <span class="built_in">TIMESTAMP</span>(<span class="number">0</span>)</span><br><span class="line">)</span><br></pre></td></tr></table></figure><p>插入数据<a href="/blog/2016/06/19/sql%E6%9F%A5%E8%AF%A2/data.sql.txt">data</a><br>解决方案</p><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> *</span><br><span class="line">  <span class="keyword">FROM</span> (<span class="keyword">SELECT</span> USER_ID, BANK_ID, <span class="keyword">COUNT</span>(STOCK_CODE) CNT, <span class="keyword">MAX</span>(TS) TS</span><br><span class="line">          <span class="keyword">FROM</span> TRY</span><br><span class="line">         <span class="keyword">GROUP</span> <span class="keyword">BY</span> USER_ID, BANK_ID) A</span><br><span class="line"> <span class="keyword">WHERE</span> <span class="keyword">NOT</span> <span class="keyword">EXISTS</span></span><br><span class="line"> (<span class="keyword">SELECT</span> <span class="number">1</span></span><br><span class="line">          <span class="keyword">FROM</span> (<span class="keyword">SELECT</span> USER_ID, BANK_ID, <span class="keyword">COUNT</span>(STOCK_CODE) CNT, <span class="keyword">MAX</span>(TS) TS</span><br><span class="line">                  <span class="keyword">FROM</span> TRY</span><br><span class="line">                 <span class="keyword">GROUP</span> <span class="keyword">BY</span> USER_ID, BANK_ID) B</span><br><span class="line">         <span class="keyword">WHERE</span> A.USER_ID = B.USER_ID</span><br><span class="line">           <span class="keyword">AND</span> A.BANK_ID != B.BANK_ID</span><br><span class="line">           <span class="keyword">AND</span> (A.CNT &lt; B.CNT <span class="keyword">OR</span> (A.CNT = B.CNT <span class="keyword">AND</span> A.TS &lt; B.TS)))</span><br></pre></td></tr></table></figure></div><footer class="article-footer"><a data-url="https://github.com/carl-zk/blog/2016/06/19/sql%E6%9F%A5%E8%AF%A2/" data-id="ck5l5fbo0005bq3ps54i0ee7s" class="article-share-link">分享</a><ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/sql/" rel="tag">sql</a></li></ul></footer></div><script src="/blog/jquery/jquery.min.js"></script><div id="random_posts"><h2>推荐文章</h2><div class="random_posts_ul"><script>var random_count=4,site={BASE_URI:"/blog/"};function load_random_posts(t){var s=site.posts;if(t){for(var o,r,a=s.length;a;o=Math.floor(Math.random()*a),r=s[--a],s[a]=s[o],s[o]=r);s=s.slice(0,random_count);for(var e="<ul>",n=0;n<s.length;n++){var i=s[n];e+="<li><strong>"+i.date+':&nbsp;&nbsp;<a href="'+(site.BASE_URI+i.uri)+'">'+(i.title||i.uri)+"</a></strong>",i.excerpt&&(e+='<div class="post-excerpt">'+i.excerpt+"</div>"),e+="</li>"}$(t).html(e+"</ul>")}}$(".random_posts_ul").each(function(){var s=this;site.posts&&site.posts.length?load_random_posts(s):$.getJSON(site.BASE_URI+"js/posts.js",function(t){site.posts=t,load_random_posts(s)})})</script></div></div><nav id="article-nav"><a href="/blog/2016/06/20/Rightmost-Digit/" id="article-nav-newer" class="article-nav-link-wrap"><strong class="article-nav-caption">上一篇</strong><div class="article-nav-title">Rightmost Digit</div></a><a href="/blog/2016/06/18/%E5%93%88%E5%A4%AB%E6%9B%BC%E7%BC%96%E7%A0%81/" id="article-nav-older" class="article-nav-link-wrap"><strong class="article-nav-caption">下一篇</strong><div class="article-nav-title">哈夫曼编码</div></a></nav></article><div class="comments" id="comments"></div></section><aside id="sidebar"><div class="widget-wrap"><div class="widget" id="toc-widget-fixed"><strong class="toc-title">文章目录</strong><div class="toc-widget-list"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#删除重复数据"><span class="toc-number">1.</span> <span class="toc-text">删除重复数据</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#列出各个部门中工资高于本部门的平均"><span class="toc-number">2.</span> <span class="toc-text">列出各个部门中工资高于本部门的平均</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#工资的员工数和部门号，并按部门号排序"><span class="toc-number">3.</span> <span class="toc-text">工资的员工数和部门号，并按部门号排序</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#取每组的前N条数据"><span class="toc-number">4.</span> <span class="toc-text">取每组的前N条数据</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#union-和-union-all-的区别"><span class="toc-number">5.</span> <span class="toc-text">union 和 union all 的区别</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#选出2040-4080-80-100分数的学生人数"><span class="toc-number">6.</span> <span class="toc-text">选出2040,4080,80~100分数的学生人数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#之前没想出来的sql"><span class="toc-number">7.</span> <span class="toc-text">之前没想出来的sql</span></a></li></ol></div></div></div></aside></div><footer id="footer"><div class="outer"><div id="footer-left">&copy; 2016 - 2020 carl-zk</div><div id="footer-right">富强民主文明和谐自由平等公正法治爱国敬业诚信友善</div></div></footer><script src="/blog/jquery/jquery.min.js"></script><script color="168, 168, 168" opacity="0.6" zindex="-2" count="20" src="https://cdnjs.cloudflare.com/ajax/libs/canvas-nest.js/1.0.1/canvas-nest.min.js"></script></div><nav id="mobile-nav"><a href="/blog/" class="mobile-nav-link">首页</a> <a href="/blog/archives" class="mobile-nav-link">归档</a> <a href="/blog/about" class="mobile-nav-link">关于</a></nav><img class="back-to-top-btn" src="/blog/images/fly-to-top.png"><script>window.onload=function(){new Elevator({selector:".back-to-top-btn",element:document.querySelector(".back-to-top-btn"),duration:1e3})}</script><script type="text/x-mathjax-config">MathJax.Hub.Config({
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Sql查询 | 一叶轻舟渡万江</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Group By 和 Having, Where ,Order by语句的执行顺序：Where&gt; Group By&gt; Having&gt; Order by。首先where将最原始记录中不满足条件的记录删除(所以应该在where语句中尽量的将不符合条件的记录筛选掉，这样可以减少分组的次数)，然后通过Group By关键字后面指定的分组条件将筛选得到的视图进行分组，接着系统根据Havin">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Sql查询">
+<meta property="og:url" content="https://github.com/carl-zk/blog/2016/06/19/sql%E6%9F%A5%E8%AF%A2/index.html">
+<meta property="og:site_name" content="一叶轻舟渡万江">
+<meta property="og:description" content="Group By 和 Having, Where ,Order by语句的执行顺序：Where&gt; Group By&gt; Having&gt; Order by。首先where将最原始记录中不满足条件的记录删除(所以应该在where语句中尽量的将不符合条件的记录筛选掉，这样可以减少分组的次数)，然后通过Group By关键字后面指定的分组条件将筛选得到的视图进行分组，接着系统根据Havin">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2016-06-19T04:17:30.000Z">
+<meta property="article:modified_time" content="2019-02-16T01:58:27.798Z">
+<meta property="article:author" content="carl-zk">
+<meta property="article:tag" content="sql">
+<meta name="twitter:card" content="summary">
+  
+  
+    <link rel="icon" href="img/favicon2.ico">
+  
+  
+    
+  
+  
+<link rel="stylesheet" href="/blog/css/style.css">
+
+  
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    
+    <div id="header-inner" class="inner">
+      <nav id="sub-nav">
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://github.com/carl-zk/blog"></form>
+      </div>
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/blog/">首页</a>
+        
+          <a class="main-nav-link" href="/blog/archives">归档</a>
+        
+          <a class="main-nav-link" href="/blog/about">关于</a>
+        
+      </nav>
+      
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/blog/" id="logo">一叶轻舟渡万江</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/blog/" id="subtitle">泰山不拒细壤故能成其高 江海不择细流故能就其深</a>
+        </h2>
+      
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-sql查询" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2016/06/19/sql%E6%9F%A5%E8%AF%A2/" class="article-date">
+  <time datetime="2016-06-19T04:17:30.000Z" itemprop="datePublished">2016-06-19</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Sql查询
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <p><a href="http://tangwenchao86.iteye.com/blog/1107795" target="_blank" rel="noopener">Group By 和 Having, Where ,Order by语句的执行顺序：</a><br>Where&gt; Group By&gt; Having&gt; Order by。首先where将最原始记录中不满足条件的记录删除(所以应该在where语句中尽量的将不符合条件的记录筛选掉，这样可以减少分组的次数)，然后通过Group By关键字后面指定的分组条件将筛选得到的视图进行分组，接着系统根据Having关键字后面指定的筛选条件，将分组视图后不满足条件的记录筛选掉，然后按照Order By语句对视图进行排序，这样最终的结果就产生了。在这四个关键字中，只有在Order By语句中才可以使用最终视图的列名，如： 　　SELECT FruitName, ProductPlace, Price, ID AS IDE, Discount 　　FROM T_TEST_FRUITINFO 　　WHERE (ProductPlace = N’china’) 　　ORDER BY IDE 　　这里只有在ORDER BY语句中才可以使用IDE，其他条件语句中如果需要引用列名则只能使用ID，而不能使用IDE。 </p>
+<h1 id="删除重复数据"><a href="#删除重复数据" class="headerlink" title="删除重复数据"></a>删除重复数据</h1><blockquote>
+<p>Person表</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>id</th>
+<th align="center">name</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td align="center">a</td>
+</tr>
+<tr>
+<td>2</td>
+<td align="center">b</td>
+</tr>
+<tr>
+<td>3</td>
+<td align="center">a</td>
+</tr>
+</tbody></table>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SET SQL_SAFE_UPDATES&#x3D;0; #防止safe模式下where未指定disdinct column不能执行delete语句</span><br><span class="line">delete from Person where id not in (select minId from (select min(id) as minId FROM Person group by name) as T); #delete不允许表同时在select条件中,故as一个新表</span><br></pre></td></tr></table></figure>
+
+<h1 id="列出各个部门中工资高于本部门的平均"><a href="#列出各个部门中工资高于本部门的平均" class="headerlink" title="列出各个部门中工资高于本部门的平均"></a>列出各个部门中工资高于本部门的平均</h1><h1 id="工资的员工数和部门号，并按部门号排序"><a href="#工资的员工数和部门号，并按部门号排序" class="headerlink" title="工资的员工数和部门号，并按部门号排序"></a>工资的员工数和部门号，并按部门号排序</h1><p>department表结构: id, employee_id, salary;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select count(ta.employee_id), ta.id from summery.department ta right join (select avg(tb.salary) as avgs, tb.id as tbid from summery.department tb group by tb.id) as tc on ta.id&#x3D;tc.tbid and ta.salary &gt; tc.avgs group by ta.id desc;</span><br></pre></td></tr></table></figure>
+<p>思路: 先找出部门号和平均工资,然后join相同部门号并且工资&gt;平均值的行,group by id即可.</p>
+<h1 id="取每组的前N条数据"><a href="#取每组的前N条数据" class="headerlink" title="取每组的前N条数据"></a>取每组的前N条数据</h1><p>参考:<a href="http://huanghualiang.blog.51cto.com/6782683/1252630" target="_blank" rel="noopener">http://huanghualiang.blog.51cto.com/6782683/1252630</a></p>
+<p>分自连接和半连接:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">自连接:<span class="keyword">select</span> * <span class="keyword">from</span> t2 a <span class="keyword">where</span> <span class="number">3</span>&gt;(<span class="keyword">select</span> <span class="keyword">count</span>(*) <span class="keyword">from</span> t2 <span class="keyword">where</span> gid=a.gid <span class="keyword">and</span> col2&gt;a.col2) <span class="keyword">order</span> <span class="keyword">by</span> a.gid,a.col2 <span class="keyword">desc</span>;</span><br><span class="line">半连接:<span class="keyword">select</span> * <span class="keyword">from</span> t2 a <span class="keyword">where</span> <span class="keyword">exists</span>(<span class="keyword">select</span> <span class="keyword">count</span>(*) <span class="keyword">from</span> t2 b <span class="keyword">where</span> b.gid=a.gid <span class="keyword">and</span> a.col2&lt;b.col2 <span class="keyword">having</span>(<span class="keyword">count</span>(*))&lt;<span class="number">3</span>) <span class="keyword">order</span> <span class="keyword">by</span> a.gid,a.col2 <span class="keyword">desc</span></span><br></pre></td></tr></table></figure>
+<p><strong>这两种方法刚开始没懂,后来看懂了,才发现真是碉堡了.值得玩味.</strong></p>
+<blockquote>
+<p>原文中一处错误—&gt;<br>*N=1时：<br>自连接：降序排好后group by取每组最大的一条。<br>select * from (select * from t2 order by col2 desc)as a group by gid order by gid;</p>
+</blockquote>
+<p>group by 要将 select 之后全部的非聚合列都加进来,所以这条语句已经不能用了.</p>
+<p><a href="https://www.cnblogs.com/eflylab/archive/2007/06/25/794278.html" target="_blank" rel="noopener">左连接，右连接，全连接，内连接，交叉连接，自连接</a><br>左连接就是以左表为准，右连接就是以右表为准。select * from tbla, tblb:这里的,就是笛卡尔积。</p>
+<p>mysql面试题<br>学生表<br>create table student(<br>    id int primary key auto_increment,<br>    group_id int,<br>    name nvarchar(250),<br>    score numeric(4, 1)<br>);<br>兴趣小组表<br>create table study_group(<br>    id int primary key auto_increment,<br>    name nvarchar(250)<br>);<br>student<br>sutdentId groupId sutdentName score<br>1 1 Tom1 65<br>2 2 Tom2 60<br>3 3 Tom3 70<br>4 2 Tom4 80<br>5 1 Tom5 75<br>6 3 Tom6 85<br>7 3 Tom7 78<br>8 1 Tom8 97<br>9 2 Tom9 88<br>10 4 Aaa1 88<br>11 4 Aaa2 56<br>12 5 Aaa3 76<br>13 5 Aaa4 77<br>14 2 Aaa5 90<br>15 4 Ddd3 45<br>16 5 Ddd2 78<br>17 3 Ddd1 90<br>18 1 Eee3 0<br>19 3 Ggg1 0<br>20 4 Ttt1 0<br>21 2 Rrr2 0<br>Study_group<br>groupId groupName<br>1 音乐小组<br>2 绘画小组<br>3 体育小组<br>4 养生小组<br>5 环卫小组<br>6 没有参加小组</p>
+<p>可存在txt中导入mysql<br> 导入命令：<br> mysql&gt; load data infile ‘/home/lujing/student.txt’ into table student<br>    -&gt; fields terminated by’ ‘<br>    -&gt; lines terminated by’\n’ (windows中换行为\r\n)</p>
+<p>1、用一条sql查询出个小组成绩最优秀的学生，需要查询出小组名称，学生名称，成绩</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select tc.name,ta.name,ta.score from summery.student ta join summery.study_group tc on ta.group_id&#x3D;tc.id where (ta.score, ta.group_id) in (select max(tb.score) as mxs, tb.group_id as gid from summery.student tb group by tb.group_id);</span><br></pre></td></tr></table></figure>
+<p>思路:先找每组的最高分,然后(ta.score, ta.group_id)匹配.<br>优化:要对student的group_id加索引.</p>
+<p>​2、将所有没有参加的小组的学生的活动成绩更新为-1</p>
+<p>update summery.student set score=-1 where group_id=6;</p>
+<p>3、用一条sql语句查出所有学生参加兴趣小组的情况，需要查出学生名称，小组名称，如果学生没有参加小组，则小组名称返回“没有参加小组”</p>
+<p>select ta.name, tb.name from summery.student ta join summery.study_group tb on ta.group_id=tb.id;</p>
+<h1 id="union-和-union-all-的区别"><a href="#union-和-union-all-的区别" class="headerlink" title="union 和 union all 的区别"></a>union 和 union all 的区别</h1><p>这俩个没怎么用过,<a href="http://www.5idev.com/p-mysql_union.shtml" target="_blank" rel="noopener">http://www.5idev.com/p-mysql_union.shtml</a></p>
+<h1 id="选出2040-4080-80-100分数的学生人数"><a href="#选出2040-4080-80-100分数的学生人数" class="headerlink" title="选出2040,4080,80~100分数的学生人数"></a>选出20<del>40,40</del>80,80~100分数的学生人数</h1><p>case when 条件 then 行名 else 行名 end as 列名</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">case</span> <span class="keyword">when</span> score &gt; <span class="number">70</span> <span class="keyword">then</span> <span class="string">'&gt;70'</span> <span class="keyword">else</span> <span class="string">'≤70'</span> <span class="keyword">end</span> <span class="keyword">as</span> <span class="string">'范围'</span>, <span class="keyword">count</span>(score) <span class="keyword">as</span> <span class="string">'人数'</span> <span class="keyword">FROM</span> summery.student </span><br><span class="line"><span class="keyword">group</span> <span class="keyword">by</span> <span class="keyword">case</span> <span class="keyword">when</span> score&gt;<span class="number">70</span> <span class="keyword">then</span> <span class="string">'&gt;70'</span> <span class="keyword">else</span> <span class="string">'≤70'</span> <span class="keyword">end</span>;</span><br></pre></td></tr></table></figure>
+
+<h1 id="之前没想出来的sql"><a href="#之前没想出来的sql" class="headerlink" title="之前没想出来的sql"></a>之前没想出来的sql</h1><p>一个用户有多个保单，每个保单有一个机构号，保单有日期。<br>找出每个用户保单最多的那个机构，如果保单数目相同就取最近保单的那个机构。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> TRY</span><br><span class="line">(</span><br><span class="line">  user_id    <span class="built_in">INTEGER</span>,</span><br><span class="line">  stock_code <span class="built_in">INTEGER</span>,</span><br><span class="line">  bank_id    <span class="built_in">INTEGER</span>,</span><br><span class="line">  ts         <span class="built_in">TIMESTAMP</span>(<span class="number">0</span>)</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p>插入数据<a href="/blog/2016/06/19/sql%E6%9F%A5%E8%AF%A2/data.sql.txt">data</a><br>解决方案</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> *</span><br><span class="line">  <span class="keyword">FROM</span> (<span class="keyword">SELECT</span> USER_ID, BANK_ID, <span class="keyword">COUNT</span>(STOCK_CODE) CNT, <span class="keyword">MAX</span>(TS) TS</span><br><span class="line">          <span class="keyword">FROM</span> TRY</span><br><span class="line">         <span class="keyword">GROUP</span> <span class="keyword">BY</span> USER_ID, BANK_ID) A</span><br><span class="line"> <span class="keyword">WHERE</span> <span class="keyword">NOT</span> <span class="keyword">EXISTS</span></span><br><span class="line"> (<span class="keyword">SELECT</span> <span class="number">1</span></span><br><span class="line">          <span class="keyword">FROM</span> (<span class="keyword">SELECT</span> USER_ID, BANK_ID, <span class="keyword">COUNT</span>(STOCK_CODE) CNT, <span class="keyword">MAX</span>(TS) TS</span><br><span class="line">                  <span class="keyword">FROM</span> TRY</span><br><span class="line">                 <span class="keyword">GROUP</span> <span class="keyword">BY</span> USER_ID, BANK_ID) B</span><br><span class="line">         <span class="keyword">WHERE</span> A.USER_ID = B.USER_ID</span><br><span class="line">           <span class="keyword">AND</span> A.BANK_ID != B.BANK_ID</span><br><span class="line">           <span class="keyword">AND</span> (A.CNT &lt; B.CNT <span class="keyword">OR</span> (A.CNT = B.CNT <span class="keyword">AND</span> A.TS &lt; B.TS)))</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <!-- <a data-url="https://github.com/carl-zk/blog/2016/06/19/sql%E6%9F%A5%E8%AF%A2/" data-id="ck5lsdoz800582fps7p9rcr5e" class="article-share-link">分享</a> -->
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/sql/" rel="tag">sql</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+ 
+<script src="/blog/jquery/jquery.min.js"></script>
+
+  <div id="random_posts">
+    <h2>推荐文章</h2>
+    <div class="random_posts_ul">
+      <script>
+          var random_count =4
+          var site = {BASE_URI:'/blog/'};
+          function load_random_posts(obj) {
+              var arr=site.posts;
+              if (!obj) return;
+              // var count = $(obj).attr('data-count') || 6;
+              for (var i, tmp, n = arr.length; n; i = Math.floor(Math.random() * n), tmp = arr[--n], arr[n] = arr[i], arr[i] = tmp);
+              arr = arr.slice(0, random_count);
+              var html = '<ul>';
+            
+              for(var j=0;j<arr.length;j++){
+                var item=arr[j];
+                html += '<li><strong>' + 
+                item.date + ':&nbsp;&nbsp;<a href="' + (site.BASE_URI+item.uri) + '">' + 
+                (item.title || item.uri) + '</a></strong>';
+                if(item.excerpt){
+                  html +='<div class="post-excerpt">'+item.excerpt+'</div>';
+                }
+                html +='</li>';
+                
+              }
+              $(obj).html(html + '</ul>');
+          }
+          $('.random_posts_ul').each(function () {
+              var c = this;
+              if (!site.posts || !site.posts.length){
+                  $.getJSON(site.BASE_URI + 'js/posts.js',function(json){site.posts = json;load_random_posts(c)});
+              } 
+               else{
+                load_random_posts(c);
+              }
+          });
+      </script>
+    </div>
+  </div>
+
+    
+<nav id="article-nav">
+  
+    <a href="/blog/2016/06/20/Rightmost-Digit/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          Rightmost Digit
+        
+      </div>
+    </a>
+  
+  
+    <a href="/blog/2016/06/18/%E5%93%88%E5%A4%AB%E6%9B%BC%E7%BC%96%E7%A0%81/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">哈夫曼编码</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+ 
+     
+  <div class="comments" id="comments">
+    
+     
+       
+       
+      
+      
+  </div>
+ 
+  
+
+</section>
+           
+    <aside id="sidebar">
+  
+    
+
+  
+    
+    <div class="widget-wrap">
+    
+      <div class="widget" id="toc-widget-fixed">
+      
+        <strong class="toc-title">文章目录</strong>
+        <div class="toc-widget-list">
+              <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#删除重复数据"><span class="toc-number">1.</span> <span class="toc-text">删除重复数据</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#列出各个部门中工资高于本部门的平均"><span class="toc-number">2.</span> <span class="toc-text">列出各个部门中工资高于本部门的平均</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#工资的员工数和部门号，并按部门号排序"><span class="toc-number">3.</span> <span class="toc-text">工资的员工数和部门号，并按部门号排序</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#取每组的前N条数据"><span class="toc-number">4.</span> <span class="toc-text">取每组的前N条数据</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#union-和-union-all-的区别"><span class="toc-number">5.</span> <span class="toc-text">union 和 union all 的区别</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#选出2040-4080-80-100分数的学生人数"><span class="toc-number">6.</span> <span class="toc-text">选出2040,4080,80~100分数的学生人数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#之前没想出来的sql"><span class="toc-number">7.</span> <span class="toc-text">之前没想出来的sql</span></a></li></ol>
+          </div>
+      </div>
+    </div>
+
+  
+    
+
+  
+    
+  
+    
+  
+    
+
+  
+    
+  
+    <!--微信公众号二维码-->
+
+
+  
+</aside>
+
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-left">
+      &copy; 2016 - 2020 carl-zk<!--&nbsp;|&nbsp;
+      主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a> -->
+    </div>
+  
+     <div id="footer-right">
+      <!--联系方式&nbsp;|&nbsp; -->
+      富强民主文明和谐自由平等公正法治爱国敬业诚信友善
+    </div>
+  </div>
+</footer>
+ 
+<script src="/blog/jquery/jquery.min.js"></script>
+
+ <script type="text/javascript" color="168, 168, 168" opacity='0.6' zIndex="-2" count="20" src="https://cdnjs.cloudflare.com/ajax/libs/canvas-nest.js/1.0.1/canvas-nest.min.js"></script>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/blog/" class="mobile-nav-link">首页</a>
+  
+    <a href="/blog/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/blog/about" class="mobile-nav-link">关于</a>
+  
+</nav>
+    <img class="back-to-top-btn" src="/blog/images/fly-to-top.png"/>
+<script>
+// Elevator script included on the page, already.
+window.onload = function() {
+  var elevator = new Elevator({
+    selector:'.back-to-top-btn',
+    element: document.querySelector('.back-to-top-btn'),
+    duration: 1000 // milliseconds
+  });
+}
+</script>
+      
+
+  
+
+  
+
+
+
+
+
+
+
+<!-- author:forvoid begin -->
+<!-- author:forvoid begin -->
+
+<!-- author:forvoid end -->
+
+<!-- author:forvoid end -->
+
+
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
         tex2jax: {
           inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
           processEscapes: true,
           skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
         }
-      })</script><script type="text/x-mathjax-config">MathJax.Hub.Queue(function() {
+      })
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
         var all = MathJax.Hub.getAllJax(), i;
         for (i=0; i < all.length; i += 1) {
           all[i].SourceElement().parentNode.className += ' has-jax';
         }
-      })</script><script src="https://cdn.rawgit.com/mathjax/MathJax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><script src="/blog/js/is.js"></script><link rel="stylesheet" href="/blog/fancybox/jquery.fancybox.css"><script src="/blog/fancybox/jquery.fancybox.pack.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/7.1.2/mermaid.min.js"></script><script>window.mermaid&&mermaid.initialize({theme:"forest"})</script><script src="/blog/js/script.js"></script><script src="/blog/js/elevator.js"></script></div></body>
+      })
+    </script>
+    <script type="text/javascript" src="https://cdn.rawgit.com/mathjax/MathJax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+ 
+<script src="/blog/js/is.js"></script>
+
+
+
+  
+<link rel="stylesheet" href="/blog/fancybox/jquery.fancybox.css">
+
+  
+<script src="/blog/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/mermaid/7.1.2/mermaid.min.js'></script>
+  <!-- script src="/blog/js/mermaid.min.js" -->
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({theme: 'forest'});
+    }
+  </script>
+
+
+<script src="/blog/js/script.js"></script>
+
+
+<script src="/blog/js/elevator.js"></script>
+
+  </div>
+</body>
+</html>
