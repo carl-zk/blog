@@ -125,3 +125,5 @@ minify:
       - '*.svg'
       - '*.eot'
       - '*.json'
+math:
+  engine: 'mathjax'
