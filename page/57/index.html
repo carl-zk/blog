@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
   
   <title>一叶轻舟渡万江</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -24,10 +24,10 @@
 
   
 
-<meta name="generator" content="Hexo 4.2.0"></head>
+<meta name="generator" content="Hexo 4.2.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
 
 <body>
-  <div id="container">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="container">
     <div id="wrap">
       <header id="header">
   <div id="banner"></div>
@@ -68,10 +68,10 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-存储过程分页" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-使用sql-developer调试" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2017/09/16/%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B%E5%88%86%E9%A1%B5/" class="article-date">
-  <time datetime="2017-09-16T14:08:08.000Z" itemprop="datePublished">2017-09-16</time>
+    <a href="/blog/2017/09/17/%E4%BD%BF%E7%94%A8sql-developer%E8%B0%83%E8%AF%95/" class="article-date">
+  <time datetime="2017-09-17T02:57:28.000Z" itemprop="datePublished">2017-09-17</time>
 </a>
     
   </div>
@@ -82,7 +82,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2017/09/16/%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B%E5%88%86%E9%A1%B5/">存储过程分页</a>
+      <a class="article-title" href="/blog/2017/09/17/%E4%BD%BF%E7%94%A8sql-developer%E8%B0%83%E8%AF%95/">使用Sql Developer调试</a>
     </h1>
   
 
@@ -92,41 +92,18 @@
       
         <!-- Table of Contents -->
         
-        <p><a href="http://xurichusheng.iteye.com/blog/1963741" target="_blank" rel="noopener">参考</a></p>
-<h3 id="创建分页存储过程"><a href="#创建分页存储过程" class="headerlink" title="创建分页存储过程"></a>创建分页存储过程</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">OR</span> <span class="keyword">REPLACE</span> <span class="keyword">PROCEDURE</span> split_page (</span><br><span class="line">    qsql         <span class="keyword">IN</span> <span class="built_in">VARCHAR2</span>,</span><br><span class="line">    page_index   <span class="keyword">IN</span> <span class="built_in">NUMBER</span>,</span><br><span class="line">    page_size    <span class="keyword">IN</span> <span class="built_in">NUMBER</span>,</span><br><span class="line">    total        <span class="keyword">OUT</span> <span class="built_in">NUMBER</span>,</span><br><span class="line">    res          <span class="keyword">OUT</span> SYS_REFCURSOR</span><br><span class="line">)</span><br><span class="line">    <span class="keyword">AS</span></span><br><span class="line">    qurry <span class="built_in">varchar2</span>(<span class="number">2000</span>);</span><br><span class="line">    las NUMBER := page_index * page_size;</span><br><span class="line">    fir NUMBER := las - page_size;</span><br><span class="line"><span class="keyword">BEGIN</span></span><br><span class="line">    qurry := <span class="string">'select max(rownum) from ( '</span> || qsql || <span class="string">' )'</span>;</span><br><span class="line">    <span class="keyword">EXECUTE</span> <span class="keyword">IMMEDIATE</span> qurry <span class="keyword">INTO</span> total;</span><br><span class="line">    qurry := '<span class="keyword">select</span> B.* <span class="keyword">from</span> (<span class="keyword">select</span> A.*, <span class="keyword">rownum</span> rownumber <span class="keyword">from</span> (<span class="string">' || qsql || '</span>) A <span class="keyword">where</span> <span class="keyword">rownum</span> &lt;=<span class="string">' || las || '</span>) B <span class="keyword">where</span> rownumber &gt; <span class="string">' || fir;</span></span><br><span class="line"><span class="string">    OPEN res FOR qurry;</span></span><br><span class="line"><span class="string">END;</span></span><br></pre></td></tr></table></figure>
-<p>qsql: 查询语句<br>page_index: 查询第几页<br>page_size: 每页大小<br>total: 总条数<br>res: 结果集游标</p>
-<p><strong>注意：qsql结果集中列名不能与rownum别名<code>rownumber</code>重复</strong></p>
-<h3 id="java-调用"><a href="#java-调用" class="headerlink" title="java 调用"></a>java 调用</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">db.dirver&#x3D;oracle.jdbc.driver.OracleDriver</span><br><span class="line">db.url&#x3D;jdbc:oracle:thin:@192.168.1.11:1521:xe</span><br><span class="line">db.user&#x3D;hr</span><br><span class="line">db.password&#x3D;hr</span><br></pre></td></tr></table></figure>
-
-<pre><code class="java">Connection conn = <span class="keyword">null</span>;
-CallableStatement cstmt = <span class="keyword">null</span>;
-ResultSet res = <span class="keyword">null</span>;
-<span class="keyword">try</span> {
-    conn = DBUtil.getConnection();
-    cstmt = conn.prepareCall(<span class="string">"{call split_page(?,?,?,?,?)}"</span>);
-    cstmt.setString(<span class="number">1</span>, <span class="string">"select * from student order by age asc"</span>);
-    cstmt.setInt(<span class="number">2</span>, <span class="number">2</span>);
-    cstmt.setInt(<span class="number">3</span>, <span class="number">2</span>);
-    cstmt.registerOutParameter(<span class="number">4</span>, OracleTypes.INTEGER);
-    cstmt.registerOutParameter(<span class="number">5</span>, OracleTypes.CURSOR);
-    cstmt.execute();
-    System.out.println(cstmt.getObject(<span class="number">4</span>));
-    res = (ResultSet) cstmt.getObject(<span class="number">5</span>);
-    <span class="keyword">while</span> (res.next()) {
-        System.out.println(res.getString(<span class="string">"name"</span>));
-    }
-
-} <span class="keyword">catch</span> (Exception e) {
-    e.printStackTrace();
-} <span class="keyword">finally</span> {
-    DBUtil.closeAll(res, cstmt, conn);
-}</code></pre>
-<p>rownum 和 group by 的关系，当group by 中存在非主键，则oracle会先给列加rownum然后再group by.<br>如果主键类型是char、varchar2而非int,number等,则先rownum再group by.</p>
-
+        <p><a href="http://www.oracle.com/technetwork/cn/tutorials/plsql-debug-088880-zhs.html#p" target="_blank" rel="noopener">参考</a></p>
+<h4 id="前提条件"><a href="#前提条件" class="headerlink" title="前提条件"></a>前提条件</h4><p>1.解锁hr用户</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">USER</span> hr <span class="keyword">UNLOCK</span> <span class="keyword">ACCOUNT</span>; <span class="comment">-- or alter user xx account unlock</span></span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">USER</span> hr <span class="keyword">IDENTIFIED</span> <span class="keyword">BY</span> hr;</span><br></pre></td></tr></table></figure>
+<p>2.授予debug权限</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">GRANT</span> debug <span class="keyword">any</span> <span class="keyword">procedure</span>, debug <span class="keyword">connect</span> <span class="keyword">session</span> <span class="keyword">TO</span> hr;</span><br></pre></td></tr></table></figure>
+<h4 id="调试存储过程"><a href="#调试存储过程" class="headerlink" title="调试存储过程"></a>调试存储过程</h4><p>1.单击一个存储过程;<br>2.右键选择<code>compile for debug</code><br>  此时左侧该存储过程会出现一个绿色的小虫。<br>3.单击行首设置断点<br>4.单击红色<code>debug</code>按钮<br>5.在<code>Parameters/Input Value</code>中填入<code>IN</code>的参数，<code>OUT</code>可以不管<br>6.单击<code>OK</code></p>
+<h4 id="truncate等待锁"><a href="#truncate等待锁" class="headerlink" title="truncate等待锁"></a>truncate等待锁</h4><p>默认情况下truncate没有获取锁会立即报错，需要设置DDL_LOCK_TIMEOUT，默认0，即NOWAIT，最大1000000（秒），大约11.5天。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> parameter ddl_lock_time;</span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">session</span> <span class="keyword">set</span> ddl_lock_timeout=<span class="number">5</span>;</span><br></pre></td></tr></table></figure>
       
     </div>
     <footer class="article-footer">
-      <!-- <a data-url="https://github.com/carl-zk/blog/2017/09/16/%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B%E5%88%86%E9%A1%B5/" data-id="ck5lsdp05007w2fpshky7b1lc" class="article-share-link">分享</a> -->
+      <!-- <a data-url="https://github.com/carl-zk/blog/2017/09/17/%E4%BD%BF%E7%94%A8sql-developer%E8%B0%83%E8%AF%95/" data-id="ck5lsdozl006d2fps08ok8zzi" class="article-share-link">分享</a> -->
       
       
       
@@ -143,7 +120,7 @@ ResultSet res = <span class="keyword">null</span>;
 
 
   <nav id="page-nav">
-    <a class="extend prev" rel="prev" href="/blog/page/56/">&lt;&lt;上一页</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/55/">55</a><a class="page-number" href="/blog/page/56/">56</a><span class="page-number current">57</span><a class="page-number" href="/blog/page/58/">58</a><a class="page-number" href="/blog/page/59/">59</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/177/">177</a><a class="extend next" rel="next" href="/blog/page/58/">下一页&gt;&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/56/">&lt;&lt;上一页</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/55/">55</a><a class="page-number" href="/blog/page/56/">56</a><span class="page-number current">57</span><a class="page-number" href="/blog/page/58/">58</a><a class="page-number" href="/blog/page/59/">59</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/178/">178</a><a class="extend next" rel="next" href="/blog/page/58/">下一页&gt;&gt;</a>
   </nav>
 
 </section>
@@ -167,6 +144,10 @@ ResultSet res = <span class="keyword">null</span>;
       <ul>
         
           <li>
+            <a href="/blog/2020/02/28/Segment-Tree/">Segment Tree</a>
+          </li>
+        
+          <li>
             <a href="/blog/2020/01/19/%E5%88%B7%E9%A2%98%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%9C%A8%E4%B8%8D%E5%90%8C%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84%E8%A1%A8%E7%A4%BA/">刷题常用数据结构在不同语言中的表示</a>
           </li>
         
@@ -180,10 +161,6 @@ ResultSet res = <span class="keyword">null</span>;
         
           <li>
             <a href="/blog/2019/04/21/Jenkins-Starter/">Jenkins Starter</a>
-          </li>
-        
-          <li>
-            <a href="/blog/2019/04/04/MacBook-%E7%A3%81%E7%9B%98%E6%B8%85%E7%90%86/">MacBook 磁盘清理</a>
           </li>
         
       </ul>
@@ -312,6 +289,23 @@ window.onload = function() {
 
 <script src="/blog/js/elevator.js"></script>
 
-  </div>
+  </div><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
 </body>
 </html>

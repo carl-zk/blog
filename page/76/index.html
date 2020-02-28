@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
   
   <title>一叶轻舟渡万江</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -24,10 +24,10 @@
 
   
 
-<meta name="generator" content="Hexo 4.2.0"></head>
+<meta name="generator" content="Hexo 4.2.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
 
 <body>
-  <div id="container">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="container">
     <div id="wrap">
       <header id="header">
   <div id="banner"></div>
@@ -68,10 +68,10 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-debian" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-linux配置jdk" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2017/05/06/debian/" class="article-date">
-  <time datetime="2017-05-06T10:16:09.000Z" itemprop="datePublished">2017-05-06</time>
+    <a href="/blog/2017/05/06/linux%E9%85%8D%E7%BD%AEjdk/" class="article-date">
+  <time datetime="2017-05-06T13:58:38.000Z" itemprop="datePublished">2017-05-06</time>
 </a>
     
   <div class="article-category">
@@ -86,7 +86,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2017/05/06/debian/">Debian</a>
+      <a class="article-title" href="/blog/2017/05/06/linux%E9%85%8D%E7%BD%AEjdk/">Linux配置jdk</a>
     </h1>
   
 
@@ -96,25 +96,16 @@
       
         <!-- Table of Contents -->
         
-        <p>最近看了篇关于吐槽ubuntu放弃unity转用gnome的文章，作者是deepin桌面系统的开发者。忍不住就去deepin的官网下了下装在虚机里试了试，结果样式全都是模仿的mac的。<br>作为一个linux桌面开发者，他的情怀我可以理解，不过我没打算用deepin系统，虽然样子很酷，毕竟太像mac的linux让我感觉不舒服。另外还有个顾虑，不方便说。<br>我想，既然mac的小托盘这么好，不如也在我debian8里面装一个。果然评论里有人说装个dash-to-doc和topicons就跟mac差不多了。还等啥，google一下装起来。</p>
-<p><strong>1.检查gnome-shell版本</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ gnome-shell --version</span><br></pre></td></tr></table></figure>
-<p>GNOME Shell 3.14.4</p>
-<p><strong>2.安装chrome浏览器插件</strong><br>GNOME Shell integration</p>
-<p><strong>3.点击插件进入网页</strong><br><a href="https://extensions.gnome.org/" target="_blank" rel="noopener">https://extensions.gnome.org/</a></p>
-<p><strong>4.搜索dash-to-dock，topicons</strong><br>根据shell版本选择对应的下载安装即可。</p>
-<p>我找到的是这俩<br><a href="https://github.com/micheleg/dash-to-dock/tree/gnome-3.14">dash-to-dock</a><br><a href="https://github.com/wincinderith/topicons">topicons</a></p>
-<p>安装过程很简单，都是<br>下载xxx.zip<br>$ unzip xxx.zip<br>$ cd xxx/<br>$ make<br>$ make install</p>
-<p>目录 <code>~/.local/share/gnome-shell/extensions</code> 看看有没有你安装的插件</p>
-<p>Alt+F2 r 回车</p>
-<p>$ gnome-shell-extension-prefs</p>
-<p>找到对应的插件把开关置成on</p>
-<p>体验：<br>Dash To Dock 这个插件还是挺好的，TopIcons插件好多应用就没有icon，唉。</p>
+        <p>已经有一种习惯，每次配置jdk都会翻自己以前的博客，因为每次只要一百度，肯定会出来很多乱七八糟的东西，而且google出来的也不准确。互联网就是因为坏的东西太多，一一甄别太耗时，还是自己备份的最靠谱。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># java jdk 1u8</span><br><span class="line">export JAVA_HOME&#x3D;&#x2F;usr&#x2F;lib&#x2F;jdk</span><br><span class="line">export JRE_HOME&#x3D;$&#123;JAVA_HOME&#125;&#x2F;jre </span><br><span class="line">export CLASSPATH&#x3D;.:$&#123;JAVA_HOME&#125;&#x2F;lib:$&#123;JRE_HOME&#125;&#x2F;lib</span><br><span class="line">export PATH&#x3D;$&#123;JAVA_HOME&#125;&#x2F;bin:$PATH</span><br></pre></td></tr></table></figure>
 
+<p>华丽丽的隐身分割线</p>
+<p>IDEA可以在terminal中直接’idea’启动，但是点击图标却报JDK not found。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ locate idea.sh</span><br><span class="line">$ vi &#x2F;path&#x2F;to&#x2F;idea.sh</span><br><span class="line"></span><br><span class="line">在第2行添加</span><br><span class="line">export IDEA_JDK&#x3D;&#x2F;path&#x2F;to&#x2F;jdk</span><br></pre></td></tr></table></figure>
       
     </div>
     <footer class="article-footer">
-      <!-- <a data-url="https://github.com/carl-zk/blog/2017/05/06/debian/" data-id="ck5lsdoyr003t2fps1jtt4vxq" class="article-share-link">分享</a> -->
+      <!-- <a data-url="https://github.com/carl-zk/blog/2017/05/06/linux%E9%85%8D%E7%BD%AEjdk/" data-id="ck5lsdoyz004g2fps081ebb0m" class="article-share-link">分享</a> -->
       
       
       
@@ -129,7 +120,7 @@
 
 
   <nav id="page-nav">
-    <a class="extend prev" rel="prev" href="/blog/page/75/">&lt;&lt;上一页</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/74/">74</a><a class="page-number" href="/blog/page/75/">75</a><span class="page-number current">76</span><a class="page-number" href="/blog/page/77/">77</a><a class="page-number" href="/blog/page/78/">78</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/177/">177</a><a class="extend next" rel="next" href="/blog/page/77/">下一页&gt;&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/75/">&lt;&lt;上一页</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/74/">74</a><a class="page-number" href="/blog/page/75/">75</a><span class="page-number current">76</span><a class="page-number" href="/blog/page/77/">77</a><a class="page-number" href="/blog/page/78/">78</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/178/">178</a><a class="extend next" rel="next" href="/blog/page/77/">下一页&gt;&gt;</a>
   </nav>
 
 </section>
@@ -153,6 +144,10 @@
       <ul>
         
           <li>
+            <a href="/blog/2020/02/28/Segment-Tree/">Segment Tree</a>
+          </li>
+        
+          <li>
             <a href="/blog/2020/01/19/%E5%88%B7%E9%A2%98%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%9C%A8%E4%B8%8D%E5%90%8C%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84%E8%A1%A8%E7%A4%BA/">刷题常用数据结构在不同语言中的表示</a>
           </li>
         
@@ -166,10 +161,6 @@
         
           <li>
             <a href="/blog/2019/04/21/Jenkins-Starter/">Jenkins Starter</a>
-          </li>
-        
-          <li>
-            <a href="/blog/2019/04/04/MacBook-%E7%A3%81%E7%9B%98%E6%B8%85%E7%90%86/">MacBook 磁盘清理</a>
           </li>
         
       </ul>
@@ -298,6 +289,23 @@ window.onload = function() {
 
 <script src="/blog/js/elevator.js"></script>
 
-  </div>
+  </div><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
 </body>
 </html>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
   
   <title>一叶轻舟渡万江</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -24,10 +24,10 @@
 
   
 
-<meta name="generator" content="Hexo 4.2.0"></head>
+<meta name="generator" content="Hexo 4.2.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
 
 <body>
-  <div id="container">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="container">
     <div id="wrap">
       <header id="header">
   <div id="banner"></div>
@@ -68,10 +68,10 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-第3章-类型、值和变量" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-第9章-类和模块" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2017/12/30/%E7%AC%AC3%E7%AB%A0-%E7%B1%BB%E5%9E%8B%E3%80%81%E5%80%BC%E5%92%8C%E5%8F%98%E9%87%8F/" class="article-date">
-  <time datetime="2017-12-30T05:34:06.000Z" itemprop="datePublished">2017-12-30</time>
+    <a href="/blog/2018/01/08/%E7%AC%AC9%E7%AB%A0-%E7%B1%BB%E5%92%8C%E6%A8%A1%E5%9D%97/" class="article-date">
+  <time datetime="2018-01-08T14:08:04.000Z" itemprop="datePublished">2018-01-08</time>
 </a>
     
   </div>
@@ -82,7 +82,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2017/12/30/%E7%AC%AC3%E7%AB%A0-%E7%B1%BB%E5%9E%8B%E3%80%81%E5%80%BC%E5%92%8C%E5%8F%98%E9%87%8F/">第3章 类型、值和变量</a>
+      <a class="article-title" href="/blog/2018/01/08/%E7%AC%AC9%E7%AB%A0-%E7%B1%BB%E5%92%8C%E6%A8%A1%E5%9D%97/">第9章 类和模块</a>
     </h1>
   
 
@@ -92,58 +92,26 @@
       
         <!-- Table of Contents -->
         
-        <h2 id="数字"><a href="#数字" class="headerlink" title="数字"></a>数字</h2><p>JavaScript不区分整数值和浮点数值，<br>浮点数的范围是[-5*10^-324, 1.7976931348623157*10^308]，<br>整数范围是[-2^53, 2^53]<br>需要注意的是，数字的索引值是基于32位整数的！！！</p>
-<h3 id="整型直接量"><a href="#整型直接量" class="headerlink" title="整型直接量"></a>整型直接量</h3><p>0<br>3<br>100000000<br>还可以是十六进制：<br>0xff    // 255<br>0XCAF893</p>
-<h3 id="浮点型直接量"><a href="#浮点型直接量" class="headerlink" title="浮点型直接量"></a>浮点型直接量</h3><p>3.14<br>.33333<br>6.02e23     // 6.02*10^23</p>
-<h3 id="算数运算"><a href="#算数运算" class="headerlink" title="算数运算"></a>算数运算</h3><p>+、-、*、/、%<br>另外，<br>Math.pow(2, 12)     // 2^12<br>Maht.round(.6)    // 四舍五入<br>Math.ceil(.6)    // 向上取整<br>Math.floor(.6)    // 向下取整</p>
-<p>JavaScript在溢出、下溢或除零时不会报错！！！<br>1/0        // Infinity, Number.POSITIVE_INFINITY<br>0/0        // NaN, Number.NaN, not a number<br>Number.MIN_VALUE-1        // 发生下溢，0</p>
-<h3 id="二进制浮点数和四舍五入错误"><a href="#二进制浮点数和四舍五入错误" class="headerlink" title="二进制浮点数和四舍五入错误"></a>二进制浮点数和四舍五入错误</h3><p>由于浮点数的表示方法，决定了它可以精确的表示分数：1/2,1/4,1/16;但是不能精确表示1/10,1/100；</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> x = <span class="number">.3</span> - <span class="number">.2</span>;</span><br><span class="line"><span class="keyword">var</span> y = <span class="number">.2</span> - <span class="number">.1</span>;</span><br><span class="line">x == y 		<span class="comment">// false</span></span><br><span class="line">x == <span class="number">.1</span>		<span class="comment">// false</span></span><br><span class="line">y == <span class="number">.1</span> 	<span class="comment">// true</span></span><br></pre></td></tr></table></figure>
-<p>这种情况同样适用于python、java、c++。</p>
-<h3 id="日期和时间"><a href="#日期和时间" class="headerlink" title="日期和时间"></a>日期和时间</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> now = <span class="keyword">new</span> <span class="built_in">Date</span>();</span><br><span class="line"><span class="keyword">var</span> later = <span class="keyword">new</span> <span class="built_in">Date</span>(<span class="number">2019</span>, <span class="number">1</span>, <span class="number">12</span>, <span class="number">22</span>, <span class="number">30</span>, <span class="number">0</span>);</span><br><span class="line"><span class="keyword">var</span> last = <span class="keyword">new</span> <span class="built_in">Date</span>(<span class="number">2017</span>, <span class="number">12</span>, <span class="number">20</span>);</span><br><span class="line"><span class="keyword">var</span> elapsed = now - then;	<span class="comment">// 间隔的毫秒数</span></span><br><span class="line">later.getFullYear()</span><br><span class="line">later.getMonth()</span><br><span class="line">later.getDate()</span><br><span class="line">later.getDay() 		<span class="comment">// 周几</span></span><br></pre></td></tr></table></figure>
-<h2 id="文本"><a href="#文本" class="headerlink" title="文本"></a>文本</h2><p>JavaScript采用UTF-16编码的Unicode字符集，没有像Java一样的Char类型，单个字符即是长度为1的字符串。</p>
-<h3 id="转义字符"><a href="#转义字符" class="headerlink" title="转义字符"></a>转义字符</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">\n 换行符</span><br><span class="line">\r 回车符</span><br><span class="line">\<span class="string">'</span></span><br></pre></td></tr></table></figure>
-<h3 id="字符串的使用"><a href="#字符串的使用" class="headerlink" title="字符串的使用"></a>字符串的使用</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> s = <span class="string">"hello, "</span> + <span class="string">"world"</span>;</span><br><span class="line">s.length</span><br><span class="line">s.charAt(<span class="number">2</span>)</span><br><span class="line">s.substring(<span class="number">0</span>, <span class="number">2</span>)	<span class="comment">// he</span></span><br><span class="line">s.slice(<span class="number">1</span>, <span class="number">2</span>)	<span class="comment">// e</span></span><br><span class="line">s.indexOf(<span class="string">'l'</span>)	<span class="comment">// 2</span></span><br><span class="line">s.lastIndexOf(<span class="string">'l'</span>)</span><br><span class="line">s.indexOf(<span class="string">'l'</span>, <span class="number">3</span>)	<span class="comment">// 3，在位置3之后首次出现的</span></span><br><span class="line">s.split(<span class="string">','</span>)</span><br><span class="line">s.replace(<span class="string">'h'</span>, <span class="string">'H'</span>)</span><br><span class="line">s.toUpperCase()</span><br></pre></td></tr></table></figure>
-<p>注意：replace()和toUpperCase()返回一个新的字符串，原字符串并未改变！<br><a href="https://www.w3schools.com/jsref/jsref_obj_string.asp" target="_blank" rel="noopener">String Reference</a></p>
-<h3 id="模式匹配"><a href="#模式匹配" class="headerlink" title="模式匹配"></a>模式匹配</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> text = <span class="string">'testing: 1, 2, 3'</span>;</span><br><span class="line"><span class="keyword">var</span> p = <span class="regexp">/\d+/g</span>;</span><br><span class="line">p.test(text)	<span class="comment">//true</span></span><br><span class="line">text.search(p)	<span class="comment">//9</span></span><br><span class="line">text.match(p)	<span class="comment">//['1', '2', '3']</span></span><br><span class="line">text.replace(p, <span class="string">'#'</span>)	<span class="comment">//'testing: #, #, #'</span></span><br></pre></td></tr></table></figure>
-<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions" target="_blank" rel="noopener">Regular Expression</a></p>
-<h2 id="布尔值"><a href="#布尔值" class="headerlink" title="布尔值"></a>布尔值</h2><p>下面这些值会被转换成false：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="literal">undefined</span></span><br><span class="line"><span class="literal">null</span></span><br><span class="line"><span class="number">0</span></span><br><span class="line"><span class="number">-0</span></span><br><span class="line"><span class="literal">NaN</span></span><br><span class="line"><span class="string">""</span></span><br></pre></td></tr></table></figure>
-<h2 id="全局对象"><a href="#全局对象" class="headerlink" title="全局对象"></a>全局对象</h2><table>
-<thead>
-<tr>
-<th align="left">类别</th>
-<th align="left">举例</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">全局属性</td>
-<td align="left">undefined,Infimity,NaN</td>
-</tr>
-<tr>
-<td align="left">全局函数</td>
-<td align="left">isNaN(),parseInt(),eval()</td>
-</tr>
-<tr>
-<td align="left">构造函数</td>
-<td align="left">Date(),RegExp(),String(),Object(),Array()</td>
-</tr>
-<tr>
-<td align="left">全局对象</td>
-<td align="left">Math,JSON</td>
-</tr>
-</tbody></table>
-<h2 id="包装对象"><a href="#包装对象" class="headerlink" title="包装对象"></a>包装对象</h2><p>对象是值和方法的集合，通过<strong>.</strong>来访问。如下：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> s = <span class="string">'hello'</span>;</span><br><span class="line">s.length</span><br></pre></td></tr></table></figure>
-<p>s是一个字符串类型(typeof查看),当用<strong>.</strong>来访问length或其它方法时，JavaScript就会通过new String(‘hello’)把s转换成了一个对象，访问完之后就被销毁。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> s = <span class="string">'test'</span>;</span><br><span class="line">s.len = <span class="number">4</span>;</span><br><span class="line"><span class="keyword">var</span> t = s.len;</span><br></pre></td></tr></table></figure>
-<p>运行结果是t为undefined，并不是4；<br>存取数字、字符串、布尔值的属性创建的临时对象被称为包装对象。包装对象只是数字、字符串和布尔值的具体实现，不必在意，只要知道它与对象的区别即可。</p>
-<h2 id="不可变的原始值和可变的对象引用"><a href="#不可变的原始值和可变的对象引用" class="headerlink" title="不可变的原始值和可变的对象引用"></a>不可变的原始值和可变的对象引用</h2><p>与Java完全一致，数字、字符串和布尔值本身不可改变，对象指向同一个实例才是相等。</p>
+        <h2 id="类和构造函数"><a href="#类和构造函数" class="headerlink" title="类和构造函数"></a>类和构造函数</h2><p>构造函数的 prototype 属性被用作新对象的原型。这就意味着通过同一个构造函数创建的所有对象都继承自同一个对象。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params">name, age</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.name = name;</span><br><span class="line">    <span class="keyword">this</span>.age = age;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Person.prototype = &#123;</span><br><span class="line">    speak: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'hello world'</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> xiaoming = <span class="keyword">new</span> Person(<span class="string">'小明'</span>, <span class="number">18</span>);</span><br><span class="line"></span><br><span class="line">xiaoming.speak();</span><br></pre></td></tr></table></figure>
+
+<h3 id="构造函数和类的标识"><a href="#构造函数和类的标识" class="headerlink" title="构造函数和类的标识"></a>构造函数和类的标识</h3><p><strong>原型对象是类的唯一标识</strong>：当且仅当两个对象继承自同一个原型对象时，它们才是属于同一个类的实例。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> base = &#123;</span><br><span class="line">    id: <span class="number">0</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Cat</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.name = <span class="string">'cat'</span>;</span><br><span class="line">&#125;</span><br><span class="line">Cat.prototype = base;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Dog</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.age = <span class="number">18</span>;</span><br><span class="line">&#125;</span><br><span class="line">Dog.prototype = base;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> c = <span class="keyword">new</span> Cat();</span><br><span class="line"><span class="keyword">var</span> d = <span class="keyword">new</span> Dog;</span><br><span class="line"><span class="built_in">console</span>.log(c <span class="keyword">instanceof</span> Dog);</span><br></pre></td></tr></table></figure>
+<p>结果为 true</p>
+<h3 id="constructor属性"><a href="#constructor属性" class="headerlink" title="constructor属性"></a>constructor属性</h3><p>任何JavaScript函数都可以作为构造函数，并且调用构造函数需要用到一个prototype属性。因此每个函数都自动拥有一个prototype属性。这个属性的值是一个对象，这个对象包含唯一一个不可枚举属性constructor。constructor的值是一个函数对象。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> F = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;;	<span class="comment">// 这是一个函数对象</span></span><br><span class="line"><span class="keyword">var</span> c = F.prototype.constructor;</span><br><span class="line">c === F</span><br></pre></td></tr></table></figure>
+<p>结果为 true</p>
+<p>上例中由于Person将原型指向一个新对象代替了默认的Person.prototype对象，这个新对象不含有contructor属性，所以Person的实例也不含有constructor属性。可以通过补救来修正它：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Person.prototype = &#123;</span><br><span class="line">    <span class="keyword">constructor</span>: Person,</span><br><span class="line">    speak: function() &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'hello world'</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>显示的设置构造函数反向引用，或者：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Person.prototype.speak = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'hello world'</span>);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>为原型对象添加方法。<br>在实践中，推荐使用后者。</p>
+<h2 id="Java式的类继承"><a href="#Java式的类继承" class="headerlink" title="Java式的类继承"></a>Java式的类继承</h2><p>P207</p>
 
       
     </div>
     <footer class="article-footer">
-      <!-- <a data-url="https://github.com/carl-zk/blog/2017/12/30/%E7%AC%AC3%E7%AB%A0-%E7%B1%BB%E5%9E%8B%E3%80%81%E5%80%BC%E5%92%8C%E5%8F%98%E9%87%8F/" data-id="ck5lsdp0m009d2fps6huz4eb3" class="article-share-link">分享</a> -->
+      <!-- <a data-url="https://github.com/carl-zk/blog/2018/01/08/%E7%AC%AC9%E7%AB%A0-%E7%B1%BB%E5%92%8C%E6%A8%A1%E5%9D%97/" data-id="ck5lsdp0p009k2fps9juz4e4e" class="article-share-link">分享</a> -->
       
       
       
@@ -160,7 +128,7 @@
 
 
   <nav id="page-nav">
-    <a class="extend prev" rel="prev" href="/blog/page/41/">&lt;&lt;上一页</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/40/">40</a><a class="page-number" href="/blog/page/41/">41</a><span class="page-number current">42</span><a class="page-number" href="/blog/page/43/">43</a><a class="page-number" href="/blog/page/44/">44</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/177/">177</a><a class="extend next" rel="next" href="/blog/page/43/">下一页&gt;&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/41/">&lt;&lt;上一页</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/40/">40</a><a class="page-number" href="/blog/page/41/">41</a><span class="page-number current">42</span><a class="page-number" href="/blog/page/43/">43</a><a class="page-number" href="/blog/page/44/">44</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/178/">178</a><a class="extend next" rel="next" href="/blog/page/43/">下一页&gt;&gt;</a>
   </nav>
 
 </section>
@@ -184,6 +152,10 @@
       <ul>
         
           <li>
+            <a href="/blog/2020/02/28/Segment-Tree/">Segment Tree</a>
+          </li>
+        
+          <li>
             <a href="/blog/2020/01/19/%E5%88%B7%E9%A2%98%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%9C%A8%E4%B8%8D%E5%90%8C%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84%E8%A1%A8%E7%A4%BA/">刷题常用数据结构在不同语言中的表示</a>
           </li>
         
@@ -197,10 +169,6 @@
         
           <li>
             <a href="/blog/2019/04/21/Jenkins-Starter/">Jenkins Starter</a>
-          </li>
-        
-          <li>
-            <a href="/blog/2019/04/04/MacBook-%E7%A3%81%E7%9B%98%E6%B8%85%E7%90%86/">MacBook 磁盘清理</a>
           </li>
         
       </ul>
@@ -329,6 +297,23 @@ window.onload = function() {
 
 <script src="/blog/js/elevator.js"></script>
 
-  </div>
+  </div><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
 </body>
 </html>
