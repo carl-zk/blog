@@ -113,7 +113,7 @@
       
     </div>
     <footer class="article-footer">
-      <!-- <a data-url="https://github.com/carl-zk/blog/2018/03/10/%E5%A0%86-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" data-id="ck77pakbx007dxupsbn5l4c1g" class="article-share-link">分享</a> -->
+      <!-- <a data-url="https://github.com/carl-zk/blog/2018/03/10/%E5%A0%86-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" data-id="ck77qn8dw007c98psed280uh9" class="article-share-link">分享</a> -->
       
       
       
@@ -232,6 +232,27 @@ window.onload = function() {
 
 <!-- author:forvoid end -->
 
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+ <script type="text/javascript">
+      var gitalk = new Gitalk({
+        clientID: '4cb6744ec422e72a39bf',
+        clientSecret: 'd0243116135375ff3b8db348dea02bc5ac88b6e3',
+        repo: 'gitalk',
+        owner: 'carl-zk',
+        admin: [&#39;carl-zk&#39;],
+        id: location.pathname,
+        labels: [&#39;Gitalk&#39;],
+        perPage: 15,
+        pagerDirection: 'last',
+        createIssueManually: true,
+        distractionFreeMode: false
+      })
+
+      gitalk.render('gitalk-container')
+</script>
 <!-- author:forvoid end -->
 
 

@@ -111,7 +111,7 @@
       
     </div>
     <footer class="article-footer">
-      <!-- <a data-url="https://github.com/carl-zk/blog/2016/06/27/Let-the-Balloon-Rise/" data-id="ck77pakaa0024xups9cvj4fd2" class="article-share-link">分享</a> -->
+      <!-- <a data-url="https://github.com/carl-zk/blog/2016/06/27/Let-the-Balloon-Rise/" data-id="ck77qn8cc002a98ps09hsdeg7" class="article-share-link">分享</a> -->
       
       
       
@@ -230,6 +230,27 @@ window.onload = function() {
 
 <!-- author:forvoid end -->
 
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+ <script type="text/javascript">
+      var gitalk = new Gitalk({
+        clientID: '4cb6744ec422e72a39bf',
+        clientSecret: 'd0243116135375ff3b8db348dea02bc5ac88b6e3',
+        repo: 'gitalk',
+        owner: 'carl-zk',
+        admin: [&#39;carl-zk&#39;],
+        id: location.pathname,
+        labels: [&#39;Gitalk&#39;],
+        perPage: 15,
+        pagerDirection: 'last',
+        createIssueManually: true,
+        distractionFreeMode: false
+      })
+
+      gitalk.render('gitalk-container')
+</script>
 <!-- author:forvoid end -->
 
 
