@@ -280,9 +280,13 @@ window.onload = function() {
 
 <!-- author:forvoid end -->
 
+
+
 <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
 
-<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<script src="/blog/js/gitalk.min.js"></script>
+
 
  <script type="text/javascript">
       var gitalk = new Gitalk({
@@ -290,7 +294,7 @@ window.onload = function() {
         clientSecret: 'd0243116135375ff3b8db348dea02bc5ac88b6e3',
         repo: 'gitalk',
         owner: 'carl-zk',
-        admin: [&#39;carl-zk&#39;],
+        admin: carl-zk,
         id: location.pathname,
         labels: [&#39;Gitalk&#39;],
         perPage: 15,
@@ -298,9 +302,12 @@ window.onload = function() {
         createIssueManually: true,
         distractionFreeMode: false
       })
+      gitalk.render(document.getElementById("gitalk-container"))
 
-      gitalk.render('gitalk-container')
 </script>
+
+
+
 <!-- author:forvoid end -->
 
 

@@ -102,7 +102,7 @@
       
     </div>
     <footer class="article-footer">
-      <!-- <a data-url="https://github.com/carl-zk/blog/2018/09/23/MySQL-%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B%E5%88%86%E9%A1%B5/" data-id="ck77qn8ce002j98psdbxy5x7g" class="article-share-link">分享</a> -->
+      <!-- <a data-url="https://github.com/carl-zk/blog/2018/09/23/MySQL-%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B%E5%88%86%E9%A1%B5/" data-id="ck77uu95y002gwipsasomctfn" class="article-share-link">分享</a> -->
       
       
       
@@ -223,9 +223,13 @@ window.onload = function() {
 
 <!-- author:forvoid end -->
 
+
+
 <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
 
-<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<script src="/blog/js/gitalk.min.js"></script>
+
 
  <script type="text/javascript">
       var gitalk = new Gitalk({
@@ -233,7 +237,7 @@ window.onload = function() {
         clientSecret: 'd0243116135375ff3b8db348dea02bc5ac88b6e3',
         repo: 'gitalk',
         owner: 'carl-zk',
-        admin: [&#39;carl-zk&#39;],
+        admin: carl-zk,
         id: location.pathname,
         labels: [&#39;Gitalk&#39;],
         perPage: 15,
@@ -241,9 +245,12 @@ window.onload = function() {
         createIssueManually: true,
         distractionFreeMode: false
       })
+      gitalk.render(document.getElementById("gitalk-container"))
 
-      gitalk.render('gitalk-container')
 </script>
+
+
+
 <!-- author:forvoid end -->
 
 
