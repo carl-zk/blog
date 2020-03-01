@@ -1,0 +1,18 @@
+<% include ../_third-part/index.ejs%>
+ <%- js('js/is.js') %>
+
+<% if (theme.fancybox){ %>
+  <%- css('fancybox/jquery.fancybox') %>
+  <%- js('fancybox/jquery.fancybox.pack') %>
+<% } %>
+<% if (theme.mermaid.enable) { %>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/mermaid/<%= theme.mermaid.version %>/mermaid.min.js'></script>
+  <!-- script src="<%- config.root %>js/mermaid.min.js" -->
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({theme: 'forest'});
+    }
+  </script>
+<% } %>
+<%- js('js/script') %>
+<%- js('js/elevator') %>

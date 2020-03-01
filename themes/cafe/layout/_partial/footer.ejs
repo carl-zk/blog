@@ -1,0 +1,18 @@
+<footer id="footer">
+  <% if (theme.sidebar === 'bottom'){ %>
+    <%- partial('_partial/sidebar') %>
+  <% } %>
+  <div class="outer">
+    <div id="footer-left">
+      &copy; 2016 - <%= date(new Date(), 'YYYY') %> <%= config.author || config.title %><!--&nbsp;|&nbsp;
+      <%= __('theme_by') %> <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a> -->
+    </div>
+  
+     <div id="footer-right">
+      <!--<%= __('contact') %>&nbsp;|&nbsp; -->
+      <%= theme.slogan %>
+    </div>
+  </div>
+</footer>
+ <%- js('jquery/jquery.min.js') %>
+ <script type="text/javascript" color="168, 168, 168" opacity='0.6' zIndex="-2" count="20" src="https://cdnjs.cloudflare.com/ajax/libs/canvas-nest.js/1.0.1/canvas-nest.min.js"></script>
