@@ -17,16 +17,16 @@ def signal_handler(sig, frame):
 signal.signal(signal.SIGINT, signal_handler)
 
 username = 'carl-zk'
-oauth_token = '5d08e22e0c782e8d223b944f2ead604dd7a2a919'
+oauth_token = '9b2873f8f7a1329b213ad58fde78dbf8bf4dbd44'
 repo_name = 'gitalk'
 sitemap_url = "https://carl-zk.github.io/blog/sitemap.xml"
 label = 'Gitalk'
 
 headers = {
         'Authorization': f'token {oauth_token}',
-        'User-Agent': 'Mozilla/5.0 Chrome/70.0'}
+        'User-Agent': "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.122 Safari/537.36"}
 
-api = 'https://api.github.com/repos/' + username + '/' + repo_name + '/issues'
+api = f"https://api.github.com/repos/{username}/{repo_name}/issues"
 
 r = s.get(sitemap_url).text
 
@@ -40,12 +40,12 @@ for url in sitemapTags:
     title = re.search('\/blog/.*', url.findNext("loc").text)[0]
     ID = hashlib.md5(title.encode())
     r = s.get(api, params={'labels': [label, ID.hexdigest()]}, headers=headers)
-    if not r.json():
-    	inited += 1
-    	print('init comments of: ' + unquote(title))
-    	r = s.post(api, json={'title':unquote(title), 'labels':[label, ID.hexdigest()]}, headers=headers)
+    if len(r.json()) == 0 or len(r.json()[0]['url']) < 1:
+        inited += 1
+        print('init comments of: ' + unquote(title))
+        r = s.post(api, json={'title':unquote(title), 'labels':[label, ID.hexdigest()]}, headers=headers)
+        print(r.json())
+    else:
+        break
 s.close()
 print("ALL DONE!")
-
-
-
