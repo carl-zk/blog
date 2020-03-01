@@ -105,7 +105,7 @@
       
     </div>
     <footer class="article-footer">
-      <!-- <a data-url="https://github.com/carl-zk/blog/2017/09/17/sql%E6%9D%82%E8%B4%A7%E9%93%BA/" data-id="ck77uu96w0059wips2xi7gg9a" class="article-share-link">分享</a> -->
+      <!-- <a data-url="https://github.com/carl-zk/blog/2017/09/17/sql%E6%9D%82%E8%B4%A7%E9%93%BA/" data-id="ck78yazvg0055uopsh7ot26ql" class="article-share-link">分享</a> -->
       
       
       
@@ -234,15 +234,18 @@ window.onload = function() {
 <script src="/blog/js/gitalk.min.js"></script>
 
 
+<script src="/blog/js/md5.min.js"></script>
+
+
  <script type="text/javascript">
       var gitalk = new Gitalk({
         clientID: '4cb6744ec422e72a39bf',
         clientSecret: 'd0243116135375ff3b8db348dea02bc5ac88b6e3',
         repo: 'gitalk',
         owner: 'carl-zk',
-        admin: carl-zk,
-        id: location.pathname,
-        labels: [&#39;Gitalk&#39;],
+        admin: ['carl-zk'],
+        id: md5(location.pathname),
+        labels: ['Gitalk'],
         perPage: 15,
         pagerDirection: 'last',
         createIssueManually: true,

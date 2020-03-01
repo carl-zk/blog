@@ -104,7 +104,7 @@
       
     </div>
     <footer class="article-footer">
-      <!-- <a data-url="https://github.com/carl-zk/blog/2018/04/01/Two-Sum-%E9%80%92%E5%BD%92/" data-id="ck77uu96a003iwipsd09uhhpv" class="article-share-link">分享</a> -->
+      <!-- <a data-url="https://github.com/carl-zk/blog/2018/04/01/Two-Sum-%E9%80%92%E5%BD%92/" data-id="ck78yazv0003juops3m6jhvo1" class="article-share-link">分享</a> -->
       
       
       
@@ -233,15 +233,18 @@ window.onload = function() {
 <script src="/blog/js/gitalk.min.js"></script>
 
 
+<script src="/blog/js/md5.min.js"></script>
+
+
  <script type="text/javascript">
       var gitalk = new Gitalk({
         clientID: '4cb6744ec422e72a39bf',
         clientSecret: 'd0243116135375ff3b8db348dea02bc5ac88b6e3',
         repo: 'gitalk',
         owner: 'carl-zk',
-        admin: carl-zk,
-        id: location.pathname,
-        labels: [&#39;Gitalk&#39;],
+        admin: ['carl-zk'],
+        id: md5(location.pathname),
+        labels: ['Gitalk'],
         perPage: 15,
         pagerDirection: 'last',
         createIssueManually: true,

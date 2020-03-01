@@ -125,7 +125,7 @@
       
     </div>
     <footer class="article-footer">
-      <!-- <a data-url="https://github.com/carl-zk/blog/2020/01/19/%E5%88%B7%E9%A2%98%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%9C%A8%E4%B8%8D%E5%90%8C%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84%E8%A1%A8%E7%A4%BA/" data-id="ck77uu97j006twips7ufmh08n" class="article-share-link">分享</a> -->
+      <!-- <a data-url="https://github.com/carl-zk/blog/2020/01/19/%E5%88%B7%E9%A2%98%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%9C%A8%E4%B8%8D%E5%90%8C%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84%E8%A1%A8%E7%A4%BA/" data-id="ck78yazw1006yuops8kx30an4" class="article-share-link">分享</a> -->
       
       
       
@@ -198,36 +198,6 @@
 
   
 </article>
-
-    
-
-<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
-
-
-<script src="/blog/js/gitalk.min.js"></script>
-
-<div id="gitalk-container2"></div>
- <script type="text/javascript">
-      var gitalk = new Gitalk({
-        clientID: '4cb6744ec422e72a39bf',
-        clientSecret: 'd0243116135375ff3b8db348dea02bc5ac88b6e3',
-        repo: 'gitalk',
-        owner: 'carl-zk',
-        admin: ['carl-zk'],
-        id: location.pathname,
-        labels: ['Gitalk'],
-        perPage: 15,
-        pagerDirection: 'last',
-        createIssueManually: true,
-        distractionFreeMode: false
-      })
-      gitalk.render(document.getElementById("gitalk-container2"))
-
-
-
-</script>
-
-
 
     
   <div class="comments" id="comments">
@@ -330,15 +300,18 @@ window.onload = function() {
 <script src="/blog/js/gitalk.min.js"></script>
 
 
+<script src="/blog/js/md5.min.js"></script>
+
+
  <script type="text/javascript">
       var gitalk = new Gitalk({
         clientID: '4cb6744ec422e72a39bf',
         clientSecret: 'd0243116135375ff3b8db348dea02bc5ac88b6e3',
         repo: 'gitalk',
         owner: 'carl-zk',
-        admin: carl-zk,
-        id: location.pathname,
-        labels: [&#39;Gitalk&#39;],
+        admin: ['carl-zk'],
+        id: md5(location.pathname),
+        labels: ['Gitalk'],
         perPage: 15,
         pagerDirection: 'last',
         createIssueManually: true,

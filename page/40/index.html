@@ -116,7 +116,7 @@
       
     </div>
     <footer class="article-footer">
-      <!-- <a data-url="https://github.com/carl-zk/blog/2018/03/03/%E5%A6%82%E4%BD%95%E4%BC%98%E9%9B%85%E7%9A%84%E7%95%AA%E8%94%B7/" data-id="ck77uu97u007mwipshtrh6rz5" class="article-share-link">分享</a> -->
+      <!-- <a data-url="https://github.com/carl-zk/blog/2018/03/03/%E5%A6%82%E4%BD%95%E4%BC%98%E9%9B%85%E7%9A%84%E7%95%AA%E8%94%B7/" data-id="ck78yazwa007quops38lpfoxu" class="article-share-link">分享</a> -->
       
       
       
@@ -243,15 +243,18 @@ window.onload = function() {
 <script src="/blog/js/gitalk.min.js"></script>
 
 
+<script src="/blog/js/md5.min.js"></script>
+
+
  <script type="text/javascript">
       var gitalk = new Gitalk({
         clientID: '4cb6744ec422e72a39bf',
         clientSecret: 'd0243116135375ff3b8db348dea02bc5ac88b6e3',
         repo: 'gitalk',
         owner: 'carl-zk',
-        admin: carl-zk,
-        id: location.pathname,
-        labels: [&#39;Gitalk&#39;],
+        admin: ['carl-zk'],
+        id: md5(location.pathname),
+        labels: ['Gitalk'],
         perPage: 15,
         pagerDirection: 'last',
         createIssueManually: true,

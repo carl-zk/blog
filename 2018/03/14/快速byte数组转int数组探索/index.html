@@ -111,7 +111,7 @@
       
     </div>
     <footer class="article-footer">
-      <!-- <a data-url="https://github.com/carl-zk/blog/2018/03/14/%E5%BF%AB%E9%80%9Fbyte%E6%95%B0%E7%BB%84%E8%BD%ACint%E6%95%B0%E7%BB%84%E6%8E%A2%E7%B4%A2/" data-id="ck77uu985008jwipsecby2g1v" class="article-share-link">分享</a> -->
+      <!-- <a data-url="https://github.com/carl-zk/blog/2018/03/14/%E5%BF%AB%E9%80%9Fbyte%E6%95%B0%E7%BB%84%E8%BD%ACint%E6%95%B0%E7%BB%84%E6%8E%A2%E7%B4%A2/" data-id="ck78yazwh008fuops23mi3kp6" class="article-share-link">分享</a> -->
       
       
       
@@ -184,36 +184,6 @@
 
   
 </article>
-
-    
-
-<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
-
-
-<script src="/blog/js/gitalk.min.js"></script>
-
-<div id="gitalk-container2"></div>
- <script type="text/javascript">
-      var gitalk = new Gitalk({
-        clientID: '4cb6744ec422e72a39bf',
-        clientSecret: 'd0243116135375ff3b8db348dea02bc5ac88b6e3',
-        repo: 'gitalk',
-        owner: 'carl-zk',
-        admin: ['carl-zk'],
-        id: location.pathname,
-        labels: ['Gitalk'],
-        perPage: 15,
-        pagerDirection: 'last',
-        createIssueManually: true,
-        distractionFreeMode: false
-      })
-      gitalk.render(document.getElementById("gitalk-container2"))
-
-
-
-</script>
-
-
 
     
   <div class="comments" id="comments">
@@ -316,15 +286,18 @@ window.onload = function() {
 <script src="/blog/js/gitalk.min.js"></script>
 
 
+<script src="/blog/js/md5.min.js"></script>
+
+
  <script type="text/javascript">
       var gitalk = new Gitalk({
         clientID: '4cb6744ec422e72a39bf',
         clientSecret: 'd0243116135375ff3b8db348dea02bc5ac88b6e3',
         repo: 'gitalk',
         owner: 'carl-zk',
-        admin: carl-zk,
-        id: location.pathname,
-        labels: [&#39;Gitalk&#39;],
+        admin: ['carl-zk'],
+        id: md5(location.pathname),
+        labels: ['Gitalk'],
         perPage: 15,
         pagerDirection: 'last',
         createIssueManually: true,

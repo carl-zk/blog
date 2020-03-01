@@ -115,7 +115,7 @@
       
     </div>
     <footer class="article-footer">
-      <!-- <a data-url="https://github.com/carl-zk/blog/2016/06/16/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%B9%BF%E4%B9%89%E8%A1%A8%E8%A1%A8%E7%A4%BA%E6%96%B9%E6%B3%95/" data-id="ck77uu97d0069wips0zcfdgap" class="article-share-link">分享</a> -->
+      <!-- <a data-url="https://github.com/carl-zk/blog/2016/06/16/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%B9%BF%E4%B9%89%E8%A1%A8%E8%A1%A8%E7%A4%BA%E6%96%B9%E6%B3%95/" data-id="ck78yazvu0069uopsbxna0eiq" class="article-share-link">分享</a> -->
       
       
       
@@ -242,15 +242,18 @@ window.onload = function() {
 <script src="/blog/js/gitalk.min.js"></script>
 
 
+<script src="/blog/js/md5.min.js"></script>
+
+
  <script type="text/javascript">
       var gitalk = new Gitalk({
         clientID: '4cb6744ec422e72a39bf',
         clientSecret: 'd0243116135375ff3b8db348dea02bc5ac88b6e3',
         repo: 'gitalk',
         owner: 'carl-zk',
-        admin: carl-zk,
-        id: location.pathname,
-        labels: [&#39;Gitalk&#39;],
+        admin: ['carl-zk'],
+        id: md5(location.pathname),
+        labels: ['Gitalk'],
         perPage: 15,
         pagerDirection: 'last',
         createIssueManually: true,
