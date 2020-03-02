@@ -7,13 +7,14 @@ title: 一叶轻舟渡万江
 subtitle: 泰山不拒细壤故能成其高 江海不择细流故能就其深
 description:
 author: carl-zk
+email: zxfspace@163.com
 language: zh-CN
 timezone: Asia/Shanghai
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: https://github.com/carl-zk/blog
-root: /blog/
+url: https://carl-zk.github.io/blog
+root: /blog
 permalink: :year/:month/:day/:title/
 permalink_defaults:
 
@@ -80,11 +81,14 @@ deploy:
   name: carl-zk
   email: zxfspace@163.com
 
-# RSS
+# RSS https://github.com/hexojs/hexo-generator-feed/blob/master/atom.xml
 feed:
     type: atom
-    path: atom.xml
-    limit: 20
+    path: /atom.xml
+    icon: /images/fav.png
+    content: false
+    content_limit: 500
+    limit: 0
 
 # mermaid chart 
 mermaid: ## mermaid url https://github.com/knsv/mermaid 
@@ -127,6 +131,8 @@ minify:
       - '*.json'
 math:
   engine: 'mathjax'
+
+# sitemap
 sitemap:
     path: sitemap.xml
     template: ./sitemap_template.xml
