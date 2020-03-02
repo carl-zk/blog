@@ -8,16 +8,18 @@
   <meta name="description" content="最近心血来潮想写点算法、数据结构的代码，所以就又拿出《算法导论》温习了一遍分治算法。本来以为自己对分治算法已经了解的很深了，但是重新看一遍才发现，实现分治算法并不难，难点在于对实际问题向分治算法的转变。书中给出的问题是找出连续N天股票买入卖出能获得的最大收益，这个问题用了相对值的角度一变形就成为了一个能够用分治策略解决的问题。所谓人才和平庸的差距，可能就在这个转化里面吧。分治算法就是把一个大问题拆">
 <meta property="og:type" content="article">
 <meta property="og:title" content="分治-最大子段和">
-<meta property="og:url" content="https://github.com/carl-zk/blog/2018/03/17/%E5%88%86%E6%B2%BB-%E6%9C%80%E5%A4%A7%E5%AD%90%E6%AE%B5%E5%92%8C/index.html">
+<meta property="og:url" content="https://carl-zk.github.io/blog/2018/03/17/%E5%88%86%E6%B2%BB-%E6%9C%80%E5%A4%A7%E5%AD%90%E6%AE%B5%E5%92%8C/index.html">
 <meta property="og:site_name" content="一叶轻舟渡万江">
 <meta property="og:description" content="最近心血来潮想写点算法、数据结构的代码，所以就又拿出《算法导论》温习了一遍分治算法。本来以为自己对分治算法已经了解的很深了，但是重新看一遍才发现，实现分治算法并不难，难点在于对实际问题向分治算法的转变。书中给出的问题是找出连续N天股票买入卖出能获得的最大收益，这个问题用了相对值的角度一变形就成为了一个能够用分治策略解决的问题。所谓人才和平庸的差距，可能就在这个转化里面吧。分治算法就是把一个大问题拆">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://github.com/blog/2018/03/17/%E5%88%86%E6%B2%BB-%E6%9C%80%E5%A4%A7%E5%AD%90%E6%AE%B5%E5%92%8C/dm.svg">
+<meta property="og:image" content="https://carl-zk.github.io/blog/2018/03/17/%E5%88%86%E6%B2%BB-%E6%9C%80%E5%A4%A7%E5%AD%90%E6%AE%B5%E5%92%8C/dm.svg">
 <meta property="article:published_time" content="2018-03-17T02:58:02.000Z">
 <meta property="article:modified_time" content="2019-02-16T01:58:27.847Z">
 <meta property="article:author" content="carl-zk">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://github.com/blog/2018/03/17/%E5%88%86%E6%B2%BB-%E6%9C%80%E5%A4%A7%E5%AD%90%E6%AE%B5%E5%92%8C/dm.svg">
+<meta name="twitter:image" content="https://carl-zk.github.io/blog/2018/03/17/%E5%88%86%E6%B2%BB-%E6%9C%80%E5%A4%A7%E5%AD%90%E6%AE%B5%E5%92%8C/dm.svg">
+  
+    <link rel="alternate" href="/blog/atom.xml" title="一叶轻舟渡万江" type="application/atom+xml">
   
   
     <link rel="icon" href="img/favicon2.ico">
@@ -42,10 +44,12 @@
     <div id="header-inner" class="inner">
       <nav id="sub-nav">
         
+          <a id="nav-rss-link" class="nav-icon" href="/blog/atom.xml" title="RSS Feed"></a>
+        
         <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
       </nav>
       <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://github.com/carl-zk/blog"></form>
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://carl-zk.github.io/blog"></form>
       </div>
       <nav id="main-nav">
         <a id="main-nav-toggle" class="nav-icon"></a>
@@ -115,7 +119,7 @@
       
     </div>
     <footer class="article-footer">
-      <!-- <a data-url="https://github.com/carl-zk/blog/2018/03/17/%E5%88%86%E6%B2%BB-%E6%9C%80%E5%A4%A7%E5%AD%90%E6%AE%B5%E5%92%8C/" data-id="ck792utby006qogps46cjc1j5" class="article-share-link">分享</a> -->
+      <!-- <a data-url="https://carl-zk.github.io/blog/2018/03/17/%E5%88%86%E6%B2%BB-%E6%9C%80%E5%A4%A7%E5%AD%90%E6%AE%B5%E5%92%8C/" data-id="ck79vx1k4006smupscbv09d22" class="article-share-link">分享</a> -->
       
       
       

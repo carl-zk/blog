@@ -8,17 +8,19 @@
   <meta name="description" content="好久不更新blog了，慵懒了！  为了搞清楚 Spring Security 是如何工作了，特地翻了下源代码，查了许多文档，因为我比较在意细节，例如从何时起SS做认证(Authentication)，从何时做授权(Authorization)，如何定制SS。  Spring Security FiltersSpring Security 框架主要利用 Filter 来实现对 HTTP 请求的认证和">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Spring-Security">
-<meta property="og:url" content="https://github.com/carl-zk/blog/2019/02/18/spring-security/index.html">
+<meta property="og:url" content="https://carl-zk.github.io/blog/2019/02/18/spring-security/index.html">
 <meta property="og:site_name" content="一叶轻舟渡万江">
 <meta property="og:description" content="好久不更新blog了，慵懒了！  为了搞清楚 Spring Security 是如何工作了，特地翻了下源代码，查了许多文档，因为我比较在意细节，例如从何时起SS做认证(Authentication)，从何时做授权(Authorization)，如何定制SS。  Spring Security FiltersSpring Security 框架主要利用 Filter 来实现对 HTTP 请求的认证和">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://github.com/blog/2019/02/18/spring-security/flow.svg">
+<meta property="og:image" content="https://carl-zk.github.io/blog/2019/02/18/spring-security/flow.svg">
 <meta property="article:published_time" content="2019-02-18T12:15:22.000Z">
 <meta property="article:modified_time" content="2019-02-18T15:23:10.613Z">
 <meta property="article:author" content="carl-zk">
 <meta property="article:tag" content="spring">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://github.com/blog/2019/02/18/spring-security/flow.svg">
+<meta name="twitter:image" content="https://carl-zk.github.io/blog/2019/02/18/spring-security/flow.svg">
+  
+    <link rel="alternate" href="/blog/atom.xml" title="一叶轻舟渡万江" type="application/atom+xml">
   
   
     <link rel="icon" href="img/favicon2.ico">
@@ -43,10 +45,12 @@
     <div id="header-inner" class="inner">
       <nav id="sub-nav">
         
+          <a id="nav-rss-link" class="nav-icon" href="/blog/atom.xml" title="RSS Feed"></a>
+        
         <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
       </nav>
       <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://github.com/carl-zk/blog"></form>
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://carl-zk.github.io/blog"></form>
       </div>
       <nav id="main-nav">
         <a id="main-nav-toggle" class="nav-icon"></a>
@@ -112,12 +116,12 @@
 
 <p>attemptAuthentication(request, response) 需要子类具体实现认证过程，调用 this.getAuthenticationManager().authenticate(Authentication auth) 方法。<br>AuthenticationManager包含 <code>List&lt;AuthenticationProvider&gt;</code>, AuthenticationProvider 提供具体的认证过程。<br>概括一下就是 Filter 调用 AuthenticationManager 进行认证，认证成功后保存 Authentication 到 SecurityContextHolder。</p>
 <h4 id="Authorization"><a href="#Authorization" class="headerlink" title="Authorization"></a>Authorization</h4><p>FilterSecurityInterceptor 是最后一个 SS Filter，一般情况下用户不需要DIY这部分，因为认证成功后会将 Principle (登录对象) 和 Roles 一同保存在 SecurityContextHolder 中，授权过程就成了根据 request 从 Map&lt;RequestMatcher, Collection<ConfigAttribute>&gt; 获取该 uri 所需角色列表，交给 AccessDecisionManager（类似的，它包含 <code>List&lt;AccessDecisionVoter&gt;</code>, 由 voter 投票） 来决定是否有权限访问，只要有一个 voter 不通过，则无权访问。</p>
-<p><a href="https://github.com/carl-zk/JavaJava/tree/master/security2">code</a></p>
+<p><a href="https://github.com/carl-zk/JavaJava/tree/master/security2" target="_blank" rel="noopener">code</a></p>
 
       
     </div>
     <footer class="article-footer">
-      <!-- <a data-url="https://github.com/carl-zk/blog/2019/02/18/spring-security/" data-id="ck792utbk005eogpsbb622xuu" class="article-share-link">分享</a> -->
+      <!-- <a data-url="https://carl-zk.github.io/blog/2019/02/18/spring-security/" data-id="ck79vx1jp0059mups3p514byk" class="article-share-link">分享</a> -->
       
       
       

@@ -8,7 +8,7 @@
   <meta name="description" content="做有素养的工程师！  https:&#x2F;&#x2F;site.mockito.org&#x2F;Mockito 是Java语言下写单元测试的工具，本篇就来讲讲它的一些概念和用法。 为什么要写单元测试？作为一个工程师，写出来的项目要做到可读、可维护，这里的可读、可维护不单单指代码作者本人，更是指其他维护该项目的工程师。单元测试的好处不止为公司留下了可维护的代码，对工程师本人也是职业素养的提升。一个有良好单元测试的项目让你">
 <meta property="og:type" content="article">
 <meta property="og:title" content="如何写单元测试">
-<meta property="og:url" content="https://github.com/carl-zk/blog/2019/06/01/%E5%A6%82%E4%BD%95%E5%86%99%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/index.html">
+<meta property="og:url" content="https://carl-zk.github.io/blog/2019/06/01/%E5%A6%82%E4%BD%95%E5%86%99%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/index.html">
 <meta property="og:site_name" content="一叶轻舟渡万江">
 <meta property="og:description" content="做有素养的工程师！  https:&#x2F;&#x2F;site.mockito.org&#x2F;Mockito 是Java语言下写单元测试的工具，本篇就来讲讲它的一些概念和用法。 为什么要写单元测试？作为一个工程师，写出来的项目要做到可读、可维护，这里的可读、可维护不单单指代码作者本人，更是指其他维护该项目的工程师。单元测试的好处不止为公司留下了可维护的代码，对工程师本人也是职业素养的提升。一个有良好单元测试的项目让你">
 <meta property="og:locale" content="zh_CN">
@@ -18,6 +18,8 @@
 <meta property="article:tag" content="unit test">
 <meta property="article:tag" content="mockito">
 <meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/blog/atom.xml" title="一叶轻舟渡万江" type="application/atom+xml">
   
   
     <link rel="icon" href="img/favicon2.ico">
@@ -42,10 +44,12 @@
     <div id="header-inner" class="inner">
       <nav id="sub-nav">
         
+          <a id="nav-rss-link" class="nav-icon" href="/blog/atom.xml" title="RSS Feed"></a>
+        
         <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
       </nav>
       <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://github.com/carl-zk/blog"></form>
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://carl-zk.github.io/blog"></form>
       </div>
       <nav id="main-nav">
         <a id="main-nav-toggle" class="nav-icon"></a>
@@ -111,14 +115,14 @@
 <h3 id="集成测试："><a href="#集成测试：" class="headerlink" title="集成测试："></a>集成测试：</h3><p>一组测试单元。</p>
 <h2 id="术语"><a href="#术语" class="headerlink" title="术语"></a>术语</h2><p><a href="http://xunitpatterns.com/Mocks,%20Fakes,%20Stubs%20and%20Dummies.html" target="_blank" rel="noopener">http://xunitpatterns.com/Mocks,%20Fakes,%20Stubs%20and%20Dummies.html</a></p>
 <p>system under test<a href="http://xunitpatterns.com/SUT.html" target="_blank" rel="noopener">(SUT)</a>: whatever we are testing.<br>Dummy Object: 在SUT中某个方法需要一个实例对象作为参数，但是该参数只是为了可以正常调用该方法，而不对该测试起任何影响。<br>Test Stub: 在一个SUT中，需要依赖外部的接口，为了稳定控制测试流程（Unit testing 需要保证repeatable），可以fake一个该外部接口的实现类，根据设定的参数返回指定的值。<br>Test Spy: 与Test Stub类似，区别在于Test Spy可以记录方法的入参，在result verification阶段可以验证参数是否与预期一致。<br>Mock Object: 与Test Stub类似，区别在于Mock Object预先设置了期望的接收参数，当参数与预期不符则测试失败。<br>Fake Object: 术语搞这么多，唉！Test Stub为了流程控制（control point）; Test Spy/Mock Object 为了验证（observation point）; 而Fake Object仅仅为了提供一个外部接口简单的实现，并不记录或验证什么，例如database。</p>
-<h2 id="怎么写单元测试？"><a href="#怎么写单元测试？" class="headerlink" title="怎么写单元测试？"></a>怎么写单元测试？</h2><p><a href="https://github.com/mockito/mockito/wiki/How-to-write-good-tests">How to write good tests</a><br><a href="https://www.baeldung.com/mockito-series" target="_blank" rel="noopener">https://www.baeldung.com/mockito-series</a></p>
+<h2 id="怎么写单元测试？"><a href="#怎么写单元测试？" class="headerlink" title="怎么写单元测试？"></a>怎么写单元测试？</h2><p><a href="https://github.com/mockito/mockito/wiki/How-to-write-good-tests" target="_blank" rel="noopener">How to write good tests</a><br><a href="https://www.baeldung.com/mockito-series" target="_blank" rel="noopener">https://www.baeldung.com/mockito-series</a></p>
 <p>单元测试的阶段：<br>Setup<br>Exercise<br>Verify<br>Teardown</p>
 <p>Rock同学推荐的好网站：<a href="https://cyber-dojo.org/" target="_blank" rel="noopener">https://cyber-dojo.org/</a></p>
 
       
     </div>
     <footer class="article-footer">
-      <!-- <a data-url="https://github.com/carl-zk/blog/2019/06/01/%E5%A6%82%E4%BD%95%E5%86%99%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/" data-id="ck792utca007qogps3c7bh45e" class="article-share-link">分享</a> -->
+      <!-- <a data-url="https://carl-zk.github.io/blog/2019/06/01/%E5%A6%82%E4%BD%95%E5%86%99%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/" data-id="ck79vx1kg007smupsfx30b76v" class="article-share-link">分享</a> -->
       
       
       

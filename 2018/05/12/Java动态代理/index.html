@@ -8,7 +8,7 @@
   <meta name="description" content="JDK原生动态代理http:&#x2F;&#x2F;www.cnblogs.com&#x2F;xiaoluo501395377&#x2F;p&#x2F;3383130.html面向接口编程就一定要先定义接口再定义实现类吗？一个项目中有大量的 dao&#x2F;imp、service&#x2F;imp 包，看上去很‘规范’（理由是大家都这么写）。其实这样写是有历史包袱的，AOP特性的实现依赖于动态代理机制，而最早的框架中只能对接口进行动态代理，这样就导致每次都是先写接">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java动态代理">
-<meta property="og:url" content="https://github.com/carl-zk/blog/2018/05/12/Java%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86/index.html">
+<meta property="og:url" content="https://carl-zk.github.io/blog/2018/05/12/Java%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86/index.html">
 <meta property="og:site_name" content="一叶轻舟渡万江">
 <meta property="og:description" content="JDK原生动态代理http:&#x2F;&#x2F;www.cnblogs.com&#x2F;xiaoluo501395377&#x2F;p&#x2F;3383130.html面向接口编程就一定要先定义接口再定义实现类吗？一个项目中有大量的 dao&#x2F;imp、service&#x2F;imp 包，看上去很‘规范’（理由是大家都这么写）。其实这样写是有历史包袱的，AOP特性的实现依赖于动态代理机制，而最早的框架中只能对接口进行动态代理，这样就导致每次都是先写接">
 <meta property="og:locale" content="zh_CN">
@@ -17,6 +17,8 @@
 <meta property="article:author" content="carl-zk">
 <meta property="article:tag" content="spring">
 <meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/blog/atom.xml" title="一叶轻舟渡万江" type="application/atom+xml">
   
   
     <link rel="icon" href="img/favicon2.ico">
@@ -41,10 +43,12 @@
     <div id="header-inner" class="inner">
       <nav id="sub-nav">
         
+          <a id="nav-rss-link" class="nav-icon" href="/blog/atom.xml" title="RSS Feed"></a>
+        
         <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
       </nav>
       <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://github.com/carl-zk/blog"></form>
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://carl-zk.github.io/blog"></form>
       </div>
       <nav id="main-nav">
         <a id="main-nav-toggle" class="nav-icon"></a>
@@ -108,7 +112,7 @@
 <p>局限性：Proxy.newProxyInstance 只能返回接口Animal，不能返回对象Duck；不支持对static方法的代理。<br>优点：所谓的‘动态’只不过是调用某方法时去执行我事先定义好的handler方法，虽然我不必像静态代理那样写一个代理类，但是我需要写一个handler。但是我现在只需要写一个handler，就能产生Duck、Dog、Cat的代理类。</p>
 <h2 id="CGLIB动态代理"><a href="#CGLIB动态代理" class="headerlink" title="CGLIB动态代理"></a>CGLIB动态代理</h2><p><a href="http://www.importnew.com/27772.html" target="_blank" rel="noopener">http://www.importnew.com/27772.html</a></p>
 <blockquote>
-<p><a href="https://github.com/cglib/cglib">CGLIB(Code Generation Library)</a>是一个基于ASM的字节码生成库，它允许我们在运行时对字节码进行修改和动态生成。CGLIB通过继承方式实现代理。</p>
+<p><a href="https://github.com/cglib/cglib" target="_blank" rel="noopener">CGLIB(Code Generation Library)</a>是一个基于ASM的字节码生成库，它允许我们在运行时对字节码进行修改和动态生成。CGLIB通过继承方式实现代理。</p>
 </blockquote>
 <p>spring的@Transactional注解不能用在static方法上就很好理解了。spring使用cglib代理，而cglib通过继承方式实现代理，那么static方法不能继承（它不属于任何对象），就不能被代理了。同样，final修饰的方法（不能被override）、final 修饰的类（不能被继承）也不能被代理。</p>
 <p>cglib给的一个演示示例，理解其如何实现动态代理</p>
@@ -125,7 +129,7 @@
       
     </div>
     <footer class="article-footer">
-      <!-- <a data-url="https://github.com/carl-zk/blog/2018/05/12/Java%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86/" data-id="ck792utag001oogpsgvkae50i" class="article-share-link">分享</a> -->
+      <!-- <a data-url="https://carl-zk.github.io/blog/2018/05/12/Java%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86/" data-id="ck79vx1ip001smups2gpc3gdk" class="article-share-link">分享</a> -->
       
       
       

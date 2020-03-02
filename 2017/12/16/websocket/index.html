@@ -8,7 +8,7 @@
   <meta name="description" content="https:&#x2F;&#x2F;www.imooc.com&#x2F;video&#x2F;15319https:&#x2F;&#x2F;www.websocket.org&#x2F;https:&#x2F;&#x2F;github.com&#x2F;sitegui&#x2F;nodejs-websockethttps:&#x2F;&#x2F;socket.io&#x2F; websocket 允许浏览器和服务器建立持久连接，借助nodejs-websocket实现群聊功能。 EchowsSocket.js 12345678910">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Websocket">
-<meta property="og:url" content="https://github.com/carl-zk/blog/2017/12/16/websocket/index.html">
+<meta property="og:url" content="https://carl-zk.github.io/blog/2017/12/16/websocket/index.html">
 <meta property="og:site_name" content="一叶轻舟渡万江">
 <meta property="og:description" content="https:&#x2F;&#x2F;www.imooc.com&#x2F;video&#x2F;15319https:&#x2F;&#x2F;www.websocket.org&#x2F;https:&#x2F;&#x2F;github.com&#x2F;sitegui&#x2F;nodejs-websockethttps:&#x2F;&#x2F;socket.io&#x2F; websocket 允许浏览器和服务器建立持久连接，借助nodejs-websocket实现群聊功能。 EchowsSocket.js 12345678910">
 <meta property="og:locale" content="zh_CN">
@@ -16,6 +16,8 @@
 <meta property="article:modified_time" content="2019-02-16T01:58:27.799Z">
 <meta property="article:author" content="carl-zk">
 <meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/blog/atom.xml" title="一叶轻舟渡万江" type="application/atom+xml">
   
   
     <link rel="icon" href="img/favicon2.ico">
@@ -40,10 +42,12 @@
     <div id="header-inner" class="inner">
       <nav id="sub-nav">
         
+          <a id="nav-rss-link" class="nav-icon" href="/blog/atom.xml" title="RSS Feed"></a>
+        
         <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
       </nav>
       <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://github.com/carl-zk/blog"></form>
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://carl-zk.github.io/blog"></form>
       </div>
       <nav id="main-nav">
         <a id="main-nav-toggle" class="nav-icon"></a>
@@ -94,7 +98,7 @@
       
         <!-- Table of Contents -->
         
-        <p><a href="https://www.imooc.com/video/15319" target="_blank" rel="noopener">https://www.imooc.com/video/15319</a><br><a href="https://www.websocket.org/" target="_blank" rel="noopener">https://www.websocket.org/</a><br><a href="https://github.com/sitegui/nodejs-websocket">https://github.com/sitegui/nodejs-websocket</a><br><a href="https://socket.io/" target="_blank" rel="noopener">https://socket.io/</a></p>
+        <p><a href="https://www.imooc.com/video/15319" target="_blank" rel="noopener">https://www.imooc.com/video/15319</a><br><a href="https://www.websocket.org/" target="_blank" rel="noopener">https://www.websocket.org/</a><br><a href="https://github.com/sitegui/nodejs-websocket" target="_blank" rel="noopener">https://github.com/sitegui/nodejs-websocket</a><br><a href="https://socket.io/" target="_blank" rel="noopener">https://socket.io/</a></p>
 <p>websocket 允许浏览器和服务器建立持久连接，借助nodejs-websocket实现群聊功能。</p>
 <h4 id="Echo"><a href="#Echo" class="headerlink" title="Echo"></a>Echo</h4><p>wsSocket.js</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> ws = <span class="built_in">require</span>(<span class="string">"nodejs-websocket"</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> PORT = <span class="number">3000</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> server = ws.createServer(<span class="function"><span class="keyword">function</span> (<span class="params">conn</span>) </span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="string">"New connection"</span>)</span><br><span class="line">	conn.on(<span class="string">"text"</span>, <span class="function"><span class="keyword">function</span> (<span class="params">str</span>) </span>&#123;</span><br><span class="line">		<span class="built_in">console</span>.log(<span class="string">"Received "</span>+str)</span><br><span class="line">		conn.sendText(str)</span><br><span class="line">	&#125;)</span><br><span class="line">	conn.on(<span class="string">"close"</span>, <span class="function"><span class="keyword">function</span> (<span class="params">code, reason</span>) </span>&#123;</span><br><span class="line">		<span class="built_in">console</span>.log(<span class="string">"Connection closed"</span>)</span><br><span class="line">	&#125;)</span><br><span class="line">	conn.on(<span class="string">"error"</span>, <span class="function"><span class="keyword">function</span>(<span class="params">err</span>)</span>&#123;</span><br><span class="line">		<span class="built_in">console</span>.log(<span class="string">"handle error"</span>)</span><br><span class="line">		<span class="built_in">console</span>.log(err)</span><br><span class="line">	&#125;)</span><br><span class="line">&#125;).listen(PORT)</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"server listen on port "</span> + PORT)</span><br></pre></td></tr></table></figure>
@@ -157,7 +161,7 @@
       
     </div>
     <footer class="article-footer">
-      <!-- <a data-url="https://github.com/carl-zk/blog/2017/12/16/websocket/" data-id="ck792utbo005rogps7ggzdrda" class="article-share-link">分享</a> -->
+      <!-- <a data-url="https://carl-zk.github.io/blog/2017/12/16/websocket/" data-id="ck79vx1jv005wmupsg7nh9ta5" class="article-share-link">分享</a> -->
       
       
       

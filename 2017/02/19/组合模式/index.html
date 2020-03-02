@@ -8,16 +8,18 @@
   <meta name="description" content="将对象组合成树形结构以表示”部分-整体”的层次结构.使用户对单个对象和组合对象的使用具有一致性.组合模式定义了包含基本对象和组合对象的类层次结构.基本对象可以被组合成更复杂的组合对象,而这个组合对象又可以被组合,这样不断的递归下去,客户代码中,任何用到基本对象的地方都可以使用组合对象.用户不用关心到底是处理一个叶节点还是处理一个组合结点,也就用不着为定义组合而写一些选择判断语句了.简单说就是组合">
 <meta property="og:type" content="article">
 <meta property="og:title" content="组合模式">
-<meta property="og:url" content="https://github.com/carl-zk/blog/2017/02/19/%E7%BB%84%E5%90%88%E6%A8%A1%E5%BC%8F/index.html">
+<meta property="og:url" content="https://carl-zk.github.io/blog/2017/02/19/%E7%BB%84%E5%90%88%E6%A8%A1%E5%BC%8F/index.html">
 <meta property="og:site_name" content="一叶轻舟渡万江">
 <meta property="og:description" content="将对象组合成树形结构以表示”部分-整体”的层次结构.使用户对单个对象和组合对象的使用具有一致性.组合模式定义了包含基本对象和组合对象的类层次结构.基本对象可以被组合成更复杂的组合对象,而这个组合对象又可以被组合,这样不断的递归下去,客户代码中,任何用到基本对象的地方都可以使用组合对象.用户不用关心到底是处理一个叶节点还是处理一个组合结点,也就用不着为定义组合而写一些选择判断语句了.简单说就是组合">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://github.com/carl-zk/blog/2017/02/19/%E7%BB%84%E5%90%88%E6%A8%A1%E5%BC%8F/composite.svg">
+<meta property="og:image" content="https://carl-zk.github.io/blog/2017/02/19/%E7%BB%84%E5%90%88%E6%A8%A1%E5%BC%8F/composite.svg">
 <meta property="article:published_time" content="2017-02-19T13:17:54.000Z">
 <meta property="article:modified_time" content="2019-02-16T01:58:27.863Z">
 <meta property="article:author" content="carl-zk">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://github.com/carl-zk/blog/2017/02/19/%E7%BB%84%E5%90%88%E6%A8%A1%E5%BC%8F/composite.svg">
+<meta name="twitter:image" content="https://carl-zk.github.io/blog/2017/02/19/%E7%BB%84%E5%90%88%E6%A8%A1%E5%BC%8F/composite.svg">
+  
+    <link rel="alternate" href="/blog/atom.xml" title="一叶轻舟渡万江" type="application/atom+xml">
   
   
     <link rel="icon" href="img/favicon2.ico">
@@ -42,10 +44,12 @@
     <div id="header-inner" class="inner">
       <nav id="sub-nav">
         
+          <a id="nav-rss-link" class="nav-icon" href="/blog/atom.xml" title="RSS Feed"></a>
+        
         <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
       </nav>
       <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://github.com/carl-zk/blog"></form>
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://carl-zk.github.io/blog"></form>
       </div>
       <nav id="main-nav">
         <a id="main-nav-toggle" class="nav-icon"></a>
@@ -115,7 +119,7 @@
       
     </div>
     <footer class="article-footer">
-      <!-- <a data-url="https://github.com/carl-zk/blog/2017/02/19/%E7%BB%84%E5%90%88%E6%A8%A1%E5%BC%8F/" data-id="ck792utcz00a1ogps54bzcod5" class="article-share-link">分享</a> -->
+      <!-- <a data-url="https://carl-zk.github.io/blog/2017/02/19/%E7%BB%84%E5%90%88%E6%A8%A1%E5%BC%8F/" data-id="ck79vx1l700a3mups3hxtagdz" class="article-share-link">分享</a> -->
       
       
       

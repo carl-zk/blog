@@ -8,7 +8,7 @@
   <meta name="description" content="tools1.gperftoolsgperftools将C++中的malloc替换成tcmalloc，然后就可以监控C++内存。所以，在64位linux系统中，建议安装libunwind-0.99-beta这个版本，因为它会调用malloc，版本太低或过高会引发内存泄露。 install libunwind-0.99-betacd libunwind-0.99-beta.&#x2F;configuremak">
 <meta property="og:type" content="article">
 <meta property="og:title" content="查看堆外内存">
-<meta property="og:url" content="https://github.com/carl-zk/blog/2017/06/18/%E6%9F%A5%E7%9C%8B%E5%A0%86%E5%A4%96%E5%86%85%E5%AD%98/index.html">
+<meta property="og:url" content="https://carl-zk.github.io/blog/2017/06/18/%E6%9F%A5%E7%9C%8B%E5%A0%86%E5%A4%96%E5%86%85%E5%AD%98/index.html">
 <meta property="og:site_name" content="一叶轻舟渡万江">
 <meta property="og:description" content="tools1.gperftoolsgperftools将C++中的malloc替换成tcmalloc，然后就可以监控C++内存。所以，在64位linux系统中，建议安装libunwind-0.99-beta这个版本，因为它会调用malloc，版本太低或过高会引发内存泄露。 install libunwind-0.99-betacd libunwind-0.99-beta.&#x2F;configuremak">
 <meta property="og:locale" content="zh_CN">
@@ -16,6 +16,8 @@
 <meta property="article:modified_time" content="2019-02-16T01:58:27.858Z">
 <meta property="article:author" content="carl-zk">
 <meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/blog/atom.xml" title="一叶轻舟渡万江" type="application/atom+xml">
   
   
     <link rel="icon" href="img/favicon2.ico">
@@ -40,10 +42,12 @@
     <div id="header-inner" class="inner">
       <nav id="sub-nav">
         
+          <a id="nav-rss-link" class="nav-icon" href="/blog/atom.xml" title="RSS Feed"></a>
+        
         <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
       </nav>
       <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://github.com/carl-zk/blog"></form>
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://carl-zk.github.io/blog"></form>
       </div>
       <nav id="main-nav">
         <a id="main-nav-toggle" class="nav-icon"></a>
@@ -98,14 +102,14 @@
       
         <!-- Table of Contents -->
         
-        <h4 id="tools"><a href="#tools" class="headerlink" title="tools"></a>tools</h4><p>1.<br><a href="https://github.com/gperftools/gperftools">gperftools</a><br>gperftools将C++中的malloc替换成tcmalloc，然后就可以监控C++内存。<br>所以，在64位linux系统中，建议安装<a href="http://download.savannah.gnu.org/releases/libunwind/libunwind-0.99-beta.tar.gz" target="_blank" rel="noopener">libunwind-0.99-beta</a>这个版本，因为它会调用malloc，版本太低或过高会引发内存泄露。</p>
+        <h4 id="tools"><a href="#tools" class="headerlink" title="tools"></a>tools</h4><p>1.<br><a href="https://github.com/gperftools/gperftools" target="_blank" rel="noopener">gperftools</a><br>gperftools将C++中的malloc替换成tcmalloc，然后就可以监控C++内存。<br>所以，在64位linux系统中，建议安装<a href="http://download.savannah.gnu.org/releases/libunwind/libunwind-0.99-beta.tar.gz" target="_blank" rel="noopener">libunwind-0.99-beta</a>这个版本，因为它会调用malloc，版本太低或过高会引发内存泄露。</p>
 <p><strong>install libunwind-0.99-beta</strong><br>cd libunwind-0.99-beta<br>./configure<br>make<br>如果报错error: ‘longjmp’ aliased to undefined symbol ‘_longjmp ，<br>删除此文件重新解压，执行./configure后，在src/Makefile中搜索CPPFLAGS， 添加-U_FORTIFY_SOURCE，如<br><code>CPPFLAGS = -U_FORTIFY_SOURCE  -D_GNU_SOURCE -DNDEBUG</code>，然后make<br>sudo make install<br>此过程参考<a href="http://blog.csdn.net/chosen0ne/article/details/9338591" target="_blank" rel="noopener">1</a>,<a href="http://blog.csdn.net/littletigerat/article/details/7738731" target="_blank" rel="noopener">tcmalloc学习笔记</a><br><strong>install gperftools-2.5.93</strong><br>cd gperftools-2.5.93<br>./configure<br>make<br>sudo make install</p>
 <p><strong>监控</strong><br>//sudo vi /etc/ld.so.conf.d/usr_local_lib.conf<br>//加入/usr/local/lib     (libtcmalloc.so的lib所在目录)<br>//sudo /sbin/ldconfig   使libunwind生效<br>参考<a href=""></a></p>
 <p>export HEAPPROFILE=/home/hero/tmp/perftools        dump的文件位置和前缀，任意定义<br>export LD_PRELOAD=/usr/local/lib/libtcmalloc.so<br>export HEAPCHECK=normal           监控方式，可选？</p>
 <p>执行java命令<br>java moc.direct.buff.DirectBuff</p>
 <p>查看dump信息<br>pprof –text /usr/lib/jdk/bin/java ~/tmp/perftools.0001.heap</p>
 <p>并没有想象的好用，还会导致jvm崩溃。</p>
-<p>2.<br>jvisualvm插件<br><a href="https://github.com/oracle/visualvm/releases">com-sun-tools-visualvm-modules-buffermonitor.nbm</a><br>安装方式很简单，打开jvisualvm，点击Tools—Plugins,选择Available Plugins或Downloaded—Add Plugins。<br>com-sun-tools-visualvm-modules-mbeans.nbm可以查看是哪个类申请的。</p>
+<p>2.<br>jvisualvm插件<br><a href="https://github.com/oracle/visualvm/releases" target="_blank" rel="noopener">com-sun-tools-visualvm-modules-buffermonitor.nbm</a><br>安装方式很简单，打开jvisualvm，点击Tools—Plugins,选择Available Plugins或Downloaded—Add Plugins。<br>com-sun-tools-visualvm-modules-mbeans.nbm可以查看是哪个类申请的。</p>
 <h4 id="监控远程java进程"><a href="#监控远程java进程" class="headerlink" title="监控远程java进程"></a>监控远程java进程</h4><p>配置启动项</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">-Dcom.sun.management.jmxremote.port&#x3D;1899    &#x2F;&#x2F; 任意空闲端口</span><br><span class="line">-Dcom.sun.management.jmxremote.ssl&#x3D;false </span><br><span class="line">-Dcom.sun.management.jmxremote.authenticate&#x3D;false </span><br><span class="line">-Djava.rmi.server.hostname&#x3D;192.168.1.54     &#x2F;&#x2F; 远程应用所在IP</span><br></pre></td></tr></table></figure>
 
@@ -115,7 +119,7 @@
       
     </div>
     <footer class="article-footer">
-      <!-- <a data-url="https://github.com/carl-zk/blog/2017/06/18/%E6%9F%A5%E7%9C%8B%E5%A0%86%E5%A4%96%E5%86%85%E5%AD%98/" data-id="ck792utcn008vogpsdnpc5hig" class="article-share-link">分享</a> -->
+      <!-- <a data-url="https://carl-zk.github.io/blog/2017/06/18/%E6%9F%A5%E7%9C%8B%E5%A0%86%E5%A4%96%E5%86%85%E5%AD%98/" data-id="ck79vx1ks008xmups1ohd20uy" class="article-share-link">分享</a> -->
       
       
       

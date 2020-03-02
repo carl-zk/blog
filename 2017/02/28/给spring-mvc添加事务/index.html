@@ -8,16 +8,18 @@
   <meta name="description" content="所谓的spring容器，一般指的是spring-context所提供的IOC容器；但是我们一般都是要建立一个web项目，所以就要引入另一个依赖—spring-web，它也提供了一个容器，在web.xml文件中配置一个ContextLoaderListener就可以将IOC容器加入到spring-web容器中。    很多博客都将了上面的这个事实，但是他们却没给一个很准确的给controller层">
 <meta property="og:type" content="article">
 <meta property="og:title" content="给Spring-Mvc添加事务">
-<meta property="og:url" content="https://github.com/carl-zk/blog/2017/02/28/%E7%BB%99spring-mvc%E6%B7%BB%E5%8A%A0%E4%BA%8B%E5%8A%A1/index.html">
+<meta property="og:url" content="https://carl-zk.github.io/blog/2017/02/28/%E7%BB%99spring-mvc%E6%B7%BB%E5%8A%A0%E4%BA%8B%E5%8A%A1/index.html">
 <meta property="og:site_name" content="一叶轻舟渡万江">
 <meta property="og:description" content="所谓的spring容器，一般指的是spring-context所提供的IOC容器；但是我们一般都是要建立一个web项目，所以就要引入另一个依赖—spring-web，它也提供了一个容器，在web.xml文件中配置一个ContextLoaderListener就可以将IOC容器加入到spring-web容器中。    很多博客都将了上面的这个事实，但是他们却没给一个很准确的给controller层">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://github.com/carl-zk/blog/2017/02/28/%E7%BB%99spring-mvc%E6%B7%BB%E5%8A%A0%E4%BA%8B%E5%8A%A1/container.svg">
+<meta property="og:image" content="https://carl-zk.github.io/blog/2017/02/28/%E7%BB%99spring-mvc%E6%B7%BB%E5%8A%A0%E4%BA%8B%E5%8A%A1/container.svg">
 <meta property="article:published_time" content="2017-02-27T16:48:17.000Z">
 <meta property="article:modified_time" content="2019-02-16T01:58:27.863Z">
 <meta property="article:author" content="carl-zk">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://github.com/carl-zk/blog/2017/02/28/%E7%BB%99spring-mvc%E6%B7%BB%E5%8A%A0%E4%BA%8B%E5%8A%A1/container.svg">
+<meta name="twitter:image" content="https://carl-zk.github.io/blog/2017/02/28/%E7%BB%99spring-mvc%E6%B7%BB%E5%8A%A0%E4%BA%8B%E5%8A%A1/container.svg">
+  
+    <link rel="alternate" href="/blog/atom.xml" title="一叶轻舟渡万江" type="application/atom+xml">
   
   
     <link rel="icon" href="img/favicon2.ico">
@@ -42,10 +44,12 @@
     <div id="header-inner" class="inner">
       <nav id="sub-nav">
         
+          <a id="nav-rss-link" class="nav-icon" href="/blog/atom.xml" title="RSS Feed"></a>
+        
         <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
       </nav>
       <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://github.com/carl-zk/blog"></form>
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://carl-zk.github.io/blog"></form>
       </div>
       <nav id="main-nav">
         <a id="main-nav-toggle" class="nav-icon"></a>
@@ -114,7 +118,7 @@
       
     </div>
     <footer class="article-footer">
-      <!-- <a data-url="https://github.com/carl-zk/blog/2017/02/28/%E7%BB%99spring-mvc%E6%B7%BB%E5%8A%A0%E4%BA%8B%E5%8A%A1/" data-id="ck792utcz00a3ogps8n8of8ou" class="article-share-link">分享</a> -->
+      <!-- <a data-url="https://carl-zk.github.io/blog/2017/02/28/%E7%BB%99spring-mvc%E6%B7%BB%E5%8A%A0%E4%BA%8B%E5%8A%A1/" data-id="ck79vx1l700a5mupshx8za7ir" class="article-share-link">分享</a> -->
       
       
       

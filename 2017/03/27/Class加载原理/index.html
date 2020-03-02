@@ -8,7 +8,7 @@
   <meta name="description" content="今天想利用类加载机制写一个单例类,结果发现自己不会写了,内部类没有写成static,搞不懂为什么在外部类中不能new这个内部类——当然不能,因为外部类的这个方法是static的,而这个内部类不是static,不要以为这样就结束了,原理你清楚吗? 参考文献Internals of Java Class Loading深入探讨Java类加载器 Class和Dataclass代表一段可执行的代码(cod">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Class加载原理">
-<meta property="og:url" content="https://github.com/carl-zk/blog/2017/03/27/Class%E5%8A%A0%E8%BD%BD%E5%8E%9F%E7%90%86/index.html">
+<meta property="og:url" content="https://carl-zk.github.io/blog/2017/03/27/Class%E5%8A%A0%E8%BD%BD%E5%8E%9F%E7%90%86/index.html">
 <meta property="og:site_name" content="一叶轻舟渡万江">
 <meta property="og:description" content="今天想利用类加载机制写一个单例类,结果发现自己不会写了,内部类没有写成static,搞不懂为什么在外部类中不能new这个内部类——当然不能,因为外部类的这个方法是static的,而这个内部类不是static,不要以为这样就结束了,原理你清楚吗? 参考文献Internals of Java Class Loading深入探讨Java类加载器 Class和Dataclass代表一段可执行的代码(cod">
 <meta property="og:locale" content="zh_CN">
@@ -17,6 +17,8 @@
 <meta property="article:author" content="carl-zk">
 <meta property="article:tag" content="reflect">
 <meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/blog/atom.xml" title="一叶轻舟渡万江" type="application/atom+xml">
   
   
     <link rel="icon" href="img/favicon2.ico">
@@ -41,10 +43,12 @@
     <div id="header-inner" class="inner">
       <nav id="sub-nav">
         
+          <a id="nav-rss-link" class="nav-icon" href="/blog/atom.xml" title="RSS Feed"></a>
+        
         <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
       </nav>
       <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://github.com/carl-zk/blog"></form>
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://carl-zk.github.io/blog"></form>
       </div>
       <nav id="main-nav">
         <a id="main-nav-toggle" class="nav-icon"></a>
@@ -132,7 +136,7 @@
       
     </div>
     <footer class="article-footer">
-      <!-- <a data-url="https://github.com/carl-zk/blog/2017/03/27/Class%E5%8A%A0%E8%BD%BD%E5%8E%9F%E7%90%86/" data-id="ck792uta0000dogps58bcdnt8" class="article-share-link">分享</a> -->
+      <!-- <a data-url="https://carl-zk.github.io/blog/2017/03/27/Class%E5%8A%A0%E8%BD%BD%E5%8E%9F%E7%90%86/" data-id="ck79vx1i8000fmupsd2ixb87g" class="article-share-link">分享</a> -->
       
       
       

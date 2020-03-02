@@ -8,17 +8,19 @@
   <meta name="description" content="抽象工厂模式与简单工厂模式的区别在于,抽象工厂模式针对的是一系列对象,简单工厂模式是针对单独一个对象.   简单工厂模式可以简化抽象工厂模式,去掉AbstractFactory,ConcreteFactory1,ConcreteFactory2改为Factory.  利用反射去掉Factory中的switch…case…语句.">
 <meta property="og:type" content="article">
 <meta property="og:title" content="抽象工厂模式">
-<meta property="og:url" content="https://github.com/carl-zk/blog/2017/02/19/%E6%8A%BD%E8%B1%A1%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/index.html">
+<meta property="og:url" content="https://carl-zk.github.io/blog/2017/02/19/%E6%8A%BD%E8%B1%A1%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/index.html">
 <meta property="og:site_name" content="一叶轻舟渡万江">
 <meta property="og:description" content="抽象工厂模式与简单工厂模式的区别在于,抽象工厂模式针对的是一系列对象,简单工厂模式是针对单独一个对象.   简单工厂模式可以简化抽象工厂模式,去掉AbstractFactory,ConcreteFactory1,ConcreteFactory2改为Factory.  利用反射去掉Factory中的switch…case…语句.">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://github.com/carl-zk/blog/2017/02/19/%E6%8A%BD%E8%B1%A1%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/abstractFactory.svg">
-<meta property="og:image" content="https://github.com/carl-zk/blog/2017/02/19/%E6%8A%BD%E8%B1%A1%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/abstractFactory2.svg">
+<meta property="og:image" content="https://carl-zk.github.io/blog/2017/02/19/%E6%8A%BD%E8%B1%A1%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/abstractFactory.svg">
+<meta property="og:image" content="https://carl-zk.github.io/blog/2017/02/19/%E6%8A%BD%E8%B1%A1%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/abstractFactory2.svg">
 <meta property="article:published_time" content="2017-02-19T07:43:30.000Z">
 <meta property="article:modified_time" content="2019-02-16T01:58:27.856Z">
 <meta property="article:author" content="carl-zk">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://github.com/carl-zk/blog/2017/02/19/%E6%8A%BD%E8%B1%A1%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/abstractFactory.svg">
+<meta name="twitter:image" content="https://carl-zk.github.io/blog/2017/02/19/%E6%8A%BD%E8%B1%A1%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/abstractFactory.svg">
+  
+    <link rel="alternate" href="/blog/atom.xml" title="一叶轻舟渡万江" type="application/atom+xml">
   
   
     <link rel="icon" href="img/favicon2.ico">
@@ -43,10 +45,12 @@
     <div id="header-inner" class="inner">
       <nav id="sub-nav">
         
+          <a id="nav-rss-link" class="nav-icon" href="/blog/atom.xml" title="RSS Feed"></a>
+        
         <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
       </nav>
       <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://github.com/carl-zk/blog"></form>
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://carl-zk.github.io/blog"></form>
       </div>
       <nav id="main-nav">
         <a id="main-nav-toggle" class="nav-icon"></a>
@@ -112,7 +116,7 @@
       
     </div>
     <footer class="article-footer">
-      <!-- <a data-url="https://github.com/carl-zk/blog/2017/02/19/%E6%8A%BD%E8%B1%A1%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/" data-id="ck792utcj008kogps150b22bs" class="article-share-link">分享</a> -->
+      <!-- <a data-url="https://carl-zk.github.io/blog/2017/02/19/%E6%8A%BD%E8%B1%A1%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/" data-id="ck79vx1ko008mmupsb59959z3" class="article-share-link">分享</a> -->
       
       
       

@@ -8,16 +8,18 @@
   <meta name="description" content="它容易设计一个命令队列; 在需要的情况下,可容易记入日志; 允许接收请求的一方决定是否要否决请求; 容易实现对请求的撤销和重做; 由于加入新的具体命令类不影响其它类,因此增加新的会很容易.   命令模式把请求一个操作的对象与知道怎么执行一个操作的对象分割开.  123456789101112131415package order;&#x2F;** * Created by hero on 17-2-20.">
 <meta property="og:type" content="article">
 <meta property="og:title" content="命令模式">
-<meta property="og:url" content="https://github.com/carl-zk/blog/2017/02/20/%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F/index.html">
+<meta property="og:url" content="https://carl-zk.github.io/blog/2017/02/20/%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F/index.html">
 <meta property="og:site_name" content="一叶轻舟渡万江">
 <meta property="og:description" content="它容易设计一个命令队列; 在需要的情况下,可容易记入日志; 允许接收请求的一方决定是否要否决请求; 容易实现对请求的撤销和重做; 由于加入新的具体命令类不影响其它类,因此增加新的会很容易.   命令模式把请求一个操作的对象与知道怎么执行一个操作的对象分割开.  123456789101112131415package order;&#x2F;** * Created by hero on 17-2-20.">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://github.com/carl-zk/blog/2017/02/20/%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F/order.svg">
+<meta property="og:image" content="https://carl-zk.github.io/blog/2017/02/20/%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F/order.svg">
 <meta property="article:published_time" content="2017-02-20T08:23:52.000Z">
 <meta property="article:modified_time" content="2019-02-16T01:58:27.849Z">
 <meta property="article:author" content="carl-zk">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://github.com/carl-zk/blog/2017/02/20/%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F/order.svg">
+<meta name="twitter:image" content="https://carl-zk.github.io/blog/2017/02/20/%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F/order.svg">
+  
+    <link rel="alternate" href="/blog/atom.xml" title="一叶轻舟渡万江" type="application/atom+xml">
   
   
     <link rel="icon" href="img/favicon2.ico">
@@ -42,10 +44,12 @@
     <div id="header-inner" class="inner">
       <nav id="sub-nav">
         
+          <a id="nav-rss-link" class="nav-icon" href="/blog/atom.xml" title="RSS Feed"></a>
+        
         <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
       </nav>
       <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://github.com/carl-zk/blog"></form>
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://carl-zk.github.io/blog"></form>
       </div>
       <nav id="main-nav">
         <a id="main-nav-toggle" class="nav-icon"></a>
@@ -122,7 +126,7 @@
       
     </div>
     <footer class="article-footer">
-      <!-- <a data-url="https://github.com/carl-zk/blog/2017/02/20/%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F/" data-id="ck792utc30075ogps0sp218e0" class="article-share-link">分享</a> -->
+      <!-- <a data-url="https://carl-zk.github.io/blog/2017/02/20/%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F/" data-id="ck79vx1k90079mupsh5330nz7" class="article-share-link">分享</a> -->
       
       
       

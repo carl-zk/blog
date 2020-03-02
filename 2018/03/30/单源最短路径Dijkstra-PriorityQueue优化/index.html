@@ -8,7 +8,7 @@
   <meta name="description" content="无向图中，权值&gt;&#x3D;0，找出从节点s到t的最短距离：令d[i]为从s到i的最短距离，则从s到i的最短路径不会再变更，以后再更新d，d[i]也不会改变，那么与i相邻的其它节点的最短距离也就随之确定：d[j] &#x3D; min(d[j], d[i] + (从i到j的权值))，j &#x3D; 1，2，3….更新完与i相邻的节点j后，d[j]也就固定下来了，再从d[j]中选取一个 距离最小的 &amp;&amp;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="单源最短路径Dijkstra+PriorityQueue优化">
-<meta property="og:url" content="https://github.com/carl-zk/blog/2018/03/30/%E5%8D%95%E6%BA%90%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84Dijkstra-PriorityQueue%E4%BC%98%E5%8C%96/index.html">
+<meta property="og:url" content="https://carl-zk.github.io/blog/2018/03/30/%E5%8D%95%E6%BA%90%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84Dijkstra-PriorityQueue%E4%BC%98%E5%8C%96/index.html">
 <meta property="og:site_name" content="一叶轻舟渡万江">
 <meta property="og:description" content="无向图中，权值&gt;&#x3D;0，找出从节点s到t的最短距离：令d[i]为从s到i的最短距离，则从s到i的最短路径不会再变更，以后再更新d，d[i]也不会改变，那么与i相邻的其它节点的最短距离也就随之确定：d[j] &#x3D; min(d[j], d[i] + (从i到j的权值))，j &#x3D; 1，2，3….更新完与i相邻的节点j后，d[j]也就固定下来了，再从d[j]中选取一个 距离最小的 &amp;&amp;">
 <meta property="og:locale" content="zh_CN">
@@ -16,6 +16,8 @@
 <meta property="article:modified_time" content="2019-02-16T01:58:27.848Z">
 <meta property="article:author" content="carl-zk">
 <meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/blog/atom.xml" title="一叶轻舟渡万江" type="application/atom+xml">
   
   
     <link rel="icon" href="img/favicon2.ico">
@@ -40,10 +42,12 @@
     <div id="header-inner" class="inner">
       <nav id="sub-nav">
         
+          <a id="nav-rss-link" class="nav-icon" href="/blog/atom.xml" title="RSS Feed"></a>
+        
         <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
       </nav>
       <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://github.com/carl-zk/blog"></form>
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://carl-zk.github.io/blog"></form>
       </div>
       <nav id="main-nav">
         <a id="main-nav-toggle" class="nav-icon"></a>
@@ -110,7 +114,7 @@
       
     </div>
     <footer class="article-footer">
-      <!-- <a data-url="https://github.com/carl-zk/blog/2018/03/30/%E5%8D%95%E6%BA%90%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84Dijkstra-PriorityQueue%E4%BC%98%E5%8C%96/" data-id="ck792utc10070ogps8lm4es1t" class="article-share-link">分享</a> -->
+      <!-- <a data-url="https://carl-zk.github.io/blog/2018/03/30/%E5%8D%95%E6%BA%90%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84Dijkstra-PriorityQueue%E4%BC%98%E5%8C%96/" data-id="ck79vx1k70072mupsgi743r80" class="article-share-link">分享</a> -->
       
       
       

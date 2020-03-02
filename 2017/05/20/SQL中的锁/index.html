@@ -8,7 +8,7 @@
   <meta name="description" content="Connnection设置autoCommit&#x3D;false时，sql执行更新之后还未commit，其它更新这条数据的sql会等待还是顺利执行完成？ 测试环境mysql  Ver 14.14 Distrib 5.5.55, for debian-linux-gnu (x86_64) using readline 6.3Linux itmebrnb 3.16.0-4-amd64 #1 SMP Debi">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SQL中的锁">
-<meta property="og:url" content="https://github.com/carl-zk/blog/2017/05/20/SQL%E4%B8%AD%E7%9A%84%E9%94%81/index.html">
+<meta property="og:url" content="https://carl-zk.github.io/blog/2017/05/20/SQL%E4%B8%AD%E7%9A%84%E9%94%81/index.html">
 <meta property="og:site_name" content="一叶轻舟渡万江">
 <meta property="og:description" content="Connnection设置autoCommit&#x3D;false时，sql执行更新之后还未commit，其它更新这条数据的sql会等待还是顺利执行完成？ 测试环境mysql  Ver 14.14 Distrib 5.5.55, for debian-linux-gnu (x86_64) using readline 6.3Linux itmebrnb 3.16.0-4-amd64 #1 SMP Debi">
 <meta property="og:locale" content="zh_CN">
@@ -17,6 +17,8 @@
 <meta property="article:author" content="carl-zk">
 <meta property="article:tag" content="sql">
 <meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/blog/atom.xml" title="一叶轻舟渡万江" type="application/atom+xml">
   
   
     <link rel="icon" href="img/favicon2.ico">
@@ -41,10 +43,12 @@
     <div id="header-inner" class="inner">
       <nav id="sub-nav">
         
+          <a id="nav-rss-link" class="nav-icon" href="/blog/atom.xml" title="RSS Feed"></a>
+        
         <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
       </nav>
       <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://github.com/carl-zk/blog"></form>
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://carl-zk.github.io/blog"></form>
       </div>
       <nav id="main-nav">
         <a id="main-nav-toggle" class="nav-icon"></a>
@@ -97,7 +101,7 @@
         
         <p>Connnection设置autoCommit=false时，sql执行更新之后还未commit，其它更新这条数据的sql会等待还是顺利执行完成？</p>
 <p><strong>测试环境</strong><br>mysql  Ver 14.14 Distrib 5.5.55, for debian-linux-gnu (x86_64) using readline 6.3<br>Linux itmebrnb 3.16.0-4-amd64 #1 SMP Debian 3.16.43-2 (2017-04-30) x86_64 GNU/Linux</p>
-<p><a href="https://github.com/carl-zk/JavaJava/tree/master/SqlRowLock">测试代码</a></p>
+<p><a href="https://github.com/carl-zk/JavaJava/tree/master/SqlRowLock" target="_blank" rel="noopener">测试代码</a></p>
 <h4 id="测试方法"><a href="#测试方法" class="headerlink" title="测试方法"></a>测试方法</h4><p>在IDEA中debug模式下运行TestA，断点设在MySqlUserRepository</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">save</span><span class="params">(User user)</span> </span>&#123;</span><br><span class="line">        Connection conn = DBUtil.getConnection();</span><br><span class="line">        PreparedStatement stat = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">int</span> res = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            conn.setAutoCommit(<span class="keyword">false</span>);</span><br><span class="line">            stat = conn.prepareStatement(<span class="string">"update user set name=?, age=? where id=?"</span>);</span><br><span class="line">            stat.setString(<span class="number">1</span>, user.getName());</span><br><span class="line">            stat.setInt(<span class="number">2</span>, user.getAge());</span><br><span class="line">            stat.setInt(<span class="number">3</span>, user.getId());</span><br><span class="line">            res = stat.executeUpdate();</span><br><span class="line">            conn.commit();      <span class="comment">// 在这里设置断点则其他update命令将等待</span></span><br><span class="line">        &#125; <span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            DBUtil.closeAll(<span class="keyword">null</span>, stat, conn);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
 
@@ -109,7 +113,7 @@
       
     </div>
     <footer class="article-footer">
-      <!-- <a data-url="https://github.com/carl-zk/blog/2017/05/20/SQL%E4%B8%AD%E7%9A%84%E9%94%81/" data-id="ck792utau0039ogpsg53k4vii" class="article-share-link">分享</a> -->
+      <!-- <a data-url="https://carl-zk.github.io/blog/2017/05/20/SQL%E4%B8%AD%E7%9A%84%E9%94%81/" data-id="ck79vx1j5003amups7ehf3bij" class="article-share-link">分享</a> -->
       
       
       
