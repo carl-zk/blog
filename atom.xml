@@ -6,7 +6,7 @@
   <link href="/blog//atom.xml" rel="self"/>
   
   <link href="https://carl-zk.github.io/blog/"/>
-  <updated>2020-02-29T00:47:21.262Z</updated>
+  <updated>2020-03-04T07:17:39.417Z</updated>
   <id>https://carl-zk.github.io/blog/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Gitalk 运作原理</title>
+    <link href="https://carl-zk.github.io/blog/2020/03/03/gitalk-%E8%BF%90%E4%BD%9C%E5%8E%9F%E7%90%86/"/>
+    <id>https://carl-zk.github.io/blog/2020/03/03/gitalk-运作原理/</id>
+    <published>2020-03-03T05:56:21.000Z</published>
+    <updated>2020-03-04T07:17:39.417Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;gitalk就是我现在用的评论工具，它基于GitHub Issue。集成倒是简单，对于git pages的博客来讲，算是很方便的评论系统了，只要有GitHub账号就可以留评论。不过使用之前还担心会对GitHub仓库带来隐患，下面是整个调查过程。&lt;br&gt;我不会介绍如何配置gitalk。我先介绍 OAuth 2 和 GitHub OAuth APPs，然后做一个demo来具体化 GitHub OAuth 认证流程，最后结合gitalk源码来看gitalk的实现。&lt;/p&gt;
+&lt;h2 id=&quot;Gitalk-配置要求&quot;&gt;&lt;a href=&quot;#Gitalk-配置要求&quot; class=&quot;headerlink&quot; title=&quot;Gitalk 配置要求&quot;&gt;&lt;/a&gt;Gitalk 配置要求&lt;/h2&gt;&lt;p&gt;按照说明&lt;a href=&quot;https://github.com/gitalk/gitalk&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;https://github.com/gitalk/gitalk&lt;/a&gt;新建一个 OAuth App，然后配置几个参数即可。&lt;/p&gt;
+&lt;figure cl
+      
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>Segment Tree</title>

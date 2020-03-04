@@ -85,10 +85,10 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-when-IntelliJ-goes-fool" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-hibernate" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2018/04/18/when-IntelliJ-goes-fool/" class="article-date">
-  <time datetime="2018-04-17T16:20:47.000Z" itemprop="datePublished">2018-04-18</time>
+    <a href="/blog/2018/04/19/hibernate/" class="article-date">
+  <time datetime="2018-04-19T14:30:51.000Z" itemprop="datePublished">2018-04-19</time>
 </a>
     
   </div>
@@ -99,7 +99,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2018/04/18/when-IntelliJ-goes-fool/">When IntelliJ Goes Fool</a>
+      <a class="article-title" href="/blog/2018/04/19/hibernate/">Hibernate</a>
     </h1>
   
 
@@ -109,26 +109,24 @@
       
         <!-- Table of Contents -->
         
-        <blockquote>
-<p>hehe</p>
-</blockquote>
-<p>当已经被公认是最好用的工具后，并且你已经使用了很久，而且它也从未让你感到失望。<br>直到出现某一时刻，它卡顿了，它莫名其妙的提示一些你关也关不掉的信息，<br>你终于被弄疯掉了！！！</p>
-<p>这就是我这次使用IDEA的感受。</p>
-<p>建的包‘moc.oreh’在没有mark源文件root时只是作为了一个文件夹的名字！这样idea就死活找不到某个类，提示信息只是‘can not resolve symbol ‘moc’ ’，懵懂的我可能太较真，关不掉这个提示信息让我无法忍受，所以我尝试了漫长的求知之旅。<br>我去<code>/Applications/IntelliJ IDEA.app/Contents</code>，<br><code>/Users/hero/Library/Preferences/IntelliJIdea2018.1</code>,<br><code>/Users/hero/Library/Caches/IntelliJIdea2018.1/caches</code><br>各个目录下备份、删除，才终于发现问题完美的重现，看来并不是配置搞错了，但是idea15的提示信息是如此的简洁，让我摸不到头脑，直到我安装了最新版本的idea，这个提示信息一下子让我明白了原来是两个包名成了一个文件名。</p>
-<p>从这件事上可以学到：</p>
-<ol>
-<li>工具是如此的便利，但同时它也让你丢失了很多能力。</li>
-<li>习惯一旦养成，就会按着期望去做事，不愿改变也不愿思考。</li>
-<li>工具可能会由好变得更好，但人的演化是相反的。</li>
-<li>第4点还没想好，不过我得先睡觉了。</li>
-</ol>
-<p>最好的编译器：idea；<br>最好的笔记本：Mac；<br>这些拿到了“最好的”头衔的东西，用起来还是会让人失望。</p>
+        <h1 id="hibernate-结果集映射"><a href="#hibernate-结果集映射" class="headerlink" title="hibernate 结果集映射"></a>hibernate 结果集映射</h1><p><a href="http://peijunlin2008.iteye.com/blog/1269266" target="_blank" rel="noopener">http://peijunlin2008.iteye.com/blog/1269266</a></p>
+<h2 id="Result-gt-Map"><a href="#Result-gt-Map" class="headerlink" title="Result -&gt; Map"></a>Result -&gt; Map</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">List&lt;Map&gt; phoneCallTotalDurations = entityManager.createQuery(</span><br><span class="line">    <span class="string">"select new map("</span> +</span><br><span class="line">    <span class="string">"    p.number as phoneNumber , "</span> +</span><br><span class="line">    <span class="string">"    sum(c.duration) as totalDuration, "</span> +</span><br><span class="line">    <span class="string">"    avg(c.duration) as averageDuration "</span> +</span><br><span class="line">    <span class="string">")  "</span> +</span><br><span class="line">    <span class="string">"from Call c "</span> +</span><br><span class="line">    <span class="string">"join c.phone p "</span> +</span><br><span class="line">    <span class="string">"group by p.number "</span>, Map<span class="class">.<span class="keyword">class</span> )</span></span><br><span class="line"><span class="class">.<span class="title">getResultList</span>()</span>;</span><br></pre></td></tr></table></figure>
 
+<p>需要注意的点：<br>like 的写法；(in的写法类似：key in (:scope))</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.hibernate.SQLQuery;</span><br><span class="line"><span class="keyword">import</span> org.hibernate.transform.Transformers;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> List&lt;xxxVo&gt; <span class="title">listAllMembers</span><span class="params">(Long orderUsedTimeId, String keyword, Integer page, Integer count)</span> </span>&#123;</span><br><span class="line">    String haskey = <span class="string">"select u.id, u.nickname, u.background, u.portrait, c.name as companyName, case when m.id is null then '0' else '1' end as isInvited from t_user u join t_company c on u.companyId=c.id left join t_meetinginvitationrecord m on u.id=m.beInvitedUserId and m.orderUsedTimeId=:orderUsedTimeId where u.nickname like :keyword"</span>;</span><br><span class="line">    List&lt;Map&gt; list = Member.entityManager()</span><br><span class="line">                .createNativeQuery(haskey)</span><br><span class="line">                .setParameter(<span class="string">"keyword"</span>, <span class="string">"%"</span> + keyword + <span class="string">"%"</span>)</span><br><span class="line">                .setParameter(<span class="string">"orderUsedTimeId"</span>, orderUsedTimeId)</span><br><span class="line">                .setFirstResult((page - <span class="number">1</span>) * count)</span><br><span class="line">                .setMaxResults(count)</span><br><span class="line">                .unwrap(SQLQuery<span class="class">.<span class="keyword">class</span>).<span class="title">setResultTransformer</span>(<span class="title">Transformers</span>.<span class="title">ALIAS_TO_ENTITY_MAP</span>).<span class="title">list</span>()</span>;</span><br><span class="line">    List&lt;xxxVo&gt; result = <span class="keyword">new</span> LinkedList&lt;&gt;();</span><br><span class="line">    list.forEach(item -&gt; &#123;</span><br><span class="line">        BigInteger id = (BigInteger) item.get(<span class="string">"id"</span>);</span><br><span class="line">        String nickname = (String) item.get(<span class="string">"nickname"</span>);</span><br><span class="line">        String background = (String) item.get(<span class="string">"background"</span>);</span><br><span class="line">        String portrait = (String) item.get(<span class="string">"portrait"</span>);</span><br><span class="line">        String companyName = (String) item.get(<span class="string">"companyName"</span>);</span><br><span class="line">        Boolean isInvited = ((String) item.get(<span class="string">"isInvited"</span>)).equals(<span class="string">"0"</span>) ? <span class="keyword">false</span> : <span class="keyword">true</span>;</span><br><span class="line">        result.add(<span class="keyword">new</span> xxxVo(id.longValue(), nickname, background, portrait, companyName, isInvited));</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Result-gt-List-lt-gt"><a href="#Result-gt-List-lt-gt" class="headerlink" title="Result -&gt; List&lt;&gt;"></a>Result -&gt; List&lt;&gt;</h2><p>都不怎么好，非得选就推荐用它了。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">List&lt;Object[]&gt; persons = entityManager.createQuery(</span><br><span class="line">    <span class="string">"select distinct pr, ph "</span> +</span><br><span class="line">    <span class="string">"from Person pr, Phone ph "</span> +</span><br><span class="line">    <span class="string">"where ph.person = pr and ph is not null"</span>, Object[]<span class="class">.<span class="keyword">class</span>)</span></span><br><span class="line"><span class="class">.<span class="title">getResultList</span>()</span>;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Result-gt-Stream-lt-gt"><a href="#Result-gt-Stream-lt-gt" class="headerlink" title="Result -&gt; Stream&lt;&gt;"></a>Result -&gt; Stream&lt;&gt;</h2><p><a href="http://hibernate.org/" target="_blank" rel="noopener">http://hibernate.org/</a></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> ( Stream&lt;Object[]&gt; persons = session.createQuery(</span><br><span class="line">    <span class="string">"select p.name, p.nickName "</span> +</span><br><span class="line">    <span class="string">"from Person p "</span> +</span><br><span class="line">    <span class="string">"where p.name like :name"</span> )</span><br><span class="line">.setParameter( <span class="string">"name"</span>, <span class="string">"J%"</span> )</span><br><span class="line">.stream() ) &#123;</span><br><span class="line"></span><br><span class="line">    persons</span><br><span class="line">    .map( row -&gt; <span class="keyword">new</span> PersonNames(</span><br><span class="line">            (String) row[<span class="number">0</span>],</span><br><span class="line">            (String) row[<span class="number">1</span>] ) )</span><br><span class="line">    .forEach( <span class="keyword">this</span>::process );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
     <footer class="article-footer">
-      <!-- <a data-url="https://carl-zk.github.io/blog/2018/04/18/when-IntelliJ-goes-fool/" data-id="ck7adqx0y005xdxps7bomcalg" class="article-share-link">分享</a> -->
+      <!-- <a data-url="https://carl-zk.github.io/blog/2018/04/19/hibernate/" data-id="ck7d04try004a30psbrlve6yh" class="article-share-link">分享</a> -->
       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/hibernate/" rel="tag">hibernate</a></li></ul>
+
     </footer>
   </div>
   
@@ -139,7 +137,7 @@
 
 
   <nav id="page-nav">
-    <a class="extend prev" rel="prev" href="/blog/page/24/">&lt;&lt;上一页</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/23/">23</a><a class="page-number" href="/blog/page/24/">24</a><span class="page-number current">25</span><a class="page-number" href="/blog/page/26/">26</a><a class="page-number" href="/blog/page/27/">27</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/178/">178</a><a class="extend next" rel="next" href="/blog/page/26/">下一页&gt;&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/24/">&lt;&lt;上一页</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/23/">23</a><a class="page-number" href="/blog/page/24/">24</a><span class="page-number current">25</span><a class="page-number" href="/blog/page/26/">26</a><a class="page-number" href="/blog/page/27/">27</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/179/">179</a><a class="extend next" rel="next" href="/blog/page/26/">下一页&gt;&gt;</a>
   </nav>
 
 </section>
@@ -163,6 +161,10 @@
       <ul>
         
           <li>
+            <a href="/blog/2020/03/03/gitalk-%E8%BF%90%E4%BD%9C%E5%8E%9F%E7%90%86/">Gitalk 运作原理</a>
+          </li>
+        
+          <li>
             <a href="/blog/2020/02/28/Segment-Tree/">Segment Tree</a>
           </li>
         
@@ -176,10 +178,6 @@
         
           <li>
             <a href="/blog/2019/05/02/Jenkins-CI-CD/">Jenkins CI/CD</a>
-          </li>
-        
-          <li>
-            <a href="/blog/2019/04/21/Jenkins-Starter/">Jenkins Starter</a>
           </li>
         
       </ul>

@@ -85,10 +85,10 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-elasticsearch" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-问题总结" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2018/10/10/elasticsearch/" class="article-date">
-  <time datetime="2018-10-10T01:34:33.000Z" itemprop="datePublished">2018-10-10</time>
+    <a href="/blog/2018/11/16/%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/" class="article-date">
+  <time datetime="2018-11-16T06:12:09.000Z" itemprop="datePublished">2018-11-16</time>
 </a>
     
   </div>
@@ -99,7 +99,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2018/10/10/elasticsearch/">Elasticsearch</a>
+      <a class="article-title" href="/blog/2018/11/16/%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/">问题总结</a>
     </h1>
   
 
@@ -109,26 +109,17 @@
       
         <!-- Table of Contents -->
         
-        <h2 id="install-es-and-plugins"><a href="#install-es-and-plugins" class="headerlink" title="install es and plugins"></a>install es and plugins</h2><p><a href="https://www.elastic.co/downloads" target="_blank" rel="noopener">elasticsearch-6.4.1 download</a><br>plugin:<br><a href="https://www.elastic.co/guide/en/elasticsearch/plugins/6.0/analysis-smartcn.html" target="_blank" rel="noopener">analysis-smartcn</a> (eg: ./bin/elasticsearch-plugin install analysis-smartcn)<br><a href="https://github.com/medcl/elasticsearch-analysis-ik" target="_blank" rel="noopener">ik</a></p>
-<p>then start es: bin/elasticsearch</p>
-<h2 id="surfing"><a href="#surfing" class="headerlink" title="surfing"></a>surfing</h2><h3 id="验证分词器是否生效"><a href="#验证分词器是否生效" class="headerlink" title="验证分词器是否生效"></a>验证分词器是否生效</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">curl --request POST \</span><br><span class="line">  --url http://localhost:9200/_analyze \</span><br><span class="line">  --header <span class="string">'Content-Type: application/json'</span>  -d \</span><br><span class="line"><span class="string">'&#123;</span></span><br><span class="line"><span class="string">    "analyzer": "pinyin",</span></span><br><span class="line"><span class="string">    "text": "小明"</span></span><br><span class="line"><span class="string">&#125;'</span></span><br></pre></td></tr></table></figure>
-<h3 id="hibernate-search-elasticsearch"><a href="#hibernate-search-elasticsearch" class="headerlink" title="hibernate-search-elasticsearch"></a>hibernate-search-elasticsearch</h3><p><a href="https://github.com/carl-zk/JavaJava/tree/master/search-service" target="_blank" rel="noopener">code</a></p>
-<h3 id="config-index-and-mapping"><a href="#config-index-and-mapping" class="headerlink" title="config index and mapping"></a>config index and mapping</h3><ol>
-<li>设置analyzer<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">curl --request PUT \</span><br><span class="line">  --url http://localhost:9200/com.wework.entity.company -d \</span><br><span class="line"><span class="string">'&#123;</span></span><br><span class="line"><span class="string">    "index": &#123;</span></span><br><span class="line"><span class="string">        "analysis": &#123;</span></span><br><span class="line"><span class="string">        "analyzer": &#123;</span></span><br><span class="line"><span class="string">            "pinyin_analyzer": &#123;</span></span><br><span class="line"><span class="string">                "tokenizer": "my_pinyin"</span></span><br><span class="line"><span class="string">            &#125;</span></span><br><span class="line"><span class="string">        &#125;,</span></span><br><span class="line"><span class="string">        "tokenizer": &#123;</span></span><br><span class="line"><span class="string">            "my_pinyin": &#123;</span></span><br><span class="line"><span class="string">                "type": "pinyin",</span></span><br><span class="line"><span class="string">                "keep_separate_first_letter" : false,</span></span><br><span class="line"><span class="string">                "keep_full_pinyin" : true,</span></span><br><span class="line"><span class="string">                "keep_original" : true,</span></span><br><span class="line"><span class="string">                "limit_first_letter_length" : 16,</span></span><br><span class="line"><span class="string">                "lowercase" : true,</span></span><br><span class="line"><span class="string">                "remove_duplicated_term" : true</span></span><br><span class="line"><span class="string">                &#125;</span></span><br><span class="line"><span class="string">            &#125;</span></span><br><span class="line"><span class="string">        &#125;</span></span><br><span class="line"><span class="string">    &#125;</span></span><br><span class="line"><span class="string">&#125;'</span></span><br></pre></td></tr></table></figure></li>
-<li>设置mapping<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">curl --request PUT \</span><br><span class="line">  --url http://localhost:9200/com.wework.entity.company/_mapping/com.wework.entity.Company -d \</span><br><span class="line"><span class="string">'&#123;</span></span><br><span class="line"><span class="string">    "properties": &#123;</span></span><br><span class="line"><span class="string">        "name": &#123;</span></span><br><span class="line"><span class="string">            "type": "text",</span></span><br><span class="line"><span class="string">            "analyzer": "ik_smart",</span></span><br><span class="line"><span class="string">            "fields": &#123;</span></span><br><span class="line"><span class="string">                "pinyin": &#123;</span></span><br><span class="line"><span class="string">                    "type": "text",</span></span><br><span class="line"><span class="string">                    "store": false,</span></span><br><span class="line"><span class="string">                    "term_vector": "with_offsets",</span></span><br><span class="line"><span class="string">                    "analyzer": "pinyin_analyzer",</span></span><br><span class="line"><span class="string">                    "boost": 10</span></span><br><span class="line"><span class="string">                &#125;,</span></span><br><span class="line"><span class="string">                "keyword": &#123;</span></span><br><span class="line"><span class="string">                    "type": "keyword",</span></span><br><span class="line"><span class="string">                    "ignore_above": 256</span></span><br><span class="line"><span class="string">                &#125;</span></span><br><span class="line"><span class="string">            &#125;</span></span><br><span class="line"><span class="string">        &#125;</span></span><br><span class="line"><span class="string">    &#125;</span></span><br><span class="line"><span class="string">&#125;'</span></span><br></pre></td></tr></table></figure></li>
-<li>查看mapping<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">curl --request GET \</span><br><span class="line">  --url http://localhost:9200/com.wework.entity.user/_mapping \</span><br></pre></td></tr></table></figure></li>
-<li>搜索<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">curl --request POST \</span><br><span class="line">  --url <span class="string">'http://localhost:9200/com.wework.entity.user/_search?pretty='</span> -d \</span><br><span class="line"><span class="string">'&#123;</span></span><br><span class="line"><span class="string">    "query": &#123;</span></span><br><span class="line"><span class="string">        "match": &#123;</span></span><br><span class="line"><span class="string">            "name.pinyin": "xiao明"</span></span><br><span class="line"><span class="string">        &#125;</span></span><br><span class="line"><span class="string">    &#125;,</span></span><br><span class="line"><span class="string">    "from": 0,</span></span><br><span class="line"><span class="string">    "size": 10,</span></span><br><span class="line"><span class="string">    "sort": ["_score"]</span></span><br><span class="line"><span class="string">&#125;'</span></span><br></pre></td></tr></table></figure>
+        <h2 id="生成-ES256-秘钥对"><a href="#生成-ES256-秘钥对" class="headerlink" title="生成 ES256 秘钥对"></a>生成 ES256 秘钥对</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">openssl ecparam -genkey -name prime256v1 -noout -out ec_private.pem</span><br><span class="line">openssl ec -<span class="keyword">in</span> ec_private.pem -pubout -out ec_public.pem</span><br></pre></td></tr></table></figure>
 
-</li>
-</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Security.addProvider(<span class="keyword">new</span> org.bouncycastle.jce.provider.BouncyCastleProvider());</span><br><span class="line">Reader rdr = <span class="keyword">new</span> StringReader(privateKeyPem);</span><br><span class="line">Object parsed = <span class="keyword">new</span> org.bouncycastle.openssl.PEMParser(rdr).readObject();</span><br><span class="line">KeyPair pair = <span class="keyword">new</span> org.bouncycastle.openssl.jcajce.JcaPEMKeyConverter().getKeyPair((org.bouncycastle.openssl.PEMKeyPair) parsed);</span><br><span class="line">privateKey = pair.getPrivate();</span><br><span class="line">publicKey = pair.getPublic();</span><br></pre></td></tr></table></figure>
+
+<h2 id="Jenkins-硬盘100"><a href="#Jenkins-硬盘100" class="headerlink" title="Jenkins 硬盘100%"></a>Jenkins 硬盘100%</h2><p>部署显示成功，代码显示也是最新，但是测试发现老问题依然存在。<br>可能原因是由于硬盘满了，无法生成新镜像，服务器还是跑的老镜像，没有任何异常提示。<br>Jenkins + docker 如果当前部署失败，默认使用上一次的镜像部署，当硬盘不足以生成一个新镜像，此类情况很难排查。</p>
 
       
     </div>
     <footer class="article-footer">
-      <!-- <a data-url="https://carl-zk.github.io/blog/2018/10/10/elasticsearch/" data-id="ck7adqx0d0045dxpsa3the2ol" class="article-share-link">分享</a> -->
+      <!-- <a data-url="https://carl-zk.github.io/blog/2018/11/16/%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/" data-id="ck7d04tu100ao30ps1w9d9g8x" class="article-share-link">分享</a> -->
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/elasticsearch/" rel="tag">elasticsearch</a></li></ul>
-
     </footer>
   </div>
   
@@ -139,7 +130,7 @@
 
 
   <nav id="page-nav">
-    <a class="extend prev" rel="prev" href="/blog/page/10/">&lt;&lt;上一页</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/9/">9</a><a class="page-number" href="/blog/page/10/">10</a><span class="page-number current">11</span><a class="page-number" href="/blog/page/12/">12</a><a class="page-number" href="/blog/page/13/">13</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/178/">178</a><a class="extend next" rel="next" href="/blog/page/12/">下一页&gt;&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/10/">&lt;&lt;上一页</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/9/">9</a><a class="page-number" href="/blog/page/10/">10</a><span class="page-number current">11</span><a class="page-number" href="/blog/page/12/">12</a><a class="page-number" href="/blog/page/13/">13</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/179/">179</a><a class="extend next" rel="next" href="/blog/page/12/">下一页&gt;&gt;</a>
   </nav>
 
 </section>
@@ -163,6 +154,10 @@
       <ul>
         
           <li>
+            <a href="/blog/2020/03/03/gitalk-%E8%BF%90%E4%BD%9C%E5%8E%9F%E7%90%86/">Gitalk 运作原理</a>
+          </li>
+        
+          <li>
             <a href="/blog/2020/02/28/Segment-Tree/">Segment Tree</a>
           </li>
         
@@ -176,10 +171,6 @@
         
           <li>
             <a href="/blog/2019/05/02/Jenkins-CI-CD/">Jenkins CI/CD</a>
-          </li>
-        
-          <li>
-            <a href="/blog/2019/04/21/Jenkins-Starter/">Jenkins Starter</a>
           </li>
         
       </ul>
