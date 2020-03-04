@@ -17,7 +17,7 @@ def signal_handler(sig, frame):
 signal.signal(signal.SIGINT, signal_handler)
 
 username = 'carl-zk'
-oauth_token = '9b2873f8f7a1329b213ad58fde78dbf8bf4dbd44'
+oauth_token = ''
 repo_name = 'gitalk'
 sitemap_url = "https://carl-zk.github.io/blog/sitemap.xml"
 label = 'Gitalk'
@@ -45,7 +45,6 @@ for url in sitemapTags:
         print('init comments of: ' + unquote(title))
         r = s.post(api, json={'title':unquote(title), 'labels':[label, ID.hexdigest()]}, headers=headers)
         print(r.json())
-    else:
-        break
+
 s.close()
 print("ALL DONE!")
