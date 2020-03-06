@@ -85,10 +85,10 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-心灵驿站" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Hello-Python" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2016/06/01/%E5%BF%83%E7%81%B5%E9%A9%BF%E7%AB%99/" class="article-date">
-  <time datetime="2016-06-01T04:28:04.000Z" itemprop="datePublished">2016-06-01</time>
+    <a href="/blog/2016/06/06/Hello-Python/" class="article-date">
+  <time datetime="2016-06-06T15:18:31.000Z" itemprop="datePublished">2016-06-06</time>
 </a>
     
   </div>
@@ -99,7 +99,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2016/06/01/%E5%BF%83%E7%81%B5%E9%A9%BF%E7%AB%99/">迷茫小书童</a>
+      <a class="article-title" href="/blog/2016/06/06/Hello-Python/">Hello Python</a>
     </h1>
   
 
@@ -109,17 +109,51 @@
       
         <!-- Table of Contents -->
         
-        <p>原本在上次面试链家后决定好好学习，想在年底再去找工作，可是上周跟老板处的不是很好，冲动之下提出辞职，到今天找工作也快要一周了，拉勾网上的招聘不是很多，有些小公司我也不想去，算下来投了简历不超过10个，面试邀请只有3个。遇到的面试官都不是很有经验，有的也让我觉得无语。唉，虽然自己不是什么牛，但是踏实学习的劲头也还是有的，只不过我的性格决定了我不适合给别人打工。</p>
-<p>究竟是好事还是坏事呢，我有点要否定自己的感觉了。我赶在这个时候提出了辞职，也算是给自己了一个教训，不过既然是决定好了，而且后来想想这样做也非不可，那就顺着这个趋势走吧。</p>
-<p>我小看了“失业”，虽然对于一个程序员来说，跳槽不是什么稀罕事，换一份工作也没有那么难，但是在没有拿到任何offer之前，内心还是很悲伤的。可能这也是一个机会吧，好让我清醒清醒我之前忙碌工作的状态和它的意义，我还没有好好想过这些。</p>
-<p>我的朋友很少，所以我也能坦然独自面对。我不想成为一个虚伪的人，我也做不到这一点。我喜欢和真诚的人交朋友，我要让自己变的优秀，这样我就能接触更多牛逼的人，通常情况下，牛逼的人都很真诚。</p>
-<p>我还是不要再气馁吧，就当这是生活的考验，我会静静的等待，就像我等待爱情一样。</p>
+        <h3 id="《Python-核心编程》"><a href="#《Python-核心编程》" class="headerlink" title="《Python 核心编程》"></a><strong>《Python 核心编程》</strong></h3><p><strong><em>基于python2.7版本</em></strong></p>
+<h4 id="第一章-欢迎来到python世界"><a href="#第一章-欢迎来到python世界" class="headerlink" title="第一章 欢迎来到python世界"></a>第一章 欢迎来到python世界</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#！/usr/bin/env python</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"> <span class="keyword">print</span> <span class="string">'hello world'</span></span><br></pre></td></tr></table></figure>
+<h4 id="第二章-快速入门"><a href="#第二章-快速入门" class="headerlink" title="第二章 快速入门"></a>第二章 快速入门</h4><h5 id="2-1-程序输出"><a href="#2-1-程序输出" class="headerlink" title="2.1 程序输出"></a>2.1 程序输出</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">print</span> <span class="string">"%s is number %d!"</span> % (<span class="string">"Python"</span>, <span class="number">1</span>), <span class="string">'what do you think? %.2f'</span> % (<span class="number">2.50</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">print</span> &gt;&gt; sys.stderr, <span class="string">'Fatal error: invalid input'</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line">logfile = open(<span class="string">'/home/hero/workspace/PythonTest/log'</span>, <span class="string">'a'</span>) <span class="comment">#a添加、r读、w写</span></span><br><span class="line"><span class="keyword">print</span> &gt;&gt; logfile, <span class="string">'可以重定向输出到文件log'</span></span><br><span class="line">logfile.close()</span><br></pre></td></tr></table></figure>
+<h5 id="2-2-程序输入和raw-input-内建函数"><a href="#2-2-程序输入和raw-input-内建函数" class="headerlink" title="2.2 程序输入和raw_input()内建函数"></a>2.2 程序输入和raw_input()内建函数</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">user = raw_input(<span class="string">'Enter login name: '</span>)</span><br><span class="line"><span class="keyword">print</span> <span class="string">'Your login name is'</span>, user</span><br></pre></td></tr></table></figure>
+<h5 id="2-4-操作符"><a href="#2-4-操作符" class="headerlink" title="2.4 操作符"></a>2.4 操作符</h5><table>
+<thead>
+<tr>
+<th align="left"><strong>算数操作符</strong></th>
+<th align="center"><strong>方式</strong></th>
+<th align="right"><strong>示例</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">+、-、*、/、%</td>
+<td align="center">标准操作符</td>
+<td align="right"></td>
+</tr>
+<tr>
+<td align="left">//</td>
+<td align="center">浮点除法(四舍五入)</td>
+<td align="right">7//2=3</td>
+</tr>
+<tr>
+<td align="left">**</td>
+<td align="center">乘方操作符</td>
+<td align="right">3**2=9</td>
+</tr>
+</tbody></table>
+<h5 id="2-18-类"><a href="#2-18-类" class="headerlink" title="2.18 类"></a>2.18 类</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Foo</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="string">"""docstring for Foo"""</span></span><br><span class="line">    version = <span class="number">1.0</span></span><br><span class="line">    <span class="string">"""constructor"""</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, nm=<span class="string">'John Doe'</span>)</span>:</span></span><br><span class="line">        self.name = nm</span><br><span class="line">        <span class="keyword">print</span> <span class="string">'create Foo '</span>+ nm</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">showname</span><span class="params">(self)</span>:</span> <span class="comment">#self（java中的this）</span></span><br><span class="line">        <span class="keyword">print</span> self.name</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">showver</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">print</span> self.version</span><br><span class="line"></span><br><span class="line">foo = Foo()</span><br><span class="line">foo.showname()</span><br><span class="line">foo.showver()</span><br><span class="line"></span><br><span class="line">foo = Foo(<span class="string">'Jimy'</span>)</span><br><span class="line">foo.showname()</span><br><span class="line">foo.showver()</span><br></pre></td></tr></table></figure>
+<h5 id="2-19-模块"><a href="#2-19-模块" class="headerlink" title="2.19 模块"></a>2.19 模块</h5><p>module_cap.py</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding:utf-8 -*-</span></span><br><span class="line"><span class="comment">#将每个单词首字母改为大写</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">my_cap</span><span class="params">(s)</span>:</span>  <span class="comment"># my capitalize fun</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> isinstance(s, str):</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    l = s.split(<span class="string">' '</span>)</span><br><span class="line">    res = <span class="string">''</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> l:</span><br><span class="line">        res += i.capitalize() + <span class="string">' '</span></span><br><span class="line">    <span class="keyword">return</span> res</span><br><span class="line">value=<span class="number">999</span></span><br></pre></td></tr></table></figure>
+<p>test_main.py</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="keyword">from</span> module_cap <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">print</span> my_cap(<span class="string">'hello world'</span>)</span><br><span class="line"><span class="keyword">print</span> value</span><br></pre></td></tr></table></figure>
+<h4 id="第三章-语句和语法"><a href="#第三章-语句和语法" class="headerlink" title="第三章 语句和语法"></a>第三章 语句和语法</h4><h5 id="3-6-文件读写"><a href="#3-6-文件读写" class="headerlink" title="3.6 文件读写"></a>3.6 文件读写</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># --*-- coding: utf-8 --*--</span></span><br><span class="line"></span><br><span class="line"><span class="string">"""makeTextFile.py -- create text file"""</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">touch_file</span><span class="params">()</span>:</span></span><br><span class="line">    ls = os.linesep</span><br><span class="line"></span><br><span class="line">    <span class="comment"># get file name</span></span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        fname = raw_input(<span class="string">'Please enter the file name:("q" to quit) '</span>)</span><br><span class="line">        <span class="keyword">if</span> fname == <span class="string">'q'</span>:</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">        <span class="keyword">elif</span> os.path.exists(fname):</span><br><span class="line">            <span class="keyword">print</span> <span class="string">"Error: '%s' already exists"</span> % fname</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># get file content lines</span></span><br><span class="line">    all = []</span><br><span class="line">    <span class="keyword">print</span> <span class="string">'Enter lines ("#" by itself to quit).'</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># loop</span></span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        entry = raw_input(<span class="string">'&gt; '</span>)</span><br><span class="line">        <span class="keyword">if</span> entry == <span class="string">'#'</span>:</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            all.append(entry)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># write to file</span></span><br><span class="line">    fobj = open(fname, <span class="string">'w'</span>)</span><br><span class="line">    fobj.writelines([<span class="string">'%s%s'</span> % (x, ls) <span class="keyword">for</span> x <span class="keyword">in</span> all])</span><br><span class="line">    fobj.close()</span><br><span class="line">    <span class="keyword">print</span> <span class="string">'Done!'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    touch_file()</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># --*-- coding: utf-8 --*--</span></span><br><span class="line"></span><br><span class="line"><span class="string">"""readTextFile.py -- read text file"""</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">read_text_file</span><span class="params">()</span>:</span></span><br><span class="line">    fname = raw_input(<span class="string">'Enter file name: '</span>)</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        fobj = open(fname, <span class="string">'r'</span>)</span><br><span class="line">    <span class="keyword">except</span> IOError, e:</span><br><span class="line">        <span class="keyword">print</span> <span class="string">'file open error:'</span>, e</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">for</span> eachLine <span class="keyword">in</span> fobj:</span><br><span class="line">            <span class="keyword">print</span> eachLine,</span><br><span class="line">        fobj.close()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    read_text_file()</span><br></pre></td></tr></table></figure>
 
       
     </div>
     <footer class="article-footer">
-      <!-- <a data-url="https://carl-zk.github.io/blog/2016/06/01/%E5%BF%83%E7%81%B5%E9%A9%BF%E7%AB%99/" data-id="ck7d04tt7008b30psefx5hnh1" class="article-share-link">分享</a> -->
+      <!-- <a data-url="https://carl-zk.github.io/blog/2016/06/06/Hello-Python/" data-id="ck7d04tqz000t30ps9zjlce7z" class="article-share-link">分享</a> -->
       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/python/" rel="tag">python</a></li></ul>
+
     </footer>
   </div>
   
@@ -130,7 +164,7 @@
 
 
   <nav id="page-nav">
-    <a class="extend prev" rel="prev" href="/blog/page/178/">&lt;&lt;上一页</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/177/">177</a><a class="page-number" href="/blog/page/178/">178</a><span class="page-number current">179</span>
+    <a class="extend prev" rel="prev" href="/blog/page/178/">&lt;&lt;上一页</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/177/">177</a><a class="page-number" href="/blog/page/178/">178</a><span class="page-number current">179</span><a class="page-number" href="/blog/page/180/">180</a><a class="extend next" rel="next" href="/blog/page/180/">下一页&gt;&gt;</a>
   </nav>
 
 </section>
@@ -154,6 +188,10 @@
       <ul>
         
           <li>
+            <a href="/blog/2020/03/05/SkipList/">SkipList</a>
+          </li>
+        
+          <li>
             <a href="/blog/2020/03/03/gitalk-%E8%BF%90%E4%BD%9C%E5%8E%9F%E7%90%86/">Gitalk 运作原理</a>
           </li>
         
@@ -167,10 +205,6 @@
         
           <li>
             <a href="/blog/2019/06/01/%E5%A6%82%E4%BD%95%E5%86%99%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/">如何写单元测试</a>
-          </li>
-        
-          <li>
-            <a href="/blog/2019/05/02/Jenkins-CI-CD/">Jenkins CI/CD</a>
           </li>
         
       </ul>

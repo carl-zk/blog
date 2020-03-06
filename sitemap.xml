@@ -2,6 +2,12 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://carl-zk.github.io/blog/2020/03/05/SkipList/</loc>
+    <title>SkipList</title>
+    <date>2020-03-05T12:09:10.000Z</date>
+  </url>
+  
+  <url>
     <loc>https://carl-zk.github.io/blog/2020/03/03/gitalk-%E8%BF%90%E4%BD%9C%E5%8E%9F%E7%90%86/</loc>
     <title>Gitalk 运作原理</title>
     <date>2020-03-03T05:56:21.000Z</date>

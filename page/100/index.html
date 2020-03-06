@@ -85,10 +85,10 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-Listener介绍" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-给spring-mvc添加事务" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2017/02/25/Listener%E4%BB%8B%E7%BB%8D/" class="article-date">
-  <time datetime="2017-02-25T13:56:04.000Z" itemprop="datePublished">2017-02-25</time>
+    <a href="/blog/2017/02/28/%E7%BB%99spring-mvc%E6%B7%BB%E5%8A%A0%E4%BA%8B%E5%8A%A1/" class="article-date">
+  <time datetime="2017-02-27T16:48:17.000Z" itemprop="datePublished">2017-02-28</time>
 </a>
     
   </div>
@@ -99,7 +99,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2017/02/25/Listener%E4%BB%8B%E7%BB%8D/">Listener介绍</a>
+      <a class="article-title" href="/blog/2017/02/28/%E7%BB%99spring-mvc%E6%B7%BB%E5%8A%A0%E4%BA%8B%E5%8A%A1/">给Spring-Mvc添加事务</a>
     </h1>
   
 
@@ -110,20 +110,25 @@
         <!-- Table of Contents -->
         
         <blockquote>
-<p>当web应用在web容器中运行时,web应用内部会不断的发生各种事件:web应用被启动、web应用被停止、用户session开始、用户session结束、用户请求到达等，通常来说这些web事件对开发者是透明的。<br>ServletAPI提供了大量监听器来监听web应用的内部事件，从而允许当web内部事件发生时回调事件监听器内的方法。<br>使用Listener只需两步：</p>
+<p>所谓的spring容器，一般指的是spring-context所提供的IOC容器；但是我们一般都是要建立一个web项目，所以就要引入另一个依赖—spring-web，它也提供了一个容器，在web.xml文件中配置一个ContextLoaderListener就可以将IOC容器加入到spring-web容器中。</p>
 </blockquote>
-<ol>
-<li>定义Listener实现类。</li>
-<li>通过Annotation或web.xml文件中配置Listener。</li>
-</ol>
+<p><img src="container.svg" alt="容器关系"></p>
+<blockquote>
+<p>很多博客都将了上面的这个事实，但是他们却没给一个很准确的给controller层加事务能力的方法。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;tx:annotation-driven transaction-manager&#x3D;&quot;transactionManager&quot;&#x2F;&gt;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>要在xxx-controller.xml中加入上面这一句注释。</p>
+</blockquote>
+<p> 延伸：<br> <a href="http://jinnianshilongnian.iteye.com/blog/1901694" target="_blank" rel="noopener">分析源码的大牛</a><br> <a href="http://docs.spring.io/spring/docs/current/spring-framework-reference/html/aop-api.html" target="_blank" rel="noopener"> Spring AOP APIs</a> ctr+F搜索: <code>proxyTargetClass</code></p>
+<p> 为什么这样写也可以</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;aop:aspectj-autoproxy proxy-target-class&#x3D;&quot;true&quot;&#x2F;&gt;  </span><br><span class="line">&lt;tx:annotation-driven transaction-manager&#x3D;&quot;transactionManager&quot;&#x2F;&gt;</span><br></pre></td></tr></table></figure>
 
       
     </div>
     <footer class="article-footer">
-      <!-- <a data-url="https://carl-zk.github.io/blog/2017/02/25/Listener%E4%BB%8B%E7%BB%8D/" data-id="ck7d04tre002b30pscujxdqbz" class="article-share-link">分享</a> -->
+      <!-- <a data-url="https://carl-zk.github.io/blog/2017/02/28/%E7%BB%99spring-mvc%E6%B7%BB%E5%8A%A0%E4%BA%8B%E5%8A%A1/" data-id="ck7d04ttt00a330psef0b62vr" class="article-share-link">分享</a> -->
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/Servlet/" rel="tag">Servlet</a></li></ul>
-
     </footer>
   </div>
   
@@ -134,7 +139,7 @@
 
 
   <nav id="page-nav">
-    <a class="extend prev" rel="prev" href="/blog/page/99/">&lt;&lt;上一页</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/98/">98</a><a class="page-number" href="/blog/page/99/">99</a><span class="page-number current">100</span><a class="page-number" href="/blog/page/101/">101</a><a class="page-number" href="/blog/page/102/">102</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/179/">179</a><a class="extend next" rel="next" href="/blog/page/101/">下一页&gt;&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/99/">&lt;&lt;上一页</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/98/">98</a><a class="page-number" href="/blog/page/99/">99</a><span class="page-number current">100</span><a class="page-number" href="/blog/page/101/">101</a><a class="page-number" href="/blog/page/102/">102</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/180/">180</a><a class="extend next" rel="next" href="/blog/page/101/">下一页&gt;&gt;</a>
   </nav>
 
 </section>
@@ -158,6 +163,10 @@
       <ul>
         
           <li>
+            <a href="/blog/2020/03/05/SkipList/">SkipList</a>
+          </li>
+        
+          <li>
             <a href="/blog/2020/03/03/gitalk-%E8%BF%90%E4%BD%9C%E5%8E%9F%E7%90%86/">Gitalk 运作原理</a>
           </li>
         
@@ -171,10 +180,6 @@
         
           <li>
             <a href="/blog/2019/06/01/%E5%A6%82%E4%BD%95%E5%86%99%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/">如何写单元测试</a>
-          </li>
-        
-          <li>
-            <a href="/blog/2019/05/02/Jenkins-CI-CD/">Jenkins CI/CD</a>
           </li>
         
       </ul>

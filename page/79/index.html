@@ -85,12 +85,16 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-发现一本好书" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-debian" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2017/04/17/%E5%8F%91%E7%8E%B0%E4%B8%80%E6%9C%AC%E5%A5%BD%E4%B9%A6/" class="article-date">
-  <time datetime="2017-04-17T14:47:27.000Z" itemprop="datePublished">2017-04-17</time>
+    <a href="/blog/2017/05/06/debian/" class="article-date">
+  <time datetime="2017-05-06T10:16:09.000Z" itemprop="datePublished">2017-05-06</time>
 </a>
     
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/%E7%B3%BB%E7%BB%9F%E9%85%8D%E7%BD%AE/">系统配置</a>
+  </div>
+
   </div>
   <div class="article-inner">
     
@@ -99,7 +103,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2017/04/17/%E5%8F%91%E7%8E%B0%E4%B8%80%E6%9C%AC%E5%A5%BD%E4%B9%A6/">发现一本好书</a>
+      <a class="article-title" href="/blog/2017/05/06/debian/">Debian</a>
     </h1>
   
 
@@ -109,22 +113,25 @@
       
         <!-- Table of Contents -->
         
-        <blockquote>
-<p>这里主要记录一些意外发现的好东西,比如博客书籍.</p>
-</blockquote>
-<h4 id="The-Linux-Command-Line"><a href="#The-Linux-Command-Line" class="headerlink" title="The Linux Command Line"></a>The Linux Command Line</h4><p>快乐Linux命令行<br><a href="https://billie66.github.io/TLCL/" target="_blank" rel="noopener">https://billie66.github.io/TLCL/</a><br>去下pdf,成为linux大神<a href="http://linuxcommand.org/" target="_blank" rel="noopener">官网</a></p>
-<p>####</p>
-<p>####</p>
-<p>####</p>
-<p>####</p>
-<p>####</p>
-<p>####</p>
-<p>####</p>
+        <p>最近看了篇关于吐槽ubuntu放弃unity转用gnome的文章，作者是deepin桌面系统的开发者。忍不住就去deepin的官网下了下装在虚机里试了试，结果样式全都是模仿的mac的。<br>作为一个linux桌面开发者，他的情怀我可以理解，不过我没打算用deepin系统，虽然样子很酷，毕竟太像mac的linux让我感觉不舒服。另外还有个顾虑，不方便说。<br>我想，既然mac的小托盘这么好，不如也在我debian8里面装一个。果然评论里有人说装个dash-to-doc和topicons就跟mac差不多了。还等啥，google一下装起来。</p>
+<p><strong>1.检查gnome-shell版本</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ gnome-shell --version</span><br></pre></td></tr></table></figure>
+<p>GNOME Shell 3.14.4</p>
+<p><strong>2.安装chrome浏览器插件</strong><br>GNOME Shell integration</p>
+<p><strong>3.点击插件进入网页</strong><br><a href="https://extensions.gnome.org/" target="_blank" rel="noopener">https://extensions.gnome.org/</a></p>
+<p><strong>4.搜索dash-to-dock，topicons</strong><br>根据shell版本选择对应的下载安装即可。</p>
+<p>我找到的是这俩<br><a href="https://github.com/micheleg/dash-to-dock/tree/gnome-3.14" target="_blank" rel="noopener">dash-to-dock</a><br><a href="https://github.com/wincinderith/topicons" target="_blank" rel="noopener">topicons</a></p>
+<p>安装过程很简单，都是<br>下载xxx.zip<br>$ unzip xxx.zip<br>$ cd xxx/<br>$ make<br>$ make install</p>
+<p>目录 <code>~/.local/share/gnome-shell/extensions</code> 看看有没有你安装的插件</p>
+<p>Alt+F2 r 回车</p>
+<p>$ gnome-shell-extension-prefs</p>
+<p>找到对应的插件把开关置成on</p>
+<p>体验：<br>Dash To Dock 这个插件还是挺好的，TopIcons插件好多应用就没有icon，唉。</p>
 
       
     </div>
     <footer class="article-footer">
-      <!-- <a data-url="https://carl-zk.github.io/blog/2017/04/17/%E5%8F%91%E7%8E%B0%E4%B8%80%E6%9C%AC%E5%A5%BD%E4%B9%A6/" data-id="ck7d04tsu007330ps8vqg6i2c" class="article-share-link">分享</a> -->
+      <!-- <a data-url="https://carl-zk.github.io/blog/2017/05/06/debian/" data-id="ck7d04tru003v30psbl5yf3q5" class="article-share-link">分享</a> -->
       
     </footer>
   </div>
@@ -136,7 +143,7 @@
 
 
   <nav id="page-nav">
-    <a class="extend prev" rel="prev" href="/blog/page/78/">&lt;&lt;上一页</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/77/">77</a><a class="page-number" href="/blog/page/78/">78</a><span class="page-number current">79</span><a class="page-number" href="/blog/page/80/">80</a><a class="page-number" href="/blog/page/81/">81</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/179/">179</a><a class="extend next" rel="next" href="/blog/page/80/">下一页&gt;&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/78/">&lt;&lt;上一页</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/77/">77</a><a class="page-number" href="/blog/page/78/">78</a><span class="page-number current">79</span><a class="page-number" href="/blog/page/80/">80</a><a class="page-number" href="/blog/page/81/">81</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/180/">180</a><a class="extend next" rel="next" href="/blog/page/80/">下一页&gt;&gt;</a>
   </nav>
 
 </section>
@@ -160,6 +167,10 @@
       <ul>
         
           <li>
+            <a href="/blog/2020/03/05/SkipList/">SkipList</a>
+          </li>
+        
+          <li>
             <a href="/blog/2020/03/03/gitalk-%E8%BF%90%E4%BD%9C%E5%8E%9F%E7%90%86/">Gitalk 运作原理</a>
           </li>
         
@@ -173,10 +184,6 @@
         
           <li>
             <a href="/blog/2019/06/01/%E5%A6%82%E4%BD%95%E5%86%99%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/">如何写单元测试</a>
-          </li>
-        
-          <li>
-            <a href="/blog/2019/05/02/Jenkins-CI-CD/">Jenkins CI/CD</a>
           </li>
         
       </ul>

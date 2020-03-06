@@ -85,10 +85,10 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-OFBiz-Learn" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Install-OFBize" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2017/03/04/OFBiz-Learn/" class="article-date">
-  <time datetime="2017-03-04T05:42:07.000Z" itemprop="datePublished">2017-03-04</time>
+    <a href="/blog/2017/03/05/Install-OFBize/" class="article-date">
+  <time datetime="2017-03-05T05:11:57.000Z" itemprop="datePublished">2017-03-05</time>
 </a>
     
   <div class="article-category">
@@ -103,7 +103,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2017/03/04/OFBiz-Learn/">OFBiz Learn</a>
+      <a class="article-title" href="/blog/2017/03/05/Install-OFBize/">Install OFBiz</a>
     </h1>
   
 
@@ -113,52 +113,14 @@
       
         <!-- Table of Contents -->
         
-        <h1 id="初识OFBiz"><a href="#初识OFBiz" class="headerlink" title="初识OFBiz"></a>初识OFBiz</h1><p><a href="https://ofbiz.apache.org/apache-ofbiz-project-overview.html" target="_blank" rel="noopener">官网</a></p>
-<p>Open For Business(OFBiz) 是一个企业应用框架，类似于Spring，主要针对ERP、CRM系统。<br>OFBiz使用 <a href="https://www.apache.org/licenses/LICENSE-2.0" target="_blank" rel="noopener">Apache License Version 2.0协议</a>，你可以不公开你的代码。</p>
-<h1 id="Major-Application-Components"><a href="#Major-Application-Components" class="headerlink" title="Major Application Components"></a>Major Application Components</h1><h2 id="Common-Data"><a href="#Common-Data" class="headerlink" title="Common Data"></a>Common Data</h2><p>包括实体类等系统启动时加载的、一般很少变动的数据。</p>
-<h2 id="Content"><a href="#Content" class="headerlink" title="Content"></a>Content</h2><p>用于对数据的追踪。</p>
-<h2 id="Security"><a href="#Security" class="headerlink" title="Security"></a>Security</h2><p>访问控制。</p>
-<h2 id="Party"><a href="#Party" class="headerlink" title="Party"></a>Party</h2><p>可以是一个人，或一个Parties组。Party Group可以是一个公司，公司内部的一个机构，供应商或顾客等。<br>与Party相关的类型有</p>
-<ol>
-<li>Contact Mechanisms(地址，手机，邮箱，URL……)</li>
-<li>Roles(作为顾客，供应商，员工，经理，商人……)</li>
-<li>另一种可归为Party类的数据是Parties之间communication和agreement的信息。它可被Work Effort实体用来计划和追踪Parties之间的问题和解决方案。</li>
-</ol>
-<h2 id="Product"><a href="#Product" class="headerlink" title="Product"></a>Product</h2><p>公司出售或内部使用的商品，可以是goods或services</p>
-<h2 id="Order"><a href="#Order" class="headerlink" title="Order"></a>Order</h2><p>商品的排序。如顾客对一类商品的url请求，就会被Order package内的实体处理。</p>
-<h2 id="Facility"><a href="#Facility" class="headerlink" title="Facility"></a>Facility</h2><p>一座大楼或一个地理位置。</p>
-<h2 id="Shipment"><a href="#Shipment" class="headerlink" title="Shipment"></a>Shipment</h2><p>跟踪进出货和进出货清单。</p>
-<h2 id="Accounting"><a href="#Accounting" class="headerlink" title="Accounting"></a>Accounting</h2><p>记账。</p>
-<h2 id="Marketing"><a href="#Marketing" class="headerlink" title="Marketing"></a>Marketing</h2><p>市场信息。</p>
-<h2 id="Work-Effort"><a href="#Work-Effort" class="headerlink" title="Work Effort"></a>Work Effort</h2><p>可以是一个task，project，project phase，to-do item,Workflow Activity等。</p>
-<blockquote>
-<p>需要注意的是，OFBiz放弃了Workflow Engines，改用Event Driven Architecture(EDA)和ECAs(SECA,EECA,MECA)。ECA是Event Condition Action的缩写。SECAs用于Services，EECA用于Entity，MECAs用于Mail。</p>
-</blockquote>
-<h2 id="Human-Resources"><a href="#Human-Resources" class="headerlink" title="Human Resources"></a>Human Resources</h2><p>人力资源信息。</p>
-<p><img src="ofbiz.png" alt="主要应用部件"></p>
-<h1 id="Architecture-and-System-Organization"><a href="#Architecture-and-System-Organization" class="headerlink" title="Architecture and System Organization"></a>Architecture and System Organization</h1><h2 id="Entities-and-Services"><a href="#Entities-and-Services" class="headerlink" title="Entities and Services"></a>Entities and Services</h2><table>
-<thead>
-<tr>
-<th align="left">Entity</th>
-<th align="left">作用</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">basic entity</td>
-<td align="left">&#124; 与数据库表对应</td>
-</tr>
-<tr>
-<td align="left">view-entity</td>
-<td align="left">&#124; 组合实体类字段构成虚拟实体</td>
-</tr>
-</tbody></table>
-<p>使用Entity Engine可以省去写sql，可以不必维护大量的CRUD持久层类。取而代之的是相对少量的xml配置文件。<br>每个Service只负责简单的特定的任务，由ECA去调度，所以扩展时也不必改变原来的逻辑代码。</p>
-<h2 id="Web-Framework-and-XML-Mini-Languages"><a href="#Web-Framework-and-XML-Mini-Languages" class="headerlink" title="Web Framework and XML Mini-Languages"></a>Web Framework and XML Mini-Languages</h2><p>OFBiz Core Framework 提供了许多client-server、peer-to-peer框架，为了便于使用，所以推出一个‘XML Mini-Language’工具。</p>
+        <h1 id="download"><a href="#download" class="headerlink" title="download"></a>download</h1><p><a href="https://ofbiz.apache.org/download.html" target="_blank" rel="noopener">download</a></p>
+<h1 id="install-gradle"><a href="#install-gradle" class="headerlink" title="install gradle"></a>install gradle</h1><p><a href="https://docs.gradle.org/3.4.1/userguide/overview.html" target="_blank" rel="noopener">gradle</a>是一个build,automate and deliver工具，类似ant，不过<a href="http://localhost:4000/blog/2017/03/06/gradle/" target="_blank" rel="noopener">gradle学习</a>主要针对Java项目。build scripts是采用<a href="http://groovy-lang.org/install.html" target="_blank" rel="noopener">Groovy</a>语言，原因是它比Java更简单直接，类似Python、Ruby。<br>你可以不用安装gradle，如果它是一个Gradle-based build项目，直接 <code>./gradlew tasks</code>即可。<br>我选择直接安装在/opt/gradle中，在~/.zshrc中export然后source。(Ubuntu的sdk安装工具sdkman类似mac的brew)</p>
+<h1 id="first-step"><a href="#first-step" class="headerlink" title="first step"></a>first step</h1><p>进入OFBiz根目录，它是一个gradle-based的项目，但是我已经安装gradle了，所以可以直接<code>gradle cleanAll loadDefault</code></p>
 
       
     </div>
     <footer class="article-footer">
-      <!-- <a data-url="https://carl-zk.github.io/blog/2017/03/04/OFBiz-Learn/" data-id="ck7d04tri002p30ps1pn25z87" class="article-share-link">分享</a> -->
+      <!-- <a data-url="https://carl-zk.github.io/blog/2017/03/05/Install-OFBize/" data-id="ck7d04tr4001a30ps5ynwaru9" class="article-share-link">分享</a> -->
       
     </footer>
   </div>
@@ -170,7 +132,7 @@
 
 
   <nav id="page-nav">
-    <a class="extend prev" rel="prev" href="/blog/page/94/">&lt;&lt;上一页</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/93/">93</a><a class="page-number" href="/blog/page/94/">94</a><span class="page-number current">95</span><a class="page-number" href="/blog/page/96/">96</a><a class="page-number" href="/blog/page/97/">97</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/179/">179</a><a class="extend next" rel="next" href="/blog/page/96/">下一页&gt;&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/94/">&lt;&lt;上一页</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/93/">93</a><a class="page-number" href="/blog/page/94/">94</a><span class="page-number current">95</span><a class="page-number" href="/blog/page/96/">96</a><a class="page-number" href="/blog/page/97/">97</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/180/">180</a><a class="extend next" rel="next" href="/blog/page/96/">下一页&gt;&gt;</a>
   </nav>
 
 </section>
@@ -194,6 +156,10 @@
       <ul>
         
           <li>
+            <a href="/blog/2020/03/05/SkipList/">SkipList</a>
+          </li>
+        
+          <li>
             <a href="/blog/2020/03/03/gitalk-%E8%BF%90%E4%BD%9C%E5%8E%9F%E7%90%86/">Gitalk 运作原理</a>
           </li>
         
@@ -207,10 +173,6 @@
         
           <li>
             <a href="/blog/2019/06/01/%E5%A6%82%E4%BD%95%E5%86%99%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/">如何写单元测试</a>
-          </li>
-        
-          <li>
-            <a href="/blog/2019/05/02/Jenkins-CI-CD/">Jenkins CI/CD</a>
           </li>
         
       </ul>

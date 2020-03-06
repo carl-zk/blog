@@ -3,10 +3,10 @@
   <title>一叶轻舟渡万江</title>
   <icon>https://www.gravatar.com/avatar/2bae9fe5081d6efb423499dcf6f2b92b</icon>
   <subtitle>泰山不拒细壤故能成其高 江海不择细流故能就其深</subtitle>
-  <link href="/blog//atom.xml" rel="self"/>
+  <link href="/blog/atom.xml" rel="self"/>
   
   <link href="https://carl-zk.github.io/blog/"/>
-  <updated>2020-03-04T07:17:39.417Z</updated>
+  <updated>2020-03-06T04:35:14.431Z</updated>
   <id>https://carl-zk.github.io/blog/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>SkipList</title>
+    <link href="https://carl-zk.github.io/blog/2020/03/05/SkipList/"/>
+    <id>https://carl-zk.github.io/blog/2020/03/05/SkipList/</id>
+    <published>2020-03-05T12:09:10.000Z</published>
+    <updated>2020-03-06T04:35:14.431Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;This article will bring you into a fancy world of Skip Lists, come with me and enjoy your journey. &lt;/p&gt;
+&lt;h2 id=&quot;Start-from-Binary-Search&quot;&gt;&lt;a href=&quot;#Start-from-Binary-Search&quot; class=&quot;headerlink&quot; title=&quot;Start from Binary Search&quot;&gt;&lt;/a&gt;Start from Binary Search&lt;/h2&gt;&lt;h3 id=&quot;1-d-array&quot;&gt;&lt;a href=&quot;#1-d-array&quot; class=&quot;headerlink&quot; title=&quot;1-d array&quot;&gt;&lt;/a&gt;1-d array&lt;/h3&gt;&lt;p&gt;Give you a sorted array a = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], query if number x exists. Which algorithm would you like to use? Binary Sea
+      
+    
+    </summary>
+    
+      <category term="数据结构" scheme="https://carl-zk.github.io/blog/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>Gitalk 运作原理</title>
