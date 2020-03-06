@@ -84,7 +84,7 @@ deploy:
 # RSS https://github.com/hexojs/hexo-generator-feed/blob/master/atom.xml
 feed:
     type: atom
-    path: /atom.xml
+    path: atom.xml
     icon: /images/fav.png
     content: false
     content_limit: 500
