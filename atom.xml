@@ -6,7 +6,7 @@
   <link href="/blog/atom.xml" rel="self"/>
   
   <link href="https://carl-zk.github.io/blog/"/>
-  <updated>2020-03-06T04:35:14.431Z</updated>
+  <updated>2020-08-31T15:08:48.295Z</updated>
   <id>https://carl-zk.github.io/blog/</id>
   
   <author>
@@ -15,6 +15,56 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Mac中处理txt中文乱码</title>
+    <link href="https://carl-zk.github.io/blog/2020/08/31/Mac%E4%B8%AD%E5%A4%84%E7%90%86txt%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81/"/>
+    <id>https://carl-zk.github.io/blog/2020/08/31/Mac中处理txt中文乱码/</id>
+    <published>2020-08-31T14:50:21.000Z</published>
+    <updated>2020-08-31T15:08:48.295Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;blockquote&gt;
+&lt;p&gt;最近下载了一本电子书，格式为TXT，打开后发现乱码，故在网上找到若干解决方法，特记于此，免于后烦。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&quot;合并文件&quot;&gt;&lt;a href=&quot;#合并文件&quot; class=&quot;headerlink&quot; title=&quot;合并文件&quot;&gt;&lt;/a&gt;合并文件&lt;/h2&gt;&lt;p&gt;首先，每个章节为一个独立文件，文件名格式“章节编号.txt”。需要一个shell脚本整合到一个文件中&lt;/p&gt;
+&lt;figure class=&quot;highlight sh&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;s
+      
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>MySQL 8 Window Functions</title>
+    <link href="https://carl-zk.github.io/blog/2020/07/15/MySQL-8-window-functions/"/>
+    <id>https://carl-zk.github.io/blog/2020/07/15/MySQL-8-window-functions/</id>
+    <published>2020-07-15T02:12:17.000Z</published>
+    <updated>2020-07-15T12:57:57.986Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;blockquote&gt;
+&lt;p&gt;MySQL Version: since 8.0&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h1 id=&quot;Window-Functions&quot;&gt;&lt;a href=&quot;#Window-Functions&quot; class=&quot;headerlink&quot; title=&quot;Window Functions&quot;&gt;&lt;/a&gt;Window Functions&lt;/h1&gt;&lt;blockquote&gt;
+&lt;p&gt;A window function is an SQL function where the input values are taken from a “window” of one or more rows in the results set of a SELECT statement.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;一个window function 是一个SQL函数，它的input是从一个“SELECT语句结果集中一行或多行的 window”中获取。与普通聚合函数的区别在于它使用关键字 &lt;code&gt;OVER&lt;/code&gt;。&lt;br&gt;window functions 不能使用&lt;c
+      
+    
+    </summary>
+    
+    
+      <category term="MySQL" scheme="https://carl-zk.github.io/blog/tags/MySQL/"/>
+    
+  </entry>
   
   <entry>
     <title>SkipList</title>

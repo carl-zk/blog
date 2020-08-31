@@ -85,10 +85,10 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-MySQL-存储过程分页" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-问题总结" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2018/09/23/MySQL-%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B%E5%88%86%E9%A1%B5/" class="article-date">
-  <time datetime="2018-09-23T09:19:40.000Z" itemprop="datePublished">2018-09-23</time>
+    <a href="/blog/2018/11/16/%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/" class="article-date">
+  <time datetime="2018-11-16T06:12:09.000Z" itemprop="datePublished">2018-11-16</time>
 </a>
     
   </div>
@@ -99,7 +99,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2018/09/23/MySQL-%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B%E5%88%86%E9%A1%B5/">MySQL 存储过程分页</a>
+      <a class="article-title" href="/blog/2018/11/16/%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/">问题总结</a>
     </h1>
   
 
@@ -109,20 +109,17 @@
       
         <!-- Table of Contents -->
         
-        <p><a href="https://www.w3resource.com/mysql/mysql-procedure.php" target="_blank" rel="noopener">https://www.w3resource.com/mysql/mysql-procedure.php</a><br><a href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_substr" target="_blank" rel="noopener">https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_substr</a><br><a href=""></a></p>
-<p><code>MySQL version: 5.7.9</code></p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">drop</span> <span class="keyword">procedure</span> <span class="keyword">if</span> <span class="keyword">exists</span> pagination;</span><br><span class="line"><span class="keyword">create</span> <span class="keyword">procedure</span> pagination(<span class="keyword">in</span> i_query <span class="built_in">varchar</span>(<span class="number">8000</span>), <span class="keyword">in</span> i_page <span class="built_in">int</span>, <span class="keyword">in</span> i_size <span class="built_in">int</span>, <span class="keyword">out</span> o_total <span class="built_in">int</span>)</span><br><span class="line">  <span class="keyword">begin</span></span><br><span class="line">    <span class="keyword">set</span> @limit_start = (i_page - <span class="number">1</span>) * i_size;</span><br><span class="line">    <span class="keyword">set</span> @limit_size = i_size;</span><br><span class="line">    <span class="keyword">set</span> @tmp_query = <span class="keyword">concat</span>(<span class="string">'select * from ('</span>, i_query, <span class="string">') t limit ?, ?'</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">set</span> @tmp_total = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">set</span> @tmp_stat = <span class="keyword">concat</span>(<span class="string">'select count(1) into @tmp_total from ('</span>, i_query, <span class="string">') t '</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">prepare</span> stmt_query <span class="keyword">from</span> @tmp_query;</span><br><span class="line">    <span class="keyword">execute</span> stmt_query <span class="keyword">using</span> @limit_start, @limit_size;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">prepare</span> stmt_count <span class="keyword">from</span> @tmp_stat;</span><br><span class="line">    <span class="keyword">execute</span> stmt_count;</span><br><span class="line">    <span class="keyword">set</span> o_total = @tmp_total;</span><br><span class="line">  <span class="keyword">end</span>;</span><br></pre></td></tr></table></figure>
+        <h2 id="生成-ES256-秘钥对"><a href="#生成-ES256-秘钥对" class="headerlink" title="生成 ES256 秘钥对"></a>生成 ES256 秘钥对</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">openssl ecparam -genkey -name prime256v1 -noout -out ec_private.pem</span><br><span class="line">openssl ec -<span class="keyword">in</span> ec_private.pem -pubout -out ec_public.pem</span><br></pre></td></tr></table></figure>
 
-<p>参照之前写的 Oracle 版的分页，思路是一样的；比较坑的是从括号里传的变量前面不加@，在拼接SQL的时候需要另外定义变量才能使用 select count(1) into 。</p>
-<p><code>show VARIABLES like &#39;%max_allowed_packet%&#39;;</code> SQL长度限制，单位 byte.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        Class.forName(<span class="string">"com.mysql.cj.jdbc.Driver"</span>);</span><br><span class="line">        Connection connect = DriverManager</span><br><span class="line">                .getConnection(<span class="string">"jdbc:mysql://localhost:3306/mydb?"</span></span><br><span class="line">                        + <span class="string">"user=root&amp;password=password"</span>);</span><br><span class="line">        <span class="keyword">int</span> total = <span class="number">0</span>;</span><br><span class="line">        CallableStatement callableStatement = connect.prepareCall(<span class="string">"&#123;call pagination(?,?,?,?)&#125;"</span>);</span><br><span class="line">        callableStatement.setString(<span class="number">1</span>, <span class="string">"select * from tbl_user order by id desc"</span>);</span><br><span class="line">        callableStatement.setInt(<span class="number">2</span>, <span class="number">1</span>);</span><br><span class="line">        callableStatement.setInt(<span class="number">3</span>, <span class="number">6</span>);</span><br><span class="line">        callableStatement.registerOutParameter(<span class="number">4</span>, MysqlType.INT);</span><br><span class="line">        ResultSet resultSet = callableStatement.executeQuery();</span><br><span class="line">        total = callableStatement.getInt(<span class="number">4</span>);</span><br><span class="line">        System.out.println(<span class="string">"total = "</span> + total);</span><br><span class="line">        <span class="keyword">while</span> (resultSet.next()) &#123;</span><br><span class="line">            System.out.println(resultSet.getInt(<span class="string">"id"</span>) + <span class="string">", "</span> + resultSet.getString(<span class="string">"name"</span>));</span><br><span class="line">        &#125;</span><br><span class="line">        connect.close();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Security.addProvider(<span class="keyword">new</span> org.bouncycastle.jce.provider.BouncyCastleProvider());</span><br><span class="line">Reader rdr = <span class="keyword">new</span> StringReader(privateKeyPem);</span><br><span class="line">Object parsed = <span class="keyword">new</span> org.bouncycastle.openssl.PEMParser(rdr).readObject();</span><br><span class="line">KeyPair pair = <span class="keyword">new</span> org.bouncycastle.openssl.jcajce.JcaPEMKeyConverter().getKeyPair((org.bouncycastle.openssl.PEMKeyPair) parsed);</span><br><span class="line">privateKey = pair.getPrivate();</span><br><span class="line">publicKey = pair.getPublic();</span><br></pre></td></tr></table></figure>
+
+<h2 id="Jenkins-硬盘100"><a href="#Jenkins-硬盘100" class="headerlink" title="Jenkins 硬盘100%"></a>Jenkins 硬盘100%</h2><p>部署显示成功，代码显示也是最新，但是测试发现老问题依然存在。<br>可能原因是由于硬盘满了，无法生成新镜像，服务器还是跑的老镜像，没有任何异常提示。<br>Jenkins + docker 如果当前部署失败，默认使用上一次的镜像部署，当硬盘不足以生成一个新镜像，此类情况很难排查。</p>
+
       
     </div>
     <footer class="article-footer">
-      <!-- <a data-url="https://carl-zk.github.io/blog/2018/09/23/MySQL-%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B%E5%88%86%E9%A1%B5/" data-id="ck7d04trg002j30ps7uo632oy" class="article-share-link">分享</a> -->
+      <!-- <a data-url="https://carl-zk.github.io/blog/2018/11/16/%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/" data-id="ck7d04tu100ao30ps1w9d9g8x" class="article-share-link">分享</a> -->
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/MySQL/" rel="tag">MySQL</a></li></ul>
-
     </footer>
   </div>
   
@@ -133,7 +130,7 @@
 
 
   <nav id="page-nav">
-    <a class="extend prev" rel="prev" href="/blog/page/13/">&lt;&lt;上一页</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/12/">12</a><a class="page-number" href="/blog/page/13/">13</a><span class="page-number current">14</span><a class="page-number" href="/blog/page/15/">15</a><a class="page-number" href="/blog/page/16/">16</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/180/">180</a><a class="extend next" rel="next" href="/blog/page/15/">下一页&gt;&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/13/">&lt;&lt;上一页</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/12/">12</a><a class="page-number" href="/blog/page/13/">13</a><span class="page-number current">14</span><a class="page-number" href="/blog/page/15/">15</a><a class="page-number" href="/blog/page/16/">16</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/182/">182</a><a class="extend next" rel="next" href="/blog/page/15/">下一页&gt;&gt;</a>
   </nav>
 
 </section>
@@ -157,6 +154,14 @@
       <ul>
         
           <li>
+            <a href="/blog/2020/08/31/Mac%E4%B8%AD%E5%A4%84%E7%90%86txt%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81/">Mac中处理txt中文乱码</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2020/07/15/MySQL-8-window-functions/">MySQL 8 Window Functions</a>
+          </li>
+        
+          <li>
             <a href="/blog/2020/03/05/SkipList/">SkipList</a>
           </li>
         
@@ -166,14 +171,6 @@
         
           <li>
             <a href="/blog/2020/02/28/Segment-Tree/">Segment Tree</a>
-          </li>
-        
-          <li>
-            <a href="/blog/2020/01/19/%E5%88%B7%E9%A2%98%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%9C%A8%E4%B8%8D%E5%90%8C%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84%E8%A1%A8%E7%A4%BA/">刷题常用数据结构在不同语言中的表示</a>
-          </li>
-        
-          <li>
-            <a href="/blog/2019/06/01/%E5%A6%82%E4%BD%95%E5%86%99%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/">如何写单元测试</a>
           </li>
         
       </ul>
