@@ -6,7 +6,7 @@
   <link href="/blog/atom.xml" rel="self"/>
   
   <link href="https://carl-zk.github.io/blog/"/>
-  <updated>2020-08-31T15:08:48.295Z</updated>
+  <updated>2020-09-16T08:54:03.257Z</updated>
   <id>https://carl-zk.github.io/blog/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Wavelet Tree</title>
+    <link href="https://carl-zk.github.io/blog/2020/09/16/Wavelet-Tree/"/>
+    <id>https://carl-zk.github.io/blog/2020/09/16/Wavelet-Tree/</id>
+    <published>2020-09-16T04:19:17.000Z</published>
+    <updated>2020-09-16T08:54:03.257Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;blockquote&gt;
+&lt;p&gt;最近刷题看到一个很有意思的数据结构：小波树(Wavelet Tree)。网上搜了基本都是C++实现的，我不能完全看懂，看了很多资料，大部分都不靠谱，不是图不对就是解释泛泛，最后终于找到个靠谱的论文，让我可以根据原理用Java把它实现出来，终于对它的妙处有了一点了解。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h1 id=&quot;初识&quot;&gt;&lt;a href=&quot;#初识&quot; class=&quot;headerlink&quot; title=&quot;初识&quot;&gt;&lt;/a&gt;初识&lt;/h1&gt;&lt;p&gt;小波树有很多应用场景，这里就从LeetCode的一道题目说起，&lt;a href=&quot;https://leetcode.com/problems/online-majority-element-in-subarray/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;1157. Online Majority Element In Subarray&lt;/a&gt;，：&lt;br&gt;实现这个类 MajorityChecker 的一个方法，&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;MajorityChecker(int[] arr)，构造函
+      
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>Mac中处理txt中文乱码</title>
