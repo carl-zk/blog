@@ -2,7 +2,7 @@
 title: java html template tool
 date: 2019-02-19 00:12:35
 category: java
-tags: 
+tags: freemarker
 ---
 一个好用的处理 html template 的工具：
 [freemarker](https://freemarker.apache.org/docs/pgui_quickstart_all.html)
