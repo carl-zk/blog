@@ -2,6 +2,18 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://carl-zk.github.io/blog/2020/11/01/generate-class-with-freemaker/</loc>
+    <title>Generate Class With Freemarker</title>
+    <date>2020-11-01T09:33:42.000Z</date>
+  </url>
+  
+  <url>
+    <loc>https://carl-zk.github.io/blog/2019/02/19/java-html-template-tool/</loc>
+    <title>Java Html Template Tool</title>
+    <date>2019-02-18T16:12:35.000Z</date>
+  </url>
+  
+  <url>
     <loc>https://carl-zk.github.io/blog/2020/09/16/Wavelet-Tree/</loc>
     <title>Wavelet Tree</title>
     <date>2020-09-16T04:19:17.000Z</date>
@@ -47,12 +59,6 @@
     <loc>https://carl-zk.github.io/blog/about/index.html</loc>
     <title>About</title>
     <date>2017-03-02T14:38:35.000Z</date>
-  </url>
-  
-  <url>
-    <loc>https://carl-zk.github.io/blog/2019/02/19/java-html-template-tool/</loc>
-    <title>Java Html Template Tool</title>
-    <date>2019-02-18T16:12:35.000Z</date>
   </url>
   
   <url>

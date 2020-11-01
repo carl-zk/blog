@@ -85,10 +85,10 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-切蛋糕" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Leftmost-Digit" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2016/06/22/%E5%88%87%E8%9B%8B%E7%B3%95/" class="article-date">
-  <time datetime="2016-06-22T04:51:44.000Z" itemprop="datePublished">2016-06-22</time>
+    <a href="/blog/2016/06/22/Leftmost-Digit/" class="article-date">
+  <time datetime="2016-06-22T09:08:07.000Z" itemprop="datePublished">2016-06-22</time>
 </a>
     
   <div class="article-category">
@@ -103,7 +103,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2016/06/22/%E5%88%87%E8%9B%8B%E7%B3%95/">切蛋糕</a>
+      <a class="article-title" href="/blog/2016/06/22/Leftmost-Digit/">Leftmost Digit</a>
     </h1>
   
 
@@ -113,28 +113,28 @@
       
         <!-- Table of Contents -->
         
-        <p><a href="http://acm.hdu.edu.cn/game/entry/problem/show.php?chapterid=2&sectionid=1&problemid=4" target="_blank" rel="noopener">题目链接</a><br>Cake</p>
-<p>Time Limit: 1000/1000 MS (Java/Others) Memory Limit: 32768/32768 K (Java/Others)<br>Total Submission(s): 3439 Accepted Submission(s): 1642</p>
-<p>Problem Description<br>一次生日Party可能有p人或者q人参加,现准备有一个大蛋糕.问最少要将蛋糕切成多少块(每块大小不一定相等),才能使p人或者q人出席的任何一种情况,都能平均将蛋糕分食.</p>
-<p>Input<br>每行有两个数p和q.</p>
-<p>Output<br>输出最少要将蛋糕切成多少块.</p>
-<p>Sample Input<br>2 3</p>
-<p>Sample Output<br>4</p>
-<p>Hint<br>将蛋糕切成大小分别为1/3,1/3,1/6,1/6的四块即满足要求.<br>当2个人来时，每人可以吃1/3+1/6=1/2 , 1/2块。<br>当3个人来时，每人可以吃1/6+1/6=1/3 , 1/3, 1/3块。</p>
+        <p><a href="http://acm.hdu.edu.cn/game/entry/problem/show.php?chapterid=2&sectionid=1&problemid=11" target="_blank" rel="noopener">题目链接</a><br>Leftmost Digit</p>
+<p>Time Limit: 2000/1000 MS (Java/Others) Memory Limit: 65536/32768 K (Java/Others)<br>Total Submission(s): 3331 Accepted Submission(s): 1464</p>
+<p>Problem Description<br>Given a positive integer N, you should output the leftmost digit of N^N.</p>
+<p>Input<br>The input contains several test cases. The first line of the input is a single integer T which is the number of test cases. T test cases follow.<br>Each test case contains a single positive integer N(1&lt;=N&lt;=1,000,000,000).</p>
+<p>Output<br>For each test case, you should output the leftmost digit of N^N.</p>
+<p>Sample Input<br>2<br>3<br>4</p>
+<p>Sample Output<br>2<br>2</p>
+<p>Hint</p>
+<p>In the first case, 3 * 3 * 3 = 27, so the leftmost digit is 2.<br>In the second case, 4 * 4 * 4 * 4 = 256, so the leftmost digit is 2.</p>
 <hr />
 
 <blockquote>
-<p>如图,切1刀得到1块,切2刀得到2块.在同一起始点切p刀和q刀,得到的总块数减去重合的切线,就是所得总的块数.<br>重合切线即是p和q的最大公约数r.<br>?:最大公约数的本质是什么呢?为什么重合切线就是最大公约数?因为假设p和q都各是一个圆,那么将这两个圆各分成r分,切线肯定是一样的.再比如p和q都各是一条长度为1的钢管,重量分别为p和q,将它们分成r份,那么切点是一样的,只是每段的质量不同而已. r就像篮子,p和q都可以均匀放到r个篮子里一样.</p>
+<p>给参考博主点赞!感觉我的数学已经废了,忘记log函数了.<br>对double类型取整要用long long 类型, 否则AC不过.</p>
 </blockquote>
-<p><img src="http://o6ibfi17w.bkt.clouddn.com/images/cake.png" alt="" title="cake cut"></p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;set&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAX (1 &lt;&lt; 20)</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="title">gcd</span><span class="params">(<span class="keyword">unsigned</span> x, <span class="keyword">unsigned</span> y)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> y?gcd(y, x%y):x;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">unsigned</span> x, y;</span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">scanf</span>(<span class="string">"%d %d"</span>, &amp;x, &amp;y)!=EOF)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, x+y - gcd(x, y));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;set&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAX 1000001</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">leftMostDigit</span><span class="params">(<span class="keyword">long</span> <span class="keyword">long</span> d)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">double</span> p = d * <span class="built_in">log10</span>(d);</span><br><span class="line">    p -= (<span class="keyword">long</span> <span class="keyword">long</span>) p;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">pow</span>(<span class="number">10</span>, p);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n, d;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;n);</span><br><span class="line">    <span class="keyword">while</span>(n--)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;d);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, leftMostDigit(d));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p><a href="http://blog.chinaunix.net/uid-26382417-id-3324955.html" target="_blank" rel="noopener">参考链接</a></p>
+<p><a href="http://blog.sina.com.cn/s/blog_64e467d60100zznb.html" target="_blank" rel="noopener">参考链接</a></p>
 
       
     </div>
     <footer class="article-footer">
-      <!-- <a data-url="https://carl-zk.github.io/blog/2016/06/22/%E5%88%87%E8%9B%8B%E7%B3%95/" data-id="ck7d04tsr006s30ps8ahd2876" class="article-share-link">分享</a> -->
+      <!-- <a data-url="https://carl-zk.github.io/blog/2016/06/22/Leftmost-Digit/" data-id="ck7d04trd002530pshh6kgn6l" class="article-share-link">分享</a> -->
       
     </footer>
   </div>
@@ -146,7 +146,7 @@
 
 
   <nav id="page-nav">
-    <a class="extend prev" rel="prev" href="/blog/page/162/">&lt;&lt;上一页</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/161/">161</a><a class="page-number" href="/blog/page/162/">162</a><span class="page-number current">163</span><a class="page-number" href="/blog/page/164/">164</a><a class="page-number" href="/blog/page/165/">165</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/183/">183</a><a class="extend next" rel="next" href="/blog/page/164/">下一页&gt;&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/162/">&lt;&lt;上一页</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/161/">161</a><a class="page-number" href="/blog/page/162/">162</a><span class="page-number current">163</span><a class="page-number" href="/blog/page/164/">164</a><a class="page-number" href="/blog/page/165/">165</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/184/">184</a><a class="extend next" rel="next" href="/blog/page/164/">下一页&gt;&gt;</a>
   </nav>
 
 </section>
@@ -170,6 +170,10 @@
       <ul>
         
           <li>
+            <a href="/blog/2020/11/01/generate-class-with-freemaker/">Generate Class With Freemarker</a>
+          </li>
+        
+          <li>
             <a href="/blog/2020/09/16/Wavelet-Tree/">Wavelet Tree</a>
           </li>
         
@@ -183,10 +187,6 @@
         
           <li>
             <a href="/blog/2020/03/05/SkipList/">SkipList</a>
-          </li>
-        
-          <li>
-            <a href="/blog/2020/03/03/gitalk-%E8%BF%90%E4%BD%9C%E5%8E%9F%E7%90%86/">Gitalk 运作原理</a>
           </li>
         
       </ul>

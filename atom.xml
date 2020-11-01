@@ -6,7 +6,7 @@
   <link href="/blog/atom.xml" rel="self"/>
   
   <link href="https://carl-zk.github.io/blog/"/>
-  <updated>2020-09-16T08:54:03.257Z</updated>
+  <updated>2020-11-01T09:49:32.123Z</updated>
   <id>https://carl-zk.github.io/blog/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Generate Class With Freemarker</title>
+    <link href="https://carl-zk.github.io/blog/2020/11/01/generate-class-with-freemaker/"/>
+    <id>https://carl-zk.github.io/blog/2020/11/01/generate-class-with-freemaker/</id>
+    <published>2020-11-01T09:33:42.000Z</published>
+    <updated>2020-11-01T09:49:32.123Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;&lt;a href=&quot;https://freemarker.apache.org/docs/ref_directive_list.html&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;freemarker&lt;/a&gt;是一个Java template engine，可以基于模板+Data生成对应的HTML web pages, e-mails, configuration files, source code, etc.文件。&lt;/p&gt;
+&lt;figure class=&quot;highlight xml&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;
+      
+    
+    </summary>
+    
+    
+      <category term="freemarker" scheme="https://carl-zk.github.io/blog/tags/freemarker/"/>
+    
+  </entry>
   
   <entry>
     <title>Wavelet Tree</title>
@@ -316,7 +338,7 @@
     <link href="https://carl-zk.github.io/blog/2019/02/19/java-html-template-tool/"/>
     <id>https://carl-zk.github.io/blog/2019/02/19/java-html-template-tool/</id>
     <published>2019-02-18T16:12:35.000Z</published>
-    <updated>2019-08-09T23:48:34.619Z</updated>
+    <updated>2020-11-01T09:49:24.554Z</updated>
     
     <summary type="html">
     
@@ -331,6 +353,8 @@
     
       <category term="java" scheme="https://carl-zk.github.io/blog/categories/java/"/>
     
+    
+      <category term="freemarker" scheme="https://carl-zk.github.io/blog/tags/freemarker/"/>
     
   </entry>
   
