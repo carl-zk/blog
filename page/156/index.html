@@ -85,10 +85,10 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-Wolf-and-Rabbit" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-哈哈-发现hdu错题一道" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2016/06/23/Wolf-and-Rabbit/" class="article-date">
-  <time datetime="2016-06-23T14:52:21.000Z" itemprop="datePublished">2016-06-23</time>
+    <a href="/blog/2016/06/24/%E5%93%88%E5%93%88-%E5%8F%91%E7%8E%B0hdu%E9%94%99%E9%A2%98%E4%B8%80%E9%81%93/" class="article-date">
+  <time datetime="2016-06-23T18:01:12.000Z" itemprop="datePublished">2016-06-24</time>
 </a>
     
   <div class="article-category">
@@ -103,7 +103,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2016/06/23/Wolf-and-Rabbit/">Wolf and Rabbit</a>
+      <a class="article-title" href="/blog/2016/06/24/%E5%93%88%E5%93%88-%E5%8F%91%E7%8E%B0hdu%E9%94%99%E9%A2%98%E4%B8%80%E9%81%93/">哈哈,发现Hdu错题一道</a>
     </h1>
   
 
@@ -113,21 +113,66 @@
       
         <!-- Table of Contents -->
         
-        <p><a href="http://acm.hdu.edu.cn/game/entry/problem/show.php?chapterid=2&sectionid=2&problemid=4" target="_blank" rel="noopener">题目链接</a><br>Problem Description<br>There is a hill with n holes around. The holes are signed from 0 to n-1.</p>
-<p>A rabbit must hide in one of the holes. A wolf searches the rabbit in anticlockwise order. The first hole he get into is the one signed with 0. Then he will get into the hole every m holes. For example, m=2 and n=6, the wolf will get into the holes which are signed 0,2,4,0. If the rabbit hides in the hole which signed 1,3 or 5, she will survive. So we call these holes the safe holes.</p>
-<p>Input<br>The input starts with a positive integer P which indicates the number of test cases. Then on the following P lines,each line consists 2 positive integer m and n(0&lt;m,n&lt;2147483648).</p>
-<p>Output<br>For each input m n, if safe holes exist, you should output “YES”, else output “NO” in a single line.</p>
-<p>Sample Input<br>2<br>1 2<br>2 2</p>
-<p>Sample Output<br>NO<br>YES</p>
-<hr/>
-> 找规律
+        <p><a href="http://acm.hdu.edu.cn/game/entry/problem/show.php?chapterid=2&sectionid=2&problemid=8" target="_blank" rel="noopener">题目链接</a><br>Number Sequence</p>
+<p>Time Limit: 2000/1000 MS (Java/Others) Memory Limit: 65536/32768 K (Java/Others)<br>Total Submission(s): 1762 Accepted Submission(s): 675</p>
+<p>Problem Description<br>A number sequence is defined as follows:</p>
+<p>f(1) = 1, f(2) = 1, f(n) = (A * f(n - 1) + B * f(n - 2)) mod 7.</p>
+<p>Given A, B, and n, you are to calculate the value of f(n).</p>
+<p>Input<br>The input consists of multiple test cases. Each test case contains 3 integers A, B and n on a single line (1 &lt;= A, B &lt;= 1000, 1 &lt;= n &lt;= 100,000,000). Three zeros signal the end of input and this test case is not to be processed.</p>
+<p>Output<br>For each test case, print the value of f(n) on a single line.</p>
+<p>Sample Input<br>1 1 3<br>1 2 10<br>0 0 0</p>
+<p>Sample Output<br>2<br>5</p>
+<hr />
 
-<p>当m,n互质的时候狼可以遍历一遍.</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;set&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAX 66</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">gcd</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> y?gcd(y, x%y):x;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> P, m, n;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;P);</span><br><span class="line">    <span class="keyword">while</span>(P--)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d %d"</span>, &amp;m, &amp;n);</span><br><span class="line">        <span class="keyword">if</span>(gcd(m, n)==<span class="number">1</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"NO\n"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"YES\n"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>AC代码如下:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;set&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAX 50</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> f[MAX] = &#123;<span class="number">0</span>,<span class="number">1</span>,<span class="number">1</span>,&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">circ</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b, <span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">//f[0]=0;   取消注释测试会有惊喜哦</span></span><br><span class="line">    <span class="comment">//f[0]=1;</span></span><br><span class="line">    f[<span class="number">1</span>] = f[<span class="number">2</span>] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">3</span>; i&lt;MAX; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        f[i] = (a*f[i<span class="number">-1</span>]+b*f[i<span class="number">-2</span>]) % <span class="number">7</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> f[n%<span class="number">49</span>];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> A,B,n;</span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">scanf</span>(<span class="string">"%d %d %d"</span>, &amp;A, &amp;B, &amp;n),A!=<span class="number">0</span> || B!=<span class="number">0</span> ||n!=<span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, circ(A,B,n));</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>是这样的,看到这道题的第一感觉肯定是以为找规律题,没错!BUT,你能猜到周期是几吗?<br>因为f=(x+y)%7, x和y又都&lt;7,所以x和y的组合不过只有7*7=49种情况,照这样编码,so easy!?</p>
+<p>解释一下,出题人显然没搞懂<strong>周期</strong>的概念,最大情况49是没错,错就错在它并不能代表周期的倍数,同时你也不知道周期是从第几个开始的.举个例子:当A=5,B=7时,周期从第2个开始;当A=6,B=8时,周期从1开始.</p>
+<ol>
+<li>A=5, B=7的情况:</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>n</th>
+<th align="center">f[n]的真实值</th>
+<th align="center">f[0] = 1时</th>
+<th align="right">f[0] = 0时</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>49</td>
+<td align="center">3</td>
+<td align="center">1</td>
+<td align="right">0</td>
+</tr>
+<tr>
+<td>50</td>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="right">1</td>
+</tr>
+<tr>
+<td>51</td>
+<td align="center">5</td>
+<td align="center">1</td>
+<td align="right">1</td>
+</tr>
+<tr>
+<td>52</td>
+<td align="center">4</td>
+<td align="center">5</td>
+<td align="right">5</td>
+</tr>
+</tbody></table>
+<p>LOOK,可以AC的代码竟然会出现这样的结果!<br>真正的答案应该是找出周期T和周期开始位置S,结束位置E.根据实际情况去计算.</p>
+<p>不过猜想题主的用意是利用周期,所以可能没在意这些细节吧!这题折磨我好久,终于可以安心的睡了.</p>
+
       
     </div>
     <footer class="article-footer">
-      <!-- <a data-url="https://carl-zk.github.io/blog/2016/06/23/Wolf-and-Rabbit/" data-id="ck7d04trs003p30pscwmi6ohr" class="article-share-link">分享</a> -->
+      <!-- <a data-url="https://carl-zk.github.io/blog/2016/06/24/%E5%93%88%E5%93%88-%E5%8F%91%E7%8E%B0hdu%E9%94%99%E9%A2%98%E4%B8%80%E9%81%93/" data-id="ck7d04tsw007930psbhzae1in" class="article-share-link">分享</a> -->
       
     </footer>
   </div>
@@ -139,7 +184,7 @@
 
 
   <nav id="page-nav">
-    <a class="extend prev" rel="prev" href="/blog/page/155/">&lt;&lt;上一页</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/154/">154</a><a class="page-number" href="/blog/page/155/">155</a><span class="page-number current">156</span><a class="page-number" href="/blog/page/157/">157</a><a class="page-number" href="/blog/page/158/">158</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/184/">184</a><a class="extend next" rel="next" href="/blog/page/157/">下一页&gt;&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/155/">&lt;&lt;上一页</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/154/">154</a><a class="page-number" href="/blog/page/155/">155</a><span class="page-number current">156</span><a class="page-number" href="/blog/page/157/">157</a><a class="page-number" href="/blog/page/158/">158</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/185/">185</a><a class="extend next" rel="next" href="/blog/page/157/">下一页&gt;&gt;</a>
   </nav>
 
 </section>
@@ -163,6 +208,10 @@
       <ul>
         
           <li>
+            <a href="/blog/2021/03/02/Patience-sorting/">Patience Sorting</a>
+          </li>
+        
+          <li>
             <a href="/blog/2020/11/01/generate-class-with-freemaker/">Generate Class With Freemarker</a>
           </li>
         
@@ -176,10 +225,6 @@
         
           <li>
             <a href="/blog/2020/07/15/MySQL-8-window-functions/">MySQL 8 Window Functions</a>
-          </li>
-        
-          <li>
-            <a href="/blog/2020/03/05/SkipList/">SkipList</a>
           </li>
         
       </ul>
@@ -203,7 +248,7 @@
   
   <div class="outer">
     <div id="footer-left">
-      &copy; 2016 - 2020 carl-zk<!--&nbsp;|&nbsp;
+      &copy; 2016 - 2021 carl-zk<!--&nbsp;|&nbsp;
       主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a> -->
     </div>
   

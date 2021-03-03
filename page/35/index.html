@@ -85,10 +85,10 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-Add-Two-Numbers" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Longest-Substring-no-Repeat" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2018/04/01/Add-Two-Numbers/" class="article-date">
-  <time datetime="2018-03-31T17:25:04.000Z" itemprop="datePublished">2018-04-01</time>
+    <a href="/blog/2018/04/01/Longest-Substring-no-Repeat/" class="article-date">
+  <time datetime="2018-04-01T02:46:40.000Z" itemprop="datePublished">2018-04-01</time>
 </a>
     
   </div>
@@ -99,7 +99,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2018/04/01/Add-Two-Numbers/">Add Two Numbers</a>
+      <a class="article-title" href="/blog/2018/04/01/Longest-Substring-no-Repeat/">Longest Substring No Repeat</a>
     </h1>
   
 
@@ -110,20 +110,27 @@
         <!-- Table of Contents -->
         
         <blockquote>
-<p>水题系列</p>
+<p>没有所谓的水题，只有解题的思想够不够先进。</p>
 </blockquote>
-<p>You are given two non-empty linked lists representing two non-negative integers. The digits are stored in reverse order and each of their nodes contain a single digit. Add the two numbers and return it as a linked list.</p>
-<p>You may assume the two numbers do not contain any leading zero, except the number 0 itself.</p>
-<p>Example</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Input: (2 -&gt; 4 -&gt; 3) + (5 -&gt; 6 -&gt; 4)</span><br><span class="line">Output: 7 -&gt; 0 -&gt; 8</span><br><span class="line">Explanation: 342 + 465 &#x3D; 807.</span><br></pre></td></tr></table></figure>
+<p>Given a string, find the length of the longest substring without repeating characters.</p>
+<p>Examples:<br>Given “abcabcbb”, the answer is “abc”, which the length is 3.<br>Given “bbbbb”, the answer is “b”, with the length of 1.<br>Given “pwwkew”, the answer is “wke”, with the length of 3. Note that the answer must be a substring, “pwke” is a subsequence and not a substring.</p>
+<p>需要做两项工作：</p>
+<ol>
+<li>查字符是否与当前连续子串重复；</li>
+<li>计算当前子串长度；</li>
+</ol>
+<p>用一个 HashMap&lt;char, int&gt; 来保存 &lt;字符, 字符所在位置下标&gt;，用 maxlen 来保存最长不重复子串长度，用 i 保存当前子串起始坐标，遍历字符串数组：</p>
+<ol>
+<li>根据 Integer loc = map.get(char), loc == null || loc &lt; i 来判断是否重复;</li>
+<li>当重复时，子串长度不可能增加；当不重复时，更新最大长度 maxlen = max(maxlen, j-i+1);</li>
+</ol>
+<p><a href="https://leetcode.com/problems/longest-substring-without-repeating-characters/description/" target="_blank" rel="noopener">Longest Substring Without Repeating Characters</a><br><code>AC code</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">lengthOfLongestSubstring</span><span class="params">(String s)</span> </span>&#123;</span><br><span class="line">        HashMap&lt;Character, Integer&gt; map = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">        <span class="keyword">char</span>[] chars = s.toCharArray();</span><br><span class="line">        <span class="keyword">int</span> maxlen = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; chars.length; j++) &#123;</span><br><span class="line">            Integer k = map.get(chars[j]);</span><br><span class="line">            <span class="keyword">if</span> (k == <span class="keyword">null</span> || k &lt; i) &#123;</span><br><span class="line">                maxlen = Math.max(maxlen, j - i + <span class="number">1</span>);</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                i = k + <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            map.put(chars[j], j);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> maxlen;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>两个 list 相加，考虑进位即可。</p>
-<p><a href="https://leetcode.com/problems/add-two-numbers/description/" target="_blank" rel="noopener">add-two-numbers</a><br><code>AC code</code></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * public class ListNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     ListNode next;</span></span><br><span class="line"><span class="comment"> *     ListNode(int x) &#123; val = x; &#125;</span></span><br><span class="line"><span class="comment"> * &#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">            <span class="function"><span class="keyword">public</span> ListNode <span class="title">addTwoNumbers</span><span class="params">(ListNode l1, ListNode l2)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (l1 == <span class="keyword">null</span>) <span class="keyword">return</span> l2;</span><br><span class="line">        <span class="keyword">if</span> (l2 == <span class="keyword">null</span>) <span class="keyword">return</span> l1;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> upper = <span class="number">0</span>;</span><br><span class="line">        ListNode list = <span class="keyword">new</span> ListNode(l1.val + l2.val), t = list;</span><br><span class="line">        <span class="keyword">if</span> (list.val &gt; <span class="number">9</span>) &#123;</span><br><span class="line">            list.val -= <span class="number">10</span>;</span><br><span class="line">            upper = <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        l1 = l1.next;</span><br><span class="line">        l2 = l2.next;</span><br><span class="line">        <span class="keyword">while</span> (l1 != <span class="keyword">null</span> &amp;&amp; l2 != <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">int</span> val = l1.val + l2.val + upper;</span><br><span class="line">            <span class="keyword">if</span> (val &gt; <span class="number">9</span>) &#123;</span><br><span class="line">                upper = <span class="number">1</span>;</span><br><span class="line">                val -= <span class="number">10</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                upper = <span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            ListNode next = <span class="keyword">new</span> ListNode(val);</span><br><span class="line">            t.next = next;</span><br><span class="line">            t = next;</span><br><span class="line">            l1 = l1.next;</span><br><span class="line">            l2 = l2.next;</span><br><span class="line">        &#125;</span><br><span class="line">        l1 = l1 == <span class="keyword">null</span> ? l2 : l1;</span><br><span class="line">        <span class="keyword">while</span> (l1 != <span class="keyword">null</span>) &#123;</span><br><span class="line">            l1.val += upper;</span><br><span class="line">            <span class="keyword">if</span> (l1.val &gt; <span class="number">9</span>) &#123;</span><br><span class="line">                upper = <span class="number">1</span>;</span><br><span class="line">                l1.val -= <span class="number">10</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                upper = <span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            t.next = l1;</span><br><span class="line">            t = l1;</span><br><span class="line">            l1 = l1.next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (upper &gt; <span class="number">0</span>) &#123;</span><br><span class="line">            t.next = <span class="keyword">new</span> ListNode(<span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> list;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
     <footer class="article-footer">
-      <!-- <a data-url="https://carl-zk.github.io/blog/2018/04/01/Add-Two-Numbers/" data-id="ck7d04tqr000a30ps5s6o6hgn" class="article-share-link">分享</a> -->
+      <!-- <a data-url="https://carl-zk.github.io/blog/2018/04/01/Longest-Substring-no-Repeat/" data-id="ck7d04tre002c30pscnt2fudp" class="article-share-link">分享</a> -->
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/LeetCode/" rel="tag">LeetCode</a></li></ul>
 
@@ -137,7 +144,7 @@
 
 
   <nav id="page-nav">
-    <a class="extend prev" rel="prev" href="/blog/page/34/">&lt;&lt;上一页</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/33/">33</a><a class="page-number" href="/blog/page/34/">34</a><span class="page-number current">35</span><a class="page-number" href="/blog/page/36/">36</a><a class="page-number" href="/blog/page/37/">37</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/184/">184</a><a class="extend next" rel="next" href="/blog/page/36/">下一页&gt;&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/34/">&lt;&lt;上一页</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/33/">33</a><a class="page-number" href="/blog/page/34/">34</a><span class="page-number current">35</span><a class="page-number" href="/blog/page/36/">36</a><a class="page-number" href="/blog/page/37/">37</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/185/">185</a><a class="extend next" rel="next" href="/blog/page/36/">下一页&gt;&gt;</a>
   </nav>
 
 </section>
@@ -161,6 +168,10 @@
       <ul>
         
           <li>
+            <a href="/blog/2021/03/02/Patience-sorting/">Patience Sorting</a>
+          </li>
+        
+          <li>
             <a href="/blog/2020/11/01/generate-class-with-freemaker/">Generate Class With Freemarker</a>
           </li>
         
@@ -174,10 +185,6 @@
         
           <li>
             <a href="/blog/2020/07/15/MySQL-8-window-functions/">MySQL 8 Window Functions</a>
-          </li>
-        
-          <li>
-            <a href="/blog/2020/03/05/SkipList/">SkipList</a>
           </li>
         
       </ul>
@@ -201,7 +208,7 @@
   
   <div class="outer">
     <div id="footer-left">
-      &copy; 2016 - 2020 carl-zk<!--&nbsp;|&nbsp;
+      &copy; 2016 - 2021 carl-zk<!--&nbsp;|&nbsp;
       主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a> -->
     </div>
   

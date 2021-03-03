@@ -85,10 +85,10 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-MySQL-8-window-functions" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Mac中处理txt中文乱码" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2020/07/15/MySQL-8-window-functions/" class="article-date">
-  <time datetime="2020-07-15T02:12:17.000Z" itemprop="datePublished">2020-07-15</time>
+    <a href="/blog/2020/08/31/Mac%E4%B8%AD%E5%A4%84%E7%90%86txt%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81/" class="article-date">
+  <time datetime="2020-08-31T14:50:21.000Z" itemprop="datePublished">2020-08-31</time>
 </a>
     
   </div>
@@ -99,7 +99,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2020/07/15/MySQL-8-window-functions/">MySQL 8 Window Functions</a>
+      <a class="article-title" href="/blog/2020/08/31/Mac%E4%B8%AD%E5%A4%84%E7%90%86txt%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81/">Mac中处理txt中文乱码</a>
     </h1>
   
 
@@ -110,23 +110,24 @@
         <!-- Table of Contents -->
         
         <blockquote>
-<p>MySQL Version: since 8.0</p>
+<p>最近下载了一本电子书，格式为TXT，打开后发现乱码，故在网上找到若干解决方法，特记于此，免于后烦。</p>
 </blockquote>
-<h1 id="Window-Functions"><a href="#Window-Functions" class="headerlink" title="Window Functions"></a>Window Functions</h1><blockquote>
-<p>A window function is an SQL function where the input values are taken from a “window” of one or more rows in the results set of a SELECT statement.</p>
-</blockquote>
-<p>一个window function 是一个SQL函数，它的input是从一个“SELECT语句结果集中一行或多行的 window”中获取。与普通聚合函数的区别在于它使用关键字 <code>OVER</code>。<br>window functions 不能使用<code>DISTINCT</code>关键字，同时，window functions 只能出现在结果集(result set) 和 SELECT 语句的 ORDER BY 中。</p>
-<h2 id="TOP-5-each-group"><a href="#TOP-5-each-group" class="headerlink" title="TOP 5 each group"></a>TOP 5 each group</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> t1.project_id, t1.user_id <span class="keyword">FROM</span> project_user t1 <span class="keyword">WHERE</span> <span class="number">5</span> &gt; (</span><br><span class="line">  <span class="keyword">SELECT</span> <span class="keyword">COUNT</span>(*) <span class="keyword">FROM</span> project_user t2 <span class="keyword">WHERE</span> t1.project_id=t2.project_id <span class="keyword">AND</span> t1.user_id&gt;t2.user_id</span><br><span class="line">) <span class="keyword">ORDER</span> <span class="keyword">BY</span> project_id, user_id</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> (</span><br><span class="line">  <span class="keyword">SELECT</span> project_id, user_id, <span class="keyword">RANK</span>() <span class="keyword">over</span> (<span class="keyword">PARTITION</span> <span class="keyword">BY</span> project_id <span class="keyword">ORDER</span> <span class="keyword">BY</span> user_id) <span class="keyword">as</span> rank_num <span class="keyword">FROM</span> project_user <span class="keyword">ORDER</span> <span class="keyword">BY</span> project_id, user_id</span><br><span class="line">) t <span class="keyword">WHERE</span> rank_num &lt;= <span class="number">5</span></span><br></pre></td></tr></table></figure>
-
-<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://www.sqlite.org/windowfunctions.html#:~:text=A%20window%20function%20is%20an,it%20is%20a%20window%20function." target="_blank" rel="noopener">Window Functions</a><br><a href="https://www.mysqltutorial.org/mysql-window-functions/" target="_blank" rel="noopener">MySQL Window Functions</a></p>
+<h2 id="合并文件"><a href="#合并文件" class="headerlink" title="合并文件"></a>合并文件</h2><p>首先，每个章节为一个独立文件，文件名格式“章节编号.txt”。需要一个shell脚本整合到一个文件中</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">file=ALL.TXT</span><br><span class="line"><span class="built_in">echo</span> &gt; <span class="variable">$file</span></span><br><span class="line"></span><br><span class="line">cat CONTENT.txt &gt;&gt; <span class="variable">$file</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> &#123;1..101&#125;</span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">        index=<span class="string">"<span class="variable">$&#123;i&#125;</span>.txt"</span></span><br><span class="line">        <span class="keyword">if</span> [ <span class="variable">$i</span> -lt 10 ]</span><br><span class="line">        <span class="keyword">then</span></span><br><span class="line">                index=<span class="string">"0<span class="variable">$&#123;i&#125;</span>.txt"</span></span><br><span class="line">        <span class="keyword">fi</span></span><br><span class="line">        <span class="built_in">echo</span> <span class="variable">$&#123;index&#125;</span></span><br><span class="line">        cat <span class="variable">$&#123;index&#125;</span> &gt;&gt; <span class="variable">$file</span></span><br><span class="line">        <span class="built_in">echo</span> &gt;&gt; <span class="variable">$file</span></span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>
+<h2 id="解决乱码"><a href="#解决乱码" class="headerlink" title="解决乱码"></a>解决乱码</h2><p><a href="https://it365.gitlab.io/zh-cn/decode/" target="_blank" rel="noopener">在线监测文件编码</a><br>看到该文件编码为GB18030。<br>使用shell命令转换文件编码，命令格式如下：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iconv -f encoding -t encoding sourcefile &gt; destinationfile</span><br></pre></td></tr></table></figure>
+<p>则具体命令为</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iconv -f GB18030 -t UTF8 A.txt &gt; B.txt</span><br></pre></td></tr></table></figure>
+<p>参考文章中有批量命令，特誊抄于此：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find *.txt -<span class="built_in">exec</span> sh -c <span class="string">"iconv -f GB18030 -t UTF8 &#123;&#125; &gt; &#123;&#125;.txt"</span> \;</span><br></pre></td></tr></table></figure>
+<p>至此，转码完成，需要对文件中特殊符号<code>^M</code>做删除处理，可参考我之前文章<a href="https://carl-zk.github.io/blog/2017/05/09/Bash-Script%E5%AD%A6%E4%B9%A0/">windows格式文件转linux格式文件</a></p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://www.jianshu.com/p/f55ddf1e9839" target="_blank" rel="noopener">https://www.jianshu.com/p/f55ddf1e9839</a><br><a href="https://zhuanlan.zhihu.com/p/46935220" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/46935220</a></p>
 
       
     </div>
     <footer class="article-footer">
-      <!-- <a data-url="https://carl-zk.github.io/blog/2020/07/15/MySQL-8-window-functions/" data-id="ckcnazab000002hq68xe6f5q2" class="article-share-link">分享</a> -->
+      <!-- <a data-url="https://carl-zk.github.io/blog/2020/08/31/Mac%E4%B8%AD%E5%A4%84%E7%90%86txt%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81/" data-id="ckeinn7wh0000r3q62bb267sp" class="article-share-link">分享</a> -->
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/MySQL/" rel="tag">MySQL</a></li></ul>
-
     </footer>
   </div>
   
@@ -137,7 +138,7 @@
 
 
   <nav id="page-nav">
-    <a class="extend prev" rel="prev" href="/blog/page/3/">&lt;&lt;上一页</a><a class="page-number" href="/blog/">1</a><a class="page-number" href="/blog/page/2/">2</a><a class="page-number" href="/blog/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/blog/page/5/">5</a><a class="page-number" href="/blog/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/184/">184</a><a class="extend next" rel="next" href="/blog/page/5/">下一页&gt;&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/3/">&lt;&lt;上一页</a><a class="page-number" href="/blog/">1</a><a class="page-number" href="/blog/page/2/">2</a><a class="page-number" href="/blog/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/blog/page/5/">5</a><a class="page-number" href="/blog/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/185/">185</a><a class="extend next" rel="next" href="/blog/page/5/">下一页&gt;&gt;</a>
   </nav>
 
 </section>
@@ -161,6 +162,10 @@
       <ul>
         
           <li>
+            <a href="/blog/2021/03/02/Patience-sorting/">Patience Sorting</a>
+          </li>
+        
+          <li>
             <a href="/blog/2020/11/01/generate-class-with-freemaker/">Generate Class With Freemarker</a>
           </li>
         
@@ -174,10 +179,6 @@
         
           <li>
             <a href="/blog/2020/07/15/MySQL-8-window-functions/">MySQL 8 Window Functions</a>
-          </li>
-        
-          <li>
-            <a href="/blog/2020/03/05/SkipList/">SkipList</a>
           </li>
         
       </ul>
@@ -201,7 +202,7 @@
   
   <div class="outer">
     <div id="footer-left">
-      &copy; 2016 - 2020 carl-zk<!--&nbsp;|&nbsp;
+      &copy; 2016 - 2021 carl-zk<!--&nbsp;|&nbsp;
       主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a> -->
     </div>
   

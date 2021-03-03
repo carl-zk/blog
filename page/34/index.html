@@ -85,10 +85,10 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-Longest-Substring-no-Repeat" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Median-of-Two-Sorted-Arrays" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2018/04/01/Longest-Substring-no-Repeat/" class="article-date">
-  <time datetime="2018-04-01T02:46:40.000Z" itemprop="datePublished">2018-04-01</time>
+    <a href="/blog/2018/04/01/Median-of-Two-Sorted-Arrays/" class="article-date">
+  <time datetime="2018-04-01T03:32:59.000Z" itemprop="datePublished">2018-04-01</time>
 </a>
     
   </div>
@@ -99,7 +99,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2018/04/01/Longest-Substring-no-Repeat/">Longest Substring No Repeat</a>
+      <a class="article-title" href="/blog/2018/04/01/Median-of-Two-Sorted-Arrays/">Median of Two Sorted Arrays</a>
     </h1>
   
 
@@ -109,28 +109,19 @@
       
         <!-- Table of Contents -->
         
-        <blockquote>
-<p>没有所谓的水题，只有解题的思想够不够先进。</p>
-</blockquote>
-<p>Given a string, find the length of the longest substring without repeating characters.</p>
-<p>Examples:<br>Given “abcabcbb”, the answer is “abc”, which the length is 3.<br>Given “bbbbb”, the answer is “b”, with the length of 1.<br>Given “pwwkew”, the answer is “wke”, with the length of 3. Note that the answer must be a substring, “pwke” is a subsequence and not a substring.</p>
-<p>需要做两项工作：</p>
-<ol>
-<li>查字符是否与当前连续子串重复；</li>
-<li>计算当前子串长度；</li>
-</ol>
-<p>用一个 HashMap&lt;char, int&gt; 来保存 &lt;字符, 字符所在位置下标&gt;，用 maxlen 来保存最长不重复子串长度，用 i 保存当前子串起始坐标，遍历字符串数组：</p>
-<ol>
-<li>根据 Integer loc = map.get(char), loc == null || loc &lt; i 来判断是否重复;</li>
-<li>当重复时，子串长度不可能增加；当不重复时，更新最大长度 maxlen = max(maxlen, j-i+1);</li>
-</ol>
-<p><a href="https://leetcode.com/problems/longest-substring-without-repeating-characters/description/" target="_blank" rel="noopener">Longest Substring Without Repeating Characters</a><br><code>AC code</code></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">lengthOfLongestSubstring</span><span class="params">(String s)</span> </span>&#123;</span><br><span class="line">        HashMap&lt;Character, Integer&gt; map = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">        <span class="keyword">char</span>[] chars = s.toCharArray();</span><br><span class="line">        <span class="keyword">int</span> maxlen = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; chars.length; j++) &#123;</span><br><span class="line">            Integer k = map.get(chars[j]);</span><br><span class="line">            <span class="keyword">if</span> (k == <span class="keyword">null</span> || k &lt; i) &#123;</span><br><span class="line">                maxlen = Math.max(maxlen, j - i + <span class="number">1</span>);</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                i = k + <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            map.put(chars[j], j);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> maxlen;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <p>我相信这道题肯定不是让用这种方法，但是块拷贝的确比分析情况简单多了。</p>
+<p>There are two sorted arrays nums1 and nums2 of size m and n respectively.</p>
+<p>Find the median of the two sorted arrays. The overall run time complexity should be O(log (m+n)).</p>
+<p>Example 1:<br>nums1 = [1, 3]<br>nums2 = [2]</p>
+<p>The median is 2.0<br>Example 2:<br>nums1 = [1, 2]<br>nums2 = [3, 4]</p>
+<p>The median is (2 + 3)/2 = 2.5</p>
+<p><a href="https://leetcode.com/problems/median-of-two-sorted-arrays/description/" target="_blank" rel="noopener">median-of-two-sorted-arrays</a><br><code>AC code</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">double</span> <span class="title">findMedianSortedArrays</span><span class="params">(<span class="keyword">int</span>[] nums1, <span class="keyword">int</span>[] nums2)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> len = nums1.length + nums2.length, mid = len &gt;&gt; <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span>[] nums = <span class="keyword">new</span> <span class="keyword">int</span>[len];</span><br><span class="line">        System.arraycopy(nums1, <span class="number">0</span>, nums, <span class="number">0</span>, nums1.length);</span><br><span class="line">        System.arraycopy(nums2, <span class="number">0</span>, nums, nums1.length, nums2.length);</span><br><span class="line">        Arrays.sort(nums);</span><br><span class="line">        <span class="keyword">double</span> res = nums[mid];</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> (len % <span class="number">2</span> == <span class="number">0</span>) &#123;</span><br><span class="line">            res += nums[mid - <span class="number">1</span>];</span><br><span class="line">            res /= <span class="number">2</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
     <footer class="article-footer">
-      <!-- <a data-url="https://carl-zk.github.io/blog/2018/04/01/Longest-Substring-no-Repeat/" data-id="ck7d04tre002c30pscnt2fudp" class="article-share-link">分享</a> -->
+      <!-- <a data-url="https://carl-zk.github.io/blog/2018/04/01/Median-of-Two-Sorted-Arrays/" data-id="ck7d04trg002i30psadnz3sqy" class="article-share-link">分享</a> -->
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/LeetCode/" rel="tag">LeetCode</a></li></ul>
 
@@ -144,7 +135,7 @@
 
 
   <nav id="page-nav">
-    <a class="extend prev" rel="prev" href="/blog/page/33/">&lt;&lt;上一页</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/32/">32</a><a class="page-number" href="/blog/page/33/">33</a><span class="page-number current">34</span><a class="page-number" href="/blog/page/35/">35</a><a class="page-number" href="/blog/page/36/">36</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/184/">184</a><a class="extend next" rel="next" href="/blog/page/35/">下一页&gt;&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/33/">&lt;&lt;上一页</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/32/">32</a><a class="page-number" href="/blog/page/33/">33</a><span class="page-number current">34</span><a class="page-number" href="/blog/page/35/">35</a><a class="page-number" href="/blog/page/36/">36</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/185/">185</a><a class="extend next" rel="next" href="/blog/page/35/">下一页&gt;&gt;</a>
   </nav>
 
 </section>
@@ -168,6 +159,10 @@
       <ul>
         
           <li>
+            <a href="/blog/2021/03/02/Patience-sorting/">Patience Sorting</a>
+          </li>
+        
+          <li>
             <a href="/blog/2020/11/01/generate-class-with-freemaker/">Generate Class With Freemarker</a>
           </li>
         
@@ -181,10 +176,6 @@
         
           <li>
             <a href="/blog/2020/07/15/MySQL-8-window-functions/">MySQL 8 Window Functions</a>
-          </li>
-        
-          <li>
-            <a href="/blog/2020/03/05/SkipList/">SkipList</a>
           </li>
         
       </ul>
@@ -208,7 +199,7 @@
   
   <div class="outer">
     <div id="footer-left">
-      &copy; 2016 - 2020 carl-zk<!--&nbsp;|&nbsp;
+      &copy; 2016 - 2021 carl-zk<!--&nbsp;|&nbsp;
       主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a> -->
     </div>
   
