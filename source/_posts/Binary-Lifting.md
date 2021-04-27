@@ -83,5 +83,111 @@ class TreeAncestor {
 [236. Lowest Common Ancestor of a Binary Tree
 ](https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/)
 
+在一棵二叉树上找到两个节点 u 和 v 的最低公共父节点。
+
+方法：
+
+- 构造 dp[i][j], 即 节点 i 的第 $2^j$ 个父级节点；
+- 若 level[u] < level[v], swap(u, v);
+- 则 diff = level[u] - level[v], u 上移 diff 层与 v 达到同级；
+- 若 u == v 则 return u;
+- j 从 $log_2n$ 到 0 遍历，若 dp[u][j] != dp[v][j] 则 u = dp[u][j]; v = dp[v][j];
+- 返回 dp[u][0]
+
+核心在于将 u 和 v 置于同级，初始搜索空间为[0, h]（二叉树高度 h）：
+1. 若其父级节点不同，则更新 u、v，其搜索空间变为 [0, h/2];
+2. 否则其搜索空间变为 [h/2, h];
+
+![](/blog/2021/04/26/Binary-Lifting/search.svg)
+
+如图：
+若 u、v 同在第 h 层且 u != v，
+第一次取 p = parent(u, h/2)，q = parent(v, h/2)， p != q，则 u = p, v  = q，其搜索区间变为 [0, h/2]；
+第二次取 p = parent(u, h/4), q = parent(v, h/4)，p == q，其搜索区间变为 [h/4, h/2];
+同理，第三次 p != q, 则 u = p, v = q，其搜索区间变为 [h/4, h3/8];
+最终 u != v 但 parent(u) == parent(v).
+
+查找的时间复杂度为 $O(log_2h)$.
+
+```java
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        List<TreeNode> nodes = new ArrayList<>();
+        List<Integer> P = new ArrayList<>();
+        int[] ids = new int[]{-1, -1}, levs = new int[]{0, 0};
+        dfs(root, 0, nodes, P, p, q, ids, levs, 0);
+        if (levs[0] < levs[1]) {
+            swap(ids);
+            swap(levs);
+        }
+        int n = nodes.size(), lg = (int) (Math.log(n) / Math.log(2)), diff = levs[0] - levs[1];
+        int[][] dp = new int[n][lg + 1];
+        for (int i = 0; i < n; i++) {
+            dp[i][0] = P.get(i);
+        }
+        for (int l = 1; l <= lg; l++) {
+            for (int i = 0; i < n; i++) {
+                int par = dp[i][l - 1];
+                if (par >= 0) {
+                    dp[i][l] = dp[par][l - 1];
+                } else {
+                    dp[i][l] = -1;
+                }
+            }
+        }
+        for (int j = lg; j >= 0; j--) {
+            if (((1 << j) & diff) != 0) {
+                ids[0] = dp[ids[0]][j];
+            }
+        }
+        if (ids[0] == ids[1]) {
+            return nodes.get(ids[0]);
+        }
+        for (int j = lg; j >= 0; j--) {
+            if (dp[ids[0]][j] != dp[ids[1]][j]) {
+                ids[0] = dp[ids[0]][j];
+                ids[1] = dp[ids[1]][j];
+            }
+        }
+        return nodes.get(dp[ids[0]][0]);
+    }
+
+    void swap(int[] arr) {
+        int tmp = arr[0];
+        arr[0] = arr[1];
+        arr[1] = tmp;
+    }
+
+    void dfs(TreeNode node, int parent, List<TreeNode> nodes, List<Integer> parents, TreeNode p, TreeNode q, int[] ids, int[] levs, int lev) {
+        if (node == null) {
+            return;
+        }
+        if (p == node) {
+            ids[0] = nodes.size();
+            levs[0] = lev;
+        }
+        if (q == node) {
+            ids[1] = nodes.size();
+            levs[1] = lev;
+        }
+        nodes.add(node);
+        parents.add(parent);
+        int par = nodes.size() - 1;
+        dfs(node.left, par, nodes, parents, p, q, ids, levs, lev + 1);
+        dfs(node.right, par, nodes, parents, p, q, ids, levs, lev + 1);
+    }
+}
+```
+
 # 参考
 https://www.youtube.com/watch?v=oib-XsjFa-M
+https://www.geeksforgeeks.org/lca-in-a-tree-using-binary-lifting-technique/
