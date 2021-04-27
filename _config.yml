@@ -75,7 +75,7 @@ stylus:
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repo: https://github.com/carl-zk/blog
+  repo: https://github.com/carl-zk/blog.git
   branch: gh-pages
   token: $GITHUB_TOKEN
   message: auto-deploy
