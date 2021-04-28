@@ -109,6 +109,51 @@ class TreeAncestor {
 
 查找的时间复杂度为 $O(log_2h)$.
 
+类比二分查找：
+用二分查找 arr = {1, 1, 1, 2, 2, 2, 2, 2, 2} 中最后一个1的位置。
+一般的二分查找写法：
+```java
+int binarySearchLastIndexOf1(int[] arr) {
+    int l = 0, r = arr.length - 1;
+    while (l <= r) {
+        int mid = (l + r) >> 1;
+        if (arr[mid] == 1) {
+            l = mid + 1;
+        } else {
+            r = mid - 1;
+        }
+    }
+    return r;
+}
+```
+
+Binary Lifting 写法：
+```java
+int binSearchLastIndexOf1(int[] arr) {
+    int n = arr.length, h = (int) (Math.log(n) / Math.log(2));
+    int i = n - 1;
+    if (arr[i] == 1) return i;
+    for (int j = h; j >= 0; j--) { // 每次搜索步长为 2^j
+        if ((1 << j) < i && arr[i - (1 << j)] != 1) { // 如果arr[k] != 1，上移i到k
+            i -= 1 << j;
+        }
+    }
+    //arr[i] != 1，但 arr[i-1] == 1
+    return i - 1;
+}
+
+public static void main(String[] args) {
+    Solution solution = new Solution();
+    int[][] arrs = {{1, 1, 1, 2, 2, 2, 2, 2, 2}, {1, 1, 1, 1, 1, 2, 2, 2}, {1, 2, 2, 2}};
+    for (int[] arr : arrs) {
+        System.out.println(solution.binarySearchLastIndexOf1(arr) + "; " + solution.binSearchLastIndexOf1(arr));
+    }
+}
+```
+
+Binary Lifting 也是将搜索空间分为两半，每搜索一次空间减半，虽然不如二分查找直观。有兴趣的可以把下面的代码（Binary Lifting方式）改成普通二分查找方式。
+
+
 ```java
 /**
  * Definition for a binary tree node.
