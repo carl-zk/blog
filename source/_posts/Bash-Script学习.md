@@ -453,3 +453,10 @@ expr `cat /dev/urandom | od -An -N1 -tu1` % 120
 ```sh
 cat /dev/urandom | sed 's/[^a-zA-Z]//g' | strings -n3 | head -n1
 ```
+
+## find 
+搜文件并删除
+```sh
+find . -name ".DS_Store" -exec rm -rf {} \;
+```
+
