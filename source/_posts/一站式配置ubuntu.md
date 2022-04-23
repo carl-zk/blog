@@ -64,7 +64,7 @@ E36B85CC 84991F19 7575D828 470A92AB
 ##### 别人整理的
 [http://blog.csdn.net/terence1212/article/details/52270210](http://blog.csdn.net/terence1212/article/details/52270210)
 
-![](/blog/2017/08/17/%E4%B8%80%E7%AB%99%E5%BC%8F%E9%85%8D%E7%BD%AEubuntu/Screenshot.png)
+![](/2017/08/17/%E4%B8%80%E7%AB%99%E5%BC%8F%E9%85%8D%E7%BD%AEubuntu/Screenshot.png)
 
 ##### unity 转 gnome
 可以看出来，扁平化是好看了点，但是太占内存！而且桌面系统不稳定，叹！
@@ -106,10 +106,10 @@ Suspend Button
 <!--size width="1920" height="1080">/usr/share/images/desktop-base/lines-lockscreen_1920x1080.svg</size-->
 <size width="1920" height="1080">/usr/share/images/desktop-base/dragon_girl_forest_art_96504_1920x1080.jpg</size>
 ```
-![](/blog/2017/08/17/%E4%B8%80%E7%AB%99%E5%BC%8F%E9%85%8D%E7%BD%AEubuntu/Screenshot3.jpg)
+![](/2017/08/17/%E4%B8%80%E7%AB%99%E5%BC%8F%E9%85%8D%E7%BD%AEubuntu/Screenshot3.jpg)
 
 
-![](/blog/2017/08/17/%E4%B8%80%E7%AB%99%E5%BC%8F%E9%85%8D%E7%BD%AEubuntu/Screenshot2.png)
+![](/2017/08/17/%E4%B8%80%E7%AB%99%E5%BC%8F%E9%85%8D%E7%BD%AEubuntu/Screenshot2.png)
 
 折腾这么多，为何不直接下[Ubuntu GNOME](https://ubuntugnome.org/download/)?
 

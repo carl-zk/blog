@@ -101,7 +101,7 @@ END;
 /
 EXIT;
 ```
-![](/blog/2017/06/21/PL-SQL-%E5%AD%A6%E4%B9%A0/bulk.PNG)
+![](/2017/06/21/PL-SQL-%E5%AD%A6%E4%B9%A0/bulk.PNG)
 
 结果集很多都需要遍历，这里有一种更简便的遍历方式，不用声明其它变量、开/关游标。
 FOREACH LOOP

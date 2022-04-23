@@ -32,7 +32,8 @@ skip_render:
 new_post_name: :title.md # File name of new posts
 default_layout: post
 titlecase: true # Transform title into titlecase
-external_link: true # Open external links in new tab
+external_link:
+  enable: true # Open external links in new tab
 filename_case: 0
 render_drafts: false
 post_asset_folder: true
@@ -65,11 +66,18 @@ pagination_dir: page
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
 theme: cafe
-#theme: jacman
-# theme: maupassant
+
+fancybox: true
+
 # compress css
-stylus: 
-     compress: true
+stylus:
+  compress: true
+  sourcemaps:
+    comment: false
+    inline: true
+    sourceRoot: ''
+    basePath: .
+  plugins: 'nib'
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
@@ -90,13 +98,6 @@ feed:
     content: false
     content_limit: 500
     limit: 0
-
-# mermaid chart 
-mermaid: ## mermaid url https://github.com/knsv/mermaid 
-  enable: true  # default true 
-  version: "7.1.2" # default v7.1.2 
-  options:  # find more api options from https://github.com/knsv/mermaid/blob/master/src/mermaidAPI.js 
-    #startOnload: true  // default true
 
 # hexo-yam
 minify:
@@ -130,11 +131,46 @@ minify:
       - '*.svg'
       - '*.eot'
       - '*.json'
+
 math:
-  engine: 'mathjax'
+  katex:
+    css: 'https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css'
+    options:
+      throwOnError: false
+  mathjax:
+    css: 'https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css'
+    options:
+      conversion:
+        display: false
+      tex:
+      svg:
 
 # sitemap
 sitemap:
     path: sitemap.xml
     template: ./sitemap_template.xml
     rel: false
+
+marked:
+  gfm: true
+  pedantic: false
+  breaks: true
+  smartLists: true
+  smartypants: true
+  quotes: '“”‘’'
+  modifyAnchors: 0
+  anchorAlias: false
+  autolink: true
+  mangle: true
+  sanitizeUrl: false
+  dompurify: false
+  headerIds: true
+  lazyload: true
+  prependRoot: true
+  postAsset: true
+  external_link:
+    enable: false
+    exclude: []
+    nofollow: false
+  disableNunjucks: false
+  descriptionLists: true

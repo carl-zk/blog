@@ -14,7 +14,7 @@ tags: log4j2
 [slf4](https://www.slf4j.org/)The Simple Logging Facade for Java ,是对诸多日志框架(e.g. java.util.logging, logback, log4j) 的外观模式封装，可以不修改源码只通过替换jar包来切换日志框架。
 
 先简单介绍一下slf4j的强大吧，[legacy](https://www.slf4j.org/legacy.html)
-![](/blog/2017/03/28/log4j%E6%89%8B%E5%86%8C/slf4j.png)
+![](/2017/03/28/log4j%E6%89%8B%E5%86%8C/slf4j.png)
 如图所示，一个应用依赖了外部两个框架，这两个框架分别使用的日志框架是Commons-logging和log4j,而这个应用本身使用的日志框架是jdk14，那么问题来了，如何在我jdk14的日志里看到这两个框架的日志记录呢？
 很简单，Commons-logging我使用jcl-over-slf4j.jar来桥接一下，即虽然你调用的是Commons-logging日志接口，但是内部实际使用的是slf4j接口，同理，log4j我使用log4j-over-slf4j.jar来桥接，这样它们实际调用的都是slf4j接口，那我再使用slf4j-jdk14.jar就可以调用jdk14日志了。
 在maven中，可以通过这种xxx-slf4j.jar来exclusion多余的日志框架，主要是可以把不同日志框架给统一起来了。

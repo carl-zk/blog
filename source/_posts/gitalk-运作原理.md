@@ -230,8 +230,8 @@ OAuth2Demo/
 6. 测试认证
 <a href="http://localhost:5000" target="_blank">http://localhost:5000</a>
 为了方便查看记录，可以先设置下Chrome的Network和Console，即使网页发生跳转也不清除任何记录：
-![](/blog/2020/03/03/gitalk-%E8%BF%90%E4%BD%9C%E5%8E%9F%E7%90%86/chrome_1.png)
-![](/blog/2020/03/03/gitalk-%E8%BF%90%E4%BD%9C%E5%8E%9F%E7%90%86/chrome_2.png)
+![](/2020/03/03/gitalk-%E8%BF%90%E4%BD%9C%E5%8E%9F%E7%90%86/chrome_1.png)
+![](/2020/03/03/gitalk-%E8%BF%90%E4%BD%9C%E5%8E%9F%E7%90%86/chrome_2.png)
 
 依次出现的请求有：
 1. 跳转到GitHub授权页
@@ -361,7 +361,7 @@ HTTP Status 200，再无跳转
 https://github.com/login/oauth/access_token
 ```
 申请失败，请求无法完成，查看Console信息如下：
-![](/blog/2020/03/03/gitalk-%E8%BF%90%E4%BD%9C%E5%8E%9F%E7%90%86/cors.png)
+![](/2020/03/03/gitalk-%E8%BF%90%E4%BD%9C%E5%8E%9F%E7%90%86/cors.png)
 原因是这个接口禁止跨域请求，如果用Postman去请求就可以获取。解决方法是找个代理服务器转发，代理服务器再把access_token返回给我们。
 使用[https://github.com/Rob--W/cors-anywhere](https://github.com/Rob--W/cors-anywhere)作为代理服务器，启动在3000端口：
 

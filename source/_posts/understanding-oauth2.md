@@ -75,7 +75,7 @@ OAuth2 要求客户端和认证服务器之间使用HTTPS协议，因为会有�
 > 更多[Authorization Code Grant](https://tools.ietf.org/html/rfc6749#section-4.1)
 
 时序图：
-![](/blog/2019/03/18/understanding-oauth2/auth_code_flow.png)
+![](/2019/03/18/understanding-oauth2/auth_code_flow.png)
 
 ### 简化模式（Implicit Grant）
 1. 何时使用？
@@ -99,7 +99,7 @@ OAuth2 要求客户端和认证服务器之间使用HTTPS协议，因为会有�
 > 更多：[Implicit Grant](https://tools.ietf.org/html/rfc6749#section-4.2)
 
 时序图：
-![](/blog/2019/03/18/understanding-oauth2/implicit_flow.png)
+![](/2019/03/18/understanding-oauth2/implicit_flow.png)
 
 ### 密码模式（Resource Owner Password Credentials Grant）
 1. 何时使用？
@@ -120,7 +120,7 @@ OAuth2 要求客户端和认证服务器之间使用HTTPS协议，因为会有�
 > 更多：[Resource Owner Password Credentials Grant]( Resource Owner Password Credentials Grant)
 
 时序图：
-![](/blog/2019/03/18/understanding-oauth2/password.png)
+![](/2019/03/18/understanding-oauth2/password.png)
 
 ### 客户端模式（Client Credentials Grant）
 1. 何时使用？
@@ -139,7 +139,7 @@ OAuth2 要求客户端和认证服务器之间使用HTTPS协议，因为会有�
 > 更多：[Client Credentials Grant](https://tools.ietf.org/html/rfc6749#section-4.4)
 
 时序图：
-![](/blog/2019/03/18/understanding-oauth2/client_credentials_flow.png)
+![](/2019/03/18/understanding-oauth2/client_credentials_flow.png)
 
 ## Access token 的使用
 access token有几种使用方法。
@@ -194,7 +194,7 @@ Google在它的API文档中这样描述的：
 攻击者会将授权页面放在iframe中，隐藏在一个链接下面诱导受害者点击，点击的地方正好是授权页的“允许”按钮。
 
 例如：
-![](/blog/2019/03/18/understanding-oauth2/oauth2_clickjacking.png)
+![](/2019/03/18/understanding-oauth2/oauth2_clickjacking.png)
 
 解决方法：
 认证服务器在授权页面的返回头中增加key为`X-Frame-Options` value为`DENY`or`SAMEORIGIN`。这就防止了授权页面被放在iframe（DENY）或要求主页面的域名要和iframe的`src`值保持一致（SAMEORIGIN）.

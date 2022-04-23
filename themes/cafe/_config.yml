@@ -120,6 +120,11 @@ gitment:
   client_id: 7e5dd6cdb9xxaxa4cf91a # Register a new OAuth application https://github.com/settings/applications/new 
   client_secret: 97f37d5c27c4a511xx4fxx623d391c85cb97f8 
 
-
+# mermaid chart 
+mermaid: ## mermaid url https://github.com/knsv/mermaid 
+  enable: true  # default true 
+  version: "7.1.2" # default v7.1.2 
+  options:  # find more api options from https://github.com/knsv/mermaid/blob/master/src/mermaidAPI.js 
+    #startOnload: true  // default true
 
 

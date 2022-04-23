@@ -12,7 +12,7 @@ Spring Security 框架主要利用 Filter 来实现对 HTTP 请求的认证和�
 
 Spring Security 的所有 Filter 都放在 FilterChainProxy 的 `List<SecurityFilterChain>` 中，Spring-boot 启动时通过 SecurityFilterAutoConfiguration 自动注册 Spring Security's Filter;
 
-![](/blog/2019/02/18/spring-security/flow.svg)
+![](/2019/02/18/spring-security/flow.svg)
 
 FilterChainProxy
 ```java

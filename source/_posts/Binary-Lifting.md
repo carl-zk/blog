@@ -10,7 +10,7 @@ tags:
 
 给定一棵二叉树，给定一个 node 和 k，实现方法 `int getKthAncestor(int node, int k)` 找到该 node 第 k 个上级节点。如图：
 
-![](/blog/2021/04/26/Binary-Lifting/tree.svg)
+![](/2021/04/26/Binary-Lifting/tree.svg)
 
 getKthAncestor(3, 1) = 1;
 getKthAncestor(6, 2) = 0;
@@ -18,31 +18,31 @@ getKthAncestor(6, 3) = -1;
 
 Constraints:
 
-1 <= k <= n <= $5\*10^4$
+1 <= k <= n <= {% mathjax %} 5*10^4 {% endmathjax %}
 parent[0] == -1 indicating that 0 is the root node.
 0 <= parent[i] < n for all 0 < i < n
 0 <= node < n
-There will be at most $5\*10^4$ queries.
+There will be at most {% mathjax %} 5*10^4 {% endmathjax %} queries.
 
 思路：
-令 dp[i,j] 为节点 i 的第 $2^j$ 个上级，则：
+令 dp[i,j] 为节点 i 的第 {% mathjax %} 2^j {% endmathjax %} 个上级，则：
 dp[i,0] = parent[i] when j == 0;
 dp[i,j] = dp[dp[i,j-1],j-1] when j > 0; 
 
-![](/blog/2021/04/26/Binary-Lifting/dp.svg)
-假设有3个节点，u、w、v 的距离都为 $2^{j-1}$，则 v 的第 $2^j$ 个上级为 u；
+![](/2021/04/26/Binary-Lifting/dp.svg)
+假设有3个节点，u、w、v 的距离都为 {% mathjax %} 2^{j-1} {% endmathjax %}，则 v 的第 {% mathjax %} 2^j {% endmathjax %} 个上级为 u；
 即：dp[v,j] = dp[dp[v,j-1], j-1] = dp[w,j-1] = u
 
 由于任意一个正整数都可以用2的幂次方表示（即二进制表示），则第 k 个上级可以表示为：
-k=$2^a+2^b+...+2^z$
-parent(u, k) = parent(u, $2^a+2^b+...+2^z$) = parent(w, $2^b+...+2^z$),
-其中 w = parent(u, $2^a$)
-parent(w, $2^b+...+2^z$) = parent(v, $2^y+2^z$),
-其中 v = parent(w, $2^b+...+2^x$)
-parent(v, $2^y+2^z$) = $\alpha$
-即：parent(u, k) = $\alpha$.
+k= {% mathjax %} 2^a+2^b+...+2^z {% endmathjax %}
+parent(u, k) = parent(u, {% mathjax %} 2^a+2^b+...+2^z {% endmathjax %}) = parent(w, {% mathjax %}2^b+...+2^z{% endmathjax %}),
+其中 w = parent(u, {% mathjax %}2^a{% endmathjax %})
+parent(w, {% mathjax %}2^b+...+2^z{% endmathjax %}) = parent(v, {% mathjax %}2^y+2^z{% endmathjax %}),
+其中 v = parent(w, {% mathjax %}2^b+...+2^x{% endmathjax %})
+parent(v, {% mathjax %}2^y+2^z{% endmathjax %}) = {% mathjax %}\alpha{% endmathjax %}
+即：parent(u, k) = {% mathjax %}\alpha{% endmathjax %}.
 
-查找的时间复杂度为：$O(n\*log_2k)$
+查找的时间复杂度为：{% mathjax %}O(n*log_2k){% endmathjax %}
 
 ```java
 class TreeAncestor {
@@ -87,18 +87,18 @@ class TreeAncestor {
 
 方法：
 
-- 构造 dp[i][j], 即 节点 i 的第 $2^j$ 个父级节点；
+- 构造 dp[i][j], 即 节点 i 的第 {% mathjax %}2^j{% endmathjax %} 个父级节点；
 - 若 level[u] < level[v], swap(u, v);
 - 则 diff = level[u] - level[v], u 上移 diff 层与 v 达到同级；
 - 若 u == v 则 return u;
-- j 从 $log_2n$ 到 0 遍历，若 dp[u][j] != dp[v][j] 则 u = dp[u][j]; v = dp[v][j];
+- j 从 {% mathjax %}log_2n{% endmathjax %} 到 0 遍历，若 dp[u][j] != dp[v][j] 则 u = dp[u][j]; v = dp[v][j];
 - 返回 dp[u][0]
 
 核心在于将 u 和 v 置于同级，初始搜索空间为[0, h]（二叉树高度 h）：
 1. 若其父级节点不同，则更新 u、v，其搜索空间变为 [0, h/2];
 2. 否则其搜索空间变为 [h/2, h];
 
-![](/blog/2021/04/26/Binary-Lifting/search.svg)
+![](/2021/04/26/Binary-Lifting/search.svg)
 
 如图：
 若 u、v 同在第 h 层且 u != v，
@@ -107,7 +107,7 @@ class TreeAncestor {
 同理，第三次 p != q, 则 u = p, v = q，其搜索区间变为 [h/4, h3/8];
 最终 u != v 但 parent(u) == parent(v).
 
-查找的时间复杂度为 $O(log_2h)$.
+查找的时间复杂度为 {% mathjax %}O(log_2h){% endmathjax %}.
 
 类比二分查找：
 用二分查找 arr = {1, 1, 1, 2, 2, 2, 2, 2, 2} 中最后一个1的位置。

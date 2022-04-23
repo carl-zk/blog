@@ -297,7 +297,7 @@ END;
 /
 EXIT;
 ```
-![](/blog/2017/06/17/Oracle-Install/result.PNG)
+![](/2017/06/17/Oracle-Install/result.PNG)
 
 ```sql
 -- PL/SQL 控制语句
@@ -379,4 +379,4 @@ END;
 /
 EXIT;
 ```
-![](/blog/2017/06/17/Oracle-Install/flowcontrol.PNG)
+![](/2017/06/17/Oracle-Install/flowcontrol.PNG)

@@ -1,6 +1,7 @@
 
 ## Blog
 > my own blog server based on github.io and hexo.
+> 升级了npm依赖，math解析不兼容了(ಥ﹏ಥ)，之前文章里的数学公式要一一修改才能正常显示
 
 [https://carl-zk.github.io/blog/](https://carl-zk.github.io/blog/)
 

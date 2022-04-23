@@ -16,9 +16,9 @@ tags:
 # 介绍
 ## 建树
 构造一个小波树，需要一个数组S，和这个数组中唯一元素的有序集合alphabet。假设S是一个int数组[3,3,9,1,2,1,7,6,4,8,9,4,3,7,5,9,2,7,3,5,1,3]，则alphabet是[1,2,3,4,5,6,7,8,9].
-![](/blog/2020/09/16/Wavelet-Tree/alphabet.svg)
+![](/2020/09/16/Wavelet-Tree/alphabet.svg)
 从lo=0, hi=alphabet.length - 1的中间值alphabet[mid] (mid=(lo + hi)/2)将S划分为左右两个数组，left child 所有元素<=alphabet[mid]，right child 所有元素 > alphabet[mid]，直至子数组中元素相同为止。在划分的过程中，用数组freq记录从index=0到该元素被划分到右子树的个数。
-![](/blog/2020/09/16/Wavelet-Tree/WT.svg)
+![](/2020/09/16/Wavelet-Tree/WT.svg)
 这样建造的小波树是一个平衡树，并且叶子节点个数=alphabet.length，时间复杂度为S.length*lg(alphabet.length).
 
 ## 查询

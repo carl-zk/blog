@@ -79,7 +79,7 @@ ok，打印的信息是log4j的输出格式，但调用的方法仍然是commons
 ### 源码分析
 废话不说，直接上代码！（这本身就是句废话，不知道为啥老是有人这么说，我来吐槽一下）
 如图，桥接器使用[SPI](https://www.baeldung.com/java-spi)模式实现，
-![](/blog/2022/01/09/Logger-%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8F/log4j-jcl.png)
+![](/2022/01/09/Logger-%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8F/log4j-jcl.png)
 
 `LogFactoryImpl`继承了`org.apache.commons.logging.LogFactory`，通过`LogAdapter`来生成log。
 ```java

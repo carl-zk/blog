@@ -8,10 +8,10 @@ tags:
 原来叫 Patience 是因为这个排序像一个扑克牌游戏，游戏名叫“Patience”，现在流行叫“Solitaire”。可以在电脑上玩玩先。
 Patience sorting 最适合解决 Longest Increasing Subsequence (LIS) 问题。
 例如 arr = [1,3,3,8,6,7].
-![](/blog/2021/03/02/Patience-sorting/1.svg)
+![](/2021/03/02/Patience-sorting/1.svg)
 长度为4。
 如何计算长度为4的 LIS 的个数呢？
-![](/blog/2021/03/02/Patience-sorting/2.svg)
+![](/2021/03/02/Patience-sorting/2.svg)
 i = 0, arr[i] = 1 : len = 1, count(0) = 1. (即count(i))
 i = 1, arr[i] = 3 : len = 2, count(1) = 1 (len=1 and arr[k] < arr[i] 的所有count(k) 之和).
 len = 2, count(2) = 1.
