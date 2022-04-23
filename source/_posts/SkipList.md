@@ -116,20 +116,21 @@ public void add(int num) {
 
 remove is similar to add, I just post the full code here.
 ```java
+import java.util.Arrays;
+import java.util.Random;
+
 public class Skiplist {
-    Node head;
-    int level;
+    Node header;
     Random random;
 
     public Skiplist() {
-        this.head = new Node(-1, 0);
-        this.level = -1;
+        this.header = new Node(-1, 0);
         this.random = new Random();
     }
 
     public boolean search(int target) {
-        Node e = head;
-        for (int i = level; i >= 0; i--) {
+        Node e = header;
+        for (int i = header.forward.length - 1; i >= 0; i--) {
             while (e.forward[i] != null && e.forward[i].key < target) {
                 e = e.forward[i];
             }
@@ -139,53 +140,47 @@ public class Skiplist {
 
     public void add(int num) {
         int newLevel = randomLevel();
-        if (newLevel > this.level) {
-            adjustHead(newLevel);
-        }
-        Node[] update = new Node[this.level + 1];
-        Node e = this.head;
-        for (int i = this.level; i >= 0; i--) {
+        adjustHead(newLevel);
+        Node nd = new Node(num, newLevel);
+        Node e = this.header;
+        for (int i = this.header.forward.length - 1; i >= 0; i--) {
             while (e.forward[i] != null && e.forward[i].key < num) {
                 e = e.forward[i];
             }
-            update[i] = e;
-        }
-        Node node = new Node(num, newLevel);
-        for (int i = 0; i <= newLevel; i++) {
-            node.forward[i] = update[i].forward[i];
-            update[i].forward[i] = node;
+            if (i < newLevel) {
+                nd.forward[i] = e.forward[i];
+                e.forward[i] = nd;
+            }
         }
     }
 
     private int randomLevel() {
-        int lev = 0;
+        int level = 1;
         while (random.nextInt(2) == 0) {
-            lev++;
+            level++;
         }
-        return lev;
+        return level;
     }
 
     private void adjustHead(int newLevel) {
-        head.forward = Arrays.copyOf(head.forward, (this.level = newLevel) + 1);
+        if (header.forward.length < newLevel) {
+            header.forward = Arrays.copyOf(header.forward, newLevel + 1);
+        }
     }
 
     public boolean erase(int num) {
-        Node e = head;
-        Node[] delete = new Node[this.level + 1];
-        for (int i = level; i >= 0; i--) {
+        boolean d = false;
+        Node e = header;
+        for (int i = header.forward.length - 1; i >= 0; i--) {
             while (e.forward[i] != null && e.forward[i].key < num) {
                 e = e.forward[i];
             }
-            delete[i] = e;
+            if (e.forward[i] != null && e.forward[i].key == num) {
+                e.forward[i] = e.forward[i].forward[i];
+                d = true;
+            }
         }
-        Node del;
-        if ((del = e.forward[0]) == null || del.key != num) {
-            return false;
-        }
-        for (int i = 0; i < del.forward.length; i++) {
-            delete[i].forward[i] = del.forward[i];
-        }
-        return true;
+        return d;
     }
 
     class Node {
@@ -194,10 +189,71 @@ public class Skiplist {
 
         public Node(int key, int level) {
             this.key = key;
-            this.forward = new Node[level + 1];
+            this.forward = new Node[level];
         }
     }
 }
+```
+
+python3 version:
+
+```python
+from random import random
+
+
+def _rand_level() -> int:
+    level = 1
+    while random() < 0.5:
+        level += 1
+    return level
+
+
+class Skiplist:
+
+    def __init__(self):
+        self._header = Node(-1, 0)
+
+    def _iter(self, num: int):
+        e = self._header
+        for i in range(len(self._header.forward) - 1, -1, -1):
+            while e.forward[i] and e.forward[i].val < num:
+                e = e.forward[i]
+            yield e, i
+
+    def search(self, target: int) -> bool:
+        for e, i in self._iter(target):
+            pass
+        return e.forward[0] and e.forward[0].val == target
+
+    def add(self, num: int) -> None:
+        level = _rand_level()
+        self._adjust_header(level)
+        nd = Node(num, level)
+        for e, i in self._iter(num):
+            if i < level:
+                nd.forward[i] = e.forward[i]
+                e.forward[i] = nd
+
+    def erase(self, num: int) -> bool:
+        d = False
+        for e, i in self._iter(num):
+            if e.forward[i] and e.forward[i].val == num:
+                e.forward[i] = e.forward[i].forward[i]
+                d = True
+        return d
+
+    def _adjust_header(self, new_level: int) -> None:
+        diff = new_level - len(self._header.forward)
+        if diff > 0:
+            self._header.forward += [None] * diff
+
+
+class Node:
+    __slots__ = 'val', 'forward'
+
+    def __init__(self, val: int, level: int):
+        self.val = val
+        self.forward = [None] * level
 ```
 
 Skip Lists is a useful structure in many ways. When I first saw it, it comes out a 2-d binary search in my mind. And I don't know what's flip coins means, and why it can be so fast as red-black tree. Then I google it and learned, write my own thoughts here, hope to be helpful.
