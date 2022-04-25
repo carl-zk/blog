@@ -5,14 +5,21 @@
 
 <%- js('js/md5.min.js') %>
 
- <script type="text/javascript">
+ <script type="text/javascript" defer>
+      function genId() {
+        var title = document.querySelector('article div.article-meta a').pathname
+        if(title == null) {
+            title = <%=theme.gitalk.ID%>
+        }
+        return title
+      } 
       var gitalk = new Gitalk({
         clientID: '<%=theme.gitalk.ClientID%>',
         clientSecret: '<%=theme.gitalk.ClientSecret%>',
         repo: '<%=theme.gitalk.repo%>',
         owner: '<%=theme.gitalk.owner%>',
         admin: ['carl-zk'],
-        id: md5(<%=theme.gitalk.ID%>),
+        id: md5(genId()),
         labels: ['Gitalk'],
         perPage: <%=theme.gitalk.perPage%>,
         pagerDirection: '<%=theme.gitalk.pagerDirection%>',
@@ -24,3 +31,4 @@
 </script>
 
 <% } %>
+

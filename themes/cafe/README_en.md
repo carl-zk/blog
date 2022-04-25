@@ -86,7 +86,6 @@ google_analytics:
 favicon: /favicon.png
 # 若使用多说，此处填写的是多说评论账号ID
 # 若使用Disqus，请在博客 config 文件中填写disqus_shortname，并设置duosuo: false关闭多说评论
-duoshuo_shortname: false
 twitter:
 google_plus:
 fb_admins:

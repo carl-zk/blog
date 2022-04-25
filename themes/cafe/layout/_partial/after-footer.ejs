@@ -1,7 +1,8 @@
-<%- partial('../_third-part/index') %>
- <%- js('js/is.js') %>
+
+<%- js('js/is.js') %>
 
 <% if (theme.fancybox){ %>
+  <%- js('jquery/jquery.min.js') %>
   <%- css('fancybox/jquery.fancybox') %>
   <%- js('fancybox/jquery.fancybox.pack') %>
 <% } %>
