@@ -32,6 +32,10 @@
     <footer class="article-footer">
       <!-- <a data-url="<%- post.permalink %>" data-id="<%= post._id %>" class="article-share-link"><%= __('share') %></a> -->
       <%- partial('post/tag') %>
+      <% if (theme.gitalk.enable) { %>
+        <%- partial('../_third-part/index') %>
+        <div id="gitalk-container"></div>
+      <% } %>
     </footer>
   </div>
   <% if (!index){ %>
