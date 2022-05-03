@@ -3,7 +3,8 @@ title: Segment Tree
 date: 2020-02-28 19:27:37
 category:
     - 数据结构
-tags:
+tags: 
+    - python
 ---
 ## Brief Introduction
 线段树是一棵完全二叉树，它的每个节点代表一个区间，子节点的区间是父节点的区间的子区间。
@@ -18,15 +19,15 @@ tags:
 查询和修改的时间复杂度都为O(logN),N=len(arr)，即arr的长度。而建树的时间复杂度为O(N).
 
 ## Recursive methods for Segment Trees
-二叉树一般用数组存储，且如果父节点的下标为i，则：左孩子的下标为2\*i-1，右孩子下标为2\*i+2。
+二叉树一般用数组存储，且如果父节点的下标为i，则：左孩子的下标为2\*i+1，右孩子下标为2\*i+2。
 完全二叉树的性质：有n个叶节点，就有n-1个非叶节点。
-用数组tree[]保存线段树的节点，则给定一个len(arr)=n的数组，至少需要len(tree) >= 2\*n-1构建线段树。如果n是2的幂，则len(tree)==2\*n-1，否则len(tree) = $2 * 2^{\left\lceil\log _{2} n\right\rceil}-1$.例如：len(arr) = 4, 则线段树的结构为：
+用数组tree[]保存线段树的节点，则给定一个len(arr)=n的数组，至少需要len(tree) >= 2\*n-1构建线段树。如果n是2的幂，则len(tree)=2\*n-1，否则len(tree) = {% katex %}2 * 2^{\left\lceil\log _{2} n\right\rceil}-1{% endkatex %}.例如：len(arr) = 4, 则线段树的结构为：
 ![](/2020/02/28/Segment-Tree/st2.svg)
 (注：绿色为叶节点，index为该节点在tree[]中的位置)
 其大小len(tree) = 2 \* len(arr) - 1 = 7.
 若len(arr) = 10, 则线段树的结构为：
 ![](/2020/02/28/Segment-Tree/st3.svg)
-其大小len(tree) = $2 * 2^{4} - 1$ = 31. ($\left\lceil\log _{2} len(arr)\right\rceil = 4$) 有12个无用叶节点，有2 \* len(arr) - 1 = 19个有用节点（10个叶节点+9个非叶节点）。
+其大小len(tree) = {% katex %}2 * 2^{4} - 1{% endkatex %} = 31. ({% katex %}\left\lceil\log _{2} len(arr)\right\rceil = 4{% endkatex %}) 有12个无用叶节点，有2 \* len(arr) - 1 = 19个有用节点（10个叶节点+9个非叶节点）。
 由此可以看出，当len(arr)为2的幂时，线段树无无用节点，最后一个叶节点的index刚好等于2\*len(arr)-1 - 1；当len(arr)不是2的幂时，树中存在无用节点，最后一个叶节点的index可能大于2\*len(arr)-1（当len(arr)=10，最后一个叶节点index=24)，除非无用节点只出现在最底层末端（例如len(arr)=3、5or7时）。无用节点必然成对儿存在。（因为有一个叶节点就有两个无用节点）
 
 ### Build Segment Tree
@@ -81,7 +82,7 @@ public int query(int treeIndex, int range_left, int range_right, int query_left,
 
 ### Update
 ```java
-public void update(int treeIndex, int range_left, int res_right, int arrIndex, int val) {
+public void update(int treeIndex, int range_left, int range_right, int arrIndex, int val) {
     if(range_left == range_right) {
         tree[treeIndex] = val;
         arr[arrIndex] = val;
@@ -329,5 +330,73 @@ class Solution {
     }
 }
 ```
+
+[2251. Number of Flowers in Full Bloom](https://leetcode.com/problems/number-of-flowers-in-full-bloom/)
+```python
+class Solution:
+    def fullBloomFlowers(self, flowers: List[List[int]], persons: List[int]) -> List[int]:
+        points = set()
+        for x, y in flowers:
+            points.add(x)
+            points.add(y)
+        for x in persons:
+            points.add(x)
+        sorted_points = sorted(points)
+        mp = {x: i for i, x in enumerate(sorted_points)}
+        root = Node(0, len(sorted_points))
+        for x, y in flowers:
+            insert(root, mp[x], mp[y], 1)
+        ans = []
+        for x in persons:
+            i = mp[x]
+            ans.append(query(root, i, i))
+        return ans
+
+
+class Node:
+    __slots__ = 'l', 'r', 'v', 'lazy', 'left', 'right'
+
+    def __init__(self, l: int, r: int, v: int = 0, lazy: int = 0):
+        self.l = l
+        self.r = r
+        self.v = v
+        self.lazy = lazy
+        self.left = None if l == r else Node(l, self._mid())
+        self.right = None if l == r else Node(self._mid() + 1, r)
+
+    def _mid(self):
+        return (self.l + self.r) >> 1
+
+
+def insert(root: Node, l: int, r: int, v: int):
+    if root.r < l or r < root.l:
+        return
+    elif l <= root.l and root.r <= r:
+        root.v += v
+        if l != r:
+            root.lazy += v
+    else:
+        insert(root.left, l, r, v)
+        insert(root.right, l, r, v)
+        root.v += root.left.v + root.right.v
+
+
+def query(root: Node, l: int, r: int):
+    if root.r < l or r < root.l:
+        return 0
+    elif l <= root.l and root.r <= r:
+        return root.v
+    else:
+        if root.lazy > 0:
+            root.left.v += root.lazy
+            root.right.v += root.lazy
+            if root.left.l != root.left.r:
+                root.left.lazy += root.lazy
+            if root.right.l != root.right.r:
+                root.right.lazy += root.lazy
+            root.lazy = 0
+        return query(root.left, l, r) + query(root.right, l, r)        
+```
+
 ## Reference
 https://leetcode.com/articles/a-recursive-approach-to-segment-trees-range-sum-queries-lazy-propagation/

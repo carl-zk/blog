@@ -18,6 +18,7 @@ fancybox: true
 social_title: Follow me
 # Social links 社交链接
 social:
+  leetcode: https://leetcode.com/zxfspace/
   github: https://github.com/carl-zk
   email: 'zxfspace@163.com'
 

@@ -4,6 +4,9 @@
         <h3 class="follow-title "><%=  theme.social_title %></h3>
      <%}%>
     <div class="widget follow">
+      <% if (theme.social.leetcode){%>
+          <a class="leetcode" aria-hidden="true" href="<%=  theme.social.leetcode %>" target="_blank" title="leetcode"></a>
+      <%}%>
       <% if (theme.social.github){%>
               <a class="github" aria-hidden="true" href="<%=  theme.social.github %>" target="_blank" title="Github"></a>
       <%}%>
