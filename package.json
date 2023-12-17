@@ -3,10 +3,9 @@
   "version": "0.0.1",
   "private": true,
   "hexo": {
-    "version": "6.1.0"
+    "version": "6.3.0"
   },
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
     "hexo": "^6.0.0",
     "hexo-deployer-git": "^3.0.0",
