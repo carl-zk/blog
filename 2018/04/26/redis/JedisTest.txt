@@ -1,0 +1,99 @@
+package hello;
+
+import moc.oreh.common.JedisLock;
+import redis.clients.jedis.Jedis;
+import redis.clients.jedis.JedisPool;
+import redis.clients.jedis.JedisPoolConfig;
+
+import java.util.concurrent.TimeUnit;
+
+public class JedisTest implements Runnable {
+    static JedisPool pool;
+
+    static {
+        JedisPoolConfig config = new JedisPoolConfig();
+        config.setMaxTotal(10);
+        config.setMaxIdle(10);
+        config.setMinIdle(10);
+        pool = new JedisPool(config, "localhost", 6397, 10, "password");
+
+        System.out.println("pool started." + pool.getNumIdle() + ", " + pool.getNumActive() + ", " + pool.getNumWaiters());
+    }
+
+    @Override
+    public void run() {
+
+        Jedis jedis = pool.getResource();
+        jedis.del("a");
+        new Thread(new Task(jedis)).start();
+        System.out.println("pool started." + pool.getNumIdle() + ", " + pool.getNumActive() + ", " + pool.getNumWaiters());
+
+        jedis = pool.getResource();
+        new Thread(new Task(jedis)).start();
+        System.out.println("pool started." + pool.getNumIdle() + ", " + pool.getNumActive() + ", " + pool.getNumWaiters());
+
+        jedis = pool.getResource();
+        new Thread(new Task(jedis)).start();
+        System.out.println("pool started." + pool.getNumIdle() + ", " + pool.getNumActive() + ", " + pool.getNumWaiters());
+
+        try {
+            TimeUnit.SECONDS.sleep(2);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        pool.close();
+    }
+
+    public static void main(String[] args) {
+        new JedisTest().run();
+    }
+
+    class Task implements Runnable {
+        Jedis jedis;
+
+        public Task(Jedis jedis) {
+            this.jedis = jedis;
+        }
+
+        @Override
+        public void run() {
+            //lockDemo();
+            tryLockDemo();
+        }
+
+        public void lockDemo() {
+            String key = "a", token = "a";
+            JedisLock.lock(key, token, jedis);
+            try {
+                System.out.println("lock" + Thread.currentThread().getId());
+                TimeUnit.MILLISECONDS.sleep(20);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } finally {
+                System.out.println("release" + Thread.currentThread().getId() + ", " + System.currentTimeMillis());
+                JedisLock.unlock(key, token, jedis);
+                jedis.close();
+            }
+        }
+
+        public void tryLockDemo() {
+            String key = "a", token = "a";
+            boolean got = JedisLock.tryLock(key, token, 10, TimeUnit.MILLISECONDS, jedis);
+            if (got) {
+                try {
+                    System.out.println("lock" + Thread.currentThread().getId());
+                    TimeUnit.MILLISECONDS.sleep(2);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } finally {
+                    System.out.println("release" + Thread.currentThread().getId() + ", " + System.currentTimeMillis());
+                    JedisLock.unlock(key, token, jedis);
+                    jedis.close();
+                }
+            } else {
+                System.out.println("failed lock " + Thread.currentThread().getId());
+            }
+        }
+    }
+}

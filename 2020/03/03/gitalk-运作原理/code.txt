@@ -1,0 +1,153 @@
+### server.js
+```js
+const express = require('express')
+const app = express()
+
+// Import the axios library, to make HTTP requests
+const axios = require('axios')
+
+// This is the client ID and client secret that you obtained
+// while registering the application
+const clientID = '6b2b6a2d87e8389e341a'
+const clientSecret = '1e313e588e2ffc5b74146f6a5822e6afcce17b20'
+
+// Declare the redirect route
+app.get('/carl-zk/blog', (req, res) => {
+
+  // The req.query object has the query params that were sent to this route.
+  const requestToken = req.query.code
+  
+  axios({
+    method: 'post',
+    url: `https://github.com/login/oauth/access_token?client_id=${clientID}&client_secret=${clientSecret}&code=${requestToken}`,
+    // Set the content type header, so that we get the response in JSON
+    headers: {
+         accept: 'application/json'
+    }
+    
+  }).then((response) => {
+    
+    const accessToken = response.data.access_token
+    console.log(response.data)
+    
+    // redirect the user to the home page, along with the access token
+    res.redirect(`/home.html?access_token=${accessToken}`)
+  })
+})
+
+app.use(express.static(__dirname + '/public'))
+app.listen(5000,()=>{
+    console.log("Server listening on port : 5000")
+})
+```
+### index.html
+```html
+<!DOCTYPE html>
+<html>
+
+<body>
+	<script>
+		const clientID = '6b2b6a2d87e8389e341a';
+        const clientSecret = '1e313e588e2ffc5b74146f6a5822e6afcce17b20';
+
+        const url = "https://github.com/login/oauth/access_token";
+        const proxy_url = "http://localhost:3000/" + url;
+
+		if(localStorage.getItem('name')) {
+			displayWelcome()
+		}
+		
+		const query = window.location.search.substring(1)
+		if(query) {
+			// 当前页面带有 grant code
+			let code = query.split("code=")[1]
+
+		    const payload = { "client_id": clientID, "client_secret": clientSecret, "code": code}
+			
+			fetch(proxy_url, {
+			  method: 'POST', 
+			  headers: {"Content-Type": "application/json", "Accept": "application/json"},
+			  body: JSON.stringify(payload),
+			})
+			.then((response) => response.json())
+			.then((data) => {
+			  fetchUser(data.access_token)
+			})
+		}
+
+		async function fetchUser(accessToken) {
+			await fetch('https://api.github.com/user', {
+				method: 'GET',
+				headers: {
+					"Accept": "application/json",
+					"Authorization": `token ${accessToken}`
+				}
+			})
+			.then(res => res.json())
+			.then(res => {
+				localStorage.setItem('accessToken', accessToken)
+				localStorage.setItem('name', res.name)
+				displayWelcome()
+			})
+		}
+
+		function displayWelcome() {
+			const nameNode = document.createTextNode('Welcome, ' + localStorage.getItem('name'))
+			document.body.appendChild(nameNode)
+		}
+	</script>
+	<!-- 第1步，跳转到授权页 -->
+  <a href="https://github.com/login/oauth/authorize?client_id=6b2b6a2d87e8389e341a&redirect_uri=http://localhost:5000">
+    Login with github (via proxy)
+  </a>
+  <br/>
+  <a href="https://github.com/login/oauth/authorize?client_id=6b2b6a2d87e8389e341a&redirect_uri=http://localhost:5000/carl-zk/blog">
+    Login with github (via backend server)
+  </a>
+  <br/>
+  <a href='http://localhost:5000'>back</a>
+</body>
+
+</html>
+```
+### home.html
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Hello</title>
+</head>
+
+<body>
+ <a href='http://localhost:5000'>back</a>
+</body>
+<script>
+	// We can get the token from the "access_token" query
+	// param, available in the browsers "location" global
+	const query = window.location.search.substring(1)
+  const token = query.split('access_token=')[1]
+
+	// Call the user info API using the fetch browser library
+	fetch('https://api.github.com/user', {
+			headers: {
+				// Include the token in the Authorization header
+				Authorization: 'token ' + token
+			}
+		})
+		// Parse the response as JSON
+		.then(res => res.json())
+		.then(res => {
+			// Once we get the response (which has many fields)
+			// Documented here: https://developer.github.com/v3/users/#get-the-authenticated-user
+			// Write "Welcome <user name>" to the documents body
+			const nameNode = document.createTextNode(`Welcome, ${res.name}`)
+			document.body.appendChild(nameNode)
+		})
+</script>
+
+</html>
+```
