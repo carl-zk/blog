@@ -41,7 +41,7 @@ content_position: widget
 content_display_fixed: true
 
 # 文章底部推荐文章数,false关闭
-random_posts: 4
+random_posts: false
 
 widgets:
 - social
