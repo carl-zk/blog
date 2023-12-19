@@ -5,12 +5,12 @@
   
   <title>C语言字符串处理 | 一叶轻舟渡万江</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="题目链接The Seven Percent Solution Problem DescriptionUniform Resource Identifiers (or URIs) are strings like http:&#x2F;&#x2F;icpc.baylor.edu&#x2F;icpc&#x2F;, mailto:&amp;#x66;&amp;#111;&amp;#x6f;&amp;#64;&amp;#x62;&amp;#x61;&amp;#x72;&amp;#x2e;&amp;#x6f;&amp;#x7">
+  <meta name="description" content="题目链接The Seven Percent Solution Problem DescriptionUniform Resource Identifiers (or URIs) are strings like http:&#x2F;&#x2F;icpc.baylor.edu&#x2F;icpc&#x2F;, mailto:&amp;#x66;&amp;#111;&amp;#111;&amp;#64;&amp;#x62;&amp;#x61;&amp;#x72;&amp;#46;&amp;#x6f;&amp;#x72">
 <meta property="og:type" content="article">
 <meta property="og:title" content="C语言字符串处理">
 <meta property="og:url" content="https://carl-zk.github.io/blog/2016/06/21/c%E8%AF%AD%E8%A8%80%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%A4%84%E7%90%86/index.html">
 <meta property="og:site_name" content="一叶轻舟渡万江">
-<meta property="og:description" content="题目链接The Seven Percent Solution Problem DescriptionUniform Resource Identifiers (or URIs) are strings like http:&#x2F;&#x2F;icpc.baylor.edu&#x2F;icpc&#x2F;, mailto:&amp;#x66;&amp;#111;&amp;#x6f;&amp;#64;&amp;#x62;&amp;#x61;&amp;#x72;&amp;#x2e;&amp;#x6f;&amp;#x7">
+<meta property="og:description" content="题目链接The Seven Percent Solution Problem DescriptionUniform Resource Identifiers (or URIs) are strings like http:&#x2F;&#x2F;icpc.baylor.edu&#x2F;icpc&#x2F;, mailto:&amp;#x66;&amp;#111;&amp;#111;&amp;#64;&amp;#x62;&amp;#x61;&amp;#x72;&amp;#46;&amp;#x6f;&amp;#x72">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2016-06-20T17:38:39.000Z">
 <meta property="article:modified_time" content="2023-11-08T13:50:48.241Z">
@@ -118,7 +118,7 @@
       
       <!-- Table of Contents -->
        <p><a target="_blank" rel="noopener" href="http://acm.hdu.edu.cn/game/entry/problem/show.php?chapterid=1&sectionid=2&problemid=14">题目链接</a><br><strong>The Seven Percent Solution</strong></p>
-<p>Problem Description<br>Uniform Resource Identifiers (or URIs) are strings like <a target="_blank" rel="noopener" href="http://icpc.baylor.edu/icpc/">http://icpc.baylor.edu/icpc/</a>, mailto:<a href="mailto:&#x66;&#111;&#x6f;&#64;&#x62;&#x61;&#x72;&#x2e;&#x6f;&#x72;&#103;">&#x66;&#111;&#x6f;&#64;&#x62;&#x61;&#x72;&#x2e;&#x6f;&#x72;&#103;</a>, <a href="ftp://127.0.0.1/pub/linux">ftp://127.0.0.1/pub/linux</a>, or even just readme.txt that are used to identify a resource, usually on the Internet or a local computer. Certain characters are reserved within URIs, and if a reserved character is part of an identifier then it must be percent-encoded by replacing it with a percent sign followed by two hexadecimal digits representing the ASCII code of the character. A table of seven reserved characters and their encodings is shown below. Your job is to write a program that can percent-encode a string of characters.</p>
+<p>Problem Description<br>Uniform Resource Identifiers (or URIs) are strings like <a target="_blank" rel="noopener" href="http://icpc.baylor.edu/icpc/">http://icpc.baylor.edu/icpc/</a>, mailto:<a href="mailto:&#x66;&#111;&#111;&#64;&#x62;&#x61;&#x72;&#46;&#x6f;&#x72;&#x67;">&#x66;&#111;&#111;&#64;&#x62;&#x61;&#x72;&#46;&#x6f;&#x72;&#x67;</a>, <a href="ftp://127.0.0.1/pub/linux">ftp://127.0.0.1/pub/linux</a>, or even just readme.txt that are used to identify a resource, usually on the Internet or a local computer. Certain characters are reserved within URIs, and if a reserved character is part of an identifier then it must be percent-encoded by replacing it with a percent sign followed by two hexadecimal digits representing the ASCII code of the character. A table of seven reserved characters and their encodings is shown below. Your job is to write a program that can percent-encode a string of characters.</p>
 <p>Character  Encoding<br>“ “ (space)  %20<br>“!” (exclamation point)  %21<br>“$” (dollar sign)  %24<br>“%” (percent sign)  %25<br>“(“ (left parenthesis)  %28<br>“)” (right parenthesis)  %29<br>“*” (asterisk)  %2a</p>
 <p>Input<br>The input consists of one or more strings, each 1–79 characters long and on a line by itself, followed by a line containing only “#” that signals the end of the input. The character “#” is used only as an end-of-input marker and will not appear anywhere else in the input. A string may contain spaces, but not at the beginning or end of the string, and there will never be two or more consecutive spaces.</p>
 <p>Output<br>For each input string, replace every occurrence of a reserved character in the table above by its percent-encoding, exactly as shown, and output the resulting string on a line by itself. Note that the percent-encoding for an asterisk is %2a (with a lowercase “a”) rather than %2A (with an uppercase “A”).</p>
@@ -134,7 +134,7 @@
     </div>
 
     <footer class="article-footer">
-      <!-- <a data-url="https://carl-zk.github.io/blog/2016/06/21/c%E8%AF%AD%E8%A8%80%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%A4%84%E7%90%86/" data-id="clq7tyuum004l6cc96y2jaczh" class="article-share-link">分享</a> -->
+      <!-- <a data-url="https://carl-zk.github.io/blog/2016/06/21/c%E8%AF%AD%E8%A8%80%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%A4%84%E7%90%86/" data-id="clqcfxml8004oocc9h78c6ami" class="article-share-link">分享</a> -->
        
       <div id="gitalk-container"></div>
        
@@ -178,50 +178,7 @@
  
     </footer>
   </div>
-   
- 
-<script src="/blog/jquery/jquery.min.js"></script>
-
-  <div id="random_posts">
-    <h2>推荐文章</h2>
-    <div class="random_posts_ul">
-      <script>
-          var random_count =4
-          var site = {BASE_URI:'/blog/'};
-          function load_random_posts(obj) {
-              var arr=site.posts;
-              if (!obj) return;
-              // var count = $(obj).attr('data-count') || 6;
-              for (var i, tmp, n = arr.length; n; i = Math.floor(Math.random() * n), tmp = arr[--n], arr[n] = arr[i], arr[i] = tmp);
-              arr = arr.slice(0, random_count);
-              var html = '<ul>';
-            
-              for(var j=0;j<arr.length;j++){
-                var item=arr[j];
-                html += '<li><strong>' + 
-                item.date + ':&nbsp;&nbsp;<a href="' + (site.BASE_URI+item.uri) + '">' + 
-                (item.title || item.uri) + '</a></strong>';
-                if(item.excerpt){
-                  html +='<div class="post-excerpt">'+item.excerpt+'</div>';
-                }
-                html +='</li>';
-                
-              }
-              $(obj).html(html + '</ul>');
-          }
-          $('.random_posts_ul').each(function () {
-              var c = this;
-              if (!site.posts || !site.posts.length){
-                  $.getJSON(site.BASE_URI + 'js/posts.js',function(json){site.posts = json;load_random_posts(c)});
-              } 
-               else{
-                load_random_posts(c);
-              }
-          });
-      </script>
-    </div>
-  </div>
- 
+    
 <nav id="article-nav">
   
     <a href="/blog/2016/06/21/decimal-system/" id="article-nav-newer" class="article-nav-link-wrap">
