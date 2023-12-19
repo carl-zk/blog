@@ -34,6 +34,12 @@ public class TextEncryptorConfigBootstrapper implements BootstrapRegistryInitial
 			@ConfigurationProperties(KeyProperties.PREFIX)
 			public class KeyProperties {}
 		*/
+		java8 的 function interface，先在这里注册一个 function，等后面DefaultBootstrapContext用的时候把this传进来，
+		这个方法保证能return一个instance
+		
+		这样的好处是什么？代码有点绕，难道是因为KeyProperties需要后面初始化？ KeyProperties 与 BootstrapContext 通过
+		Binder 关联，那么这个binder在哪里注测到 BootstrapContext ？
+		这个Binder是后面才注册到Context的，后面应该会看到
 		registry.registerIfAbsent(KeyProperties.class, context -> context.get(Binder.class)
 				.bind(KeyProperties.PREFIX, KeyProperties.class).orElseGet(KeyProperties::new));
 		if (RSA_IS_PRESENT) {
