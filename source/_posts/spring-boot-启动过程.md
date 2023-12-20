@@ -61,7 +61,7 @@ tags:
     - [org.springframework.cloud.bootstrap.TextEncryptorConfigBootstrapper](/blog/repo/spring-boot-启动过程/TextEncryptorConfigBootstrapper)
 - **ApplicationContextInitializer**
     - [org.springframework.boot.context.config.DelegatingApplicationContextInitializer@550ee7e5](/blog/repo/spring-boot-启动过程/DelegatingApplicationContextInitializer)
-    - [org.springframework.boot.autoconfigure.SharedMetadataReaderFactoryContextInitializer@5f9b2141]()
+    - [org.springframework.boot.autoconfigure.SharedMetadataReaderFactoryContextInitializer@5f9b2141](/blog/repo/spring-boot-启动过程/SharedMetadataReaderFactoryContextInitializer)
     - [org.springframework.boot.context.ContextIdApplicationContextInitializer@247d8ae]()
     - [com.learn.config.MyApplicationContextInitializer@48974e45]()
     - [org.springframework.boot.context.ConfigurationWarningsApplicationContextInitializer@6a84a97d]()
