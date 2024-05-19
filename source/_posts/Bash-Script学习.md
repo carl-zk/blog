@@ -460,3 +460,27 @@ cat /dev/urandom | sed 's/[^a-zA-Z]//g' | strings -n3 | head -n1
 find . -name ".DS_Store" -exec rm -rf {} \;
 ```
 
+每次匹配，ls都执行一次
+`find /usr/bin -type f -name '*zip' -ok ls -l '{}' ';'`
+
+所有结果传递，ls执行一次
+`find /usr/bin -type f -name '*zip' -exec ls -l '{}' +`
+or
+`find /usr/bin -type f -name '*zip' | xargs ls -l`
+
+
+## Networking
+ping
+traceroute xxx.com
+ip a
+netstat
+ftp
+wget
+ssh
+sftp
+## Searching For Files
+locate
+find
+xargs
+touch
+stat

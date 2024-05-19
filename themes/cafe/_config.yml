@@ -89,8 +89,6 @@ mathjax:
   per_page: false
   cdn: https://cdn.rawgit.com/mathjax/MathJax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML
 
-
-
 # 其他参数
 google_analytics: true
 firebase: true
