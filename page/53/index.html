@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>一叶轻舟渡万江</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="一叶轻舟渡万江">
+<meta property="og:url" content="https://carl-zk.github.io/blog/page/53/index.html">
+<meta property="og:site_name" content="一叶轻舟渡万江">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="carl-zk">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/blog/atom.xml" title="一叶轻舟渡万江" type="application/atom+xml">
+  
+  
+  
+    
+  
+  
+<link rel="stylesheet" href="/blog/css/style.css">
+
+  
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-92800981-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-92800981-2');
+</script>
+
+
+
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    
+    <div id="header-inner" class="inner">
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/blog/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://carl-zk.github.io/blog"></form>
+      </div>
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/blog/">首页</a>
+        
+          <a class="main-nav-link" href="/blog/archives">归档</a>
+        
+          <a class="main-nav-link" href="/blog/about">关于</a>
+        
+      </nav>
+      
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/blog/" id="logo">一叶轻舟渡万江</a>
+      </h1>
+      
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article
+  id="post-超时30分钟自动取消订单"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+>
+
+  <div class="article-meta">
+    <a href="/blog/2018/03/08/%E8%B6%85%E6%97%B630%E5%88%86%E9%92%9F%E8%87%AA%E5%8A%A8%E5%8F%96%E6%B6%88%E8%AE%A2%E5%8D%95/" class="article-date">
+  <time datetime="2018-03-08T14:16:27.000Z" itemprop="datePublished">2018-03-08</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+     
+    <header class="article-header">
+      
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2018/03/08/%E8%B6%85%E6%97%B630%E5%88%86%E9%92%9F%E8%87%AA%E5%8A%A8%E5%8F%96%E6%B6%88%E8%AE%A2%E5%8D%95/">超时30分钟自动取消订单</a>
+    </h1>
+  
+
+    </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      <!-- Table of Contents -->
+       <p>想象一个队列，你可以放任务进去，并且设置每个任务要延迟几分钟后执行。<br>这里的关键点就是延迟执行，如何保证每个任务按延时时间执行呢？可以把任务按延时时间从小到大排序，每次取第一个，依次取下去直到队列为空。假设取出的第一个任务到时间T才能执行，那么sleep(T-currentTime)之后就可以执行，即：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span>(queue.size &gt; <span class="number">0</span>)</span><br><span class="line">  task &lt;--- queue.peak()</span><br><span class="line">  remain &lt;--- task.runTime - currentTime</span><br><span class="line">  <span class="title function_">sleep</span><span class="params">(remain)</span></span><br><span class="line">  process(task)    </span><br></pre></td></tr></table></figure>
+<p>其中queue是一个优先队列，它的数据结构是小堆，最上面的一个值最小，每次插入一个元素的时间复杂度为O(logN)，即便已有10^9个元素，再插入一个元素也不过移动40个左右元素，所以性能完全没有问题。<br>在多线程情况下，Java已有现有的实现，<em>DelayQueue</em>是一个延迟优先队列，它的队列元素都必须实现<em>Delayed</em>接口。下面分析它是如何实现延时执行的。<br>Delayed</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">long</span> <span class="title function_">getDelay</span><span class="params">(TimeUnit unit)</span>  <span class="comment">//还剩多长时间方可执行</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">compareTo</span><span class="params">(Delayed o)</span>	<span class="comment">//按delay时间比较</span></span><br></pre></td></tr></table></figure>
+<p>这两个方法都是为DelayQueue服务的。<br>DelayQueue</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//取队列第一个元素，并从队列中移除</span></span><br><span class="line"><span class="keyword">public</span> E <span class="title function_">take</span><span class="params">()</span> <span class="keyword">throws</span> InterruptedException &#123;</span><br><span class="line">    <span class="keyword">final</span> <span class="type">ReentrantLock</span> <span class="variable">lock</span> <span class="operator">=</span> <span class="built_in">this</span>.lock;	<span class="comment">//非公平锁</span></span><br><span class="line">    lock.lockInterruptibly();	<span class="comment">//抢占锁时允许被中断</span></span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="keyword">for</span> (;;) &#123;</span><br><span class="line">            <span class="type">E</span> <span class="variable">first</span> <span class="operator">=</span> q.peek();	<span class="comment">//取第一个，如果队列为空，则返回null</span></span><br><span class="line">            <span class="keyword">if</span> (first == <span class="literal">null</span>)</span><br><span class="line">                available.await();	<span class="comment">//1.如果队列为空，则等待</span></span><br><span class="line">            <span class="keyword">else</span> &#123;	<span class="comment">//2.如果队列中有元素，</span></span><br><span class="line">                <span class="type">long</span> <span class="variable">delay</span> <span class="operator">=</span> first.getDelay(NANOSECONDS);	<span class="comment">//离可以执行还有多久</span></span><br><span class="line">                <span class="keyword">if</span> (delay &lt;= <span class="number">0</span>)	</span><br><span class="line">                    <span class="keyword">return</span> q.poll();	<span class="comment">//a.时间到了，把第一个元素移除并返回</span></span><br><span class="line">                <span class="comment">//b.时间还没到，    </span></span><br><span class="line">                first = <span class="literal">null</span>; <span class="comment">//多线程情况下，就不要有多余引用指向首元素，防止阻碍垃圾回收</span></span><br><span class="line">                <span class="keyword">if</span> (leader != <span class="literal">null</span>)</span><br><span class="line">                    available.await();	<span class="comment">//leader只是个标志，代表哪只线程是第一个获得q.peek()的</span></span><br><span class="line">                    					<span class="comment">//哪只线程先获取到元素task，哪只线程就有权利执行task，</span></span><br><span class="line">                    					<span class="comment">//那么其它线程就不会多执行这个task了</span></span><br><span class="line">                <span class="keyword">else</span> &#123;</span><br><span class="line">                    <span class="type">Thread</span> <span class="variable">thisThread</span> <span class="operator">=</span> Thread.currentThread();</span><br><span class="line">                    leader = thisThread;</span><br><span class="line">                    <span class="keyword">try</span> &#123;</span><br><span class="line">                        available.awaitNanos(delay);	<span class="comment">//await期间会释放锁，其它线程会来争抢锁，但是</span></span><br><span class="line">                                                        <span class="comment">//这个时候由于leader已经设值，所以其它线程只能</span></span><br><span class="line">                                                        <span class="comment">//干等，什么都做不了</span></span><br><span class="line">                    &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">                        <span class="keyword">if</span> (leader == thisThread)</span><br><span class="line">                            leader = <span class="literal">null</span>;	<span class="comment">//释放leader，到下一次循环q.peek()的delay就&lt;=0了，元素被移除并返回</span></span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (leader == <span class="literal">null</span> &amp;&amp; q.peek() != <span class="literal">null</span>)</span><br><span class="line">            available.signal();	<span class="comment">//在return q.poll()之后，如果队列中还有task，那么唤醒一个沉睡的线程</span></span><br><span class="line">        lock.unlock();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>由此可见，take()方法永远不会返回null，除非你queue.add(null)。<br>整个<em>DelayQueue</em>并没有太难的东西，但是却有它很巧妙的地方。利用一个leader标志来防止task被重复执行，在线程await时将first置null。<br>30分钟订单未支付自动取消，这个原本是道面试题，我首先想的是轮询，但是无论怎么设计都感觉很费效率。之所以没想到用优先队列是因为我隐约觉得任务列表是一个链表结构，订单如果到2亿怎么办，我还没见过2亿一个的数组。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.entity;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> hero</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Order</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">long</span> id;</span><br><span class="line">    <span class="keyword">private</span> Status status;     <span class="comment">//订单状态</span></span><br><span class="line">    <span class="keyword">private</span> <span class="type">long</span> createTime;      <span class="comment">//下单时间，毫秒</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Order</span><span class="params">(<span class="type">long</span> id, <span class="type">long</span> createTime)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.id = id;</span><br><span class="line">        <span class="built_in">this</span>.status = Status.UNPAYED;</span><br><span class="line">        <span class="built_in">this</span>.createTime = createTime;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">enum</span> <span class="title class_">Status</span> &#123;</span><br><span class="line">        UNPAYED,</span><br><span class="line">        UNCONFIRMED,</span><br><span class="line">        FINISHED,</span><br><span class="line">        CANCELED</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="type">long</span> <span class="title function_">getId</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> id;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setId</span><span class="params">(<span class="type">long</span> id)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.id = id;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> Status <span class="title function_">getStatus</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> status;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setStatus</span><span class="params">(Status status)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.status = status;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="type">long</span> <span class="title function_">getCreateTime</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> createTime;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setCreateTime</span><span class="params">(<span class="type">long</span> createTime)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.createTime = createTime;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.domain;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.entity.Order;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.DelayQueue;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.Delayed;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.TimeUnit;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> hero</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">OrderService</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="type">long</span> <span class="variable">DELAY_TIME_IN_MILLIS</span> <span class="operator">=</span> <span class="number">2</span> * <span class="number">1000</span>;   <span class="comment">//下单未支付超时时间</span></span><br><span class="line">    <span class="keyword">private</span> DelayQueue&lt;OrderTask&gt; que = <span class="keyword">new</span> <span class="title class_">DelayQueue</span>&lt;&gt;();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">OrderService</span> <span class="variable">service</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">OrderService</span>();</span><br><span class="line">        service.placeAnOrder(<span class="keyword">new</span> <span class="title class_">Order</span>(<span class="number">1</span>, System.currentTimeMillis() + <span class="number">10</span>));</span><br><span class="line">        service.placeAnOrder(<span class="keyword">new</span> <span class="title class_">Order</span>(<span class="number">2</span>, System.currentTimeMillis()));</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">            <span class="comment">// 找出超时未支付订单，触发取消订单事件</span></span><br><span class="line">            System.out.println(service.getExpiredOrder());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">placeAnOrder</span><span class="params">(Order order)</span> &#123;</span><br><span class="line">        <span class="comment">// 1.入库</span></span><br><span class="line">        <span class="comment">// ...</span></span><br><span class="line">        <span class="comment">// ...</span></span><br><span class="line">        <span class="comment">// ...</span></span><br><span class="line">        <span class="comment">// 2.加一个定时task</span></span><br><span class="line">        que.add(<span class="keyword">new</span> <span class="title class_">OrderTask</span>(order));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="type">long</span> <span class="title function_">getExpiredOrder</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> que.take().orderId;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">RuntimeException</span>(e);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">class</span> <span class="title class_">OrderTask</span> <span class="keyword">implements</span> <span class="title class_">Delayed</span> &#123;</span><br><span class="line">        <span class="keyword">private</span> <span class="type">long</span> orderId;</span><br><span class="line">        <span class="keyword">private</span> <span class="type">long</span> expiredTime;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">public</span> <span class="title function_">OrderTask</span><span class="params">(Order order)</span> &#123;</span><br><span class="line">            <span class="built_in">this</span>.orderId = order.getId();</span><br><span class="line">            <span class="built_in">this</span>.expiredTime = order.getCreateTime() + DELAY_TIME_IN_MILLIS;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="keyword">public</span> <span class="type">long</span> <span class="title function_">getDelay</span><span class="params">(TimeUnit unit)</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> unit.convert(expiredTime - System.currentTimeMillis(), TimeUnit.MILLISECONDS);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">compareTo</span><span class="params">(Delayed o)</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> expiredTime &gt; ((OrderTask) o).expiredTime ? <span class="number">1</span> : -<span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure> 
+    </div>
+
+    <footer class="article-footer">
+      <!-- <a data-url="https://carl-zk.github.io/blog/2018/03/08/%E8%B6%85%E6%97%B630%E5%88%86%E9%92%9F%E8%87%AA%E5%8A%A8%E5%8F%96%E6%B6%88%E8%AE%A2%E5%8D%95/" data-id="clwbvux5v00bp64odakgh98zc" class="article-share-link">分享</a> -->
+       
+      <div id="gitalk-container"></div>
+       
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+
+
+<script src="/blog/js/md5.min.js"></script>
+
+
+ <script type="text/javascript" defer>
+      function genId() {
+        var title = document.querySelector('article div.article-meta a').pathname
+        if(title == null) {
+            title = location.pathname
+        }
+        return title
+      } 
+      var gitalk = new Gitalk({
+        clientID: '4cb6744ec422e72a39bf',
+        clientSecret: 'd0243116135375ff3b8db348dea02bc5ac88b6e3',
+        repo: 'gitalk',
+        owner: 'carl-zk',
+        admin: ['carl-zk'],
+        id: md5(genId()),
+        labels: ['Gitalk'],
+        perPage: 15,
+        pagerDirection: 'last',
+        createIssueManually: false,
+        distractionFreeMode: false
+      })
+      gitalk.render("gitalk-container")
+
+</script>
+
+
+
+
+
+ 
+    </footer>
+  </div>
+  
+</article>
+
+  
+
+
+  <nav id="page-nav">
+    <a class="extend prev" rel="prev" href="/blog/page/52/">&lt;&lt;上一页</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/51/">51</a><a class="page-number" href="/blog/page/52/">52</a><span class="page-number current">53</span><a class="page-number" href="/blog/page/54/">54</a><a class="page-number" href="/blog/page/55/">55</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/192/">192</a><a class="extend next" rel="next" href="/blog/page/54/">下一页&gt;&gt;</a>
+  </nav>
+
+</section>
+           
+    <aside id="sidebar">
+  
+    
+
+  
+    
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title recent-posts">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/blog/2024/05/19/windows/">Windows</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2023/12/17/spring-cloud-%E9%85%8D%E7%BD%AE%E5%8A%A0%E5%AF%86%E5%AD%97%E6%AE%B5/">Spring Cloud 配置加密字段</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2023/12/15/spring-boot-%E5%90%AF%E5%8A%A8%E8%BF%87%E7%A8%8B/">Spring Boot 启动过程</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2022/04/25/Design-Underground-System/">Design Underground System</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2022/04/25/Encode-and-Decode-TinyURL/">Encode and Decode TinyURL</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+
+  
+    
+  
+    <!--微信公众号二维码-->
+
+
+  
+</aside>
+
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-left">
+      &copy; 2016 - 2024 carl-zk<!--&nbsp;|&nbsp;
+      主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a> -->
+    </div>
+  
+     <div id="footer-right">
+      <!--联系方式&nbsp;|&nbsp; -->
+      富强民主文明和谐自由平等公正法治爱国敬业诚信友善
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/blog/" class="mobile-nav-link">首页</a>
+  
+    <a href="/blog/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/blog/about" class="mobile-nav-link">关于</a>
+  
+</nav>
+    <img class="back-to-top-btn" src="/blog/images/fly-to-top.png"/>
+<script>
+// Elevator script included on the page, already.
+window.onload = function() {
+  var elevator = new Elevator({
+    selector:'.back-to-top-btn',
+    element: document.querySelector('.back-to-top-btn'),
+    duration: 1000 // milliseconds
+  });
+}
+</script>
+    
+
+<script src="/blog/js/is.js"></script>
+
+
+
+  
+<script src="/blog/jquery/jquery.min.js"></script>
+
+  
+<link rel="stylesheet" href="/blog/fancybox/jquery.fancybox.css">
+
+  
+<script src="/blog/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/mermaid/7.1.2/mermaid.min.js'></script>
+  <!-- script src="/blog/js/mermaid.min.js" -->
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({theme: 'forest'});
+    }
+  </script>
+
+
+<script src="/blog/js/script.js"></script>
+
+
+<script src="/blog/js/elevator.js"></script>
+
+  </div>
+</body>
+</html>

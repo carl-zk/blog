@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>一叶轻舟渡万江</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="一叶轻舟渡万江">
+<meta property="og:url" content="https://carl-zk.github.io/blog/page/67/index.html">
+<meta property="og:site_name" content="一叶轻舟渡万江">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="carl-zk">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/blog/atom.xml" title="一叶轻舟渡万江" type="application/atom+xml">
+  
+  
+  
+    
+  
+  
+<link rel="stylesheet" href="/blog/css/style.css">
+
+  
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-92800981-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-92800981-2');
+</script>
+
+
+
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    
+    <div id="header-inner" class="inner">
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/blog/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://carl-zk.github.io/blog"></form>
+      </div>
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/blog/">首页</a>
+        
+          <a class="main-nav-link" href="/blog/archives">归档</a>
+        
+          <a class="main-nav-link" href="/blog/about">关于</a>
+        
+      </nav>
+      
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/blog/" id="logo">一叶轻舟渡万江</a>
+      </h1>
+      
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article
+  id="post-grub"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+>
+
+  <div class="article-meta">
+    <a href="/blog/2017/10/14/grub/" class="article-date">
+  <time datetime="2017-10-14T03:31:10.000Z" itemprop="datePublished">2017-10-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+     
+    <header class="article-header">
+      
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2017/10/14/grub/">Grub</a>
+    </h1>
+  
+
+    </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      <!-- Table of Contents -->
+       <blockquote>
+<p>目的：制作一个Linux和windows启动盘。</p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.gnu.org/software/grub/">grub官网</a><br><a target="_blank" rel="noopener" href="https://www.linux.com/learn/how-rescue-non-booting-grub-2-Linux">grub命令修复系统</a><br><a target="_blank" rel="noopener" href="http://www.winsetupfromusb.com/downloads/">多合一启动盘制作工具 WinSetupFromUSB</a><a target="_blank" rel="noopener" href="http://www.iplaysoft.com/winsetupfromusb.html">【WinSetupFromUSB教程】</a><br><a target="_blank" rel="noopener" href="https://www.pendrivelinux.com/multiboot-create-a-multiboot-usb-from-linux/">MultiSystem – Create a MultiBoot USB from Linux</a><a target="_blank" rel="noopener" href="http://www.mintos.org/skill/multisystem.html">【MultiSystem教程】</a><br><strong>GNU GRUB</strong>是一个系统开机引导应用。</p>
+<h3 id="命名规则"><a href="#命名规则" class="headerlink" title="命名规则"></a>命名规则</h3><p>(fd0) :  fd 表示floppy disk，0 表示drive number，driver号从0开始。<br>(hd0,msdos2) :  hd 表示hard disk drive，msdos 表示partition scheme，2表示partition number， partition number从1开始。<br>(hd0,msdos5) :  5表示hd0的第一个逻辑分区。(一个系统只能有4个主分区)<br>(hd1,msdos1,bsd1) :  BSD系统中，第二个硬盘第一个slice的’a’分区。<br>如何指定一个文件？<br>(hd0,msdos1)&#x2F;vmlinuz :  第一个硬盘的第一个主分区的vmlinuz文件。</p>
+<h3 id="如何用GRUB引导OS"><a href="#如何用GRUB引导OS" class="headerlink" title="如何用GRUB引导OS"></a>如何用GRUB引导OS</h3><p><strong>GRUB有两种不同的引导方式：直接引导和chain-load（引导另一种boot loader，让它去load OS）。</strong><br>Multiboot是GRUB原生支持的，它可以直接引导Linux, FreeBSD, NetBSD and OpenBSD等系统。<br>不支持Multiboot及GRUB没有明确表示支持的系统只能通过chain-load引导。</p>
+<p>Chain-loading is only supported on PC BIOS and EFI platforms.</p>
+<h3 id="GRUB-SHELL"><a href="#GRUB-SHELL" class="headerlink" title="GRUB SHELL"></a>GRUB SHELL</h3><h4 id="如何用grub命令手动引导？"><a href="#如何用grub命令手动引导？" class="headerlink" title="如何用grub命令手动引导？"></a>如何用grub命令手动引导？</h4><p>1.进入<code>grub&gt;</code>;<br>ubuntu&#x2F;debian系统开机出现画面时按一下shift键。<br>如果开机时没有选择界面，直接到输入密码界面，则需要修改&#x2F;etc&#x2F;default&#x2F;grub文件<br><code>GRUB_HIDDEN_TIMEOUT=10</code>取消注释并设置成10<br><code>GRUB_GFXMODE=640x480</code>取消注释<br>修改完执行<code>update-grub</code><br>2.在shell中</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">grub&gt;<span class="built_in">ls</span></span><br><span class="line">列出当前系统中的磁盘分区代号</span><br><span class="line">(hd0) (hd0,msdos6) (hd0,msdos5) (hd0,msdos1)</span><br><span class="line">grub&gt;<span class="built_in">ls</span> (hd0,msdos6)/</span><br><span class="line">列出分区中的文件，可看出此分区为 /</span><br><span class="line">bin    dev   initrd.img      lib32       media  proc  sbin  sys  var</span><br><span class="line">boot   etc   initrd.img.old  lib64       mnt    root  snap  tmp  vmlinuz</span><br><span class="line">cdrom  home  lib             lost+found  opt    run   srv   usr  vmlinuz.old</span><br><span class="line">grub&gt; <span class="built_in">ls</span> (hd0,msdos1)</span><br><span class="line">会列出分区信息：文件系统类型、UUID、分区大小等。</span><br><span class="line">grub&gt;<span class="built_in">ls</span> (hd0,msdos1)/</span><br><span class="line">可看出此分区为 /boot</span><br><span class="line">abi-4.10.0-19-generic         memtest86+.bin</span><br><span class="line">abi-4.10.0-35-generic         memtest86+.elf</span><br><span class="line">abi-4.10.0-37-generic         memtest86+_multiboot.bin</span><br><span class="line">config-4.10.0-19-generic      System.map-4.10.0-19-generic</span><br><span class="line">config-4.10.0-35-generic      System.map-4.10.0-35-generic</span><br><span class="line">config-4.10.0-37-generic      System.map-4.10.0-37-generic</span><br><span class="line">efi                           vmlinuz-4.10.0-19-generic</span><br><span class="line">grub                          vmlinuz-4.10.0-35-generic</span><br><span class="line">initrd.img-4.10.0-19-generic  vmlinuz-4.10.0-35-generic.efi.signed</span><br><span class="line">initrd.img-4.10.0-35-generic  vmlinuz-4.10.0-37-generic</span><br><span class="line">initrd.img-4.10.0-37-generic  vmlinuz-4.10.0-37-generic.efi.signed</span><br><span class="line">grub&gt;<span class="built_in">set</span> root=(hd0,msdos6)</span><br><span class="line">grub&gt;linux (hd0,msdos1)/vmlinuz-4.10.0-35-generic root=/dev/sda6</span><br><span class="line">grub&gt;initrd (hd0,msdos1)/initrd.img-4.10.0-35-generic</span><br><span class="line">grub&gt;boot</span><br></pre></td></tr></table></figure>
+<p>通过ls可以查到哪个分区是&#x2F;boot，哪个分区是&#x2F;。然后set root&#x3D;(hd0,msdos6)，指定根目录。然后linux (hd0,msdos1)&#x2F;vmlinuz-4.10.0-35-generic告诉GRUB加载哪个kernel，root&#x3D;&#x2F;dev&#x2F;sda6指定根目录。然后initrd (hd0,msdos1)&#x2F;initrd.img-4.10.0-35-generic指定initrd file。最后boot。<br>如果是x86系统，对应的linux16、initrd16。initrd file是加载kernel后的启动参数。<br>在*grub rescue&gt;*模式下可参考：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">grub rescue&gt; <span class="built_in">set</span> prefix=(hd0,1)/boot/grub</span><br><span class="line">grub rescue&gt; <span class="built_in">set</span> root=(hd0,1)</span><br><span class="line">grub rescue&gt; insmod normal</span><br><span class="line">grub rescue&gt; normal</span><br><span class="line">grub rescue&gt; insmod linux</span><br><span class="line">grub rescue&gt; linux /boot/vmlinuz-3.13.0-29-generic root=/dev/sda1</span><br><span class="line">grub rescue&gt; initrd /boot/initrd.img-3.13.0-29-generic</span><br><span class="line">grub rescue&gt; boot</span><br></pre></td></tr></table></figure>
+<p>等成功进入系统后，执行</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#update-grub</span></span><br><span class="line"><span class="comment">#grub-install /dev/sda</span></span><br></pre></td></tr></table></figure>
+<p>grub-install &#x2F;dev&#x2F;sda只需指定boot的所在driver，不要partition number，所以do not use a partition number like &#x2F;dev&#x2F;sda1.<br>如果还不行，就用其它工具<a target="_blank" rel="noopener" href="http://www.supergrubdisk.org/">Super Grub2 Disk</a>.</p>
+<p>以上是引导&#x2F;修复GNU&#x2F;Linux，如果是DOS&#x2F;Windows,请参考<a target="_blank" rel="noopener" href="https://www.gnu.org/software/grub/manual/grub/grub.html#Configuration">5.3.4 DOS&#x2F;Windows</a></p>
+<h3 id="写一个configuration-file"><a href="#写一个configuration-file" class="headerlink" title="写一个configuration file"></a>写一个configuration file</h3><h4 id="Simple-configuration"><a href="#Simple-configuration" class="headerlink" title="Simple configuration"></a>Simple configuration</h4><p>最推荐的一种方式，可以应对绝大多数情况。<br>使用grub-mkconfig命令生成grub.cfg文件，&#x2F;etc&#x2F;default&#x2F;grub文件控制grub-mkconfig。生成grub.cfg后，如果修改了&#x2F;etc&#x2F;default&#x2F;grub文件，需要<code>update-grub</code>来更新一下&#x2F;boot&#x2F;grub&#x2F;grub.cfg文件。grub-mkconfig使用的模板在&#x2F;usr&#x2F;local&#x2F;etc&#x2F;grub.d中。<br>&#x2F;etc&#x2F;default&#x2F;grub中是标准的键-值对，值中如果有空格则需双引号括起来。</p>
+<h4 id="Shell-like-scripting"><a href="#Shell-like-scripting" class="headerlink" title="Shell-like scripting"></a>Shell-like scripting</h4><h4 id="Multi-boot-manual-config"><a href="#Multi-boot-manual-config" class="headerlink" title="Multi-boot manual config"></a>Multi-boot manual config</h4><h4 id="Embedded-configuration"><a href="#Embedded-configuration" class="headerlink" title="Embedded configuration"></a>Embedded configuration</h4> 
+    </div>
+
+    <footer class="article-footer">
+      <!-- <a data-url="https://carl-zk.github.io/blog/2017/10/14/grub/" data-id="clwbvux53005764od6o4j796f" class="article-share-link">分享</a> -->
+       
+      <div id="gitalk-container"></div>
+       
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+
+
+<script src="/blog/js/md5.min.js"></script>
+
+
+ <script type="text/javascript" defer>
+      function genId() {
+        var title = document.querySelector('article div.article-meta a').pathname
+        if(title == null) {
+            title = location.pathname
+        }
+        return title
+      } 
+      var gitalk = new Gitalk({
+        clientID: '4cb6744ec422e72a39bf',
+        clientSecret: 'd0243116135375ff3b8db348dea02bc5ac88b6e3',
+        repo: 'gitalk',
+        owner: 'carl-zk',
+        admin: ['carl-zk'],
+        id: md5(genId()),
+        labels: ['Gitalk'],
+        perPage: 15,
+        pagerDirection: 'last',
+        createIssueManually: false,
+        distractionFreeMode: false
+      })
+      gitalk.render("gitalk-container")
+
+</script>
+
+
+
+
+
+ 
+    </footer>
+  </div>
+  
+</article>
+
+  
+
+
+  <nav id="page-nav">
+    <a class="extend prev" rel="prev" href="/blog/page/66/">&lt;&lt;上一页</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/65/">65</a><a class="page-number" href="/blog/page/66/">66</a><span class="page-number current">67</span><a class="page-number" href="/blog/page/68/">68</a><a class="page-number" href="/blog/page/69/">69</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/192/">192</a><a class="extend next" rel="next" href="/blog/page/68/">下一页&gt;&gt;</a>
+  </nav>
+
+</section>
+           
+    <aside id="sidebar">
+  
+    
+
+  
+    
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title recent-posts">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/blog/2024/05/19/windows/">Windows</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2023/12/17/spring-cloud-%E9%85%8D%E7%BD%AE%E5%8A%A0%E5%AF%86%E5%AD%97%E6%AE%B5/">Spring Cloud 配置加密字段</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2023/12/15/spring-boot-%E5%90%AF%E5%8A%A8%E8%BF%87%E7%A8%8B/">Spring Boot 启动过程</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2022/04/25/Design-Underground-System/">Design Underground System</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2022/04/25/Encode-and-Decode-TinyURL/">Encode and Decode TinyURL</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+
+  
+    
+  
+    <!--微信公众号二维码-->
+
+
+  
+</aside>
+
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-left">
+      &copy; 2016 - 2024 carl-zk<!--&nbsp;|&nbsp;
+      主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a> -->
+    </div>
+  
+     <div id="footer-right">
+      <!--联系方式&nbsp;|&nbsp; -->
+      富强民主文明和谐自由平等公正法治爱国敬业诚信友善
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/blog/" class="mobile-nav-link">首页</a>
+  
+    <a href="/blog/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/blog/about" class="mobile-nav-link">关于</a>
+  
+</nav>
+    <img class="back-to-top-btn" src="/blog/images/fly-to-top.png"/>
+<script>
+// Elevator script included on the page, already.
+window.onload = function() {
+  var elevator = new Elevator({
+    selector:'.back-to-top-btn',
+    element: document.querySelector('.back-to-top-btn'),
+    duration: 1000 // milliseconds
+  });
+}
+</script>
+    
+
+<script src="/blog/js/is.js"></script>
+
+
+
+  
+<script src="/blog/jquery/jquery.min.js"></script>
+
+  
+<link rel="stylesheet" href="/blog/fancybox/jquery.fancybox.css">
+
+  
+<script src="/blog/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/mermaid/7.1.2/mermaid.min.js'></script>
+  <!-- script src="/blog/js/mermaid.min.js" -->
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({theme: 'forest'});
+    }
+  </script>
+
+
+<script src="/blog/js/script.js"></script>
+
+
+<script src="/blog/js/elevator.js"></script>
+
+  </div>
+</body>
+</html>

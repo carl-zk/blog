@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>一叶轻舟渡万江</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="一叶轻舟渡万江">
+<meta property="og:url" content="https://carl-zk.github.io/blog/page/149/index.html">
+<meta property="og:site_name" content="一叶轻舟渡万江">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="carl-zk">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/blog/atom.xml" title="一叶轻舟渡万江" type="application/atom+xml">
+  
+  
+  
+    
+  
+  
+<link rel="stylesheet" href="/blog/css/style.css">
+
+  
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-92800981-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-92800981-2');
+</script>
+
+
+
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    
+    <div id="header-inner" class="inner">
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/blog/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://carl-zk.github.io/blog"></form>
+      </div>
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/blog/">首页</a>
+        
+          <a class="main-nav-link" href="/blog/archives">归档</a>
+        
+          <a class="main-nav-link" href="/blog/about">关于</a>
+        
+      </nav>
+      
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/blog/" id="logo">一叶轻舟渡万江</a>
+      </h1>
+      
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article
+  id="post-Ignatius-and-the-Princess-I"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+>
+
+  <div class="article-meta">
+    <a href="/blog/2016/07/02/Ignatius-and-the-Princess-I/" class="article-date">
+  <time datetime="2016-07-02T07:30:45.000Z" itemprop="datePublished">2016-07-02</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/hdu/">hdu</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+     
+    <header class="article-header">
+      
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2016/07/02/Ignatius-and-the-Princess-I/">Ignatius and the Princess I</a>
+    </h1>
+  
+
+    </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      <!-- Table of Contents -->
+       <p><a target="_blank" rel="noopener" href="http://acm.hdu.edu.cn/showproblem.php?pid=1026">题目链接</a><br>Problem Description<br>The Princess has been abducted by the BEelzebub feng5166, our hero Ignatius has to rescue our pretty Princess. Now he gets into feng5166’s castle. The castle is a large labyrinth. To make the problem simply, we assume the labyrinth is a N*M two-dimensional array which left-top corner is (0,0) and right-bottom corner is (N-1,M-1). Ignatius enters at (0,0), and the door to feng5166’s room is at (N-1,M-1), that is our target. There are some monsters in the castle, if Ignatius meet them, he has to kill them. Here is some rules:</p>
+<p>1.Ignatius can only move in four directions(up, down, left, right), one step per second. A step is defined as follow: if current position is (x,y), after a step, Ignatius can only stand on (x-1,y), (x+1,y), (x,y-1) or (x,y+1).<br>2.The array is marked with some characters and numbers. We define them like this:<br>. : The place where Ignatius can walk on.<br>X : The place is a trap, Ignatius should not walk on it.<br>n : Here is a monster with n HP(1&lt;&#x3D;n&lt;&#x3D;9), if Ignatius walk on it, it takes him n seconds to kill the monster.</p>
+<p>Your task is to give out the path which costs minimum seconds for Ignatius to reach target position. You may assume that the start position and the target position will never be a trap, and there will never be a monster at the start position.</p>
+<p>Input<br>The input contains several test cases. Each test case starts with a line contains two numbers N and M(2&lt;&#x3D;N&lt;&#x3D;100,2&lt;&#x3D;M&lt;&#x3D;100) which indicate the size of the labyrinth. Then a N*M two-dimensional array follows, which describe the whole labyrinth. The input is terminated by the end of file. More details in the Sample Input.</p>
+<p>Output<br>For each test case, you should output “God please help our poor hero.” if Ignatius can’t reach the target position, or you should output “It takes n seconds to reach the target position, let me show you the way.”(n is the minimum seconds), and tell our hero the whole path. Output a line contains “FINISH” after each test case. If there are more than one path, any one is OK in this problem. More details in the Sample Output.</p>
+<p>Sample Input<br>5 6<br>.XX.1.<br>..X.2.<br>2…X.<br>…XX.<br>XXXXX.<br>5 6<br>.XX.1.<br>..X.2.<br>2…X.<br>…XX.<br>XXXXX1<br>5 6<br>.XX…<br>..XX1.<br>2…X.<br>…XX.<br>XXXXX.</p>
+<p>Sample Output<br>It takes 13 seconds to reach the target position, let me show you the way.<br>1s:(0,0)-&gt;(1,0)<br>2s:(1,0)-&gt;(1,1)<br>3s:(1,1)-&gt;(2,1)<br>4s:(2,1)-&gt;(2,2)<br>5s:(2,2)-&gt;(2,3)<br>6s:(2,3)-&gt;(1,3)<br>7s:(1,3)-&gt;(1,4)<br>8s:FIGHT AT (1,4)<br>9s:FIGHT AT (1,4)<br>10s:(1,4)-&gt;(1,5)<br>11s:(1,5)-&gt;(2,5)<br>12s:(2,5)-&gt;(3,5)<br>13s:(3,5)-&gt;(4,5)<br>FINISH<br>It takes 14 seconds to reach the target position, let me show you the way.<br>1s:(0,0)-&gt;(1,0)<br>2s:(1,0)-&gt;(1,1)<br>3s:(1,1)-&gt;(2,1)<br>4s:(2,1)-&gt;(2,2)<br>5s:(2,2)-&gt;(2,3)<br>6s:(2,3)-&gt;(1,3)<br>7s:(1,3)-&gt;(1,4)<br>8s:FIGHT AT (1,4)<br>9s:FIGHT AT (1,4)<br>10s:(1,4)-&gt;(1,5)<br>11s:(1,5)-&gt;(2,5)<br>12s:(2,5)-&gt;(3,5)<br>13s:(3,5)-&gt;(4,5)<br>14s:FIGHT AT (4,5)<br>FINISH<br>God please help our poor hero.<br>FINISH</p>
+<p>N*M的迷宫,找出一条从maze[0][0]到maze[N-1][M-1]的路.<br>‘X’表示不通;’.’表示可走;’数字1-9’表示野怪.<br>maze[0][0]没有野怪, 途中遇到野怪必须消灭.<br>如果路径有多条,打印一条就可以.</p>
+<hr/>
+此题有坑,并非任一路径都可以,必须是最短路.
+说下感受,OJ并不给提供任何出错信息,这让想入门ACM的菜鸟,也就是我非常绝望.但是等我找出问题解决后我又有很大的成就感,"世上无难事"并非只是说说而已.
+
+<p>为什么是BFS(Breadth-First-Search)而不是DFS(Depth-First-Search),因为BFS是按照层级遍历,所以首先遍历到的是距离根节点最近的, 而DFS解决类似一个问题是否有解的问题.</p>
+<p>我踩的坑.由于要输出路径,所以每个node节点有个指针指向父节点, 这个值在node入队列前设置.<br>刚开始我是将node出队列,然后visited置为true.这就会引发一个问题——node的指针可能会被更新多次,而最后一次会指向花费最大的那个父节点.<br>例矩阵:<br>.  2<br>3 4<br>&lt;队列状态&gt;(进入一格需1s, 从起点开始)</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="number">3</span>, <span class="number">4</span>&gt;  maze[<span class="number">0</span>][[<span class="number">1</span>].pre --&gt;[<span class="number">0</span>][<span class="number">0</span>], [<span class="number">1</span>][<span class="number">0</span>] --&gt;[<span class="number">0</span>][<span class="number">0</span>]</span><br><span class="line">&lt;<span class="number">4</span>, <span class="number">8</span>&gt; [<span class="number">1</span>][<span class="number">1</span>]--&gt;[<span class="number">0</span>][<span class="number">1</span>]</span><br><span class="line">&lt;<span class="number">8</span>, <span class="number">9</span>&gt; [<span class="number">1</span>][<span class="number">1</span>]--&gt;[<span class="number">1</span>][<span class="number">0</span>]</span><br></pre></td></tr></table></figure>
+<p>(x &#x3D;&#x3D; N-1 &amp;&amp; y &#x3D;&#x3D; M-1) 条件满足,退出.(此时[1][1]的pre 指向的是 [1][0], 路径是错误的.)<br>正确的BFS应该是在node放入队列前将其visited置为true.</p>
+<p>由指针求下标:<br>矩阵a[N][M], 有*p &#x3D; &amp;a[i][j], 则<br>i &#x3D; (p - &amp;a[0][0]) &#x2F; M;<br>j &#x3D; (p - &amp;a[0][0]) % M;</p>
+<p>历时1.5天,终于解决了.从time limit exceeded(用的DFS)到Stack over flow(STL的queue不够)到wrong answer(不是最短路径).一点一点摸索怎么节省内存,到底哪里溢出,终于都解决后看到的是wa.可想而知我的内心是崩溃的,题目明明说的任一路径都可以.刚开始我没有发现写的BFS有问题,也算是没有 白白浪费时间,毕竟搞清楚了是visited的问题.wrong到死的感觉,崩溃到几乎要怀疑人生.<br>然而当终于发现问题在哪并解决之后,才知道一切都是值得的.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;set&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stack&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> MAX 101</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> INF 1&lt;&lt;20</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> TEST</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">using namespace <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">char</span> labyrinth[MAX][MAX];</span><br><span class="line"><span class="type">int</span> N, M, sec;</span><br><span class="line"><span class="type">bool</span> finish;</span><br><span class="line"><span class="type">int</span> dx[<span class="number">4</span>] = &#123;<span class="number">1</span>, <span class="number">0</span>, <span class="number">-1</span>, <span class="number">0</span>&#125;, dy[<span class="number">4</span>] = &#123;<span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">-1</span>&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">node</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="type">int</span> step;  <span class="comment">//到此节点时用的步数(or时间)</span></span><br><span class="line">    node *pre;  <span class="comment">//指向父节点</span></span><br><span class="line">    <span class="type">void</span> <span class="title function_">init</span><span class="params">(<span class="type">int</span> s, node *p)</span></span><br><span class="line">    &#123;</span><br><span class="line">        step = s;</span><br><span class="line">        pre = p;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="type">bool</span> operator &lt; (<span class="type">const</span> node &amp;x) <span class="type">const</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> step &gt; x.step; <span class="comment">//在队列中按从小到大排列</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125; Node;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">cmp</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="type">bool</span> <span class="title function_">operator</span> <span class="params">()</span> <span class="params">(<span class="type">const</span> Node *x, <span class="type">const</span> Node *y)</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> x-&gt;step &gt;= y-&gt;step;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">Node maze[MAX][MAX];</span><br><span class="line"><span class="type">bool</span> visited[MAX][MAX];</span><br><span class="line"><span class="built_in">priority_queue</span>&lt;Node*, <span class="built_in">vector</span>&lt;Node*&gt;, cmp&gt; pri;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">init</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">memset</span>(visited, <span class="number">0</span>, <span class="keyword">sizeof</span>(visited));</span><br><span class="line">    <span class="comment">//memset(maze, 0, sizeof(maze));</span></span><br><span class="line">    <span class="comment">//memset(labyrinth, 0, sizeof(labyrinth));</span></span><br><span class="line">    finish = <span class="literal">false</span>;</span><br><span class="line">    sec = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(!pri.empty())pri.pop();</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; N; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%s&quot;</span>, &amp;labyrinth[i]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">monsters</span><span class="params">(<span class="type">int</span> x, <span class="type">int</span> y)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>(labyrinth[x][y]&gt;<span class="string">&#x27;0&#x27;</span>&amp;&amp;labyrinth[x][y]&lt;=<span class="string">&#x27;9&#x27;</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> labyrinth[x][y] - <span class="string">&#x27;0&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">bfs</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    visited[<span class="number">0</span>][<span class="number">0</span>] = <span class="literal">true</span>;</span><br><span class="line">    pri.push(&amp;maze[<span class="number">0</span>][<span class="number">0</span>]);</span><br><span class="line">    Node *p;</span><br><span class="line">    <span class="type">int</span> px, py;</span><br><span class="line">    <span class="keyword">while</span>(!pri.empty())</span><br><span class="line">    &#123;</span><br><span class="line">        p = pri.top();</span><br><span class="line">        pri.pop();</span><br><span class="line">        px = (p - &amp;maze[<span class="number">0</span>][<span class="number">0</span>]) / MAX; <span class="comment">//获取指针在矩阵中的下标</span></span><br><span class="line">        py = (p - &amp;maze[<span class="number">0</span>][<span class="number">0</span>]) % MAX;</span><br><span class="line">        <span class="keyword">if</span>(px == N<span class="number">-1</span> &amp;&amp; py == M<span class="number">-1</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            finish = <span class="literal">true</span>;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//visited[p.x][p.y] = true;  我在这里犯了一个错误</span></span><br><span class="line">        <span class="type">int</span> x, y;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>; i&lt;<span class="number">4</span>; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            x = px + dx[i];</span><br><span class="line">            y = py + dy[i];</span><br><span class="line">            <span class="keyword">if</span>(x&gt;<span class="number">-1</span>&amp;&amp;x&lt;N&amp;&amp;y&gt;<span class="number">-1</span>&amp;&amp;y&lt;M &amp;&amp; labyrinth[x][y]!=<span class="string">&#x27;X&#x27;</span> &amp;&amp; !visited[x][y])</span><br><span class="line">            &#123;</span><br><span class="line">                visited[x][y] = <span class="literal">true</span>;  <span class="comment">//应该在放入队列前将其置为true,否则可能一个节点会被放入两次</span></span><br><span class="line">                maze[x][y].init(p-&gt;step + monsters(x, y) + <span class="number">1</span>, &amp;maze[px][py]);</span><br><span class="line">                pri.push(&amp;maze[x][y]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">showTrace</span><span class="params">(<span class="type">int</span> x, <span class="type">int</span> y)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>(x!=<span class="number">0</span> || y!=<span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        showTrace((maze[x][y].pre - &amp;maze[<span class="number">0</span>][<span class="number">0</span>]) / MAX, (maze[x][y].pre - &amp;maze[<span class="number">0</span>][<span class="number">0</span>]) % MAX);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%ds:(%d,%d)-&gt;(%d,%d)\n&quot;</span>, ++sec, (maze[x][y].pre - &amp;maze[<span class="number">0</span>][<span class="number">0</span>]) / MAX, (maze[x][y].pre - &amp;maze[<span class="number">0</span>][<span class="number">0</span>]) % MAX, x, y);</span><br><span class="line">        <span class="keyword">while</span>(labyrinth[x][y]&gt;<span class="string">&#x27;0&#x27;</span> &amp;&amp; labyrinth[x][y]&lt;=<span class="string">&#x27;9&#x27;</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            labyrinth[x][y]--;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;%ds:FIGHT AT (%d,%d)\n&quot;</span>, ++sec, x, y);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;It takes %d seconds to reach the target position, let me show you the way.\n&quot;</span>, maze[N<span class="number">-1</span>][M<span class="number">-1</span>].step);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="meta">#<span class="keyword">ifdef</span> TEST</span></span><br><span class="line">    freopen(<span class="string">&quot;in.txt&quot;</span>, <span class="string">&quot;r&quot;</span>, <span class="built_in">stdin</span>);</span><br><span class="line">    <span class="comment">//freopen(&quot;out.txt&quot;, &quot;w&quot;, stdout);</span></span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">scanf</span>(<span class="string">&quot;%d %d&quot;</span>, &amp;N, &amp;M)!=EOF)</span><br><span class="line">    &#123;</span><br><span class="line">        init();</span><br><span class="line">        bfs();</span><br><span class="line">        <span class="keyword">if</span>(!finish)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;God please help our poor hero.\n&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            showTrace(N<span class="number">-1</span>, M<span class="number">-1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;FINISH\n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">ifdef</span> TEST</span></span><br><span class="line">    fclose(<span class="built_in">stdin</span>);</span><br><span class="line">    <span class="comment">//fclose(stdout);</span></span><br><span class="line"><span class="meta">#<span class="keyword">endif</span> <span class="comment">// TEST</span></span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure> 
+    </div>
+
+    <footer class="article-footer">
+      <!-- <a data-url="https://carl-zk.github.io/blog/2016/07/02/Ignatius-and-the-Princess-I/" data-id="clwbvux4n001j64od8km2a9x5" class="article-share-link">分享</a> -->
+       
+      <div id="gitalk-container"></div>
+       
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+
+
+<script src="/blog/js/md5.min.js"></script>
+
+
+ <script type="text/javascript" defer>
+      function genId() {
+        var title = document.querySelector('article div.article-meta a').pathname
+        if(title == null) {
+            title = location.pathname
+        }
+        return title
+      } 
+      var gitalk = new Gitalk({
+        clientID: '4cb6744ec422e72a39bf',
+        clientSecret: 'd0243116135375ff3b8db348dea02bc5ac88b6e3',
+        repo: 'gitalk',
+        owner: 'carl-zk',
+        admin: ['carl-zk'],
+        id: md5(genId()),
+        labels: ['Gitalk'],
+        perPage: 15,
+        pagerDirection: 'last',
+        createIssueManually: false,
+        distractionFreeMode: false
+      })
+      gitalk.render("gitalk-container")
+
+</script>
+
+
+
+
+
+ 
+    </footer>
+  </div>
+  
+</article>
+
+  
+
+
+  <nav id="page-nav">
+    <a class="extend prev" rel="prev" href="/blog/page/148/">&lt;&lt;上一页</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/147/">147</a><a class="page-number" href="/blog/page/148/">148</a><span class="page-number current">149</span><a class="page-number" href="/blog/page/150/">150</a><a class="page-number" href="/blog/page/151/">151</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/192/">192</a><a class="extend next" rel="next" href="/blog/page/150/">下一页&gt;&gt;</a>
+  </nav>
+
+</section>
+           
+    <aside id="sidebar">
+  
+    
+
+  
+    
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title recent-posts">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/blog/2024/05/19/windows/">Windows</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2023/12/17/spring-cloud-%E9%85%8D%E7%BD%AE%E5%8A%A0%E5%AF%86%E5%AD%97%E6%AE%B5/">Spring Cloud 配置加密字段</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2023/12/15/spring-boot-%E5%90%AF%E5%8A%A8%E8%BF%87%E7%A8%8B/">Spring Boot 启动过程</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2022/04/25/Design-Underground-System/">Design Underground System</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2022/04/25/Encode-and-Decode-TinyURL/">Encode and Decode TinyURL</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+
+  
+    
+  
+    <!--微信公众号二维码-->
+
+
+  
+</aside>
+
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-left">
+      &copy; 2016 - 2024 carl-zk<!--&nbsp;|&nbsp;
+      主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a> -->
+    </div>
+  
+     <div id="footer-right">
+      <!--联系方式&nbsp;|&nbsp; -->
+      富强民主文明和谐自由平等公正法治爱国敬业诚信友善
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/blog/" class="mobile-nav-link">首页</a>
+  
+    <a href="/blog/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/blog/about" class="mobile-nav-link">关于</a>
+  
+</nav>
+    <img class="back-to-top-btn" src="/blog/images/fly-to-top.png"/>
+<script>
+// Elevator script included on the page, already.
+window.onload = function() {
+  var elevator = new Elevator({
+    selector:'.back-to-top-btn',
+    element: document.querySelector('.back-to-top-btn'),
+    duration: 1000 // milliseconds
+  });
+}
+</script>
+    
+
+<script src="/blog/js/is.js"></script>
+
+
+
+  
+<script src="/blog/jquery/jquery.min.js"></script>
+
+  
+<link rel="stylesheet" href="/blog/fancybox/jquery.fancybox.css">
+
+  
+<script src="/blog/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/mermaid/7.1.2/mermaid.min.js'></script>
+  <!-- script src="/blog/js/mermaid.min.js" -->
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({theme: 'forest'});
+    }
+  </script>
+
+
+<script src="/blog/js/script.js"></script>
+
+
+<script src="/blog/js/elevator.js"></script>
+
+  </div>
+</body>
+</html>

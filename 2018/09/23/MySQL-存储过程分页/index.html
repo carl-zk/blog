@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>MySQL 存储过程分页 | 一叶轻舟渡万江</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="https:&#x2F;&#x2F;www.w3resource.com&#x2F;mysql&#x2F;mysql-procedure.phphttps:&#x2F;&#x2F;dev.mysql.com&#x2F;doc&#x2F;refman&#x2F;8.0&#x2F;en&#x2F;string-functions.html#function_substr MySQL version: 5.7.9 123456789101112131415161718drop procedure if exis">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MySQL 存储过程分页">
+<meta property="og:url" content="https://carl-zk.github.io/blog/2018/09/23/MySQL-%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B%E5%88%86%E9%A1%B5/index.html">
+<meta property="og:site_name" content="一叶轻舟渡万江">
+<meta property="og:description" content="https:&#x2F;&#x2F;www.w3resource.com&#x2F;mysql&#x2F;mysql-procedure.phphttps:&#x2F;&#x2F;dev.mysql.com&#x2F;doc&#x2F;refman&#x2F;8.0&#x2F;en&#x2F;string-functions.html#function_substr MySQL version: 5.7.9 123456789101112131415161718drop procedure if exis">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2018-09-23T09:19:40.000Z">
+<meta property="article:modified_time" content="2024-05-18T08:19:43.157Z">
+<meta property="article:author" content="carl-zk">
+<meta property="article:tag" content="MySQL">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/blog/atom.xml" title="一叶轻舟渡万江" type="application/atom+xml">
+  
+  
+  
+    
+  
+  
+<link rel="stylesheet" href="/blog/css/style.css">
+
+  
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-92800981-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-92800981-2');
+</script>
+
+
+
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    
+    <div id="header-inner" class="inner">
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/blog/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://carl-zk.github.io/blog"></form>
+      </div>
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/blog/">首页</a>
+        
+          <a class="main-nav-link" href="/blog/archives">归档</a>
+        
+          <a class="main-nav-link" href="/blog/about">关于</a>
+        
+      </nav>
+      
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/blog/" id="logo">一叶轻舟渡万江</a>
+      </h1>
+      
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article
+  id="post-MySQL-存储过程分页"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+>
+
+  <div class="article-meta">
+    <a href="/blog/2018/09/23/MySQL-%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B%E5%88%86%E9%A1%B5/" class="article-date">
+  <time datetime="2018-09-23T09:19:40.000Z" itemprop="datePublished">2018-09-23</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+     
+    <header class="article-header">
+      
+  
+    <h1 class="article-title" itemprop="name">
+      MySQL 存储过程分页
+    </h1>
+  
+
+    </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      <!-- Table of Contents -->
+       <p><a target="_blank" rel="noopener" href="https://www.w3resource.com/mysql/mysql-procedure.php">https://www.w3resource.com/mysql/mysql-procedure.php</a><br><a target="_blank" rel="noopener" href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_substr">https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_substr</a><br><a href=""></a></p>
+<p><code>MySQL version: 5.7.9</code></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">drop</span> <span class="keyword">procedure</span> if <span class="keyword">exists</span> pagination;</span><br><span class="line"><span class="keyword">create</span> <span class="keyword">procedure</span> pagination(<span class="keyword">in</span> i_query <span class="type">varchar</span>(<span class="number">8000</span>), <span class="keyword">in</span> i_page <span class="type">int</span>, <span class="keyword">in</span> i_size <span class="type">int</span>, <span class="keyword">out</span> o_total <span class="type">int</span>)</span><br><span class="line">  <span class="keyword">begin</span></span><br><span class="line">    <span class="keyword">set</span> <span class="variable">@limit_start</span> <span class="operator">=</span> (i_page <span class="operator">-</span> <span class="number">1</span>) <span class="operator">*</span> i_size;</span><br><span class="line">    <span class="keyword">set</span> <span class="variable">@limit_size</span> <span class="operator">=</span> i_size;</span><br><span class="line">    <span class="keyword">set</span> <span class="variable">@tmp_query</span> <span class="operator">=</span> concat(<span class="string">&#x27;select * from (&#x27;</span>, i_query, <span class="string">&#x27;) t limit ?, ?&#x27;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">set</span> <span class="variable">@tmp_total</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">set</span> <span class="variable">@tmp_stat</span> <span class="operator">=</span> concat(<span class="string">&#x27;select count(1) into @tmp_total from (&#x27;</span>, i_query, <span class="string">&#x27;) t &#x27;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">prepare</span> stmt_query <span class="keyword">from</span> <span class="variable">@tmp_query</span>;</span><br><span class="line">    <span class="keyword">execute</span> stmt_query <span class="keyword">using</span> <span class="variable">@limit_start</span>, <span class="variable">@limit_size</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">prepare</span> stmt_count <span class="keyword">from</span> <span class="variable">@tmp_stat</span>;</span><br><span class="line">    <span class="keyword">execute</span> stmt_count;</span><br><span class="line">    <span class="keyword">set</span> o_total <span class="operator">=</span> <span class="variable">@tmp_total</span>;</span><br><span class="line">  <span class="keyword">end</span>;</span><br></pre></td></tr></table></figure>
+
+<p>参照之前写的 Oracle 版的分页，思路是一样的；比较坑的是从括号里传的变量前面不加@，在拼接SQL的时候需要另外定义变量才能使用 select count(1) into 。</p>
+<p><code>show VARIABLES like &#39;%max_allowed_packet%&#39;;</code> SQL长度限制，单位 byte.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Test</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        Class.forName(<span class="string">&quot;com.mysql.cj.jdbc.Driver&quot;</span>);</span><br><span class="line">        <span class="type">Connection</span> <span class="variable">connect</span> <span class="operator">=</span> DriverManager</span><br><span class="line">                .getConnection(<span class="string">&quot;jdbc:mysql://localhost:3306/mydb?&quot;</span></span><br><span class="line">                        + <span class="string">&quot;user=root&amp;password=password&quot;</span>);</span><br><span class="line">        <span class="type">int</span> <span class="variable">total</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="type">CallableStatement</span> <span class="variable">callableStatement</span> <span class="operator">=</span> connect.prepareCall(<span class="string">&quot;&#123;call pagination(?,?,?,?)&#125;&quot;</span>);</span><br><span class="line">        callableStatement.setString(<span class="number">1</span>, <span class="string">&quot;select * from tbl_user order by id desc&quot;</span>);</span><br><span class="line">        callableStatement.setInt(<span class="number">2</span>, <span class="number">1</span>);</span><br><span class="line">        callableStatement.setInt(<span class="number">3</span>, <span class="number">6</span>);</span><br><span class="line">        callableStatement.registerOutParameter(<span class="number">4</span>, MysqlType.INT);</span><br><span class="line">        <span class="type">ResultSet</span> <span class="variable">resultSet</span> <span class="operator">=</span> callableStatement.executeQuery();</span><br><span class="line">        total = callableStatement.getInt(<span class="number">4</span>);</span><br><span class="line">        System.out.println(<span class="string">&quot;total = &quot;</span> + total);</span><br><span class="line">        <span class="keyword">while</span> (resultSet.next()) &#123;</span><br><span class="line">            System.out.println(resultSet.getInt(<span class="string">&quot;id&quot;</span>) + <span class="string">&quot;, &quot;</span> + resultSet.getString(<span class="string">&quot;name&quot;</span>));</span><br><span class="line">        &#125;</span><br><span class="line">        connect.close();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure> 
+    </div>
+
+    <footer class="article-footer">
+      <!-- <a data-url="https://carl-zk.github.io/blog/2018/09/23/MySQL-%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B%E5%88%86%E9%A1%B5/" data-id="clwbvux4u003964od3hejggin" class="article-share-link">分享</a> -->
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/MySQL/" rel="tag">MySQL</a></li></ul>
+ 
+      <div id="gitalk-container"></div>
+       
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+
+
+<script src="/blog/js/md5.min.js"></script>
+
+
+ <script type="text/javascript" defer>
+      function genId() {
+        var title = document.querySelector('article div.article-meta a').pathname
+        if(title == null) {
+            title = location.pathname
+        }
+        return title
+      } 
+      var gitalk = new Gitalk({
+        clientID: '4cb6744ec422e72a39bf',
+        clientSecret: 'd0243116135375ff3b8db348dea02bc5ac88b6e3',
+        repo: 'gitalk',
+        owner: 'carl-zk',
+        admin: ['carl-zk'],
+        id: md5(genId()),
+        labels: ['Gitalk'],
+        perPage: 15,
+        pagerDirection: 'last',
+        createIssueManually: false,
+        distractionFreeMode: false
+      })
+      gitalk.render("gitalk-container")
+
+</script>
+
+
+
+
+
+ 
+    </footer>
+  </div>
+    
+<nav id="article-nav">
+  
+    <a href="/blog/2018/10/10/elasticsearch/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          Elasticsearch
+        
+      </div>
+    </a>
+  
+  
+    <a href="/blog/2018/09/14/mysql-%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">Mysql 中文乱码</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+</section>
+           
+    <aside id="sidebar">
+  
+    
+
+  
+    
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title recent-posts">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/blog/2024/05/19/windows/">Windows</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2023/12/17/spring-cloud-%E9%85%8D%E7%BD%AE%E5%8A%A0%E5%AF%86%E5%AD%97%E6%AE%B5/">Spring Cloud 配置加密字段</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2023/12/15/spring-boot-%E5%90%AF%E5%8A%A8%E8%BF%87%E7%A8%8B/">Spring Boot 启动过程</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2022/04/25/Design-Underground-System/">Design Underground System</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2022/04/25/Encode-and-Decode-TinyURL/">Encode and Decode TinyURL</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+
+  
+    
+  
+    <!--微信公众号二维码-->
+
+
+  
+</aside>
+
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-left">
+      &copy; 2016 - 2024 carl-zk<!--&nbsp;|&nbsp;
+      主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a> -->
+    </div>
+  
+     <div id="footer-right">
+      <!--联系方式&nbsp;|&nbsp; -->
+      富强民主文明和谐自由平等公正法治爱国敬业诚信友善
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/blog/" class="mobile-nav-link">首页</a>
+  
+    <a href="/blog/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/blog/about" class="mobile-nav-link">关于</a>
+  
+</nav>
+    <img class="back-to-top-btn" src="/blog/images/fly-to-top.png"/>
+<script>
+// Elevator script included on the page, already.
+window.onload = function() {
+  var elevator = new Elevator({
+    selector:'.back-to-top-btn',
+    element: document.querySelector('.back-to-top-btn'),
+    duration: 1000 // milliseconds
+  });
+}
+</script>
+    
+
+<script src="/blog/js/is.js"></script>
+
+
+
+  
+<script src="/blog/jquery/jquery.min.js"></script>
+
+  
+<link rel="stylesheet" href="/blog/fancybox/jquery.fancybox.css">
+
+  
+<script src="/blog/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/mermaid/7.1.2/mermaid.min.js'></script>
+  <!-- script src="/blog/js/mermaid.min.js" -->
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({theme: 'forest'});
+    }
+  </script>
+
+
+<script src="/blog/js/script.js"></script>
+
+
+<script src="/blog/js/elevator.js"></script>
+
+  </div>
+</body>
+</html>

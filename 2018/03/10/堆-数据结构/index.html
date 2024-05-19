@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>堆(数据结构) | 一叶轻舟渡万江</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="上一篇博客中用到了优先队列，它的内部是用堆实现的，这篇就来回忆一下堆是怎么实现的。堆是一棵完全二叉树，即数字0，1，2……代表节点的下标，即一维数组中元素的位置。第k个节点的左右子节点分别是：  2*k + 1    左孩子 2*k + 2    右孩子  第n个节点的父节点是：  (n - 1) &#x2F; 2  因为堆是一棵完全二叉树，所以插入和删除一个节点，维护的成本都是O(logn)。如">
+<meta property="og:type" content="article">
+<meta property="og:title" content="堆(数据结构)">
+<meta property="og:url" content="https://carl-zk.github.io/blog/2018/03/10/%E5%A0%86-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/index.html">
+<meta property="og:site_name" content="一叶轻舟渡万江">
+<meta property="og:description" content="上一篇博客中用到了优先队列，它的内部是用堆实现的，这篇就来回忆一下堆是怎么实现的。堆是一棵完全二叉树，即数字0，1，2……代表节点的下标，即一维数组中元素的位置。第k个节点的左右子节点分别是：  2*k + 1    左孩子 2*k + 2    右孩子  第n个节点的父节点是：  (n - 1) &#x2F; 2  因为堆是一棵完全二叉树，所以插入和删除一个节点，维护的成本都是O(logn)。如">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://carl-zk.github.io/blog/blog/2018/03/10/%E5%A0%86-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/bintree.svg">
+<meta property="article:published_time" content="2018-03-10T13:46:15.000Z">
+<meta property="article:modified_time" content="2024-05-18T08:19:43.196Z">
+<meta property="article:author" content="carl-zk">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://carl-zk.github.io/blog/blog/2018/03/10/%E5%A0%86-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/bintree.svg">
+  
+    <link rel="alternate" href="/blog/atom.xml" title="一叶轻舟渡万江" type="application/atom+xml">
+  
+  
+  
+    
+  
+  
+<link rel="stylesheet" href="/blog/css/style.css">
+
+  
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-92800981-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-92800981-2');
+</script>
+
+
+
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    
+    <div id="header-inner" class="inner">
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/blog/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://carl-zk.github.io/blog"></form>
+      </div>
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/blog/">首页</a>
+        
+          <a class="main-nav-link" href="/blog/archives">归档</a>
+        
+          <a class="main-nav-link" href="/blog/about">关于</a>
+        
+      </nav>
+      
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/blog/" id="logo">一叶轻舟渡万江</a>
+      </h1>
+      
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article
+  id="post-堆-数据结构"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+>
+
+  <div class="article-meta">
+    <a href="/blog/2018/03/10/%E5%A0%86-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" class="article-date">
+  <time datetime="2018-03-10T13:46:15.000Z" itemprop="datePublished">2018-03-10</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+     
+    <header class="article-header">
+      
+  
+    <h1 class="article-title" itemprop="name">
+      堆(数据结构)
+    </h1>
+  
+
+    </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      <!-- Table of Contents -->
+       <p>上一篇博客中用到了优先队列，它的内部是用堆实现的，这篇就来回忆一下堆是怎么实现的。<br>堆是一棵<a target="_blank" rel="noopener" href="https://baike.baidu.com/link?url=VXtjCF0qfzxdQNguCXoD888GiGKL_E9kKTRIfYr2RSHWJ2BxEx1aFbOzSfofPk4ZkBqva2Ag18E48EqUVfUXCbvn8qJolkJ2dEI0HLa67vRxMkg7s4I_Z1lqtijaZQWbslBx1W0wwiDhtxtYtA20Sa">完全二叉树</a>，即<br><img src="/blog/blog/2018/03/10/%E5%A0%86-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/bintree.svg" alt="完全二叉树" loading="lazy"><br>数字0，1，2……代表节点的下标，即一维数组中元素的位置。<br>第k个节点的左右子节点分别是：</p>
+<ul>
+<li>2*k + 1    左孩子</li>
+<li>2*k + 2    右孩子</li>
+</ul>
+<p>第n个节点的父节点是：</p>
+<ul>
+<li>(n - 1) &#x2F; 2</li>
+</ul>
+<p>因为堆是一棵完全二叉树，所以插入和删除一个节点，维护的成本都是O(logn)。<br>如果这是个最小堆，即顶点元素的值最小，<br>插入时：<br>将节点插入到数组末尾n，然后与它的父节点m&#x3D;parent(n)比较，如果值比父节点小，则交换，继续从m向上比较。<br>删除时：<br>交换顶点元素heap[0]和末尾元素heap[n]，然后从顶点向下比较，直到父节点比子节点都小结束。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> structure;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> hero</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Heap</span>&lt;E <span class="keyword">extends</span> <span class="title class_">Comparable</span>&lt;E&gt;&gt; &#123;</span><br><span class="line">    <span class="keyword">private</span> Object[] heap;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> size;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">r</span> <span class="operator">=</span> <span class="number">10000000</span>;    <span class="comment">//-Xms2048m,-Xmx2048m</span></span><br><span class="line">        <span class="type">long</span> <span class="variable">start</span> <span class="operator">=</span> System.currentTimeMillis();</span><br><span class="line">        test0(r);</span><br><span class="line">        <span class="type">long</span> <span class="variable">end</span> <span class="operator">=</span> System.currentTimeMillis();</span><br><span class="line">        System.out.println(end - start);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">test0</span><span class="params">(<span class="type">int</span> r)</span> &#123;</span><br><span class="line">        Heap&lt;Integer&gt; heap = <span class="keyword">new</span> <span class="title class_">Heap</span>&lt;&gt;(r);</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> r; i &gt; <span class="number">0</span>; i--) &#123;</span><br><span class="line">            heap.add(i);</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(<span class="string">&quot;length: &quot;</span> + heap.heap.length);</span><br><span class="line">        <span class="keyword">while</span> (heap.isNotEmpty()) &#123;</span><br><span class="line">            <span class="comment">//System.out.println(heap.peak());</span></span><br><span class="line">            heap.peak();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Heap</span><span class="params">()</span> &#123;</span><br><span class="line">        heap = <span class="keyword">new</span> <span class="title class_">Object</span>[<span class="number">32</span>];</span><br><span class="line">        size = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Heap</span><span class="params">(<span class="type">int</span> capacity)</span> &#123;</span><br><span class="line">        heap = <span class="keyword">new</span> <span class="title class_">Object</span>[capacity];</span><br><span class="line">        size = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> E <span class="title function_">peak</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (size &gt; <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="type">Object</span> <span class="variable">o</span> <span class="operator">=</span> heap[<span class="number">0</span>];</span><br><span class="line">            heap[<span class="number">0</span>] = heap[size - <span class="number">1</span>];</span><br><span class="line">            size = size - <span class="number">1</span>;</span><br><span class="line">            siftDown(<span class="number">0</span>);</span><br><span class="line">            <span class="keyword">return</span> (E) o;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">add</span><span class="params">(E e)</span> &#123;</span><br><span class="line">        resizeIfNeed();</span><br><span class="line">        heap[size] = e;</span><br><span class="line">        size = size + <span class="number">1</span>;</span><br><span class="line">        siftUp(size - <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">isNotEmpty</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> size &gt; <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">resizeIfNeed</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (size == heap.length) &#123;</span><br><span class="line">            <span class="type">int</span> <span class="variable">capacity</span> <span class="operator">=</span> heap.length + (heap.length &gt;&gt; <span class="number">1</span>);</span><br><span class="line">            Object[] extend = <span class="keyword">new</span> <span class="title class_">Object</span>[capacity];</span><br><span class="line">            System.arraycopy(heap, <span class="number">0</span>, extend, <span class="number">0</span>, size);</span><br><span class="line">            heap = extend;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">siftUp</span><span class="params">(<span class="type">int</span> i)</span> &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> parent(i); j &gt;= <span class="number">0</span>; j = parent(i)) &#123;</span><br><span class="line">            <span class="keyword">if</span> (bigger(j, i)) &#123;</span><br><span class="line">                swap(j, i);</span><br><span class="line">                i = j;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">siftDown</span><span class="params">(<span class="type">int</span> i)</span> &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">ls</span> <span class="operator">=</span> leftSon(i), rs = ls + <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span> (rs &lt; size &amp;&amp; bigger(ls, rs)) &#123;</span><br><span class="line">            <span class="keyword">if</span> (bigger(i, rs)) &#123;</span><br><span class="line">                swap(i, rs);</span><br><span class="line">                siftDown(rs);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (ls &lt; size &amp;&amp; bigger(i, ls)) &#123;</span><br><span class="line">            swap(i, ls);</span><br><span class="line">            siftDown(ls);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> <span class="title function_">parent</span><span class="params">(<span class="type">int</span> i)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> (i - <span class="number">1</span>) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> <span class="title function_">leftSon</span><span class="params">(<span class="type">int</span> i)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> (i &lt;&lt; <span class="number">1</span>) + <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">swap</span><span class="params">(<span class="type">int</span> i, <span class="type">int</span> j)</span> &#123;</span><br><span class="line">        <span class="type">Object</span> <span class="variable">o</span> <span class="operator">=</span> heap[j];</span><br><span class="line">        heap[j] = heap[i];</span><br><span class="line">        heap[i] = o;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="type">boolean</span> <span class="title function_">bigger</span><span class="params">(<span class="type">int</span> i, <span class="type">int</span> j)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> ((E) heap[i]).compareTo((E) heap[j]) &gt; <span class="number">0</span> ? <span class="literal">true</span> : <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>一个int有4个字节，1KB&#x3D;2^8个int，那 1GB&#x3D;2^10*2^10*2^8&#x3D;2^28&#x3D;268435456(int)，PriorityQueue的最大长度为(Integer.MAX_VALUE-8),即((1&lt;&lt;31)-1)-8&#x3D;2147483639，看来是我多虑了，2亿的数组其实不算什么，业务量真有那么大，应该会有更好的处理方法。<br>如果想要Integer.MAX_VALUE*2的数组怎么办，只能用Unsafe去直接内存申请了，这部分内存不受GC影响，不受JVM限制，需要自己释放。一般是不建议使用，即便你觉得它很有用。</p>
+ 
+    </div>
+
+    <footer class="article-footer">
+      <!-- <a data-url="https://carl-zk.github.io/blog/2018/03/10/%E5%A0%86-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" data-id="clwbvux5h008g64od7yxm4bcc" class="article-share-link">分享</a> -->
+       
+      <div id="gitalk-container"></div>
+       
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+
+
+<script src="/blog/js/md5.min.js"></script>
+
+
+ <script type="text/javascript" defer>
+      function genId() {
+        var title = document.querySelector('article div.article-meta a').pathname
+        if(title == null) {
+            title = location.pathname
+        }
+        return title
+      } 
+      var gitalk = new Gitalk({
+        clientID: '4cb6744ec422e72a39bf',
+        clientSecret: 'd0243116135375ff3b8db348dea02bc5ac88b6e3',
+        repo: 'gitalk',
+        owner: 'carl-zk',
+        admin: ['carl-zk'],
+        id: md5(genId()),
+        labels: ['Gitalk'],
+        perPage: 15,
+        pagerDirection: 'last',
+        createIssueManually: false,
+        distractionFreeMode: false
+      })
+      gitalk.render("gitalk-container")
+
+</script>
+
+
+
+
+
+ 
+    </footer>
+  </div>
+    
+<nav id="article-nav">
+  
+    <a href="/blog/2018/03/11/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          快速排序
+        
+      </div>
+    </a>
+  
+  
+    <a href="/blog/2018/03/08/%E8%B6%85%E6%97%B630%E5%88%86%E9%92%9F%E8%87%AA%E5%8A%A8%E5%8F%96%E6%B6%88%E8%AE%A2%E5%8D%95/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">超时30分钟自动取消订单</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+</section>
+           
+    <aside id="sidebar">
+  
+    
+
+  
+    
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title recent-posts">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/blog/2024/05/19/windows/">Windows</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2023/12/17/spring-cloud-%E9%85%8D%E7%BD%AE%E5%8A%A0%E5%AF%86%E5%AD%97%E6%AE%B5/">Spring Cloud 配置加密字段</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2023/12/15/spring-boot-%E5%90%AF%E5%8A%A8%E8%BF%87%E7%A8%8B/">Spring Boot 启动过程</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2022/04/25/Design-Underground-System/">Design Underground System</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2022/04/25/Encode-and-Decode-TinyURL/">Encode and Decode TinyURL</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+
+  
+    
+  
+    <!--微信公众号二维码-->
+
+
+  
+</aside>
+
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-left">
+      &copy; 2016 - 2024 carl-zk<!--&nbsp;|&nbsp;
+      主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a> -->
+    </div>
+  
+     <div id="footer-right">
+      <!--联系方式&nbsp;|&nbsp; -->
+      富强民主文明和谐自由平等公正法治爱国敬业诚信友善
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/blog/" class="mobile-nav-link">首页</a>
+  
+    <a href="/blog/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/blog/about" class="mobile-nav-link">关于</a>
+  
+</nav>
+    <img class="back-to-top-btn" src="/blog/images/fly-to-top.png"/>
+<script>
+// Elevator script included on the page, already.
+window.onload = function() {
+  var elevator = new Elevator({
+    selector:'.back-to-top-btn',
+    element: document.querySelector('.back-to-top-btn'),
+    duration: 1000 // milliseconds
+  });
+}
+</script>
+    
+
+<script src="/blog/js/is.js"></script>
+
+
+
+  
+<script src="/blog/jquery/jquery.min.js"></script>
+
+  
+<link rel="stylesheet" href="/blog/fancybox/jquery.fancybox.css">
+
+  
+<script src="/blog/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/mermaid/7.1.2/mermaid.min.js'></script>
+  <!-- script src="/blog/js/mermaid.min.js" -->
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({theme: 'forest'});
+    }
+  </script>
+
+
+<script src="/blog/js/script.js"></script>
+
+
+<script src="/blog/js/elevator.js"></script>
+
+  </div>
+</body>
+</html>

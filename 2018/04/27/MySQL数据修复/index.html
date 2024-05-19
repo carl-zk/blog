@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>MySQL数据修复 | 一叶轻舟渡万江</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="A、B数据库使用otter实时同步，但是有数据不一致情况，需要做数据修复。因为没有找到合适的工具，所以自己写了些脚本来做处理，配合人工检查和过滤，99.9%的数据得以修复。  思路： 以A、B中的同一张表t举例，首先拿到 A.t 和 B.t 的INSERT语句，提取ID相同的不同数据； 拼接update语句：a. ID为奇数，取A.t中的数据；b. ID为偶数，取B.t中的数据； 在A、B中执行">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MySQL数据修复">
+<meta property="og:url" content="https://carl-zk.github.io/blog/2018/04/27/MySQL%E6%95%B0%E6%8D%AE%E4%BF%AE%E5%A4%8D/index.html">
+<meta property="og:site_name" content="一叶轻舟渡万江">
+<meta property="og:description" content="A、B数据库使用otter实时同步，但是有数据不一致情况，需要做数据修复。因为没有找到合适的工具，所以自己写了些脚本来做处理，配合人工检查和过滤，99.9%的数据得以修复。  思路： 以A、B中的同一张表t举例，首先拿到 A.t 和 B.t 的INSERT语句，提取ID相同的不同数据； 拼接update语句：a. ID为奇数，取A.t中的数据；b. ID为偶数，取B.t中的数据； 在A、B中执行">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2018-04-27T14:43:44.000Z">
+<meta property="article:modified_time" content="2024-05-18T08:19:43.157Z">
+<meta property="article:author" content="carl-zk">
+<meta property="article:tag" content="shell">
+<meta property="article:tag" content="MySQL">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/blog/atom.xml" title="一叶轻舟渡万江" type="application/atom+xml">
+  
+  
+  
+    
+  
+  
+<link rel="stylesheet" href="/blog/css/style.css">
+
+  
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-92800981-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-92800981-2');
+</script>
+
+
+
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    
+    <div id="header-inner" class="inner">
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/blog/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://carl-zk.github.io/blog"></form>
+      </div>
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/blog/">首页</a>
+        
+          <a class="main-nav-link" href="/blog/archives">归档</a>
+        
+          <a class="main-nav-link" href="/blog/about">关于</a>
+        
+      </nav>
+      
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/blog/" id="logo">一叶轻舟渡万江</a>
+      </h1>
+      
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article
+  id="post-MySQL数据修复"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+>
+
+  <div class="article-meta">
+    <a href="/blog/2018/04/27/MySQL%E6%95%B0%E6%8D%AE%E4%BF%AE%E5%A4%8D/" class="article-date">
+  <time datetime="2018-04-27T14:43:44.000Z" itemprop="datePublished">2018-04-27</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+     
+    <header class="article-header">
+      
+  
+    <h1 class="article-title" itemprop="name">
+      MySQL数据修复
+    </h1>
+  
+
+    </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      <!-- Table of Contents -->
+       <blockquote>
+<p>A、B数据库使用otter实时同步，但是有数据不一致情况，需要做数据修复。<br>因为没有找到合适的工具，所以自己写了些脚本来做处理，配合人工检查和过滤，99.9%的数据得以修复。</p>
+</blockquote>
+<h2 id="思路："><a href="#思路：" class="headerlink" title="思路："></a>思路：</h2><ol>
+<li>以A、B中的同一张表t举例，首先拿到 A.t 和 B.t 的INSERT语句，提取ID相同的不同数据；</li>
+<li>拼接update语句：<br>a. ID为奇数，取A.t中的数据；<br>b. ID为偶数，取B.t中的数据；</li>
+<li>在A、B中执行此update即可。</li>
+</ol>
+<p>具体实现与思路不一致，下面是具体实现。</p>
+<h2 id="第一步，找不同"><a href="#第一步，找不同" class="headerlink" title="第一步，找不同"></a>第一步，找不同</h2><ol>
+<li>取表名；</li>
+<li>导出每张表，提取数据，每行一条；</li>
+<li>比较出两个库不同的部分；<br>统计结果在stat.txt中，只包含ID相同value不同的情况。</li>
+</ol>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="comment">## 统计不同数据的表，分析</span></span><br><span class="line"></span><br><span class="line">. /Users/hero/.zshrc</span><br><span class="line"></span><br><span class="line"><span class="comment">#1.取表名</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;step 1 : 取表名&quot;</span></span><br><span class="line"><span class="built_in">echo</span> `mysql -uroot -ppasswd -hlocalhost &lt;&lt; <span class="string">EOF</span></span><br><span class="line"><span class="string">use shanghai;</span></span><br><span class="line"><span class="string">SELECT table_name FROM information_schema.tables where table_schema=&#x27;shanghai&#x27; and table_name like &#x27;nh%&#x27; and table_name not like &#x27;%_reference&#x27;;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">EOF</span>` &gt; tables.txt</span><br><span class="line">sed -E -e <span class="string">&#x27;s/\t/ /g&#x27;</span> -e <span class="string">&#x27;s/ +/\n/g&#x27;</span> tables.txt | <span class="built_in">tail</span> -n +2 &gt; alltables</span><br><span class="line"><span class="built_in">rm</span> tables.txt</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> `<span class="built_in">cat</span> alltables`;<span class="keyword">do</span></span><br><span class="line">  <span class="built_in">echo</span> <span class="variable">$i</span></span><br><span class="line"><span class="keyword">done</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#2.提取diff</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&#x27;step 2 : 提取diff&#x27;</span></span><br><span class="line"><span class="comment">#from</span></span><br><span class="line">url_from=localhost</span><br><span class="line">user_from=root</span><br><span class="line">password_from=passwd</span><br><span class="line">schema_from=shanghai</span><br><span class="line"><span class="comment">#to</span></span><br><span class="line">url_to=localhost</span><br><span class="line">user_to=root</span><br><span class="line">password_to=passwd</span><br><span class="line">schema_to=hongkong</span><br><span class="line"></span><br><span class="line"><span class="built_in">rm</span> -rf from</span><br><span class="line"><span class="built_in">mkdir</span> from</span><br><span class="line"><span class="built_in">rm</span> -rf to</span><br><span class="line"><span class="built_in">mkdir</span> to</span><br><span class="line"><span class="built_in">rm</span> -rf diff</span><br><span class="line"><span class="built_in">mkdir</span> diff</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> `<span class="built_in">cat</span> alltables`; <span class="keyword">do</span></span><br><span class="line">  <span class="built_in">echo</span> <span class="string">&quot;`date &#x27;+%H:%M:%S&#x27;` compare table ---&gt; &quot;</span><span class="variable">$i</span><span class="string">&quot;\n&quot;</span></span><br><span class="line">  mysqldump -h<span class="variable">$url_from</span> -u<span class="variable">$user_from</span> -p<span class="variable">$password_from</span> --single-transaction <span class="variable">$schema_from</span> <span class="variable">$i</span> -r from/<span class="variable">$&#123;i&#125;</span></span><br><span class="line">  mysqldump -h<span class="variable">$url_to</span> -u<span class="variable">$user_to</span> -p<span class="variable">$password_to</span> --single-transaction <span class="variable">$schema_to</span> <span class="variable">$i</span> -r to/<span class="variable">$&#123;i&#125;</span></span><br><span class="line">  grep <span class="string">&quot;^INSERT&quot;</span> from/<span class="variable">$&#123;i&#125;</span> | sed -e <span class="string">&#x27;s/INSERT.*VALUES //g&#x27;</span> -e <span class="string">&#x27;s/),/)\n/g&#x27;</span> -e <span class="string">&#x27;s/);/)\n/g&#x27;</span> &gt; from/<span class="variable">$&#123;i&#125;</span>.ok</span><br><span class="line">  grep <span class="string">&quot;^INSERT&quot;</span> to/<span class="variable">$&#123;i&#125;</span> | sed -e <span class="string">&#x27;s/INSERT.*VALUES //g&#x27;</span> -e <span class="string">&#x27;s/),/)\n/g&#x27;</span> -e <span class="string">&#x27;s/);/)\n/g&#x27;</span> &gt; to/<span class="variable">$&#123;i&#125;</span>.ok</span><br><span class="line">  diff from/<span class="variable">$&#123;i&#125;</span>.ok to/<span class="variable">$&#123;i&#125;</span>.ok &gt; diff/<span class="variable">$i</span></span><br><span class="line"><span class="keyword">done</span></span><br><span class="line">find diff/ -empty -delete</span><br><span class="line"></span><br><span class="line"><span class="comment">#3.统计</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&#x27;统计&#x27;</span></span><br><span class="line">FILE=stat.txt</span><br><span class="line">TMP=stat.txt.tmp</span><br><span class="line">&gt;<span class="variable">$FILE</span></span><br><span class="line">&gt;<span class="variable">$TMP</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> `<span class="built_in">ls</span> diff/`; <span class="keyword">do</span></span><br><span class="line">  sh=`grep <span class="string">&#x27;^&lt;&#x27;</span> diff/<span class="variable">$i</span> | <span class="built_in">wc</span> -l`</span><br><span class="line">  ho=`grep <span class="string">&#x27;^&gt;&#x27;</span> diff/<span class="variable">$i</span> | <span class="built_in">wc</span> -l`</span><br><span class="line">  <span class="built_in">echo</span> <span class="variable">$i</span> <span class="variable">$sh</span> <span class="variable">$ho</span> &gt;&gt; <span class="variable">$TMP</span></span><br><span class="line"><span class="keyword">done</span></span><br><span class="line"><span class="built_in">sort</span> -n -k 2 <span class="variable">$TMP</span> &gt; <span class="variable">$FILE</span></span><br><span class="line"><span class="built_in">rm</span> <span class="variable">$TMP</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&#x27;统计结果：stat.txt&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">mv</span> stat.txt stat.txt.old</span><br><span class="line"><span class="built_in">cp</span> stat.txt.old stat.txt.`<span class="built_in">date</span> +%Y%m%d%H%M%S`</span><br><span class="line"></span><br><span class="line">awk -F <span class="string">&#x27;[ ]&#x27;</span> <span class="string">&#x27;&#123;if($2==$3)printf(&quot;%s\n&quot;, $0)&#125;&#x27;</span> stat.txt.old &gt;&gt; stat.txt</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="第二步，根据ID奇偶取数"><a href="#第二步，根据ID奇偶取数" class="headerlink" title="第二步，根据ID奇偶取数"></a>第二步，根据ID奇偶取数</h2><p>在取ID的时候有一个假设，即每个表的ID都是第一个字段。<br>这样有个问题，ID不在第一个的表无法拿到它的ID；不过问题不大，因为我会对batch.sql做筛选。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="comment">## 根据id奇偶性获取不同数据表的insert语句</span></span><br><span class="line">LOG=<span class="built_in">log</span></span><br><span class="line">&gt;<span class="variable">$LOG</span></span><br><span class="line"><span class="built_in">exec</span> 1&gt;&gt;<span class="variable">$LOG</span> 2&gt;&amp;1</span><br><span class="line"></span><br><span class="line"><span class="built_in">rm</span> -rf extr</span><br><span class="line"><span class="built_in">mkdir</span> extr</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> `<span class="built_in">ls</span> diff/`; <span class="keyword">do</span></span><br><span class="line">  grep <span class="string">&#x27;^&gt;&#x27;</span> diff/<span class="variable">$i</span> &gt; extr/<span class="variable">$i</span></span><br><span class="line"><span class="keyword">done</span></span><br><span class="line">find extr/ -empty -delete</span><br><span class="line"></span><br><span class="line"><span class="built_in">rm</span> -rf ids</span><br><span class="line"><span class="built_in">mkdir</span> ids</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> `<span class="built_in">ls</span> extr/`; <span class="keyword">do</span></span><br><span class="line">  awk -F <span class="string">&#x27;[(,]&#x27;</span> <span class="string">&#x27;&#123;printf(&quot;%s\n&quot;, $2)&#125;&#x27;</span> extr/<span class="variable">$i</span> &gt; ids/<span class="variable">$&#123;i&#125;</span>.tmp</span><br><span class="line">  <span class="built_in">cat</span> ids/<span class="variable">$&#123;i&#125;</span>.tmp | grep -v <span class="string">&#x27;^$&#x27;</span> | <span class="built_in">sort</span> | <span class="built_in">uniq</span> &gt; ids/<span class="variable">$i</span></span><br><span class="line">  <span class="built_in">rm</span> ids/<span class="variable">$&#123;i&#125;</span>.tmp</span><br><span class="line"><span class="keyword">done</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 奇数 上海</span></span><br><span class="line">&gt;batch.sql</span><br><span class="line">SHANG=shanghai</span><br><span class="line">HONG=hongkong</span><br><span class="line"><span class="built_in">rm</span> -rf jiou</span><br><span class="line"><span class="built_in">mkdir</span> jiou</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> `<span class="built_in">ls</span> ids/`; <span class="keyword">do</span></span><br><span class="line">  <span class="keyword">while</span> <span class="built_in">read</span> <span class="built_in">id</span>; <span class="keyword">do</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;<span class="variable">$id</span> <span class="variable">$i</span>&quot;</span></span><br><span class="line">    <span class="keyword">if</span> (( (( <span class="variable">$id</span> % <span class="number">2</span> )) == 0 )); <span class="keyword">then</span></span><br><span class="line">     schema=<span class="variable">$HONG</span></span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">     schema=<span class="variable">$SHANG</span></span><br><span class="line">    <span class="keyword">fi</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;mysqldump -hlocalhost -uroot -ppasswd --single-transaction <span class="variable">$schema</span> <span class="variable">$i</span> --where=\&quot;id=<span class="variable">$id</span>\&quot; &gt;&gt; jiou/<span class="variable">$i</span>&quot;</span> &gt;&gt; batch.sql</span><br><span class="line">  <span class="keyword">done</span> &lt; ids/<span class="variable">$i</span></span><br><span class="line"><span class="keyword">done</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&#x27;get batch.sql&#x27;</span></span><br><span class="line"><span class="built_in">rm</span> -rf jiou</span><br><span class="line"><span class="built_in">mkdir</span> jiou</span><br><span class="line"> </span><br><span class="line"><span class="built_in">echo</span> <span class="string">&#x27;有问题的表：&#x27;</span></span><br><span class="line">grep -arl <span class="string">&quot;NULL&quot;</span> ids/</span><br><span class="line">grep <span class="string">&#x27;^NULL&#x27;</span> <span class="variable">$LOG</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&#x27;根据log筛选batch.sql, 然后执行 sh batch.sql&#x27;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><strong>一定要记得根据log对batch.sql做筛除，然后执行batch.sql，这样就拿到了根据ID的奇偶性获取的元数据</strong></p>
+<h2 id="第三步，insert、update、remove-tmp脚本"><a href="#第三步，insert、update、remove-tmp脚本" class="headerlink" title="第三步，insert、update、remove_tmp脚本"></a>第三步，insert、update、remove_tmp脚本</h2><p>对元数据处理，拿到insert语句。创建临时表xxx_tmp将数据插入临时表中，然后根据临时表来更新A(B)，最后删除临时表。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="comment"># 整理表结构</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">rm</span> -rf insert</span><br><span class="line"><span class="built_in">mkdir</span> insert</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> `<span class="built_in">ls</span> jiou/`; <span class="keyword">do</span></span><br><span class="line">  grep -aoE <span class="string">&#x27;INSERT .*);&#x27;</span> jiou/<span class="variable">$i</span> &gt; insert/<span class="variable">$i</span></span><br><span class="line"><span class="keyword">done</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="built_in">rm</span> -rf struct</span><br><span class="line"><span class="built_in">mkdir</span> struct</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> `<span class="built_in">ls</span> insert/`; <span class="keyword">do</span></span><br><span class="line"><span class="built_in">echo</span> `mysql -uroot -ppasswd -hlocalhost &lt;&lt;-<span class="string">EOF</span></span><br><span class="line"><span class="string">select column_name from information_schema.columns where table_schema=&#x27;hongkong&#x27; and table_name=&#x27;$i&#x27;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">EOF</span>` &gt; struct/<span class="variable">$i</span></span><br><span class="line">gsed -e <span class="string">&#x27;s/ /\n/g&#x27;</span> struct/<span class="variable">$i</span> | <span class="built_in">tail</span> -n +3 &gt; struct/<span class="variable">$&#123;i&#125;</span>.ok</span><br><span class="line"><span class="keyword">done</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&gt;update.sql</span><br><span class="line">&gt;insert.sql</span><br><span class="line">&gt;remove_tmp.sql</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> `<span class="built_in">ls</span> insert/`; <span class="keyword">do</span></span><br><span class="line"> <span class="built_in">echo</span> <span class="string">&quot;create table <span class="variable">$&#123;i&#125;</span>_tmp as select * from <span class="variable">$i</span> where 1!=1;&quot;</span> &gt;&gt; insert.sql</span><br><span class="line"> <span class="built_in">echo</span> <span class="string">&quot;drop table <span class="variable">$&#123;i&#125;</span>_tmp;&quot;</span> &gt;&gt; remove_tmp.sql</span><br><span class="line"> gsed -i <span class="string">&quot;s/<span class="variable">$&#123;i&#125;</span>/<span class="variable">$&#123;i&#125;</span>_tmp/g&quot;</span> insert/<span class="variable">$i</span></span><br><span class="line"> <span class="built_in">cat</span> insert/<span class="variable">$i</span> &gt;&gt; insert.sql</span><br><span class="line"> <span class="built_in">printf</span> %s <span class="string">&quot;update <span class="variable">$i</span> a, <span class="variable">$&#123;i&#125;</span>_tmp b set &quot;</span> &gt;&gt; update.sql</span><br><span class="line"> awk <span class="string">&#x27;&#123;printf(&quot;a.%s=b.%s,&quot;, $1, $1)&#125;&#x27;</span> struct/<span class="variable">$&#123;i&#125;</span>.ok &gt;&gt; update.sql</span><br><span class="line"> <span class="built_in">echo</span> <span class="string">&quot; where a.id=b.id;&quot;</span> &gt;&gt; update.sql</span><br><span class="line"><span class="keyword">done</span></span><br><span class="line">gsed -i <span class="string">&#x27;s/, where/ where/g&#x27;</span> update.sql</span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&#x27;执行insert.sql--&gt;update.sql---&gt;remove_tmp.sql&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;mysql -uroot -ppasswd --binary-mode=1 &lt; insert.sql&quot;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h2><p>新建一个子目录，然后执行第一个脚本，拿到stat.txt验证数据修复结果。</p>
+ 
+    </div>
+
+    <footer class="article-footer">
+      <!-- <a data-url="https://carl-zk.github.io/blog/2018/04/27/MySQL%E6%95%B0%E6%8D%AE%E4%BF%AE%E5%A4%8D/" data-id="clwbvux4u003c64od6uc8bp0m" class="article-share-link">分享</a> -->
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/MySQL/" rel="tag">MySQL</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/shell/" rel="tag">shell</a></li></ul>
+ 
+      <div id="gitalk-container"></div>
+       
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+
+
+<script src="/blog/js/md5.min.js"></script>
+
+
+ <script type="text/javascript" defer>
+      function genId() {
+        var title = document.querySelector('article div.article-meta a').pathname
+        if(title == null) {
+            title = location.pathname
+        }
+        return title
+      } 
+      var gitalk = new Gitalk({
+        clientID: '4cb6744ec422e72a39bf',
+        clientSecret: 'd0243116135375ff3b8db348dea02bc5ac88b6e3',
+        repo: 'gitalk',
+        owner: 'carl-zk',
+        admin: ['carl-zk'],
+        id: md5(genId()),
+        labels: ['Gitalk'],
+        perPage: 15,
+        pagerDirection: 'last',
+        createIssueManually: false,
+        distractionFreeMode: false
+      })
+      gitalk.render("gitalk-container")
+
+</script>
+
+
+
+
+
+ 
+    </footer>
+  </div>
+    
+<nav id="article-nav">
+  
+    <a href="/blog/2018/05/09/%E7%A5%9E%E5%99%A8%EF%BC%9A%E6%9F%A5class%E6%89%80%E5%9C%A8jar%E5%8C%85/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          神器：查Class所在jar包
+        
+      </div>
+    </a>
+  
+  
+    <a href="/blog/2018/04/26/redis/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">Redis</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+</section>
+           
+    <aside id="sidebar">
+  
+    
+
+  
+    
+    <div class="widget-wrap">
+    
+      <div class="widget" id="toc-widget-fixed">
+      
+        <strong class="toc-title">文章目录</strong>
+        <div class="toc-widget-list">
+              <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%9D%E8%B7%AF%EF%BC%9A"><span class="toc-number">1.</span> <span class="toc-text">思路：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E6%AD%A5%EF%BC%8C%E6%89%BE%E4%B8%8D%E5%90%8C"><span class="toc-number">2.</span> <span class="toc-text">第一步，找不同</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E6%AD%A5%EF%BC%8C%E6%A0%B9%E6%8D%AEID%E5%A5%87%E5%81%B6%E5%8F%96%E6%95%B0"><span class="toc-number">3.</span> <span class="toc-text">第二步，根据ID奇偶取数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%B8%89%E6%AD%A5%EF%BC%8Cinsert%E3%80%81update%E3%80%81remove-tmp%E8%84%9A%E6%9C%AC"><span class="toc-number">4.</span> <span class="toc-text">第三步，insert、update、remove_tmp脚本</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%AA%8C%E8%AF%81"><span class="toc-number">5.</span> <span class="toc-text">验证</span></a></li></ol>
+          </div>
+      </div>
+    </div>
+
+  
+    
+
+  
+    
+  
+    
+  
+    
+
+  
+    
+  
+    <!--微信公众号二维码-->
+
+
+  
+</aside>
+
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-left">
+      &copy; 2016 - 2024 carl-zk<!--&nbsp;|&nbsp;
+      主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a> -->
+    </div>
+  
+     <div id="footer-right">
+      <!--联系方式&nbsp;|&nbsp; -->
+      富强民主文明和谐自由平等公正法治爱国敬业诚信友善
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/blog/" class="mobile-nav-link">首页</a>
+  
+    <a href="/blog/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/blog/about" class="mobile-nav-link">关于</a>
+  
+</nav>
+    <img class="back-to-top-btn" src="/blog/images/fly-to-top.png"/>
+<script>
+// Elevator script included on the page, already.
+window.onload = function() {
+  var elevator = new Elevator({
+    selector:'.back-to-top-btn',
+    element: document.querySelector('.back-to-top-btn'),
+    duration: 1000 // milliseconds
+  });
+}
+</script>
+    
+
+<script src="/blog/js/is.js"></script>
+
+
+
+  
+<script src="/blog/jquery/jquery.min.js"></script>
+
+  
+<link rel="stylesheet" href="/blog/fancybox/jquery.fancybox.css">
+
+  
+<script src="/blog/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/mermaid/7.1.2/mermaid.min.js'></script>
+  <!-- script src="/blog/js/mermaid.min.js" -->
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({theme: 'forest'});
+    }
+  </script>
+
+
+<script src="/blog/js/script.js"></script>
+
+
+<script src="/blog/js/elevator.js"></script>
+
+  </div>
+</body>
+</html>

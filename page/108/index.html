@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>一叶轻舟渡万江</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="一叶轻舟渡万江">
+<meta property="og:url" content="https://carl-zk.github.io/blog/page/108/index.html">
+<meta property="og:site_name" content="一叶轻舟渡万江">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="carl-zk">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/blog/atom.xml" title="一叶轻舟渡万江" type="application/atom+xml">
+  
+  
+  
+    
+  
+  
+<link rel="stylesheet" href="/blog/css/style.css">
+
+  
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-92800981-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-92800981-2');
+</script>
+
+
+
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    
+    <div id="header-inner" class="inner">
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/blog/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://carl-zk.github.io/blog"></form>
+      </div>
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/blog/">首页</a>
+        
+          <a class="main-nav-link" href="/blog/archives">归档</a>
+        
+          <a class="main-nav-link" href="/blog/about">关于</a>
+        
+      </nav>
+      
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/blog/" id="logo">一叶轻舟渡万江</a>
+      </h1>
+      
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article
+  id="post-OFBiz-Learn"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+>
+
+  <div class="article-meta">
+    <a href="/blog/2017/03/04/OFBiz-Learn/" class="article-date">
+  <time datetime="2017-03-04T05:42:07.000Z" itemprop="datePublished">2017-03-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/OFBiz/">OFBiz</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+     
+    <header class="article-header">
+      
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2017/03/04/OFBiz-Learn/">OFBiz Learn</a>
+    </h1>
+  
+
+    </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      <!-- Table of Contents -->
+       <h1 id="初识OFBiz"><a href="#初识OFBiz" class="headerlink" title="初识OFBiz"></a>初识OFBiz</h1><p><a target="_blank" rel="noopener" href="https://ofbiz.apache.org/apache-ofbiz-project-overview.html">官网</a></p>
+<p>Open For Business(OFBiz) 是一个企业应用框架，类似于Spring，主要针对ERP、CRM系统。<br>OFBiz使用 <a target="_blank" rel="noopener" href="https://www.apache.org/licenses/LICENSE-2.0">Apache License Version 2.0协议</a>，你可以不公开你的代码。</p>
+<h1 id="Major-Application-Components"><a href="#Major-Application-Components" class="headerlink" title="Major Application Components"></a>Major Application Components</h1><h2 id="Common-Data"><a href="#Common-Data" class="headerlink" title="Common Data"></a>Common Data</h2><p>包括实体类等系统启动时加载的、一般很少变动的数据。</p>
+<h2 id="Content"><a href="#Content" class="headerlink" title="Content"></a>Content</h2><p>用于对数据的追踪。</p>
+<h2 id="Security"><a href="#Security" class="headerlink" title="Security"></a>Security</h2><p>访问控制。</p>
+<h2 id="Party"><a href="#Party" class="headerlink" title="Party"></a>Party</h2><p>可以是一个人，或一个Parties组。Party Group可以是一个公司，公司内部的一个机构，供应商或顾客等。<br>与Party相关的类型有</p>
+<ol>
+<li>Contact Mechanisms(地址，手机，邮箱，URL……)</li>
+<li>Roles(作为顾客，供应商，员工，经理，商人……)</li>
+<li>另一种可归为Party类的数据是Parties之间communication和agreement的信息。它可被Work Effort实体用来计划和追踪Parties之间的问题和解决方案。</li>
+</ol>
+<h2 id="Product"><a href="#Product" class="headerlink" title="Product"></a>Product</h2><p>公司出售或内部使用的商品，可以是goods或services</p>
+<h2 id="Order"><a href="#Order" class="headerlink" title="Order"></a>Order</h2><p>商品的排序。如顾客对一类商品的url请求，就会被Order package内的实体处理。</p>
+<h2 id="Facility"><a href="#Facility" class="headerlink" title="Facility"></a>Facility</h2><p>一座大楼或一个地理位置。</p>
+<h2 id="Shipment"><a href="#Shipment" class="headerlink" title="Shipment"></a>Shipment</h2><p>跟踪进出货和进出货清单。</p>
+<h2 id="Accounting"><a href="#Accounting" class="headerlink" title="Accounting"></a>Accounting</h2><p>记账。</p>
+<h2 id="Marketing"><a href="#Marketing" class="headerlink" title="Marketing"></a>Marketing</h2><p>市场信息。</p>
+<h2 id="Work-Effort"><a href="#Work-Effort" class="headerlink" title="Work Effort"></a>Work Effort</h2><p>可以是一个task，project，project phase，to-do item,Workflow Activity等。</p>
+<blockquote>
+<p>需要注意的是，OFBiz放弃了Workflow Engines，改用Event Driven Architecture(EDA)和ECAs(SECA,EECA,MECA)。ECA是Event Condition Action的缩写。SECAs用于Services，EECA用于Entity，MECAs用于Mail。</p>
+</blockquote>
+<h2 id="Human-Resources"><a href="#Human-Resources" class="headerlink" title="Human Resources"></a>Human Resources</h2><p>人力资源信息。</p>
+<p><img src="/blog/2017/03/04/OFBiz-Learn/ofbiz.png" alt="主要应用部件" loading="lazy"></p>
+<h1 id="Architecture-and-System-Organization"><a href="#Architecture-and-System-Organization" class="headerlink" title="Architecture and System Organization"></a>Architecture and System Organization</h1><h2 id="Entities-and-Services"><a href="#Entities-and-Services" class="headerlink" title="Entities and Services"></a>Entities and Services</h2><table>
+<thead>
+<tr>
+<th align="left">Entity</th>
+<th align="left">作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">basic entity</td>
+<td align="left">&amp;#124; 与数据库表对应</td>
+</tr>
+<tr>
+<td align="left">view-entity</td>
+<td align="left">&amp;#124; 组合实体类字段构成虚拟实体</td>
+</tr>
+</tbody></table>
+<p>使用Entity Engine可以省去写sql，可以不必维护大量的CRUD持久层类。取而代之的是相对少量的xml配置文件。<br>每个Service只负责简单的特定的任务，由ECA去调度，所以扩展时也不必改变原来的逻辑代码。</p>
+<h2 id="Web-Framework-and-XML-Mini-Languages"><a href="#Web-Framework-and-XML-Mini-Languages" class="headerlink" title="Web Framework and XML Mini-Languages"></a>Web Framework and XML Mini-Languages</h2><p>OFBiz Core Framework 提供了许多client-server、peer-to-peer框架，为了便于使用，所以推出一个‘XML Mini-Language’工具。</p>
+ 
+    </div>
+
+    <footer class="article-footer">
+      <!-- <a data-url="https://carl-zk.github.io/blog/2017/03/04/OFBiz-Learn/" data-id="clwbvux4v003e64od4fbla8a7" class="article-share-link">分享</a> -->
+       
+      <div id="gitalk-container"></div>
+       
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+
+
+<script src="/blog/js/md5.min.js"></script>
+
+
+ <script type="text/javascript" defer>
+      function genId() {
+        var title = document.querySelector('article div.article-meta a').pathname
+        if(title == null) {
+            title = location.pathname
+        }
+        return title
+      } 
+      var gitalk = new Gitalk({
+        clientID: '4cb6744ec422e72a39bf',
+        clientSecret: 'd0243116135375ff3b8db348dea02bc5ac88b6e3',
+        repo: 'gitalk',
+        owner: 'carl-zk',
+        admin: ['carl-zk'],
+        id: md5(genId()),
+        labels: ['Gitalk'],
+        perPage: 15,
+        pagerDirection: 'last',
+        createIssueManually: false,
+        distractionFreeMode: false
+      })
+      gitalk.render("gitalk-container")
+
+</script>
+
+
+
+
+
+ 
+    </footer>
+  </div>
+  
+</article>
+
+  
+
+
+  <nav id="page-nav">
+    <a class="extend prev" rel="prev" href="/blog/page/107/">&lt;&lt;上一页</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/106/">106</a><a class="page-number" href="/blog/page/107/">107</a><span class="page-number current">108</span><a class="page-number" href="/blog/page/109/">109</a><a class="page-number" href="/blog/page/110/">110</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/192/">192</a><a class="extend next" rel="next" href="/blog/page/109/">下一页&gt;&gt;</a>
+  </nav>
+
+</section>
+           
+    <aside id="sidebar">
+  
+    
+
+  
+    
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title recent-posts">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/blog/2024/05/19/windows/">Windows</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2023/12/17/spring-cloud-%E9%85%8D%E7%BD%AE%E5%8A%A0%E5%AF%86%E5%AD%97%E6%AE%B5/">Spring Cloud 配置加密字段</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2023/12/15/spring-boot-%E5%90%AF%E5%8A%A8%E8%BF%87%E7%A8%8B/">Spring Boot 启动过程</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2022/04/25/Design-Underground-System/">Design Underground System</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2022/04/25/Encode-and-Decode-TinyURL/">Encode and Decode TinyURL</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+
+  
+    
+  
+    <!--微信公众号二维码-->
+
+
+  
+</aside>
+
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-left">
+      &copy; 2016 - 2024 carl-zk<!--&nbsp;|&nbsp;
+      主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a> -->
+    </div>
+  
+     <div id="footer-right">
+      <!--联系方式&nbsp;|&nbsp; -->
+      富强民主文明和谐自由平等公正法治爱国敬业诚信友善
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/blog/" class="mobile-nav-link">首页</a>
+  
+    <a href="/blog/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/blog/about" class="mobile-nav-link">关于</a>
+  
+</nav>
+    <img class="back-to-top-btn" src="/blog/images/fly-to-top.png"/>
+<script>
+// Elevator script included on the page, already.
+window.onload = function() {
+  var elevator = new Elevator({
+    selector:'.back-to-top-btn',
+    element: document.querySelector('.back-to-top-btn'),
+    duration: 1000 // milliseconds
+  });
+}
+</script>
+    
+
+<script src="/blog/js/is.js"></script>
+
+
+
+  
+<script src="/blog/jquery/jquery.min.js"></script>
+
+  
+<link rel="stylesheet" href="/blog/fancybox/jquery.fancybox.css">
+
+  
+<script src="/blog/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/mermaid/7.1.2/mermaid.min.js'></script>
+  <!-- script src="/blog/js/mermaid.min.js" -->
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({theme: 'forest'});
+    }
+  </script>
+
+
+<script src="/blog/js/script.js"></script>
+
+
+<script src="/blog/js/elevator.js"></script>
+
+  </div>
+</body>
+</html>

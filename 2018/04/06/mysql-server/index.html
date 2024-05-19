@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Mysql Server | 一叶轻舟渡万江</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="忘记 root 密码 mysql server version : 5.7.9+  查找MySQL sever 安装位置sudo find &#x2F; -name “mysqld”  停服务ps -ef|grep mysqlsudo kill -9 pid1 pid2			 重启1mysqld_safe --skip-grant-tables &amp; 登录mysql -u root  重置密">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Mysql Server">
+<meta property="og:url" content="https://carl-zk.github.io/blog/2018/04/06/mysql-server/index.html">
+<meta property="og:site_name" content="一叶轻舟渡万江">
+<meta property="og:description" content="忘记 root 密码 mysql server version : 5.7.9+  查找MySQL sever 安装位置sudo find &#x2F; -name “mysqld”  停服务ps -ef|grep mysqlsudo kill -9 pid1 pid2			 重启1mysqld_safe --skip-grant-tables &amp; 登录mysql -u root  重置密">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2018-04-06T11:21:31.000Z">
+<meta property="article:modified_time" content="2024-05-18T08:19:43.166Z">
+<meta property="article:author" content="carl-zk">
+<meta property="article:tag" content="MySQL">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/blog/atom.xml" title="一叶轻舟渡万江" type="application/atom+xml">
+  
+  
+  
+    
+  
+  
+<link rel="stylesheet" href="/blog/css/style.css">
+
+  
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-92800981-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-92800981-2');
+</script>
+
+
+
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    
+    <div id="header-inner" class="inner">
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/blog/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://carl-zk.github.io/blog"></form>
+      </div>
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/blog/">首页</a>
+        
+          <a class="main-nav-link" href="/blog/archives">归档</a>
+        
+          <a class="main-nav-link" href="/blog/about">关于</a>
+        
+      </nav>
+      
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/blog/" id="logo">一叶轻舟渡万江</a>
+      </h1>
+      
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article
+  id="post-mysql-server"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+>
+
+  <div class="article-meta">
+    <a href="/blog/2018/04/06/mysql-server/" class="article-date">
+  <time datetime="2018-04-06T11:21:31.000Z" itemprop="datePublished">2018-04-06</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/%E7%B3%BB%E7%BB%9F%E9%85%8D%E7%BD%AE/">系统配置</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+     
+    <header class="article-header">
+      
+  
+    <h1 class="article-title" itemprop="name">
+      Mysql Server
+    </h1>
+  
+
+    </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      <!-- Table of Contents -->
+       <h4 id="忘记-root-密码"><a href="#忘记-root-密码" class="headerlink" title="忘记 root 密码"></a>忘记 root 密码</h4><blockquote>
+<p>mysql server version : 5.7.9+</p>
+</blockquote>
+<p>查找MySQL sever 安装位置<br>sudo find &#x2F; -name “mysqld”</p>
+<ol>
+<li>停服务<br>ps -ef|grep mysql<br>sudo kill -9 pid1 pid2			</li>
+<li>重启<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysqld_safe --skip-grant-tables &amp;</span><br></pre></td></tr></table></figure></li>
+<li>登录<br>mysql -u root </li>
+<li>重置密码<br>use mysql;<br>update user set authentication_string&#x3D;’password’, password_expired &#x3D; ‘N’ where User &#x3D;’root’ and Host&#x3D;’localhost’;<br>flush privileges;<br>exit;<br>停服务重新登录即可<br>sudo mysqld -uroot &amp;</li>
+</ol>
+<p>注意：Mac 上通过 System Preferences 启动的 server，其启动参数 -u 为 _mysql，在上述第2步之后，第3步改为<br>mysql -u _mysql<br>grant all privileges on <em>.</em> to ‘root‘@’%’ identified by ‘password’ with grant option;</p>
+<h4 id="数据迁移"><a href="#数据迁移" class="headerlink" title="数据迁移"></a>数据迁移</h4><h5 id="导出工具"><a href="#导出工具" class="headerlink" title="导出工具"></a>导出工具</h5><p><a target="_blank" rel="noopener" href="http://www.runoob.com/mysql/mysql-database-export.html">MySQL数据导出</a></p>
+<h6 id="mysqldump"><a href="#mysqldump" class="headerlink" title="mysqldump"></a>mysqldump</h6><ol>
+<li>导出 sql<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysqldump <span class="operator">-</span>hhost <span class="operator">-</span>uroot <span class="operator">-</span>ppassword <span class="comment">--single-transaction schema table -r </span></span><br><span class="line">dump.sql</span><br></pre></td></tr></table></figure>
+导入：<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mysql <span class="operator">-</span>uroot <span class="operator">-</span>p</span><br><span class="line"><span class="operator">&gt;</span>use databases;</span><br><span class="line"><span class="operator">&gt;</span>source <span class="operator">/</span>path<span class="operator">/</span><span class="keyword">to</span><span class="operator">/</span>dump.sql</span><br></pre></td></tr></table></figure></li>
+<li>导出 tab<br>mysqldump -hhost -uroot -ppassword –tab&#x3D;&#x2F;Users&#x2F;hero&#x2F;tmp –fields-terminated-by&#x3D;’^!’ –lines-terminated-by&#x3D;’\n’ –single-transaction schema table</li>
+</ol>
+<h5 id="比较工具"><a href="#比较工具" class="headerlink" title="比较工具"></a>比较工具</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysqldbcompare --server1=root:密码@IP:3306 --server2=root:passwd@ip:3306 --difftype=sql schema1:schema2</span><br></pre></td></tr></table></figure>
+<p> 如果schema含有非字母字符，<br> –difftype&#x3D;sql “`nh-rel-x`:`nh-rel-x`“ –run-all-tests &gt; ~&#x2F;tmp&#x2F;res.txt</p>
+<h4 id="比较脚本"><a href="#比较脚本" class="headerlink" title="比较脚本"></a>比较脚本</h4><blockquote>
+<p>场景：在不影响生产的情况下拿A库与B库做比较，A与B分别在两个地方，用otter做了实时同步。但是otter有问题，不知道哪些数据同步有问题，所以需要逐表比对一下。</p>
+</blockquote>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">. <span class="operator">/</span>Users<span class="operator">/</span>hero<span class="operator">/</span>.zshrc</span><br><span class="line"># 取所有表名</span><br><span class="line">echo `mysql <span class="operator">-</span>uuser <span class="operator">-</span>ppasswd <span class="operator">-</span>hhost <span class="operator">&lt;&lt;</span>EOF</span><br><span class="line"><span class="keyword">SELECT</span> table_name <span class="keyword">FROM</span> information_schema.tables <span class="keyword">where</span> table_schema<span class="operator">=</span><span class="string">&#x27;nh-rel-x&#x27;</span> <span class="keyword">and</span> table_name <span class="keyword">like</span> <span class="string">&#x27;nh%&#x27;</span> <span class="keyword">and</span> table_name <span class="keyword">not</span> <span class="keyword">like</span> <span class="string">&#x27;%_reference&#x27;</span>;</span><br><span class="line">EOF` <span class="operator">&gt;</span> tables.txt</span><br><span class="line"></span><br><span class="line">sed <span class="operator">-</span>E <span class="operator">-</span>e <span class="string">&#x27;s/\t/ /g&#x27;</span> <span class="operator">-</span>e <span class="string">&#x27;s/ +/\n/g&#x27;</span> tables.txt <span class="operator">|</span> tail <span class="operator">-</span>n <span class="operator">+</span><span class="number">2</span> <span class="operator">&gt;</span> alltables.txt</span><br><span class="line">rm tables.txt</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">. <span class="operator">/</span>Users<span class="operator">/</span>hero<span class="operator">/</span>.zshrc</span><br><span class="line">#<span class="keyword">from</span></span><br><span class="line">url_from<span class="operator">=</span></span><br><span class="line">user_from<span class="operator">=</span></span><br><span class="line">password_from<span class="operator">=</span></span><br><span class="line">schema_from<span class="operator">=</span></span><br><span class="line">#<span class="keyword">to</span></span><br><span class="line">url_to<span class="operator">=</span></span><br><span class="line">user_to<span class="operator">=</span></span><br><span class="line">password_to<span class="operator">=</span></span><br><span class="line">schema_to<span class="operator">=</span></span><br><span class="line"></span><br><span class="line">rm <span class="operator">-</span>rf <span class="keyword">from</span></span><br><span class="line">mkdir <span class="keyword">from</span></span><br><span class="line">rm <span class="operator">-</span>rf <span class="keyword">to</span></span><br><span class="line">mkdir <span class="keyword">to</span></span><br><span class="line">rm <span class="operator">-</span>rf diff</span><br><span class="line">mkdir diff</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> `cat alltables.txt`; do</span><br><span class="line">  echo &quot;`date &#x27;+%H:%M:%S&#x27;` compare table ---&gt; &quot;$i&quot;\n&quot;</span><br><span class="line">  mysqldump <span class="operator">-</span>h$url_from <span class="operator">-</span>u$user_from <span class="operator">-</span>p$password_from <span class="comment">--single-transaction $schema_from $i -r from/$&#123;i&#125;</span></span><br><span class="line">  mysqldump <span class="operator">-</span>h$url_to <span class="operator">-</span>u$user_to <span class="operator">-</span>p$password_to <span class="comment">--single-transaction $schema_to $i -r to/$&#123;i&#125;</span></span><br><span class="line">  grep &quot;^INSERT&quot; <span class="keyword">from</span><span class="operator">/</span>$&#123;i&#125; <span class="operator">|</span> sed <span class="operator">-</span>e <span class="string">&#x27;s/INSERT.*VALUES //g&#x27;</span> <span class="operator">-</span>e <span class="string">&#x27;s/),/)\n/g&#x27;</span> <span class="operator">-</span>e <span class="string">&#x27;s/);/)\n/g&#x27;</span> <span class="operator">&gt;</span> <span class="keyword">from</span><span class="operator">/</span>$&#123;i&#125;.ok</span><br><span class="line">  grep &quot;^INSERT&quot; <span class="keyword">to</span><span class="operator">/</span>$&#123;i&#125; <span class="operator">|</span> sed <span class="operator">-</span>e <span class="string">&#x27;s/INSERT.*VALUES //g&#x27;</span> <span class="operator">-</span>e <span class="string">&#x27;s/),/)\n/g&#x27;</span> <span class="operator">-</span>e <span class="string">&#x27;s/);/)\n/g&#x27;</span> <span class="operator">&gt;</span> <span class="keyword">to</span><span class="operator">/</span>$&#123;i&#125;.ok</span><br><span class="line">  diff <span class="keyword">from</span><span class="operator">/</span>$&#123;i&#125;.ok <span class="keyword">to</span><span class="operator">/</span>$&#123;i&#125;.ok <span class="operator">&gt;</span> diff<span class="operator">/</span>$i</span><br><span class="line">done</span><br><span class="line"></span><br><span class="line">find diff<span class="operator">/</span> <span class="operator">-</span><span class="keyword">empty</span> <span class="operator">-</span><span class="keyword">delete</span></span><br><span class="line"></span><br><span class="line"><span class="operator">&gt;</span>report.txt</span><br><span class="line">tabs<span class="operator">=</span>`ls diff<span class="operator">/</span>`</span><br><span class="line"><span class="keyword">for</span> t <span class="keyword">in</span> $tabs; do</span><br><span class="line">  shanghai<span class="operator">=</span>`grep <span class="operator">-</span>c &quot;^&lt;&quot; diff<span class="operator">/</span>$t`</span><br><span class="line">  hongkong<span class="operator">=</span>`grep <span class="operator">-</span>c &quot;^&gt;&quot; diff<span class="operator">/</span>$t`</span><br><span class="line">  echo $t  $shanghai  $hongkong <span class="operator">&gt;&gt;</span> report.txt</span><br><span class="line">done</span><br><span class="line">sort <span class="operator">-</span>n <span class="operator">-</span>k <span class="number">2</span> report.txt</span><br></pre></td></tr></table></figure>
+<h4 id="mm"><a href="#mm" class="headerlink" title="mm"></a>mm</h4><p><code>mysql -uroot -ppassword &lt; init.sql</code><br>init.sql</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">use mydb;</span><br><span class="line">#创建用户表</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> t_user (</span><br><span class="line">    id <span class="type">INT</span> auto_increment <span class="keyword">PRIMARY</span> KEY,</span><br><span class="line">        name <span class="type">VARCHAR</span>(<span class="number">30</span>),</span><br><span class="line">        password <span class="type">varchar</span>(<span class="number">64</span>),</span><br><span class="line">        credits <span class="type">INT</span></span><br><span class="line">)ENGINE<span class="operator">=</span>INNODB;</span><br><span class="line">#创建登录日志表</span><br><span class="line"><span class="keyword">create</span> <span class="keyword">TABLE</span> t_login_log (</span><br><span class="line">      id <span class="type">int</span> auto_increment <span class="keyword">PRIMARY</span> KEY,</span><br><span class="line">        user_id <span class="type">int</span>,</span><br><span class="line">        ip <span class="type">varchar</span>(<span class="number">23</span>),</span><br><span class="line">        login_datetime datetime</span><br><span class="line">)ENGINE<span class="operator">=</span>INNODB;</span><br></pre></td></tr></table></figure>
+
+
+
+ 
+    </div>
+
+    <footer class="article-footer">
+      <!-- <a data-url="https://carl-zk.github.io/blog/2018/04/06/mysql-server/" data-id="clwbvux55005r64odh7fx4e3l" class="article-share-link">分享</a> -->
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/MySQL/" rel="tag">MySQL</a></li></ul>
+ 
+      <div id="gitalk-container"></div>
+       
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+
+
+<script src="/blog/js/md5.min.js"></script>
+
+
+ <script type="text/javascript" defer>
+      function genId() {
+        var title = document.querySelector('article div.article-meta a').pathname
+        if(title == null) {
+            title = location.pathname
+        }
+        return title
+      } 
+      var gitalk = new Gitalk({
+        clientID: '4cb6744ec422e72a39bf',
+        clientSecret: 'd0243116135375ff3b8db348dea02bc5ac88b6e3',
+        repo: 'gitalk',
+        owner: 'carl-zk',
+        admin: ['carl-zk'],
+        id: md5(genId()),
+        labels: ['Gitalk'],
+        perPage: 15,
+        pagerDirection: 'last',
+        createIssueManually: false,
+        distractionFreeMode: false
+      })
+      gitalk.render("gitalk-container")
+
+</script>
+
+
+
+
+
+ 
+    </footer>
+  </div>
+    
+<nav id="article-nav">
+  
+    <a href="/blog/2018/04/18/when-IntelliJ-goes-fool/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          When IntelliJ Goes Fool
+        
+      </div>
+    </a>
+  
+  
+    <a href="/blog/2018/04/01/Median-of-Two-Sorted-Arrays/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">Median of Two Sorted Arrays</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+</section>
+           
+    <aside id="sidebar">
+  
+    
+
+  
+    
+    <div class="widget-wrap">
+    
+      <div class="widget" id="toc-widget-fixed">
+      
+        <strong class="toc-title">文章目录</strong>
+        <div class="toc-widget-list">
+              <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BF%98%E8%AE%B0-root-%E5%AF%86%E7%A0%81"><span class="toc-number">1.</span> <span class="toc-text">忘记 root 密码</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E8%BF%81%E7%A7%BB"><span class="toc-number">2.</span> <span class="toc-text">数据迁移</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%AF%BC%E5%87%BA%E5%B7%A5%E5%85%B7"><span class="toc-number">2.1.</span> <span class="toc-text">导出工具</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#mysqldump"><span class="toc-number">2.1.1.</span> <span class="toc-text">mysqldump</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%AF%94%E8%BE%83%E5%B7%A5%E5%85%B7"><span class="toc-number">2.2.</span> <span class="toc-text">比较工具</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%AF%94%E8%BE%83%E8%84%9A%E6%9C%AC"><span class="toc-number">3.</span> <span class="toc-text">比较脚本</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#mm"><span class="toc-number">4.</span> <span class="toc-text">mm</span></a></li></ol>
+          </div>
+      </div>
+    </div>
+
+  
+    
+
+  
+    
+  
+    
+  
+    
+
+  
+    
+  
+    <!--微信公众号二维码-->
+
+
+  
+</aside>
+
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-left">
+      &copy; 2016 - 2024 carl-zk<!--&nbsp;|&nbsp;
+      主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a> -->
+    </div>
+  
+     <div id="footer-right">
+      <!--联系方式&nbsp;|&nbsp; -->
+      富强民主文明和谐自由平等公正法治爱国敬业诚信友善
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/blog/" class="mobile-nav-link">首页</a>
+  
+    <a href="/blog/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/blog/about" class="mobile-nav-link">关于</a>
+  
+</nav>
+    <img class="back-to-top-btn" src="/blog/images/fly-to-top.png"/>
+<script>
+// Elevator script included on the page, already.
+window.onload = function() {
+  var elevator = new Elevator({
+    selector:'.back-to-top-btn',
+    element: document.querySelector('.back-to-top-btn'),
+    duration: 1000 // milliseconds
+  });
+}
+</script>
+    
+
+<script src="/blog/js/is.js"></script>
+
+
+
+  
+<script src="/blog/jquery/jquery.min.js"></script>
+
+  
+<link rel="stylesheet" href="/blog/fancybox/jquery.fancybox.css">
+
+  
+<script src="/blog/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/mermaid/7.1.2/mermaid.min.js'></script>
+  <!-- script src="/blog/js/mermaid.min.js" -->
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({theme: 'forest'});
+    }
+  </script>
+
+
+<script src="/blog/js/script.js"></script>
+
+
+<script src="/blog/js/elevator.js"></script>
+
+  </div>
+</body>
+</html>

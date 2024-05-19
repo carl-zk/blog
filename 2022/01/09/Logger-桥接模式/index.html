@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Logger 桥接模式 | 一叶轻舟渡万江</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="好久不写博客了，准备水一篇。  之前写过一篇关于slf4j的文章Log4j2手册，今天就来分析一下代码。 源码：https:&#x2F;&#x2F;github.com&#x2F;carl-zk&#x2F;example-logger 开始实验首先引入 commons-logging   12345&lt;dependency&gt;    &lt;groupId&gt;commons-logging&lt;&#x2F;groupId&gt;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Logger 桥接模式">
+<meta property="og:url" content="https://carl-zk.github.io/blog/2022/01/09/Logger-%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8F/index.html">
+<meta property="og:site_name" content="一叶轻舟渡万江">
+<meta property="og:description" content="好久不写博客了，准备水一篇。  之前写过一篇关于slf4j的文章Log4j2手册，今天就来分析一下代码。 源码：https:&#x2F;&#x2F;github.com&#x2F;carl-zk&#x2F;example-logger 开始实验首先引入 commons-logging   12345&lt;dependency&gt;    &lt;groupId&gt;commons-logging&lt;&#x2F;groupId&gt;">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://carl-zk.github.io/blog/2022/01/09/Logger-%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8F/log4j-jcl.png">
+<meta property="article:published_time" content="2022-01-09T09:35:33.000Z">
+<meta property="article:modified_time" content="2024-05-18T08:19:43.155Z">
+<meta property="article:author" content="carl-zk">
+<meta property="article:tag" content="log4j2">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://carl-zk.github.io/blog/2022/01/09/Logger-%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8F/log4j-jcl.png">
+  
+    <link rel="alternate" href="/blog/atom.xml" title="一叶轻舟渡万江" type="application/atom+xml">
+  
+  
+  
+    
+  
+  
+<link rel="stylesheet" href="/blog/css/style.css">
+
+  
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-92800981-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-92800981-2');
+</script>
+
+
+
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    
+    <div id="header-inner" class="inner">
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/blog/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://carl-zk.github.io/blog"></form>
+      </div>
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/blog/">首页</a>
+        
+          <a class="main-nav-link" href="/blog/archives">归档</a>
+        
+          <a class="main-nav-link" href="/blog/about">关于</a>
+        
+      </nav>
+      
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/blog/" id="logo">一叶轻舟渡万江</a>
+      </h1>
+      
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article
+  id="post-Logger-桥接模式"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+>
+
+  <div class="article-meta">
+    <a href="/blog/2022/01/09/Logger-%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8F/" class="article-date">
+  <time datetime="2022-01-09T09:35:33.000Z" itemprop="datePublished">2022-01-09</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+     
+    <header class="article-header">
+      
+  
+    <h1 class="article-title" itemprop="name">
+      Logger 桥接模式
+    </h1>
+  
+
+    </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      <!-- Table of Contents -->
+       <blockquote>
+<p>好久不写博客了，准备水一篇。</p>
+</blockquote>
+<p>之前写过一篇关于slf4j的文章<a href="/blog/2017/03/28/log4j%E6%89%8B%E5%86%8C/">Log4j2手册</a>，今天就来分析一下代码。</p>
+<p>源码：<a target="_blank" rel="noopener" href="https://github.com/carl-zk/example-logger">https://github.com/carl-zk/example-logger</a></p>
+<h3 id="开始实验"><a href="#开始实验" class="headerlink" title="开始实验"></a>开始实验</h3><p>首先引入 <code>commons-logging</code>  </p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>commons-logging<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>commons-logging<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>写一个logger</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">commons_logging_directly</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">Log</span> <span class="variable">log</span> <span class="operator">=</span> LogFactory.getLog(Tests.class);</span><br><span class="line">    log.info(<span class="string">&quot;commons_logging_directly&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>正常打印，ok, perfect!</p>
+<p>引入 <code>log4j2</code></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.logging.log4j<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>log4j-api<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.17.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.logging.log4j<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>log4j-core<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.17.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">log4j2_logging_directly</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">Logger</span> <span class="variable">logger</span> <span class="operator">=</span> LogManager.getLogger(Tests.class);</span><br><span class="line">    logger.info(<span class="string">&quot;log4j2_logging_directly&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>打印正常！（需添加配置文件log4j2.xml）</p>
+<p>引入桥接 <code>log4j-jcl</code></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.logging.log4j<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>log4j-jcl<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.17.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>它的作用是将使用commons-logging包的log记录的信息通过log4j输出出去。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">commons_logging_via_log4j</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">Log</span> <span class="variable">log</span> <span class="operator">=</span> LogFactory.getLog(Tests.class);</span><br><span class="line">    log.info(<span class="string">&quot;commons_logging_via_log4j&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>ok，打印的信息是log4j的输出格式，但调用的方法仍然是commons-logging的。</p>
+<h3 id="源码分析"><a href="#源码分析" class="headerlink" title="源码分析"></a>源码分析</h3><p>废话不说，直接上代码！（这本身就是句废话，不知道为啥老是有人这么说，我来吐槽一下）<br>如图，桥接器使用<a target="_blank" rel="noopener" href="https://www.baeldung.com/java-spi">SPI</a>模式实现，<br><img src="/blog/2022/01/09/Logger-%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8F/log4j-jcl.png" loading="lazy"></p>
+<p><code>LogFactoryImpl</code>继承了<code>org.apache.commons.logging.LogFactory</code>，通过<code>LogAdapter</code>来生成log。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.apache.commons.logging.Log;</span><br><span class="line"><span class="keyword">import</span> org.apache.commons.logging.LogConfigurationException;</span><br><span class="line"><span class="keyword">import</span> org.apache.commons.logging.LogFactory;</span><br><span class="line"><span class="keyword">import</span> org.apache.logging.log4j.spi.LoggerAdapter;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Log4j binding for Commons Logging.</span></span><br><span class="line"><span class="comment"> * &#123;<span class="doctag">@inheritDoc</span>&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">LogFactoryImpl</span> <span class="keyword">extends</span> <span class="title class_">LogFactory</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> LoggerAdapter&lt;Log&gt; adapter = <span class="keyword">new</span> <span class="title class_">LogAdapter</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> ConcurrentMap&lt;String, Object&gt; attributes = <span class="keyword">new</span> <span class="title class_">ConcurrentHashMap</span>&lt;&gt;();</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> Log <span class="title function_">getInstance</span><span class="params">(<span class="keyword">final</span> String name)</span> <span class="keyword">throws</span> LogConfigurationException &#123;</span><br><span class="line">        <span class="keyword">return</span> adapter.getLogger(name);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>LogAdapter</code> 返回<code>Log4jLog</code>对象，</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.apache.commons.logging.Log;</span><br><span class="line"><span class="keyword">import</span> org.apache.commons.logging.LogFactory;</span><br><span class="line"><span class="keyword">import</span> org.apache.logging.log4j.LogManager;</span><br><span class="line"><span class="keyword">import</span> org.apache.logging.log4j.spi.AbstractLoggerAdapter;</span><br><span class="line"><span class="keyword">import</span> org.apache.logging.log4j.spi.LoggerContext;</span><br><span class="line"><span class="keyword">import</span> org.apache.logging.log4j.util.StackLocatorUtil;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Commons Logging adapter registry.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@since</span> 2.1</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">LogAdapter</span> <span class="keyword">extends</span> <span class="title class_">AbstractLoggerAdapter</span>&lt;Log&gt; &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">protected</span> Log <span class="title function_">newLogger</span><span class="params">(<span class="keyword">final</span> String name, <span class="keyword">final</span> LoggerContext context)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Log4jLog</span>(context.getLogger(name));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">protected</span> LoggerContext <span class="title function_">getContext</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> getContext(LogManager.getFactory().isClassLoaderDependent()</span><br><span class="line">                ? StackLocatorUtil.getCallerClass(LogFactory.class)</span><br><span class="line">                : <span class="literal">null</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>Log4jLog</code> 实现 <code>org.apache.commons.logging.Log</code> 接口，内部组合了一个<code>ExtendedLogger</code>（就是log4j的基类），接口的实现方法都是使用的它来实现。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.apache.commons.logging.Log;</span><br><span class="line"><span class="keyword">import</span> org.apache.logging.log4j.Level;</span><br><span class="line"><span class="keyword">import</span> org.apache.logging.log4j.spi.ExtendedLogger;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Log4jLog</span> <span class="keyword">implements</span> <span class="title class_">Log</span>, Serializable &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">long</span> <span class="variable">serialVersionUID</span> <span class="operator">=</span> <span class="number">1L</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">String</span> <span class="variable">FQCN</span> <span class="operator">=</span> Log4jLog.class.getName();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> ExtendedLogger logger;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Log4jLog</span><span class="params">(<span class="keyword">final</span> ExtendedLogger logger)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.logger = logger;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">isDebugEnabled</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> logger.isEnabled(Level.DEBUG, <span class="literal">null</span>, <span class="literal">null</span>);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>既然是SPI，那自然需要知道在哪里load这个<code>LogFactoryImpl</code>。<br>下面来看一下<code>org.apache.commons.logging.LogFactory</code>，这里的<code>SERVICE_ID=&quot;META-INF/services/org.apache.commons.logging.LogFactory&quot;</code>，通过反射最终拿到实现类<code>LogFactoryImpl</code>。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> LogFactory <span class="title function_">getFactory</span><span class="params">()</span> <span class="keyword">throws</span> LogConfigurationException &#123;</span><br><span class="line">    ...</span><br><span class="line">    <span class="keyword">if</span> (factory == <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (isDiagnosticsEnabled()) &#123;</span><br><span class="line">            logDiagnostic(<span class="string">&quot;[LOOKUP] Looking for a resource file of name [&quot;</span> + SERVICE_ID +</span><br><span class="line">                          <span class="string">&quot;] to define the LogFactory subclass to use...&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">final</span> <span class="type">InputStream</span> <span class="variable">is</span> <span class="operator">=</span> getResourceAsStream(contextClassLoader, SERVICE_ID);</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span>( is != <span class="literal">null</span> ) &#123;</span><br><span class="line">                <span class="comment">// This code is needed by EBCDIC and other strange systems.</span></span><br><span class="line">                <span class="comment">// It&#x27;s a fix for bugs reported in xerces</span></span><br><span class="line">                BufferedReader rd;</span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    rd = <span class="keyword">new</span> <span class="title class_">BufferedReader</span>(<span class="keyword">new</span> <span class="title class_">InputStreamReader</span>(is, <span class="string">&quot;UTF-8&quot;</span>));</span><br><span class="line">                &#125; <span class="keyword">catch</span> (java.io.UnsupportedEncodingException e) &#123;</span><br><span class="line">                    rd = <span class="keyword">new</span> <span class="title class_">BufferedReader</span>(<span class="keyword">new</span> <span class="title class_">InputStreamReader</span>(is));</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                <span class="type">String</span> <span class="variable">factoryClassName</span> <span class="operator">=</span> rd.readLine();</span><br><span class="line">                rd.close();</span><br><span class="line"></span><br><span class="line">                <span class="keyword">if</span> (factoryClassName != <span class="literal">null</span> &amp;&amp; ! <span class="string">&quot;&quot;</span>.equals(factoryClassName)) &#123;</span><br><span class="line">                    <span class="keyword">if</span> (isDiagnosticsEnabled()) &#123;</span><br><span class="line">                        logDiagnostic(<span class="string">&quot;[LOOKUP]  Creating an instance of LogFactory class &quot;</span> +</span><br><span class="line">                                      factoryClassName +</span><br><span class="line">                                      <span class="string">&quot; as specified by file &#x27;&quot;</span> + SERVICE_ID +</span><br><span class="line">                                      <span class="string">&quot;&#x27; which was present in the path of the context classloader.&quot;</span>);</span><br><span class="line">                    &#125;</span><br><span class="line">                    factory = newFactory(factoryClassName, baseClassLoader, contextClassLoader );</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="comment">// is == null</span></span><br><span class="line">                <span class="keyword">if</span> (isDiagnosticsEnabled()) &#123;</span><br><span class="line">                    logDiagnostic(<span class="string">&quot;[LOOKUP] No resource file with name &#x27;&quot;</span> + SERVICE_ID + <span class="string">&quot;&#x27; found.&quot;</span>);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception ex) &#123;</span><br><span class="line">            <span class="comment">// note: if the specified LogFactory class wasn&#x27;t compatible with LogFactory</span></span><br><span class="line">            <span class="comment">// for some reason, a ClassCastException will be caught here, and attempts will</span></span><br><span class="line">            <span class="comment">// continue to find a compatible class.</span></span><br><span class="line">            <span class="keyword">if</span> (isDiagnosticsEnabled()) &#123;</span><br><span class="line">                logDiagnostic(</span><br><span class="line">                    <span class="string">&quot;[LOOKUP] A security exception occurred while trying to create an&quot;</span> +</span><br><span class="line">                    <span class="string">&quot; instance of the custom factory class&quot;</span> +</span><br><span class="line">                    <span class="string">&quot;: [&quot;</span> + trim(ex.getMessage()) +</span><br><span class="line">                    <span class="string">&quot;]. Trying alternative implementations...&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// ignore</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    ...</span><br></pre></td></tr></table></figure>
+<p>另外，这个方法查找的优先级如下，查到就返回，否则顺序向下，SPI位于第二，最后一个是commons-logging自己。</p>
+<ul>
+<li>The org.apache.commons.logging.LogFactory system property.</li>
+<li>The JDK 1.3 Service Discovery mechanism</li>
+<li>Use the properties file commons-logging.properties file, if found in the class path of this class. The configuration file is in standard java.util.Properties format and contains the fully qualified name of the implementation class with the key being the system property defined above.</li>
+<li>Fall back to a default implementation class (org.apache.commons.logging.impl.LogFactoryImpl).</li>
+</ul>
+<p>至此，在没有改动任何代码的前提下，仅仅通过引入<code>log4j-jcl</code>jar就能将<code>org.apache.commons.logging.LogFactory</code>的实现类从<code>org.apache.commons.logging.impl.LogFactoryImpl</code> 变成了<code>org.apache.logging.log4j.jcl.LogFactoryImpl</code>，从而<code>Log log = LogFactory.getLog(Tests.class);</code>获得的是<code>org.apache.logging.log4j.jcl.Log4jLog</code>，调用<code>log.info()</code>其实是<code>Log4jLog</code>的实现方法，其内部是组合了一个log4j的实现类<code>ExtendedLogger</code>，最终日志是通过log4j输出的。</p>
+<p>要看到commons-logging的更多信息，可以加参数<code>-Dorg.apache.commons.logging.diagnostics.dest=STDOUT</code>.</p>
+<p>由此可见，日志框架都有自己的规则：作为一个日志框架，本身要支持SPI这种模式。要兼容另一种日志框架，则另外提供一个桥接工具包，使用组合的方式将自己封装起来。slf4j作为统一的标准日志接口，其目的就是起到桥接任何日志框架的目的，最终归于一个具体实现类日志框架。后面如果自己写个框架，日志类只需引入slf4j，使用这个框架的项目只需引入<code>log4j-slf4j18-impl</code>即可。</p>
+<p>slf4j的实现类只可以绑定一个，更多信息refer <a target="_blank" rel="noopener" href="https://www.slf4j.org/manual.html">slf4.org</a>.</p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a target="_blank" rel="noopener" href="https://logging.apache.org/log4j/2.x/log4j-jcl/index.html">log4j官网</a></p>
+ 
+    </div>
+
+    <footer class="article-footer">
+      <!-- <a data-url="https://carl-zk.github.io/blog/2022/01/09/Logger-%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8F/" data-id="clwbvux4s002u64od93ba31mi" class="article-share-link">分享</a> -->
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/log4j2/" rel="tag">log4j2</a></li></ul>
+ 
+      <div id="gitalk-container"></div>
+       
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+
+
+<script src="/blog/js/md5.min.js"></script>
+
+
+ <script type="text/javascript" defer>
+      function genId() {
+        var title = document.querySelector('article div.article-meta a').pathname
+        if(title == null) {
+            title = location.pathname
+        }
+        return title
+      } 
+      var gitalk = new Gitalk({
+        clientID: '4cb6744ec422e72a39bf',
+        clientSecret: 'd0243116135375ff3b8db348dea02bc5ac88b6e3',
+        repo: 'gitalk',
+        owner: 'carl-zk',
+        admin: ['carl-zk'],
+        id: md5(genId()),
+        labels: ['Gitalk'],
+        perPage: 15,
+        pagerDirection: 'last',
+        createIssueManually: false,
+        distractionFreeMode: false
+      })
+      gitalk.render("gitalk-container")
+
+</script>
+
+
+
+
+
+ 
+    </footer>
+  </div>
+    
+<nav id="article-nav">
+  
+    <a href="/blog/2022/04/25/Encode-and-Decode-TinyURL/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">
+        
+          Encode and Decode TinyURL
+        
+      </div>
+    </a>
+  
+  
+    <a href="/blog/2021/04/26/Binary-Lifting/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">Binary Lifting</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+</section>
+           
+    <aside id="sidebar">
+  
+    
+
+  
+    
+    <div class="widget-wrap">
+    
+      <div class="widget" id="toc-widget-fixed">
+      
+        <strong class="toc-title">文章目录</strong>
+        <div class="toc-widget-list">
+              <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%80%E5%A7%8B%E5%AE%9E%E9%AA%8C"><span class="toc-number">1.</span> <span class="toc-text">开始实验</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90"><span class="toc-number">2.</span> <span class="toc-text">源码分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%82%E8%80%83"><span class="toc-number">3.</span> <span class="toc-text">参考</span></a></li></ol>
+          </div>
+      </div>
+    </div>
+
+  
+    
+
+  
+    
+  
+    
+  
+    
+
+  
+    
+  
+    <!--微信公众号二维码-->
+
+
+  
+</aside>
+
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-left">
+      &copy; 2016 - 2024 carl-zk<!--&nbsp;|&nbsp;
+      主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a> -->
+    </div>
+  
+     <div id="footer-right">
+      <!--联系方式&nbsp;|&nbsp; -->
+      富强民主文明和谐自由平等公正法治爱国敬业诚信友善
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/blog/" class="mobile-nav-link">首页</a>
+  
+    <a href="/blog/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/blog/about" class="mobile-nav-link">关于</a>
+  
+</nav>
+    <img class="back-to-top-btn" src="/blog/images/fly-to-top.png"/>
+<script>
+// Elevator script included on the page, already.
+window.onload = function() {
+  var elevator = new Elevator({
+    selector:'.back-to-top-btn',
+    element: document.querySelector('.back-to-top-btn'),
+    duration: 1000 // milliseconds
+  });
+}
+</script>
+    
+
+<script src="/blog/js/is.js"></script>
+
+
+
+  
+<script src="/blog/jquery/jquery.min.js"></script>
+
+  
+<link rel="stylesheet" href="/blog/fancybox/jquery.fancybox.css">
+
+  
+<script src="/blog/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/mermaid/7.1.2/mermaid.min.js'></script>
+  <!-- script src="/blog/js/mermaid.min.js" -->
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({theme: 'forest'});
+    }
+  </script>
+
+
+<script src="/blog/js/script.js"></script>
+
+
+<script src="/blog/js/elevator.js"></script>
+
+  </div>
+</body>
+</html>
