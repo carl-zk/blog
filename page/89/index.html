@@ -116,6 +116,9 @@
 </blockquote>
 <h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><h3 id="windows格式文件转linux格式文件"><a href="#windows格式文件转linux格式文件" class="headerlink" title="windows格式文件转linux格式文件"></a>windows格式文件转linux格式文件</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed -i <span class="string">&#x27;s/^M//g&#x27;</span> file</span><br></pre></td></tr></table></figure>
 <p>^M&#x3D;Ctrl+v,Ctrl+m<br><em>注意：Mac中安装gnu-sed替换原生sed，然后增加别名即可</em><br><em>alias sed&#x3D;”&#x2F;usr&#x2F;local&#x2F;opt&#x2F;gnu-sed&#x2F;bin&#x2F;gsed”</em> </p>
+<p>windows 下 java项目编码由gbk改为utf8</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">find . -name &#x27;*.java&#x27; -exec bash -c &quot;iconv -f gbk -t utf-8 &#x27;&#123;&#125;&#x27;.utf8&quot; \;</span><br><span class="line">find . -name &#x27;*.java&#x27; -exec rm -rf &#123;&#125; \;</span><br><span class="line">find . -name &#x27;*.utf8&#x27; | awk -F &quot;.&quot; &#x27;&#123;print $2&#125;&#x27; | xargs -i -t mv ./&#123;&#125;.java.utf8 ./&#123;&#125;.java;</span><br></pre></td></tr></table></figure>
+
 <h3 id="截取文件"><a href="#截取文件" class="headerlink" title="截取文件"></a>截取文件</h3><h4 id="从第3行到最后"><a href="#从第3行到最后" class="headerlink" title="从第3行到最后"></a>从第3行到最后</h4><p><code>tail -n +3 file &gt; newfile</code><br>or<br><code>sed &#39;1,2d&#39; file &gt; newFile</code></p>
 <h4 id="sed"><a href="#sed" class="headerlink" title="sed"></a>sed</h4><p><code>sed &#39;3d&#39; file</code>  删除第3行<br><code>sed &#39;2,3d&#39; file</code> 删除第2到第3行<br><code>sed &#39;2,$d&#39; file</code> 删除第2行到最后<br><code>sed &#39;/key/d&#39; file</code> 删除文件中包含key的行</p>
 <h4 id="vi"><a href="#vi" class="headerlink" title="vi"></a>vi</h4><blockquote>
@@ -142,10 +145,451 @@
 </blockquote>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line"><span class="comment"># 普通</span></span><br><span class="line"><span class="built_in">cat</span> &lt;&lt; <span class="string">eof</span></span><br><span class="line"><span class="string">  hh</span></span><br><span class="line"><span class="string">eof</span></span><br><span class="line"><span class="comment"># here document</span></span><br><span class="line"><span class="built_in">cat</span> &lt;&lt;- <span class="string">_EOF_</span></span><br><span class="line"><span class="string">  hello world</span></span><br><span class="line"><span class="string">  haha</span></span><br><span class="line"><span class="string">    123</span></span><br><span class="line"><span class="string">_EOF_</span></span><br><span class="line"><span class="comment"># here string</span></span><br><span class="line"><span class="built_in">cat</span> &lt;&lt;&lt; <span class="string">&quot;hello world&quot;</span></span><br></pre></td></tr></table></figure>
 
-<h2 id="文本处理三大利器-amp-正则表达式"><a href="#文本处理三大利器-amp-正则表达式" class="headerlink" title="文本处理三大利器 &amp; 正则表达式"></a>文本处理三大利器 &amp; 正则表达式</h2><h3 id="grep"><a href="#grep" class="headerlink" title="grep"></a>grep</h3><p>基础表达式<br><code>^ $ . [ ] *</code></p>
+<h2 id="文本处理三大利器-amp-正则表达式"><a href="#文本处理三大利器-amp-正则表达式" class="headerlink" title="文本处理三大利器 &amp; 正则表达式"></a>文本处理三大利器 &amp; 正则表达式</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">^ (caret): Matches the start of a string.</span><br><span class="line">$ (dollar): Matches the end of a string.</span><br><span class="line">. (dot): Matches any single character except a newline character.</span><br><span class="line">[] (square brackets): Defines a character class, matching any one character within the brackets.</span><br><span class="line">&#123;&#125; (curly brackets): Specifies a specific quantity of characters to match.</span><br><span class="line">- (hyphen): Specifies a range of characters when used within square brackets.</span><br><span class="line">? (question mark): Makes the preceding character optional, matching zero or one occurrence.</span><br><span class="line">* (asterisk): Matches zero or more occurrences of the preceding character.</span><br><span class="line">+ (plus): Matches one or more occurrences of the preceding character.</span><br><span class="line">() (parentheses): Groups expressions together.</span><br><span class="line">| (pipe): Indicates an OR condition between two expressions.</span><br><span class="line">\ (backslash): Escapes a metacharacter, allowing it to be matched as a literal character.</span><br></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://www.elastic.co/guide/en/beats/heartbeat/current/regexp-support.html">regex-support from elastic</a></p>
+<table>
+<thead>
+<tr>
+<th>Pattern</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Single Characters</strong></td>
+<td></td>
+</tr>
+<tr>
+<td>x</td>
+<td>single character</td>
+</tr>
+<tr>
+<td>.</td>
+<td>any character</td>
+</tr>
+<tr>
+<td>[xyz]</td>
+<td>character class</td>
+</tr>
+<tr>
+<td>[^xyz]</td>
+<td>negated character class</td>
+</tr>
+<tr>
+<td>[[:alpha:]]</td>
+<td>ASCII character class</td>
+</tr>
+<tr>
+<td>[[:^alpha:]]</td>
+<td>negated ASCII character class</td>
+</tr>
+<tr>
+<td>\d</td>
+<td>Perl character class</td>
+</tr>
+<tr>
+<td>\D</td>
+<td>negated Perl character class</td>
+</tr>
+<tr>
+<td>\pN</td>
+<td>Unicode character class (one-letter name)</td>
+</tr>
+<tr>
+<td>\p{Greek}</td>
+<td>Unicode character class</td>
+</tr>
+<tr>
+<td>\PN</td>
+<td>negated Unicode character class (one-letter name)</td>
+</tr>
+<tr>
+<td>\P{Greek}</td>
+<td>negated Unicode character class</td>
+</tr>
+<tr>
+<td><strong>Composites</strong></td>
+<td></td>
+</tr>
+<tr>
+<td>xy</td>
+<td>x followed by y</td>
+</tr>
+<tr>
+<td>x</td>
+<td>y</td>
+</tr>
+<tr>
+<td><strong>Repetitions</strong></td>
+<td></td>
+</tr>
+<tr>
+<td>x*</td>
+<td>zero or more x</td>
+</tr>
+<tr>
+<td>x+</td>
+<td>one or more x</td>
+</tr>
+<tr>
+<td>x?</td>
+<td>zero or one x</td>
+</tr>
+<tr>
+<td>x{n,m}</td>
+<td>n or n+1 or …​ or m x, prefer more</td>
+</tr>
+<tr>
+<td>x{n,}</td>
+<td>n or more x, prefer more</td>
+</tr>
+<tr>
+<td>x{n}</td>
+<td>exactly n x</td>
+</tr>
+<tr>
+<td>x*?</td>
+<td>zero or more x, prefer fewer</td>
+</tr>
+<tr>
+<td>x+?</td>
+<td>one or more x, prefer fewer</td>
+</tr>
+<tr>
+<td>x??</td>
+<td>zero or one x, prefer zero</td>
+</tr>
+<tr>
+<td>x{n,m}?</td>
+<td>n or n+1 or …​ or m x, prefer fewer</td>
+</tr>
+<tr>
+<td>x{n,}?</td>
+<td>n or more x, prefer fewer</td>
+</tr>
+<tr>
+<td>x{n}?</td>
+<td>exactly n x</td>
+</tr>
+<tr>
+<td><strong>Grouping</strong></td>
+<td></td>
+</tr>
+<tr>
+<td>(re)</td>
+<td>numbered capturing group (submatch)</td>
+</tr>
+<tr>
+<td>(?P<name>re)</td>
+<td>named &amp; numbered capturing group (submatch)</td>
+</tr>
+<tr>
+<td>(?:re)</td>
+<td>non-capturing group</td>
+</tr>
+<tr>
+<td>(?i)abc</td>
+<td>set flags within current group, non-capturing</td>
+</tr>
+<tr>
+<td>(?i:re)</td>
+<td>set flags during re, non-capturing</td>
+</tr>
+<tr>
+<td>(?i)PaTTeRN</td>
+<td>case-insensitive (default false)</td>
+</tr>
+<tr>
+<td>(?m)multiline</td>
+<td>multi-line mode: ^ and $ match begin&#x2F;end line in addition to begin&#x2F;end text (default false)</td>
+</tr>
+<tr>
+<td>(?s)pattern.</td>
+<td>let . match \n (default false)</td>
+</tr>
+<tr>
+<td>(?U)x*abc</td>
+<td>ungreedy: swap meaning of x* and x*?, x+ and x+?, etc (default false)</td>
+</tr>
+<tr>
+<td><strong>Empty Strings</strong></td>
+<td></td>
+</tr>
+<tr>
+<td>^</td>
+<td>at beginning of text or line (m&#x3D;true)</td>
+</tr>
+<tr>
+<td>$</td>
+<td>at end of text (like \z not \Z) or line (m&#x3D;true)</td>
+</tr>
+<tr>
+<td>\A</td>
+<td>at beginning of text</td>
+</tr>
+<tr>
+<td>\b</td>
+<td>at ASCII word boundary (\w on one side and \W, \A, or \z on the other)</td>
+</tr>
+<tr>
+<td>\B</td>
+<td>not at ASCII word boundary</td>
+</tr>
+<tr>
+<td>\z</td>
+<td>at end of text</td>
+</tr>
+<tr>
+<td><strong>Escape Sequences</strong></td>
+<td></td>
+</tr>
+<tr>
+<td>\a</td>
+<td>bell (same as \007)</td>
+</tr>
+<tr>
+<td>\f</td>
+<td>form feed (same as \014)</td>
+</tr>
+<tr>
+<td>\t</td>
+<td>horizontal tab (same as \011)</td>
+</tr>
+<tr>
+<td>\n</td>
+<td>newline (same as \012)</td>
+</tr>
+<tr>
+<td>\r</td>
+<td>carriage return (same as \015)</td>
+</tr>
+<tr>
+<td>\v</td>
+<td>vertical tab character (same as \013)</td>
+</tr>
+<tr>
+<td>*</td>
+<td>literal *, for any punctuation character *</td>
+</tr>
+<tr>
+<td>\123</td>
+<td>octal character code (up to three digits)</td>
+</tr>
+<tr>
+<td>\x7F</td>
+<td>two-digit hex character code</td>
+</tr>
+<tr>
+<td>\x{10FFFF}</td>
+<td>hex character code</td>
+</tr>
+<tr>
+<td>\Q…\E</td>
+<td>literal text … even if … has punctuation</td>
+</tr>
+<tr>
+<td><strong>ASCII Character Classes</strong></td>
+<td></td>
+</tr>
+<tr>
+<td>[[:alnum:]]</td>
+<td>alphanumeric (same as [0-9A-Za-z])</td>
+</tr>
+<tr>
+<td>[[:alpha:]]</td>
+<td>alphabetic (same as [A-Za-z])</td>
+</tr>
+<tr>
+<td>[[:ascii:]]</td>
+<td>ASCII (same as \x00-\x7F])</td>
+</tr>
+<tr>
+<td>[[:blank:]]</td>
+<td>blank (same as [\t ])</td>
+</tr>
+<tr>
+<td>[[:cntrl:]]</td>
+<td>control (same as [\x00-\x1F\x7F])</td>
+</tr>
+<tr>
+<td>[[:digit:]]</td>
+<td>digits (same as [0-9])</td>
+</tr>
+<tr>
+<td>[[:graph:]]</td>
+<td>graphical (same as [!-~] &#x3D;&#x3D; [A-Za-z0-9!”#$%&amp;’()*+,-.&#x2F;:;&lt;&#x3D;&gt;?@[\]^_&#96; {</td>
+</tr>
+<tr>
+<td>[[:lower:]]</td>
+<td>lower case (same as [a-z])</td>
+</tr>
+<tr>
+<td>[[:print:]]</td>
+<td>printable (same as [ -~] &#x3D;&#x3D; [ [:graph:]])</td>
+</tr>
+<tr>
+<td>[[:punct:]]</td>
+<td>punctuation (same as [!-&#x2F;:-@[-&#96;{-~])</td>
+</tr>
+<tr>
+<td>[[:space:]]</td>
+<td>whitespace (same as [\t\n\v\f\r ])</td>
+</tr>
+<tr>
+<td>[[:upper:]]</td>
+<td>upper case (same as [A-Z])</td>
+</tr>
+<tr>
+<td>[[:word:]]</td>
+<td>word characters (same as [0-9A-Za-z_])</td>
+</tr>
+<tr>
+<td>[[:xdigit:]]</td>
+<td>hex digit (same as [0-9A-Fa-f])</td>
+</tr>
+<tr>
+<td><strong>Supported Perl Character Classes</strong></td>
+<td></td>
+</tr>
+<tr>
+<td>\d</td>
+<td>digits (same as [0-9])</td>
+</tr>
+<tr>
+<td>\D</td>
+<td>not digits (same as [^0-9])</td>
+</tr>
+<tr>
+<td>\s</td>
+<td>whitespace (same as [\t\n\f\r ])</td>
+</tr>
+<tr>
+<td>\S</td>
+<td>not whitespace (same as [^\t\n\f\r ])</td>
+</tr>
+<tr>
+<td>\w</td>
+<td>word characters (same as [0-9A-Za-z_])</td>
+</tr>
+<tr>
+<td>\W</td>
+<td>not word characters (same as [^0-9A-Za-z_])</td>
+</tr>
+</tbody></table>
+<p><a target="_blank" rel="noopener" href="https://www.ibm.com/docs/en/nsm/61.1?topic=expressions-regular-expression-syntax#JL1078292394b__BABCCCCA">Regular expression syntax</a></p>
+<table>
+<thead>
+<tr>
+<th>Token</th>
+<th>Matches</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>.</td>
+<td>Any character.</td>
+</tr>
+<tr>
+<td>^</td>
+<td>The start of a line (a zero-length string).</td>
+</tr>
+<tr>
+<td>$</td>
+<td>The end of a line; a new line or the end of the search buffer.</td>
+</tr>
+<tr>
+<td>&lt;</td>
+<td>The start of a word (where a word is a string of alphanumeric characters).</td>
+</tr>
+<tr>
+<td>&gt;</td>
+<td>The end of a word (the zero length string between an alphanumeric character and a non-alphanumeric character).</td>
+</tr>
+<tr>
+<td>\b</td>
+<td>Any word boundary (this is equivalent to (&lt;¦&gt;) ).</td>
+</tr>
+<tr>
+<td>\d</td>
+<td>A digit character.</td>
+</tr>
+<tr>
+<td>\D</td>
+<td>Any non-digit character.</td>
+</tr>
+<tr>
+<td>\w</td>
+<td>A word character (alphanumeric or underscore).</td>
+</tr>
+<tr>
+<td>\W</td>
+<td>Any character that is not a word character (alphanumeric or underscore).</td>
+</tr>
+<tr>
+<td>\s</td>
+<td>A whitespace character.</td>
+</tr>
+<tr>
+<td>\S</td>
+<td>Any non-whitespace character.</td>
+</tr>
+<tr>
+<td>\c</td>
+<td>Special characters and escaping. The following characters are interpreted according to the C language conventions: \0, \a, \f, \n, \r, \t, \v. To specify a character in hexadecimal, use the \xNN syntax. For example, \x41 is the ASCII character A.</td>
+</tr>
+<tr>
+<td>\</td>
+<td>All characters apart from those described above may be escaped using the backslash prefix. For example, to specify a plain left-bracket use [.</td>
+</tr>
+<tr>
+<td>[]</td>
+<td>Any one of the specified characters in a set. An explicit set of characters may be specified as in [aeiou] as well as character ranges, such as [0-9A-Fa-f], which match any hexadecimal digit. The dash (-) loses its special meaning when escaped, such as in [A-Z] or when it is the first or last character in a set, such as in [-xyz0-9].  All of the above backslash-escaping rules may be used within []. For example, the expression [\x41-\x45] is equivalent to [A-D] in ASCII. To use a closing bracket in a set, either escape it using []] or use it as the first character in the set, such as []xyz].  POSIX-style character classes are also allowed inside a character set. The syntax for character classes is [:class:]. The supported character classes are:  [:alnum:] - alphanumeric characters. [:alpha:] - alphabetic characters. [:blank:] - space and TAB characters. [:cntrl:] - control characters. [:digit:] - numeric characters. [:graph:] - characters that are both printable and visible. [:lower:] - lowercase alphabetic characters. [:print:] - printable characters (characters that are not control characters). [:punct:] - punctuation characters (characters that are not letters, digits, control characters, or spaces). [:space:] - space characters (such as space, TAB and form feed). [:upper:] - uppercase alphabetic characters. [:xdigit:] - characters that are hexadecimal digits.  Brackets are permitted within the set’s brackets. For example, [a-z0-9!] is equivalent to [[:lower:][:digit:]!] in the C locale.</td>
+</tr>
+<tr>
+<td>[^]</td>
+<td>Inverts the behavior of a character set [] as described above. For example, [^[:alpha:]] matches any character that is not alphabetical. The ^ caret symbol only has this special meaning when it is the first character in a bracket set.</td>
+</tr>
+<tr>
+<td>{n}</td>
+<td>Exactly n occurrences of the previous expression, where 0 &lt;&#x3D; n &lt;&#x3D; 255. For example, a{3} matches aaa.</td>
+</tr>
+<tr>
+<td>{n,m}</td>
+<td>Between n and m occurrences of the previous expression, where 0 &lt;&#x3D; n &lt;&#x3D; m &lt;&#x3D; 255. For example, a 32-bit hexadecimal number can be described as 0x[[:xdigit:]]{1,8}.</td>
+</tr>
+<tr>
+<td>{n,}</td>
+<td>At least n or more (up to infinity) occurrences of the previous expression.</td>
+</tr>
+<tr>
+<td>*</td>
+<td>Zero or more of the previous expression.</td>
+</tr>
+<tr>
+<td>+</td>
+<td>One or more of the previous expression.</td>
+</tr>
+<tr>
+<td>?</td>
+<td>Zero or one of the previous expression.</td>
+</tr>
+<tr>
+<td>(exp)</td>
+<td>Grouping; any series of expressions may be grouped in parentheses so as to apply a postfix or bar (¦) operator to a group of successive expressions. For example:  ab+ matches all of abbb (ab)+ matches all of ababab</td>
+</tr>
+<tr>
+<td>¦</td>
+<td>Alternate expressions (logical OR). The vertical bar (¦) has the lowest precedence of all tokens in the regular expression language. This means that ab¦cd matches all of cd but does not match abd (in this case use a(b¦c)d ).</td>
+</tr>
+</tbody></table>
+<h3 id="grep"><a href="#grep" class="headerlink" title="grep"></a>grep</h3><p>基础表达式<br><code>^ $ . [ ] *</code></p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep <span class="string">&quot;^[a-z]&quot;</span> /etc/passwd</span><br></pre></td></tr></table></figure>
 <p>扩展表达式<br><code>( ) &#123; &#125; ? + |</code><br>扩展表达式可以使用正则，如</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep -E &quot;^[a-z]&#123;1,6&#125;&quot; /etc/passwd</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"> ~/tmp  <span class="keyword">for</span> i <span class="keyword">in</span> &#123;1..10&#125;; <span class="keyword">do</span> <span class="built_in">echo</span> <span class="string">&quot;(<span class="variable">$&#123;RANDOM:0:3&#125;</span>) <span class="variable">$&#123;RANDOM:0:3&#125;</span>-<span class="variable">$&#123;RANDOM:0:4&#125;</span>&quot;</span> &gt;&gt; phonelist.txt; <span class="keyword">done</span>             INT</span><br><span class="line"> ~/tmp  <span class="built_in">cat</span> phonelist.txt                                                                                           ok</span><br><span class="line">(238) 501-1131</span><br><span class="line">(782) 181-1403</span><br><span class="line">(170) 816-1059</span><br><span class="line">(180) 984-1900</span><br><span class="line">(691) 237-1956</span><br><span class="line">(191) 499-5170</span><br><span class="line">(246) 229-1708</span><br><span class="line">(777) 282-3094</span><br><span class="line">(154) 118-2033</span><br><span class="line">(820) 176-1289</span><br><span class="line"></span><br><span class="line">~/tmp  grep -Ev <span class="string">&#x27;^\([[:digit:]]&#123;3&#125;\)? [[:digit:]]&#123;3&#125;-[[:digit:]]&#123;4&#125;$&#x27;</span> phonelist.txt</span><br></pre></td></tr></table></figure>
+
+
+<p><code>zgrep &#39;899&#39; phonelist.tar.gz</code> zgrep 可查询二进制文件是否包含 </p>
 <h3 id="sed-1"><a href="#sed-1" class="headerlink" title="sed"></a>sed</h3><p>输出文件的第k行<br><code>sed -n kp file</code><br>输出第k到m行<br><code>sed -n &quot;k,mp&quot; file</code></p>
 <p>逐行比较两个文件：</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;file1=<span class="variable">$1</span>, file2=<span class="variable">$2</span>&quot;</span></span><br><span class="line">na=`grep -c <span class="string">&quot;.*&quot;</span> <span class="variable">$1</span>`</span><br><span class="line">nb=`grep -c <span class="string">&quot;.*&quot;</span> <span class="variable">$2</span>`</span><br><span class="line"><span class="keyword">if</span> ((<span class="variable">$na</span> != <span class="variable">$nb</span>)); <span class="keyword">then</span></span><br><span class="line">  <span class="built_in">echo</span> <span class="string">&quot;diff lines number: <span class="variable">$na</span> : <span class="variable">$nb</span>&quot;</span></span><br><span class="line">  <span class="built_in">exit</span> 1</span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"><span class="keyword">for</span> ((i=<span class="number">1</span>; i&lt;=<span class="variable">$na</span>; i++)); <span class="keyword">do</span></span><br><span class="line">  la=`sed -n <span class="variable">$&#123;i&#125;</span>p <span class="variable">$1</span>`</span><br><span class="line">  lb=`sed -n <span class="variable">$&#123;i&#125;</span>p <span class="variable">$2</span>`</span><br><span class="line">  <span class="keyword">if</span> [[ <span class="variable">$la</span> != <span class="variable">$lb</span> ]]; <span class="keyword">then</span></span><br><span class="line">    <span class="built_in">printf</span> <span class="string">&quot;%s: file1=%s, file2=%s\n&quot;</span>  <span class="variable">$i</span> <span class="variable">$la</span> <span class="variable">$lb</span></span><br><span class="line">    <span class="built_in">exit</span> 1</span><br><span class="line">  <span class="keyword">fi</span></span><br><span class="line"><span class="keyword">done</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;check result : same file&quot;</span></span><br><span class="line"><span class="built_in">exit</span></span><br></pre></td></tr></table></figure>
@@ -163,6 +607,9 @@
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">awk <span class="string">&#x27;&#123;if($0~/regExp/)printf(&quot;%s&quot;, $0)&#125;&#x27;</span> file</span><br></pre></td></tr></table></figure>
 <p>文件a中存的key值，文件b中存的‘key value’值，从文件a找b中对应的value：</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="keyword">while</span> <span class="built_in">read</span> key; <span class="keyword">do</span></span><br><span class="line">  awk <span class="string">&#x27;&#123;if($0~/&#x27;</span><span class="string">&quot;(<span class="variable">$key</span>)&quot;</span><span class="string">&#x27;/)printf(&quot;%s\n&quot;, $0)&#125;&#x27;</span> fileb</span><br><span class="line"><span class="keyword">done</span> &lt; filea</span><br></pre></td></tr></table></figure>
+
+
+
 
 <h2 id="控制流语句"><a href="#控制流语句" class="headerlink" title="控制流语句"></a>控制流语句</h2><h3 id="if"><a href="#if" class="headerlink" title="if"></a>if</h3><p><a target="_blank" rel="noopener" href="http://ryanstutorials.net/bash-scripting-tutorial/bash-if-statements.php">tutorial网站</a></p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> [ &lt;some <span class="built_in">test</span>&gt; ]; <span class="keyword">then</span></span><br><span class="line">  &lt;commands&gt;</span><br><span class="line"><span class="keyword">elif</span> [  ]; <span class="keyword">then</span></span><br><span class="line"><span class="keyword">else</span></span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure>
@@ -208,8 +655,10 @@
 
 <p>每次匹配，ls都执行一次<br><code>find /usr/bin -type f -name &#39;*zip&#39; -ok ls -l &#39;&#123;&#125;&#39; &#39;;&#39;</code></p>
 <p>所有结果传递，ls执行一次<br><code>find /usr/bin -type f -name &#39;*zip&#39; -exec ls -l &#39;&#123;&#125;&#39; +</code><br>or<br><code>find /usr/bin -type f -name &#39;*zip&#39; | xargs ls -l</code></p>
+<p><code>find / -regex &#39;.*[^-_./0-9a-zA-Z].*&#39;</code> find with regex</p>
 <h2 id="Networking"><a href="#Networking" class="headerlink" title="Networking"></a>Networking</h2><p>ping<br>traceroute xxx.com<br>ip a<br>netstat<br>ftp<br>wget<br>ssh<br>sftp</p>
 <h2 id="Searching-For-Files"><a href="#Searching-For-Files" class="headerlink" title="Searching For Files"></a>Searching For Files</h2><p>locate<br>find<br>xargs<br>touch<br>stat</p>
+<h2 id="Text-Processing"><a href="#Text-Processing" class="headerlink" title="Text Processing"></a>Text Processing</h2><p>cat<br>sort<br>uniq<br>cut<br>paste<br>join<br>comm<br>diff<br>patch<br>tr<br>sed<br>aspell</p>
  
     </div>
 
