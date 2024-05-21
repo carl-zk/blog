@@ -8,7 +8,7 @@ tags:
 ## software
 ### [PowerToys](https://learn.microsoft.com/en-us/windows/powertoys/)
 ![](/2024/05/19/windows/powertoys.png)
-### [LightShot 截图工具](https://app.prntscr.com/en/)
+### [LightShot 截图工具](https://app.prntscr.com/en/) or [snipaste](https://www.snipaste.com/)
 ### [coreDNS](https://coredns.io/)
 ![](/2024/05/19/windows/coreDNS.png)
 [Corefile](/blog/2024/05/19/windows/Corefile)
