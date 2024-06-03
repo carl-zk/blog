@@ -660,3 +660,10 @@ patch
 tr
 sed
 aspell
+
+## exit status
+`echo $?`
+
+`exit` 
+`exit 2`
+`return 1`

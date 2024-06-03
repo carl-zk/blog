@@ -32,5 +32,10 @@ tags:
 [openJDK](https://adoptium.net/temurin/releases/?os=windows)
 [eclipse](https://www.eclipse.org/downloads/packages/)
 [eclipse_preferences.epf](/blog/2024/05/19/windows/eclipse_preferences.epf)
+[settings.xml](/blog/2024/05/19/windows/settings.xml)
 [RainbowDrops.xml](/blog/2024/05/19/windows/RainbowDrops.xml)
 ![](/2024/05/19/windows/eclipse.png)
+
+## dns over https
+https://doh.libredns.gr/noads
+https://dns.quad9.net/dns-query
