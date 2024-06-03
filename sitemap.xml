@@ -2,15 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://carl-zk.github.io/blog/2024/05/19/windows/</loc>
-    <title>Windows</title>
-    <date>2024-05-19T04:04:23.000Z</date>
-  </url>
-  
-  <url>
     <loc>https://carl-zk.github.io/blog/2017/05/09/Bash-Script%E5%AD%A6%E4%B9%A0/</loc>
     <title>Bash Script学习</title>
     <date>2017-05-09T14:58:50.000Z</date>
+  </url>
+  
+  <url>
+    <loc>https://carl-zk.github.io/blog/2024/05/19/windows/</loc>
+    <title>Windows</title>
+    <date>2024-05-19T04:04:23.000Z</date>
   </url>
   
   <url>
