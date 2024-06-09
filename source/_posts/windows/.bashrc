@@ -8,6 +8,8 @@ export PATH=$PATH:${MVN_HOME}/bin
 # refer to symbol link node
 NODE_HOME=/d/local/node
 export PATH=$PATH:$NODE_HOME
+PROTOC_HOME=/d/local/protoc/bin
+export PATH=$PATH:$PROTOC_HOME
 
 ## config alias
 #mvn clean install -Dparallel=all -DperCoreThreadCount=true
