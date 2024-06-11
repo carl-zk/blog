@@ -6,6 +6,15 @@ tags: shell
 ---
 >不看[TLCL](http://linuxcommand.org/index.php),学会shell script也惘然！
 
+#!bin/bash -e 或 set -e 执行报错就停止
+-x 打印每条
+command & 后台执行
+jobs --show back tasks
+fg %job_number 把task从back挪出来，可以用ctr+c停掉
+ctr+z 停process
+bg %job_number 
+kill -15/20
+
 ## 常用命令
 ### windows格式文件转linux格式文件
 ```sh
@@ -47,6 +56,30 @@ or
 `:s/old/new/g` 替换当前行所有
 `:2,$s/old/new/g` 第2行到文件末
 
+vi file1 file2
+:bn 切换
+:bp
+:buffers 文件列表
+
+O -insert above line
+I -insert lien heading
+r -replace one char
+R -replace until Esc
+cw -change current word with next text
+C -change until Esc
+cc -change whole line
+dw -delete word
+D -delete to tail
+
+?string -search backward
+
+:.= -current line number
+:= -total line number
+
+:w newfile -write into another file
+
+
+
 # 入门大全
 ## 脚本文件
 文件首行一般为所用shell类型：
@@ -60,6 +93,19 @@ or
 echo 'hello world'
 ```
 现在所有Linux、Unix系统都有`bash/sh`，而bash是对sh的增强版本，所以推荐直接用bash。
+
+echo '$(cal)' 单引号使特殊字符失效
+
+## string
+foo="fdjslj jfd"
+echo ${foo} 长度
+echo ${foo:5:2} 截取
+test -z "$foo" && echo yes 必须用引号括起来
+
+arr=("a" "b" "c")
+for i in "${arr[@]}"; do 必须用引号括起来，最优方式
+  echo $i
+done
 
 ## 输出重定向
 ```sh
@@ -122,6 +168,10 @@ _EOF_
 # here string
 cat <<< "hello world"
 ```
+
+cat < file_name
+cat > file_name
+
 
 ## 文本处理三大利器 & 正则表达式
 
@@ -286,6 +336,7 @@ grep -E "^[a-z]{1,6}" /etc/passwd
 
 
 `zgrep '899' phonelist.tar.gz` zgrep 可查询二进制文件是否包含 
+grep -rl --binary-file=binary 'exp' .
 
 ### sed
 输出文件的第k行
@@ -315,6 +366,11 @@ echo "check result : same file"
 exit
 ```
 ### awk
+awk '{print}' file
+awk -F':' '{print $1}' /etc/passwd
+awk '/regexp/ {print $1} file
+awk 'BEGIN {} {} END{}' file
+
 统计每个人每月的加班情况
 要求：加班结束时间必须大于等于19：30, 加班时长=（加班结束时间-18:30）/8, 保留2位小数，小数位不进位。
 
@@ -667,3 +723,11 @@ aspell
 `exit` 
 `exit 2`
 `return 1`
+
+## ps netstat
+ps -ef|grep java
+ps -aux|grep java
+ps -eo pid,vsz,cmd --sort vsz|grep java
+
+netstat -an|grep 80
+netstat -an|grep 80|cut -d':' -f 2|cut -b 1-30|sort|uniq
