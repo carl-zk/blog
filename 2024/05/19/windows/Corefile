@@ -2,7 +2,7 @@
     whoami
     errors
     hosts {
-    	127.0.0.1 a.b.c.d
+    	127.0.0.1	localhost
     	#127.0.0.1 www.scootersoftware.com
     	#127.0.0.1 scootersoftware.com
     	#172.217.163.46 google.com
@@ -12,8 +12,8 @@
     }
     forward . 208.67.222.222:443 208.67.222.222:5353 208.67.220.220:443 208.67.220.220:5353
     cache 30
-    log
-    health
+#    log
+#    health
 }
 .:5301 {
 	forward . tls://9.9.9.9 {
@@ -33,3 +33,10 @@ tls_servername dns.google
 }
 cache
 }
+.:5304 {
+forward . tls://116.202.176.26:853 tls://2a01:4f8:1c0c:8274::1:853 {
+tls_servername noads.libredns.gr
+}
+cache
+}
+
