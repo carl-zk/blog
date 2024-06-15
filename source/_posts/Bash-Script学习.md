@@ -98,7 +98,7 @@ echo '$(cal)' 单引号使特殊字符失效
 
 ## string
 foo="fdjslj jfd"
-echo ${foo} 长度
+echo ${#foo} 长度
 echo ${foo:5:2} 截取
 test -z "$foo" && echo yes 必须用引号括起来
 
