@@ -10,6 +10,8 @@ NODE_HOME=/d/local/node
 export PATH=$PATH:$NODE_HOME
 PROTOC_HOME=/d/local/protoc/bin
 export PATH=$PATH:$PROTOC_HOME
+export JMETER_HOME=/d/local/jmeter
+export PATH=$PATH:${JMETER_HOME}/bin
 
 ## config alias
 #mvn clean install -Dparallel=all -DperCoreThreadCount=true

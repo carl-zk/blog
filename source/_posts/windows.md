@@ -28,6 +28,41 @@ tags:
 ### [cudaText](https://cudatext.github.io/)
 `ctr-shift-p`
 ### [hhkb Keymap Tool](https://happyhackingkb.com/download/)
+### ssh
+```sh
+ssh 配置 client 无密码登录
+
+远程主机中：
+cd .ssh // 没有就执行 ssh-keygen
+vi authorized_keys
+将id_rsa.pub复制进去
+chmod 600 authorized_keys
+
+本地：
+cd .ssh
+vi config
+Host hostA //名字随便起
+  Hostname ip
+  Port 22
+  User xx
+  ServerAliveInterval 120 //每2分钟发一个空包，保持连接用的
+  ServerAliveCountMax 5 //5次收不到服务端响应就断开
+Host * // *匹配所有
+  Port 22
+  ServerAliveInterval 120 //每2分钟发一个空包，保持连接用的
+  ServerAliveCountMax 5 //5次收不到服务端响应就断开
+  
+使用：
+ssh hostA
+
+帮助：
+man ssh_conifg
+```
+
+other optional utils:
+[PuTTY](https://www.putty.org/)
+[mRemoteNG](https://mremoteng.org/)
+
 ## local
 [openJDK](https://adoptium.net/temurin/releases/?os=windows)
 [eclipse](https://www.eclipse.org/downloads/packages/)
