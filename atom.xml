@@ -2038,7 +2038,7 @@
     <link href="https://carl-zk.github.io/blog/2017/05/09/Bash-Script%E5%AD%A6%E4%B9%A0/"/>
     <id>https://carl-zk.github.io/blog/2017/05/09/Bash-Script%E5%AD%A6%E4%B9%A0/</id>
     <published>2017-05-09T14:58:50.000Z</published>
-    <updated>2024-06-13T05:23:27.770Z</updated>
+    <updated>2024-07-11T13:09:09.678Z</updated>
     
     
       
@@ -2046,8 +2046,7 @@
     <summary type="html">&lt;blockquote&gt;
 &lt;p&gt;不看&lt;a href=&quot;http://linuxcommand.org/index.php&quot;&gt;TLCL&lt;/a&gt;,学会shell script也惘然！&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;#!bin&amp;#x2F;bash -e 或 set -e 执行报错就停止&lt;br&gt;-x 打印每条&lt;br&gt;command &amp;amp; 后台执行&lt;br&gt;jobs –show back tasks&lt;br&gt;fg %job_number 把task从back挪出来，可以用ctr+c停掉&lt;br&gt;ctr+z 停process&lt;br&gt;bg %job_number&lt;br&gt;kill -15&amp;#x2F;20&lt;/p&gt;
-&lt;h2 id=&quot;常用命令&quot;&gt;&lt;a href=&quot;#常用命令&quot; class=&quot;headerlink&quot; title=&quot;常用命令&quot;&gt;&lt;/a&gt;常用命令&lt;/h2&gt;&lt;h3 id=&quot;windows格式文件转linux格式文件&quot;&gt;&lt;a href=&quot;#windows格式文件转linux格式文件&quot; class=&quot;headerlink&quot; title=&quot;windows格式文件转linux格式文件&quot;&gt;&lt;/a&gt;</summary>
+&lt;figure class=&quot;highlight plaintext&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;#!bin/bash -e 或 set -</summary>
       
     
     
