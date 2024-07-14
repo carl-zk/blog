@@ -6,6 +6,7 @@ tags: shell
 ---
 >不看[TLCL](http://linuxcommand.org/index.php),学会shell script也惘然！
 
+```
 #!bin/bash -e 或 set -e 执行报错就停止
 -x 打印每条
 command & 后台执行
@@ -14,6 +15,7 @@ fg %job_number 把task从back挪出来，可以用ctr+c停掉
 ctr+z 停process
 bg %job_number 
 kill -15/20
+```
 
 ## 常用命令
 ### windows格式文件转linux格式文件
@@ -92,8 +94,9 @@ or
 #!/bin/sh
 echo 'hello world'
 ```
-现在所有Linux、Unix系统都有`bash/sh`，而bash是对sh的增强版本，所以推荐直接用bash。
 
+现在所有Linux、Unix系统都有`bash/sh`，而bash是对sh的增强版本，所以推荐直接用bash。
+```
 echo '$(cal)' 单引号使特殊字符失效
 
 ## string
@@ -106,6 +109,7 @@ arr=("a" "b" "c")
 for i in "${arr[@]}"; do 必须用引号括起来，最优方式
   echo $i
 done
+```
 
 ## 输出重定向
 ```sh
@@ -149,10 +153,12 @@ sl
 > ```
 > 结果为
 > ```sh
-> hello world
-> $str
+> hello world          
+> $str              
 > ```
-** here doc ** 可以使用tab键控制文本格式，但只为方便阅读，不作用于输出
+
+**here doc** 可以使用tab键控制文本格式，但只为方便阅读，不作用于输出
+
 ```sh
 #!/bin/sh
 # 普通
@@ -174,6 +180,9 @@ cat > file_name
 
 
 ## 文本处理三大利器 & 正则表达式
+
+`.*?` : question mark for Non Greedy mode
+`<([A-Z]{1,9})>[^<]*</\\1>` : `\\1` for previous group match item 
 
 ```
 ^ (caret): Matches the start of a string.
