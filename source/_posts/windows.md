@@ -74,3 +74,11 @@ other optional utils:
 ## dns over https
 https://doh.libredns.gr/noads
 https://dns.quad9.net/dns-query
+
+## desktop
+[Macified-Windows](https://github.com/Runixe786/Macified-Windows)
+
+## 输入法
+[小狼毫](https://github.com/rime/home/wiki/CustomizationGuide#%E4%B8%80%E4%BE%8B%E5%AE%9A%E8%A3%BD%E6%AF%8F%E9%A0%81%E5%80%99%E9%81%B8%E6%95%B8)
+
+
