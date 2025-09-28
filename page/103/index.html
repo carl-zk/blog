@@ -84,19 +84,19 @@
         <section id="main">
   
     <article
-  id="post-第二章-Java并发机制的底层实现原理"
+  id="post-ReentrantLock"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
 >
 
   <div class="article-meta">
-    <a href="/blog/2017/03/11/%E7%AC%AC%E4%BA%8C%E7%AB%A0-Java%E5%B9%B6%E5%8F%91%E6%9C%BA%E5%88%B6%E7%9A%84%E5%BA%95%E5%B1%82%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/" class="article-date">
-  <time datetime="2017-03-11T13:35:52.000Z" itemprop="datePublished">2017-03-11</time>
+    <a href="/blog/2017/03/12/ReentrantLock/" class="article-date">
+  <time datetime="2017-03-12T07:15:07.000Z" itemprop="datePublished">2017-03-12</time>
 </a>
     
   <div class="article-category">
-    <a class="article-category-link" href="/blog/categories/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E7%9A%84%E8%89%BA%E6%9C%AF/">并发编程的艺术</a>
+    <a class="article-category-link" href="/blog/categories/java/">java</a>
   </div>
 
   </div>
@@ -106,22 +106,22 @@
       
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2017/03/11/%E7%AC%AC%E4%BA%8C%E7%AB%A0-Java%E5%B9%B6%E5%8F%91%E6%9C%BA%E5%88%B6%E7%9A%84%E5%BA%95%E5%B1%82%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/">第二章 Java并发机制的底层实现原理</a>
+      <a class="article-title" href="/blog/2017/03/12/ReentrantLock/">ReentrantLock</a>
     </h1>
   
 
     </header>
     
     <div class="article-entry" itemprop="articleBody">
-       <p>从下图中可以看出，Java中所使用的并发机制依赖于<strong>JVM的实现</strong>和<strong>CPU的指令</strong>。</p> 
+       <p>ReentrantLock UML图：</p> 
       <p class="article-more-link">
-        <a href="/blog/2017/03/11/%E7%AC%AC%E4%BA%8C%E7%AB%A0-Java%E5%B9%B6%E5%8F%91%E6%9C%BA%E5%88%B6%E7%9A%84%E5%BA%95%E5%B1%82%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/#more">继续阅读全文 »</a>
+        <a href="/blog/2017/03/12/ReentrantLock/#more">继续阅读全文 »</a>
       </p>
        
     </div>
 
     <footer class="article-footer">
-      <!-- <a data-url="https://carl-zk.github.io/blog/2017/03/11/%E7%AC%AC%E4%BA%8C%E7%AB%A0-Java%E5%B9%B6%E5%8F%91%E6%9C%BA%E5%88%B6%E7%9A%84%E5%BA%95%E5%B1%82%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/" data-id="clwbvux5s00b164od27563jxw" class="article-share-link">分享</a> -->
+      <!-- <a data-url="https://carl-zk.github.io/blog/2017/03/12/ReentrantLock/" data-id="clwbvux4w003o64odbyopbzry" class="article-share-link">分享</a> -->
        
       <div id="gitalk-container"></div>
        
@@ -172,7 +172,7 @@
 
 
   <nav id="page-nav">
-    <a class="extend prev" rel="prev" href="/blog/page/102/">&lt;&lt;上一页</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/101/">101</a><a class="page-number" href="/blog/page/102/">102</a><span class="page-number current">103</span><a class="page-number" href="/blog/page/104/">104</a><a class="page-number" href="/blog/page/105/">105</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/192/">192</a><a class="extend next" rel="next" href="/blog/page/104/">下一页&gt;&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/102/">&lt;&lt;上一页</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/101/">101</a><a class="page-number" href="/blog/page/102/">102</a><span class="page-number current">103</span><a class="page-number" href="/blog/page/104/">104</a><a class="page-number" href="/blog/page/105/">105</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/194/">194</a><a class="extend next" rel="next" href="/blog/page/104/">下一页&gt;&gt;</a>
   </nav>
 
 </section>
@@ -196,6 +196,14 @@
       <ul>
         
           <li>
+            <a href="/blog/2025/09/28/projectreactor-webflux/">Projectreactor &amp; Webflux</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2025/02/19/DNSCrypt/">DNSCrypt</a>
+          </li>
+        
+          <li>
             <a href="/blog/2024/05/19/windows/">Windows</a>
           </li>
         
@@ -205,14 +213,6 @@
         
           <li>
             <a href="/blog/2023/12/15/spring-boot-%E5%90%AF%E5%8A%A8%E8%BF%87%E7%A8%8B/">Spring Boot 启动过程</a>
-          </li>
-        
-          <li>
-            <a href="/blog/2022/04/25/Design-Underground-System/">Design Underground System</a>
-          </li>
-        
-          <li>
-            <a href="/blog/2022/04/25/Encode-and-Decode-TinyURL/">Encode and Decode TinyURL</a>
           </li>
         
       </ul>
@@ -236,7 +236,7 @@
   
   <div class="outer">
     <div id="footer-left">
-      &copy; 2016 - 2024 carl-zk<!--&nbsp;|&nbsp;
+      &copy; 2016 - 2025 carl-zk<!--&nbsp;|&nbsp;
       主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a> -->
     </div>
   

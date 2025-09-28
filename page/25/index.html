@@ -84,15 +84,15 @@
         <section id="main">
   
     <article
-  id="post-elasticsearch"
+  id="post-spring-security"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
 >
 
   <div class="article-meta">
-    <a href="/blog/2018/10/10/elasticsearch/" class="article-date">
-  <time datetime="2018-10-10T01:34:33.000Z" itemprop="datePublished">2018-10-10</time>
+    <a href="/blog/2019/02/18/spring-security/" class="article-date">
+  <time datetime="2019-02-18T12:15:22.000Z" itemprop="datePublished">2019-02-18</time>
 </a>
     
   </div>
@@ -102,7 +102,7 @@
       
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2018/10/10/elasticsearch/">Elasticsearch</a>
+      <a class="article-title" href="/blog/2019/02/18/spring-security/">Spring-Security</a>
     </h1>
   
 
@@ -111,23 +111,29 @@
     <div class="article-entry" itemprop="articleBody">
       
       <!-- Table of Contents -->
-       <h2 id="install-es-and-plugins"><a href="#install-es-and-plugins" class="headerlink" title="install es and plugins"></a>install es and plugins</h2><p><a target="_blank" rel="noopener" href="https://www.elastic.co/downloads">elasticsearch-6.4.1 download</a><br>plugin:<br><a target="_blank" rel="noopener" href="https://www.elastic.co/guide/en/elasticsearch/plugins/6.0/analysis-smartcn.html">analysis-smartcn</a> (eg: .&#x2F;bin&#x2F;elasticsearch-plugin install analysis-smartcn)<br><a target="_blank" rel="noopener" href="https://github.com/medcl/elasticsearch-analysis-ik">ik</a></p>
-<p>then start es: bin&#x2F;elasticsearch</p>
-<h2 id="surfing"><a href="#surfing" class="headerlink" title="surfing"></a>surfing</h2><h3 id="验证分词器是否生效"><a href="#验证分词器是否生效" class="headerlink" title="验证分词器是否生效"></a>验证分词器是否生效</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">curl --request POST \</span><br><span class="line">  --url http://localhost:9200/_analyze \</span><br><span class="line">  --header <span class="string">&#x27;Content-Type: application/json&#x27;</span>  -d \</span><br><span class="line"><span class="string">&#x27;&#123;</span></span><br><span class="line"><span class="string">    &quot;analyzer&quot;: &quot;pinyin&quot;,</span></span><br><span class="line"><span class="string">    &quot;text&quot;: &quot;小明&quot;</span></span><br><span class="line"><span class="string">&#125;&#x27;</span></span><br></pre></td></tr></table></figure>
-<h3 id="hibernate-search-elasticsearch"><a href="#hibernate-search-elasticsearch" class="headerlink" title="hibernate-search-elasticsearch"></a>hibernate-search-elasticsearch</h3><p><a target="_blank" rel="noopener" href="https://github.com/carl-zk/JavaJava/tree/master/search-service">code</a></p>
-<h3 id="config-index-and-mapping"><a href="#config-index-and-mapping" class="headerlink" title="config index and mapping"></a>config index and mapping</h3><ol>
-<li>设置analyzer<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">curl --request PUT \</span><br><span class="line">  --url http://localhost:9200/com.wework.entity.company -d \</span><br><span class="line"><span class="string">&#x27;&#123;</span></span><br><span class="line"><span class="string">    &quot;index&quot;: &#123;</span></span><br><span class="line"><span class="string">        &quot;analysis&quot;: &#123;</span></span><br><span class="line"><span class="string">        &quot;analyzer&quot;: &#123;</span></span><br><span class="line"><span class="string">            &quot;pinyin_analyzer&quot;: &#123;</span></span><br><span class="line"><span class="string">                &quot;tokenizer&quot;: &quot;my_pinyin&quot;</span></span><br><span class="line"><span class="string">            &#125;</span></span><br><span class="line"><span class="string">        &#125;,</span></span><br><span class="line"><span class="string">        &quot;tokenizer&quot;: &#123;</span></span><br><span class="line"><span class="string">            &quot;my_pinyin&quot;: &#123;</span></span><br><span class="line"><span class="string">                &quot;type&quot;: &quot;pinyin&quot;,</span></span><br><span class="line"><span class="string">                &quot;keep_separate_first_letter&quot; : false,</span></span><br><span class="line"><span class="string">                &quot;keep_full_pinyin&quot; : true,</span></span><br><span class="line"><span class="string">                &quot;keep_original&quot; : true,</span></span><br><span class="line"><span class="string">                &quot;limit_first_letter_length&quot; : 16,</span></span><br><span class="line"><span class="string">                &quot;lowercase&quot; : true,</span></span><br><span class="line"><span class="string">                &quot;remove_duplicated_term&quot; : true</span></span><br><span class="line"><span class="string">                &#125;</span></span><br><span class="line"><span class="string">            &#125;</span></span><br><span class="line"><span class="string">        &#125;</span></span><br><span class="line"><span class="string">    &#125;</span></span><br><span class="line"><span class="string">&#125;&#x27;</span></span><br></pre></td></tr></table></figure></li>
-<li>设置mapping<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">curl --request PUT \</span><br><span class="line">  --url http://localhost:9200/com.wework.entity.company/_mapping/com.wework.entity.Company -d \</span><br><span class="line"><span class="string">&#x27;&#123;</span></span><br><span class="line"><span class="string">    &quot;properties&quot;: &#123;</span></span><br><span class="line"><span class="string">        &quot;name&quot;: &#123;</span></span><br><span class="line"><span class="string">            &quot;type&quot;: &quot;text&quot;,</span></span><br><span class="line"><span class="string">            &quot;analyzer&quot;: &quot;ik_smart&quot;,</span></span><br><span class="line"><span class="string">            &quot;fields&quot;: &#123;</span></span><br><span class="line"><span class="string">                &quot;pinyin&quot;: &#123;</span></span><br><span class="line"><span class="string">                    &quot;type&quot;: &quot;text&quot;,</span></span><br><span class="line"><span class="string">                    &quot;store&quot;: false,</span></span><br><span class="line"><span class="string">                    &quot;term_vector&quot;: &quot;with_offsets&quot;,</span></span><br><span class="line"><span class="string">                    &quot;analyzer&quot;: &quot;pinyin_analyzer&quot;,</span></span><br><span class="line"><span class="string">                    &quot;boost&quot;: 10</span></span><br><span class="line"><span class="string">                &#125;,</span></span><br><span class="line"><span class="string">                &quot;keyword&quot;: &#123;</span></span><br><span class="line"><span class="string">                    &quot;type&quot;: &quot;keyword&quot;,</span></span><br><span class="line"><span class="string">                    &quot;ignore_above&quot;: 256</span></span><br><span class="line"><span class="string">                &#125;</span></span><br><span class="line"><span class="string">            &#125;</span></span><br><span class="line"><span class="string">        &#125;</span></span><br><span class="line"><span class="string">    &#125;</span></span><br><span class="line"><span class="string">&#125;&#x27;</span></span><br></pre></td></tr></table></figure></li>
-<li>查看mapping<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">curl --request GET \</span><br><span class="line">  --url http://localhost:9200/com.wework.entity.user/_mapping \</span><br></pre></td></tr></table></figure></li>
-<li>搜索<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">curl --request POST \</span><br><span class="line">  --url <span class="string">&#x27;http://localhost:9200/com.wework.entity.user/_search?pretty=&#x27;</span> -d \</span><br><span class="line"><span class="string">&#x27;&#123;</span></span><br><span class="line"><span class="string">    &quot;query&quot;: &#123;</span></span><br><span class="line"><span class="string">        &quot;match&quot;: &#123;</span></span><br><span class="line"><span class="string">            &quot;name.pinyin&quot;: &quot;xiao明&quot;</span></span><br><span class="line"><span class="string">        &#125;</span></span><br><span class="line"><span class="string">    &#125;,</span></span><br><span class="line"><span class="string">    &quot;from&quot;: 0,</span></span><br><span class="line"><span class="string">    &quot;size&quot;: 10,</span></span><br><span class="line"><span class="string">    &quot;sort&quot;: [&quot;_score&quot;]</span></span><br><span class="line"><span class="string">&#125;&#x27;</span></span><br></pre></td></tr></table></figure></li>
-</ol>
+       <p>好久不更新blog了，慵懒了！</p>
+<blockquote>
+<p>为了搞清楚 Spring Security 是如何工作了，特地翻了下源代码，查了许多文档，因为我比较在意细节，例如从何时起SS做认证(Authentication)，从何时做授权(Authorization)，如何定制SS。</p>
+</blockquote>
+<h3 id="Spring-Security-Filters"><a href="#Spring-Security-Filters" class="headerlink" title="Spring Security Filters"></a>Spring Security Filters</h3><p>Spring Security 框架主要利用 Filter 来实现对 HTTP 请求的认证和授权，掌握了 Filter 就弄明白了SS。</p>
+<p>Spring Security 的所有 Filter 都放在 FilterChainProxy 的 <code>List&lt;SecurityFilterChain&gt;</code> 中，Spring-boot 启动时通过 SecurityFilterAutoConfiguration 自动注册 Spring Security’s Filter;</p>
+<p><img src="/blog/2019/02/18/spring-security/flow.svg" loading="lazy"></p>
+<p>FilterChainProxy</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">doFilter</span><span class="params">(ServletRequest request, ServletResponse response,</span></span><br><span class="line"><span class="params">        FilterChain chain)</span> <span class="keyword">throws</span> IOException, ServletException &#123;</span><br><span class="line">    <span class="type">boolean</span> <span class="variable">clearContext</span> <span class="operator">=</span> request.getAttribute(FILTER_APPLIED) == <span class="literal">null</span>;</span><br><span class="line">    <span class="keyword">if</span> (clearContext) &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            request.setAttribute(FILTER_APPLIED, Boolean.TRUE);</span><br><span class="line">            doFilterInternal(request, response, chain);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">finally</span> &#123;</span><br><span class="line">            SecurityContextHolder.clearContext();</span><br><span class="line">            request.removeAttribute(FILTER_APPLIED);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        doFilterInternal(request, response, chain);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>可以看出 doFilterInternal(request, response, chain) 就包含了 Spring Security 的认证和授权，认证结果保存着 SecurityContextHolder中，FilterChain 结束后清除。</p>
+<h4 id="Authentication"><a href="#Authentication" class="headerlink" title="Authentication"></a>Authentication</h4><p>AbstractAuthenticationProcessingFilter</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">doFilter</span><span class="params">(ServletRequest req, ServletResponse res, FilterChain chain)</span></span><br><span class="line">            <span class="keyword">throws</span> IOException, ServletException &#123;</span><br><span class="line"></span><br><span class="line">        ...</span><br><span class="line"></span><br><span class="line">        Authentication authResult;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            authResult = attemptAuthentication(request, response);</span><br><span class="line">            <span class="keyword">if</span> (authResult == <span class="literal">null</span>) &#123;</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// 认证成功，依据session策略进行处理，默认无session</span></span><br><span class="line">            sessionStrategy.onAuthentication(authResult, request, response);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">catch</span> (AuthenticationException failed) &#123;</span><br><span class="line">            unsuccessfulAuthentication(request, response, failed);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// successfulAuthentication(request, response, chain, authResult);</span></span><br><span class="line"></span><br><span class="line">        SecurityContextHolder.getContext().setAuthentication(authResult);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 记住认证结果，一般在 cookie 或 redis </span></span><br><span class="line">        rememberMeServices.loginSuccess(request, response, authResult);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Fire event</span></span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">this</span>.eventPublisher != <span class="literal">null</span>) &#123;</span><br><span class="line">            eventPublisher.publishEvent(<span class="keyword">new</span> <span class="title class_">InteractiveAuthenticationSuccessEvent</span>(</span><br><span class="line">                    authResult, <span class="built_in">this</span>.getClass()));</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 认证成功后，默认跳转到指定 target url</span></span><br><span class="line">        successHandler.onAuthenticationSuccess(request, response, authResult);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>attemptAuthentication(request, response) 需要子类具体实现认证过程，调用 this.getAuthenticationManager().authenticate(Authentication auth) 方法。<br>AuthenticationManager包含 <code>List&lt;AuthenticationProvider&gt;</code>, AuthenticationProvider 提供具体的认证过程。<br>概括一下就是 Filter 调用 AuthenticationManager 进行认证，认证成功后保存 Authentication 到 SecurityContextHolder。</p>
+<h4 id="Authorization"><a href="#Authorization" class="headerlink" title="Authorization"></a>Authorization</h4><p>FilterSecurityInterceptor 是最后一个 SS Filter，一般情况下用户不需要DIY这部分，因为认证成功后会将 Principle (登录对象) 和 Roles 一同保存在 SecurityContextHolder 中，授权过程就成了根据 request 从 Map&lt;RequestMatcher, Collection<ConfigAttribute>&gt; 获取该 uri 所需角色列表，交给 AccessDecisionManager（类似的，它包含 <code>List&lt;AccessDecisionVoter&gt;</code>, 由 voter 投票） 来决定是否有权限访问，只要有一个 voter 不通过，则无权访问。</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/carl-zk/JavaJava/tree/master/security2">code</a></p>
  
     </div>
 
     <footer class="article-footer">
-      <!-- <a data-url="https://carl-zk.github.io/blog/2018/10/10/elasticsearch/" data-id="clwbvux52005064od6mxd49gm" class="article-share-link">分享</a> -->
+      <!-- <a data-url="https://carl-zk.github.io/blog/2019/02/18/spring-security/" data-id="clwbvux57006c64od9q901mxx" class="article-share-link">分享</a> -->
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/elasticsearch/" rel="tag">elasticsearch</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/spring/" rel="tag">spring</a></li></ul>
  
       <div id="gitalk-container"></div>
        
@@ -178,7 +184,7 @@
 
 
   <nav id="page-nav">
-    <a class="extend prev" rel="prev" href="/blog/page/24/">&lt;&lt;上一页</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/23/">23</a><a class="page-number" href="/blog/page/24/">24</a><span class="page-number current">25</span><a class="page-number" href="/blog/page/26/">26</a><a class="page-number" href="/blog/page/27/">27</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/192/">192</a><a class="extend next" rel="next" href="/blog/page/26/">下一页&gt;&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/24/">&lt;&lt;上一页</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/23/">23</a><a class="page-number" href="/blog/page/24/">24</a><span class="page-number current">25</span><a class="page-number" href="/blog/page/26/">26</a><a class="page-number" href="/blog/page/27/">27</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/194/">194</a><a class="extend next" rel="next" href="/blog/page/26/">下一页&gt;&gt;</a>
   </nav>
 
 </section>
@@ -202,6 +208,14 @@
       <ul>
         
           <li>
+            <a href="/blog/2025/09/28/projectreactor-webflux/">Projectreactor &amp; Webflux</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2025/02/19/DNSCrypt/">DNSCrypt</a>
+          </li>
+        
+          <li>
             <a href="/blog/2024/05/19/windows/">Windows</a>
           </li>
         
@@ -211,14 +225,6 @@
         
           <li>
             <a href="/blog/2023/12/15/spring-boot-%E5%90%AF%E5%8A%A8%E8%BF%87%E7%A8%8B/">Spring Boot 启动过程</a>
-          </li>
-        
-          <li>
-            <a href="/blog/2022/04/25/Design-Underground-System/">Design Underground System</a>
-          </li>
-        
-          <li>
-            <a href="/blog/2022/04/25/Encode-and-Decode-TinyURL/">Encode and Decode TinyURL</a>
           </li>
         
       </ul>
@@ -242,7 +248,7 @@
   
   <div class="outer">
     <div id="footer-left">
-      &copy; 2016 - 2024 carl-zk<!--&nbsp;|&nbsp;
+      &copy; 2016 - 2025 carl-zk<!--&nbsp;|&nbsp;
       主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a> -->
     </div>
   

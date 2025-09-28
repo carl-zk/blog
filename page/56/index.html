@@ -84,17 +84,21 @@
         <section id="main">
   
     <article
-  id="post-第9章-类和模块"
+  id="post-如何优雅的番蔷"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
 >
 
   <div class="article-meta">
-    <a href="/blog/2018/01/08/%E7%AC%AC9%E7%AB%A0-%E7%B1%BB%E5%92%8C%E6%A8%A1%E5%9D%97/" class="article-date">
-  <time datetime="2018-01-08T14:08:04.000Z" itemprop="datePublished">2018-01-08</time>
+    <a href="/blog/2018/03/03/%E5%A6%82%E4%BD%95%E4%BC%98%E9%9B%85%E7%9A%84%E7%95%AA%E8%94%B7/" class="article-date">
+  <time datetime="2018-03-03T12:59:14.000Z" itemprop="datePublished">2018-03-03</time>
 </a>
     
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/%E7%B3%BB%E7%BB%9F%E9%85%8D%E7%BD%AE/">系统配置</a>
+  </div>
+
   </div>
   <div class="article-inner">
      
@@ -102,7 +106,7 @@
       
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2018/01/08/%E7%AC%AC9%E7%AB%A0-%E7%B1%BB%E5%92%8C%E6%A8%A1%E5%9D%97/">第9章 类和模块</a>
+      <a class="article-title" href="/blog/2018/03/03/%E5%A6%82%E4%BD%95%E4%BC%98%E9%9B%85%E7%9A%84%E7%95%AA%E8%94%B7/">如何优雅的番蔷</a>
     </h1>
   
 
@@ -111,29 +115,28 @@
     <div class="article-entry" itemprop="articleBody">
       
       <!-- Table of Contents -->
-       <h2 id="类和构造函数"><a href="#类和构造函数" class="headerlink" title="类和构造函数"></a>类和构造函数</h2><p>构造函数的 prototype 属性被用作新对象的原型。这就意味着通过同一个构造函数创建的所有对象都继承自同一个对象。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">Person</span>(<span class="params">name, age</span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">name</span> = name;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">age</span> = age;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title class_">Person</span>.<span class="property"><span class="keyword">prototype</span></span> = &#123;</span><br><span class="line">    <span class="attr">speak</span>: <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;hello world&#x27;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> xiaoming = <span class="keyword">new</span> <span class="title class_">Person</span>(<span class="string">&#x27;小明&#x27;</span>, <span class="number">18</span>);</span><br><span class="line"></span><br><span class="line">xiaoming.<span class="title function_">speak</span>();</span><br></pre></td></tr></table></figure>
+       <p>教大家如何翻墙。<br>本来以为这个博客不会有人看的，意外的是竟然有人通过这个博客加我微信，还有人通过这个博客能了解我是个什么样的人，让我找工作时不用怎么美化自己对方也能看到我的<strong>潜力</strong>。我觉得以后要加点个人介绍什么的，免得每次面试都要先来个自我介绍，感觉很不自在。<br>从我上大学接触编程开始，会翻墙似乎成了一种基本素养。<br>曾经以为<em>自由门</em>会用一辈子，但是还没念到大四就不好用了。以前还可以搜没有封掉的Google server IP，配置一下hosts文件，但是现如今这招大概也不灵了吧。其它的什么蓝灯工具应该也只是好用了一阵，免费的翻墙工具基本上都不好使了。为了使祖国更加强大，从事“科学研究”的我们只能想办法搞到一手资料，避免落后挨打的局面。祖国万岁！我爱你！<br>我不记得是从什么时候开始用<a target="_blank" rel="noopener" href="https://github.com/XX-net/XX-Net">XX-Net</a>的，忘记了是怎么知道它的。好像是我用自由门翻墙时，Google出来的，当年为了能有个备用的翻墙工具（那个时候自由门还是最好用的翻墙工具），所以就找到它了，第一次尝试它总觉得它本身有个BUG：因为你无法翻墙所以才用XX-Net，但是你用XX-Net的前提条件是你得有Go-Agent账号，做认证的时候需要你的电脑能访问Google，认证完成后你才能用XX-Net翻墙。让我开始喜欢它是因为自由门真的不行了，但XX-Net仍然可以让我使用Google。当年很多同学都不知道有这个神器，着实让我嘚瑟了一番，工作后我又把它分享给同事，每次我发现还有不会翻墙的程序员时我都无法理解，百度真的有变化吗？哎呀，最近都没怎么用XX-Net，由于两会期间XX-Net也不行的时候，我只能用自己的服务器翻墙，现在我翻墙基本上就用<a target="_blank" rel="noopener" href="https://shadowsocks.org/en/download/servers.html">shadowsocks</a>.<br>相信网上有很多关于如何配置的博客，我就不重复了，我就说说我是如何知道它的吧。因为我看过<strong>一本黑</strong>的公众号，它里面有一个收费的会员宣传图片，其中就包括教大家如何翻墙，图上有一个PDF的文件名是ss+ssh，我就是通过这个文件名搜到的shadowsocks。估计肯付费的都是冲着教翻墙去的，哈哈。<br>我的AWS服务器也快到期了，多希望能进一个有VPN翻墙的公司，这样就不愁翻不了墙了。</p>
+<hr>
+<p>不写个傻瓜教程是不行的，再次部署发现竟然有坑，只有一个能fq的工具也是不行的。<br>AWS服务器 EC2(Elastic Compute Cloud) 一只，UBUNTU 16.04</p>
+<h3 id="Install-shadowsocks"><a href="#Install-shadowsocks" class="headerlink" title="Install shadowsocks"></a>Install shadowsocks</h3><p><a target="_blank" rel="noopener" href="https://pip.pypa.io/en/stable/installing/">Install pip</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py</span><br><span class="line">python get-pip.py</span><br><span class="line">sudo pip install shadowsocks</span><br></pre></td></tr></table></figure>
+<p><a target="_blank" rel="noopener" href="http://www.shadowsocks.org/en/download/servers.html">http://www.shadowsocks.org/en/download/servers.html</a></p>
+<h3 id="config"><a href="#config" class="headerlink" title="config"></a>config</h3><p>命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">ubuntu@ip-172-31-16-168:~$ ssserver -h</span><br><span class="line">INFO: loading config from config.json</span><br><span class="line">usage: ssserver [OPTION]...</span><br><span class="line">A fast tunnel proxy that helps you bypass firewalls.</span><br><span class="line"></span><br><span class="line">You can supply configurations via either config file or command line arguments.</span><br><span class="line"></span><br><span class="line">Proxy options:</span><br><span class="line">  -c CONFIG              path to config file</span><br><span class="line">  -s SERVER_ADDR         server address, default: 0.0.0.0</span><br><span class="line">  -p SERVER_PORT         server port, default: 8388</span><br><span class="line">  -k PASSWORD            password</span><br><span class="line">  -m METHOD              encryption method, default: aes-256-cfb</span><br><span class="line">  -t TIMEOUT             timeout in seconds, default: 300</span><br><span class="line">  --fast-open            use TCP_FASTOPEN, requires Linux 3.7+</span><br><span class="line">  --workers WORKERS      number of workers, available on Unix/Linux</span><br><span class="line">  --forbidden-ip IPLIST  comma seperated IP list forbidden to connect</span><br><span class="line">  --manager-address ADDR optional server manager UDP address, see wiki</span><br><span class="line"></span><br><span class="line">General options:</span><br><span class="line">  -h, --help             show this help message and exit</span><br><span class="line">  -d start/stop/restart  daemon mode</span><br><span class="line">  --pid-file PID_FILE    pid file for daemon mode</span><br><span class="line">  --log-file LOG_FILE    log file for daemon mode</span><br><span class="line">  --user USER            username to run as</span><br><span class="line">  -v, -vv                verbose mode</span><br><span class="line">  -q, -qq                quiet mode, only show warnings/errors</span><br><span class="line">  --version              show version information</span><br><span class="line"></span><br><span class="line">Online help: &lt;https://github.com/shadowsocks/shadowsocks&gt;</span><br></pre></td></tr></table></figure>
+<p>新建config.json, 格式：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line"> &quot;server&quot;: &quot;0.0.0.0&quot;,</span><br><span class="line"> &quot;server_ipv6&quot;: &quot;::&quot;,</span><br><span class="line"> &quot;server_port&quot;: 8388,</span><br><span class="line"></span><br><span class="line"> &quot;password&quot;: &quot;abc123&quot;,</span><br><span class="line"> &quot;timeout&quot;: 120,</span><br><span class="line"> &quot;udp_timeout&quot;: 60,</span><br><span class="line"> &quot;method&quot;: &quot;aes-128-ctr&quot;,</span><br><span class="line"> &quot;protocol&quot;: &quot;auth_aes128_md5&quot;,</span><br><span class="line"> &quot;protocol_param&quot;: &quot;&quot;,</span><br><span class="line"> &quot;obfs&quot;: &quot;tls1.2_ticket_auth_compatible&quot;,</span><br><span class="line"> &quot;obfs_param&quot;: &quot;&quot;,</span><br><span class="line"> &quot;speed_limit_per_con&quot;: 0,</span><br><span class="line"> &quot;speed_limit_per_user&quot;: 0,</span><br><span class="line"></span><br><span class="line"> &quot;dns_ipv6&quot;: false,</span><br><span class="line"> &quot;connect_verbose_info&quot;: 0,</span><br><span class="line"> &quot;redirect&quot;: &quot;&quot;,</span><br><span class="line"> &quot;fast_open&quot;: false</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h3 id="构造函数和类的标识"><a href="#构造函数和类的标识" class="headerlink" title="构造函数和类的标识"></a>构造函数和类的标识</h3><p><strong>原型对象是类的唯一标识</strong>：当且仅当两个对象继承自同一个原型对象时，它们才是属于同一个类的实例。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> base = &#123;</span><br><span class="line">    <span class="attr">id</span>: <span class="number">0</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">Cat</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">name</span> = <span class="string">&#x27;cat&#x27;</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="title class_">Cat</span>.<span class="property"><span class="keyword">prototype</span></span> = base;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">Dog</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">age</span> = <span class="number">18</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="title class_">Dog</span>.<span class="property"><span class="keyword">prototype</span></span> = base;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> c = <span class="keyword">new</span> <span class="title class_">Cat</span>();</span><br><span class="line"><span class="keyword">var</span> d = <span class="keyword">new</span> <span class="title class_">Dog</span>;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(c <span class="keyword">instanceof</span> <span class="title class_">Dog</span>);</span><br></pre></td></tr></table></figure>
-<p>结果为 true</p>
-<h3 id="constructor属性"><a href="#constructor属性" class="headerlink" title="constructor属性"></a>constructor属性</h3><p>任何JavaScript函数都可以作为构造函数，并且调用构造函数需要用到一个prototype属性。因此每个函数都自动拥有一个prototype属性。这个属性的值是一个对象，这个对象包含唯一一个不可枚举属性constructor。constructor的值是一个函数对象。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> F = <span class="keyword">function</span>(<span class="params"></span>)&#123;&#125;;	<span class="comment">// 这是一个函数对象</span></span><br><span class="line"><span class="keyword">var</span> c = F.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">constructor</span>;</span><br><span class="line">c === F </span><br></pre></td></tr></table></figure>
-<p>结果为 true</p>
-<p>上例中由于Person将原型指向一个新对象代替了默认的Person.prototype对象，这个新对象不含有contructor属性，所以Person的实例也不含有constructor属性。可以通过补救来修正它：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Person</span>.<span class="property"><span class="keyword">prototype</span></span> = &#123;</span><br><span class="line">    <span class="attr">constructor</span>: <span class="title class_">Person</span>,</span><br><span class="line">    <span class="attr">speak</span>: <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;hello world&#x27;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>显示的设置构造函数反向引用，或者：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Person</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">speak</span> = <span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;hello world&#x27;</span>);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>为原型对象添加方法。<br>在实践中，推荐使用后者。</p>
-<h2 id="Java式的类继承"><a href="#Java式的类继承" class="headerlink" title="Java式的类继承"></a>Java式的类继承</h2><p>P207</p>
+<p><code>ssserver -c ./config.json -d start</code></p>
+<h3 id="client"><a href="#client" class="headerlink" title="client"></a>client</h3><p><a target="_blank" rel="noopener" href="https://github.com/shadowsocks/ShadowsocksX-NG/releases">download</a><br><img src="/blog/2018/03/03/%E5%A6%82%E4%BD%95%E4%BC%98%E9%9B%85%E7%9A%84%E7%95%AA%E8%94%B7/sser.png" loading="lazy"><br><img src="/blog/2018/03/03/%E5%A6%82%E4%BD%95%E4%BC%98%E9%9B%85%E7%9A%84%E7%95%AA%E8%94%B7/conf.png" loading="lazy"><br>浏览器代理：<br><img src="/blog/2018/03/03/%E5%A6%82%E4%BD%95%E4%BC%98%E9%9B%85%E7%9A%84%E7%95%AA%E8%94%B7/swi.png" loading="lazy"></p>
+<p>如果突然不能fq了，改下server port 8388。客户端修改端口后重启生效。</p>
+<p>流量不够用？<a target="_blank" rel="noopener" href="https://doub.io/sszhfx/">逗比根据地</a></p>
+<h4 id="more"><a href="#more" class="headerlink" title="more"></a>more</h4><p><a target="_blank" rel="noopener" href="https://github.com/txthinking/brook">brook</a><br><a target="_blank" rel="noopener" href="https://github.com/coyove/goflyway">goflyway</a></p>
  
     </div>
 
     <footer class="article-footer">
-      <!-- <a data-url="https://carl-zk.github.io/blog/2018/01/08/%E7%AC%AC9%E7%AB%A0-%E7%B1%BB%E5%92%8C%E6%A8%A1%E5%9D%97/" data-id="clwbvux5s00at64od8ifa4z97" class="article-share-link">分享</a> -->
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/javascript/" rel="tag">javascript</a></li></ul>
- 
+      <!-- <a data-url="https://carl-zk.github.io/blog/2018/03/03/%E5%A6%82%E4%BD%95%E4%BC%98%E9%9B%85%E7%9A%84%E7%95%AA%E8%94%B7/" data-id="clwbvux5i008s64od6hmv4qzu" class="article-share-link">分享</a> -->
+       
       <div id="gitalk-container"></div>
        
 
@@ -183,7 +186,7 @@
 
 
   <nav id="page-nav">
-    <a class="extend prev" rel="prev" href="/blog/page/55/">&lt;&lt;上一页</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/54/">54</a><a class="page-number" href="/blog/page/55/">55</a><span class="page-number current">56</span><a class="page-number" href="/blog/page/57/">57</a><a class="page-number" href="/blog/page/58/">58</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/192/">192</a><a class="extend next" rel="next" href="/blog/page/57/">下一页&gt;&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/55/">&lt;&lt;上一页</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/54/">54</a><a class="page-number" href="/blog/page/55/">55</a><span class="page-number current">56</span><a class="page-number" href="/blog/page/57/">57</a><a class="page-number" href="/blog/page/58/">58</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/194/">194</a><a class="extend next" rel="next" href="/blog/page/57/">下一页&gt;&gt;</a>
   </nav>
 
 </section>
@@ -207,6 +210,14 @@
       <ul>
         
           <li>
+            <a href="/blog/2025/09/28/projectreactor-webflux/">Projectreactor &amp; Webflux</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2025/02/19/DNSCrypt/">DNSCrypt</a>
+          </li>
+        
+          <li>
             <a href="/blog/2024/05/19/windows/">Windows</a>
           </li>
         
@@ -216,14 +227,6 @@
         
           <li>
             <a href="/blog/2023/12/15/spring-boot-%E5%90%AF%E5%8A%A8%E8%BF%87%E7%A8%8B/">Spring Boot 启动过程</a>
-          </li>
-        
-          <li>
-            <a href="/blog/2022/04/25/Design-Underground-System/">Design Underground System</a>
-          </li>
-        
-          <li>
-            <a href="/blog/2022/04/25/Encode-and-Decode-TinyURL/">Encode and Decode TinyURL</a>
           </li>
         
       </ul>
@@ -247,7 +250,7 @@
   
   <div class="outer">
     <div id="footer-left">
-      &copy; 2016 - 2024 carl-zk<!--&nbsp;|&nbsp;
+      &copy; 2016 - 2025 carl-zk<!--&nbsp;|&nbsp;
       主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a> -->
     </div>
   

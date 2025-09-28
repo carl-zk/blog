@@ -84,15 +84,15 @@
         <section id="main">
   
     <article
-  id="post-docker-note"
+  id="post-mysql-中文乱码"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
 >
 
   <div class="article-meta">
-    <a href="/blog/2018/08/11/docker-note/" class="article-date">
-  <time datetime="2018-08-11T15:30:54.000Z" itemprop="datePublished">2018-08-11</time>
+    <a href="/blog/2018/09/14/mysql-%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81/" class="article-date">
+  <time datetime="2018-09-14T07:42:50.000Z" itemprop="datePublished">2018-09-14</time>
 </a>
     
   </div>
@@ -102,7 +102,7 @@
       
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2018/08/11/docker-note/">Docker Note</a>
+      <a class="article-title" href="/blog/2018/09/14/mysql-%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81/">Mysql 中文乱码</a>
     </h1>
   
 
@@ -111,77 +111,19 @@
     <div class="article-entry" itemprop="articleBody">
       
       <!-- Table of Contents -->
-       <h2 id="docker-container-networking"><a href="#docker-container-networking" class="headerlink" title="docker container networking"></a>docker container networking</h2><h3 id="Closed-containers"><a href="#Closed-containers" class="headerlink" title="Closed containers"></a>Closed containers</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run --net none</span><br></pre></td></tr></table></figure>
-<h3 id="Bridged-containers-default"><a href="#Bridged-containers-default" class="headerlink" title="Bridged containers (default)"></a>Bridged containers (default)</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run --net bridge</span><br></pre></td></tr></table></figure>
-<h4 id="custom-name-resolution"><a href="#custom-name-resolution" class="headerlink" title="custom name resolution"></a>custom name resolution</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">--hostname containerhostname</span><br></pre></td></tr></table></figure>
-<p>set primary DNS server</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">--dns 8.8.8.8</span><br></pre></td></tr></table></figure>
-<p>在此 DNS server 上配置容器的 IP 和 hostname</p>
-<p>custome mapping for an IP address and host name pair:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">--add-host test:1.1.1.1</span><br></pre></td></tr></table></figure>
+       <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/blueheart20/article/details/52385142">https://blog.csdn.net/blueheart20/article/details/52385142</a></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> variables <span class="keyword">like</span> <span class="string">&#x27;char%&#x27;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-<p>所有映射均可在 &#x2F;etc&#x2F;hosts 中看到。</p>
-<p>端口映射：</p>
-<ol>
-<li>&lt;containerPort&gt;<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-p 3333</span><br></pre></td></tr></table></figure></li>
-<li>&lt;hostPort&gt;:&lt;containerPort&gt;<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-p 3333:3333</span><br></pre></td></tr></table></figure></li>
-<li>&lt;ip&gt;::&lt;containerPort&gt;<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-p 1.1.1.1::3333</span><br></pre></td></tr></table></figure></li>
-<li>&lt;ip&gt;:&lt;hostPort&gt;:&lt;containerPort&gt;<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-p 1.1.1.1:3333:3333</span><br></pre></td></tr></table></figure></li>
-</ol>
-<p>默认情况下，inter-container communication 的策略是完全访问，即同一个 docker0 bridge 下的所有容器都可以 ping 通其它容器。这其实是很不安全的，禁用方法：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">--icc=false</span><br></pre></td></tr></table></figure>
-<p>我们可以通过修改 bridge interface 来控制：</p>
-<ul>
-<li>define the address and subnet of the bridge</li>
-<li>define the range of IP addresses that can be assigned to containers</li>
-<li>define the maximum transmission unit (MTU)</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">--bip &quot;192.168.0.128/25&quot;</span><br></pre></td></tr></table></figure>
-<p>这样就会使 docker0 interface 的 IP 设为 192.168.0.128，允许 192.168.0.128-192.168.0.255 访问。<br>设置好后，容器的 IP 就会在这个区间分配，你可以为容器指定固定 IP:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">--fixed-cidr &quot;192.168.0.130/25&quot;</span><br></pre></td></tr></table></figure>
-
-<p>如果需要设置 maximum size of a packet，(default 1500 bytes)</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-mtu 1200</span><br></pre></td></tr></table></figure>
-
-<p>如何使用定制的 bridge:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-b mybridge</span><br></pre></td></tr></table></figure>
-<h3 id="Joined-containers"><a href="#Joined-containers" class="headerlink" title="Joined containers"></a>Joined containers</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run --net container:xxx</span><br></pre></td></tr></table></figure>
-<p>for example,</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">docker run -d --name brady \</span><br><span class="line">    --net none alpine:latest \</span><br><span class="line">    nc -l 127.0.0.1:3333</span><br><span class="line">docker run -it \</span><br><span class="line">    --net container:brady \</span><br><span class="line">    alpine:latest netstat –al</span><br></pre></td></tr></table></figure>
-<p>即 network interface 版的 managed volume.<br>使用场景：</p>
-<ul>
-<li>在a中修改网络配置使b中的生效。</li>
-<li>在a中监控b的流量。</li>
-<li>多个容易共用一个端口交流。</li>
-<li>与容器未 expose 的端口通信。</li>
-</ul>
-<p>Joined containers 允许你连接任何其它容器，但它还不是最不安全的，最不安全的是下面这个。</p>
-<h3 id="Open-containers"><a href="#Open-containers" class="headerlink" title="Open containers"></a>Open containers</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run --net host</span><br></pre></td></tr></table></figure>
-
-<h2 id="Inter-container-dependencies"><a href="#Inter-container-dependencies" class="headerlink" title="Inter-container dependencies"></a>Inter-container dependencies</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">--link a:alias-a</span><br></pre></td></tr></table></figure>
-<p>link 不具有传递性：B-&gt;A, C-&gt;B &#x3D;&#x2F;&#x3D; C-&gt;A.<br>link 有一个特权：它可以连接没有 expose 任何端口号的容器。</p>
-<h2 id="Limiting-risk-with-isolation"><a href="#Limiting-risk-with-isolation" class="headerlink" title="Limiting risk with isolation"></a>Limiting risk with isolation</h2><h3 id="memory-limits"><a href="#memory-limits" class="headerlink" title="memory limits"></a>memory limits</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-m 256m </span><br></pre></td></tr></table></figure>
-<p>单位：b, k, m, g<br>这里需要注意的是设置为 256m 并不表示真会分配的到这么多，仅仅是为了防止使用超度。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">docker run -d --name ch6_mariadb \</span><br><span class="line">    --memory 256m \</span><br><span class="line">    --cpu-shares 1024</span><br><span class="line">    --user nobody \</span><br><span class="line">    --cap-drop all \</span><br><span class="line">    dockerfile/mariadb</span><br></pre></td></tr></table></figure>
-
-<h2 id="制作镜像"><a href="#制作镜像" class="headerlink" title="制作镜像"></a>制作镜像</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">docker run --name rie \</span><br><span class="line">-e ENV_A=a -e ENV_B=b \</span><br><span class="line">--entrypoint <span class="string">&quot;/bin/sh&quot;</span> \</span><br><span class="line">busybox:latest \</span><br><span class="line">-c <span class="string">&quot;echo \$ENV_A&quot;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">docker commit -a <span class="string">&quot;carl&quot;</span> -m <span class="string">&quot;just for example&quot;</span> rie zxfspace/rie</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h3 id="exporting-and-importing-flat-file-systems"><a href="#exporting-and-importing-flat-file-systems" class="headerlink" title="exporting and importing flat file systems"></a>exporting and importing flat file systems</h3><p>如果需要添加一个文件，用<code>docker copy</code>；如果多个文件，<code>docker export</code>；<br>将容器文件 copy 到 tar 包。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker export --output export.tar container</span><br></pre></td></tr></table></figure>
-<h3 id="Dockerfile"><a href="#Dockerfile" class="headerlink" title="Dockerfile"></a>Dockerfile</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">FROM ubuntu:latest</span><br><span class="line"><span class="comment"># (or scratch for empty)</span></span><br><span class="line">MAINTAINER carl</span><br><span class="line">RUN <span class="built_in">echo</span> <span class="string">&#x27;hello&#x27;</span> \</span><br><span class="line">    &amp;&amp; <span class="built_in">echo</span> <span class="string">&#x27;world&#x27;</span></span><br><span class="line">ENV APPROOT=<span class="string">&quot;/app&quot;</span> \</span><br><span class="line">    APP=<span class="string">&quot;myapp&quot;</span> \</span><br><span class="line">    VERSION=<span class="string">&#x27;0.1&#x27;</span></span><br><span class="line">LABEL base.name=<span class="string">&quot;hw&quot;</span> \</span><br><span class="line">      base.version=<span class="string">&quot;<span class="variable">$&#123;VERSION&#125;</span>&quot;</span></span><br><span class="line">WORKDIR <span class="variable">$APPROOT</span></span><br><span class="line">ENTRYPOINT [<span class="string">&quot;pwd&quot;</span>]</span><br><span class="line">EXPOSE 3333</span><br><span class="line"><span class="comment"># do not set the default user in the base</span></span><br></pre></td></tr></table></figure>
-<p><code>docker build -f df -t diy:1 .</code><br>不想加到 image 中的文件写到 <strong>.dockerignore</strong> 中。</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">FROM diy:1</span><br><span class="line">COPY [<span class="string">&quot;./&quot;</span>, <span class="string">&quot;<span class="variable">$&#123;APPROOT&#125;</span>&quot;</span>]</span><br><span class="line"><span class="comment"># USER example:example</span></span><br><span class="line">RUN <span class="built_in">chmod</span> 111 <span class="variable">$&#123;APPROOT&#125;</span>/df</span><br><span class="line">VOLUME [<span class="string">&quot;/docker/diy&quot;</span>, <span class="string">&quot;/var/log&quot;</span>]</span><br><span class="line">CMD [<span class="string">&quot;echo &#x27;hello&#x27;&quot;</span>]</span><br></pre></td></tr></table></figure>
-
-
-
-
-
+<p>编辑 <code>/etc/my.cnf</code></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">[client]</span><br><span class="line">default-character-set=utf8mb4</span><br><span class="line"></span><br><span class="line">[mysql]</span><br><span class="line">default-character-set=utf8mb4</span><br><span class="line"></span><br><span class="line">[mysqld]</span><br><span class="line">character-set-server=utf8mb4</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># Remove leading # and set to the amount of RAM for the most important data</span></span><br><span class="line"><span class="comment"># cache in MySQL. Start at 70% of total RAM for dedicated server, else 10%.</span></span><br><span class="line"><span class="comment"># innodb_buffer_pool_size = 128M</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Remove leading # to turn on a very important data integrity option: logging</span></span><br><span class="line"><span class="comment"># changes to the binary log between backups.</span></span><br><span class="line"><span class="comment"># log_bin</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># These are commonly set, remove the # and set as required.</span></span><br><span class="line"><span class="comment"># basedir = .....</span></span><br><span class="line"><span class="comment"># datadir = .....</span></span><br><span class="line"><span class="comment"># port = .....</span></span><br><span class="line"><span class="comment"># server_id = .....</span></span><br><span class="line"><span class="comment"># socket = .....</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Remove leading # to set options mainly useful for reporting servers.</span></span><br><span class="line"><span class="comment"># The server defaults are faster for transactions and fast SELECTs.</span></span><br><span class="line"><span class="comment"># Adjust sizes as needed, experiment to find the optimal values.</span></span><br><span class="line"><span class="comment"># join_buffer_size = 128M</span></span><br><span class="line"><span class="comment"># sort_buffer_size = 2M</span></span><br><span class="line"><span class="comment"># read_rnd_buffer_size = 2M </span></span><br><span class="line"></span><br><span class="line">sql_mode=NO_ENGINE_SUBSTITUTION,STRICT_TRANS_TABLES</span><br></pre></td></tr></table></figure>
+<p>重启，over。</p>
  
     </div>
 
     <footer class="article-footer">
-      <!-- <a data-url="https://carl-zk.github.io/blog/2018/08/11/docker-note/" data-id="clwbvux51004v64od7c1h2xna" class="article-share-link">分享</a> -->
+      <!-- <a data-url="https://carl-zk.github.io/blog/2018/09/14/mysql-%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81/" data-id="clwbvux55005v64od0k087dsz" class="article-share-link">分享</a> -->
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/docker/" rel="tag">docker</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/MySQL/" rel="tag">MySQL</a></li></ul>
  
       <div id="gitalk-container"></div>
        
@@ -232,7 +174,7 @@
 
 
   <nav id="page-nav">
-    <a class="extend prev" rel="prev" href="/blog/page/28/">&lt;&lt;上一页</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/27/">27</a><a class="page-number" href="/blog/page/28/">28</a><span class="page-number current">29</span><a class="page-number" href="/blog/page/30/">30</a><a class="page-number" href="/blog/page/31/">31</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/192/">192</a><a class="extend next" rel="next" href="/blog/page/30/">下一页&gt;&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/28/">&lt;&lt;上一页</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/27/">27</a><a class="page-number" href="/blog/page/28/">28</a><span class="page-number current">29</span><a class="page-number" href="/blog/page/30/">30</a><a class="page-number" href="/blog/page/31/">31</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/194/">194</a><a class="extend next" rel="next" href="/blog/page/30/">下一页&gt;&gt;</a>
   </nav>
 
 </section>
@@ -256,6 +198,14 @@
       <ul>
         
           <li>
+            <a href="/blog/2025/09/28/projectreactor-webflux/">Projectreactor &amp; Webflux</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2025/02/19/DNSCrypt/">DNSCrypt</a>
+          </li>
+        
+          <li>
             <a href="/blog/2024/05/19/windows/">Windows</a>
           </li>
         
@@ -265,14 +215,6 @@
         
           <li>
             <a href="/blog/2023/12/15/spring-boot-%E5%90%AF%E5%8A%A8%E8%BF%87%E7%A8%8B/">Spring Boot 启动过程</a>
-          </li>
-        
-          <li>
-            <a href="/blog/2022/04/25/Design-Underground-System/">Design Underground System</a>
-          </li>
-        
-          <li>
-            <a href="/blog/2022/04/25/Encode-and-Decode-TinyURL/">Encode and Decode TinyURL</a>
           </li>
         
       </ul>
@@ -296,7 +238,7 @@
   
   <div class="outer">
     <div id="footer-left">
-      &copy; 2016 - 2024 carl-zk<!--&nbsp;|&nbsp;
+      &copy; 2016 - 2025 carl-zk<!--&nbsp;|&nbsp;
       主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a> -->
     </div>
   

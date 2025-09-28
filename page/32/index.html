@@ -84,15 +84,15 @@
         <section id="main">
   
     <article
-  id="post-AOP无法增强问题解剖"
+  id="post-docker-practice"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
 >
 
   <div class="article-meta">
-    <a href="/blog/2018/05/15/AOP%E6%97%A0%E6%B3%95%E5%A2%9E%E5%BC%BA%E9%97%AE%E9%A2%98%E8%A7%A3%E5%89%96/" class="article-date">
-  <time datetime="2018-05-15T01:36:44.000Z" itemprop="datePublished">2018-05-15</time>
+    <a href="/blog/2018/08/05/docker-practice/" class="article-date">
+  <time datetime="2018-08-05T05:23:07.000Z" itemprop="datePublished">2018-08-05</time>
 </a>
     
   </div>
@@ -102,7 +102,7 @@
       
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2018/05/15/AOP%E6%97%A0%E6%B3%95%E5%A2%9E%E5%BC%BA%E9%97%AE%E9%A2%98%E8%A7%A3%E5%89%96/">AOP无法增强问题解剖</a>
+      <a class="article-title" href="/blog/2018/08/05/docker-practice/">Docker Practice</a>
     </h1>
   
 
@@ -111,20 +111,36 @@
     <div class="article-entry" itemprop="articleBody">
       
       <!-- Table of Contents -->
-       <blockquote>
-<p>摘录自：《精通Spring 4.x 企业应用开发实战》</p>
-</blockquote>
-<p>由于Spring使用CGLib增强，所以无法对private、static、final的方法进行增强，此外还有一种特别容易忽视的情况，即funA，funB都被增强，但在funA中调用funB时funB其实并未被增强。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">    <span class="meta">@Component</span></span><br><span class="line">    <span class="keyword">class</span> <span class="title class_">Waiter</span> &#123;</span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">funA</span><span class="params">()</span> &#123;</span><br><span class="line">            funB();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">funB</span><span class="params">()</span> &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;What do you want to eat?&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Aspect</span></span><br><span class="line">    <span class="keyword">class</span> <span class="title class_">P</span> &#123;</span><br><span class="line">        <span class="meta">@Pointcut(&quot;execution(* *.fun*(..))&quot;)</span></span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">pointcut</span><span class="params">()</span> &#123;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="meta">@Before(&quot;pointcut()&quot;)</span></span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">advice</span><span class="params">()</span> &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;good morning sir&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Configuration</span></span><br><span class="line">    <span class="meta">@Import(&#123;P.class, Waiter.class&#125;)</span></span><br><span class="line">    <span class="meta">@EnableAspectJAutoProxy(proxyTargetClass = true)</span></span><br><span class="line">    <span class="keyword">class</span> <span class="title class_">Config</span> &#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="type">ApplicationContext</span> <span class="variable">context</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">AnnotationConfigApplicationContext</span>(Config.class);</span><br><span class="line">    <span class="type">Waiter</span> <span class="variable">w</span> <span class="operator">=</span> context.getBean(Waiter.class);</span><br><span class="line">    w.funA();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+       <h2 id="run-mysql-with-docker"><a href="#run-mysql-with-docker" class="headerlink" title="run mysql with docker"></a>run mysql with docker</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">docker run -d --name mysql_server \</span><br><span class="line">-p 3307:3306 \</span><br><span class="line">-v /docker/mysqlDB:/var/lib/mysql \</span><br><span class="line">-e MYSQL_ROOT_PASSWORD=root \</span><br><span class="line">-e MYSQL_ROOT_HOST=% \</span><br><span class="line">mysql:latest</span><br></pre></td></tr></table></figure>
 
-<p>遇到这种情况，需要特别注意，解决方法很简单，就是在funA中使用代理对象调用funB。</p>
+<p>检查是否运行成功：docker ps</p>
+<p>然后：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql -h0.0.0.0 -P3307 -uroot -proot</span><br></pre></td></tr></table></figure>
+
+<p>如果报下面错误：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ERROR 2059 (HY000): Authentication plugin &#x27;caching_sha2_password&#x27; cannot be loaded: dlopen(/usr/local/mysql/lib/plugin/caching_sha2_password.so, 2): image not found</span><br></pre></td></tr></table></figure>
+<p>则：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker exec -it mysql_server mysql -uroot -proot</span><br><span class="line">alter user &#x27;root&#x27;@&#x27;%&#x27; identified with mysql_native_password by &#x27;root&#x27;;</span><br></pre></td></tr></table></figure>
+
+
+<p><strong>备注：</strong></p>
+<p>默认情况下 MySQL server 只允许本机登录，修改任意IP地址登录：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grant all privileges on *.* to &#x27;root&#x27;@&#x27;%&#x27; identified by &#x27;root&#x27; with grant option;</span><br></pre></td></tr></table></figure>
+
+<p>查看 MySQL server container IP 地址：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker inspect mysql_server | grep IPAdd</span><br></pre></td></tr></table></figure>
+
+<p>停止并清理</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">docker rm -f mysql_server</span><br><span class="line">docker container prune</span><br><span class="line">docker image prune</span><br></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/0.0.0.0">IP 地址 0.0.0.0 的意义</a></p>
  
     </div>
 
     <footer class="article-footer">
-      <!-- <a data-url="https://carl-zk.github.io/blog/2018/05/15/AOP%E6%97%A0%E6%B3%95%E5%A2%9E%E5%BC%BA%E9%97%AE%E9%A2%98%E8%A7%A3%E5%89%96/" data-id="clwbvux4f000864odgqrxgiva" class="article-share-link">分享</a> -->
+      <!-- <a data-url="https://carl-zk.github.io/blog/2018/08/05/docker-practice/" data-id="clwbvux51004x64odc1c0g9rn" class="article-share-link">分享</a> -->
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/spring/" rel="tag">spring</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/docker/" rel="tag">docker</a></li></ul>
  
       <div id="gitalk-container"></div>
        
@@ -175,7 +191,7 @@
 
 
   <nav id="page-nav">
-    <a class="extend prev" rel="prev" href="/blog/page/31/">&lt;&lt;上一页</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/30/">30</a><a class="page-number" href="/blog/page/31/">31</a><span class="page-number current">32</span><a class="page-number" href="/blog/page/33/">33</a><a class="page-number" href="/blog/page/34/">34</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/192/">192</a><a class="extend next" rel="next" href="/blog/page/33/">下一页&gt;&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/31/">&lt;&lt;上一页</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/30/">30</a><a class="page-number" href="/blog/page/31/">31</a><span class="page-number current">32</span><a class="page-number" href="/blog/page/33/">33</a><a class="page-number" href="/blog/page/34/">34</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/194/">194</a><a class="extend next" rel="next" href="/blog/page/33/">下一页&gt;&gt;</a>
   </nav>
 
 </section>
@@ -199,6 +215,14 @@
       <ul>
         
           <li>
+            <a href="/blog/2025/09/28/projectreactor-webflux/">Projectreactor &amp; Webflux</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2025/02/19/DNSCrypt/">DNSCrypt</a>
+          </li>
+        
+          <li>
             <a href="/blog/2024/05/19/windows/">Windows</a>
           </li>
         
@@ -208,14 +232,6 @@
         
           <li>
             <a href="/blog/2023/12/15/spring-boot-%E5%90%AF%E5%8A%A8%E8%BF%87%E7%A8%8B/">Spring Boot 启动过程</a>
-          </li>
-        
-          <li>
-            <a href="/blog/2022/04/25/Design-Underground-System/">Design Underground System</a>
-          </li>
-        
-          <li>
-            <a href="/blog/2022/04/25/Encode-and-Decode-TinyURL/">Encode and Decode TinyURL</a>
           </li>
         
       </ul>
@@ -239,7 +255,7 @@
   
   <div class="outer">
     <div id="footer-left">
-      &copy; 2016 - 2024 carl-zk<!--&nbsp;|&nbsp;
+      &copy; 2016 - 2025 carl-zk<!--&nbsp;|&nbsp;
       主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a> -->
     </div>
   

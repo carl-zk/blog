@@ -84,15 +84,15 @@
         <section id="main">
   
     <article
-  id="post-OFBiz-Learn"
+  id="post-gradle"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
 >
 
   <div class="article-meta">
-    <a href="/blog/2017/03/04/OFBiz-Learn/" class="article-date">
-  <time datetime="2017-03-04T05:42:07.000Z" itemprop="datePublished">2017-03-04</time>
+    <a href="/blog/2017/03/06/gradle/" class="article-date">
+  <time datetime="2017-03-06T13:13:10.000Z" itemprop="datePublished">2017-03-06</time>
 </a>
     
   <div class="article-category">
@@ -106,7 +106,7 @@
       
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2017/03/04/OFBiz-Learn/">OFBiz Learn</a>
+      <a class="article-title" href="/blog/2017/03/06/gradle/">Gradle</a>
     </h1>
   
 
@@ -115,52 +115,36 @@
     <div class="article-entry" itemprop="articleBody">
       
       <!-- Table of Contents -->
-       <h1 id="初识OFBiz"><a href="#初识OFBiz" class="headerlink" title="初识OFBiz"></a>初识OFBiz</h1><p><a target="_blank" rel="noopener" href="https://ofbiz.apache.org/apache-ofbiz-project-overview.html">官网</a></p>
-<p>Open For Business(OFBiz) 是一个企业应用框架，类似于Spring，主要针对ERP、CRM系统。<br>OFBiz使用 <a target="_blank" rel="noopener" href="https://www.apache.org/licenses/LICENSE-2.0">Apache License Version 2.0协议</a>，你可以不公开你的代码。</p>
-<h1 id="Major-Application-Components"><a href="#Major-Application-Components" class="headerlink" title="Major Application Components"></a>Major Application Components</h1><h2 id="Common-Data"><a href="#Common-Data" class="headerlink" title="Common Data"></a>Common Data</h2><p>包括实体类等系统启动时加载的、一般很少变动的数据。</p>
-<h2 id="Content"><a href="#Content" class="headerlink" title="Content"></a>Content</h2><p>用于对数据的追踪。</p>
-<h2 id="Security"><a href="#Security" class="headerlink" title="Security"></a>Security</h2><p>访问控制。</p>
-<h2 id="Party"><a href="#Party" class="headerlink" title="Party"></a>Party</h2><p>可以是一个人，或一个Parties组。Party Group可以是一个公司，公司内部的一个机构，供应商或顾客等。<br>与Party相关的类型有</p>
-<ol>
-<li>Contact Mechanisms(地址，手机，邮箱，URL……)</li>
-<li>Roles(作为顾客，供应商，员工，经理，商人……)</li>
-<li>另一种可归为Party类的数据是Parties之间communication和agreement的信息。它可被Work Effort实体用来计划和追踪Parties之间的问题和解决方案。</li>
-</ol>
-<h2 id="Product"><a href="#Product" class="headerlink" title="Product"></a>Product</h2><p>公司出售或内部使用的商品，可以是goods或services</p>
-<h2 id="Order"><a href="#Order" class="headerlink" title="Order"></a>Order</h2><p>商品的排序。如顾客对一类商品的url请求，就会被Order package内的实体处理。</p>
-<h2 id="Facility"><a href="#Facility" class="headerlink" title="Facility"></a>Facility</h2><p>一座大楼或一个地理位置。</p>
-<h2 id="Shipment"><a href="#Shipment" class="headerlink" title="Shipment"></a>Shipment</h2><p>跟踪进出货和进出货清单。</p>
-<h2 id="Accounting"><a href="#Accounting" class="headerlink" title="Accounting"></a>Accounting</h2><p>记账。</p>
-<h2 id="Marketing"><a href="#Marketing" class="headerlink" title="Marketing"></a>Marketing</h2><p>市场信息。</p>
-<h2 id="Work-Effort"><a href="#Work-Effort" class="headerlink" title="Work Effort"></a>Work Effort</h2><p>可以是一个task，project，project phase，to-do item,Workflow Activity等。</p>
-<blockquote>
-<p>需要注意的是，OFBiz放弃了Workflow Engines，改用Event Driven Architecture(EDA)和ECAs(SECA,EECA,MECA)。ECA是Event Condition Action的缩写。SECAs用于Services，EECA用于Entity，MECAs用于Mail。</p>
+       <blockquote>
+<p><a target="_blank" rel="noopener" href="https://docs.gradle.org/current/userguide/tutorial_gradle_command_line.html">gradle</a>与maven功能相同，区别在于gradle是一个基于编程语言的build框架，maven是xml配置文件。孰好孰坏看你的喜好，编程的当然可以分模块，往上面抽象；xml呢最广泛有很多工具可以配合，而且maven文档写的很好好赞，xml的配置也不错。个人感觉在有IDEA的情况下选择maven；gradle我会在写个人的小程序时使用，牛人和实力雄厚的公司或许会选择gradle，自己去Google一下优劣即可。在学习之前先略一略Groovy哦。</p>
 </blockquote>
-<h2 id="Human-Resources"><a href="#Human-Resources" class="headerlink" title="Human Resources"></a>Human Resources</h2><p>人力资源信息。</p>
-<p><img src="/blog/2017/03/04/OFBiz-Learn/ofbiz.png" alt="主要应用部件" loading="lazy"></p>
-<h1 id="Architecture-and-System-Organization"><a href="#Architecture-and-System-Organization" class="headerlink" title="Architecture and System Organization"></a>Architecture and System Organization</h1><h2 id="Entities-and-Services"><a href="#Entities-and-Services" class="headerlink" title="Entities and Services"></a>Entities and Services</h2><table>
-<thead>
-<tr>
-<th align="left">Entity</th>
-<th align="left">作用</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">basic entity</td>
-<td align="left">&amp;#124; 与数据库表对应</td>
-</tr>
-<tr>
-<td align="left">view-entity</td>
-<td align="left">&amp;#124; 组合实体类字段构成虚拟实体</td>
-</tr>
-</tbody></table>
-<p>使用Entity Engine可以省去写sql，可以不必维护大量的CRUD持久层类。取而代之的是相对少量的xml配置文件。<br>每个Service只负责简单的特定的任务，由ECA去调度，所以扩展时也不必改变原来的逻辑代码。</p>
-<h2 id="Web-Framework-and-XML-Mini-Languages"><a href="#Web-Framework-and-XML-Mini-Languages" class="headerlink" title="Web Framework and XML Mini-Languages"></a>Web Framework and XML Mini-Languages</h2><p>OFBiz Core Framework 提供了许多client-server、peer-to-peer框架，为了便于使用，所以推出一个‘XML Mini-Language’工具。</p>
+<h1 id="首先，学习一下gradle的几个命令。"><a href="#首先，学习一下gradle的几个命令。" class="headerlink" title="首先，学习一下gradle的几个命令。"></a>首先，学习一下gradle的几个命令。</h1><p><code>gradle tasks --all</code>  列出本项目中的所有可执行task<br>(什么是task？就是写在build.gradle文件中的可以用<code>gradle taskName</code>执行的代码块)</p>
+<p>原始的(不包括项目中自己写的)大概有这么几个task：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">**Build Setup tasks**</span><br><span class="line">init - Initializes a new Gradle build. [incubating]</span><br><span class="line">wrapper - Generates Gradle wrapper files. [incubating]</span><br><span class="line">**Help tasks**</span><br><span class="line">buildEnvironment - Displays all buildscript dependencies declared in root project &#x27;gradle&#x27;.</span><br><span class="line">components - Displays the components produced by root project &#x27;gradle&#x27;. [incubating]</span><br><span class="line">dependencies - Displays all dependencies declared in root project &#x27;gradle&#x27;.</span><br><span class="line">dependencyInsight - Displays the insight into a specific dependency in root project &#x27;gradle&#x27;.</span><br><span class="line">dependentComponents - Displays the dependent components of components in root project &#x27;gradle&#x27;. [incubating]</span><br><span class="line">help - Displays a help message. 这个经常用用就行</span><br><span class="line">model - Displays the configuration model of root project &#x27;gradle&#x27;. [incubating]</span><br><span class="line">projects - Displays the sub-projects of root project &#x27;gradle&#x27;.</span><br><span class="line">properties - Displays the properties of root project &#x27;gradle&#x27;.</span><br><span class="line">tasks - Displays the tasks runnable from root project &#x27;gradle&#x27;.</span><br></pre></td></tr></table></figure>
+
+<p><code>gradle help --task taskName</code>  对该task的一些具体信息</p>
+<p><code>gradle --help</code>下有：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">USAGE: gradle [option...] [task...]</span><br><span class="line"></span><br><span class="line">-?, -h, --help          Shows this help message.</span><br><span class="line">-a, --no-rebuild        Do not rebuild project dependencies.</span><br><span class="line">-b, --build-file        Specifies the build file. 指定要执行的build文件</span><br><span class="line">-c, --settings-file     Specifies the settings file.</span><br><span class="line">--configure-on-demand   Only relevant projects are configured in this build run. This means faster build for large multi-project builds. [incubating]</span><br><span class="line">--console               Specifies which type of console output to generate. Values are &#x27;plain&#x27;, &#x27;auto&#x27; (default) or &#x27;rich&#x27;.</span><br><span class="line">--continue              一个task failure后继续执行，但是其它依赖这个failure task的task都不会被执行了</span><br><span class="line">-D, --system-prop       Set system property of the JVM (e.g. -Dmyprop=myvalue).</span><br><span class="line">-d, --debug             Log in debug mode (includes normal stacktrace).</span><br><span class="line">--daemon                Uses the Gradle Daemon to run the build. Starts the Daemon if not running.</span><br><span class="line">--foreground            Starts the Gradle Daemon in the foreground. [incubating]</span><br><span class="line">-g, --gradle-user-home  Specifies the gradle user home directory.</span><br><span class="line">--gui                   Launches the Gradle GUI.</span><br><span class="line">-I, --init-script       Specifies an initialization script.</span><br><span class="line">-i, --info              Set log level to info.</span><br><span class="line">--include-build         Includes the specified build in the composite. [incubating]</span><br><span class="line">-m, --dry-run           Runs the builds with all task actions disabled. 展示task依赖，执行的先后循序，但不真正build</span><br><span class="line">--max-workers           Configure the number of concurrent workers Gradle is allowed to use. [incubating]</span><br><span class="line">--no-daemon             Do not use the Gradle Daemon to run the build.</span><br><span class="line">--no-scan               Disables the creation of a build scan. [incubating]</span><br><span class="line">--offline               The build should operate without accessing network resources.</span><br><span class="line">-P, --project-prop      Set project property for the build script (e.g. -Pmyprop=myvalue).</span><br><span class="line">-p, --project-dir       Specifies the start directory for Gradle. Defaults to current directory. 指定project的根目录，默认是当前目录</span><br><span class="line">--parallel              Build projects in parallel. Gradle will attempt to determine the optimal number of executor threads to use. [incubating]</span><br><span class="line">--profile               Profiles build execution time and generates a report in the &lt;build_dir&gt;/reports/profile directory. 在build命令执行时会产生一个report</span><br><span class="line">--project-cache-dir     Specifies the project-specific cache directory. Defaults to .gradle in the root project directory.</span><br><span class="line">-q, --quiet             Log errors only. 出错了才显示</span><br><span class="line">--recompile-scripts     Force build script recompiling.</span><br><span class="line">--refresh-dependencies  Refresh the state of dependencies.</span><br><span class="line">--rerun-tasks           Ignore previously cached task results. 忽视cached上次task结果，强行执行</span><br><span class="line">-S, --full-stacktrace   Print out the full (very verbose) stacktrace for all exceptions.</span><br><span class="line">-s, --stacktrace        Print out the stacktrace for all exceptions.</span><br><span class="line">--scan                  Creates a build scan. Gradle will fail the build if the build scan plugin has not been applied. [incubating]</span><br><span class="line">--status                Shows status of running and recently stopped Gradle Daemon(s).</span><br><span class="line">--stop                  Stops the Gradle Daemon if it is running.</span><br><span class="line">-t, --continuous        Enables continuous build. Gradle does not exit and will re-execute tasks when task file inputs change. [incubating]</span><br><span class="line">-u, --no-search-upward  Don&#x27;t search in parent folders for a settings.gradle file.</span><br><span class="line">-v, --version           Print version info.</span><br><span class="line">-x, --exclude-task      把某个task排除在外,即使有task依赖它，它也不会被执行</span><br></pre></td></tr></table></figure>
+
+<h1 id="举个栗子说一说gradle特性"><a href="#举个栗子说一说gradle特性" class="headerlink" title="举个栗子说一说gradle特性"></a>举个栗子说一说gradle特性</h1><h2 id="重复task只执行一次"><a href="#重复task只执行一次" class="headerlink" title="重复task只执行一次"></a>重复task只执行一次</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">task compile&#123;</span><br><span class="line">	doLast&#123;</span><br><span class="line">		println <span class="string">&#x27;compile&#x27;</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">task <span class="title function_">compileTest</span><span class="params">(dependsOn: compile)</span>&#123;</span><br><span class="line">	doLast&#123;</span><br><span class="line">		println <span class="string">&#x27;test dependsOn compile&#x27;</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">task <span class="title function_">test</span><span class="params">(dependsOn: [compile, compileTest])</span>&#123;</span><br><span class="line">	doLast&#123;</span><br><span class="line">		println <span class="string">&#x27;test dependsOn compile, compileTest&#x27;</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">task <span class="title function_">dist</span><span class="params">(dependsOn:[compile, test])</span>&#123;</span><br><span class="line">	doLast&#123;</span><br><span class="line">		println <span class="string">&#x27;dist dependsOn compile, test&#x27;</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>执行<code>gradle dist</code>：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">:compile</span><br><span class="line">compile</span><br><span class="line">:compileTest</span><br><span class="line">test dependsOn compile</span><br><span class="line">:test</span><br><span class="line">test dependsOn compile, compileTest</span><br><span class="line">:dist</span><br><span class="line">dist dependsOn compile, test</span><br><span class="line"></span><br><span class="line">BUILD SUCCESSFUL</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>执行<code>gradle dist test</code>,<code>gradle dist test compile</code>也是一样的结果，每个task不管你调了几次，它只会执行<strong>一次</strong>。</p>
+<h2 id="可以用缩写或驼峰"><a href="#可以用缩写或驼峰" class="headerlink" title="可以用缩写或驼峰"></a>可以用缩写或驼峰</h2><p>只要能唯一区分<br>如 <code>gradle di</code> equeals <code>gradle dist</code>、<code>gradle cT</code> equeals <code>gradle compileTest</code></p>
+<h1 id="获取build的信息"><a href="#获取build的信息" class="headerlink" title="获取build的信息"></a>获取build的信息</h1><p><a target="_blank" rel="noopener" href="https://docs.gradle.org/current/userguide/project_reports_plugin.html">The Project Report Plugin</a></p>
+<h2 id="List-projects-项目列表"><a href="#List-projects-项目列表" class="headerlink" title="List projects 项目列表"></a>List projects 项目列表</h2><p><code>gradle -q projects</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line">Root project &#x27;ofbiz&#x27;</span><br><span class="line">+--- Project &#x27;:applications&#x27;</span><br><span class="line">|    +--- Project &#x27;:applications:accounting&#x27;</span><br><span class="line">|    +--- Project &#x27;:applications:commonext&#x27;</span><br><span class="line">|    +--- Project &#x27;:applications:content&#x27;</span><br><span class="line">|    +--- Project &#x27;:applications:datamodel&#x27;</span><br><span class="line">|    +--- Project &#x27;:applications:humanres&#x27;</span><br><span class="line">|    +--- Project &#x27;:applications:manufacturing&#x27;</span><br><span class="line">|    +--- Project &#x27;:applications:marketing&#x27;</span><br><span class="line">|    +--- Project &#x27;:applications:order&#x27;</span><br><span class="line">|    +--- Project &#x27;:applications:party&#x27;</span><br><span class="line">|    +--- Project &#x27;:applications:product&#x27;</span><br><span class="line">|    +--- Project &#x27;:applications:securityext&#x27;</span><br><span class="line">|    \--- Project &#x27;:applications:workeffort&#x27;</span><br><span class="line">+--- Project &#x27;:framework&#x27;</span><br><span class="line">|    +--- Project &#x27;:framework:base&#x27;</span><br><span class="line">|    +--- Project &#x27;:framework:catalina&#x27;</span><br><span class="line">|    +--- Project &#x27;:framework:common&#x27;</span><br><span class="line">|    +--- Project &#x27;:framework:datafile&#x27;</span><br><span class="line">|    +--- Project &#x27;:framework:entity&#x27;</span><br><span class="line">|    +--- Project &#x27;:framework:entityext&#x27;</span><br><span class="line">|    +--- Project &#x27;:framework:images&#x27;</span><br><span class="line">|    +--- Project &#x27;:framework:minilang&#x27;</span><br><span class="line">|    +--- Project &#x27;:framework:security&#x27;</span><br><span class="line">|    +--- Project &#x27;:framework:service&#x27;</span><br><span class="line">|    +--- Project &#x27;:framework:start&#x27;</span><br><span class="line">|    +--- Project &#x27;:framework:testtools&#x27;</span><br><span class="line">|    +--- Project &#x27;:framework:webapp&#x27;</span><br><span class="line">|    +--- Project &#x27;:framework:webtools&#x27;</span><br><span class="line">|    \--- Project &#x27;:framework:widget&#x27;</span><br><span class="line">+--- Project &#x27;:specialpurpose&#x27;</span><br><span class="line">|    +--- Project &#x27;:specialpurpose:assetmaint&#x27;</span><br><span class="line">|    +--- Project &#x27;:specialpurpose:bi&#x27;</span><br><span class="line">|    +--- Project &#x27;:specialpurpose:birt&#x27;</span><br><span class="line">|    +--- Project &#x27;:specialpurpose:cmssite&#x27;</span><br><span class="line">|    +--- Project &#x27;:specialpurpose:ebay&#x27;</span><br><span class="line">|    +--- Project &#x27;:specialpurpose:ecommerce&#x27;</span><br><span class="line">|    +--- Project &#x27;:specialpurpose:example&#x27;</span><br><span class="line">|    +--- Project &#x27;:specialpurpose:exampleext&#x27;</span><br><span class="line">|    +--- Project &#x27;:specialpurpose:hhfacility&#x27;</span><br><span class="line">|    +--- Project &#x27;:specialpurpose:ldap&#x27;</span><br><span class="line">|    +--- Project &#x27;:specialpurpose:lucene&#x27;</span><br><span class="line">|    +--- Project &#x27;:specialpurpose:myportal&#x27;</span><br><span class="line">|    +--- Project &#x27;:specialpurpose:passport&#x27;</span><br><span class="line">|    +--- Project &#x27;:specialpurpose:projectmgr&#x27;</span><br><span class="line">|    +--- Project &#x27;:specialpurpose:scrum&#x27;</span><br><span class="line">|    +--- Project &#x27;:specialpurpose:solr&#x27;</span><br><span class="line">|    \--- Project &#x27;:specialpurpose:webpos&#x27;</span><br><span class="line">\--- Project &#x27;:themes&#x27;</span><br><span class="line">     +--- Project &#x27;:themes:bluelight&#x27;</span><br><span class="line">     +--- Project &#x27;:themes:flatgrey&#x27;</span><br><span class="line">     +--- Project &#x27;:themes:multiflex&#x27;</span><br><span class="line">     +--- Project &#x27;:themes:rainbowstone&#x27;</span><br><span class="line">     \--- Project &#x27;:themes:tomahawk&#x27;</span><br><span class="line"></span><br><span class="line">To see a list of the tasks of a project, run gradle &lt;project-path&gt;:tasks</span><br><span class="line">For example, try running gradle :applications:tasks</span><br></pre></td></tr></table></figure>
+
+<h2 id="List-tasks"><a href="#List-tasks" class="headerlink" title="List tasks"></a>List tasks</h2><p><code>gradle -q tasks</code> 只能看到有task group分组的，即所谓的<em>visible tasks</em>。<br><code>gradle -q tasks --all</code>可以显示所有task，即所谓的<em>hidden tasks</em>。</p>
+<h2 id="Show-task-usage-details"><a href="#Show-task-usage-details" class="headerlink" title="Show task usage details"></a>Show task usage details</h2><p><code>gradle -q help --task someTask</code> 显示相关task的相信信息</p>
+<h2 id="Listing-project-dependencies"><a href="#Listing-project-dependencies" class="headerlink" title="Listing project dependencies"></a>Listing project dependencies</h2><p><code>gradle -q dependencies aProject bProject</code> 给出所选项目的树型依赖</p>
+<h2 id="Listing-project-buildscript-dependencies"><a href="#Listing-project-buildscript-dependencies" class="headerlink" title="Listing project buildscript dependencies"></a>Listing project buildscript dependencies</h2><p><code>gradle buildEnvironment</code>所选项目所依赖的build脚本文件。</p>
+<h2 id="Listing-project-properties"><a href="#Listing-project-properties" class="headerlink" title="Listing project properties"></a>Listing project properties</h2><p><code>gradle properties</code></p>
  
     </div>
 
     <footer class="article-footer">
-      <!-- <a data-url="https://carl-zk.github.io/blog/2017/03/04/OFBiz-Learn/" data-id="clwbvux4v003e64od4fbla8a7" class="article-share-link">分享</a> -->
+      <!-- <a data-url="https://carl-zk.github.io/blog/2017/03/06/gradle/" data-id="clwbvux52005664odgrjx8tpj" class="article-share-link">分享</a> -->
        
       <div id="gitalk-container"></div>
        
@@ -211,7 +195,7 @@
 
 
   <nav id="page-nav">
-    <a class="extend prev" rel="prev" href="/blog/page/107/">&lt;&lt;上一页</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/106/">106</a><a class="page-number" href="/blog/page/107/">107</a><span class="page-number current">108</span><a class="page-number" href="/blog/page/109/">109</a><a class="page-number" href="/blog/page/110/">110</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/192/">192</a><a class="extend next" rel="next" href="/blog/page/109/">下一页&gt;&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/107/">&lt;&lt;上一页</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/106/">106</a><a class="page-number" href="/blog/page/107/">107</a><span class="page-number current">108</span><a class="page-number" href="/blog/page/109/">109</a><a class="page-number" href="/blog/page/110/">110</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/194/">194</a><a class="extend next" rel="next" href="/blog/page/109/">下一页&gt;&gt;</a>
   </nav>
 
 </section>
@@ -235,6 +219,14 @@
       <ul>
         
           <li>
+            <a href="/blog/2025/09/28/projectreactor-webflux/">Projectreactor &amp; Webflux</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2025/02/19/DNSCrypt/">DNSCrypt</a>
+          </li>
+        
+          <li>
             <a href="/blog/2024/05/19/windows/">Windows</a>
           </li>
         
@@ -244,14 +236,6 @@
         
           <li>
             <a href="/blog/2023/12/15/spring-boot-%E5%90%AF%E5%8A%A8%E8%BF%87%E7%A8%8B/">Spring Boot 启动过程</a>
-          </li>
-        
-          <li>
-            <a href="/blog/2022/04/25/Design-Underground-System/">Design Underground System</a>
-          </li>
-        
-          <li>
-            <a href="/blog/2022/04/25/Encode-and-Decode-TinyURL/">Encode and Decode TinyURL</a>
           </li>
         
       </ul>
@@ -275,7 +259,7 @@
   
   <div class="outer">
     <div id="footer-left">
-      &copy; 2016 - 2024 carl-zk<!--&nbsp;|&nbsp;
+      &copy; 2016 - 2025 carl-zk<!--&nbsp;|&nbsp;
       主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a> -->
     </div>
   

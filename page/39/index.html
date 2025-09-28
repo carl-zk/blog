@@ -84,15 +84,15 @@
         <section id="main">
   
     <article
-  id="post-when-IntelliJ-goes-fool"
+  id="post-redis"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
 >
 
   <div class="article-meta">
-    <a href="/blog/2018/04/18/when-IntelliJ-goes-fool/" class="article-date">
-  <time datetime="2018-04-17T16:20:47.000Z" itemprop="datePublished">2018-04-18</time>
+    <a href="/blog/2018/04/26/redis/" class="article-date">
+  <time datetime="2018-04-26T01:14:31.000Z" itemprop="datePublished">2018-04-26</time>
 </a>
     
   </div>
@@ -102,7 +102,7 @@
       
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2018/04/18/when-IntelliJ-goes-fool/">When IntelliJ Goes Fool</a>
+      <a class="article-title" href="/blog/2018/04/26/redis/">Redis</a>
     </h1>
   
 
@@ -112,25 +112,71 @@
       
       <!-- Table of Contents -->
        <blockquote>
-<p>hehe</p>
+<p>docker run –rm -p 6379:6379 redis –requirepass “password”<br>注意：redis-cli 连接需密码的server时，不输密码也可以进入命令模式，只有当执行命令时才报错。</p>
 </blockquote>
-<p>当已经被公认是最好用的工具后，并且你已经使用了很久，而且它也从未让你感到失望。<br>直到出现某一时刻，它卡顿了，它莫名其妙的提示一些你关也关不掉的信息，<br>你终于被弄疯掉了！！！</p>
-<p>这就是我这次使用IDEA的感受。</p>
-<p>建的包‘moc.oreh’在没有mark源文件root时只是作为了一个文件夹的名字！这样idea就死活找不到某个类，提示信息只是‘can not resolve symbol ‘moc’ ’，懵懂的我可能太较真，关不掉这个提示信息让我无法忍受，所以我尝试了漫长的求知之旅。<br>我去<code>/Applications/IntelliJ IDEA.app/Contents</code>，<br><code>/Users/hero/Library/Preferences/IntelliJIdea2018.1</code>,<br><code>/Users/hero/Library/Caches/IntelliJIdea2018.1/caches</code><br>各个目录下备份、删除，才终于发现问题完美的重现，看来并不是配置搞错了，但是idea15的提示信息是如此的简洁，让我摸不到头脑，直到我安装了最新版本的idea，这个提示信息一下子让我明白了原来是两个包名成了一个文件名。</p>
-<p>从这件事上可以学到：</p>
+<h2 id="Redis-安装启动"><a href="#Redis-安装启动" class="headerlink" title="Redis 安装启动"></a>Redis 安装启动</h2><p><a target="_blank" rel="noopener" href="https://redis.io/download">download</a></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mv</span> redis.tar.gz /redis</span><br><span class="line">tar xvzf redis.tar.gz</span><br><span class="line"><span class="built_in">mv</span> redis-4.0 server</span><br><span class="line"><span class="built_in">cd</span> server</span><br><span class="line">make</span><br><span class="line">make <span class="built_in">test</span></span><br><span class="line"><span class="built_in">cd</span> ..</span><br><span class="line"><span class="built_in">cp</span> server/redis.conf .</span><br><span class="line"><span class="built_in">cp</span> server/utils/redis_init_script .</span><br></pre></td></tr></table></figure>
+
+<p>目录结构：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">/redis</span><br><span class="line">    /server</span><br><span class="line">    /storage</span><br><span class="line">    redis.conf</span><br><span class="line">    redis_init_script</span><br><span class="line">    start</span><br><span class="line">    stop</span><br></pre></td></tr></table></figure>
+
+<p>redis.conf</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">port 6397</span><br><span class="line">pidfile /redis/redis_<span class="variable">$&#123;port&#125;</span>.pid</span><br><span class="line">logfile <span class="string">&quot;/redis/my.log&quot;</span></span><br><span class="line"><span class="built_in">dir</span> /redis/storage</span><br><span class="line"><span class="comment">#bind 127.0.0.1</span></span><br><span class="line">requirepass password</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>redis_init_script</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># Simple Redis init.d script conceived to work on Linux systems</span></span><br><span class="line"><span class="comment"># as it does use of the /proc filesystem.</span></span><br><span class="line"></span><br><span class="line">REDISPORT=6397</span><br><span class="line">PASSWORD=password</span><br><span class="line">EXEC=/redis/server/src/redis-server</span><br><span class="line">CLIEXEC=/redis/server/src/redis-cli</span><br><span class="line"></span><br><span class="line">PIDFILE=/redis/redis_<span class="variable">$&#123;REDISPORT&#125;</span>.pid</span><br><span class="line">CONF=<span class="string">&quot;/redis/redis.conf&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">case</span> <span class="string">&quot;<span class="variable">$1</span>&quot;</span> <span class="keyword">in</span></span><br><span class="line">    start)</span><br><span class="line">        <span class="keyword">if</span> [ -f <span class="variable">$PIDFILE</span> ]</span><br><span class="line">        <span class="keyword">then</span></span><br><span class="line">                <span class="built_in">echo</span> <span class="string">&quot;<span class="variable">$PIDFILE</span> exists, process is already running or crashed&quot;</span></span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">                <span class="built_in">echo</span> <span class="string">&quot;Starting Redis server...&quot;</span></span><br><span class="line">                <span class="variable">$EXEC</span> <span class="variable">$CONF</span></span><br><span class="line">        <span class="keyword">fi</span></span><br><span class="line">        ;;</span><br><span class="line">    stop)</span><br><span class="line">        <span class="built_in">echo</span> <span class="string">&quot;Stopping ...&quot;</span></span><br><span class="line">        <span class="variable">$CLIEXEC</span> -p <span class="variable">$REDISPORT</span> -a <span class="variable">$PASSWORD</span> shutdown</span><br><span class="line">        <span class="keyword">while</span> [ -x /proc/<span class="variable">$&#123;PID&#125;</span> ]; <span class="keyword">do</span></span><br><span class="line">            <span class="built_in">echo</span> <span class="string">&quot;Waiting for Redis to shutdown ...&quot;</span></span><br><span class="line">            <span class="built_in">sleep</span> 1</span><br><span class="line">            <span class="keyword">done</span></span><br><span class="line">        <span class="built_in">echo</span> <span class="string">&quot;Redis stopped&quot;</span></span><br><span class="line">        ;;</span><br><span class="line">    *)</span><br><span class="line">        <span class="built_in">echo</span> <span class="string">&quot;Please use start or stop as first argument&quot;</span></span><br><span class="line">        ;;</span><br><span class="line"><span class="keyword">esac</span></span><br></pre></td></tr></table></figure>
+<p>运行起来没有看到pid文件，所以修改了stop分支。(原来只有daemonize yes时才有pid文件)</p>
+<p>start</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line"></span><br><span class="line">/redis/redis_init_script start &amp;</span><br><span class="line"></span><br><span class="line">ps -ef | grep redis-server</span><br></pre></td></tr></table></figure>
+
+<p>stop</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line"></span><br><span class="line">/redis/redis_init_script stop</span><br><span class="line"></span><br><span class="line">ps -ef | grep redis-server</span><br></pre></td></tr></table></figure>
+
+<h3 id="主从复制"><a href="#主从复制" class="headerlink" title="主从复制"></a>主从复制</h3><p>Redis-Server(Main)</p>
+<ul>
+<li>Redis-Server(Slave)</li>
+<li>Redis-Server(Slave)</li>
+<li>Redis-Server(Slave)<br>一台主机作为写入，三台从机作为读取，这样就缓解了主机的压力。<br>Redis支持两种方式的主从配置：</li>
+</ul>
 <ol>
-<li>工具是如此的便利，但同时它也让你丢失了很多能力。</li>
-<li>习惯一旦养成，就会按着期望去做事，不愿改变也不愿思考。</li>
-<li>工具可能会由好变得更好，但人的演化是相反的。</li>
-<li>第4点还没想好，不过我得先睡觉了。</li>
+<li>redis.conf；</li>
+<li>cli.slaveOf(ip:port)</li>
 </ol>
-<p>最好的编译器：idea；<br>最好的笔记本：Mac；<br>这些拿到了“最好的”头衔的东西，用起来还是会让人失望。</p>
+<p>实验中发现即使kill -9 主机，从机还是可以读到值。只能证明Redis能处理kill方式的停机，并不能保证宕机时也能如此优雅。</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/u011204847/article/details/51307044">Redis集群</a><br>大神的博客，需要好好拜读。</p>
+<h2 id="Redis实现锁的简单方法"><a href="#Redis实现锁的简单方法" class="headerlink" title="Redis实现锁的简单方法"></a>Redis实现锁的简单方法</h2><p><a target="_blank" rel="noopener" href="http://redisdoc.com/string/set.html">SET</a><br>参考<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/XoXcqpehhXSQlRxgCBtDcw">Redis分布式锁的正确实现方式</a></p>
+<p><code>SET key value [EX seconds] [PX milliseconds] [NX|XX]</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">EX second ：设置键的过期时间为 second 秒。 SET key value EX second 效果等同于 SETEX key second value 。</span><br><span class="line">PX millisecond ：设置键的过期时间为 millisecond 毫秒。 SET key value PX millisecond 效果等同于 PSETEX key millisecond value 。</span><br><span class="line">NX ：只在键不存在时，才对键进行设置操作。 SET key value NX 效果等同于 SETNX key value 。</span><br><span class="line">XX ：只在键已经存在时，才对键进行设置操作。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> moc.oreh.common;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> redis.clients.jedis.Jedis;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.TimeUnit;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Stateless Redis Lock</span></span><br><span class="line"><span class="comment"> * &lt;p&gt;</span></span><br><span class="line"><span class="comment"> * examples:</span></span><br><span class="line"><span class="comment"> * 1. tryLock</span></span><br><span class="line"><span class="comment"> * &lt;p&gt;</span></span><br><span class="line"><span class="comment"> * boolean got = JedisLock.tryLock(key, token, time, TimeUnit, jedis);</span></span><br><span class="line"><span class="comment"> * if (got) &#123;</span></span><br><span class="line"><span class="comment"> * try &#123;</span></span><br><span class="line"><span class="comment"> * // do something</span></span><br><span class="line"><span class="comment"> * &#125; finally &#123;</span></span><br><span class="line"><span class="comment"> * JedisLock.unlock(key, token, jedis);</span></span><br><span class="line"><span class="comment"> * &#125;</span></span><br><span class="line"><span class="comment"> * &#125;</span></span><br><span class="line"><span class="comment"> * &lt;p&gt;</span></span><br><span class="line"><span class="comment"> * 2. lock</span></span><br><span class="line"><span class="comment"> * &lt;p&gt;</span></span><br><span class="line"><span class="comment"> * JedisLock.lock(key, token, jedis);</span></span><br><span class="line"><span class="comment"> * try &#123;</span></span><br><span class="line"><span class="comment"> * &lt;p&gt;</span></span><br><span class="line"><span class="comment"> * &#125; finally &#123;</span></span><br><span class="line"><span class="comment"> * JedisLock.unlock(key, token, jedis);</span></span><br><span class="line"><span class="comment"> * &#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">JedisLock</span> &#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> key</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> token</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> jedis</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="type">boolean</span> <span class="title function_">unlock</span><span class="params">(String key, String token, Jedis jedis)</span> &#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">script</span> <span class="operator">=</span> <span class="string">&quot;if redis.call(&#x27;get&#x27;, KEYS[1]) == ARGV[1] then return redis.call(&#x27;del&#x27;, KEYS[1]) else return 0 end&quot;</span>;</span><br><span class="line">        <span class="type">Object</span> <span class="variable">result</span> <span class="operator">=</span> jedis.eval(script, Collections.singletonList(lockKey), Collections.singletonList(requestId));</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (RELEASE_SUCCESS.equals(result)) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> key</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> token</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> jedis</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> </span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">lock</span><span class="params">(String key, String token, Jedis jedis)</span> &#123;</span><br><span class="line">        isValidKey(key, jedis);</span><br><span class="line">        <span class="keyword">while</span> (!tryLock(key, token, jedis)) &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                TimeUnit.MILLISECONDS.sleep(INTERVAL_IN_MILLIS);</span><br><span class="line">            &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">isValidKey</span><span class="params">(String key, Jedis jedis)</span> &#123;</span><br><span class="line">        <span class="type">long</span> <span class="variable">ttl</span> <span class="operator">=</span> jedis.ttl(key);</span><br><span class="line">        <span class="keyword">if</span> (ttl == -<span class="number">1</span>) &#123;</span><br><span class="line">            <span class="type">String</span> <span class="variable">val</span> <span class="operator">=</span> jedis.get(key);</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">Error</span>(<span class="string">&quot;redis lock encounter an unexpired key : &quot;</span> + key + <span class="string">&quot;, value : &quot;</span> + val);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">int</span> <span class="variable">INTERVAL_IN_MILLIS</span> <span class="operator">=</span> <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> key</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> token</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> timeout</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> timeUnit</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> jedis</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="type">boolean</span> <span class="title function_">tryLock</span><span class="params">(String key, String token, <span class="type">long</span> timeout, TimeUnit timeUnit, Jedis jedis)</span> &#123;</span><br><span class="line">        timeout = TimeUnit.MILLISECONDS.convert(timeout, timeUnit);</span><br><span class="line">        <span class="type">boolean</span> <span class="variable">got</span> <span class="operator">=</span> tryLock(key, token, jedis);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (!got &amp;&amp; timeout &gt; <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                TimeUnit.MILLISECONDS.sleep(<span class="number">1</span>);</span><br><span class="line">            &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            got = tryLock(key, token, jedis);</span><br><span class="line">            timeout -= INTERVAL_IN_MILLIS;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> got;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">int</span> <span class="variable">EXPIRED_TIME_IN_SECONDS</span> <span class="operator">=</span> <span class="number">60</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="type">boolean</span> <span class="title function_">tryLock</span><span class="params">(String key, String token, Jedis jedis)</span> &#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">got</span> <span class="operator">=</span> jedis.set(key, token, <span class="string">&quot;NX&quot;</span>, <span class="string">&quot;EX&quot;</span>, EXPIRED_TIME_IN_SECONDS);</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;OK&quot;</span>.equals(got);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>此锁的特点：</p>
+<ol>
+<li>独占式、不可重入；</li>
+<li>tryLock 响应中断的方式为直接返回false；</li>
+<li>EXPIRED_TIME_IN_SECONDS 为 60，可根据业务场景做相应修改；</li>
+</ol>
+<p>为什么会这样设计？<br>借助Redis的set实现的锁，旨在于保持Redis高速特性的同时具有一定的并发控制，</p>
+<ol>
+<li>没有重入场景；</li>
+<li>没有wait、notify机制，并且wait具有时效性，可以不响应中断，但是为了方便停服务，所以直接return false；</li>
+<li>为什么不使用set(key, token, “NX”)而要给锁加一个过期时间？是因为如果a、b共用一个Redis server，其中a突然挂了，那么a设置的key就永远都不过期，b就永远拿不到这个key的锁。</li>
+<li>redis server单节点，多节点情况下不保证一致性，所以一般使用zookeeper。</li>
+</ol>
+<p>适用于竞争不激烈的场景，如果对锁的竞争很激烈，或者需要重入，请使用Redisson。</p>
+<p>Redis 连接池</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">JedisPoolConfig</span> <span class="variable">config</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">JedisPoolConfig</span>();</span><br><span class="line">config.setMaxTotal(<span class="number">100</span>);</span><br><span class="line">config.setMaxIdle(<span class="number">50</span>);</span><br><span class="line">config.setMinIdle(<span class="number">10</span>);</span><br><span class="line">pool = <span class="keyword">new</span> <span class="title class_">JedisPool</span>(config, <span class="string">&quot;localhost&quot;</span>, <span class="number">6397</span>);</span><br><span class="line"></span><br><span class="line"><span class="type">Jedis</span> <span class="variable">jedis</span> <span class="operator">=</span> pool.getResource();        </span><br></pre></td></tr></table></figure>
+<p><a href="/blog/2018/04/26/redis/JedisTest.txt">JedisTest</a></p>
+<h2 id="Redis-Client"><a href="#Redis-Client" class="headerlink" title="Redis-Client"></a>Redis-Client</h2><p><a target="_blank" rel="noopener" href="https://github.com/xetorthio/jedis/wiki/AdvancedUsage">redis client jedis</a><br>small、easy to use.</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/redisson/redisson">redis client redisson</a><br>感觉就像是对着jdk的API重写了一遍Redis版的实现一样。为了实现tryLock(time, timeUnit)接口，它在内部使用了Redis的pub&#x2F;sub框架，这样就可以实现wait&#x2F;notify机制，虽然原本我也想这么搞来着，但是这样的实现太“重”，现有业务暂时用不到。</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/lettuce-io/lettuce-core">redis client lettuce-core</a><br>看粉丝的数量远不如redisson，但是它跟redisson的功能不同，它更适合事件驱动的应用，底层用了netty。事件驱动的应用最适合用它了。</p>
  
     </div>
 
     <footer class="article-footer">
-      <!-- <a data-url="https://carl-zk.github.io/blog/2018/04/18/when-IntelliJ-goes-fool/" data-id="clwbvux5a007164od2fj216nf" class="article-share-link">分享</a> -->
-       
+      <!-- <a data-url="https://carl-zk.github.io/blog/2018/04/26/redis/" data-id="clwbvux56006064odf8oy9aak" class="article-share-link">分享</a> -->
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/redis/" rel="tag">redis</a></li></ul>
+ 
       <div id="gitalk-container"></div>
        
 
@@ -180,7 +226,7 @@
 
 
   <nav id="page-nav">
-    <a class="extend prev" rel="prev" href="/blog/page/38/">&lt;&lt;上一页</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/37/">37</a><a class="page-number" href="/blog/page/38/">38</a><span class="page-number current">39</span><a class="page-number" href="/blog/page/40/">40</a><a class="page-number" href="/blog/page/41/">41</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/192/">192</a><a class="extend next" rel="next" href="/blog/page/40/">下一页&gt;&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/38/">&lt;&lt;上一页</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/37/">37</a><a class="page-number" href="/blog/page/38/">38</a><span class="page-number current">39</span><a class="page-number" href="/blog/page/40/">40</a><a class="page-number" href="/blog/page/41/">41</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/194/">194</a><a class="extend next" rel="next" href="/blog/page/40/">下一页&gt;&gt;</a>
   </nav>
 
 </section>
@@ -204,6 +250,14 @@
       <ul>
         
           <li>
+            <a href="/blog/2025/09/28/projectreactor-webflux/">Projectreactor &amp; Webflux</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2025/02/19/DNSCrypt/">DNSCrypt</a>
+          </li>
+        
+          <li>
             <a href="/blog/2024/05/19/windows/">Windows</a>
           </li>
         
@@ -213,14 +267,6 @@
         
           <li>
             <a href="/blog/2023/12/15/spring-boot-%E5%90%AF%E5%8A%A8%E8%BF%87%E7%A8%8B/">Spring Boot 启动过程</a>
-          </li>
-        
-          <li>
-            <a href="/blog/2022/04/25/Design-Underground-System/">Design Underground System</a>
-          </li>
-        
-          <li>
-            <a href="/blog/2022/04/25/Encode-and-Decode-TinyURL/">Encode and Decode TinyURL</a>
           </li>
         
       </ul>
@@ -244,7 +290,7 @@
   
   <div class="outer">
     <div id="footer-left">
-      &copy; 2016 - 2024 carl-zk<!--&nbsp;|&nbsp;
+      &copy; 2016 - 2025 carl-zk<!--&nbsp;|&nbsp;
       主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a> -->
     </div>
   

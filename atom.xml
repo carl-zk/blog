@@ -6,7 +6,7 @@
   <link href="https://carl-zk.github.io/blog/atom.xml" rel="self"/>
   
   <link href="https://carl-zk.github.io/blog/"/>
-  <updated>2024-06-27T00:14:31.229Z</updated>
+  <updated>2025-09-28T15:34:04.328Z</updated>
   <id>https://carl-zk.github.io/blog/</id>
   
   <author>
@@ -17,11 +17,63 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Projectreactor &amp; Webflux</title>
+    <link href="https://carl-zk.github.io/blog/2025/09/28/projectreactor-webflux/"/>
+    <id>https://carl-zk.github.io/blog/2025/09/28/projectreactor-webflux/</id>
+    <published>2025-09-28T13:52:25.000Z</published>
+    <updated>2025-09-28T15:34:04.328Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;reactor&quot;&gt;&lt;a href=&quot;#reactor&quot; class=&quot;headerlink&quot; title=&quot;reactor&quot;&gt;&lt;/a&gt;reactor&lt;/h1&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Aspect&lt;/th&gt;
+&lt;th&gt;&lt;code&gt;generate&lt;/code&gt; (sync)&lt;/th&gt;
+&lt;th&gt;&lt;code&gt;push&lt;/code&gt; (async, single thread)&lt;/th&gt;
+&lt;th&gt;&lt;code&gt;create&lt;/code&gt; (async, multi-thread)&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;Emission style&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;Pull&lt;/strong&gt; (one item per request)&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;Push&lt;/strong&gt; (producer pushes items)&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;Push&lt;/strong&gt; (producer pushes items)&lt;/td&gt;
+&lt;/tr&gt;</summary>
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>DNSCrypt</title>
+    <link href="https://carl-zk.github.io/blog/2025/02/19/DNSCrypt/"/>
+    <id>https://carl-zk.github.io/blog/2025/02/19/DNSCrypt/</id>
+    <published>2025-02-19T15:57:20.000Z</published>
+    <updated>2025-05-21T13:07:55.026Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;&lt;a href=&quot;https://github.com/DNSCrypt/dnscrypt-proxy&quot;&gt;https://github.com/DNSCrypt/dnscrypt-proxy&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;dnscrypt-proxy.toml&lt;/p&gt;
+&lt;figure class=&quot;highlight plaintext&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;listen_addresses = [&amp;#x27;[::]:53&amp;#x27;]&lt;/span&gt;&lt;br&gt;&lt;span c</summary>
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
     <title>Windows</title>
     <link href="https://carl-zk.github.io/blog/2024/05/19/windows/"/>
     <id>https://carl-zk.github.io/blog/2024/05/19/windows/</id>
     <published>2024-05-19T04:04:23.000Z</published>
-    <updated>2024-06-27T00:14:31.229Z</updated>
+    <updated>2025-05-21T13:10:29.843Z</updated>
     
     
       

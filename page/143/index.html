@@ -84,15 +84,15 @@
         <section id="main">
   
     <article
-  id="post-理想"
+  id="post-技术堆积栈"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
 >
 
   <div class="article-meta">
-    <a href="/blog/2016/12/05/%E7%90%86%E6%83%B3/" class="article-date">
-  <time datetime="2016-12-05T11:29:52.000Z" itemprop="datePublished">2016-12-05</time>
+    <a href="/blog/2017/02/08/%E6%8A%80%E6%9C%AF%E5%A0%86%E7%A7%AF%E6%A0%88/" class="article-date">
+  <time datetime="2017-02-08T05:11:04.000Z" itemprop="datePublished">2017-02-08</time>
 </a>
     
   </div>
@@ -102,7 +102,7 @@
       
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2016/12/05/%E7%90%86%E6%83%B3/">理想</a>
+      <a class="article-title" href="/blog/2017/02/08/%E6%8A%80%E6%9C%AF%E5%A0%86%E7%A7%AF%E6%A0%88/">技术堆积栈</a>
     </h1>
   
 
@@ -111,12 +111,39 @@
     <div class="article-entry" itemprop="articleBody">
       
       <!-- Table of Contents -->
-       <p>我想在农村老家盖个养鸡场.<br>为村里盖所小学.<br>娶个老婆,陪我爸妈一起变老.</p>
+       <p>[TOC]</p>
+<p><strong>学习博客:</strong><br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/moonandstar08/p/4865190.html">https://www.cnblogs.com/moonandstar08/p/4865190.html</a></p>
+<h3 id="jvm"><a href="#jvm" class="headerlink" title="jvm"></a>jvm</h3><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/duanxz/tag/JVM%E8%99%9A%E6%8B%9F%E6%9C%BA/">https://www.cnblogs.com/duanxz/tag/JVM%E8%99%9A%E6%8B%9F%E6%9C%BA/</a></p>
+<h3 id="集合类"><a href="#集合类" class="headerlink" title="集合类"></a>集合类</h3><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/skywang12345/p/3323085.html">https://www.cnblogs.com/skywang12345/p/3323085.html</a><br>试题<a target="_blank" rel="noopener" href="http://wiki.jikexueyuan.com/project/java-interview-bible/collection.html">http://wiki.jikexueyuan.com/project/java-interview-bible/collection.html</a></p>
+<p>List,set,vector,stack;map<br>ArrayList,LinkedList,HashMap,Hashtable,TreeMap,HashSet,TreeSet<br>fail-fast:一个线程遍历集合时,该集合被另一线程修改.<br>vector线程安全,ArrayList线程不安全.<br>各集合哪种遍历方式最快.<br>强引用,软引用,弱引用,虚引用</p>
+<h3 id="多线程"><a href="#多线程" class="headerlink" title="多线程"></a>多线程</h3><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/skywang12345/p/3479202.html">https://www.cnblogs.com/skywang12345/p/3479202.html</a><br><strong>synchronized基本原则</strong><br>一个进程访问synchronized修饰的代码块,其它进程则:<br>第一条: 当一个线程访问“某对象”的“synchronized方法”或者“synchronized代码块”时，其他线程对“该对象”的该“synchronized方法”或者“synchronized代码块”的访问将被阻塞。<br>第二条: 当一个线程访问“某对象”的“synchronized方法”或者“synchronized代码块”时，其他线程仍然可以访问“该对象”的非同步代码块。<br>第三条: 当一个线程访问“某对象”的“synchronized方法”或者“synchronized代码块”时，其他线程对“该对象”的其他的“synchronized方法”或者“synchronized代码块”的访问将被阻塞。</p>
+<p>区分synchronized方法和方法块:<br>方法: public void synchronized func(){}<br>方法块: public void func(){ synchronized(this){}}<br><strong>synchronized代码块可以更精确的控制冲突限制访问区域，有时候表现更高效率。</strong><br>实例锁和全局锁:<br>在访问实力锁时,允许其它线程访问全局锁.(我刚开始认为不可以)<br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/skywang12345/p/java_threads_category.html">https://www.cnblogs.com/skywang12345/p/java_threads_category.html</a></p>
+<p>wait()方法是让当前进程等待.</p>
+<p>尽管volatile变量的特性不错，但是volatile并不能保证线程安全的，也就是说<strong>volatile字段的操作不是原子性的</strong>，volatile变量只能保证可见性（一个线程修改后其它线程能够理解看到此变化后的结果）.</p>
+<h3 id="IO-x2F-NIO"><a href="#IO-x2F-NIO" class="headerlink" title="IO&#x2F;NIO"></a>IO&#x2F;NIO</h3><p>结构图:<br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/zemliu/p/3269015.html">https://www.cnblogs.com/zemliu/p/3269015.html</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/skywang12345/p/io_01.html">https://www.cnblogs.com/skywang12345/p/io_01.html</a></p>
+<h3 id="mysql"><a href="#mysql" class="headerlink" title="mysql"></a>mysql</h3><p><a target="_blank" rel="noopener" href="http://mm.fancymore.com/reading/mysql%E9%9D%A2%E8%AF%95%E9%A2%98%E9%9B%86%E9%94%A6.html">http://mm.fancymore.com/reading/mysql%E9%9D%A2%E8%AF%95%E9%A2%98%E9%9B%86%E9%94%A6.html</a><br>优化技巧:<a target="_blank" rel="noopener" href="https://www.douban.com/note/345871485/">https://www.douban.com/note/345871485/</a></p>
+<p>建立索引的几大原则</p>
+<p>1.最左前缀匹配原则，非常重要的原则，mysql会一直向右匹配直到遇到范围查询(&gt;、&lt;、between、like)就停止匹配，比如a &#x3D; 1 and b &#x3D; 2 and c &gt; 3 and d &#x3D; 4 如果建立(a,b,c,d)顺序的索引，d是用不到索引的，如果建立(a,b,d,c)的索引则都可以用到，a,b,d的顺序可以任意调整。</p>
+<p>2.&#x3D;和in可以乱序，比如a &#x3D; 1 and b &#x3D; 2 and c &#x3D; 3 建立(a,b,c)索引可以任意顺序，mysql的查询优化器会帮你优化成索引可以识别的形式</p>
+<p>3.尽量选择区分度高的列作为索引,区分度的公式是count(distinct col)&#x2F;count(*)，表示字段不重复的比例，比例越大我们扫描的记录数越少，唯一键的区分度是1，而一些状态、性别字段可能在大数据面前区分度就是0，那可能有人会问，这个比例有什么经验值吗？使用场景不同，这个值也很难确定，一般需要join的字段我们都要求是0.1以上，即平均1条扫描10条记录</p>
+<p>4.索引列不能参与计算，保持列“干净”，比如from_unixtime(create_time) &#x3D; ’2014-05-29’就不能使用到索引，原因很简单，b+树中存的都是数据表中的字段值，但进行检索时，需要把所有元素都应用函数才能比较，显然成本太大。所以语句应该写成create_time &#x3D; unix_timestamp(’2014-05-29’);</p>
+<p>5.尽量的扩展索引，不要新建索引。比如表中已经有a的索引，现在要加(a,b)的索引，那么只需要修改原来的索引即可</p>
+<p>优化SQL语句的步骤</p>
+<p>慢查询优化基本步骤</p>
+<p>0.先运行看看是否真的很慢，注意设置SQL_NO_CACHE</p>
+<p>1.where条件单表查，锁定最小返回记录表。这句话的意思是把查询语句的where都应用到表中返回的记录数最小的表开始查起，单表每个字段分别查询，看哪个字段的区分度最高</p>
+<p>2.explain查看执行计划，是否与1预期一致（从锁定记录较少的表开始查询）</p>
+<p>3.order by limit 形式的sql语句让排序的表优先查</p>
+<p>4.了解业务方使用场景</p>
+<p>5.加索引时参照建索引的几大原则</p>
+<p>6.观察结果，不符合预期继续从0分析</p>
+<p><strong>只有通过索引条件检索数据，InnoDB才使用行级锁，否则，InnoDB将使用表锁！</strong></p>
  
     </div>
 
     <footer class="article-footer">
-      <!-- <a data-url="https://carl-zk.github.io/blog/2016/12/05/%E7%90%86%E6%83%B3/" data-id="clwbvux5q00ad64od8ugxegj7" class="article-share-link">分享</a> -->
+      <!-- <a data-url="https://carl-zk.github.io/blog/2017/02/08/%E6%8A%80%E6%9C%AF%E5%A0%86%E7%A7%AF%E6%A0%88/" data-id="clwbvux5m009n64odbpmh2oq1" class="article-share-link">分享</a> -->
        
       <div id="gitalk-container"></div>
        
@@ -167,7 +194,7 @@
 
 
   <nav id="page-nav">
-    <a class="extend prev" rel="prev" href="/blog/page/142/">&lt;&lt;上一页</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/141/">141</a><a class="page-number" href="/blog/page/142/">142</a><span class="page-number current">143</span><a class="page-number" href="/blog/page/144/">144</a><a class="page-number" href="/blog/page/145/">145</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/192/">192</a><a class="extend next" rel="next" href="/blog/page/144/">下一页&gt;&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/142/">&lt;&lt;上一页</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/141/">141</a><a class="page-number" href="/blog/page/142/">142</a><span class="page-number current">143</span><a class="page-number" href="/blog/page/144/">144</a><a class="page-number" href="/blog/page/145/">145</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/194/">194</a><a class="extend next" rel="next" href="/blog/page/144/">下一页&gt;&gt;</a>
   </nav>
 
 </section>
@@ -191,6 +218,14 @@
       <ul>
         
           <li>
+            <a href="/blog/2025/09/28/projectreactor-webflux/">Projectreactor &amp; Webflux</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2025/02/19/DNSCrypt/">DNSCrypt</a>
+          </li>
+        
+          <li>
             <a href="/blog/2024/05/19/windows/">Windows</a>
           </li>
         
@@ -200,14 +235,6 @@
         
           <li>
             <a href="/blog/2023/12/15/spring-boot-%E5%90%AF%E5%8A%A8%E8%BF%87%E7%A8%8B/">Spring Boot 启动过程</a>
-          </li>
-        
-          <li>
-            <a href="/blog/2022/04/25/Design-Underground-System/">Design Underground System</a>
-          </li>
-        
-          <li>
-            <a href="/blog/2022/04/25/Encode-and-Decode-TinyURL/">Encode and Decode TinyURL</a>
           </li>
         
       </ul>
@@ -231,7 +258,7 @@
   
   <div class="outer">
     <div id="footer-left">
-      &copy; 2016 - 2024 carl-zk<!--&nbsp;|&nbsp;
+      &copy; 2016 - 2025 carl-zk<!--&nbsp;|&nbsp;
       主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a> -->
     </div>
   

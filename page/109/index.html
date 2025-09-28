@@ -84,17 +84,21 @@
         <section id="main">
   
     <article
-  id="post-sublime快捷键"
+  id="post-Install-OFBize"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
 >
 
   <div class="article-meta">
-    <a href="/blog/2017/03/03/sublime%E5%BF%AB%E6%8D%B7%E9%94%AE/" class="article-date">
-  <time datetime="2017-03-03T14:19:53.000Z" itemprop="datePublished">2017-03-03</time>
+    <a href="/blog/2017/03/05/Install-OFBize/" class="article-date">
+  <time datetime="2017-03-05T05:11:57.000Z" itemprop="datePublished">2017-03-05</time>
 </a>
     
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/OFBiz/">OFBiz</a>
+  </div>
+
   </div>
   <div class="article-inner">
      
@@ -102,7 +106,7 @@
       
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2017/03/03/sublime%E5%BF%AB%E6%8D%B7%E9%94%AE/">Sublime快捷键</a>
+      <a class="article-title" href="/blog/2017/03/05/Install-OFBize/">Install OFBiz</a>
     </h1>
   
 
@@ -111,15 +115,14 @@
     <div class="article-entry" itemprop="articleBody">
       
       <!-- Table of Contents -->
-       <h4 id="ctr-p"><a href="#ctr-p" class="headerlink" title="ctr+p"></a>ctr+p</h4><p>可以去任何地方</p>
-<h4 id="ctr-shift-p"><a href="#ctr-shift-p" class="headerlink" title="ctr+shift+p"></a>ctr+shift+p</h4><p>命令模式<br>设置文档语法</p>
-<h4 id="ctr-shift-d"><a href="#ctr-shift-d" class="headerlink" title="ctr+shift+d"></a>ctr+shift+d</h4><p>复制这行</p>
-<h4 id="ctr-d"><a href="#ctr-d" class="headerlink" title="ctr+d"></a>ctr+d</h4><p>ctr+k 跳过一个<br>多行游标（alt+f3, shift+鼠标右键）</p>
+       <h1 id="download"><a href="#download" class="headerlink" title="download"></a>download</h1><p><a target="_blank" rel="noopener" href="https://ofbiz.apache.org/download.html">download</a></p>
+<h1 id="install-gradle"><a href="#install-gradle" class="headerlink" title="install gradle"></a>install gradle</h1><p><a target="_blank" rel="noopener" href="https://docs.gradle.org/3.4.1/userguide/overview.html">gradle</a>是一个build,automate and deliver工具，类似ant，不过<a target="_blank" rel="noopener" href="http://localhost:4000/blog/2017/03/06/gradle/">gradle学习</a>主要针对Java项目。build scripts是采用<a target="_blank" rel="noopener" href="http://groovy-lang.org/install.html">Groovy</a>语言，原因是它比Java更简单直接，类似Python、Ruby。<br>你可以不用安装gradle，如果它是一个Gradle-based build项目，直接 <code>./gradlew tasks</code>即可。<br>我选择直接安装在&#x2F;opt&#x2F;gradle中，在~&#x2F;.zshrc中export然后source。(Ubuntu的sdk安装工具sdkman类似mac的brew)</p>
+<h1 id="first-step"><a href="#first-step" class="headerlink" title="first step"></a>first step</h1><p>进入OFBiz根目录，它是一个gradle-based的项目，但是我已经安装gradle了，所以可以直接<code>gradle cleanAll loadDefault</code></p>
  
     </div>
 
     <footer class="article-footer">
-      <!-- <a data-url="https://carl-zk.github.io/blog/2017/03/03/sublime%E5%BF%AB%E6%8D%B7%E9%94%AE/" data-id="clwbvux58006k64od25jmfjbl" class="article-share-link">分享</a> -->
+      <!-- <a data-url="https://carl-zk.github.io/blog/2017/03/05/Install-OFBize/" data-id="clwbvux4o001u64od1ktn15oa" class="article-share-link">分享</a> -->
        
       <div id="gitalk-container"></div>
        
@@ -170,7 +173,7 @@
 
 
   <nav id="page-nav">
-    <a class="extend prev" rel="prev" href="/blog/page/108/">&lt;&lt;上一页</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/107/">107</a><a class="page-number" href="/blog/page/108/">108</a><span class="page-number current">109</span><a class="page-number" href="/blog/page/110/">110</a><a class="page-number" href="/blog/page/111/">111</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/192/">192</a><a class="extend next" rel="next" href="/blog/page/110/">下一页&gt;&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/108/">&lt;&lt;上一页</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/107/">107</a><a class="page-number" href="/blog/page/108/">108</a><span class="page-number current">109</span><a class="page-number" href="/blog/page/110/">110</a><a class="page-number" href="/blog/page/111/">111</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/194/">194</a><a class="extend next" rel="next" href="/blog/page/110/">下一页&gt;&gt;</a>
   </nav>
 
 </section>
@@ -194,6 +197,14 @@
       <ul>
         
           <li>
+            <a href="/blog/2025/09/28/projectreactor-webflux/">Projectreactor &amp; Webflux</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2025/02/19/DNSCrypt/">DNSCrypt</a>
+          </li>
+        
+          <li>
             <a href="/blog/2024/05/19/windows/">Windows</a>
           </li>
         
@@ -203,14 +214,6 @@
         
           <li>
             <a href="/blog/2023/12/15/spring-boot-%E5%90%AF%E5%8A%A8%E8%BF%87%E7%A8%8B/">Spring Boot 启动过程</a>
-          </li>
-        
-          <li>
-            <a href="/blog/2022/04/25/Design-Underground-System/">Design Underground System</a>
-          </li>
-        
-          <li>
-            <a href="/blog/2022/04/25/Encode-and-Decode-TinyURL/">Encode and Decode TinyURL</a>
           </li>
         
       </ul>
@@ -234,7 +237,7 @@
   
   <div class="outer">
     <div id="footer-left">
-      &copy; 2016 - 2024 carl-zk<!--&nbsp;|&nbsp;
+      &copy; 2016 - 2025 carl-zk<!--&nbsp;|&nbsp;
       主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a> -->
     </div>
   

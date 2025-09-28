@@ -84,15 +84,15 @@
         <section id="main">
   
     <article
-  id="post-Fibonacci-Again"
+  id="post-最长上升子序列"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
 >
 
   <div class="article-meta">
-    <a href="/blog/2016/06/30/Fibonacci-Again/" class="article-date">
-  <time datetime="2016-06-30T05:28:56.000Z" itemprop="datePublished">2016-06-30</time>
+    <a href="/blog/2016/07/01/%E6%9C%80%E9%95%BF%E4%B8%8A%E5%8D%87%E5%AD%90%E5%BA%8F%E5%88%97/" class="article-date">
+  <time datetime="2016-06-30T16:45:06.000Z" itemprop="datePublished">2016-07-01</time>
 </a>
     
   <div class="article-category">
@@ -106,7 +106,7 @@
       
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2016/06/30/Fibonacci-Again/">Fibonacci Again</a>
+      <a class="article-title" href="/blog/2016/07/01/%E6%9C%80%E9%95%BF%E4%B8%8A%E5%8D%87%E5%AD%90%E5%BA%8F%E5%88%97/">最长上升子序列</a>
     </h1>
   
 
@@ -115,21 +115,24 @@
     <div class="article-entry" itemprop="articleBody">
       
       <!-- Table of Contents -->
-       <p><a target="_blank" rel="noopener" href="http://acm.hdu.edu.cn/showproblem.php?pid=1021">题目链接</a><br>Problem Description<br>There are another kind of Fibonacci numbers: F(0) &#x3D; 7, F(1) &#x3D; 11, F(n) &#x3D; F(n-1) + F(n-2) (n&gt;&#x3D;2).</p>
-<p>Input<br>Input consists of a sequence of lines, each containing an integer n. (n &lt; 1,000,000).</p>
-<p>Output<br>Print the word “yes” if 3 divide evenly into F(n).</p>
-<p>Print the word “no” if not.</p>
-<p>Sample Input<br>0<br>1<br>2<br>3<br>4<br>5</p>
-<p>Sample Output<br>no<br>no<br>yes<br>no<br>no<br>no</p>
-<p>问F(n)能否被3整除.</p>
-<hr/>
+       <p><a target="_blank" rel="noopener" href="http://acm.hdu.edu.cn/showproblem.php?pid=1025">题目链接</a><br>Constructing Roads In JGShining’s Kingdom</p>
+<p>Input<br>Each test case will begin with a line containing an integer n(1 ≤ n ≤ 500,000). Then n lines follow. Each line contains two integers p and r which represents that Poor City p needs to import resources from Rich City r. Process to the end of file.</p>
+<p>Output<br>For each test case, output the result in the form of sample.<br>You should tell JGShining what’s the maximal number of road(s) can be built. </p>
+<p>Sample Input<br>2<br>1 2<br>2 1<br>3<br>1 2<br>2 3<br>3 1</p>
+<p>Sample Output<br>Case 1:<br>My king, at most 1 road can be built.</p>
+<p>Case 2:<br>My king, at most 2 roads can be built.</p>
+<p>求序列中的最长上升子序列.</p>
+<hr />
 
-<p>寻找规律是件有意思的事情,发现规律是很令人鸡冻的.<br>n &lt; 1,000,000, F(n)最大时已经不能用long long 表示.<br>能被3整除的数如123,各位数字相加也能被3整除.所以F(i)可化简为个位数字.<br>又F(i)的范围为[1, 9], 所以周期肯定在9*9&#x3D;81之内, 又因为不会有两个9同时出现的情况,所以周期就是80.<br>计算前80项,然后n%80即可.</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;set&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> MAX 84</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> TEST</span></span><br><span class="line"></span><br><span class="line">using namespace <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> a[MAX] = &#123;<span class="number">7</span>, <span class="number">2</span>&#125;;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">init</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">2</span>; i&lt;MAX; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        a[i] = a[i<span class="number">-1</span>] + a[i<span class="number">-2</span>];</span><br><span class="line">        <span class="keyword">if</span>(a[i]&gt;<span class="number">9</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            a[i] = a[i]/<span class="number">10</span>+a[i]%<span class="number">10</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="meta">#<span class="keyword">ifdef</span> TEST</span></span><br><span class="line">    freopen(<span class="string">&quot;in.txt&quot;</span>, <span class="string">&quot;r&quot;</span>, <span class="built_in">stdin</span>);</span><br><span class="line">    <span class="comment">//freopen(&quot;out.txt&quot;, &quot;w&quot;, stdout);</span></span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line">    <span class="type">int</span> n,tc;</span><br><span class="line">    init();</span><br><span class="line">    <span class="keyword">while</span>(~<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;n))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(a[n%<span class="number">80</span>]%<span class="number">3</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;no\n&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;yes\n&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">ifdef</span> TEST</span></span><br><span class="line">    fclose(<span class="built_in">stdin</span>);</span><br><span class="line">    <span class="comment">//fclose(stdout);</span></span><br><span class="line"><span class="meta">#<span class="keyword">endif</span> <span class="comment">// TEST</span></span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure> 
+<p>首先,LIS(Longest Increasing Subsequence,最长上升子序列)不能用分治合并的方法.例如序列1,3,2,利用分治法将无法得到LIS&#x3D;2.这是因为在最大子段和的问题中,子段是连续的,而这里的子段是非连续的,当使用分治法处理最长上升子段在中间的情况时,你无法判断究竟是包含了哪些点和跨越了哪些点.</p>
+<p>其次, 该问题n太大,不能采用O(n^2)的常规dp方式,而是采用了更加优美的和特殊的二分插入方式,并且该方法的dp规则简直吊炸天.<br>dp[i]代表了长度为i的子序列末尾的值,当j&gt;i时, dp[j]肯定&gt;dp[i].<br>将dp[]初始化成最大值,然后i从1到n依次以二分查找的方式插入到dp[]中,时间复杂度O(nlogn).</p>
+<p>用到了STL中algorithm的 int *lower_bound(begin, end, value)方法,自带的二分查找最低位置的value, 相似函数还有upper_bound以及验证是否存在的方法binary_search.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;set&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stack&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> MAX 500010</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> INF 1&lt;&lt;20</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> TEST</span></span><br><span class="line"></span><br><span class="line">using namespace <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> a[MAX], dp[MAX], n;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* 最长上升子序列</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">fun</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//将dp从1到n初始化为INF</span></span><br><span class="line">    fill(dp+<span class="number">1</span>, dp+n+<span class="number">1</span>, INF);</span><br><span class="line">    <span class="comment">//利用二分查找将a[i]插入到dp[]中</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">int</span> *idx = lower_bound(dp+<span class="number">1</span>, dp+n+<span class="number">1</span>, a[i]);</span><br><span class="line">        *idx = a[i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="type">int</span> ans = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>; i&lt;=n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(dp[i] != INF) ans++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="meta">#<span class="keyword">ifdef</span> TEST</span></span><br><span class="line">    freopen(<span class="string">&quot;in.txt&quot;</span>, <span class="string">&quot;r&quot;</span>, <span class="built_in">stdin</span>);</span><br><span class="line">    <span class="comment">//freopen(&quot;out.txt&quot;, &quot;w&quot;, stdout);</span></span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line">    <span class="type">int</span> ans, rich, poor, tc = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(~<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;n))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">&quot;%d %d&quot;</span>, &amp;poor, &amp;rich);</span><br><span class="line">            a[rich] = poor;</span><br><span class="line">        &#125;</span><br><span class="line">        ans = fun();</span><br><span class="line">        <span class="keyword">if</span>(ans &gt; <span class="number">1</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;Case %d:\nMy king, at most %d roads can be built.\n\n&quot;</span>, ++tc, ans);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;Case %d:\nMy king, at most 1 road can be built.\n\n&quot;</span>, ++tc);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">ifdef</span> TEST</span></span><br><span class="line">    fclose(<span class="built_in">stdin</span>);</span><br><span class="line">    <span class="comment">//fclose(stdout);</span></span><br><span class="line"><span class="meta">#<span class="keyword">endif</span> <span class="comment">// TEST</span></span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+ 
     </div>
 
     <footer class="article-footer">
-      <!-- <a data-url="https://carl-zk.github.io/blog/2016/06/30/Fibonacci-Again/" data-id="clwbvux4l001664odgcyxeiqh" class="article-share-link">分享</a> -->
+      <!-- <a data-url="https://carl-zk.github.io/blog/2016/07/01/%E6%9C%80%E9%95%BF%E4%B8%8A%E5%8D%87%E5%AD%90%E5%BA%8F%E5%88%97/" data-id="clwbvux5p00a264od722989qo" class="article-share-link">分享</a> -->
        
       <div id="gitalk-container"></div>
        
@@ -180,7 +183,7 @@
 
 
   <nav id="page-nav">
-    <a class="extend prev" rel="prev" href="/blog/page/151/">&lt;&lt;上一页</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/150/">150</a><a class="page-number" href="/blog/page/151/">151</a><span class="page-number current">152</span><a class="page-number" href="/blog/page/153/">153</a><a class="page-number" href="/blog/page/154/">154</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/192/">192</a><a class="extend next" rel="next" href="/blog/page/153/">下一页&gt;&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/151/">&lt;&lt;上一页</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/150/">150</a><a class="page-number" href="/blog/page/151/">151</a><span class="page-number current">152</span><a class="page-number" href="/blog/page/153/">153</a><a class="page-number" href="/blog/page/154/">154</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/194/">194</a><a class="extend next" rel="next" href="/blog/page/153/">下一页&gt;&gt;</a>
   </nav>
 
 </section>
@@ -204,6 +207,14 @@
       <ul>
         
           <li>
+            <a href="/blog/2025/09/28/projectreactor-webflux/">Projectreactor &amp; Webflux</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2025/02/19/DNSCrypt/">DNSCrypt</a>
+          </li>
+        
+          <li>
             <a href="/blog/2024/05/19/windows/">Windows</a>
           </li>
         
@@ -213,14 +224,6 @@
         
           <li>
             <a href="/blog/2023/12/15/spring-boot-%E5%90%AF%E5%8A%A8%E8%BF%87%E7%A8%8B/">Spring Boot 启动过程</a>
-          </li>
-        
-          <li>
-            <a href="/blog/2022/04/25/Design-Underground-System/">Design Underground System</a>
-          </li>
-        
-          <li>
-            <a href="/blog/2022/04/25/Encode-and-Decode-TinyURL/">Encode and Decode TinyURL</a>
           </li>
         
       </ul>
@@ -244,7 +247,7 @@
   
   <div class="outer">
     <div id="footer-left">
-      &copy; 2016 - 2024 carl-zk<!--&nbsp;|&nbsp;
+      &copy; 2016 - 2025 carl-zk<!--&nbsp;|&nbsp;
       主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a> -->
     </div>
   

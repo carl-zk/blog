@@ -84,17 +84,21 @@
         <section id="main">
   
     <article
-  id="post-面试经验总结"
+  id="post-二叉树的广度优先遍历"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
 >
 
   <div class="article-meta">
-    <a href="/blog/2016/06/08/%E9%9D%A2%E8%AF%95%E7%BB%8F%E9%AA%8C%E6%80%BB%E7%BB%93/" class="article-date">
-  <time datetime="2016-06-07T16:14:50.000Z" itemprop="datePublished">2016-06-08</time>
+    <a href="/blog/2016/06/16/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%B9%BF%E5%BA%A6%E4%BC%98%E5%85%88%E9%81%8D%E5%8E%86/" class="article-date">
+  <time datetime="2016-06-16T02:32:52.000Z" itemprop="datePublished">2016-06-16</time>
 </a>
     
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a>
+  </div>
+
   </div>
   <div class="article-inner">
      
@@ -102,7 +106,7 @@
       
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2016/06/08/%E9%9D%A2%E8%AF%95%E7%BB%8F%E9%AA%8C%E6%80%BB%E7%BB%93/">面试经验总结</a>
+      <a class="article-title" href="/blog/2016/06/16/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%B9%BF%E5%BA%A6%E4%BC%98%E5%85%88%E9%81%8D%E5%8E%86/">二叉树的广度优先遍历</a>
     </h1>
   
 
@@ -111,113 +115,14 @@
     <div class="article-entry" itemprop="articleBody">
       
       <!-- Table of Contents -->
-       <h4 id="1、青蛙跳跳"><a href="#1、青蛙跳跳" class="headerlink" title="1、青蛙跳跳"></a>1、青蛙跳跳</h4><blockquote>
-<p>n块石头，一只青蛙一次可以跳一块石头，也可以跳两块石头，请问这只青蛙有几种跳法？</p>
+       <blockquote>
+<p>可以在struct内写默认构造函数.<br>在buildTree方法中声明了nodeList[len], 返回值为&amp;nodeList[1]时结果print方法报错,原来我是把局部变量的地址传出,结果局部变量的内存已经被释放.改为声明nodeList为全局变量,或者使用malloc.malloc方法是直接向内存申请空间,不手动free这块内存就永远不会被释放,容易产生内存泄露.</p>
 </blockquote>
-<p><img src="http://o6ibfi17w.bkt.clouddn.com/image%2Ffrogstones.png" loading="lazy"></p>
-<table>
-<thead>
-<tr>
-<th>n块石头</th>
-<th>跳法枚举</th>
-<th align="right">总共T(n)</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>1</td>
-<td>()</td>
-<td align="right">0</td>
-</tr>
-<tr>
-<td>2</td>
-<td>(1)</td>
-<td align="right">1</td>
-</tr>
-<tr>
-<td>3</td>
-<td>(1,1)(2)</td>
-<td align="right">2</td>
-</tr>
-<tr>
-<td>4</td>
-<td>(1,1,1)(1,2)(2,1)</td>
-<td align="right">3</td>
-</tr>
-<tr>
-<td>5</td>
-<td>(1111)(112)(121)(211)(22)</td>
-<td align="right">5</td>
-</tr>
-</tbody></table>
-<blockquote>
-<p>由上表可知，第k次的跳法是在第k-1次跳法中插入1和与1加1之和。例如：当k&#x3D;3时，k-1&#x3D;2，<br>    * 第2次的跳法(1)插入1，即(1,1);<br>    * 第2次跳法的1加1，即(2);<br>    k&#x3D;3的总跳法即(1,1)(2)。<br>    n&#x3D;6时，T(n)&#x3D;8;n&#x3D;7时，T(n)&#x3D;12;则可以假设T(n)&#x3D;T(n-1)+n-3。<br>    当n≥4时，<br>    T(4)-T(3)&#x3D;1<br>    T(5)-T(4)&#x3D;2<br>    ……<br>    即T(n)-T(3)&#x3D;1+2+…+n-3&#x3D;(n-3)(n-2)&#x2F;2<br>    所以T(n)&#x3D;(n-3)(n-2)&#x2F;2+2<br>    利用数学归纳法可证明此等式成立。</p>
-</blockquote>
-<h4 id="SQL查询"><a href="#SQL查询" class="headerlink" title="SQL查询"></a>SQL查询</h4><p>1、给出一张表T，</p>
-<table>
-<thead>
-<tr>
-<th>id</th>
-<th>user_id</th>
-<th>money</th>
-<th>time</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>1</td>
-<td>a</td>
-<td>10</td>
-<td>123</td>
-</tr>
-<tr>
-<td>2</td>
-<td>b</td>
-<td>8</td>
-<td>334</td>
-</tr>
-<tr>
-<td>3</td>
-<td>a</td>
-<td>22</td>
-<td>345</td>
-</tr>
-<tr>
-<td>4</td>
-<td>c</td>
-<td>32</td>
-<td>89</td>
-</tr>
-<tr>
-<td>5</td>
-<td>b</td>
-<td>23</td>
-<td>786</td>
-</tr>
-<tr>
-<td>列出每个用户最近上线收到的红包。</td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>select * from T a where exists (select user_id, max(time) as mt from T b group by user_id having a.user_id&#x3D;b.user_id and a.time&#x3D;mt)</td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody></table>
-<blockquote>
-<p>因为没怎么用过exist语句，所以当时没写出来，后来查了一下exist，了解了exist和in的区别，发现exist确实比较实用。</p>
-</blockquote>
-<h4 id="session共享"><a href="#session共享" class="headerlink" title="session共享"></a>session共享</h4><p>分布式系统需要考虑</p>
-<h4 id="防表单重复提交"><a href="#防表单重复提交" class="headerlink" title="防表单重复提交"></a>防表单重复提交</h4><p>在表单中增加隐藏字段uuid，如果不一致就是重复提交。</p>
-<h4 id="session持久化"><a href="#session持久化" class="headerlink" title="session持久化"></a>session持久化</h4><p>拿tomcat的实现类StandardSession来说，它在catalina.jar中，实现了Serializable，所以可以持久化。</p>
-<h4 id="锁定Integer管用吗"><a href="#锁定Integer管用吗" class="headerlink" title="锁定Integer管用吗"></a>锁定Integer管用吗</h4><p>Integer和String一样，都是final修饰的类，内部字段也是final修饰，所以synchronized(Integer a)起不到同步的效果。</p>
-<p>哇，感觉自己面试中傻傻的，恐怖！</p>
- 
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stack&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;queue&gt;</span></span></span><br><span class="line">using namespace <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="type">int</span> DATA_TYPE;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">node</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    DATA_TYPE data;</span><br><span class="line">    node *lch, *rch;</span><br><span class="line">    node()</span><br><span class="line">    &#123;</span><br><span class="line">        data = <span class="number">0</span>;</span><br><span class="line">        lch = rch = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125; Node;</span><br><span class="line"></span><br><span class="line">Node nodeList[<span class="number">100</span>];</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">print</span><span class="params">(Node *r)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>(r)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>, r-&gt;data);</span><br><span class="line">        print(r-&gt;lch);</span><br><span class="line">        print(r-&gt;rch);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Node *<span class="title function_">buildTree</span><span class="params">(DATA_TYPE dataArray[], <span class="type">int</span> len)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>; i&lt;len; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        nodeList[i].data = dataArray[i];</span><br><span class="line">        <span class="keyword">if</span>(i%<span class="number">2</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            nodeList[i/<span class="number">2</span>].rch = &amp;nodeList[i];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            nodeList[i/<span class="number">2</span>].lch = &amp;nodeList[i];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> &amp;nodeList[<span class="number">1</span>];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* BFS breadth first search</span></span><br><span class="line"><span class="comment">* 广度优先搜索</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">bfs</span><span class="params">(Node *r)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;breadth first search:\n&quot;</span>);</span><br><span class="line">    <span class="built_in">queue</span>&lt;Node*&gt; que;</span><br><span class="line">    que.push(r);</span><br><span class="line">    <span class="keyword">while</span>(!que.empty())</span><br><span class="line">    &#123;</span><br><span class="line">        Node *node = que.front();</span><br><span class="line">        que.pop();</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>, node-&gt;data);</span><br><span class="line">        <span class="keyword">if</span>(node-&gt;lch)que.push(node-&gt;lch);</span><br><span class="line">        <span class="keyword">if</span>(node-&gt;rch)que.push(node-&gt;rch);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    DATA_TYPE dataArray[] = &#123;<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>&#125;;</span><br><span class="line">    Node *root = buildTree(dataArray, <span class="keyword">sizeof</span>(dataArray)/<span class="keyword">sizeof</span>(DATA_TYPE));</span><br><span class="line">    <span class="comment">//print(root);</span></span><br><span class="line">    bfs(root);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure> 
     </div>
 
     <footer class="article-footer">
-      <!-- <a data-url="https://carl-zk.github.io/blog/2016/06/08/%E9%9D%A2%E8%AF%95%E7%BB%8F%E9%AA%8C%E6%80%BB%E7%BB%93/" data-id="clwbvux5x00by64odeg00dad5" class="article-share-link">分享</a> -->
+      <!-- <a data-url="https://carl-zk.github.io/blog/2016/06/16/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%B9%BF%E5%BA%A6%E4%BC%98%E5%85%88%E9%81%8D%E5%8E%86/" data-id="clwbvux5c007g64od70l26p69" class="article-share-link">分享</a> -->
        
       <div id="gitalk-container"></div>
        
@@ -268,7 +173,7 @@
 
 
   <nav id="page-nav">
-    <a class="extend prev" rel="prev" href="/blog/page/189/">&lt;&lt;上一页</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/188/">188</a><a class="page-number" href="/blog/page/189/">189</a><span class="page-number current">190</span><a class="page-number" href="/blog/page/191/">191</a><a class="page-number" href="/blog/page/192/">192</a><a class="extend next" rel="next" href="/blog/page/191/">下一页&gt;&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/189/">&lt;&lt;上一页</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/188/">188</a><a class="page-number" href="/blog/page/189/">189</a><span class="page-number current">190</span><a class="page-number" href="/blog/page/191/">191</a><a class="page-number" href="/blog/page/192/">192</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/194/">194</a><a class="extend next" rel="next" href="/blog/page/191/">下一页&gt;&gt;</a>
   </nav>
 
 </section>
@@ -292,6 +197,14 @@
       <ul>
         
           <li>
+            <a href="/blog/2025/09/28/projectreactor-webflux/">Projectreactor &amp; Webflux</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2025/02/19/DNSCrypt/">DNSCrypt</a>
+          </li>
+        
+          <li>
             <a href="/blog/2024/05/19/windows/">Windows</a>
           </li>
         
@@ -301,14 +214,6 @@
         
           <li>
             <a href="/blog/2023/12/15/spring-boot-%E5%90%AF%E5%8A%A8%E8%BF%87%E7%A8%8B/">Spring Boot 启动过程</a>
-          </li>
-        
-          <li>
-            <a href="/blog/2022/04/25/Design-Underground-System/">Design Underground System</a>
-          </li>
-        
-          <li>
-            <a href="/blog/2022/04/25/Encode-and-Decode-TinyURL/">Encode and Decode TinyURL</a>
           </li>
         
       </ul>
@@ -332,7 +237,7 @@
   
   <div class="outer">
     <div id="footer-left">
-      &copy; 2016 - 2024 carl-zk<!--&nbsp;|&nbsp;
+      &copy; 2016 - 2025 carl-zk<!--&nbsp;|&nbsp;
       主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a> -->
     </div>
   

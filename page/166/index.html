@@ -84,15 +84,15 @@
         <section id="main">
   
     <article
-  id="post-Joseph"
+  id="post-Wolf-and-Rabbit"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
 >
 
   <div class="article-meta">
-    <a href="/blog/2016/06/23/Joseph/" class="article-date">
-  <time datetime="2016-06-23T05:37:53.000Z" itemprop="datePublished">2016-06-23</time>
+    <a href="/blog/2016/06/23/Wolf-and-Rabbit/" class="article-date">
+  <time datetime="2016-06-23T14:52:21.000Z" itemprop="datePublished">2016-06-23</time>
 </a>
     
   <div class="article-category">
@@ -106,7 +106,7 @@
       
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2016/06/23/Joseph/">Joseph</a>
+      <a class="article-title" href="/blog/2016/06/23/Wolf-and-Rabbit/">Wolf and Rabbit</a>
     </h1>
   
 
@@ -115,22 +115,21 @@
     <div class="article-entry" itemprop="articleBody">
       
       <!-- Table of Contents -->
-       <p><a target="_blank" rel="noopener" href="http://acm.hdu.edu.cn/game/entry/problem/show.php?chapterid=2&sectionid=2&problemid=2">题目链接</a><br>Problem Description<br>The Joseph\\\&#39;s problem is notoriously known. For those who are not familiar with the original problem: from among n people, numbered 1, 2, . . ., n, standing in circle every mth is going to be executed and only the life of the last remaining person will be saved. Joseph was smart enough to choose the position of the last remaining person, thus saving his life to give us the message about the incident. For example when n &#x3D; 6 and m &#x3D; 5 then the people will be executed in the order 5, 4, 6, 2, 3 and 1 will be saved.</p>
-<p>Suppose that there are k good guys and k bad guys. In the circle the first k are good guys and the last k bad guys. You have to determine such minimal m that all the bad guys will be executed before the first good guy.</p>
-<p>Input<br>The input file consists of separate lines containing k. The last line in the input file contains 0. You can suppose that 0 &lt; k &lt; 14.</p>
-<p>Output<br>The output file will consist of separate lines containing m corresponding to k in the input file.</p>
-<p>Sample Input<br>3<br>4<br>0</p>
-<p>Sample Output<br>5<br>30</p>
+       <p><a target="_blank" rel="noopener" href="http://acm.hdu.edu.cn/game/entry/problem/show.php?chapterid=2&sectionid=2&problemid=4">题目链接</a><br>Problem Description<br>There is a hill with n holes around. The holes are signed from 0 to n-1.</p>
+<p>A rabbit must hide in one of the holes. A wolf searches the rabbit in anticlockwise order. The first hole he get into is the one signed with 0. Then he will get into the hole every m holes. For example, m&#x3D;2 and n&#x3D;6, the wolf will get into the holes which are signed 0,2,4,0. If the rabbit hides in the hole which signed 1,3 or 5, she will survive. So we call these holes the safe holes.</p>
+<p>Input<br>The input starts with a positive integer P which indicates the number of test cases. Then on the following P lines,each line consists 2 positive integer m and n(0&lt;m,n&lt;2147483648).</p>
+<p>Output<br>For each input m n, if safe holes exist, you should output “YES”, else output “NO” in a single line.</p>
+<p>Sample Input<br>2<br>1 2<br>2 2</p>
+<p>Sample Output<br>NO<br>YES</p>
 <hr/>
+> 找规律
 
-<p>编号1<del>2*k个人组成环,好人坏人各一半,k+1</del>2*k为坏人;每次报数为m的人被kill,求坏人全部先死掉的m的最小值.</p>
-<p>设pre为前一个报数人的编号.初始值为0.<br>当k&#x3D;3,m&#x3D;5时,<br>5%6 &#x3D; 5, 从pre向后数5个,即第5个人被kill.pre&#x3D;5;<br>5%(6-1)&#x3D;0, 即 pre的前一个人,即4被kill.pre&#x3D;4;<br>5%(6-2)&#x3D;1,即pre的后一个人, 即6被kill.pre&#x3D;6;<br>至此k个坏人全部先于好人被kill.则m&#x3D;5即为所求.</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;set&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> MAX 29</span></span><br><span class="line"></span><br><span class="line">using namespace <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> ans[<span class="number">15</span>]= &#123;<span class="number">0</span>,<span class="number">2</span>,&#125;;<span class="comment">//保留计算值</span></span><br><span class="line"></span><br><span class="line"><span class="type">bool</span> visited[MAX];</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> k, pre, m, n;</span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;k)&amp;&amp;k!=<span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(ans[k])</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, ans[k]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">memset</span>(visited, <span class="number">0</span>, <span class="keyword">sizeof</span>(visited));</span><br><span class="line">            pre = <span class="number">0</span>;   <span class="comment">//上一个访问点</span></span><br><span class="line">            visited[<span class="number">0</span>] = <span class="literal">true</span>;</span><br><span class="line">            m = <span class="number">1</span>;     <span class="comment">//要求的答案</span></span><br><span class="line">            n = k * <span class="number">2</span>;</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>, j; i&lt;k; i++)</span><br><span class="line">            &#123;</span><br><span class="line">                j = m % (n - i);</span><br><span class="line">                <span class="keyword">if</span>(j)    <span class="comment">//大于0,想下寻找j个未访问点</span></span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="keyword">while</span>(j)</span><br><span class="line">                    &#123;</span><br><span class="line">                        <span class="keyword">if</span>(!visited[++pre])</span><br><span class="line">                        &#123;</span><br><span class="line">                            j--;</span><br><span class="line">                        &#125;</span><br><span class="line">                        <span class="keyword">if</span>(pre &gt; n) pre = <span class="number">1</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                    visited[pre] = <span class="literal">true</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span>     <span class="comment">//等于0,向前寻找第一个未访问点</span></span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="keyword">if</span>(pre == <span class="number">0</span>)pre = n;</span><br><span class="line">                    <span class="keyword">while</span>(visited[pre])</span><br><span class="line">                    &#123;</span><br><span class="line">                        pre--;</span><br><span class="line">                        <span class="keyword">if</span>(pre == <span class="number">0</span>)pre = n;</span><br><span class="line">                    &#125;</span><br><span class="line">                    visited[pre] = <span class="literal">true</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">if</span>(pre&lt;=k)    <span class="comment">//在前k项中如果有比k小的人被kill,将参数重置,m+1</span></span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="built_in">memset</span>(visited, <span class="number">0</span>, <span class="keyword">sizeof</span>(visited));</span><br><span class="line">                    pre = <span class="number">0</span>;</span><br><span class="line">                    visited[<span class="number">0</span>] = <span class="literal">true</span>;</span><br><span class="line">                    m++;</span><br><span class="line">                    i=<span class="number">-1</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            ans[k] = m;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, ans[k]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
- 
+<p>当m,n互质的时候狼可以遍历一遍.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;set&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> MAX 66</span></span><br><span class="line"></span><br><span class="line">using namespace <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">gcd</span><span class="params">(<span class="type">int</span> x, <span class="type">int</span> y)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> y?gcd(y, x%y):x;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> P, m, n;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;P);</span><br><span class="line">    <span class="keyword">while</span>(P--)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d %d&quot;</span>, &amp;m, &amp;n);</span><br><span class="line">        <span class="keyword">if</span>(gcd(m, n)==<span class="number">1</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;NO\n&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;YES\n&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure> 
     </div>
 
     <footer class="article-footer">
-      <!-- <a data-url="https://carl-zk.github.io/blog/2016/06/23/Joseph/" data-id="clwbvux4r002l64odfwx4abrx" class="article-share-link">分享</a> -->
+      <!-- <a data-url="https://carl-zk.github.io/blog/2016/06/23/Wolf-and-Rabbit/" data-id="clwbvux50004n64odf8j27xez" class="article-share-link">分享</a> -->
        
       <div id="gitalk-container"></div>
        
@@ -181,7 +180,7 @@
 
 
   <nav id="page-nav">
-    <a class="extend prev" rel="prev" href="/blog/page/165/">&lt;&lt;上一页</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/164/">164</a><a class="page-number" href="/blog/page/165/">165</a><span class="page-number current">166</span><a class="page-number" href="/blog/page/167/">167</a><a class="page-number" href="/blog/page/168/">168</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/192/">192</a><a class="extend next" rel="next" href="/blog/page/167/">下一页&gt;&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/165/">&lt;&lt;上一页</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/164/">164</a><a class="page-number" href="/blog/page/165/">165</a><span class="page-number current">166</span><a class="page-number" href="/blog/page/167/">167</a><a class="page-number" href="/blog/page/168/">168</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/194/">194</a><a class="extend next" rel="next" href="/blog/page/167/">下一页&gt;&gt;</a>
   </nav>
 
 </section>
@@ -205,6 +204,14 @@
       <ul>
         
           <li>
+            <a href="/blog/2025/09/28/projectreactor-webflux/">Projectreactor &amp; Webflux</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2025/02/19/DNSCrypt/">DNSCrypt</a>
+          </li>
+        
+          <li>
             <a href="/blog/2024/05/19/windows/">Windows</a>
           </li>
         
@@ -214,14 +221,6 @@
         
           <li>
             <a href="/blog/2023/12/15/spring-boot-%E5%90%AF%E5%8A%A8%E8%BF%87%E7%A8%8B/">Spring Boot 启动过程</a>
-          </li>
-        
-          <li>
-            <a href="/blog/2022/04/25/Design-Underground-System/">Design Underground System</a>
-          </li>
-        
-          <li>
-            <a href="/blog/2022/04/25/Encode-and-Decode-TinyURL/">Encode and Decode TinyURL</a>
           </li>
         
       </ul>
@@ -245,7 +244,7 @@
   
   <div class="outer">
     <div id="footer-left">
-      &copy; 2016 - 2024 carl-zk<!--&nbsp;|&nbsp;
+      &copy; 2016 - 2025 carl-zk<!--&nbsp;|&nbsp;
       主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a> -->
     </div>
   

@@ -84,17 +84,21 @@
         <section id="main">
   
     <article
-  id="post-sql查询"
+  id="post-c语言字符串处理"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
 >
 
   <div class="article-meta">
-    <a href="/blog/2016/06/19/sql%E6%9F%A5%E8%AF%A2/" class="article-date">
-  <time datetime="2016-06-19T04:17:30.000Z" itemprop="datePublished">2016-06-19</time>
+    <a href="/blog/2016/06/21/c%E8%AF%AD%E8%A8%80%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%A4%84%E7%90%86/" class="article-date">
+  <time datetime="2016-06-20T17:38:39.000Z" itemprop="datePublished">2016-06-21</time>
 </a>
     
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/hdu/">hdu</a>
+  </div>
+
   </div>
   <div class="article-inner">
      
@@ -102,7 +106,7 @@
       
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2016/06/19/sql%E6%9F%A5%E8%AF%A2/">Sql查询</a>
+      <a class="article-title" href="/blog/2016/06/21/c%E8%AF%AD%E8%A8%80%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%A4%84%E7%90%86/">C语言字符串处理</a>
     </h1>
   
 
@@ -111,68 +115,25 @@
     <div class="article-entry" itemprop="articleBody">
       
       <!-- Table of Contents -->
-       <p><a target="_blank" rel="noopener" href="http://tangwenchao86.iteye.com/blog/1107795">Group By 和 Having, Where ,Order by语句的执行顺序：</a><br>Where&gt; Group By&gt; Having&gt; Order by。首先where将最原始记录中不满足条件的记录删除(所以应该在where语句中尽量的将不符合条件的记录筛选掉，这样可以减少分组的次数)，然后通过Group By关键字后面指定的分组条件将筛选得到的视图进行分组，接着系统根据Having关键字后面指定的筛选条件，将分组视图后不满足条件的记录筛选掉，然后按照Order By语句对视图进行排序，这样最终的结果就产生了。在这四个关键字中，只有在Order By语句中才可以使用最终视图的列名，如： 　　SELECT FruitName, ProductPlace, Price, ID AS IDE, Discount 　　FROM T_TEST_FRUITINFO 　　WHERE (ProductPlace &#x3D; N’china’) 　　ORDER BY IDE 　　这里只有在ORDER BY语句中才可以使用IDE，其他条件语句中如果需要引用列名则只能使用ID，而不能使用IDE。 </p>
-<h1 id="删除重复数据"><a href="#删除重复数据" class="headerlink" title="删除重复数据"></a>删除重复数据</h1><blockquote>
-<p>Person表</p>
-</blockquote>
-<table>
-<thead>
-<tr>
-<th>id</th>
-<th align="center">name</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>1</td>
-<td align="center">a</td>
-</tr>
-<tr>
-<td>2</td>
-<td align="center">b</td>
-</tr>
-<tr>
-<td>3</td>
-<td align="center">a</td>
-</tr>
-</tbody></table>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SET SQL_SAFE_UPDATES=0; #防止safe模式下where未指定disdinct column不能执行delete语句</span><br><span class="line">delete from Person where id not in (select minId from (select min(id) as minId FROM Person group by name) as T); #delete不允许表同时在select条件中,故as一个新表</span><br></pre></td></tr></table></figure>
+       <p><a target="_blank" rel="noopener" href="http://acm.hdu.edu.cn/game/entry/problem/show.php?chapterid=1&sectionid=2&problemid=14">题目链接</a><br><strong>The Seven Percent Solution</strong></p>
+<p>Problem Description<br>Uniform Resource Identifiers (or URIs) are strings like <a target="_blank" rel="noopener" href="http://icpc.baylor.edu/icpc/">http://icpc.baylor.edu/icpc/</a>, mailto:<a href="mailto:&#102;&#x6f;&#x6f;&#64;&#x62;&#x61;&#x72;&#x2e;&#111;&#x72;&#x67;">&#102;&#x6f;&#x6f;&#64;&#x62;&#x61;&#x72;&#x2e;&#111;&#x72;&#x67;</a>, <a href="ftp://127.0.0.1/pub/linux">ftp://127.0.0.1/pub/linux</a>, or even just readme.txt that are used to identify a resource, usually on the Internet or a local computer. Certain characters are reserved within URIs, and if a reserved character is part of an identifier then it must be percent-encoded by replacing it with a percent sign followed by two hexadecimal digits representing the ASCII code of the character. A table of seven reserved characters and their encodings is shown below. Your job is to write a program that can percent-encode a string of characters.</p>
+<p>Character  Encoding<br>“ “ (space)  %20<br>“!” (exclamation point)  %21<br>“$” (dollar sign)  %24<br>“%” (percent sign)  %25<br>“(“ (left parenthesis)  %28<br>“)” (right parenthesis)  %29<br>“*” (asterisk)  %2a</p>
+<p>Input<br>The input consists of one or more strings, each 1–79 characters long and on a line by itself, followed by a line containing only “#” that signals the end of the input. The character “#” is used only as an end-of-input marker and will not appear anywhere else in the input. A string may contain spaces, but not at the beginning or end of the string, and there will never be two or more consecutive spaces.</p>
+<p>Output<br>For each input string, replace every occurrence of a reserved character in the table above by its percent-encoding, exactly as shown, and output the resulting string on a line by itself. Note that the percent-encoding for an asterisk is %2a (with a lowercase “a”) rather than %2A (with an uppercase “A”).</p>
+<p>Sample Input<br>Happy Joy Joy!<br><a target="_blank" rel="noopener" href="http://icpc.baylor.edu/icpc/">http://icpc.baylor.edu/icpc/</a><br>plain_vanilla<br>(**)<br>?<br>the 7% solution<br>#</p>
+<p>Sample Output<br>Happy%20Joy%20Joy%21<br><a target="_blank" rel="noopener" href="http://icpc.baylor.edu/icpc/">http://icpc.baylor.edu/icpc/</a><br>plain_vanilla<br>%28%2a%2a%29<br>?<br>the%207%25%20solution</p>
+<p>题目大意就是将字符串中某些特殊字符用另一些字符串替换.</p>
+<hr/>
 
-<h1 id="列出各个部门中工资高于本部门的平均"><a href="#列出各个部门中工资高于本部门的平均" class="headerlink" title="列出各个部门中工资高于本部门的平均"></a>列出各个部门中工资高于本部门的平均</h1><h1 id="工资的员工数和部门号，并按部门号排序"><a href="#工资的员工数和部门号，并按部门号排序" class="headerlink" title="工资的员工数和部门号，并按部门号排序"></a>工资的员工数和部门号，并按部门号排序</h1><p>department表结构: id, employee_id, salary;</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select count(ta.employee_id), ta.id from summery.department ta right join (select avg(tb.salary) as avgs, tb.id as tbid from summery.department tb group by tb.id) as tc on ta.id=tc.tbid and ta.salary &gt; tc.avgs group by ta.id desc;</span><br></pre></td></tr></table></figure>
-<p>思路: 先找出部门号和平均工资,然后join相同部门号并且工资&gt;平均值的行,group by id即可.</p>
-<h1 id="取每组的前N条数据"><a href="#取每组的前N条数据" class="headerlink" title="取每组的前N条数据"></a>取每组的前N条数据</h1><p>参考:<a target="_blank" rel="noopener" href="http://huanghualiang.blog.51cto.com/6782683/1252630">http://huanghualiang.blog.51cto.com/6782683/1252630</a></p>
-<p>分自连接和半连接:</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">自连接:<span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> t2 a <span class="keyword">where</span> <span class="number">3</span><span class="operator">&gt;</span>(<span class="keyword">select</span> <span class="built_in">count</span>(<span class="operator">*</span>) <span class="keyword">from</span> t2 <span class="keyword">where</span> gid<span class="operator">=</span>a.gid <span class="keyword">and</span> col2<span class="operator">&gt;</span>a.col2) <span class="keyword">order</span> <span class="keyword">by</span> a.gid,a.col2 <span class="keyword">desc</span>;</span><br><span class="line">半连接:<span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> t2 a <span class="keyword">where</span> <span class="keyword">exists</span>(<span class="keyword">select</span> <span class="built_in">count</span>(<span class="operator">*</span>) <span class="keyword">from</span> t2 b <span class="keyword">where</span> b.gid<span class="operator">=</span>a.gid <span class="keyword">and</span> a.col2<span class="operator">&lt;</span>b.col2 <span class="keyword">having</span>(<span class="built_in">count</span>(<span class="operator">*</span>))<span class="operator">&lt;</span><span class="number">3</span>) <span class="keyword">order</span> <span class="keyword">by</span> a.gid,a.col2 <span class="keyword">desc</span></span><br></pre></td></tr></table></figure>
-<p><strong>这两种方法刚开始没懂,后来看懂了,才发现真是碉堡了.值得玩味.</strong></p>
 <blockquote>
-<p>原文中一处错误—&gt;<br>*N&#x3D;1时：<br>自连接：降序排好后group by取每组最大的一条。<br>select * from (select * from t2 order by col2 desc)as a group by gid order by gid;</p>
+<p><strong>scanf</strong>的高级用法, 可以加[]做过滤条件;<br>**char[]<strong>数组中字符串以</strong>‘\0’**结尾;<br><strong>单个char转char[],末尾加’\0’</strong>;<br><strong>memset</strong>初始化数组,比特全0或全1;</p>
 </blockquote>
-<p>group by 要将 select 之后全部的非聚合列都加进来,所以这条语句已经不能用了.</p>
-<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/eflylab/archive/2007/06/25/794278.html">左连接，右连接，全连接，内连接，交叉连接，自连接</a><br>左连接就是以左表为准，右连接就是以右表为准。select * from tbla, tblb:这里的,就是笛卡尔积。</p>
-<p>mysql面试题<br>学生表<br>create table student(<br>    id int primary key auto_increment,<br>    group_id int,<br>    name nvarchar(250),<br>    score numeric(4, 1)<br>);<br>兴趣小组表<br>create table study_group(<br>    id int primary key auto_increment,<br>    name nvarchar(250)<br>);<br>student<br>sutdentId groupId sutdentName score<br>1 1 Tom1 65<br>2 2 Tom2 60<br>3 3 Tom3 70<br>4 2 Tom4 80<br>5 1 Tom5 75<br>6 3 Tom6 85<br>7 3 Tom7 78<br>8 1 Tom8 97<br>9 2 Tom9 88<br>10 4 Aaa1 88<br>11 4 Aaa2 56<br>12 5 Aaa3 76<br>13 5 Aaa4 77<br>14 2 Aaa5 90<br>15 4 Ddd3 45<br>16 5 Ddd2 78<br>17 3 Ddd1 90<br>18 1 Eee3 0<br>19 3 Ggg1 0<br>20 4 Ttt1 0<br>21 2 Rrr2 0<br>Study_group<br>groupId groupName<br>1 音乐小组<br>2 绘画小组<br>3 体育小组<br>4 养生小组<br>5 环卫小组<br>6 没有参加小组</p>
-<p>可存在txt中导入mysql<br> 导入命令：<br> mysql&gt; load data infile ‘&#x2F;home&#x2F;lujing&#x2F;student.txt’ into table student<br>    -&gt; fields terminated by’ ‘<br>    -&gt; lines terminated by’\n’ (windows中换行为\r\n)</p>
-<p>1、用一条sql查询出个小组成绩最优秀的学生，需要查询出小组名称，学生名称，成绩</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select tc.name,ta.name,ta.score from summery.student ta join summery.study_group tc on ta.group_id=tc.id where (ta.score, ta.group_id) in (select max(tb.score) as mxs, tb.group_id as gid from summery.student tb group by tb.group_id);</span><br></pre></td></tr></table></figure>
-<p>思路:先找每组的最高分,然后(ta.score, ta.group_id)匹配.<br>优化:要对student的group_id加索引.</p>
-<p>​2、将所有没有参加的小组的学生的活动成绩更新为-1</p>
-<p>update summery.student set score&#x3D;-1 where group_id&#x3D;6;</p>
-<p>3、用一条sql语句查出所有学生参加兴趣小组的情况，需要查出学生名称，小组名称，如果学生没有参加小组，则小组名称返回“没有参加小组”</p>
-<p>select ta.name, tb.name from summery.student ta join summery.study_group tb on ta.group_id&#x3D;tb.id;</p>
-<h1 id="union-和-union-all-的区别"><a href="#union-和-union-all-的区别" class="headerlink" title="union 和 union all 的区别"></a>union 和 union all 的区别</h1><p>这俩个没怎么用过,<a target="_blank" rel="noopener" href="http://www.5idev.com/p-mysql_union.shtml">http://www.5idev.com/p-mysql_union.shtml</a></p>
-<h1 id="选出2040-4080-80-100分数的学生人数"><a href="#选出2040-4080-80-100分数的学生人数" class="headerlink" title="选出2040,4080,80~100分数的学生人数"></a>选出20<del>40,40</del>80,80~100分数的学生人数</h1><p>case when 条件 then 行名 else 行名 end as 列名</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">case</span> <span class="keyword">when</span> score <span class="operator">&gt;</span> <span class="number">70</span> <span class="keyword">then</span> <span class="string">&#x27;&gt;70&#x27;</span> <span class="keyword">else</span> <span class="string">&#x27;≤70&#x27;</span> <span class="keyword">end</span> <span class="keyword">as</span> <span class="string">&#x27;范围&#x27;</span>, <span class="built_in">count</span>(score) <span class="keyword">as</span> <span class="string">&#x27;人数&#x27;</span> <span class="keyword">FROM</span> summery.student </span><br><span class="line"><span class="keyword">group</span> <span class="keyword">by</span> <span class="keyword">case</span> <span class="keyword">when</span> score<span class="operator">&gt;</span><span class="number">70</span> <span class="keyword">then</span> <span class="string">&#x27;&gt;70&#x27;</span> <span class="keyword">else</span> <span class="string">&#x27;≤70&#x27;</span> <span class="keyword">end</span>;</span><br></pre></td></tr></table></figure>
-
-<h1 id="之前没想出来的sql"><a href="#之前没想出来的sql" class="headerlink" title="之前没想出来的sql"></a>之前没想出来的sql</h1><p>一个用户有多个保单，每个保单有一个机构号，保单有日期。<br>找出每个用户保单最多的那个机构，如果保单数目相同就取最近保单的那个机构。</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> TRY</span><br><span class="line">(</span><br><span class="line">  user_id    <span class="type">INTEGER</span>,</span><br><span class="line">  stock_code <span class="type">INTEGER</span>,</span><br><span class="line">  bank_id    <span class="type">INTEGER</span>,</span><br><span class="line">  ts         <span class="type">TIMESTAMP</span>(<span class="number">0</span>)</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-<p>插入数据<a href="/blog/2016/06/19/sql%E6%9F%A5%E8%AF%A2/data.sql.txt">data</a><br>解决方案</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span></span><br><span class="line">  <span class="keyword">FROM</span> (<span class="keyword">SELECT</span> USER_ID, BANK_ID, <span class="built_in">COUNT</span>(STOCK_CODE) CNT, <span class="built_in">MAX</span>(TS) TS</span><br><span class="line">          <span class="keyword">FROM</span> TRY</span><br><span class="line">         <span class="keyword">GROUP</span> <span class="keyword">BY</span> USER_ID, BANK_ID) A</span><br><span class="line"> <span class="keyword">WHERE</span> <span class="keyword">NOT</span> <span class="keyword">EXISTS</span></span><br><span class="line"> (<span class="keyword">SELECT</span> <span class="number">1</span></span><br><span class="line">          <span class="keyword">FROM</span> (<span class="keyword">SELECT</span> USER_ID, BANK_ID, <span class="built_in">COUNT</span>(STOCK_CODE) CNT, <span class="built_in">MAX</span>(TS) TS</span><br><span class="line">                  <span class="keyword">FROM</span> TRY</span><br><span class="line">                 <span class="keyword">GROUP</span> <span class="keyword">BY</span> USER_ID, BANK_ID) B</span><br><span class="line">         <span class="keyword">WHERE</span> A.USER_ID <span class="operator">=</span> B.USER_ID</span><br><span class="line">           <span class="keyword">AND</span> A.BANK_ID <span class="operator">!=</span> B.BANK_ID</span><br><span class="line">           <span class="keyword">AND</span> (A.CNT <span class="operator">&lt;</span> B.CNT <span class="keyword">OR</span> (A.CNT <span class="operator">=</span> B.CNT <span class="keyword">AND</span> A.TS <span class="operator">&lt;</span> B.TS)))</span><br></pre></td></tr></table></figure> 
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"></span><br><span class="line">using namespace <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">char</span> a[<span class="number">240</span>],b[<span class="number">240</span>], c[<span class="number">2</span>]=&#123;<span class="string">&#x27; &#x27;</span>,<span class="string">&#x27;\0&#x27;</span>&#125;;</span><br><span class="line">    <span class="type">int</span> slen;</span><br><span class="line">    <span class="keyword">while</span>(<span class="literal">true</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%[^\n]&quot;</span>, &amp;a);</span><br><span class="line">        getchar();</span><br><span class="line">        <span class="keyword">if</span>(a[<span class="number">0</span>]==<span class="string">&#x27;#&#x27;</span>)<span class="keyword">break</span>;</span><br><span class="line">        <span class="built_in">memset</span>(b, <span class="number">0</span>,<span class="keyword">sizeof</span>(b));</span><br><span class="line">        slen = <span class="built_in">strlen</span>(a);</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>, j=<span class="number">0</span>; i&lt;slen; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">switch</span>(a[i])</span><br><span class="line">            &#123;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">&#x27; &#x27;</span>:</span><br><span class="line">                <span class="built_in">strcat</span>(b, <span class="string">&quot;%20&quot;</span>);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">&#x27;!&#x27;</span>:</span><br><span class="line">                <span class="built_in">strcat</span>(b, <span class="string">&quot;%21&quot;</span>);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">&#x27;$&#x27;</span>:</span><br><span class="line">                <span class="built_in">strcat</span>(b, <span class="string">&quot;%24&quot;</span>);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">&#x27;%&#x27;</span>:</span><br><span class="line">                <span class="built_in">strcat</span>(b, <span class="string">&quot;%25&quot;</span>);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">&#x27;(&#x27;</span>:</span><br><span class="line">                <span class="built_in">strcat</span>(b, <span class="string">&quot;%28&quot;</span>);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">&#x27;)&#x27;</span>:</span><br><span class="line">                <span class="built_in">strcat</span>(b, <span class="string">&quot;%29&quot;</span>);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">&#x27;*&#x27;</span>:</span><br><span class="line">                <span class="built_in">strcat</span>(b, <span class="string">&quot;%2a&quot;</span>);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">default</span>:</span><br><span class="line">                c[<span class="number">0</span>] = a[i];</span><br><span class="line">                <span class="built_in">strcat</span>(b, c);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%s\n&quot;</span>, b);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure> 
     </div>
 
     <footer class="article-footer">
-      <!-- <a data-url="https://carl-zk.github.io/blog/2016/06/19/sql%E6%9F%A5%E8%AF%A2/" data-id="clwbvux58006g64odcm1t7wl7" class="article-share-link">分享</a> -->
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/sql/" rel="tag">sql</a></li></ul>
- 
+      <!-- <a data-url="https://carl-zk.github.io/blog/2016/06/21/c%E8%AF%AD%E8%A8%80%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%A4%84%E7%90%86/" data-id="clwbvux51004s64ode83f2eov" class="article-share-link">分享</a> -->
+       
       <div id="gitalk-container"></div>
        
 
@@ -222,7 +183,7 @@
 
 
   <nav id="page-nav">
-    <a class="extend prev" rel="prev" href="/blog/page/180/">&lt;&lt;上一页</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/179/">179</a><a class="page-number" href="/blog/page/180/">180</a><span class="page-number current">181</span><a class="page-number" href="/blog/page/182/">182</a><a class="page-number" href="/blog/page/183/">183</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/192/">192</a><a class="extend next" rel="next" href="/blog/page/182/">下一页&gt;&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/180/">&lt;&lt;上一页</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/179/">179</a><a class="page-number" href="/blog/page/180/">180</a><span class="page-number current">181</span><a class="page-number" href="/blog/page/182/">182</a><a class="page-number" href="/blog/page/183/">183</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/194/">194</a><a class="extend next" rel="next" href="/blog/page/182/">下一页&gt;&gt;</a>
   </nav>
 
 </section>
@@ -246,6 +207,14 @@
       <ul>
         
           <li>
+            <a href="/blog/2025/09/28/projectreactor-webflux/">Projectreactor &amp; Webflux</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2025/02/19/DNSCrypt/">DNSCrypt</a>
+          </li>
+        
+          <li>
             <a href="/blog/2024/05/19/windows/">Windows</a>
           </li>
         
@@ -255,14 +224,6 @@
         
           <li>
             <a href="/blog/2023/12/15/spring-boot-%E5%90%AF%E5%8A%A8%E8%BF%87%E7%A8%8B/">Spring Boot 启动过程</a>
-          </li>
-        
-          <li>
-            <a href="/blog/2022/04/25/Design-Underground-System/">Design Underground System</a>
-          </li>
-        
-          <li>
-            <a href="/blog/2022/04/25/Encode-and-Decode-TinyURL/">Encode and Decode TinyURL</a>
           </li>
         
       </ul>
@@ -286,7 +247,7 @@
   
   <div class="outer">
     <div id="footer-left">
-      &copy; 2016 - 2024 carl-zk<!--&nbsp;|&nbsp;
+      &copy; 2016 - 2025 carl-zk<!--&nbsp;|&nbsp;
       主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a> -->
     </div>
   

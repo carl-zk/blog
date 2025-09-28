@@ -84,21 +84,17 @@
         <section id="main">
   
     <article
-  id="post-maven使用"
+  id="post-sublime快捷键"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
 >
 
   <div class="article-meta">
-    <a href="/blog/2017/02/28/maven%E4%BD%BF%E7%94%A8/" class="article-date">
-  <time datetime="2017-02-28T06:56:26.000Z" itemprop="datePublished">2017-02-28</time>
+    <a href="/blog/2017/03/03/sublime%E5%BF%AB%E6%8D%B7%E9%94%AE/" class="article-date">
+  <time datetime="2017-03-03T14:19:53.000Z" itemprop="datePublished">2017-03-03</time>
 </a>
     
-  <div class="article-category">
-    <a class="article-category-link" href="/blog/categories/%E7%B3%BB%E7%BB%9F%E9%85%8D%E7%BD%AE/">系统配置</a>
-  </div>
-
   </div>
   <div class="article-inner">
      
@@ -106,7 +102,7 @@
       
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2017/02/28/maven%E4%BD%BF%E7%94%A8/">Maven使用</a>
+      <a class="article-title" href="/blog/2017/03/03/sublime%E5%BF%AB%E6%8D%B7%E9%94%AE/">Sublime快捷键</a>
     </h1>
   
 
@@ -115,47 +111,16 @@
     <div class="article-entry" itemprop="articleBody">
       
       <!-- Table of Contents -->
-       <blockquote>
-<p>用IDEA建了一个maven项目，想打包成jar放到本地~&#x2F;.m2&#x2F;repository中。</p>
-</blockquote>
-<h4 id="1-安装maven"><a href="#1-安装maven" class="headerlink" title="1. 安装maven"></a>1. 安装maven</h4><ol>
-<li>检查是否已安装：   <code>$ mvn -v</code></li>
-<li>解压到<code>/opt/apache-maven-3.3.9</code></li>
-<li>打开<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ subl ~/.zshrc</span><br></pre></td></tr></table></figure>
-我用的是zsh，如果是原生bash的话，就是.bashrc文件了。<br> 在文件末尾添加<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># maven</span><br><span class="line">export MAVEN_HOME=/opt/apache-maven-3.3.9</span><br><span class="line">export PATH=$PATH:$&#123;MAVEN_HOME&#125;/bin</span><br></pre></td></tr></table></figure>
-然后，执行 <code>source ~/.zshrc</code> 让配置立即生效。<br>你可以输入 <code>mvn -v</code>，<code>echo $MAVEN_HOME</code>，<code>echo $JAVA_HOME</code>等查询系统环境。</li>
-</ol>
-<h4 id="2-打包，发布"><a href="#2-打包，发布" class="headerlink" title="2. 打包，发布"></a>2. 打包，发布</h4><p> 建立一个maven项目，进入根目录，执行 <code>mvn package</code>，等待结束。<br> 温馨提示pom.xml文件中要有<code>&lt;packaging&gt;jar&lt;/packaging&gt;</code> 哦。<br> 然后<a target="_blank" rel="noopener" href="https://www.cnblogs.com/davenkin/archive/2012/02/15/install-jar-into-maven-local-repository.html">参照</a> 执行命令</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mvn install:install-file -Dfile=/home/hero/workspace/git/Commons/target/commons-1.0.jar -DgroupId=moc.hero -DartifactId=commons -Dversion=1.0 -Dpackaging=jar</span><br></pre></td></tr></table></figure>
-<p>其中-Dfile&#x3D;就是你jar包，上面的Commons就是我的根目录，命令就是在这里执行的。<br>这样你的~&#x2F;.m2&#x2F;repository中就有了<code>/home/hero/.m2/repository/moc/hero/commons</code>，你可以在本地新建一个maven项目，然后去依赖这个commons了。 </p>
-<p>当然了，更全更简单的在<a target="_blank" rel="noopener" href="https://maven.apache.org/guides/getting-started/index.html#How_do_I_create_a_JAR_and_install_it_in_my_local_repository">官网</a>喽。</p>
-<h5 id="插件方式"><a href="#插件方式" class="headerlink" title="插件方式"></a>插件方式</h5><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">build</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">resources</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">resource</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">directory</span>&gt;</span>$&#123;project.basedir&#125;/src/main/java<span class="tag">&lt;/<span class="name">directory</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">includes</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">include</span>&gt;</span>**/*.*<span class="tag">&lt;/<span class="name">include</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">includes</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">filtering</span>&gt;</span>false<span class="tag">&lt;/<span class="name">filtering</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">resource</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">resource</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">directory</span>&gt;</span>$&#123;project.basedir&#125;/src/main/resources<span class="tag">&lt;/<span class="name">directory</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">includes</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">include</span>&gt;</span>**/*.*<span class="tag">&lt;/<span class="name">include</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">includes</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">filtering</span>&gt;</span>false<span class="tag">&lt;/<span class="name">filtering</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">resource</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">resources</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">plugins</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.maven.plugins<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>maven-compiler-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.7.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">source</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">source</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">target</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">target</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">encoding</span>&gt;</span>UTF-8<span class="tag">&lt;/<span class="name">encoding</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.maven.plugins<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>maven-install-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.5.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>$&#123;project.groupId&#125;<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>$&#123;project.artifactId&#125;<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">packaging</span>&gt;</span>$&#123;project.packaging&#125;<span class="tag">&lt;/<span class="name">packaging</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;project.version&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">file</span>&gt;</span>$&#123;project.basedir&#125;/target/$&#123;project.name&#125;-$&#123;project.version&#125;.$&#123;project.packaging&#125;<span class="tag">&lt;/<span class="name">file</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">plugins</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">build</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>配置<em>resources</em>可以将配置文件打到jar包中（默认打包只打编译后的class文件）。运行compiler:compile 和 install:install-file即可。</p>
-<h2 id="Maven-基础"><a href="#Maven-基础" class="headerlink" title="Maven 基础"></a>Maven 基础</h2><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/liutengteng130/article/details/46991829">dependencies与dependencyManagement的区别</a></p>
-<h2 id="私服搭建"><a href="#私服搭建" class="headerlink" title="私服搭建"></a>私服搭建</h2><p><a target="_blank" rel="noopener" href="https://www.sonatype.com/nexus-repository-oss">下载Nexus Repository OSS</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_35559756/article/details/73197715">参考</a></p>
-<h3 id="deploy"><a href="#deploy" class="headerlink" title="deploy"></a>deploy</h3><p>setting.xml</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">server</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">id</span>&gt;</span>releases<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">username</span>&gt;</span>admin<span class="tag">&lt;/<span class="name">username</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">password</span>&gt;</span>admin123<span class="tag">&lt;/<span class="name">password</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">server</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">server</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">id</span>&gt;</span>snapshots<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">username</span>&gt;</span>admin<span class="tag">&lt;/<span class="name">username</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">password</span>&gt;</span>admin123<span class="tag">&lt;/<span class="name">password</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">server</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>pom.xml</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">distributionManagement</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">repository</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">id</span>&gt;</span>releases<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">url</span>&gt;</span>http://127.0.0.1:8081/repository/maven-releases/<span class="tag">&lt;/<span class="name">url</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">repository</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">snapshotRepository</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">id</span>&gt;</span>snapshots<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">url</span>&gt;</span>http://127.0.0.1:8081/repository/maven-snapshots/<span class="tag">&lt;/<span class="name">url</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">snapshotRepository</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">distributionManagement</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="指定私服的host地址"><a href="#指定私服的host地址" class="headerlink" title="指定私服的host地址"></a>指定私服的host地址</h3><p>pom.xml</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">repositories</span>&gt;</span>  </span><br><span class="line">    <span class="tag">&lt;<span class="name">repository</span>&gt;</span>  </span><br><span class="line">        <span class="tag">&lt;<span class="name">id</span>&gt;</span>releases<span class="tag">&lt;/<span class="name">id</span>&gt;</span>  </span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>releases<span class="tag">&lt;/<span class="name">name</span>&gt;</span>  </span><br><span class="line">        <span class="tag">&lt;<span class="name">url</span>&gt;</span>http://127.0.0.1:8081/repository/maven-releases/<span class="tag">&lt;/<span class="name">url</span>&gt;</span>  </span><br><span class="line">        <span class="tag">&lt;<span class="name">releases</span>&gt;</span>  </span><br><span class="line">            <span class="tag">&lt;<span class="name">enabled</span>&gt;</span>true<span class="tag">&lt;/<span class="name">enabled</span>&gt;</span>  </span><br><span class="line">        <span class="tag">&lt;/<span class="name">releases</span>&gt;</span>  </span><br><span class="line">        <span class="tag">&lt;<span class="name">snapshots</span>&gt;</span>  </span><br><span class="line">            <span class="tag">&lt;<span class="name">enabled</span>&gt;</span>false<span class="tag">&lt;/<span class="name">enabled</span>&gt;</span>  </span><br><span class="line">        <span class="tag">&lt;/<span class="name">snapshots</span>&gt;</span>  </span><br><span class="line">    <span class="tag">&lt;/<span class="name">repository</span>&gt;</span>  </span><br><span class="line"><span class="tag">&lt;/<span class="name">repositories</span>&gt;</span>  </span><br></pre></td></tr></table></figure>
-
-
-
-
-
-
-
+       <h4 id="ctr-p"><a href="#ctr-p" class="headerlink" title="ctr+p"></a>ctr+p</h4><p>可以去任何地方</p>
+<h4 id="ctr-shift-p"><a href="#ctr-shift-p" class="headerlink" title="ctr+shift+p"></a>ctr+shift+p</h4><p>命令模式<br>设置文档语法</p>
+<h4 id="ctr-shift-d"><a href="#ctr-shift-d" class="headerlink" title="ctr+shift+d"></a>ctr+shift+d</h4><p>复制这行</p>
+<h4 id="ctr-d"><a href="#ctr-d" class="headerlink" title="ctr+d"></a>ctr+d</h4><p>ctr+k 跳过一个<br>多行游标（alt+f3, shift+鼠标右键）</p>
  
     </div>
 
     <footer class="article-footer">
-      <!-- <a data-url="https://carl-zk.github.io/blog/2017/02/28/maven%E4%BD%BF%E7%94%A8/" data-id="clwbvux54005p64odec7caxd1" class="article-share-link">分享</a> -->
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/maven/" rel="tag">maven</a></li></ul>
- 
+      <!-- <a data-url="https://carl-zk.github.io/blog/2017/03/03/sublime%E5%BF%AB%E6%8D%B7%E9%94%AE/" data-id="clwbvux58006k64od25jmfjbl" class="article-share-link">分享</a> -->
+       
       <div id="gitalk-container"></div>
        
 
@@ -205,7 +170,7 @@
 
 
   <nav id="page-nav">
-    <a class="extend prev" rel="prev" href="/blog/page/110/">&lt;&lt;上一页</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/109/">109</a><a class="page-number" href="/blog/page/110/">110</a><span class="page-number current">111</span><a class="page-number" href="/blog/page/112/">112</a><a class="page-number" href="/blog/page/113/">113</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/192/">192</a><a class="extend next" rel="next" href="/blog/page/112/">下一页&gt;&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/110/">&lt;&lt;上一页</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/109/">109</a><a class="page-number" href="/blog/page/110/">110</a><span class="page-number current">111</span><a class="page-number" href="/blog/page/112/">112</a><a class="page-number" href="/blog/page/113/">113</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/194/">194</a><a class="extend next" rel="next" href="/blog/page/112/">下一页&gt;&gt;</a>
   </nav>
 
 </section>
@@ -229,6 +194,14 @@
       <ul>
         
           <li>
+            <a href="/blog/2025/09/28/projectreactor-webflux/">Projectreactor &amp; Webflux</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2025/02/19/DNSCrypt/">DNSCrypt</a>
+          </li>
+        
+          <li>
             <a href="/blog/2024/05/19/windows/">Windows</a>
           </li>
         
@@ -238,14 +211,6 @@
         
           <li>
             <a href="/blog/2023/12/15/spring-boot-%E5%90%AF%E5%8A%A8%E8%BF%87%E7%A8%8B/">Spring Boot 启动过程</a>
-          </li>
-        
-          <li>
-            <a href="/blog/2022/04/25/Design-Underground-System/">Design Underground System</a>
-          </li>
-        
-          <li>
-            <a href="/blog/2022/04/25/Encode-and-Decode-TinyURL/">Encode and Decode TinyURL</a>
           </li>
         
       </ul>
@@ -269,7 +234,7 @@
   
   <div class="outer">
     <div id="footer-left">
-      &copy; 2016 - 2024 carl-zk<!--&nbsp;|&nbsp;
+      &copy; 2016 - 2025 carl-zk<!--&nbsp;|&nbsp;
       主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a> -->
     </div>
   

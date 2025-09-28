@@ -84,15 +84,15 @@
         <section id="main">
   
     <article
-  id="post-汉诺塔VII"
+  id="post-哈哈-发现hdu错题一道"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
 >
 
   <div class="article-meta">
-    <a href="/blog/2016/06/23/%E6%B1%89%E8%AF%BA%E5%A1%94VII/" class="article-date">
-  <time datetime="2016-06-23T10:01:47.000Z" itemprop="datePublished">2016-06-23</time>
+    <a href="/blog/2016/06/24/%E5%93%88%E5%93%88-%E5%8F%91%E7%8E%B0hdu%E9%94%99%E9%A2%98%E4%B8%80%E9%81%93/" class="article-date">
+  <time datetime="2016-06-23T18:01:12.000Z" itemprop="datePublished">2016-06-24</time>
 </a>
     
   <div class="article-category">
@@ -106,7 +106,7 @@
       
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2016/06/23/%E6%B1%89%E8%AF%BA%E5%A1%94VII/">汉诺塔VII</a>
+      <a class="article-title" href="/blog/2016/06/24/%E5%93%88%E5%93%88-%E5%8F%91%E7%8E%B0hdu%E9%94%99%E9%A2%98%E4%B8%80%E9%81%93/">哈哈,发现Hdu错题一道</a>
     </h1>
   
 
@@ -115,28 +115,67 @@
     <div class="article-entry" itemprop="articleBody">
       
       <!-- Table of Contents -->
-       <p><a target="_blank" rel="noopener" href="http://acm.hdu.edu.cn/game/entry/problem/show.php?chapterid=2&sectionid=2&problemid=3">题目链接</a><br>Problem Description<br>n个盘子的汉诺塔问题的最少移动次数是2^n-1,即在移动过程中会产生2^n个系列。由于发生错移产生的系列就增加了，这种错误是放错了柱子，并不会把大盘放到小盘上，即各柱子从下往上的大小仍保持如下关系 ：<br>n&#x3D;m+p+q<br>a1&gt;a2&gt;…&gt;am<br>b1&gt;b2&gt;…&gt;bp<br>c1&gt;c2&gt;…&gt;cq<br>ai是A柱上的盘的盘号系列，bi是B柱上的盘的盘号系列， ci是C柱上的盘的盘号系列，最初目标是将A柱上的n个盘子移到C盘. 给出1个系列，判断它是否是在正确的移动中产生的系列.<br>例1：n&#x3D;3<br>3<br>2<br>1<br>是正确的<br>例2：n&#x3D;3<br>3<br>1<br>2<br>是不正确的。<br>注：对于例2如果目标是将A柱上的n个盘子移到B盘. 则是正确的.</p>
-<p>Input<br>包含多组数据，首先输入T,表示有T组数据.每组数据4行，第1行N是盘子的数目N&lt;&#x3D;64.<br>后3行如下<br>m a1 a2 …am<br>p b1 b2 …bp<br>q c1 c2 …cq<br>N&#x3D;m+p+q,0&lt;&#x3D;m&lt;&#x3D;N,0&lt;&#x3D;p&lt;&#x3D;N,0&lt;&#x3D;q&lt;&#x3D;N,</p>
-<p>Output<br>对于每组数据，判断它是否是在正确的移动中产生的系列.正确输出true，否则false</p>
-<p>Sample Input<br>6<br>3<br>1 3<br>1 2<br>1 1<br>3<br>1 3<br>1 1<br>1 2<br>6<br>3 6 5 4<br>1 1<br>2 3 2<br>6<br>3 6 5 4<br>2 3 2<br>1 1<br>3<br>1 3<br>1 2<br>1 1<br>20<br>2 20 17<br>2 19 18<br>16 16 15 14 13 12 11 10 9 8 7 6 5 4 3 2 1</p>
-<p>Sample Output<br>true<br>false<br>false<br>false<br>true<br>true</p>
-<hr/>
+       <p><a target="_blank" rel="noopener" href="http://acm.hdu.edu.cn/game/entry/problem/show.php?chapterid=2&sectionid=2&problemid=8">题目链接</a><br>Number Sequence</p>
+<p>Time Limit: 2000&#x2F;1000 MS (Java&#x2F;Others) Memory Limit: 65536&#x2F;32768 K (Java&#x2F;Others)<br>Total Submission(s): 1762 Accepted Submission(s): 675</p>
+<p>Problem Description<br>A number sequence is defined as follows:</p>
+<p>f(1) &#x3D; 1, f(2) &#x3D; 1, f(n) &#x3D; (A * f(n - 1) + B * f(n - 2)) mod 7.</p>
+<p>Given A, B, and n, you are to calculate the value of f(n).</p>
+<p>Input<br>The input consists of multiple test cases. Each test case contains 3 integers A, B and n on a single line (1 &lt;&#x3D; A, B &lt;&#x3D; 1000, 1 &lt;&#x3D; n &lt;&#x3D; 100,000,000). Three zeros signal the end of input and this test case is not to be processed.</p>
+<p>Output<br>For each test case, print the value of f(n) on a single line.</p>
+<p>Sample Input<br>1 1 3<br>1 2 10<br>0 0 0</p>
+<p>Sample Output<br>2<br>5</p>
+<hr />
 
-<p>首先膜拜递归高手,无论是解题人还是出题人!</p>
-<p><img src="http://o6ibfi17w.bkt.clouddn.com/images/hannoi.png" loading="lazy"></p>
-<p>将盘子从A柱移到C柱:<br>最大值永远不可能出现在B柱.<br>当最大值在A柱时,其上的n-1个盘子正在经历从A—&gt;B的过程;<br>当最大值在C柱时,其上的n-1个盘子在经历从B—&gt;C的过程.</p>
-<p>解析:从图中可以看出,当最大值在A时,次大值不可能在C.当最大值在C时,次大值不可能在A.也就是意味着在整个过程中,次大值永远处在过渡柱子之上.如果你根据最大值是否在A或C上,然后再去比较次大值会发现,和上面的算法的递归是一模一样的.</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;set&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> MAX 66</span></span><br><span class="line"></span><br><span class="line">using namespace <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="type">bool</span> <span class="title function_">hanoi</span><span class="params">(<span class="type">int</span> len, <span class="type">int</span> *A, <span class="type">int</span> *B, <span class="type">int</span> *C)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>(len == <span class="number">0</span>)<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">if</span>(B[<span class="number">0</span>] &amp;&amp; B[<span class="number">0</span>]==len)<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">if</span>(A[<span class="number">0</span>] &amp;&amp; A[<span class="number">0</span>] == len)     <span class="comment">//最大在a上</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> hanoi(len<span class="number">-1</span>, ++A, C, B);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> hanoi(len<span class="number">-1</span>, B, A, ++C);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> x, y, T;</span><br><span class="line">    <span class="type">int</span> a[MAX], n, alen, blen, clen;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;T);</span><br><span class="line">    <span class="keyword">while</span>(T--)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">memset</span>(a, <span class="number">0</span>, <span class="keyword">sizeof</span>(a));</span><br><span class="line">        x = <span class="number">0</span>;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;n);</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;alen);</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>; i&lt;alen; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;a[x++]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;blen);</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>; i&lt;blen; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;a[x++]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;clen);</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>; i&lt;clen; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;a[x++]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(hanoi(n, &amp;a[<span class="number">0</span>], &amp;a[alen], &amp;a[alen+blen]))</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;true\n&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;false\n&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>AC代码如下:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;set&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> MAX 50</span></span><br><span class="line"></span><br><span class="line">using namespace <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> f[MAX] = &#123;<span class="number">0</span>,<span class="number">1</span>,<span class="number">1</span>,&#125;;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">circ</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b, <span class="type">int</span> n)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//f[0]=0;   取消注释测试会有惊喜哦</span></span><br><span class="line">    <span class="comment">//f[0]=1;</span></span><br><span class="line">    f[<span class="number">1</span>] = f[<span class="number">2</span>] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">3</span>; i&lt;MAX; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        f[i] = (a*f[i<span class="number">-1</span>]+b*f[i<span class="number">-2</span>]) % <span class="number">7</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> f[n%<span class="number">49</span>];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> A,B,n;</span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">scanf</span>(<span class="string">&quot;%d %d %d&quot;</span>, &amp;A, &amp;B, &amp;n),A!=<span class="number">0</span> || B!=<span class="number">0</span> ||n!=<span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, circ(A,B,n));</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-<p><a target="_blank" rel="noopener" href="http://www.cnblogs.com/xuxueyang/p/4290930.html">参考链接</a></p>
+<p>是这样的,看到这道题的第一感觉肯定是以为找规律题,没错!BUT,你能猜到周期是几吗?<br>因为f&#x3D;(x+y)%7, x和y又都&lt;7,所以x和y的组合不过只有7*7&#x3D;49种情况,照这样编码,so easy!?</p>
+<p>解释一下,出题人显然没搞懂<strong>周期</strong>的概念,最大情况49是没错,错就错在它并不能代表周期的倍数,同时你也不知道周期是从第几个开始的.举个例子:当A&#x3D;5,B&#x3D;7时,周期从第2个开始;当A&#x3D;6,B&#x3D;8时,周期从1开始.</p>
+<ol>
+<li>A&#x3D;5, B&#x3D;7的情况:</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>n</th>
+<th align="center">f[n]的真实值</th>
+<th align="center">f[0] &#x3D; 1时</th>
+<th align="right">f[0] &#x3D; 0时</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>49</td>
+<td align="center">3</td>
+<td align="center">1</td>
+<td align="right">0</td>
+</tr>
+<tr>
+<td>50</td>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="right">1</td>
+</tr>
+<tr>
+<td>51</td>
+<td align="center">5</td>
+<td align="center">1</td>
+<td align="right">1</td>
+</tr>
+<tr>
+<td>52</td>
+<td align="center">4</td>
+<td align="center">5</td>
+<td align="right">5</td>
+</tr>
+</tbody></table>
+<p>LOOK,可以AC的代码竟然会出现这样的结果!<br>真正的答案应该是找出周期T和周期开始位置S,结束位置E.根据实际情况去计算.</p>
+<p>不过猜想题主的用意是利用周期,所以可能没在意这些细节吧!这题折磨我好久,终于可以安心的睡了.</p>
  
     </div>
 
     <footer class="article-footer">
-      <!-- <a data-url="https://carl-zk.github.io/blog/2016/06/23/%E6%B1%89%E8%AF%BA%E5%A1%94VII/" data-id="clwbvux5q00a864od9icwgjv9" class="article-share-link">分享</a> -->
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/%E9%80%92%E5%BD%92/" rel="tag">递归</a></li></ul>
- 
+      <!-- <a data-url="https://carl-zk.github.io/blog/2016/06/24/%E5%93%88%E5%93%88-%E5%8F%91%E7%8E%B0hdu%E9%94%99%E9%A2%98%E4%B8%80%E9%81%93/" data-id="clwbvux5h008f64odgq3l8sx7" class="article-share-link">分享</a> -->
+       
       <div id="gitalk-container"></div>
        
 
@@ -186,7 +225,7 @@
 
 
   <nav id="page-nav">
-    <a class="extend prev" rel="prev" href="/blog/page/164/">&lt;&lt;上一页</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/163/">163</a><a class="page-number" href="/blog/page/164/">164</a><span class="page-number current">165</span><a class="page-number" href="/blog/page/166/">166</a><a class="page-number" href="/blog/page/167/">167</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/192/">192</a><a class="extend next" rel="next" href="/blog/page/166/">下一页&gt;&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/164/">&lt;&lt;上一页</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/163/">163</a><a class="page-number" href="/blog/page/164/">164</a><span class="page-number current">165</span><a class="page-number" href="/blog/page/166/">166</a><a class="page-number" href="/blog/page/167/">167</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/194/">194</a><a class="extend next" rel="next" href="/blog/page/166/">下一页&gt;&gt;</a>
   </nav>
 
 </section>
@@ -210,6 +249,14 @@
       <ul>
         
           <li>
+            <a href="/blog/2025/09/28/projectreactor-webflux/">Projectreactor &amp; Webflux</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2025/02/19/DNSCrypt/">DNSCrypt</a>
+          </li>
+        
+          <li>
             <a href="/blog/2024/05/19/windows/">Windows</a>
           </li>
         
@@ -219,14 +266,6 @@
         
           <li>
             <a href="/blog/2023/12/15/spring-boot-%E5%90%AF%E5%8A%A8%E8%BF%87%E7%A8%8B/">Spring Boot 启动过程</a>
-          </li>
-        
-          <li>
-            <a href="/blog/2022/04/25/Design-Underground-System/">Design Underground System</a>
-          </li>
-        
-          <li>
-            <a href="/blog/2022/04/25/Encode-and-Decode-TinyURL/">Encode and Decode TinyURL</a>
           </li>
         
       </ul>
@@ -250,7 +289,7 @@
   
   <div class="outer">
     <div id="footer-left">
-      &copy; 2016 - 2024 carl-zk<!--&nbsp;|&nbsp;
+      &copy; 2016 - 2025 carl-zk<!--&nbsp;|&nbsp;
       主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a> -->
     </div>
   

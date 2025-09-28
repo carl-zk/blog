@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Projectreactor &amp; Webflux | 一叶轻舟渡万江</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="reactor   Aspect generate (sync) push (async, single thread) create (async, multi-thread)    Emission style Pull (one item per request) Push (producer pushes items) Push (producer pushes items)   Conc">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Projectreactor &amp; Webflux">
+<meta property="og:url" content="https://carl-zk.github.io/blog/2025/09/28/projectreactor-webflux/index.html">
+<meta property="og:site_name" content="一叶轻舟渡万江">
+<meta property="og:description" content="reactor   Aspect generate (sync) push (async, single thread) create (async, multi-thread)    Emission style Pull (one item per request) Push (producer pushes items) Push (producer pushes items)   Conc">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-09-28T13:52:25.000Z">
+<meta property="article:modified_time" content="2025-09-28T15:34:04.328Z">
+<meta property="article:author" content="carl-zk">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/blog/atom.xml" title="一叶轻舟渡万江" type="application/atom+xml">
+  
+  
+  
+    
+  
+  
+<link rel="stylesheet" href="/blog/css/style.css">
+
+  
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-92800981-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-92800981-2');
+</script>
+
+
+
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    
+    <div id="header-inner" class="inner">
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/blog/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://carl-zk.github.io/blog"></form>
+      </div>
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/blog/">首页</a>
+        
+          <a class="main-nav-link" href="/blog/archives">归档</a>
+        
+          <a class="main-nav-link" href="/blog/about">关于</a>
+        
+      </nav>
+      
+    </div>
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/blog/" id="logo">一叶轻舟渡万江</a>
+      </h1>
+      
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article
+  id="post-projectreactor-webflux"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+>
+
+  <div class="article-meta">
+    <a href="/blog/2025/09/28/projectreactor-webflux/" class="article-date">
+  <time datetime="2025-09-28T13:52:25.000Z" itemprop="datePublished">2025-09-28</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+     
+    <header class="article-header">
+      
+  
+    <h1 class="article-title" itemprop="name">
+      Projectreactor &amp; Webflux
+    </h1>
+  
+
+    </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      <!-- Table of Contents -->
+       <h1 id="reactor"><a href="#reactor" class="headerlink" title="reactor"></a>reactor</h1><table>
+<thead>
+<tr>
+<th>Aspect</th>
+<th><code>generate</code> (sync)</th>
+<th><code>push</code> (async, single thread)</th>
+<th><code>create</code> (async, multi-thread)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Emission style</strong></td>
+<td><strong>Pull</strong> (one item per request)</td>
+<td><strong>Push</strong> (producer pushes items)</td>
+<td><strong>Push</strong> (producer pushes items)</td>
+</tr>
+<tr>
+<td><strong>Concurrency</strong></td>
+<td>Always single-threaded, synchronous</td>
+<td>Single-thread only</td>
+<td>Multi-thread allowed</td>
+</tr>
+<tr>
+<td><strong>Backpressure</strong></td>
+<td>Native: generator runs only on demand</td>
+<td>Needs overflow strategy if fast producer</td>
+<td>Needs overflow strategy if fast producer</td>
+</tr>
+<tr>
+<td><strong>Use case</strong></td>
+<td>Generate values step by step, state machine</td>
+<td>Event listener, single-thread producer</td>
+<td>Multi-threaded sources, complex bridging</td>
+</tr>
+</tbody></table>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">Flux&lt;Integer&gt; flux = Flux.generate(</span><br><span class="line">    () -&gt; <span class="number">0</span>,  <span class="comment">// initial state</span></span><br><span class="line">    (state, sink) -&gt; &#123;</span><br><span class="line">        sink.next(state);</span><br><span class="line">        <span class="keyword">if</span> (state == <span class="number">5</span>) sink.complete();</span><br><span class="line">        <span class="keyword">return</span> state + <span class="number">1</span>; <span class="comment">// next state</span></span><br><span class="line">    &#125;</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Flux&lt;String&gt; flux = Flux.push(sink -&gt; &#123;</span><br><span class="line">    someListener.onMessage(msg -&gt; sink.next(msg));</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Flux&lt;String&gt; flux = Flux.create(sink -&gt; &#123;</span><br><span class="line">    <span class="keyword">new</span> <span class="title class_">Thread</span>(() -&gt; &#123;</span><br><span class="line">        sink.next(<span class="string">&quot;A&quot;</span>);</span><br><span class="line">        sink.next(<span class="string">&quot;B&quot;</span>);</span><br><span class="line">        sink.complete();</span><br><span class="line">    &#125;).start();</span><br><span class="line">&#125;, FluxSink.OverflowStrategy.BUFFER);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>Rule of Thumb</strong><br>Use Flux.generate when you want a pull-based, synchronous generator (like a lazy sequence, state machine, or random number generator).<br>Use Flux.push&#x2F;create when you want to adapt to an external asynchronous source (like callbacks, listeners, or multiple threads producing data).</p>
+</blockquote>
+<h1 id="webflux"><a href="#webflux" class="headerlink" title="webflux"></a>webflux</h1><p>🟢 Cold, synchronous sources (run on caller thread, usually the subscriber’s thread)</p>
+<p>These methods execute inline on the same thread that subscribes, unless moved:</p>
+<p>Mono.just(…), Flux.just(…)</p>
+<p>Mono.empty(), Flux.empty()</p>
+<p>Mono.error(…), Flux.error(…)</p>
+<p>Flux.range(…), Flux.fromIterable(…), Flux.fromArray(…)</p>
+<p>Mono.fromSupplier(…) (evaluates lazily but still on caller thread)</p>
+<p>Mono.fromCallable(…)</p>
+<p>Flux.defer(…), Mono.defer(…)</p>
+<p>👉 By default: No background thread, execution happens immediately when subscribed.</p>
+<h2 id="thread-model"><a href="#thread-model" class="headerlink" title="thread model"></a>thread model</h2><p>default WebFlux app on Netty:</p>
+<ul>
+<li>Boss threads: 1</li>
+<li>Worker (event loop) threads: 2 * cpu</li>
+<li>Reactor Scheduler available:<ul>
+<li>paraller: cpu</li>
+<li>boundedElastic: 10 * cpu -&gt; 1000+</li>
+<li>timer: cpu (independent scheduler, never run user code directly, wraped a ScheduledExecutorService)</li>
+<li>single: 1</li>
+<li>immediate: 0 (just current thread)</li>
+</ul>
+</li>
+</ul>
+<p><strong>Best Practices</strong></p>
+<ul>
+<li><p><strong>Pure reactive stack (WebClient, R2DBC, reactive Mongo, etc.):</strong><br>  → stay on Netty event loop, no scheduler needed.</p>
+</li>
+<li><p><strong>Blocking APIs (JDBC, legacy SDKs, file IO):</strong><br>  → wrap with Mono.fromCallable(…).subscribeOn(Schedulers.boundedElastic()).</p>
+</li>
+<li><p><strong>Heavy CPU tasks (compression, JSON parsing, crypto):</strong><br>  → offload with publishOn(Schedulers.parallel()).</p>
+</li>
+<li><p><strong>Global customization</strong> (rarely needed): adjust Netty loop threads for connection-heavy apps, or override boundedElastic size for blocking-heavy apps.</p>
+</li>
+</ul>
+<p>why heavy cpu tasks, not io tasks, cauz netty born for heavy sockets tasks, it’s non-block at all.</p>
+<p>io tasks not to be block tasks for netty, don’t equal to them. even if there’s no io, it still could be a block task, e.g. <code>Thread.sleep(5000)</code> is a block task, forbidden running on event loop.</p>
+<hr>
+<p>🟡 Asynchronous sources (use a Reactor scheduler by default)</p>
+<p>These spawn work on an internal boundedElastic or parallel thread pool:</p>
+<p>Mono.delay(Duration) → Schedulers.parallel()</p>
+<p>Flux.interval(Duration) → Schedulers.parallel()</p>
+<p>Mono.fromRunnable(…), Mono.fromFuture(…), Mono.fromCompletionStage(…)</p>
+<p>If future already completed → current thread</p>
+<p>If not → completion thread (depends on upstream executor&#x2F;future, not Reactor itself)</p>
+<p>👉 By default: don’t run on subscriber thread, Reactor chooses.</p>
+<hr>
+<p>🔵 Blocking bridge operators (force boundedElastic by default)</p>
+<p>Reactor assumes blocking I&#x2F;O → runs on Schedulers.boundedElastic() unless you change:</p>
+<p>Mono.fromCallable(blockingFn).subscribeOn(Schedulers.boundedElastic()) (best practice)</p>
+<p>Mono.block() &#x2F; Flux.blockFirst() &#x2F; Flux.blockLast() (blocking the caller thread)</p>
+<p>Operators like flatMap with blocking calls must be explicitly shifted to boundedElastic.</p>
+<hr>
+<p>🔴 Thread-affecting operators (don’t run anything themselves but change execution)</p>
+<p>publishOn(Scheduler) → switches downstream execution thread</p>
+<p>subscribeOn(Scheduler) → changes the context where subscription and upstream happen</p>
+<hr>
+<p>⚪ Context-dependent sources</p>
+<p>Some methods inherit threads from external APIs:</p>
+<p>Flux.create(…) or Mono.create(…) → depends on how you emit (<code>caller thread</code> or async callback thread)</p>
+<p>Flux.push(…) → same, depends on emitter thread</p>
+<p>Flux.generate(…) → runs on <code>subscriber thread</code> unless you schedule</p>
+<blockquote>
+<p>✅ Quick rule of thumb<br>“Pure data” operators (just, range, fromIterable) → run on subscriber thread.<br>“Timed” operators (delay, interval) → run on Reactor’s parallel scheduler.<br>“Bridges to blocking&#x2F;async world” (fromCallable, fromFuture) → run on caller’s thread or boundedElastic&#x2F;foreign executor, unless you move them.<br>Schedulers (publishOn, subscribeOn) are the only way to force thread switch.</p>
+</blockquote>
+<p><em><strong>caller thread &#x3D; initiator of subscription, subscriber thread &#x3D; executor of signals.</strong></em></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">flux.publishOn(Schedulers.parallel())</span><br><span class="line">    .subscribe(i -&gt; System.out.println(<span class="string">&quot;sub: &quot;</span> + i + <span class="string">&quot; on &quot;</span> + Thread.currentThread().getName()));</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>caller thread &#x3D; main</li>
+<li>subscriber thread &#x3D; parallel-1</li>
+<li>Mapping still happens on ‘parallel-1’ because of <code>publishOn</code></li>
+</ul>
+<h3 id="think-about"><a href="#think-about" class="headerlink" title="think about"></a>think about</h3><p>🔹 Two philosophies</p>
+<ol>
+<li>Operators&#x2F;methods decide their scheduler (local responsibility)</li>
+</ol>
+<p>You sprinkle .subscribeOn(…) or .publishOn(…) inside every method that returns a Mono&#x2F;Flux.</p>
+<p>Pros:<br>The method guarantees safe execution (e.g., offloading a blocking call to boundedElastic).<br>Callers don’t need to know the implementation details (e.g., that it does blocking JDBC work).<br>Cons:<br>You lose flexibility: the caller cannot override your scheduler easily.<br>If multiple methods apply .subscribeOn(…), only the first one in the chain wins (because subscribeOn only affects upstream).<br>Can lead to confusion if one method hides threading decisions.</p>
+<ol start="2">
+<li>Caller decides (central responsibility)</li>
+</ol>
+<p>Your methods just describe the pipeline (Mono.just, map, flatMap, etc.) with no scheduler hints.<br>The caller (e.g., controller or service entry point) applies subscribeOn &#x2F; publishOn.</p>
+<p>Pros:<br>Clean separation of concerns: methods remain pure, deterministic pipelines.<br>Caller has full control of threading policy.<br>Easy to test synchronously (no schedulers in unit tests unless you want them).<br>Cons:<br>Risk: if a method does blocking work (e.g., JDBC, file IO, legacy API), caller must remember to schedule it properly, or it will block Netty&#x2F;event loop.</p>
+<p>🔹 Rule of Thumb</p>
+<p>👉 Don’t sprinkle subscribeOn everywhere.</p>
+<p>If your method is purely non-blocking&#x2F;reactive (using Reactor operators, R2DBC, WebClient, etc.):<br>❌ Do not configure a scheduler. Let the caller decide.</p>
+<p>If your method wraps blocking code (JDBC, file IO, legacy API, etc.):<br>✅ Apply subscribeOn(Schedulers.boundedElastic()) inside the method — because you must protect the Netty event loop.</p>
+<p>This way:</p>
+<p>Non-blocking pipelines remain transparent and flexible.<br>Blocking bridges are safe by default, without relying on the caller’s discipline.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ✅ Non-blocking service, no scheduler</span></span><br><span class="line">Mono&lt;User&gt; <span class="title function_">getUserReactive</span><span class="params">(String id)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> webClient.get()</span><br><span class="line">        .uri(<span class="string">&quot;/users/&#123;id&#125;&quot;</span>, id)</span><br><span class="line">        .retrieve()</span><br><span class="line">        .bodyToMono(User.class);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// ✅ Blocking service, safe by default</span></span><br><span class="line">Mono&lt;User&gt; <span class="title function_">getUserBlocking</span><span class="params">(String id)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> Mono.fromCallable(() -&gt; jdbcTemplate.queryForObject(<span class="string">&quot;...&quot;</span>, User.class, id))</span><br><span class="line">               .subscribeOn(Schedulers.boundedElastic());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Caller:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Controller - doesn&#x27;t care about threading for reactive code</span></span><br><span class="line">getUserReactive(<span class="string">&quot;123&quot;</span>)</span><br><span class="line">    .map(<span class="built_in">this</span>::transform)</span><br><span class="line">    .subscribe();</span><br><span class="line"></span><br><span class="line"><span class="comment">// Blocking call is already protected by boundedElastic internally</span></span><br><span class="line">getUserBlocking(<span class="string">&quot;123&quot;</span>)</span><br><span class="line">    .map(<span class="built_in">this</span>::transform)</span><br><span class="line">    .subscribe();</span><br></pre></td></tr></table></figure>
+
+<p>✅ Best practice summary</p>
+<p>Non-blocking methods: don’t set subscribeOn.<br>Blocking methods: always set subscribeOn(Schedulers.boundedElastic()) inside the method.<br>At the top level (controllers, pipelines): only add publishOn&#x2F;subscribeOn when you need explicit control over where downstream operators run.</p>
+<p>define custom schedulers</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> reactor.core.scheduler.Scheduler;</span><br><span class="line"><span class="keyword">import</span> reactor.core.scheduler.Schedulers;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.Executors;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.ThreadFactory;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.ExecutorService;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">CustomSchedulers</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// CPU-heavy tasks: non-blocking, parallel computation</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">Scheduler</span> <span class="variable">CPU_SCHEDULER</span> <span class="operator">=</span> Schedulers.newParallel(</span><br><span class="line">            <span class="string">&quot;cpu-pool&quot;</span>,  <span class="comment">// thread name prefix</span></span><br><span class="line">            Runtime.getRuntime().availableProcessors()</span><br><span class="line">    );</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Blocking / IO-heavy tasks: e.g., DB, file I/O, network calls</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">int</span> <span class="variable">IO_POOL_SIZE</span> <span class="operator">=</span> <span class="number">50</span>;  <span class="comment">// adjust based on load</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">ExecutorService</span> <span class="variable">ioExecutor</span> <span class="operator">=</span> Executors.newFixedThreadPool(</span><br><span class="line">            IO_POOL_SIZE,</span><br><span class="line">            <span class="keyword">new</span> <span class="title class_">ThreadFactory</span>() &#123;</span><br><span class="line">                <span class="keyword">private</span> <span class="type">int</span> <span class="variable">count</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">                <span class="meta">@Override</span></span><br><span class="line">                <span class="keyword">public</span> Thread <span class="title function_">newThread</span><span class="params">(Runnable r)</span> &#123;</span><br><span class="line">                    <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Thread</span>(r, <span class="string">&quot;io-pool-&quot;</span> + count++);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">    );</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">Scheduler</span> <span class="variable">IO_SCHEDULER</span> <span class="operator">=</span> Schedulers.fromExecutorService(ioExecutor);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Cleanup on shutdown</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">shutdown</span><span class="params">()</span> &#123;</span><br><span class="line">        CPU_SCHEDULER.dispose();</span><br><span class="line">        IO_SCHEDULER.dispose();</span><br><span class="line">        ioExecutor.shutdown();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="methods-usage"><a href="#methods-usage" class="headerlink" title="methods usage"></a>methods usage</h1><h2 id="defer-amp-interval"><a href="#defer-amp-interval" class="headerlink" title="defer &amp; interval"></a>defer &amp; interval</h2><p><code>defer</code> is like a provider in spring, when inject a provider: () -&gt; new Instance() instead a : new Instance() itself.<br>it <strong>create a new Mono for every subscription</strong> by invoking the supplier lazily.</p>
+<p>say we need a loop call, </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> Mono&lt;String&gt; <span class="title function_">pollUntilJson</span><span class="params">(String path)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> Mono.defer(() -&gt;</span><br><span class="line">                webClient.get()</span><br><span class="line">                         .uri(path)</span><br><span class="line">                         .retrieve()</span><br><span class="line">                         .bodyToMono(String.class)</span><br><span class="line">        ).flatMap(body -&gt; &#123;</span><br><span class="line">            <span class="keyword">if</span> (!body.isEmpty() &amp;&amp; body.trim().startsWith(<span class="string">&quot;&#123;&quot;</span>)) &#123;</span><br><span class="line">                <span class="keyword">return</span> Mono.just(body); <span class="comment">// ✅ Got JSON, finish</span></span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">return</span> Mono.delay(Duration.ofSeconds(<span class="number">1</span>)) <span class="comment">// delay create a non-blocking timer, so reactor will schedules it on a reactor timer, not a thread sleep.</span></span><br><span class="line">                           .then(pollUntilJson(path)); <span class="comment">// each time, we make a fresh call, not reuse the first mono which we don&#x27;t want to.</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125; <span class="comment">// since webclient is non-blocking, we don&#x27;t need a subscribeOn(boundedElastic()).</span></span><br></pre></td></tr></table></figure>
+
+<p>alternatives to delay</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Flux.interval(Duration.ofSeconds(<span class="number">1</span>))</span><br><span class="line">    .flatMap(tick -&gt;</span><br><span class="line">        webClient.get().uri(path).retrieve().bodyToMono(String.class)</span><br><span class="line">    )</span><br><span class="line">    .filter(body -&gt; isJson(body)) <span class="comment">// </span></span><br><span class="line">    .next(); <span class="comment">// take the first JSON result</span></span><br></pre></td></tr></table></figure>
+
+<p>or exponential backoff way</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Mono.defer(() -&gt; webClient.get().uri(path).retrieve().bodyToMono(String.class))</span><br><span class="line">    .filter(<span class="built_in">this</span>::isJson)</span><br><span class="line">    .retryWhen(Retry.backoff(<span class="number">10</span>, Duration.ofSeconds(<span class="number">1</span>)));</span><br></pre></td></tr></table></figure>
+
+
+
+
+ 
+    </div>
+
+    <footer class="article-footer">
+      <!-- <a data-url="https://carl-zk.github.io/blog/2025/09/28/projectreactor-webflux/" data-id="cmg3red5400001kodcaathy97" class="article-share-link">分享</a> -->
+       
+      <div id="gitalk-container"></div>
+       
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+
+
+<script src="/blog/js/md5.min.js"></script>
+
+
+ <script type="text/javascript" defer>
+      function genId() {
+        var title = document.querySelector('article div.article-meta a').pathname
+        if(title == null) {
+            title = location.pathname
+        }
+        return title
+      } 
+      var gitalk = new Gitalk({
+        clientID: '4cb6744ec422e72a39bf',
+        clientSecret: 'd0243116135375ff3b8db348dea02bc5ac88b6e3',
+        repo: 'gitalk',
+        owner: 'carl-zk',
+        admin: ['carl-zk'],
+        id: md5(genId()),
+        labels: ['Gitalk'],
+        perPage: 15,
+        pagerDirection: 'last',
+        createIssueManually: false,
+        distractionFreeMode: false
+      })
+      gitalk.render("gitalk-container")
+
+</script>
+
+
+
+
+
+ 
+    </footer>
+  </div>
+    
+<nav id="article-nav">
+  
+  
+    <a href="/blog/2025/02/19/DNSCrypt/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">DNSCrypt</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+</section>
+           
+    <aside id="sidebar">
+  
+    
+
+  
+    
+    <div class="widget-wrap">
+    
+      <div class="widget" id="toc-widget-fixed">
+      
+        <strong class="toc-title">文章目录</strong>
+        <div class="toc-widget-list">
+              <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#reactor"><span class="toc-number">1.</span> <span class="toc-text">reactor</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#webflux"><span class="toc-number">2.</span> <span class="toc-text">webflux</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#thread-model"><span class="toc-number">2.1.</span> <span class="toc-text">thread model</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#think-about"><span class="toc-number">2.1.1.</span> <span class="toc-text">think about</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#methods-usage"><span class="toc-number">3.</span> <span class="toc-text">methods usage</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#defer-amp-interval"><span class="toc-number">3.1.</span> <span class="toc-text">defer &amp; interval</span></a></li></ol></li></ol>
+          </div>
+      </div>
+    </div>
+
+  
+    
+
+  
+    
+  
+    
+  
+    
+
+  
+    
+  
+    <!--微信公众号二维码-->
+
+
+  
+</aside>
+
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-left">
+      &copy; 2016 - 2025 carl-zk<!--&nbsp;|&nbsp;
+      主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a> -->
+    </div>
+  
+     <div id="footer-right">
+      <!--联系方式&nbsp;|&nbsp; -->
+      富强民主文明和谐自由平等公正法治爱国敬业诚信友善
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/blog/" class="mobile-nav-link">首页</a>
+  
+    <a href="/blog/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/blog/about" class="mobile-nav-link">关于</a>
+  
+</nav>
+    <img class="back-to-top-btn" src="/blog/images/fly-to-top.png"/>
+<script>
+// Elevator script included on the page, already.
+window.onload = function() {
+  var elevator = new Elevator({
+    selector:'.back-to-top-btn',
+    element: document.querySelector('.back-to-top-btn'),
+    duration: 1000 // milliseconds
+  });
+}
+</script>
+    
+
+<script src="/blog/js/is.js"></script>
+
+
+
+  
+<script src="/blog/jquery/jquery.min.js"></script>
+
+  
+<link rel="stylesheet" href="/blog/fancybox/jquery.fancybox.css">
+
+  
+<script src="/blog/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/mermaid/7.1.2/mermaid.min.js'></script>
+  <!-- script src="/blog/js/mermaid.min.js" -->
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({theme: 'forest'});
+    }
+  </script>
+
+
+<script src="/blog/js/script.js"></script>
+
+
+<script src="/blog/js/elevator.js"></script>
+
+  </div>
+</body>
+</html>

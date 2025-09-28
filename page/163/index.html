@@ -84,15 +84,15 @@
         <section id="main">
   
     <article
-  id="post-哈哈-发现hdu错题一道"
+  id="post-A-B-Problem-II"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
 >
 
   <div class="article-meta">
-    <a href="/blog/2016/06/24/%E5%93%88%E5%93%88-%E5%8F%91%E7%8E%B0hdu%E9%94%99%E9%A2%98%E4%B8%80%E9%81%93/" class="article-date">
-  <time datetime="2016-06-23T18:01:12.000Z" itemprop="datePublished">2016-06-24</time>
+    <a href="/blog/2016/06/26/A-B-Problem-II/" class="article-date">
+  <time datetime="2016-06-26T02:35:08.000Z" itemprop="datePublished">2016-06-26</time>
 </a>
     
   <div class="article-category">
@@ -106,7 +106,7 @@
       
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2016/06/24/%E5%93%88%E5%93%88-%E5%8F%91%E7%8E%B0hdu%E9%94%99%E9%A2%98%E4%B8%80%E9%81%93/">哈哈,发现Hdu错题一道</a>
+      <a class="article-title" href="/blog/2016/06/26/A-B-Problem-II/">A + B Problem II</a>
     </h1>
   
 
@@ -115,66 +115,19 @@
     <div class="article-entry" itemprop="articleBody">
       
       <!-- Table of Contents -->
-       <p><a target="_blank" rel="noopener" href="http://acm.hdu.edu.cn/game/entry/problem/show.php?chapterid=2&sectionid=2&problemid=8">题目链接</a><br>Number Sequence</p>
-<p>Time Limit: 2000&#x2F;1000 MS (Java&#x2F;Others) Memory Limit: 65536&#x2F;32768 K (Java&#x2F;Others)<br>Total Submission(s): 1762 Accepted Submission(s): 675</p>
-<p>Problem Description<br>A number sequence is defined as follows:</p>
-<p>f(1) &#x3D; 1, f(2) &#x3D; 1, f(n) &#x3D; (A * f(n - 1) + B * f(n - 2)) mod 7.</p>
-<p>Given A, B, and n, you are to calculate the value of f(n).</p>
-<p>Input<br>The input consists of multiple test cases. Each test case contains 3 integers A, B and n on a single line (1 &lt;&#x3D; A, B &lt;&#x3D; 1000, 1 &lt;&#x3D; n &lt;&#x3D; 100,000,000). Three zeros signal the end of input and this test case is not to be processed.</p>
-<p>Output<br>For each test case, print the value of f(n) on a single line.</p>
-<p>Sample Input<br>1 1 3<br>1 2 10<br>0 0 0</p>
-<p>Sample Output<br>2<br>5</p>
-<hr />
+       <p><a target="_blank" rel="noopener" href="http://acm.hdu.edu.cn/showproblem.php?pid=1002">题目链接</a><br>Problem Description<br>I have a very simple problem for you. Given two integers A and B, your job is to calculate the Sum of A + B.</p>
+<p>Input<br>The first line of the input contains an integer T(1&lt;&#x3D;T&lt;&#x3D;20) which means the number of test cases. Then T lines follow, each line consists of two positive integers, A and B. Notice that the integers are very large, that means you should not process them by using 32-bit integer. You may assume the length of each integer will not exceed 1000.</p>
+<p>Output<br>For each test case, you should output two lines. The first line is “Case #:”, # means the number of the test case. The second line is the an equation “A + B &#x3D; Sum”, Sum means the result of A + B. Note there are some spaces int the equation. Output a blank line between two test cases.</p>
+<p>Sample Input<br>2<br>1 2<br>112233445566778899 998877665544332211</p>
+<p>Sample Output<br>Case 1:<br>1 + 2 &#x3D; 3</p>
+<p>Case 2:<br>112233445566778899 + 998877665544332211 &#x3D; 1111111111111111110</p>
+<hr/>
 
-<p>AC代码如下:</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;set&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> MAX 50</span></span><br><span class="line"></span><br><span class="line">using namespace <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> f[MAX] = &#123;<span class="number">0</span>,<span class="number">1</span>,<span class="number">1</span>,&#125;;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">circ</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b, <span class="type">int</span> n)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//f[0]=0;   取消注释测试会有惊喜哦</span></span><br><span class="line">    <span class="comment">//f[0]=1;</span></span><br><span class="line">    f[<span class="number">1</span>] = f[<span class="number">2</span>] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">3</span>; i&lt;MAX; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        f[i] = (a*f[i<span class="number">-1</span>]+b*f[i<span class="number">-2</span>]) % <span class="number">7</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> f[n%<span class="number">49</span>];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> A,B,n;</span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">scanf</span>(<span class="string">&quot;%d %d %d&quot;</span>, &amp;A, &amp;B, &amp;n),A!=<span class="number">0</span> || B!=<span class="number">0</span> ||n!=<span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, circ(A,B,n));</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>是这样的,看到这道题的第一感觉肯定是以为找规律题,没错!BUT,你能猜到周期是几吗?<br>因为f&#x3D;(x+y)%7, x和y又都&lt;7,所以x和y的组合不过只有7*7&#x3D;49种情况,照这样编码,so easy!?</p>
-<p>解释一下,出题人显然没搞懂<strong>周期</strong>的概念,最大情况49是没错,错就错在它并不能代表周期的倍数,同时你也不知道周期是从第几个开始的.举个例子:当A&#x3D;5,B&#x3D;7时,周期从第2个开始;当A&#x3D;6,B&#x3D;8时,周期从1开始.</p>
-<ol>
-<li>A&#x3D;5, B&#x3D;7的情况:</li>
-</ol>
-<table>
-<thead>
-<tr>
-<th>n</th>
-<th align="center">f[n]的真实值</th>
-<th align="center">f[0] &#x3D; 1时</th>
-<th align="right">f[0] &#x3D; 0时</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>49</td>
-<td align="center">3</td>
-<td align="center">1</td>
-<td align="right">0</td>
-</tr>
-<tr>
-<td>50</td>
-<td align="center">1</td>
-<td align="center">1</td>
-<td align="right">1</td>
-</tr>
-<tr>
-<td>51</td>
-<td align="center">5</td>
-<td align="center">1</td>
-<td align="right">1</td>
-</tr>
-<tr>
-<td>52</td>
-<td align="center">4</td>
-<td align="center">5</td>
-<td align="right">5</td>
-</tr>
-</tbody></table>
-<p>LOOK,可以AC的代码竟然会出现这样的结果!<br>真正的答案应该是找出周期T和周期开始位置S,结束位置E.根据实际情况去计算.</p>
-<p>不过猜想题主的用意是利用周期,所以可能没在意这些细节吧!这题折磨我好久,终于可以安心的睡了.</p>
- 
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;set&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> MAX 1005</span></span><br><span class="line"></span><br><span class="line">using namespace <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">char</span> a[MAX], b[MAX], ans[MAX], resa[MAX], resb[MAX];</span><br><span class="line"><span class="type">int</span> alen, blen, y;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">strrev</span><span class="params">(<span class="type">char</span> *s, <span class="type">int</span> len)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">char</span> c;</span><br><span class="line">    <span class="type">int</span> mid = len &gt;&gt; <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>; i&lt;mid; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        c = s[i];</span><br><span class="line">        s[i] = s[len - <span class="number">1</span> - i];</span><br><span class="line">        s[len - <span class="number">1</span> - i] = c;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">strsum</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> y = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>; i&lt;blen; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        y = y+ans[i]+b[i]<span class="number">-96</span>;</span><br><span class="line">        ans[i] = y%<span class="number">10</span> + <span class="number">48</span>;</span><br><span class="line">        y/=<span class="number">10</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=blen; i&lt;alen; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        y = y+ans[i]<span class="number">-48</span>;</span><br><span class="line">        ans[i] = y % <span class="number">10</span> + <span class="number">48</span>;</span><br><span class="line">        y/=<span class="number">10</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(y)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;1&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=alen<span class="number">-1</span>; i&gt;<span class="number">-1</span>; i--)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%c&quot;</span>, ans[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> tc;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;tc);</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>; i&lt;=tc; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">memset</span>(ans, <span class="number">0</span>, <span class="keyword">sizeof</span>(ans));</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%s %s&quot;</span>, &amp;a, &amp;b);</span><br><span class="line">        <span class="built_in">strcpy</span>(resa, a);</span><br><span class="line">        <span class="built_in">strcpy</span>(resb, b);</span><br><span class="line">        strrev(a, <span class="built_in">strlen</span>(a));</span><br><span class="line">        strrev(b, <span class="built_in">strlen</span>(b));</span><br><span class="line">        <span class="keyword">if</span>(<span class="built_in">strlen</span>(a)&gt;<span class="built_in">strlen</span>(b))</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">strcpy</span>(ans, a);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">strcpy</span>(ans, b);</span><br><span class="line">            <span class="built_in">strcpy</span>(b, a);</span><br><span class="line">        &#125;</span><br><span class="line">        alen = <span class="built_in">strlen</span>(ans);</span><br><span class="line">        blen = <span class="built_in">strlen</span>(b);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;Case %d:\n%s + %s = &quot;</span>, i, resa, resb);</span><br><span class="line">        strsum();</span><br><span class="line">        <span class="keyword">if</span>(i&lt;tc)<span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure> 
     </div>
 
     <footer class="article-footer">
-      <!-- <a data-url="https://carl-zk.github.io/blog/2016/06/24/%E5%93%88%E5%93%88-%E5%8F%91%E7%8E%B0hdu%E9%94%99%E9%A2%98%E4%B8%80%E9%81%93/" data-id="clwbvux5h008f64odgq3l8sx7" class="article-share-link">分享</a> -->
+      <!-- <a data-url="https://carl-zk.github.io/blog/2016/06/26/A-B-Problem-II/" data-id="clwbvux4e000664od8g6z964s" class="article-share-link">分享</a> -->
        
       <div id="gitalk-container"></div>
        
@@ -225,7 +178,7 @@
 
 
   <nav id="page-nav">
-    <a class="extend prev" rel="prev" href="/blog/page/162/">&lt;&lt;上一页</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/161/">161</a><a class="page-number" href="/blog/page/162/">162</a><span class="page-number current">163</span><a class="page-number" href="/blog/page/164/">164</a><a class="page-number" href="/blog/page/165/">165</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/192/">192</a><a class="extend next" rel="next" href="/blog/page/164/">下一页&gt;&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/162/">&lt;&lt;上一页</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/161/">161</a><a class="page-number" href="/blog/page/162/">162</a><span class="page-number current">163</span><a class="page-number" href="/blog/page/164/">164</a><a class="page-number" href="/blog/page/165/">165</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/194/">194</a><a class="extend next" rel="next" href="/blog/page/164/">下一页&gt;&gt;</a>
   </nav>
 
 </section>
@@ -249,6 +202,14 @@
       <ul>
         
           <li>
+            <a href="/blog/2025/09/28/projectreactor-webflux/">Projectreactor &amp; Webflux</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2025/02/19/DNSCrypt/">DNSCrypt</a>
+          </li>
+        
+          <li>
             <a href="/blog/2024/05/19/windows/">Windows</a>
           </li>
         
@@ -258,14 +219,6 @@
         
           <li>
             <a href="/blog/2023/12/15/spring-boot-%E5%90%AF%E5%8A%A8%E8%BF%87%E7%A8%8B/">Spring Boot 启动过程</a>
-          </li>
-        
-          <li>
-            <a href="/blog/2022/04/25/Design-Underground-System/">Design Underground System</a>
-          </li>
-        
-          <li>
-            <a href="/blog/2022/04/25/Encode-and-Decode-TinyURL/">Encode and Decode TinyURL</a>
           </li>
         
       </ul>
@@ -289,7 +242,7 @@
   
   <div class="outer">
     <div id="footer-left">
-      &copy; 2016 - 2024 carl-zk<!--&nbsp;|&nbsp;
+      &copy; 2016 - 2025 carl-zk<!--&nbsp;|&nbsp;
       主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a> -->
     </div>
   

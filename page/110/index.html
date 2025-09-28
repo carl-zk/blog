@@ -84,19 +84,19 @@
         <section id="main">
   
     <article
-  id="post-Ubuntu下sublime3中文输入"
+  id="post-OFBiz-Learn"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
 >
 
   <div class="article-meta">
-    <a href="/blog/2017/02/28/Ubuntu%E4%B8%8Bsublime3%E4%B8%AD%E6%96%87%E8%BE%93%E5%85%A5/" class="article-date">
-  <time datetime="2017-02-28T13:41:53.000Z" itemprop="datePublished">2017-02-28</time>
+    <a href="/blog/2017/03/04/OFBiz-Learn/" class="article-date">
+  <time datetime="2017-03-04T05:42:07.000Z" itemprop="datePublished">2017-03-04</time>
 </a>
     
   <div class="article-category">
-    <a class="article-category-link" href="/blog/categories/%E7%B3%BB%E7%BB%9F%E9%85%8D%E7%BD%AE/">系统配置</a>
+    <a class="article-category-link" href="/blog/categories/OFBiz/">OFBiz</a>
   </div>
 
   </div>
@@ -106,7 +106,7 @@
       
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2017/02/28/Ubuntu%E4%B8%8Bsublime3%E4%B8%AD%E6%96%87%E8%BE%93%E5%85%A5/">Ubuntu下sublime3中文输入</a>
+      <a class="article-title" href="/blog/2017/03/04/OFBiz-Learn/">OFBiz Learn</a>
     </h1>
   
 
@@ -115,21 +115,52 @@
     <div class="article-entry" itemprop="articleBody">
       
       <!-- Table of Contents -->
-       <p><a target="_blank" rel="noopener" href="http://www.jianshu.com/p/9f2a11851b4e">参考</a></p>
-<p>最近我折腾了个新linux系统debian，安装包才二百多MB。又把sublime3中文输入的问题搞了一遍。<br>首先，安装fcitx，fcitx-sunpinyin，然后卸载ibus-pinyin。<br>在～&#x2F;.zshrc中添加export GTK_IM_MODULE&#x3D;fcitx<br>运行: fcitx-autostart , fcitx-configtool.<br>到这，你可以安装sogou。不过我喜欢sun拼音，因为它现在不比sogou差了。</p>
-<h4 id="1-保存下述代码为-sublime-imfix-c-文件"><a href="#1-保存下述代码为-sublime-imfix-c-文件" class="headerlink" title="1.保存下述代码为 sublime-imfix.c 文件"></a>1.保存下述代码为 sublime-imfix.c 文件</h4><p><a href="/blog/2017/02/28/Ubuntu%E4%B8%8Bsublime3%E4%B8%AD%E6%96%87%E8%BE%93%E5%85%A5/sublime-imfix.c">sublime-imfix.c</a></p>
-<h4 id="2-安装-C-x2F-C-的编译环境-gtk-libgtk2-0-dev"><a href="#2-安装-C-x2F-C-的编译环境-gtk-libgtk2-0-dev" class="headerlink" title="2.安装 C&#x2F;C++ 的编译环境 gtk libgtk2.0-dev"></a>2.安装 C&#x2F;C++ 的编译环境 gtk libgtk2.0-dev</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install build-essential</span><br><span class="line">sudo apt-get install libgtk2.0-dev</span><br></pre></td></tr></table></figure>
-
-<h4 id="3-进入sublime-imfix-c的目录-编译共享内库"><a href="#3-进入sublime-imfix-c的目录-编译共享内库" class="headerlink" title="3.进入sublime-imfix.c的目录,编译共享内库"></a>3.进入sublime-imfix.c的目录,编译共享内库</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc -shared -o libsublime-imfix.so sublime-imfix.c `pkg-config --libs --cflags gtk+-2.0` -fPIC</span><br></pre></td></tr></table></figure>
-<p>此句的执行结果是生成libsublime-imfix.so文件,其位置是执行此句命令所在的目录。<br>将此文件移动到&#x2F;opt&#x2F;sublime_text&#x2F;下。（我sublime3在&#x2F;opt&#x2F;下）</p>
-<h4 id="4-在-x2F-usr-x2F-bin-x2F-目录下建立新文件subl"><a href="#4-在-x2F-usr-x2F-bin-x2F-目录下建立新文件subl" class="headerlink" title="4.在&#x2F;usr&#x2F;bin&#x2F;目录下建立新文件subl"></a>4.在&#x2F;usr&#x2F;bin&#x2F;目录下建立新文件subl</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/sh</span><br><span class="line">export LD_PRELOAD=/opt/sublime_text/libsublime-imfix.so</span><br><span class="line">exec /opt/sublime_text/sublime_text &quot;$@&quot;</span><br></pre></td></tr></table></figure>
-<p>ps: 可能需要chmod，chown命令。</p>
-<h4 id="5-完成"><a href="#5-完成" class="headerlink" title="5. 完成"></a>5. 完成</h4><p> 可新打开一个终端输入subl来敲一敲中文。</p>
+       <h1 id="初识OFBiz"><a href="#初识OFBiz" class="headerlink" title="初识OFBiz"></a>初识OFBiz</h1><p><a target="_blank" rel="noopener" href="https://ofbiz.apache.org/apache-ofbiz-project-overview.html">官网</a></p>
+<p>Open For Business(OFBiz) 是一个企业应用框架，类似于Spring，主要针对ERP、CRM系统。<br>OFBiz使用 <a target="_blank" rel="noopener" href="https://www.apache.org/licenses/LICENSE-2.0">Apache License Version 2.0协议</a>，你可以不公开你的代码。</p>
+<h1 id="Major-Application-Components"><a href="#Major-Application-Components" class="headerlink" title="Major Application Components"></a>Major Application Components</h1><h2 id="Common-Data"><a href="#Common-Data" class="headerlink" title="Common Data"></a>Common Data</h2><p>包括实体类等系统启动时加载的、一般很少变动的数据。</p>
+<h2 id="Content"><a href="#Content" class="headerlink" title="Content"></a>Content</h2><p>用于对数据的追踪。</p>
+<h2 id="Security"><a href="#Security" class="headerlink" title="Security"></a>Security</h2><p>访问控制。</p>
+<h2 id="Party"><a href="#Party" class="headerlink" title="Party"></a>Party</h2><p>可以是一个人，或一个Parties组。Party Group可以是一个公司，公司内部的一个机构，供应商或顾客等。<br>与Party相关的类型有</p>
+<ol>
+<li>Contact Mechanisms(地址，手机，邮箱，URL……)</li>
+<li>Roles(作为顾客，供应商，员工，经理，商人……)</li>
+<li>另一种可归为Party类的数据是Parties之间communication和agreement的信息。它可被Work Effort实体用来计划和追踪Parties之间的问题和解决方案。</li>
+</ol>
+<h2 id="Product"><a href="#Product" class="headerlink" title="Product"></a>Product</h2><p>公司出售或内部使用的商品，可以是goods或services</p>
+<h2 id="Order"><a href="#Order" class="headerlink" title="Order"></a>Order</h2><p>商品的排序。如顾客对一类商品的url请求，就会被Order package内的实体处理。</p>
+<h2 id="Facility"><a href="#Facility" class="headerlink" title="Facility"></a>Facility</h2><p>一座大楼或一个地理位置。</p>
+<h2 id="Shipment"><a href="#Shipment" class="headerlink" title="Shipment"></a>Shipment</h2><p>跟踪进出货和进出货清单。</p>
+<h2 id="Accounting"><a href="#Accounting" class="headerlink" title="Accounting"></a>Accounting</h2><p>记账。</p>
+<h2 id="Marketing"><a href="#Marketing" class="headerlink" title="Marketing"></a>Marketing</h2><p>市场信息。</p>
+<h2 id="Work-Effort"><a href="#Work-Effort" class="headerlink" title="Work Effort"></a>Work Effort</h2><p>可以是一个task，project，project phase，to-do item,Workflow Activity等。</p>
+<blockquote>
+<p>需要注意的是，OFBiz放弃了Workflow Engines，改用Event Driven Architecture(EDA)和ECAs(SECA,EECA,MECA)。ECA是Event Condition Action的缩写。SECAs用于Services，EECA用于Entity，MECAs用于Mail。</p>
+</blockquote>
+<h2 id="Human-Resources"><a href="#Human-Resources" class="headerlink" title="Human Resources"></a>Human Resources</h2><p>人力资源信息。</p>
+<p><img src="/blog/2017/03/04/OFBiz-Learn/ofbiz.png" alt="主要应用部件" loading="lazy"></p>
+<h1 id="Architecture-and-System-Organization"><a href="#Architecture-and-System-Organization" class="headerlink" title="Architecture and System Organization"></a>Architecture and System Organization</h1><h2 id="Entities-and-Services"><a href="#Entities-and-Services" class="headerlink" title="Entities and Services"></a>Entities and Services</h2><table>
+<thead>
+<tr>
+<th align="left">Entity</th>
+<th align="left">作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">basic entity</td>
+<td align="left">&amp;#124; 与数据库表对应</td>
+</tr>
+<tr>
+<td align="left">view-entity</td>
+<td align="left">&amp;#124; 组合实体类字段构成虚拟实体</td>
+</tr>
+</tbody></table>
+<p>使用Entity Engine可以省去写sql，可以不必维护大量的CRUD持久层类。取而代之的是相对少量的xml配置文件。<br>每个Service只负责简单的特定的任务，由ECA去调度，所以扩展时也不必改变原来的逻辑代码。</p>
+<h2 id="Web-Framework-and-XML-Mini-Languages"><a href="#Web-Framework-and-XML-Mini-Languages" class="headerlink" title="Web Framework and XML Mini-Languages"></a>Web Framework and XML Mini-Languages</h2><p>OFBiz Core Framework 提供了许多client-server、peer-to-peer框架，为了便于使用，所以推出一个‘XML Mini-Language’工具。</p>
  
     </div>
 
     <footer class="article-footer">
-      <!-- <a data-url="https://carl-zk.github.io/blog/2017/02/28/Ubuntu%E4%B8%8Bsublime3%E4%B8%AD%E6%96%87%E8%BE%93%E5%85%A5/" data-id="clwbvux4z004i64odbz2e4gax" class="article-share-link">分享</a> -->
+      <!-- <a data-url="https://carl-zk.github.io/blog/2017/03/04/OFBiz-Learn/" data-id="clwbvux4v003e64od4fbla8a7" class="article-share-link">分享</a> -->
        
       <div id="gitalk-container"></div>
        
@@ -180,7 +211,7 @@
 
 
   <nav id="page-nav">
-    <a class="extend prev" rel="prev" href="/blog/page/109/">&lt;&lt;上一页</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/108/">108</a><a class="page-number" href="/blog/page/109/">109</a><span class="page-number current">110</span><a class="page-number" href="/blog/page/111/">111</a><a class="page-number" href="/blog/page/112/">112</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/192/">192</a><a class="extend next" rel="next" href="/blog/page/111/">下一页&gt;&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/109/">&lt;&lt;上一页</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/108/">108</a><a class="page-number" href="/blog/page/109/">109</a><span class="page-number current">110</span><a class="page-number" href="/blog/page/111/">111</a><a class="page-number" href="/blog/page/112/">112</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/194/">194</a><a class="extend next" rel="next" href="/blog/page/111/">下一页&gt;&gt;</a>
   </nav>
 
 </section>
@@ -204,6 +235,14 @@
       <ul>
         
           <li>
+            <a href="/blog/2025/09/28/projectreactor-webflux/">Projectreactor &amp; Webflux</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2025/02/19/DNSCrypt/">DNSCrypt</a>
+          </li>
+        
+          <li>
             <a href="/blog/2024/05/19/windows/">Windows</a>
           </li>
         
@@ -213,14 +252,6 @@
         
           <li>
             <a href="/blog/2023/12/15/spring-boot-%E5%90%AF%E5%8A%A8%E8%BF%87%E7%A8%8B/">Spring Boot 启动过程</a>
-          </li>
-        
-          <li>
-            <a href="/blog/2022/04/25/Design-Underground-System/">Design Underground System</a>
-          </li>
-        
-          <li>
-            <a href="/blog/2022/04/25/Encode-and-Decode-TinyURL/">Encode and Decode TinyURL</a>
           </li>
         
       </ul>
@@ -244,7 +275,7 @@
   
   <div class="outer">
     <div id="footer-left">
-      &copy; 2016 - 2024 carl-zk<!--&nbsp;|&nbsp;
+      &copy; 2016 - 2025 carl-zk<!--&nbsp;|&nbsp;
       主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a> -->
     </div>
   

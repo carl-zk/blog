@@ -84,15 +84,15 @@
         <section id="main">
   
     <article
-  id="post-Fibonacci"
+  id="post-汉诺塔VII"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
 >
 
   <div class="article-meta">
-    <a href="/blog/2016/06/23/Fibonacci/" class="article-date">
-  <time datetime="2016-06-22T16:32:40.000Z" itemprop="datePublished">2016-06-23</time>
+    <a href="/blog/2016/06/23/%E6%B1%89%E8%AF%BA%E5%A1%94VII/" class="article-date">
+  <time datetime="2016-06-23T10:01:47.000Z" itemprop="datePublished">2016-06-23</time>
 </a>
     
   <div class="article-category">
@@ -106,7 +106,7 @@
       
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2016/06/23/Fibonacci/">Fibonacci</a>
+      <a class="article-title" href="/blog/2016/06/23/%E6%B1%89%E8%AF%BA%E5%A1%94VII/">汉诺塔VII</a>
     </h1>
   
 
@@ -115,26 +115,28 @@
     <div class="article-entry" itemprop="articleBody">
       
       <!-- Table of Contents -->
-       <p><a target="_blank" rel="noopener" href="http://acm.hdu.edu.cn/game/entry/problem/show.php?chapterid=2&sectionid=2&problemid=1">题目链接</a><br>Problem Description<br>2007年到来了。经过2006年一年的修炼，数学神童zouyu终于把0到100000000的Fibonacci数列<br>(f[0]&#x3D;0,f[1]&#x3D;1;f[i] &#x3D; f[i-1]+f<a href="i%3E=2">i-2</a>)的值全部给背了下来。<br>接下来，CodeStar决定要考考他，于是每问他一个数字，他就要把答案说出来，不过有的数字太长了。所以规定超过4位的只要说出前4位就可以了，可是CodeStar自己又记不住。于是他决定编写一个程序来测验zouyu说的是否正确。</p>
-<p>Input<br>输入若干数字n(0 &lt;&#x3D; n &lt;&#x3D; 100000000)，每个数字一行。读到文件尾。</p>
-<p>Output<br>输出f[n]的前4个数字（若不足4个数字，就全部输出）。</p>
-<p>Sample Input<br>0<br>1<br>2<br>3<br>4<br>5<br>35<br>36<br>37<br>38<br>39<br>40</p>
-<p>Sample Output<br>0<br>1<br>1<br>2<br>3<br>5<br>9227<br>1493<br>2415<br>3908<br>6324<br>1023</p>
-<hr />
+       <p><a target="_blank" rel="noopener" href="http://acm.hdu.edu.cn/game/entry/problem/show.php?chapterid=2&sectionid=2&problemid=3">题目链接</a><br>Problem Description<br>n个盘子的汉诺塔问题的最少移动次数是2^n-1,即在移动过程中会产生2^n个系列。由于发生错移产生的系列就增加了，这种错误是放错了柱子，并不会把大盘放到小盘上，即各柱子从下往上的大小仍保持如下关系 ：<br>n&#x3D;m+p+q<br>a1&gt;a2&gt;…&gt;am<br>b1&gt;b2&gt;…&gt;bp<br>c1&gt;c2&gt;…&gt;cq<br>ai是A柱上的盘的盘号系列，bi是B柱上的盘的盘号系列， ci是C柱上的盘的盘号系列，最初目标是将A柱上的n个盘子移到C盘. 给出1个系列，判断它是否是在正确的移动中产生的系列.<br>例1：n&#x3D;3<br>3<br>2<br>1<br>是正确的<br>例2：n&#x3D;3<br>3<br>1<br>2<br>是不正确的。<br>注：对于例2如果目标是将A柱上的n个盘子移到B盘. 则是正确的.</p>
+<p>Input<br>包含多组数据，首先输入T,表示有T组数据.每组数据4行，第1行N是盘子的数目N&lt;&#x3D;64.<br>后3行如下<br>m a1 a2 …am<br>p b1 b2 …bp<br>q c1 c2 …cq<br>N&#x3D;m+p+q,0&lt;&#x3D;m&lt;&#x3D;N,0&lt;&#x3D;p&lt;&#x3D;N,0&lt;&#x3D;q&lt;&#x3D;N,</p>
+<p>Output<br>对于每组数据，判断它是否是在正确的移动中产生的系列.正确输出true，否则false</p>
+<p>Sample Input<br>6<br>3<br>1 3<br>1 2<br>1 1<br>3<br>1 3<br>1 1<br>1 2<br>6<br>3 6 5 4<br>1 1<br>2 3 2<br>6<br>3 6 5 4<br>2 3 2<br>1 1<br>3<br>1 3<br>1 2<br>1 1<br>20<br>2 20 17<br>2 19 18<br>16 16 15 14 13 12 11 10 9 8 7 6 5 4 3 2 1</p>
+<p>Sample Output<br>true<br>false<br>false<br>false<br>true<br>true</p>
+<hr/>
 
-<p><a target="_blank" rel="noopener" href="http://blog.csdn.net/xh_reventon/article/details/8747670">参考链接</a></p>
-<blockquote>
-<p>Fibonacci的通项公式：<br><strong>F(n)&#x3D;(1&#x2F;√5)*[((1+√5)&#x2F;2)^n-((1-√5)&#x2F;2)^n]</strong>  ——————    (1)<br>(1-√5)&#x2F;2很小，所以当n大的时候，((1-√5)&#x2F;2)^n为0，可以忽律不计<br>可以通过打表得出前20项都是小于等于4位，直接输出。<br>后面通过取10的对数，然后去掉整数部分，然后取10的指数，取前四位即可</p>
-</blockquote>
-<blockquote>
-<p>F(n)可以写成 a<em>10^b, 对公式(1)取对数可得:<br>*<em>lga+b&#x3D;-lg√5-n</em>lg2(1+√5)&#x3D;t*</em><br>b是t的整数部分,即[t]<br>所以a &#x3D; 10^(t-[t]);</p>
-</blockquote>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;set&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> MAX 21</span></span><br><span class="line"></span><br><span class="line">using namespace <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* Fibonacci通项公式:</span></span><br><span class="line"><span class="comment">* F(n) = (1/√5)*[((1+√5)/2)^n-((1-√5)/2)^n]</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> a[MAX];</span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">double</span> sqrt5 = <span class="built_in">sqrt</span>(<span class="number">5</span>);</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">init</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    a[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">    a[<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">2</span>; i&lt;MAX; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        a[i] = a[i<span class="number">-1</span>]+a[i<span class="number">-2</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">fibonac</span><span class="params">(<span class="type">int</span> x)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">double</span> t,y;</span><br><span class="line">    t = -<span class="built_in">log10</span>(sqrt5) + <span class="built_in">log10</span>(<span class="number">0.5</span>+<span class="number">0.5</span>*sqrt5) * x;</span><br><span class="line">    y = <span class="built_in">pow</span>(<span class="number">10</span>, t - (<span class="type">long</span> <span class="type">long</span>)t);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, (<span class="type">int</span>)(y*<span class="number">1000</span>));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    init();</span><br><span class="line">    <span class="type">int</span> x;</span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;x)!=EOF)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(x&lt;<span class="number">21</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>,a[x]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            fibonac(x);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure> 
+<p>首先膜拜递归高手,无论是解题人还是出题人!</p>
+<p><img src="http://o6ibfi17w.bkt.clouddn.com/images/hannoi.png" loading="lazy"></p>
+<p>将盘子从A柱移到C柱:<br>最大值永远不可能出现在B柱.<br>当最大值在A柱时,其上的n-1个盘子正在经历从A—&gt;B的过程;<br>当最大值在C柱时,其上的n-1个盘子在经历从B—&gt;C的过程.</p>
+<p>解析:从图中可以看出,当最大值在A时,次大值不可能在C.当最大值在C时,次大值不可能在A.也就是意味着在整个过程中,次大值永远处在过渡柱子之上.如果你根据最大值是否在A或C上,然后再去比较次大值会发现,和上面的算法的递归是一模一样的.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;set&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> MAX 66</span></span><br><span class="line"></span><br><span class="line">using namespace <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="type">bool</span> <span class="title function_">hanoi</span><span class="params">(<span class="type">int</span> len, <span class="type">int</span> *A, <span class="type">int</span> *B, <span class="type">int</span> *C)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>(len == <span class="number">0</span>)<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">if</span>(B[<span class="number">0</span>] &amp;&amp; B[<span class="number">0</span>]==len)<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">if</span>(A[<span class="number">0</span>] &amp;&amp; A[<span class="number">0</span>] == len)     <span class="comment">//最大在a上</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> hanoi(len<span class="number">-1</span>, ++A, C, B);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> hanoi(len<span class="number">-1</span>, B, A, ++C);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> x, y, T;</span><br><span class="line">    <span class="type">int</span> a[MAX], n, alen, blen, clen;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;T);</span><br><span class="line">    <span class="keyword">while</span>(T--)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">memset</span>(a, <span class="number">0</span>, <span class="keyword">sizeof</span>(a));</span><br><span class="line">        x = <span class="number">0</span>;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;n);</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;alen);</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>; i&lt;alen; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;a[x++]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;blen);</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>; i&lt;blen; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;a[x++]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;clen);</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>; i&lt;clen; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;a[x++]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(hanoi(n, &amp;a[<span class="number">0</span>], &amp;a[alen], &amp;a[alen+blen]))</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;true\n&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;false\n&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="http://www.cnblogs.com/xuxueyang/p/4290930.html">参考链接</a></p>
+ 
     </div>
 
     <footer class="article-footer">
-      <!-- <a data-url="https://carl-zk.github.io/blog/2016/06/23/Fibonacci/" data-id="clwbvux4l001a64od5k154ldj" class="article-share-link">分享</a> -->
-       
+      <!-- <a data-url="https://carl-zk.github.io/blog/2016/06/23/%E6%B1%89%E8%AF%BA%E5%A1%94VII/" data-id="clwbvux5q00a864od9icwgjv9" class="article-share-link">分享</a> -->
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/%E9%80%92%E5%BD%92/" rel="tag">递归</a></li></ul>
+ 
       <div id="gitalk-container"></div>
        
 
@@ -184,7 +186,7 @@
 
 
   <nav id="page-nav">
-    <a class="extend prev" rel="prev" href="/blog/page/166/">&lt;&lt;上一页</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/165/">165</a><a class="page-number" href="/blog/page/166/">166</a><span class="page-number current">167</span><a class="page-number" href="/blog/page/168/">168</a><a class="page-number" href="/blog/page/169/">169</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/192/">192</a><a class="extend next" rel="next" href="/blog/page/168/">下一页&gt;&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/166/">&lt;&lt;上一页</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/165/">165</a><a class="page-number" href="/blog/page/166/">166</a><span class="page-number current">167</span><a class="page-number" href="/blog/page/168/">168</a><a class="page-number" href="/blog/page/169/">169</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/194/">194</a><a class="extend next" rel="next" href="/blog/page/168/">下一页&gt;&gt;</a>
   </nav>
 
 </section>
@@ -208,6 +210,14 @@
       <ul>
         
           <li>
+            <a href="/blog/2025/09/28/projectreactor-webflux/">Projectreactor &amp; Webflux</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2025/02/19/DNSCrypt/">DNSCrypt</a>
+          </li>
+        
+          <li>
             <a href="/blog/2024/05/19/windows/">Windows</a>
           </li>
         
@@ -217,14 +227,6 @@
         
           <li>
             <a href="/blog/2023/12/15/spring-boot-%E5%90%AF%E5%8A%A8%E8%BF%87%E7%A8%8B/">Spring Boot 启动过程</a>
-          </li>
-        
-          <li>
-            <a href="/blog/2022/04/25/Design-Underground-System/">Design Underground System</a>
-          </li>
-        
-          <li>
-            <a href="/blog/2022/04/25/Encode-and-Decode-TinyURL/">Encode and Decode TinyURL</a>
           </li>
         
       </ul>
@@ -248,7 +250,7 @@
   
   <div class="outer">
     <div id="footer-left">
-      &copy; 2016 - 2024 carl-zk<!--&nbsp;|&nbsp;
+      &copy; 2016 - 2025 carl-zk<!--&nbsp;|&nbsp;
       主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a> -->
     </div>
   

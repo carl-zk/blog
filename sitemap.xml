@@ -2,15 +2,27 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://carl-zk.github.io/blog/2017/05/09/Bash-Script%E5%AD%A6%E4%B9%A0/</loc>
-    <title>Bash Script学习</title>
-    <date>2017-05-09T14:58:50.000Z</date>
+    <loc>https://carl-zk.github.io/blog/2025/09/28/projectreactor-webflux/</loc>
+    <title>Projectreactor & Webflux</title>
+    <date>2025-09-28T13:52:25.000Z</date>
   </url>
   
   <url>
     <loc>https://carl-zk.github.io/blog/2024/05/19/windows/</loc>
     <title>Windows</title>
     <date>2024-05-19T04:04:23.000Z</date>
+  </url>
+  
+  <url>
+    <loc>https://carl-zk.github.io/blog/2025/02/19/DNSCrypt/</loc>
+    <title>DNSCrypt</title>
+    <date>2025-02-19T15:57:20.000Z</date>
+  </url>
+  
+  <url>
+    <loc>https://carl-zk.github.io/blog/2017/05/09/Bash-Script%E5%AD%A6%E4%B9%A0/</loc>
+    <title>Bash Script学习</title>
+    <date>2017-05-09T14:58:50.000Z</date>
   </url>
   
   <url>

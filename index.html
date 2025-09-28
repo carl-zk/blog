@@ -84,21 +84,17 @@
         <section id="main">
   
     <article
-  id="post-windows"
+  id="post-projectreactor-webflux"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
 >
 
   <div class="article-meta">
-    <a href="/blog/2024/05/19/windows/" class="article-date">
-  <time datetime="2024-05-19T04:04:23.000Z" itemprop="datePublished">2024-05-19</time>
+    <a href="/blog/2025/09/28/projectreactor-webflux/" class="article-date">
+  <time datetime="2025-09-28T13:52:25.000Z" itemprop="datePublished">2025-09-28</time>
 </a>
     
-  <div class="article-category">
-    <a class="article-category-link" href="/blog/categories/%E7%B3%BB%E7%BB%9F%E9%85%8D%E7%BD%AE/">系统配置</a>
-  </div>
-
   </div>
   <div class="article-inner">
      
@@ -106,7 +102,7 @@
       
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2024/05/19/windows/">Windows</a>
+      <a class="article-title" href="/blog/2025/09/28/projectreactor-webflux/">Projectreactor &amp; Webflux</a>
     </h1>
   
 
@@ -115,21 +111,162 @@
     <div class="article-entry" itemprop="articleBody">
       
       <!-- Table of Contents -->
-       <h2 id="software"><a href="#software" class="headerlink" title="software"></a>software</h2><h3 id="PowerToys"><a href="#PowerToys" class="headerlink" title="PowerToys"></a><a target="_blank" rel="noopener" href="https://learn.microsoft.com/en-us/windows/powertoys/">PowerToys</a></h3><p><img src="/blog/2024/05/19/windows/powertoys.png" loading="lazy"></p>
-<h3 id="LightShot-截图工具-or-snipaste"><a href="#LightShot-截图工具-or-snipaste" class="headerlink" title="LightShot 截图工具 or snipaste"></a><a target="_blank" rel="noopener" href="https://app.prntscr.com/en/">LightShot 截图工具</a> or <a target="_blank" rel="noopener" href="https://www.snipaste.com/">snipaste</a></h3><h3 id="coreDNS"><a href="#coreDNS" class="headerlink" title="coreDNS"></a><a target="_blank" rel="noopener" href="https://coredns.io/">coreDNS</a></h3><p><img src="/blog/2024/05/19/windows/coreDNS.png" loading="lazy"><br><a href="/blog/2024/05/19/windows/Corefile">Corefile</a><br><a href="/blog/2024/05/19/windows/my-core-dns-service.xml">my-core-dns-service.xml</a><br><a target="_blank" rel="noopener" href="https://github.com/winsw/winsw">winSW</a><br>检查一下 <code>nslookup example.com 127.0.0.1</code><br>改WiFi的dns：<br><img src="/blog/2024/05/19/windows/wifi.png" loading="lazy"></p>
-<h3 id="v2rayN"><a href="#v2rayN" class="headerlink" title="v2rayN"></a><a target="_blank" rel="noopener" href="https://github.com/2dust/v2rayN">v2rayN</a></h3><p><img src="/blog/2024/05/19/windows/v2rayN.png" loading="lazy"></p>
-<h3 id="JDownloader2"><a href="#JDownloader2" class="headerlink" title="JDownloader2"></a><a target="_blank" rel="noopener" href="https://jdownloader.org/download/index">JDownloader2</a></h3><p><img src="/blog/2024/05/19/windows/JDownloader2.png" loading="lazy"></p>
-<h3 id="qbittorrent"><a href="#qbittorrent" class="headerlink" title="qbittorrent"></a><a target="_blank" rel="noopener" href="https://www.qbittorrent.org/download">qbittorrent</a></h3><h3 id="Twinkle-Tray"><a href="#Twinkle-Tray" class="headerlink" title="Twinkle Tray"></a><a target="_blank" rel="noopener" href="https://twinkletray.com/">Twinkle Tray</a></h3><h3 id="荐片高清影音"><a href="#荐片高清影音" class="headerlink" title="荐片高清影音"></a><a target="_blank" rel="noopener" href="https://www.jianpian8.co/">荐片高清影音</a></h3><h3 id="potplayer"><a href="#potplayer" class="headerlink" title="potplayer"></a><a target="_blank" rel="noopener" href="https://potplayer.tv/?lang=zh_CN">potplayer</a></h3><h3 id="cudaText"><a href="#cudaText" class="headerlink" title="cudaText"></a><a target="_blank" rel="noopener" href="https://cudatext.github.io/">cudaText</a></h3><p><code>ctr-shift-p</code></p>
-<h3 id="hhkb-Keymap-Tool"><a href="#hhkb-Keymap-Tool" class="headerlink" title="hhkb Keymap Tool"></a><a target="_blank" rel="noopener" href="https://happyhackingkb.com/download/">hhkb Keymap Tool</a></h3><h3 id="ssh"><a href="#ssh" class="headerlink" title="ssh"></a>ssh</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">ssh 配置 client 无密码登录</span><br><span class="line"></span><br><span class="line">远程主机中：</span><br><span class="line"><span class="built_in">cd</span> .ssh // 没有就执行 ssh-keygen</span><br><span class="line">vi authorized_keys</span><br><span class="line">将id_rsa.pub复制进去</span><br><span class="line"><span class="built_in">chmod</span> 600 authorized_keys</span><br><span class="line"></span><br><span class="line">本地：</span><br><span class="line"><span class="built_in">cd</span> .ssh</span><br><span class="line">vi config</span><br><span class="line">Host hostA //名字随便起</span><br><span class="line">  Hostname ip</span><br><span class="line">  Port 22</span><br><span class="line">  User xx</span><br><span class="line">  ServerAliveInterval 120 //每2分钟发一个空包，保持连接用的</span><br><span class="line">  ServerAliveCountMax 5 //5次收不到服务端响应就断开</span><br><span class="line">Host * // *匹配所有</span><br><span class="line">  Port 22</span><br><span class="line">  ServerAliveInterval 120 //每2分钟发一个空包，保持连接用的</span><br><span class="line">  ServerAliveCountMax 5 //5次收不到服务端响应就断开</span><br><span class="line">  </span><br><span class="line">使用：</span><br><span class="line">ssh hostA</span><br><span class="line"></span><br><span class="line">帮助：</span><br><span class="line">man ssh_conifg</span><br></pre></td></tr></table></figure>
+       <h1 id="reactor"><a href="#reactor" class="headerlink" title="reactor"></a>reactor</h1><table>
+<thead>
+<tr>
+<th>Aspect</th>
+<th><code>generate</code> (sync)</th>
+<th><code>push</code> (async, single thread)</th>
+<th><code>create</code> (async, multi-thread)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Emission style</strong></td>
+<td><strong>Pull</strong> (one item per request)</td>
+<td><strong>Push</strong> (producer pushes items)</td>
+<td><strong>Push</strong> (producer pushes items)</td>
+</tr>
+<tr>
+<td><strong>Concurrency</strong></td>
+<td>Always single-threaded, synchronous</td>
+<td>Single-thread only</td>
+<td>Multi-thread allowed</td>
+</tr>
+<tr>
+<td><strong>Backpressure</strong></td>
+<td>Native: generator runs only on demand</td>
+<td>Needs overflow strategy if fast producer</td>
+<td>Needs overflow strategy if fast producer</td>
+</tr>
+<tr>
+<td><strong>Use case</strong></td>
+<td>Generate values step by step, state machine</td>
+<td>Event listener, single-thread producer</td>
+<td>Multi-threaded sources, complex bridging</td>
+</tr>
+</tbody></table>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">Flux&lt;Integer&gt; flux = Flux.generate(</span><br><span class="line">    () -&gt; <span class="number">0</span>,  <span class="comment">// initial state</span></span><br><span class="line">    (state, sink) -&gt; &#123;</span><br><span class="line">        sink.next(state);</span><br><span class="line">        <span class="keyword">if</span> (state == <span class="number">5</span>) sink.complete();</span><br><span class="line">        <span class="keyword">return</span> state + <span class="number">1</span>; <span class="comment">// next state</span></span><br><span class="line">    &#125;</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Flux&lt;String&gt; flux = Flux.push(sink -&gt; &#123;</span><br><span class="line">    someListener.onMessage(msg -&gt; sink.next(msg));</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Flux&lt;String&gt; flux = Flux.create(sink -&gt; &#123;</span><br><span class="line">    <span class="keyword">new</span> <span class="title class_">Thread</span>(() -&gt; &#123;</span><br><span class="line">        sink.next(<span class="string">&quot;A&quot;</span>);</span><br><span class="line">        sink.next(<span class="string">&quot;B&quot;</span>);</span><br><span class="line">        sink.complete();</span><br><span class="line">    &#125;).start();</span><br><span class="line">&#125;, FluxSink.OverflowStrategy.BUFFER);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-<p>other optional utils:<br><a target="_blank" rel="noopener" href="https://www.putty.org/">PuTTY</a><br><a target="_blank" rel="noopener" href="https://mremoteng.org/">mRemoteNG</a></p>
-<h2 id="local"><a href="#local" class="headerlink" title="local"></a>local</h2><p><a target="_blank" rel="noopener" href="https://adoptium.net/temurin/releases/?os=windows">openJDK</a><br><a target="_blank" rel="noopener" href="https://www.eclipse.org/downloads/packages/">eclipse</a><br><a href="/blog/2024/05/19/windows/eclipse_preferences.epf">eclipse_preferences.epf</a><br><a href="/blog/2024/05/19/windows/settings.xml">settings.xml</a><br><a href="/blog/2024/05/19/windows/RainbowDrops.xml">RainbowDrops.xml</a><br><img src="/blog/2024/05/19/windows/eclipse.png" loading="lazy"></p>
-<h2 id="dns-over-https"><a href="#dns-over-https" class="headerlink" title="dns over https"></a>dns over https</h2><p><a target="_blank" rel="noopener" href="https://doh.libredns.gr/noads">https://doh.libredns.gr/noads</a><br><a target="_blank" rel="noopener" href="https://dns.quad9.net/dns-query">https://dns.quad9.net/dns-query</a></p>
+<blockquote>
+<p><strong>Rule of Thumb</strong><br>Use Flux.generate when you want a pull-based, synchronous generator (like a lazy sequence, state machine, or random number generator).<br>Use Flux.push&#x2F;create when you want to adapt to an external asynchronous source (like callbacks, listeners, or multiple threads producing data).</p>
+</blockquote>
+<h1 id="webflux"><a href="#webflux" class="headerlink" title="webflux"></a>webflux</h1><p>🟢 Cold, synchronous sources (run on caller thread, usually the subscriber’s thread)</p>
+<p>These methods execute inline on the same thread that subscribes, unless moved:</p>
+<p>Mono.just(…), Flux.just(…)</p>
+<p>Mono.empty(), Flux.empty()</p>
+<p>Mono.error(…), Flux.error(…)</p>
+<p>Flux.range(…), Flux.fromIterable(…), Flux.fromArray(…)</p>
+<p>Mono.fromSupplier(…) (evaluates lazily but still on caller thread)</p>
+<p>Mono.fromCallable(…)</p>
+<p>Flux.defer(…), Mono.defer(…)</p>
+<p>👉 By default: No background thread, execution happens immediately when subscribed.</p>
+<h2 id="thread-model"><a href="#thread-model" class="headerlink" title="thread model"></a>thread model</h2><p>default WebFlux app on Netty:</p>
+<ul>
+<li>Boss threads: 1</li>
+<li>Worker (event loop) threads: 2 * cpu</li>
+<li>Reactor Scheduler available:<ul>
+<li>paraller: cpu</li>
+<li>boundedElastic: 10 * cpu -&gt; 1000+</li>
+<li>timer: cpu (independent scheduler, never run user code directly, wraped a ScheduledExecutorService)</li>
+<li>single: 1</li>
+<li>immediate: 0 (just current thread)</li>
+</ul>
+</li>
+</ul>
+<p><strong>Best Practices</strong></p>
+<ul>
+<li><p><strong>Pure reactive stack (WebClient, R2DBC, reactive Mongo, etc.):</strong><br>  → stay on Netty event loop, no scheduler needed.</p>
+</li>
+<li><p><strong>Blocking APIs (JDBC, legacy SDKs, file IO):</strong><br>  → wrap with Mono.fromCallable(…).subscribeOn(Schedulers.boundedElastic()).</p>
+</li>
+<li><p><strong>Heavy CPU tasks (compression, JSON parsing, crypto):</strong><br>  → offload with publishOn(Schedulers.parallel()).</p>
+</li>
+<li><p><strong>Global customization</strong> (rarely needed): adjust Netty loop threads for connection-heavy apps, or override boundedElastic size for blocking-heavy apps.</p>
+</li>
+</ul>
+<p>why heavy cpu tasks, not io tasks, cauz netty born for heavy sockets tasks, it’s non-block at all.</p>
+<p>io tasks not to be block tasks for netty, don’t equal to them. even if there’s no io, it still could be a block task, e.g. <code>Thread.sleep(5000)</code> is a block task, forbidden running on event loop.</p>
+<hr>
+<p>🟡 Asynchronous sources (use a Reactor scheduler by default)</p>
+<p>These spawn work on an internal boundedElastic or parallel thread pool:</p>
+<p>Mono.delay(Duration) → Schedulers.parallel()</p>
+<p>Flux.interval(Duration) → Schedulers.parallel()</p>
+<p>Mono.fromRunnable(…), Mono.fromFuture(…), Mono.fromCompletionStage(…)</p>
+<p>If future already completed → current thread</p>
+<p>If not → completion thread (depends on upstream executor&#x2F;future, not Reactor itself)</p>
+<p>👉 By default: don’t run on subscriber thread, Reactor chooses.</p>
+<hr>
+<p>🔵 Blocking bridge operators (force boundedElastic by default)</p>
+<p>Reactor assumes blocking I&#x2F;O → runs on Schedulers.boundedElastic() unless you change:</p>
+<p>Mono.fromCallable(blockingFn).subscribeOn(Schedulers.boundedElastic()) (best practice)</p>
+<p>Mono.block() &#x2F; Flux.blockFirst() &#x2F; Flux.blockLast() (blocking the caller thread)</p>
+<p>Operators like flatMap with blocking calls must be explicitly shifted to boundedElastic.</p>
+<hr>
+<p>🔴 Thread-affecting operators (don’t run anything themselves but change execution)</p>
+<p>publishOn(Scheduler) → switches downstream execution thread</p>
+<p>subscribeOn(Scheduler) → changes the context where subscription and upstream happen</p>
+<hr>
+<p>⚪ Context-dependent sources</p>
+<p>Some methods inherit threads from external APIs:</p>
+<p>Flux.create(…) or Mono.create(…) → depends on how you emit (<code>caller thread</code> or async callback thread)</p>
+<p>Flux.push(…) → same, depends on emitter thread</p>
+<p>Flux.generate(…) → runs on <code>subscriber thread</code> unless you schedule</p>
+<blockquote>
+<p>✅ Quick rule of thumb<br>“Pure data” operators (just, range, fromIterable) → run on subscriber thread.<br>“Timed” operators (delay, interval) → run on Reactor’s parallel scheduler.<br>“Bridges to blocking&#x2F;async world” (fromCallable, fromFuture) → run on caller’s thread or boundedElastic&#x2F;foreign executor, unless you move them.<br>Schedulers (publishOn, subscribeOn) are the only way to force thread switch.</p>
+</blockquote>
+<p><em><strong>caller thread &#x3D; initiator of subscription, subscriber thread &#x3D; executor of signals.</strong></em></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">flux.publishOn(Schedulers.parallel())</span><br><span class="line">    .subscribe(i -&gt; System.out.println(<span class="string">&quot;sub: &quot;</span> + i + <span class="string">&quot; on &quot;</span> + Thread.currentThread().getName()));</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>caller thread &#x3D; main</li>
+<li>subscriber thread &#x3D; parallel-1</li>
+<li>Mapping still happens on ‘parallel-1’ because of <code>publishOn</code></li>
+</ul>
+<h3 id="think-about"><a href="#think-about" class="headerlink" title="think about"></a>think about</h3><p>🔹 Two philosophies</p>
+<ol>
+<li>Operators&#x2F;methods decide their scheduler (local responsibility)</li>
+</ol>
+<p>You sprinkle .subscribeOn(…) or .publishOn(…) inside every method that returns a Mono&#x2F;Flux.</p>
+<p>Pros:<br>The method guarantees safe execution (e.g., offloading a blocking call to boundedElastic).<br>Callers don’t need to know the implementation details (e.g., that it does blocking JDBC work).<br>Cons:<br>You lose flexibility: the caller cannot override your scheduler easily.<br>If multiple methods apply .subscribeOn(…), only the first one in the chain wins (because subscribeOn only affects upstream).<br>Can lead to confusion if one method hides threading decisions.</p>
+<ol start="2">
+<li>Caller decides (central responsibility)</li>
+</ol>
+<p>Your methods just describe the pipeline (Mono.just, map, flatMap, etc.) with no scheduler hints.<br>The caller (e.g., controller or service entry point) applies subscribeOn &#x2F; publishOn.</p>
+<p>Pros:<br>Clean separation of concerns: methods remain pure, deterministic pipelines.<br>Caller has full control of threading policy.<br>Easy to test synchronously (no schedulers in unit tests unless you want them).<br>Cons:<br>Risk: if a method does blocking work (e.g., JDBC, file IO, legacy API), caller must remember to schedule it properly, or it will block Netty&#x2F;event loop.</p>
+<p>🔹 Rule of Thumb</p>
+<p>👉 Don’t sprinkle subscribeOn everywhere.</p>
+<p>If your method is purely non-blocking&#x2F;reactive (using Reactor operators, R2DBC, WebClient, etc.):<br>❌ Do not configure a scheduler. Let the caller decide.</p>
+<p>If your method wraps blocking code (JDBC, file IO, legacy API, etc.):<br>✅ Apply subscribeOn(Schedulers.boundedElastic()) inside the method — because you must protect the Netty event loop.</p>
+<p>This way:</p>
+<p>Non-blocking pipelines remain transparent and flexible.<br>Blocking bridges are safe by default, without relying on the caller’s discipline.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ✅ Non-blocking service, no scheduler</span></span><br><span class="line">Mono&lt;User&gt; <span class="title function_">getUserReactive</span><span class="params">(String id)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> webClient.get()</span><br><span class="line">        .uri(<span class="string">&quot;/users/&#123;id&#125;&quot;</span>, id)</span><br><span class="line">        .retrieve()</span><br><span class="line">        .bodyToMono(User.class);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// ✅ Blocking service, safe by default</span></span><br><span class="line">Mono&lt;User&gt; <span class="title function_">getUserBlocking</span><span class="params">(String id)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> Mono.fromCallable(() -&gt; jdbcTemplate.queryForObject(<span class="string">&quot;...&quot;</span>, User.class, id))</span><br><span class="line">               .subscribeOn(Schedulers.boundedElastic());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Caller:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Controller - doesn&#x27;t care about threading for reactive code</span></span><br><span class="line">getUserReactive(<span class="string">&quot;123&quot;</span>)</span><br><span class="line">    .map(<span class="built_in">this</span>::transform)</span><br><span class="line">    .subscribe();</span><br><span class="line"></span><br><span class="line"><span class="comment">// Blocking call is already protected by boundedElastic internally</span></span><br><span class="line">getUserBlocking(<span class="string">&quot;123&quot;</span>)</span><br><span class="line">    .map(<span class="built_in">this</span>::transform)</span><br><span class="line">    .subscribe();</span><br></pre></td></tr></table></figure>
+
+<p>✅ Best practice summary</p>
+<p>Non-blocking methods: don’t set subscribeOn.<br>Blocking methods: always set subscribeOn(Schedulers.boundedElastic()) inside the method.<br>At the top level (controllers, pipelines): only add publishOn&#x2F;subscribeOn when you need explicit control over where downstream operators run.</p>
+<p>define custom schedulers</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> reactor.core.scheduler.Scheduler;</span><br><span class="line"><span class="keyword">import</span> reactor.core.scheduler.Schedulers;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.Executors;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.ThreadFactory;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.ExecutorService;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">CustomSchedulers</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// CPU-heavy tasks: non-blocking, parallel computation</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">Scheduler</span> <span class="variable">CPU_SCHEDULER</span> <span class="operator">=</span> Schedulers.newParallel(</span><br><span class="line">            <span class="string">&quot;cpu-pool&quot;</span>,  <span class="comment">// thread name prefix</span></span><br><span class="line">            Runtime.getRuntime().availableProcessors()</span><br><span class="line">    );</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Blocking / IO-heavy tasks: e.g., DB, file I/O, network calls</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">int</span> <span class="variable">IO_POOL_SIZE</span> <span class="operator">=</span> <span class="number">50</span>;  <span class="comment">// adjust based on load</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">ExecutorService</span> <span class="variable">ioExecutor</span> <span class="operator">=</span> Executors.newFixedThreadPool(</span><br><span class="line">            IO_POOL_SIZE,</span><br><span class="line">            <span class="keyword">new</span> <span class="title class_">ThreadFactory</span>() &#123;</span><br><span class="line">                <span class="keyword">private</span> <span class="type">int</span> <span class="variable">count</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">                <span class="meta">@Override</span></span><br><span class="line">                <span class="keyword">public</span> Thread <span class="title function_">newThread</span><span class="params">(Runnable r)</span> &#123;</span><br><span class="line">                    <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Thread</span>(r, <span class="string">&quot;io-pool-&quot;</span> + count++);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">    );</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">Scheduler</span> <span class="variable">IO_SCHEDULER</span> <span class="operator">=</span> Schedulers.fromExecutorService(ioExecutor);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Cleanup on shutdown</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">shutdown</span><span class="params">()</span> &#123;</span><br><span class="line">        CPU_SCHEDULER.dispose();</span><br><span class="line">        IO_SCHEDULER.dispose();</span><br><span class="line">        ioExecutor.shutdown();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="methods-usage"><a href="#methods-usage" class="headerlink" title="methods usage"></a>methods usage</h1><h2 id="defer-amp-interval"><a href="#defer-amp-interval" class="headerlink" title="defer &amp; interval"></a>defer &amp; interval</h2><p><code>defer</code> is like a provider in spring, when inject a provider: () -&gt; new Instance() instead a : new Instance() itself.<br>it <strong>create a new Mono for every subscription</strong> by invoking the supplier lazily.</p>
+<p>say we need a loop call, </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> Mono&lt;String&gt; <span class="title function_">pollUntilJson</span><span class="params">(String path)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> Mono.defer(() -&gt;</span><br><span class="line">                webClient.get()</span><br><span class="line">                         .uri(path)</span><br><span class="line">                         .retrieve()</span><br><span class="line">                         .bodyToMono(String.class)</span><br><span class="line">        ).flatMap(body -&gt; &#123;</span><br><span class="line">            <span class="keyword">if</span> (!body.isEmpty() &amp;&amp; body.trim().startsWith(<span class="string">&quot;&#123;&quot;</span>)) &#123;</span><br><span class="line">                <span class="keyword">return</span> Mono.just(body); <span class="comment">// ✅ Got JSON, finish</span></span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">return</span> Mono.delay(Duration.ofSeconds(<span class="number">1</span>)) <span class="comment">// delay create a non-blocking timer, so reactor will schedules it on a reactor timer, not a thread sleep.</span></span><br><span class="line">                           .then(pollUntilJson(path)); <span class="comment">// each time, we make a fresh call, not reuse the first mono which we don&#x27;t want to.</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125; <span class="comment">// since webclient is non-blocking, we don&#x27;t need a subscribeOn(boundedElastic()).</span></span><br></pre></td></tr></table></figure>
+
+<p>alternatives to delay</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Flux.interval(Duration.ofSeconds(<span class="number">1</span>))</span><br><span class="line">    .flatMap(tick -&gt;</span><br><span class="line">        webClient.get().uri(path).retrieve().bodyToMono(String.class)</span><br><span class="line">    )</span><br><span class="line">    .filter(body -&gt; isJson(body)) <span class="comment">// </span></span><br><span class="line">    .next(); <span class="comment">// take the first JSON result</span></span><br></pre></td></tr></table></figure>
+
+<p>or exponential backoff way</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Mono.defer(() -&gt; webClient.get().uri(path).retrieve().bodyToMono(String.class))</span><br><span class="line">    .filter(<span class="built_in">this</span>::isJson)</span><br><span class="line">    .retryWhen(Retry.backoff(<span class="number">10</span>, Duration.ofSeconds(<span class="number">1</span>)));</span><br></pre></td></tr></table></figure>
+
+
+
+
  
     </div>
 
     <footer class="article-footer">
-      <!-- <a data-url="https://carl-zk.github.io/blog/2024/05/19/windows/" data-id="clwd0js4g0000fcod4jy93vkh" class="article-share-link">分享</a> -->
+      <!-- <a data-url="https://carl-zk.github.io/blog/2025/09/28/projectreactor-webflux/" data-id="cmg3red5400001kodcaathy97" class="article-share-link">分享</a> -->
        
       <div id="gitalk-container"></div>
        
@@ -180,7 +317,7 @@
 
 
   <nav id="page-nav">
-    <span class="page-number current">1</span><a class="page-number" href="/blog/page/2/">2</a><a class="page-number" href="/blog/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/192/">192</a><a class="extend next" rel="next" href="/blog/page/2/">下一页&gt;&gt;</a>
+    <span class="page-number current">1</span><a class="page-number" href="/blog/page/2/">2</a><a class="page-number" href="/blog/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/194/">194</a><a class="extend next" rel="next" href="/blog/page/2/">下一页&gt;&gt;</a>
   </nav>
 
 </section>
@@ -237,6 +374,14 @@
       <ul>
         
           <li>
+            <a href="/blog/2025/09/28/projectreactor-webflux/">Projectreactor &amp; Webflux</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2025/02/19/DNSCrypt/">DNSCrypt</a>
+          </li>
+        
+          <li>
             <a href="/blog/2024/05/19/windows/">Windows</a>
           </li>
         
@@ -248,14 +393,6 @@
             <a href="/blog/2023/12/15/spring-boot-%E5%90%AF%E5%8A%A8%E8%BF%87%E7%A8%8B/">Spring Boot 启动过程</a>
           </li>
         
-          <li>
-            <a href="/blog/2022/04/25/Design-Underground-System/">Design Underground System</a>
-          </li>
-        
-          <li>
-            <a href="/blog/2022/04/25/Encode-and-Decode-TinyURL/">Encode and Decode TinyURL</a>
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -265,7 +402,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title archive">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2024/05/">五月 2024</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/12/">十二月 2023</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/04/">四月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/01/">一月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2021/04/">四月 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2021/03/">三月 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/11/">十一月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/09/">九月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/08/">八月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/07/">七月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/03/">三月 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/02/">二月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/01/">一月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2019/06/">六月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2019/05/">五月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2019/04/">四月 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2019/03/">三月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2019/02/">二月 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2018/11/">十一月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2018/10/">十月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2018/09/">九月 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2018/08/">八月 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2018/05/">五月 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2018/04/">四月 2018</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2018/03/">三月 2018</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2018/01/">一月 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/12/">十二月 2017</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/11/">十一月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/10/">十月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/09/">九月 2017</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/08/">八月 2017</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/06/">六月 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/05/">五月 2017</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/04/">四月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/03/">三月 2017</a><span class="archive-list-count">17</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/02/">二月 2017</a><span class="archive-list-count">32</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2016/12/">十二月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2016/07/">七月 2016</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2016/06/">六月 2016</a><span class="archive-list-count">42</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2025/09/">九月 2025</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2025/02/">二月 2025</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2024/05/">五月 2024</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/12/">十二月 2023</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/04/">四月 2022</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/01/">一月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2021/04/">四月 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2021/03/">三月 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/11/">十一月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/09/">九月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/08/">八月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/07/">七月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/03/">三月 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/02/">二月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/01/">一月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2019/06/">六月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2019/05/">五月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2019/04/">四月 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2019/03/">三月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2019/02/">二月 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2018/11/">十一月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2018/10/">十月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2018/09/">九月 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2018/08/">八月 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2018/05/">五月 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2018/04/">四月 2018</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2018/03/">三月 2018</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2018/01/">一月 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/12/">十二月 2017</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/11/">十一月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/10/">十月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/09/">九月 2017</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/08/">八月 2017</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/06/">六月 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/05/">五月 2017</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/04/">四月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/03/">三月 2017</a><span class="archive-list-count">17</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/02/">二月 2017</a><span class="archive-list-count">32</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2016/12/">十二月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2016/07/">七月 2016</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2016/06/">六月 2016</a><span class="archive-list-count">42</span></li></ul>
     </div>
   </div>
 
@@ -312,7 +449,7 @@
   
   <div class="outer">
     <div id="footer-left">
-      &copy; 2016 - 2024 carl-zk<!--&nbsp;|&nbsp;
+      &copy; 2016 - 2025 carl-zk<!--&nbsp;|&nbsp;
       主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a> -->
     </div>
   

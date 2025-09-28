@@ -84,15 +84,15 @@
         <section id="main">
   
     <article
-  id="post-The-3n-1-problem"
+  id="post-万进制"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
 >
 
   <div class="article-meta">
-    <a href="/blog/2016/07/04/The-3n-1-problem/" class="article-date">
-  <time datetime="2016-07-04T03:06:31.000Z" itemprop="datePublished">2016-07-04</time>
+    <a href="/blog/2016/07/07/%E4%B8%87%E8%BF%9B%E5%88%B6/" class="article-date">
+  <time datetime="2016-07-06T17:20:06.000Z" itemprop="datePublished">2016-07-07</time>
 </a>
     
   <div class="article-category">
@@ -106,7 +106,7 @@
       
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2016/07/04/The-3n-1-problem/">The 3n + 1 Problem</a>
+      <a class="article-title" href="/blog/2016/07/07/%E4%B8%87%E8%BF%9B%E5%88%B6/">万进制</a>
     </h1>
   
 
@@ -115,50 +115,25 @@
     <div class="article-entry" itemprop="articleBody">
       
       <!-- Table of Contents -->
-       <p><a target="_blank" rel="noopener" href="http://acm.hdu.edu.cn/showproblem.php?pid=1032">题目链接</a><br>Problem Description<br>Problems in Computer Science are often classified as belonging to a certain class of problems (e.g., NP, Unsolvable, Recursive). In this problem you will be analyzing a property of an algorithm whose classification is not known for all possible inputs.</p>
-<p>Consider the following algorithm T: </p>
-<pre><code>1.      input n
-
-2.      print n
-
-3.      if n = 1 then STOP
-
-4.           if n is odd then n &lt;- 3n + 1
-
-5.           else n &lt;- n / 2
-
-6.      GOTO 2
-</code></pre>
-<p>Given the input 22, the following sequence of numbers will be printed 22 11 34 17 52 26 13 40 20 10 5 16 8 4 2 1 </p>
-<p>It is conjectured that the algorithm above will terminate (when a 1 is printed) for any integral input value. Despite the simplicity of the algorithm, it is unknown whether this conjecture is true. It has been verified, however, for all integers n such that 0 &lt; n &lt; 1,000,000 (and, in fact, for many more numbers than this.) </p>
-<p>Given an input n, it is possible to determine the number of numbers printed (including the 1). For a given n this is called the cycle-length of n. In the example above, the cycle length of 22 is 16. </p>
-<p>For any two numbers i and j you are to determine the maximum cycle length over all numbers between i and j. </p>
-<p>Input<br>The input will consist of a series of pairs of integers i and j, one pair of integers per line. All integers will be less than 1,000,000 and greater than 0. </p>
-<p>You should process all pairs of integers and for each pair determine the maximum cycle length over all integers between and including i and j. </p>
-<p>You can assume that no opperation overflows a 32-bit integer.</p>
-<p>Output<br>For each pair of input integers i and j you should output i, j, and the maximum cycle length for integers between and including i and j. These three numbers should be separated by at least one space with all three numbers on one line and with one line of output for each line of input. The integers i and j must appear in the output in the same order in which they appeared in the input and should be followed by the maximum cycle length (on the same line). </p>
-<p>Sample Input<br>1 10<br>100 200<br>201 210<br>900 1000</p>
-<p>Sample Output<br>1 10 20<br>100 200 125<br>201 210 89<br>900 1000 174</p>
-<p>整数n按照给定算法T会得到一个数列.求两个整数间最长数列的长度.</p>
+       <p><a target="_blank" rel="noopener" href="http://acm.hdu.edu.cn/showproblem.php?pid=1041">题目链接</a></p>
+<p>Computer Transformation</p>
+<p>Problem Description<br>A sequence consisting of one digit, the number 1 is initially written into a computer. At each successive time step, the computer simultaneously tranforms each digit 0 into the sequence 1 0 and each digit 1 into the sequence 0 1. So, after the first time step, the sequence 0 1 is obtained; after the second, the sequence 1 0 0 1, after the third, the sequence 0 1 1 0 1 0 0 1 and so on. </p>
+<p>How many pairs of consequitive zeroes will appear in the sequence after n steps? </p>
+<p>Input<br>Every input line contains one natural number n (0 &lt; n ≤1000).</p>
+<p>Output<br>For each input n print the number of consecutive zeroes pairs that will appear in the sequence after n steps.</p>
+<p>Sample Input<br>2<br>3</p>
+<p>Sample Output<br>1<br>1</p>
+<p>计算机会把数字1转换为01,把0转换为10,初始时数组中只有1.所以执行第1次后数组变成01,第2次变成1001,以此类推.问执行到第n步时有几对连续的00存在.</p>
 <hr/>
-主要是用到了记录计算结果.a[i]是整数为i时数列的长度.
-如:n=6时,则数列是6,3,10,5,16,8,4,2,1.会有
-a[6] = a[3] + 1.
-a[3] = a[10] + 1.
-a[10] = a[5] + 1.
-a[5] = a[16] + 1.
-a[16] = a[8] + 1.
-a[8] = a[4] + 1.
-a[4] = a[2] + 1.
-a[2] = a[1] + 1.
-a[1] = 1. 
-题目中埋的坑是输入的两个整数不是从小到大的,需要做比较,而当输出时,是按照输入的顺序.
+这道题属于大数处理,基本上规律是很容易得到的.做了两道,就贴这一道留个纪念.
+这里是每10000进1,即传说中的万进制.计算时要注意余数用后清零.打印时高位补0.
+f[k] = f[k-1] + 2 * f[k-2] 
 
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;list&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;set&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stack&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> MAX 1000010</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> INF 1&lt;&lt;20</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> TEST</span></span><br><span class="line"></span><br><span class="line">using namespace <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">long</span> <span class="type">long</span> a[MAX];</span><br><span class="line"></span><br><span class="line"><span class="type">long</span> <span class="type">long</span> <span class="title function_">algo</span><span class="params">(<span class="type">long</span> <span class="type">long</span> n)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>(n &lt; MAX &amp;&amp; a[n])<span class="keyword">return</span> a[n];</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(n == <span class="number">1</span>) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(n%<span class="number">2</span> == <span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        n = <span class="number">3</span>*n+<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span>(n&lt;MAX &amp;&amp; a[n] == <span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            a[n] = algo(n);</span><br><span class="line">            <span class="keyword">return</span> a[n]+<span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(n&lt;MAX &amp;&amp; a[n] != <span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> a[n]+<span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">return</span> <span class="number">1</span> + algo(n);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        n = n&gt;&gt;<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span>(n&lt;MAX &amp;&amp; a[n] == <span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            a[n] = algo(n);</span><br><span class="line">            <span class="keyword">return</span> a[n] + <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(n&lt;MAX &amp;&amp; a[n] != <span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> a[n]+<span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span> + algo(n);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="meta">#<span class="keyword">ifdef</span> TEST</span></span><br><span class="line">    freopen(<span class="string">&quot;in.txt&quot;</span>, <span class="string">&quot;r&quot;</span>, <span class="built_in">stdin</span>);</span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line">    <span class="type">long</span> n = <span class="number">0</span>, t, s, e, ss, ee;</span><br><span class="line">    <span class="built_in">memset</span>(a, <span class="number">0</span>, <span class="keyword">sizeof</span>(a));</span><br><span class="line">    <span class="comment">//为保证打印的数字1和数字2是按照输入顺序,故另设两个变量代替,以便于大小交换</span></span><br><span class="line">    <span class="keyword">while</span>(~<span class="built_in">scanf</span>(<span class="string">&quot;%d %d&quot;</span>, &amp;ss, &amp;ee))</span><br><span class="line">    &#123;</span><br><span class="line">        s = ss, e = ee;</span><br><span class="line">        <span class="keyword">if</span>(s&gt;e)</span><br><span class="line">        &#123;</span><br><span class="line">            swap(s, e);</span><br><span class="line">        &#125;</span><br><span class="line">        n = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=s; i&lt;=e; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            t = algo(i);</span><br><span class="line">            <span class="keyword">if</span>(n&lt;t)n=t;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%ld %ld %ld\n&quot;</span>, ss, ee, n);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">ifdef</span> TEST</span></span><br><span class="line">    fclose(<span class="built_in">stdin</span>);</span><br><span class="line"><span class="meta">#<span class="keyword">endif</span> <span class="comment">// TEST</span></span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure> 
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> MAX 1001</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> MOD 10000</span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> a[MAX][<span class="number">500</span>]; <span class="comment">//&#123;0,0,1,1,3,5,11,21,43,85,171&#125;;</span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//freopen(&quot;in.txt&quot;, &quot;r&quot;, stdin);</span></span><br><span class="line">    <span class="comment">//freopen(&quot;out.txt&quot;, &quot;w&quot;, stdout);</span></span><br><span class="line">    <span class="type">int</span> n, i,j,y;</span><br><span class="line">    <span class="built_in">memset</span>(a, <span class="number">0</span>, <span class="keyword">sizeof</span>(a));</span><br><span class="line">    a[<span class="number">1</span>][<span class="number">0</span>] = <span class="number">1</span>; <span class="comment">//length of a[1]</span></span><br><span class="line">    a[<span class="number">1</span>][<span class="number">1</span>] = <span class="number">0</span>;</span><br><span class="line">    a[<span class="number">2</span>][<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">    a[<span class="number">2</span>][<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(i = <span class="number">3</span>; i &lt; MAX; i++)&#123;</span><br><span class="line">        <span class="built_in">memcpy</span>(a[i], a[i<span class="number">-1</span>], <span class="number">4</span>*(a[i<span class="number">-1</span>][<span class="number">0</span>]+<span class="number">1</span>));<span class="comment">//memcpy(dis, src, size of byte)</span></span><br><span class="line">        y = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(j = <span class="number">1</span>; j &lt;= a[i<span class="number">-2</span>][<span class="number">0</span>]; j++)&#123;</span><br><span class="line">            a[i][j] += (a[i<span class="number">-2</span>][j]&lt;&lt;<span class="number">1</span>) + y;</span><br><span class="line">            y = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">if</span>(a[i][j] &gt;= MOD)&#123;</span><br><span class="line">                y = a[i][j] / MOD;</span><br><span class="line">                a[i][j] %= MOD;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(y)&#123;</span><br><span class="line">            a[i][j] += y;</span><br><span class="line">            <span class="keyword">if</span>(j &gt; a[i][<span class="number">0</span>])a[i][<span class="number">0</span>] = j;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span>(~<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;n))&#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>, a[n][a[n][<span class="number">0</span>]]);</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = a[n][<span class="number">0</span>]<span class="number">-1</span>; i &gt; <span class="number">0</span>; i--)&#123;</span><br><span class="line">            <span class="keyword">if</span>(a[n][i] &gt;= <span class="number">1000</span>)&#123;</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>, a[n][i]);</span><br><span class="line">            &#125;<span class="keyword">else</span> <span class="keyword">if</span>(a[n][i] &gt;= <span class="number">100</span>)&#123;</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;0%d&quot;</span>, a[n][i]);</span><br><span class="line">            &#125;<span class="keyword">else</span> <span class="keyword">if</span>(a[n][i]&gt;=<span class="number">10</span>)&#123;</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;00%d&quot;</span>, a[n][i]);</span><br><span class="line">            &#125;<span class="keyword">else</span> <span class="built_in">printf</span>(<span class="string">&quot;000%d&quot;</span>, a[n][i]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">   <span class="comment">// fclose(stdin);</span></span><br><span class="line">   <span class="comment">// fclose(stdout);</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure> 
     </div>
 
     <footer class="article-footer">
-      <!-- <a data-url="https://carl-zk.github.io/blog/2016/07/04/The-3n-1-problem/" data-id="clwbvux4z004c64od5qx3cn89" class="article-share-link">分享</a> -->
+      <!-- <a data-url="https://carl-zk.github.io/blog/2016/07/07/%E4%B8%87%E8%BF%9B%E5%88%B6/" data-id="clwbvux5b007564od1litd8d8" class="article-share-link">分享</a> -->
        
       <div id="gitalk-container"></div>
        
@@ -209,7 +184,7 @@ a[1] = 1.
 
 
   <nav id="page-nav">
-    <a class="extend prev" rel="prev" href="/blog/page/145/">&lt;&lt;上一页</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/144/">144</a><a class="page-number" href="/blog/page/145/">145</a><span class="page-number current">146</span><a class="page-number" href="/blog/page/147/">147</a><a class="page-number" href="/blog/page/148/">148</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/192/">192</a><a class="extend next" rel="next" href="/blog/page/147/">下一页&gt;&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/145/">&lt;&lt;上一页</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/144/">144</a><a class="page-number" href="/blog/page/145/">145</a><span class="page-number current">146</span><a class="page-number" href="/blog/page/147/">147</a><a class="page-number" href="/blog/page/148/">148</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/194/">194</a><a class="extend next" rel="next" href="/blog/page/147/">下一页&gt;&gt;</a>
   </nav>
 
 </section>
@@ -233,6 +208,14 @@ a[1] = 1.
       <ul>
         
           <li>
+            <a href="/blog/2025/09/28/projectreactor-webflux/">Projectreactor &amp; Webflux</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2025/02/19/DNSCrypt/">DNSCrypt</a>
+          </li>
+        
+          <li>
             <a href="/blog/2024/05/19/windows/">Windows</a>
           </li>
         
@@ -242,14 +225,6 @@ a[1] = 1.
         
           <li>
             <a href="/blog/2023/12/15/spring-boot-%E5%90%AF%E5%8A%A8%E8%BF%87%E7%A8%8B/">Spring Boot 启动过程</a>
-          </li>
-        
-          <li>
-            <a href="/blog/2022/04/25/Design-Underground-System/">Design Underground System</a>
-          </li>
-        
-          <li>
-            <a href="/blog/2022/04/25/Encode-and-Decode-TinyURL/">Encode and Decode TinyURL</a>
           </li>
         
       </ul>
@@ -273,7 +248,7 @@ a[1] = 1.
   
   <div class="outer">
     <div id="footer-left">
-      &copy; 2016 - 2024 carl-zk<!--&nbsp;|&nbsp;
+      &copy; 2016 - 2025 carl-zk<!--&nbsp;|&nbsp;
       主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a> -->
     </div>
   

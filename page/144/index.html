@@ -84,21 +84,17 @@
         <section id="main">
   
     <article
-  id="post-万进制"
+  id="post-小感"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
 >
 
   <div class="article-meta">
-    <a href="/blog/2016/07/07/%E4%B8%87%E8%BF%9B%E5%88%B6/" class="article-date">
-  <time datetime="2016-07-06T17:20:06.000Z" itemprop="datePublished">2016-07-07</time>
+    <a href="/blog/2016/12/19/%E5%B0%8F%E6%84%9F/" class="article-date">
+  <time datetime="2016-12-19T15:11:43.000Z" itemprop="datePublished">2016-12-19</time>
 </a>
     
-  <div class="article-category">
-    <a class="article-category-link" href="/blog/categories/hdu/">hdu</a>
-  </div>
-
   </div>
   <div class="article-inner">
      
@@ -106,7 +102,7 @@
       
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2016/07/07/%E4%B8%87%E8%BF%9B%E5%88%B6/">万进制</a>
+      <a class="article-title" href="/blog/2016/12/19/%E5%B0%8F%E6%84%9F/">小感</a>
     </h1>
   
 
@@ -115,25 +111,16 @@
     <div class="article-entry" itemprop="articleBody">
       
       <!-- Table of Contents -->
-       <p><a target="_blank" rel="noopener" href="http://acm.hdu.edu.cn/showproblem.php?pid=1041">题目链接</a></p>
-<p>Computer Transformation</p>
-<p>Problem Description<br>A sequence consisting of one digit, the number 1 is initially written into a computer. At each successive time step, the computer simultaneously tranforms each digit 0 into the sequence 1 0 and each digit 1 into the sequence 0 1. So, after the first time step, the sequence 0 1 is obtained; after the second, the sequence 1 0 0 1, after the third, the sequence 0 1 1 0 1 0 0 1 and so on. </p>
-<p>How many pairs of consequitive zeroes will appear in the sequence after n steps? </p>
-<p>Input<br>Every input line contains one natural number n (0 &lt; n ≤1000).</p>
-<p>Output<br>For each input n print the number of consecutive zeroes pairs that will appear in the sequence after n steps.</p>
-<p>Sample Input<br>2<br>3</p>
-<p>Sample Output<br>1<br>1</p>
-<p>计算机会把数字1转换为01,把0转换为10,初始时数组中只有1.所以执行第1次后数组变成01,第2次变成1001,以此类推.问执行到第n步时有几对连续的00存在.</p>
-<hr/>
-这道题属于大数处理,基本上规律是很容易得到的.做了两道,就贴这一道留个纪念.
-这里是每10000进1,即传说中的万进制.计算时要注意余数用后清零.打印时高位补0.
-f[k] = f[k-1] + 2 * f[k-2] 
-
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> MAX 1001</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> MOD 10000</span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> a[MAX][<span class="number">500</span>]; <span class="comment">//&#123;0,0,1,1,3,5,11,21,43,85,171&#125;;</span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//freopen(&quot;in.txt&quot;, &quot;r&quot;, stdin);</span></span><br><span class="line">    <span class="comment">//freopen(&quot;out.txt&quot;, &quot;w&quot;, stdout);</span></span><br><span class="line">    <span class="type">int</span> n, i,j,y;</span><br><span class="line">    <span class="built_in">memset</span>(a, <span class="number">0</span>, <span class="keyword">sizeof</span>(a));</span><br><span class="line">    a[<span class="number">1</span>][<span class="number">0</span>] = <span class="number">1</span>; <span class="comment">//length of a[1]</span></span><br><span class="line">    a[<span class="number">1</span>][<span class="number">1</span>] = <span class="number">0</span>;</span><br><span class="line">    a[<span class="number">2</span>][<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">    a[<span class="number">2</span>][<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(i = <span class="number">3</span>; i &lt; MAX; i++)&#123;</span><br><span class="line">        <span class="built_in">memcpy</span>(a[i], a[i<span class="number">-1</span>], <span class="number">4</span>*(a[i<span class="number">-1</span>][<span class="number">0</span>]+<span class="number">1</span>));<span class="comment">//memcpy(dis, src, size of byte)</span></span><br><span class="line">        y = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(j = <span class="number">1</span>; j &lt;= a[i<span class="number">-2</span>][<span class="number">0</span>]; j++)&#123;</span><br><span class="line">            a[i][j] += (a[i<span class="number">-2</span>][j]&lt;&lt;<span class="number">1</span>) + y;</span><br><span class="line">            y = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">if</span>(a[i][j] &gt;= MOD)&#123;</span><br><span class="line">                y = a[i][j] / MOD;</span><br><span class="line">                a[i][j] %= MOD;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(y)&#123;</span><br><span class="line">            a[i][j] += y;</span><br><span class="line">            <span class="keyword">if</span>(j &gt; a[i][<span class="number">0</span>])a[i][<span class="number">0</span>] = j;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span>(~<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;n))&#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>, a[n][a[n][<span class="number">0</span>]]);</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = a[n][<span class="number">0</span>]<span class="number">-1</span>; i &gt; <span class="number">0</span>; i--)&#123;</span><br><span class="line">            <span class="keyword">if</span>(a[n][i] &gt;= <span class="number">1000</span>)&#123;</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>, a[n][i]);</span><br><span class="line">            &#125;<span class="keyword">else</span> <span class="keyword">if</span>(a[n][i] &gt;= <span class="number">100</span>)&#123;</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;0%d&quot;</span>, a[n][i]);</span><br><span class="line">            &#125;<span class="keyword">else</span> <span class="keyword">if</span>(a[n][i]&gt;=<span class="number">10</span>)&#123;</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;00%d&quot;</span>, a[n][i]);</span><br><span class="line">            &#125;<span class="keyword">else</span> <span class="built_in">printf</span>(<span class="string">&quot;000%d&quot;</span>, a[n][i]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">   <span class="comment">// fclose(stdin);</span></span><br><span class="line">   <span class="comment">// fclose(stdout);</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure> 
+       <p>苦涩的青春就像一杯酒,还没喝醉我已经白了头.</p>
+<p>近来读完了&lt;&lt;红楼梦&gt;&gt;,又看完了电视剧,现在在看脂砚斋的评注版本.感叹作者文笔惊人之外也恨作者如此狠心,将他们都定为了苦命红颜.既然后四十回遗失,而又没有完美续作,所以我也很任性的给了我喜欢的角色一个不那么薄命的结果.在我心中,黛玉无意是宝玉的唯一人选,可惜黛玉泪尽而亡,作为被落魄的宝玉和宝钗,相依为命结成了”金玉良缘”,袭人则还是嫁给了蒋玉菡,王熙凤被休后痛定思痛,在弥留之际终于看透荣华富贵,含笑而死.这样,即便作为悲剧的主线,这样的结果还是能够让我安然入睡的,否则我又有多少眼泪来重读&lt;&lt;红楼梦&gt;&gt;!</p>
+<p>&lt;&lt;红楼梦&gt;&gt;就像一面镜子,让人看清了世事,也看清了自己.赋闲了半年,经历了迷茫和彷徨,惶恐和绝望,又重新找到了平静,我称之为”不幸之幸”.如果我仍旧那样机械的工作,半年时间我仍旧不会思考人生,不会让人生有多少的改变,因为我的内心是颓废的.当我经历了这半年的闲置,我发现了自己的迷茫,其实是害怕独自一人面对未来.我一直渴望一个爱人,一直相信爱情能够让我摆脱这种浑浑噩噩的生活,让自己的人生”自然而然”的走上正途.我这岂不是自欺欺人吗?我不找”垃圾篓”倾诉我的苦衷,因为我不想影响别人,因为懂我的人很少,因为我知道自己不听劝.我就像是一个老僧一样,独自一人参佛悟道,自我修行.不敢说自己有多高境界,只是觉得自己可以坦然接受悲剧——-任何发生在自己身上的悲剧.其实也算不上悲剧,只是一种情感上的痛苦,慢慢的,将这种痛苦消化掉.</p>
+<p>喜欢邓婕和陈晓旭,因为一个把王熙凤演活了,一个活成了林黛玉.我没有宝玉那样的才情,但是我小时候也自称是一个情种,也是极其的怜香惜玉.我善于发现女生身上的优点,将她们的优点告诉她们,然后极度渴望想保护她们身上独特的魅力.而今我也是终身误了,始终摆脱不了这个情字.看手相说我容易孤独终老,年轻的时候不相信,现在可以笑呵呵的接受了.我还是把爱情看的太重,太过完美,才说不出一个爱字.即便说了又能怎样,假如我还是这么笨,假如我们性格不合,种种恐惧让我不忍心打碎这水晶般的梦.还是流几滴眼泪,长叹一声的好,毕竟这份爱是完美的,她也会遇到合适的人幸福的生活,而我已经坦然接受了一切,唯送出衷心的祝福,默默看着她幸福下去.</p>
+<p>哦,自欺欺人的家伙.</p>
+ 
     </div>
 
     <footer class="article-footer">
-      <!-- <a data-url="https://carl-zk.github.io/blog/2016/07/07/%E4%B8%87%E8%BF%9B%E5%88%B6/" data-id="clwbvux5b007564od1litd8d8" class="article-share-link">分享</a> -->
+      <!-- <a data-url="https://carl-zk.github.io/blog/2016/12/19/%E5%B0%8F%E6%84%9F/" data-id="clwbvux5k009964od6wod2ian" class="article-share-link">分享</a> -->
        
       <div id="gitalk-container"></div>
        
@@ -184,7 +171,7 @@ f[k] = f[k-1] + 2 * f[k-2]
 
 
   <nav id="page-nav">
-    <a class="extend prev" rel="prev" href="/blog/page/143/">&lt;&lt;上一页</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/142/">142</a><a class="page-number" href="/blog/page/143/">143</a><span class="page-number current">144</span><a class="page-number" href="/blog/page/145/">145</a><a class="page-number" href="/blog/page/146/">146</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/192/">192</a><a class="extend next" rel="next" href="/blog/page/145/">下一页&gt;&gt;</a>
+    <a class="extend prev" rel="prev" href="/blog/page/143/">&lt;&lt;上一页</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/142/">142</a><a class="page-number" href="/blog/page/143/">143</a><span class="page-number current">144</span><a class="page-number" href="/blog/page/145/">145</a><a class="page-number" href="/blog/page/146/">146</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/194/">194</a><a class="extend next" rel="next" href="/blog/page/145/">下一页&gt;&gt;</a>
   </nav>
 
 </section>
@@ -208,6 +195,14 @@ f[k] = f[k-1] + 2 * f[k-2]
       <ul>
         
           <li>
+            <a href="/blog/2025/09/28/projectreactor-webflux/">Projectreactor &amp; Webflux</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2025/02/19/DNSCrypt/">DNSCrypt</a>
+          </li>
+        
+          <li>
             <a href="/blog/2024/05/19/windows/">Windows</a>
           </li>
         
@@ -217,14 +212,6 @@ f[k] = f[k-1] + 2 * f[k-2]
         
           <li>
             <a href="/blog/2023/12/15/spring-boot-%E5%90%AF%E5%8A%A8%E8%BF%87%E7%A8%8B/">Spring Boot 启动过程</a>
-          </li>
-        
-          <li>
-            <a href="/blog/2022/04/25/Design-Underground-System/">Design Underground System</a>
-          </li>
-        
-          <li>
-            <a href="/blog/2022/04/25/Encode-and-Decode-TinyURL/">Encode and Decode TinyURL</a>
           </li>
         
       </ul>
@@ -248,7 +235,7 @@ f[k] = f[k-1] + 2 * f[k-2]
   
   <div class="outer">
     <div id="footer-left">
-      &copy; 2016 - 2024 carl-zk<!--&nbsp;|&nbsp;
+      &copy; 2016 - 2025 carl-zk<!--&nbsp;|&nbsp;
       主题 <a href="https://github.com/giscafer/hexo-theme-cafe/" target="_blank">Cafe</a> -->
     </div>
   
