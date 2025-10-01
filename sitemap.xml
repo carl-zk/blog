@@ -2,6 +2,24 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://carl-zk.github.io/blog/2025/09/30/virtual-thread-is-to-shake-the-world/</loc>
+    <title>Virtual Thread Is to Shake the World</title>
+    <date>2025-09-30T10:08:17.000Z</date>
+  </url>
+  
+  <url>
+    <loc>https://carl-zk.github.io/blog/categories/index.html</loc>
+    <title>Categories</title>
+    <date>2025-09-30T11:48:57.926Z</date>
+  </url>
+  
+  <url>
+    <loc>https://carl-zk.github.io/blog/tags/index.html</loc>
+    <title>Tags</title>
+    <date>2025-09-30T11:48:43.125Z</date>
+  </url>
+  
+  <url>
     <loc>https://carl-zk.github.io/blog/2025/09/28/projectreactor-webflux/</loc>
     <title>Projectreactor & Webflux</title>
     <date>2025-09-28T13:52:25.000Z</date>
@@ -38,15 +56,15 @@
   </url>
   
   <url>
-    <loc>https://carl-zk.github.io/blog/all-tags/index.html</loc>
-    <title>All-Tags</title>
-    <date>2024-05-18T08:19:43.218Z</date>
-  </url>
-  
-  <url>
     <loc>https://carl-zk.github.io/blog/repo/source.html</loc>
     <title>Haha</title>
     <date>2023-12-16T04:24:06.000Z</date>
+  </url>
+  
+  <url>
+    <loc>https://carl-zk.github.io/blog/all-tags/index.html</loc>
+    <title>All-Tags</title>
+    <date>2024-05-18T08:19:43.218Z</date>
   </url>
   
   <url>
@@ -68,26 +86,26 @@
   </url>
   
   <url>
-    <loc>https://carl-zk.github.io/blog/repo/spring-boot-%E5%90%AF%E5%8A%A8%E8%BF%87%E7%A8%8B/SharedMetadataReaderFactoryContextInitializer.html</loc>
-    <title></title>
-    <date>2024-05-18T08:19:43.218Z</date>
-  </url>
-  
-  <url>
     <loc>https://carl-zk.github.io/blog/repo/spring-boot-%E5%90%AF%E5%8A%A8%E8%BF%87%E7%A8%8B/TextEncryptorConfigBootstrapper.html</loc>
     <title></title>
     <date>2024-05-18T08:19:43.218Z</date>
   </url>
   
   <url>
-    <loc>https://carl-zk.github.io/blog/all-archives/index.html</loc>
-    <title>All-Archives</title>
-    <date>2024-05-18T08:19:43.217Z</date>
+    <loc>https://carl-zk.github.io/blog/repo/spring-boot-%E5%90%AF%E5%8A%A8%E8%BF%87%E7%A8%8B/SharedMetadataReaderFactoryContextInitializer.html</loc>
+    <title></title>
+    <date>2024-05-18T08:19:43.218Z</date>
   </url>
   
   <url>
     <loc>https://carl-zk.github.io/blog/all-categories/index.html</loc>
     <title>All-Categories</title>
+    <date>2024-05-18T08:19:43.217Z</date>
+  </url>
+  
+  <url>
+    <loc>https://carl-zk.github.io/blog/all-archives/index.html</loc>
+    <title>All-Archives</title>
     <date>2024-05-18T08:19:43.217Z</date>
   </url>
   
@@ -320,6 +338,12 @@
   </url>
   
   <url>
+    <loc>https://carl-zk.github.io/blog/2017/02/19/%E6%8A%BD%E8%B1%A1%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/</loc>
+    <title>抽象工厂模式</title>
+    <date>2017-02-19T07:43:30.000Z</date>
+  </url>
+  
+  <url>
     <loc>https://carl-zk.github.io/blog/2017/03/26/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/</loc>
     <title>排序算法</title>
     <date>2017-03-26T02:35:31.000Z</date>
@@ -338,27 +362,21 @@
   </url>
   
   <url>
-    <loc>https://carl-zk.github.io/blog/2017/02/19/%E6%8A%BD%E8%B1%A1%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/</loc>
-    <title>抽象工厂模式</title>
-    <date>2017-02-19T07:43:30.000Z</date>
-  </url>
-  
-  <url>
     <loc>https://carl-zk.github.io/blog/2016/06/27/%E6%9C%80%E8%BF%91%E7%82%B9%E5%AF%B9/</loc>
     <title>最近点对</title>
     <date>2016-06-27T13:48:46.000Z</date>
   </url>
   
   <url>
-    <loc>https://carl-zk.github.io/blog/2019/04/04/%E6%9D%82%E8%AF%86/</loc>
-    <title>杂识</title>
-    <date>2019-04-04T11:51:52.000Z</date>
-  </url>
-  
-  <url>
     <loc>https://carl-zk.github.io/blog/2016/07/01/%E6%9C%80%E9%95%BF%E4%B8%8A%E5%8D%87%E5%AD%90%E5%BA%8F%E5%88%97/</loc>
     <title>最长上升子序列</title>
     <date>2016-06-30T16:45:06.000Z</date>
+  </url>
+  
+  <url>
+    <loc>https://carl-zk.github.io/blog/2019/04/04/%E6%9D%82%E8%AF%86/</loc>
+    <title>杂识</title>
+    <date>2019-04-04T11:51:52.000Z</date>
   </url>
   
   <url>
@@ -500,15 +518,15 @@
   </url>
   
   <url>
-    <loc>https://carl-zk.github.io/blog/2016/06/18/%E5%93%88%E5%A4%AB%E6%9B%BC%E7%BC%96%E7%A0%81/</loc>
-    <title>哈夫曼编码</title>
-    <date>2016-06-18T15:00:18.000Z</date>
-  </url>
-  
-  <url>
     <loc>https://carl-zk.github.io/blog/2016/06/24/%E5%93%88%E5%93%88-%E5%8F%91%E7%8E%B0hdu%E9%94%99%E9%A2%98%E4%B8%80%E9%81%93/</loc>
     <title>哈哈,发现Hdu错题一道</title>
     <date>2016-06-23T18:01:12.000Z</date>
+  </url>
+  
+  <url>
+    <loc>https://carl-zk.github.io/blog/2016/06/18/%E5%93%88%E5%A4%AB%E6%9B%BC%E7%BC%96%E7%A0%81/</loc>
+    <title>哈夫曼编码</title>
+    <date>2016-06-18T15:00:18.000Z</date>
   </url>
   
   <url>
@@ -764,15 +782,15 @@
   </url>
   
   <url>
-    <loc>https://carl-zk.github.io/blog/2023/12/15/spring-boot-%E5%90%AF%E5%8A%A8%E8%BF%87%E7%A8%8B/</loc>
-    <title>Spring Boot 启动过程</title>
-    <date>2023-12-15T12:57:00.000Z</date>
-  </url>
-  
-  <url>
     <loc>https://carl-zk.github.io/blog/2017/09/03/shiro/</loc>
     <title>Shiro</title>
     <date>2017-09-03T06:23:57.000Z</date>
+  </url>
+  
+  <url>
+    <loc>https://carl-zk.github.io/blog/2023/12/15/spring-boot-%E5%90%AF%E5%8A%A8%E8%BF%87%E7%A8%8B/</loc>
+    <title>Spring Boot 启动过程</title>
+    <date>2023-12-15T12:57:00.000Z</date>
   </url>
   
   <url>
@@ -836,15 +854,15 @@
   </url>
   
   <url>
-    <loc>https://carl-zk.github.io/blog/2017/05/06/debian/</loc>
-    <title>Debian</title>
-    <date>2017-05-06T10:16:09.000Z</date>
-  </url>
-  
-  <url>
     <loc>https://carl-zk.github.io/blog/2016/06/21/c%E8%AF%AD%E8%A8%80%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%A4%84%E7%90%86/</loc>
     <title>C语言字符串处理</title>
     <date>2016-06-20T17:38:39.000Z</date>
+  </url>
+  
+  <url>
+    <loc>https://carl-zk.github.io/blog/2017/05/06/debian/</loc>
+    <title>Debian</title>
+    <date>2017-05-06T10:16:09.000Z</date>
   </url>
   
   <url>
@@ -974,27 +992,21 @@
   </url>
   
   <url>
-    <loc>https://carl-zk.github.io/blog/2016/06/30/Prime-Ring-Problem/</loc>
-    <title>Prime Ring Problem</title>
-    <date>2016-06-29T20:35:20.000Z</date>
-  </url>
-  
-  <url>
     <loc>https://carl-zk.github.io/blog/2021/03/02/Patience-sorting/</loc>
     <title>Patience Sorting</title>
     <date>2021-03-02T13:46:15.000Z</date>
   </url>
   
   <url>
-    <loc>https://carl-zk.github.io/blog/2017/06/17/Oracle-Install/</loc>
-    <title>Oracle Install</title>
-    <date>2017-06-17T13:45:54.000Z</date>
+    <loc>https://carl-zk.github.io/blog/2016/06/30/Prime-Ring-Problem/</loc>
+    <title>Prime Ring Problem</title>
+    <date>2016-06-29T20:35:20.000Z</date>
   </url>
   
   <url>
-    <loc>https://carl-zk.github.io/blog/2018/09/23/MySQL-%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B%E5%88%86%E9%A1%B5/</loc>
-    <title>MySQL 存储过程分页</title>
-    <date>2018-09-23T09:19:40.000Z</date>
+    <loc>https://carl-zk.github.io/blog/2017/06/17/Oracle-Install/</loc>
+    <title>Oracle Install</title>
+    <date>2017-06-17T13:45:54.000Z</date>
   </url>
   
   <url>
@@ -1010,6 +1022,12 @@
   </url>
   
   <url>
+    <loc>https://carl-zk.github.io/blog/2018/09/23/MySQL-%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B%E5%88%86%E9%A1%B5/</loc>
+    <title>MySQL 存储过程分页</title>
+    <date>2018-09-23T09:19:40.000Z</date>
+  </url>
+  
+  <url>
     <loc>https://carl-zk.github.io/blog/2017/03/04/OFBiz-Learn/</loc>
     <title>OFBiz Learn</title>
     <date>2017-03-04T05:42:07.000Z</date>
@@ -1022,15 +1040,15 @@
   </url>
   
   <url>
-    <loc>https://carl-zk.github.io/blog/2018/04/01/Median-of-Two-Sorted-Arrays/</loc>
-    <title>Median of Two Sorted Arrays</title>
-    <date>2018-04-01T03:32:59.000Z</date>
-  </url>
-  
-  <url>
     <loc>https://carl-zk.github.io/blog/2020/08/31/Mac%E4%B8%AD%E5%A4%84%E7%90%86txt%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81/</loc>
     <title>Mac中处理txt中文乱码</title>
     <date>2020-08-31T14:50:21.000Z</date>
+  </url>
+  
+  <url>
+    <loc>https://carl-zk.github.io/blog/2018/04/01/Median-of-Two-Sorted-Arrays/</loc>
+    <title>Median of Two Sorted Arrays</title>
+    <date>2018-04-01T03:32:59.000Z</date>
   </url>
   
   <url>
@@ -1052,15 +1070,15 @@
   </url>
   
   <url>
-    <loc>https://carl-zk.github.io/blog/2022/01/09/Logger-%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8F/</loc>
-    <title>Logger 桥接模式</title>
-    <date>2022-01-09T09:35:33.000Z</date>
-  </url>
-  
-  <url>
     <loc>https://carl-zk.github.io/blog/2017/02/25/Listener%E4%BB%8B%E7%BB%8D/</loc>
     <title>Listener介绍</title>
     <date>2017-02-25T13:56:04.000Z</date>
+  </url>
+  
+  <url>
+    <loc>https://carl-zk.github.io/blog/2022/01/09/Logger-%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8F/</loc>
+    <title>Logger 桥接模式</title>
+    <date>2022-01-09T09:35:33.000Z</date>
   </url>
   
   <url>
@@ -1136,15 +1154,21 @@
   </url>
   
   <url>
+    <loc>https://carl-zk.github.io/blog/2017/02/25/JSP-Servlet%E5%8F%8A%E7%9B%B8%E5%85%B3%E6%8A%80%E6%9C%AF%E8%AF%A6%E8%A7%A3/</loc>
+    <title>JSP/Servlet及相关技术详解</title>
+    <date>2017-02-25T08:01:07.000Z</date>
+  </url>
+  
+  <url>
     <loc>https://carl-zk.github.io/blog/2017/11/18/JVM%E5%8F%82%E6%95%B0%E9%82%A3%E7%82%B9%E4%BA%8B%E5%84%BF/</loc>
     <title>JVM参数那点事儿</title>
     <date>2017-11-18T09:01:39.000Z</date>
   </url>
   
   <url>
-    <loc>https://carl-zk.github.io/blog/2017/02/25/JSP-Servlet%E5%8F%8A%E7%9B%B8%E5%85%B3%E6%8A%80%E6%9C%AF%E8%AF%A6%E8%A7%A3/</loc>
-    <title>JSP/Servlet及相关技术详解</title>
-    <date>2017-02-25T08:01:07.000Z</date>
+    <loc>https://carl-zk.github.io/blog/2016/06/23/Fibonacci/</loc>
+    <title>Fibonacci</title>
+    <date>2016-06-22T16:32:40.000Z</date>
   </url>
   
   <url>
@@ -1160,12 +1184,6 @@
   </url>
   
   <url>
-    <loc>https://carl-zk.github.io/blog/2016/06/23/Fibonacci/</loc>
-    <title>Fibonacci</title>
-    <date>2016-06-22T16:32:40.000Z</date>
-  </url>
-  
-  <url>
     <loc>https://carl-zk.github.io/blog/2016/06/21/How-many-prime-numbers/</loc>
     <title>How Many Prime Numbers</title>
     <date>2016-06-21T14:25:22.000Z</date>
@@ -1178,15 +1196,15 @@
   </url>
   
   <url>
-    <loc>https://carl-zk.github.io/blog/2021/04/26/Binary-Lifting/</loc>
-    <title>Binary Lifting</title>
-    <date>2021-04-26T12:37:02.000Z</date>
-  </url>
-  
-  <url>
     <loc>https://carl-zk.github.io/blog/2017/03/27/Class%E5%8A%A0%E8%BD%BD%E5%8E%9F%E7%90%86/</loc>
     <title>Class加载原理</title>
     <date>2017-03-27T13:49:11.000Z</date>
+  </url>
+  
+  <url>
+    <loc>https://carl-zk.github.io/blog/2021/04/26/Binary-Lifting/</loc>
+    <title>Binary Lifting</title>
+    <date>2021-04-26T12:37:02.000Z</date>
   </url>
   
   <url>

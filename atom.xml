@@ -6,7 +6,7 @@
   <link href="https://carl-zk.github.io/blog/atom.xml" rel="self"/>
   
   <link href="https://carl-zk.github.io/blog/"/>
-  <updated>2025-09-28T15:34:04.328Z</updated>
+  <updated>2025-10-01T11:12:10.824Z</updated>
   <id>https://carl-zk.github.io/blog/</id>
   
   <author>
@@ -15,6 +15,24 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Virtual Thread Is to Shake the World</title>
+    <link href="https://carl-zk.github.io/blog/2025/09/30/virtual-thread-is-to-shake-the-world/"/>
+    <id>https://carl-zk.github.io/blog/2025/09/30/virtual-thread-is-to-shake-the-world/</id>
+    <published>2025-09-30T10:08:17.000Z</published>
+    <updated>2025-10-01T11:12:10.824Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;virtual-thread&quot;&gt;&lt;a href=&quot;#virtual-thread&quot; class=&quot;headerlink&quot; title=&quot;virtual thread&quot;&gt;&lt;/a&gt;virtual thread&lt;/h1&gt;&lt;h2 id=&quot;when-sould-you-use-virtual-threads&quot;&gt;&lt;a href=&quot;#when-sould-you-use-virtual-threads&quot; class=&quot;headerlink&quot; title=&quot;when sould you use virtual threads&quot;&gt;&lt;/a&gt;when sould you use virtual threads&lt;/h2&gt;&lt;p&gt;Virtual threads (introduced in &lt;strong&gt;Project Loom&lt;/strong&gt;, JDK 21 GA) are lightweight threads managed by the JVM rather than the OS. They shine in scenarios where you need to handle &lt;s</summary>
+      
+    
+    
+    
+    
+  </entry>
   
   <entry>
     <title>Projectreactor &amp; Webflux</title>
@@ -1633,7 +1651,7 @@
     
       
       
-    <summary type="html">&lt;h3 id=&quot;表空间&quot;&gt;&lt;a href=&quot;#表空间&quot; class=&quot;headerlink&quot; title=&quot;表空间&quot;&gt;&lt;/a&gt;表空间&lt;/h3&gt;&lt;h4 id=&quot;建立表空间&quot;&gt;&lt;a href=&quot;#建立表空间&quot; class=&quot;headerlink&quot; title=&quot;建立表空间&quot;&gt;&lt;/a&gt;建立表空间&lt;/h4&gt;&lt;figure class=&quot;highlight sql&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;CREATE&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;TABLE&lt;/span&gt;SPACE test DATAFILE&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;stri</summary>
+    <summary type="html">&lt;h3 id=&quot;表空间&quot;&gt;&lt;a href=&quot;#表空间&quot; class=&quot;headerlink&quot; title=&quot;表空间&quot;&gt;&lt;/a&gt;表空间&lt;/h3&gt;&lt;h4 id=&quot;建立表空间&quot;&gt;&lt;a href=&quot;#建立表空间&quot; class=&quot;headerlink&quot; title=&quot;建立表空间&quot;&gt;&lt;/a&gt;建立表空间&lt;/h4&gt;&lt;figure class=&quot;highlight sql&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;CREATE&lt;/span&gt; TABLESPACE test DATAFILE&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;string&quot;&gt;&amp;#x27;C:&#92;ORACLEXE&#92;APP&#92;ORA</summary>
       
     
     
@@ -4230,7 +4248,7 @@
       
       
     <summary type="html">&lt;p&gt;&lt;a href=&quot;http://acm.hdu.edu.cn/game/entry/problem/show.php?chapterid=1&amp;sectionid=2&amp;problemid=14&quot;&gt;题目链接&lt;/a&gt;&lt;br&gt;&lt;strong&gt;The Seven Percent Solution&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;Problem Description&lt;br&gt;Uniform Resource Identifiers (or URIs) are strings like &lt;a href=&quot;http://icpc.baylor.edu/icpc/&quot;&gt;http://icpc.baylor.edu/icpc/&lt;/a&gt;, mailto:&lt;a href=&quot;mailto:&amp;#102;&amp;#x6f;&amp;#x6f;&amp;#64;&amp;#x62;&amp;#x61;&amp;#x72;&amp;#x2e;&amp;#111;&amp;#x72;&amp;#x67;&quot;&gt;&amp;#102;&amp;#x6f;&amp;#x6f;&amp;#64;&amp;#x62;&amp;#x61;&amp;#x72;&amp;#x2e;&amp;#111;&amp;#x72;&amp;#x67;&lt;/a&gt;, &lt;a href=&quot;ftp://127.0.0.1</summary>
+&lt;p&gt;Problem Description&lt;br&gt;Uniform Resource Identifiers (or URIs) are strings like &lt;a href=&quot;http://icpc.baylor.edu/icpc/&quot;&gt;http://icpc.baylor.edu/icpc/&lt;/a&gt;, mailto:&lt;a href=&quot;mailto:&amp;#x66;&amp;#111;&amp;#111;&amp;#64;&amp;#x62;&amp;#x61;&amp;#114;&amp;#x2e;&amp;#111;&amp;#114;&amp;#x67;&quot;&gt;&amp;#x66;&amp;#111;&amp;#111;&amp;#64;&amp;#x62;&amp;#x61;&amp;#114;&amp;#x2e;&amp;#111;&amp;#114;&amp;#x67;&lt;/a&gt;, &lt;a href=&quot;ftp://127.0.0.1</summary>
       
     
     
