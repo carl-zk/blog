@@ -7,7 +7,7 @@ menu:
 rss: /blog/atom.xml
 
 # footer底部显示联系邮箱（在博客配置文件下添加email配置也是一样的效果）
-slogan: '富强民主文明和谐自由平等公正法治爱国敬业诚信友善'
+slogan: "富强民主文明和谐自由平等公正法治爱国敬业诚信友善"
 
 # 内容 Content
 excerpt_link: 继续阅读全文 »
@@ -20,11 +20,10 @@ social_title: Follow me
 social:
   leetcode: https://leetcode.com/zxfspace/
   github: https://github.com/carl-zk
-  email: 'zxfspace@163.com'
+  email: "zxfspace@163.com"
 
 # WeChat 微信公众号二维码url
 wechat_url: about/index/weixin.jpg ## 启用wechat widget才会生效
-
 
 # Friendly links 友情链接
 links:
@@ -44,14 +43,14 @@ content_display_fixed: true
 random_posts: false
 
 widgets:
-- social
-- post_content
-- category
-- tagcloud
-- recent_posts
-- archive
-- friendly_link
-- wechat
+  - social
+  - post_content
+  - category
+  - tagcloud
+  - recent_posts
+  - archive
+  - friendly_link
+  - wechat
 
 # 提供以下内置组件
 # - post_content      # 文章目录
@@ -65,7 +64,6 @@ widgets:
 # - friendly_link     # 友情链接
 # - wechat            # 微信公众号
 
-
 # display widgets at the bottom of index pages (pagination == 2)
 index_widgets:
 # - category
@@ -73,7 +71,7 @@ index_widgets:
 # - archive
 
 # widget behavior
-archive_type: 'monthly'
+archive_type: "monthly"
 # 分类是否显示文章数量
 show_count: true
 
@@ -92,7 +90,7 @@ mathjax:
 # 其他参数
 google_analytics: true
 firebase: true
-favicon: 
+favicon:
 
 # comments 评论插件
 # 关闭统一为 false
@@ -106,7 +104,7 @@ gitalk:
   adminUser: ["carl-zk"]
   ID: location.pathname
   labels: "['Gitalk']"
-  perPage: 15
+  per_page: 15
   pagerDirection: last
   createIssueManually: false
   distractionFreeMode: false
@@ -117,14 +115,12 @@ gitment:
   enable: false #如果不使用则设置false关闭
   owner: giscafer # 你的github名称或者id id的获取方式为https://api.github.com/users/forvoid（你的名称）中的id极为github id
   repo: giscafer.github.io # 你的留言存放的位置 我的是放在我的github的github page上面
-  client_id: 7e5dd6cdb9xxaxa4cf91a # Register a new OAuth application https://github.com/settings/applications/new 
-  client_secret: 97f37d5c27c4a511xx4fxx623d391c85cb97f8 
+  client_id: 7e5dd6cdb9xxaxa4cf91a # Register a new OAuth application https://github.com/settings/applications/new
+  client_secret: 97f37d5c27c4a511xx4fxx623d391c85cb97f8
 
-# mermaid chart 
-mermaid: ## mermaid url https://github.com/knsv/mermaid 
-  enable: true  # default true 
-  version: "7.1.2" # default v7.1.2 
-  options:  # find more api options from https://github.com/knsv/mermaid/blob/master/src/mermaidAPI.js 
+# mermaid chart
+mermaid: ## mermaid url https://github.com/knsv/mermaid
+  enable: true # default true
+  version: "7.1.2" # default v7.1.2
+  options: # find more api options from https://github.com/knsv/mermaid/blob/master/src/mermaidAPI.js
     #startOnload: true  // default true
-
-

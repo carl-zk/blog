@@ -61,14 +61,13 @@ time_format: HH:mm:ss
 ## Set per_page to 0 to disable pagination
 per_page: 1
 archive_page: 20
-category_page: 20
-tag_page: 10
 pagination_dir: page
 
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: cafe
+# cafe
+theme: next
 
 fancybox: true
 
@@ -78,9 +77,9 @@ stylus:
   sourcemaps:
     comment: false
     inline: true
-    sourceRoot: ''
+    sourceRoot: ""
     basePath: .
-  plugins: 'nib'
+  plugins: "nib"
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
@@ -95,12 +94,12 @@ deploy:
 
 # RSS https://github.com/hexojs/hexo-generator-feed/blob/master/atom.xml
 feed:
-    type: atom
-    path: atom.xml
-    icon: /images/fav.png
-    content: false
-    content_limit: 500
-    limit: 0
+  type: atom
+  path: atom.xml
+  icon: /images/fav.png
+  content: false
+  content_limit: 500
+  limit: 0
 
 # hexo-yam
 minify:
@@ -110,38 +109,38 @@ minify:
   css:
     enable: true
     exclude:
-      - '*.min.css'
+      - "*.min.css"
   js:
     enable: true
     exclude:
-      - '*.min.js'
+      - "*.min.js"
   svg:
     enable: true
     include:
-      - '*.svg'
-      - '!*.min.svg'
+      - "*.svg"
+      - "!*.min.svg"
   gzip:
     enable: true
     include:
-      - '*.html'
-      - '*.css'
-      - '*.js'
-      - '*.txt'
-      - '*.ttf'
-      - '*.atom'
-      - '*.stl'
-      - '*.xml'
-      - '*.svg'
-      - '*.eot'
-      - '*.json'
+      - "*.html"
+      - "*.css"
+      - "*.js"
+      - "*.txt"
+      - "*.ttf"
+      - "*.atom"
+      - "*.stl"
+      - "*.xml"
+      - "*.svg"
+      - "*.eot"
+      - "*.json"
 
 math:
   katex:
-    css: 'https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css'
+    css: "https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css"
     options:
       throwOnError: false
   mathjax:
-    css: 'https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css'
+    css: "https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css"
     options:
       conversion:
         display: false
@@ -150,9 +149,9 @@ math:
 
 # sitemap
 sitemap:
-    path: sitemap.xml
-    template: ./sitemap_template.xml
-    rel: false
+  path: sitemap.xml
+  template: ./sitemap_template.xml
+  rel: false
 
 marked:
   gfm: true
@@ -160,7 +159,7 @@ marked:
   breaks: true
   smartLists: true
   smartypants: true
-  quotes: '“”‘’'
+  quotes: "“”‘’"
   modifyAnchors: 0
   anchorAlias: false
   autolink: true
