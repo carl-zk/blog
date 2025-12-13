@@ -141,7 +141,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/blog/archives/">
-          <span class="site-state-item-count">195</span>
+          <span class="site-state-item-count">197</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -152,7 +152,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/blog/tags/">
-        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-count">26</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -178,7 +178,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://carl-zk.github.io/blog/2017/03/11/%E7%AC%AC%E4%B8%89%E7%AB%A0-Java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/">
+    <link itemprop="mainEntityOfPage" href="https://carl-zk.github.io/blog/2017/03/14/%E7%AC%AC4%E7%AB%A0-Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/blog/images/avatar.gif">
@@ -196,7 +196,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/blog/2017/03/11/%E7%AC%AC%E4%B8%89%E7%AB%A0-Java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/" class="post-title-link" itemprop="url">第三章 Java内存模型</a>
+          <a href="/blog/2017/03/14/%E7%AC%AC4%E7%AB%A0-Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/" class="post-title-link" itemprop="url">第4章 Java并发编程基础</a>
         </h2>
 
         <div class="post-meta-container">
@@ -207,7 +207,7 @@
       </span>
       <span class="post-meta-item-text">发表于</span>
 
-      <time title="创建时间：2017-03-11 23:28:38" itemprop="dateCreated datePublished" datetime="2017-03-11T23:28:38+08:00">2017-03-11</time>
+      <time title="创建时间：2017-03-14 21:42:18" itemprop="dateCreated datePublished" datetime="2017-03-14T21:42:18+08:00">2017-03-14</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -236,57 +236,46 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h1 id="Java内存模型的基础"><a href="#Java内存模型的基础" class="headerlink" title="Java内存模型的基础"></a>Java内存模型的基础</h1><h2 id="并发编程模型的两个关键问题："><a href="#并发编程模型的两个关键问题：" class="headerlink" title="并发编程模型的两个关键问题："></a>并发编程模型的两个关键问题：</h2><ul>
-<li>线程之间如何通信。</li>
-<li>线程之间如何同步。</li>
-</ul>
-<p>命令式编程中线程通信机制：</p>
-<table>
+          <h2 id="查看JVM线程信息"><a href="#查看JVM线程信息" class="headerlink" title="查看JVM线程信息"></a>查看JVM线程信息</h2><p>居然还有这么好的东西</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> chapter04;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.lang.management.ManagementFactory;</span><br><span class="line"><span class="keyword">import</span> java.lang.management.ThreadInfo;</span><br><span class="line"><span class="keyword">import</span> java.lang.management.ThreadMXBean;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by hero on 17-3-14.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MultiThread</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        MultiThread.showThreadsInfo(<span class="literal">true</span>, <span class="literal">true</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">showThreadsInfo</span><span class="params">(<span class="type">boolean</span> lockedMonitors, <span class="type">boolean</span> lockedSynchronizers)</span> &#123;</span><br><span class="line">        <span class="type">ThreadMXBean</span> <span class="variable">threadMXBean</span> <span class="operator">=</span> ManagementFactory.getThreadMXBean();</span><br><span class="line">        ThreadInfo[] threadInfos = threadMXBean.dumpAllThreads(lockedMonitors, lockedSynchronizers);</span><br><span class="line">        <span class="keyword">for</span> (ThreadInfo threadInfo : threadInfos) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;[&quot;</span> + threadInfo.getThreadId() + <span class="string">&quot;] &quot;</span> + threadInfo.getThreadName());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="线程优先级靠谱吗"><a href="#线程优先级靠谱吗" class="headerlink" title="线程优先级靠谱吗"></a>线程优先级靠谱吗</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> chapter04;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.CyclicBarrier;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.TimeUnit;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by hero on 17-3-14.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ThreadPriority</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">int</span> <span class="variable">_SIZE</span> <span class="operator">=</span> <span class="number">10</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">volatile</span> <span class="type">boolean</span> isEnd;</span><br><span class="line">    <span class="keyword">private</span> CyclicBarrier cyclicBarrier;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">ThreadPriority</span><span class="params">()</span> &#123;</span><br><span class="line">        cyclicBarrier = <span class="keyword">new</span> <span class="title class_">CyclicBarrier</span>(_SIZE);</span><br><span class="line">        isEnd = <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">ThreadPriority</span> <span class="variable">threadPriority</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ThreadPriority</span>();</span><br><span class="line">        threadPriority.run();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">run</span><span class="params">()</span> &#123;</span><br><span class="line">        Job[] jobs = <span class="keyword">new</span> <span class="title class_">Job</span>[_SIZE];</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; _SIZE; i++) &#123;</span><br><span class="line">            <span class="type">int</span> <span class="variable">priority</span> <span class="operator">=</span> i &lt; <span class="number">5</span> ? Thread.MIN_PRIORITY : Thread.MAX_PRIORITY;</span><br><span class="line">            jobs[i] = <span class="keyword">new</span> <span class="title class_">Job</span>(priority);</span><br><span class="line">            <span class="type">Thread</span> <span class="variable">thread</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Thread</span>(jobs[i]);</span><br><span class="line">            thread.setPriority(priority);</span><br><span class="line">            thread.start();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            TimeUnit.SECONDS.sleep(<span class="number">5</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        isEnd = <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (Job job : jobs) &#123;</span><br><span class="line">            System.out.printf(<span class="string">&quot;%5d %15d\n&quot;</span>, job.priority, job.count);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">class</span> <span class="title class_">Job</span> <span class="keyword">implements</span> <span class="title class_">Runnable</span> &#123;</span><br><span class="line">        <span class="keyword">private</span> <span class="type">int</span> priority;</span><br><span class="line">        <span class="keyword">private</span> <span class="type">int</span> count;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">public</span> <span class="title function_">Job</span><span class="params">(<span class="type">int</span> priority)</span> &#123;</span><br><span class="line">            <span class="built_in">this</span>.priority = priority;</span><br><span class="line">            <span class="built_in">this</span>.count = <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">run</span><span class="params">()</span> &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                cyclicBarrier.await();</span><br><span class="line">                <span class="keyword">while</span> (!isEnd) &#123;</span><br><span class="line">                    <span class="built_in">this</span>.count++;</span><br><span class="line">                    Thread.<span class="keyword">yield</span>();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>很显然，你需要运行一下上面的代码。</p>
+<h2 id="线程的状态"><a href="#线程的状态" class="headerlink" title="线程的状态"></a>线程的状态</h2><table>
 <thead>
 <tr>
-<th>并发模型</th>
-<th align="center">程序的公共状态</th>
-<th align="right">通信方式</th>
+<th>state</th>
+<th>说明</th>
 </tr>
 </thead>
 <tbody><tr>
-<td>共享内存</td>
-<td align="center">共享</td>
-<td align="right">隐式</td>
+<td>NEW</td>
+<td>初始状态，线程被构建，但还没调start()</td>
 </tr>
 <tr>
-<td>消息传递</td>
-<td align="center">无</td>
-<td align="right">显示</td>
+<td>RUNNABLE</td>
+<td>运行状态，Java将操作系统中的就绪和运行中两种状态笼统称为“RUNNABLE”</td>
+</tr>
+<tr>
+<td>BLOCKED</td>
+<td>阻塞状态，表示线程阻塞于锁</td>
+</tr>
+<tr>
+<td>WAITING</td>
+<td>等待状态，需要等待其它线程做出一些特定操作（通知或中断）</td>
+</tr>
+<tr>
+<td>TIME_WAITING</td>
+<td>超时等待，不同于WAITING，它可以在指定时间后自行返回</td>
+</tr>
+<tr>
+<td>TERMINATED</td>
+<td>终止状态，线程执行完毕</td>
 </tr>
 </tbody></table>
-<p>同步是指程序中用于控制不同线程间操作发生相对顺序的机制。</p>
-<table>
-<thead>
-<tr>
-<th>并发模型</th>
-<th align="center">状态</th>
-<th align="right">方式</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>共享内存</td>
-<td align="center">显式</td>
-<td align="right">显式指定某个方法或某段代码需要在线程之间互斥执行</td>
-</tr>
-<tr>
-<td>消息传递</td>
-<td align="center">隐式</td>
-<td align="right">消息的发送必须在接收之前的属性决定的</td>
-</tr>
-</tbody></table>
-<blockquote>
-<p>java的并发采用的是共享内存模型，线程之间的通信是隐式的，整个通信过程对程序员完全透明。</p>
-</blockquote>
-<h2 id="Java内存模型的抽象结构"><a href="#Java内存模型的抽象结构" class="headerlink" title="Java内存模型的抽象结构"></a>Java内存模型的抽象结构</h2><p>在Java中，所有实例域、静态域和数组元素都存储在堆内存中，线程间共享，称为“共享变量”。<br>局部变量(Local Variables)、方法定义参数(Formal Method Parameters)和异常处理器参数(Exception Handler Parameters)不会在线程间共享，它们不会有内存可见性问题，也不受JMM影响。</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/blog/2017/03/11/%E7%AC%AC%E4%B8%89%E7%AB%A0-Java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/#more" rel="contents">
+              <a class="btn" href="/blog/2017/03/14/%E7%AC%AC4%E7%AB%A0-Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -310,7 +299,7 @@
 
 
   <nav class="pagination">
-    <a class="extend prev" rel="prev" title="上一页" aria-label="上一页" href="/blog/page/104/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/104/">104</a><span class="page-number current">105</span><a class="page-number" href="/blog/page/106/">106</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/195/">195</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/blog/page/106/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" title="上一页" aria-label="上一页" href="/blog/page/104/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/104/">104</a><span class="page-number current">105</span><a class="page-number" href="/blog/page/106/">106</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/197/">197</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/blog/page/106/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 </div>

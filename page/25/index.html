@@ -141,7 +141,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/blog/archives/">
-          <span class="site-state-item-count">195</span>
+          <span class="site-state-item-count">197</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -152,7 +152,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/blog/tags/">
-        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-count">26</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -178,7 +178,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://carl-zk.github.io/blog/2019/02/19/java-html-template-tool/">
+    <link itemprop="mainEntityOfPage" href="https://carl-zk.github.io/blog/2019/04/04/%E6%9D%82%E8%AF%86/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/blog/images/avatar.gif">
@@ -196,7 +196,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/blog/2019/02/19/java-html-template-tool/" class="post-title-link" itemprop="url">Java Html Template Tool</a>
+          <a href="/blog/2019/04/04/%E6%9D%82%E8%AF%86/" class="post-title-link" itemprop="url">杂识</a>
         </h2>
 
         <div class="post-meta-container">
@@ -207,7 +207,7 @@
       </span>
       <span class="post-meta-item-text">发表于</span>
 
-      <time title="创建时间：2019-02-19 00:12:35" itemprop="dateCreated datePublished" datetime="2019-02-19T00:12:35+08:00">2019-02-19</time>
+      <time title="创建时间：2019-04-04 19:51:52" itemprop="dateCreated datePublished" datetime="2019-04-04T19:51:52+08:00">2019-04-04</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -222,7 +222,7 @@
       </span>
       <span class="post-meta-item-text">分类于</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/blog/categories/java/" itemprop="url" rel="index"><span itemprop="name">java</span></a>
+          <a href="/blog/categories/%E7%B3%BB%E7%BB%9F%E9%85%8D%E7%BD%AE/" itemprop="url" rel="index"><span itemprop="name">系统配置</span></a>
         </span>
     </span>
 
@@ -236,14 +236,22 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>一个好用的处理 html template 的工具：<br><a target="_blank" rel="noopener" href="https://freemarker.apache.org/docs/pgui_quickstart_all.html">freemarker</a></p>
-<p>hello.ftlh</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Welcome!<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">&lt;#-- Greet the user with his/her name --&gt;</span><br><span class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>Welcome $&#123;user&#125;!<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>We have these animals:</span><br><span class="line"><span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">    &lt;#list animals as animal&gt;</span><br><span class="line">      <span class="tag">&lt;<span class="name">li</span>&gt;</span>$&#123;animal.name&#125; for $&#123;animal.price&#125; Euros</span><br><span class="line">    &lt;/#list&gt;</span><br><span class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+          <h2 id="windows-kill-pid-on-port"><a href="#windows-kill-pid-on-port" class="headerlink" title="windows kill pid on port"></a>windows kill pid on port</h2><p><code>netstat -ano | findstr :8080</code><br><code>taskkill /PID pid /F</code></p>
+<h2 id="find-then-rename-file"><a href="#find-then-rename-file" class="headerlink" title="find then rename file"></a>find then rename file</h2><p><code>find . -name &quot;*.txt&quot; -exec  sh -c &#39;x=&#123;&#125;; mv &quot;$x&quot; $(echo $x | sed &#39;s/\.txt/\.bat/g&#39;)&#39; \;</code></p>
+<h2 id="replace-all-string"><a href="#replace-all-string" class="headerlink" title="replace all string"></a>replace all string</h2><p><code>find ./source -type f -name &quot;*md&quot; -exec grep &quot;\!\[\](/blog&quot; &#123;&#125; \;</code><br><code>find ./source -type f -name &quot;*md&quot; -exec gsed -i &quot;s/\!\[\](\/blog/\!\[\](/g&quot; &#123;&#125; \;</code></p>
+<h2 id="MacBook-磁盘清理"><a href="#MacBook-磁盘清理" class="headerlink" title="MacBook 磁盘清理"></a>MacBook 磁盘清理</h2><blockquote>
+<p>刚买的电脑磁盘满了，有点怀疑人生。查下来发现是由于sublime的临时文件导致的。由于Mac上趁手的工具需要花钱，从磁盘中找到哪里出的问题也需要些技巧，所以在这里记下来方便以后查看。</p>
+</blockquote>
+<h2 id="查看磁盘总的使用情况"><a href="#查看磁盘总的使用情况" class="headerlink" title="查看磁盘总的使用情况"></a>查看磁盘总的使用情况</h2><p><code>df -h</code><br><img src="http://ppdxz524p.bkt.clouddn.com/macClean/1.png" loading="lazy"><br>可以看到磁盘剩余89G。</p>
+<h2 id="查看文件夹大小"><a href="#查看文件夹大小" class="headerlink" title="查看文件夹大小"></a>查看文件夹大小</h2><p>有两种方式，以查看文件夹A为例：</p>
+<ul>
+<li>打开Finder，选中文件夹A，右键 -&gt; Get Info。</li>
+<li>打开终端，进入文件夹A的上一级目录，输入 <code>du -h -d 1</code><br>我使用命令方式，逐级定位出超大文件夹位置。使用命令<code>ls -ahg</code>查看超大文件夹各文件大小：<br><img src="http://ppdxz524p.bkt.clouddn.com/macClean/2.png" loading="lazy"><br>至此终于找出299G大的临时文件.channel_v3.json.swp，将其删除即可。</li>
+</ul>
+<h2 id="帮助"><a href="#帮助" class="headerlink" title="帮助"></a>帮助</h2><p>Finder 查看隐藏文件（夹），快捷键：<code>command + shift + .</code><br>Finder 打开显示完整路径 <code>View -&gt; Show Path Bar</code><br>Finder 中右键进入Terminal <code>Finder -&gt; Services -&gt; Services Preferences/Shortcuts/Files and Folders/New Terminal Tab at Folder</code> </p>
+<h2 id="网页不可拷贝"><a href="#网页不可拷贝" class="headerlink" title="网页不可拷贝"></a>网页不可拷贝</h2><p>contenteditable&#x3D;”true”</p>
+<h2 id="图标"><a href="#图标" class="headerlink" title="图标"></a>图标</h2><p>css 属性：<code>content: &quot;\f0f4&quot; </code><br><a target="_blank" rel="noopener" href="https://fontawesome.com/search?s=solid,brands">https://fontawesome.com/search?s=solid%2Cbrands</a><br><a target="_blank" rel="noopener" href="https://unicode-table.com/en/">https://unicode-table.com/en/</a></p>
 
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> freemarker.template.Configuration;</span><br><span class="line"><span class="keyword">import</span> freemarker.template.Template;</span><br><span class="line"><span class="keyword">import</span> freemarker.template.TemplateException;</span><br><span class="line"><span class="keyword">import</span> freemarker.template.TemplateExceptionHandler;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.File;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.io.OutputStreamWriter;</span><br><span class="line"><span class="keyword">import</span> java.io.Writer;</span><br><span class="line"><span class="keyword">import</span> java.util.LinkedList;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException, TemplateException &#123;</span><br><span class="line">        <span class="type">Configuration</span> <span class="variable">cfg</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Configuration</span>(Configuration.VERSION_2_3_28);</span><br><span class="line">        cfg.setDirectoryForTemplateLoading(<span class="keyword">new</span> <span class="title class_">File</span>(<span class="string">&quot;/Users/carl/workspace/freemarker/src/main/resources/templates&quot;</span>));</span><br><span class="line">        cfg.setDefaultEncoding(<span class="string">&quot;UTF-8&quot;</span>);</span><br><span class="line">        cfg.setTemplateExceptionHandler(TemplateExceptionHandler.HTML_DEBUG_HANDLER);</span><br><span class="line">        cfg.setLogTemplateExceptions(<span class="literal">false</span>);</span><br><span class="line">        cfg.setWrapUncheckedExceptions(<span class="literal">true</span>);</span><br><span class="line"></span><br><span class="line">        <span class="type">Template</span> <span class="variable">temp</span> <span class="operator">=</span> cfg.getTemplate(<span class="string">&quot;hello.ftlh&quot;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="type">DataModel</span> <span class="variable">root</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">DataModel</span>();</span><br><span class="line"></span><br><span class="line">        root.setUser(<span class="string">&quot;小红&quot;</span>);</span><br><span class="line"></span><br><span class="line">        List&lt;Animal&gt; animals = <span class="keyword">new</span> <span class="title class_">LinkedList</span>&lt;Animal&gt;();</span><br><span class="line">        animals.add(<span class="keyword">new</span> <span class="title class_">Animal</span>(<span class="string">&quot;a&quot;</span>, <span class="string">&quot;12&quot;</span>));</span><br><span class="line">        animals.add(<span class="keyword">new</span> <span class="title class_">Animal</span>(<span class="string">&quot;b&quot;</span>, <span class="string">&quot;12&quot;</span>));</span><br><span class="line"></span><br><span class="line">        root.setAnimals(animals);</span><br><span class="line"></span><br><span class="line">        <span class="type">Writer</span> <span class="variable">out</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">OutputStreamWriter</span>(System.out);</span><br><span class="line">        temp.process(root, out);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Animal</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> String price;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">DataModel</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> String user;</span><br><span class="line">    <span class="keyword">private</span> List&lt;Animal&gt; animals;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>console:</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;html&gt;</span><br><span class="line">&lt;<span class="built_in">head</span>&gt;</span><br><span class="line">    &lt;title&gt;Welcome!&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;h1&gt;Welcome 小红!&lt;/h1&gt;</span><br><span class="line">&lt;p&gt;We have these animals:</span><br><span class="line">&lt;ul&gt;</span><br><span class="line">      &lt;li&gt;a <span class="keyword">for</span> 12 Euros</span><br><span class="line">      &lt;li&gt;b <span class="keyword">for</span> 12 Euros</span><br><span class="line">&lt;/ul&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
       
     </div>
 
@@ -262,7 +270,7 @@
 
 
   <nav class="pagination">
-    <a class="extend prev" rel="prev" title="上一页" aria-label="上一页" href="/blog/page/24/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/24/">24</a><span class="page-number current">25</span><a class="page-number" href="/blog/page/26/">26</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/195/">195</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/blog/page/26/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" title="上一页" aria-label="上一页" href="/blog/page/24/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/24/">24</a><span class="page-number current">25</span><a class="page-number" href="/blog/page/26/">26</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/197/">197</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/blog/page/26/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 </div>

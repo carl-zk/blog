@@ -141,7 +141,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/blog/archives/">
-          <span class="site-state-item-count">195</span>
+          <span class="site-state-item-count">197</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -152,7 +152,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/blog/tags/">
-        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-count">26</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -178,7 +178,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://carl-zk.github.io/blog/2018/04/01/Longest-Substring-no-Repeat/">
+    <link itemprop="mainEntityOfPage" href="https://carl-zk.github.io/blog/2018/04/06/mysql-server/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/blog/images/avatar.gif">
@@ -196,7 +196,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/blog/2018/04/01/Longest-Substring-no-Repeat/" class="post-title-link" itemprop="url">Longest Substring No Repeat</a>
+          <a href="/blog/2018/04/06/mysql-server/" class="post-title-link" itemprop="url">Mysql Server</a>
         </h2>
 
         <div class="post-meta-container">
@@ -207,7 +207,7 @@
       </span>
       <span class="post-meta-item-text">发表于</span>
 
-      <time title="创建时间：2018-04-01 10:46:40" itemprop="dateCreated datePublished" datetime="2018-04-01T10:46:40+08:00">2018-04-01</time>
+      <time title="创建时间：2018-04-06 19:21:31" itemprop="dateCreated datePublished" datetime="2018-04-06T19:21:31+08:00">2018-04-06</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -215,6 +215,15 @@
       </span>
       <span class="post-meta-item-text">更新于</span>
       <time title="修改时间：2024-05-18 16:19:43" itemprop="dateModified" datetime="2024-05-18T16:19:43+08:00">2024-05-18</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/blog/categories/%E7%B3%BB%E7%BB%9F%E9%85%8D%E7%BD%AE/" itemprop="url" rel="index"><span itemprop="name">系统配置</span></a>
+        </span>
     </span>
 
   
@@ -227,23 +236,36 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <blockquote>
-<p>没有所谓的水题，只有解题的思想够不够先进。</p>
+          <h4 id="忘记-root-密码"><a href="#忘记-root-密码" class="headerlink" title="忘记 root 密码"></a>忘记 root 密码</h4><blockquote>
+<p>mysql server version : 5.7.9+</p>
 </blockquote>
-<p>Given a string, find the length of the longest substring without repeating characters.</p>
-<p>Examples:<br>Given “abcabcbb”, the answer is “abc”, which the length is 3.<br>Given “bbbbb”, the answer is “b”, with the length of 1.<br>Given “pwwkew”, the answer is “wke”, with the length of 3. Note that the answer must be a substring, “pwke” is a subsequence and not a substring.</p>
-<p>需要做两项工作：</p>
+<p>查找MySQL sever 安装位置<br>sudo find &#x2F; -name “mysqld”</p>
 <ol>
-<li>查字符是否与当前连续子串重复；</li>
-<li>计算当前子串长度；</li>
+<li>停服务<br>ps -ef|grep mysql<br>sudo kill -9 pid1 pid2			</li>
+<li>重启<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysqld_safe --skip-grant-tables &amp;</span><br></pre></td></tr></table></figure></li>
+<li>登录<br>mysql -u root </li>
+<li>重置密码<br>use mysql;<br>update user set authentication_string&#x3D;’password’, password_expired &#x3D; ‘N’ where User &#x3D;’root’ and Host&#x3D;’localhost’;<br>flush privileges;<br>exit;<br>停服务重新登录即可<br>sudo mysqld -uroot &amp;</li>
 </ol>
-<p>用一个 HashMap&lt;char, int&gt; 来保存 &lt;字符, 字符所在位置下标&gt;，用 maxlen 来保存最长不重复子串长度，用 i 保存当前子串起始坐标，遍历字符串数组：</p>
-<ol>
-<li>根据 Integer loc &#x3D; map.get(char), loc &#x3D;&#x3D; null || loc &lt; i 来判断是否重复;</li>
-<li>当重复时，子串长度不可能增加；当不重复时，更新最大长度 maxlen &#x3D; max(maxlen, j-i+1);</li>
+<p>注意：Mac 上通过 System Preferences 启动的 server，其启动参数 -u 为 _mysql，在上述第2步之后，第3步改为<br>mysql -u _mysql<br>grant all privileges on <em>.</em> to ‘root‘@’%’ identified by ‘password’ with grant option;</p>
+<h4 id="数据迁移"><a href="#数据迁移" class="headerlink" title="数据迁移"></a>数据迁移</h4><h5 id="导出工具"><a href="#导出工具" class="headerlink" title="导出工具"></a>导出工具</h5><p><a target="_blank" rel="noopener" href="http://www.runoob.com/mysql/mysql-database-export.html">MySQL数据导出</a></p>
+<h6 id="mysqldump"><a href="#mysqldump" class="headerlink" title="mysqldump"></a>mysqldump</h6><ol>
+<li>导出 sql<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysqldump <span class="operator">-</span>hhost <span class="operator">-</span>uroot <span class="operator">-</span>ppassword <span class="comment">--single-transaction schema table -r </span></span><br><span class="line">dump.sql</span><br></pre></td></tr></table></figure>
+导入：<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mysql <span class="operator">-</span>uroot <span class="operator">-</span>p</span><br><span class="line"><span class="operator">&gt;</span>use databases;</span><br><span class="line"><span class="operator">&gt;</span>source <span class="operator">/</span>path<span class="operator">/</span><span class="keyword">to</span><span class="operator">/</span>dump.sql</span><br></pre></td></tr></table></figure></li>
+<li>导出 tab<br>mysqldump -hhost -uroot -ppassword –tab&#x3D;&#x2F;Users&#x2F;hero&#x2F;tmp –fields-terminated-by&#x3D;’^!’ –lines-terminated-by&#x3D;’\n’ –single-transaction schema table</li>
 </ol>
-<p><a target="_blank" rel="noopener" href="https://leetcode.com/problems/longest-substring-without-repeating-characters/description/">Longest Substring Without Repeating Characters</a><br><code>AC code</code></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">lengthOfLongestSubstring</span><span class="params">(String s)</span> &#123;</span><br><span class="line">        HashMap&lt;Character, Integer&gt; map = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;();</span><br><span class="line">        <span class="type">char</span>[] chars = s.toCharArray();</span><br><span class="line">        <span class="type">int</span> <span class="variable">maxlen</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt; chars.length; j++) &#123;</span><br><span class="line">            <span class="type">Integer</span> <span class="variable">k</span> <span class="operator">=</span> map.get(chars[j]);</span><br><span class="line">            <span class="keyword">if</span> (k == <span class="literal">null</span> || k &lt; i) &#123;</span><br><span class="line">                maxlen = Math.max(maxlen, j - i + <span class="number">1</span>);</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                i = k + <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            map.put(chars[j], j);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> maxlen;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="比较工具"><a href="#比较工具" class="headerlink" title="比较工具"></a>比较工具</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysqldbcompare --server1=root:密码@IP:3306 --server2=root:passwd@ip:3306 --difftype=sql schema1:schema2</span><br></pre></td></tr></table></figure>
+<p> 如果schema含有非字母字符，<br> –difftype&#x3D;sql “`nh-rel-x`:`nh-rel-x`“ –run-all-tests &gt; ~&#x2F;tmp&#x2F;res.txt</p>
+<h4 id="比较脚本"><a href="#比较脚本" class="headerlink" title="比较脚本"></a>比较脚本</h4><blockquote>
+<p>场景：在不影响生产的情况下拿A库与B库做比较，A与B分别在两个地方，用otter做了实时同步。但是otter有问题，不知道哪些数据同步有问题，所以需要逐表比对一下。</p>
+</blockquote>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">. <span class="operator">/</span>Users<span class="operator">/</span>hero<span class="operator">/</span>.zshrc</span><br><span class="line"># 取所有表名</span><br><span class="line">echo `mysql <span class="operator">-</span>uuser <span class="operator">-</span>ppasswd <span class="operator">-</span>hhost <span class="operator">&lt;&lt;</span>EOF</span><br><span class="line"><span class="keyword">SELECT</span> table_name <span class="keyword">FROM</span> information_schema.tables <span class="keyword">where</span> table_schema<span class="operator">=</span><span class="string">&#x27;nh-rel-x&#x27;</span> <span class="keyword">and</span> table_name <span class="keyword">like</span> <span class="string">&#x27;nh%&#x27;</span> <span class="keyword">and</span> table_name <span class="keyword">not</span> <span class="keyword">like</span> <span class="string">&#x27;%_reference&#x27;</span>;</span><br><span class="line">EOF` <span class="operator">&gt;</span> tables.txt</span><br><span class="line"></span><br><span class="line">sed <span class="operator">-</span>E <span class="operator">-</span>e <span class="string">&#x27;s/\t/ /g&#x27;</span> <span class="operator">-</span>e <span class="string">&#x27;s/ +/\n/g&#x27;</span> tables.txt <span class="operator">|</span> tail <span class="operator">-</span>n <span class="operator">+</span><span class="number">2</span> <span class="operator">&gt;</span> alltables.txt</span><br><span class="line">rm tables.txt</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">. <span class="operator">/</span>Users<span class="operator">/</span>hero<span class="operator">/</span>.zshrc</span><br><span class="line">#<span class="keyword">from</span></span><br><span class="line">url_from<span class="operator">=</span></span><br><span class="line">user_from<span class="operator">=</span></span><br><span class="line">password_from<span class="operator">=</span></span><br><span class="line">schema_from<span class="operator">=</span></span><br><span class="line">#<span class="keyword">to</span></span><br><span class="line">url_to<span class="operator">=</span></span><br><span class="line">user_to<span class="operator">=</span></span><br><span class="line">password_to<span class="operator">=</span></span><br><span class="line">schema_to<span class="operator">=</span></span><br><span class="line"></span><br><span class="line">rm <span class="operator">-</span>rf <span class="keyword">from</span></span><br><span class="line">mkdir <span class="keyword">from</span></span><br><span class="line">rm <span class="operator">-</span>rf <span class="keyword">to</span></span><br><span class="line">mkdir <span class="keyword">to</span></span><br><span class="line">rm <span class="operator">-</span>rf diff</span><br><span class="line">mkdir diff</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> `cat alltables.txt`; do</span><br><span class="line">  echo &quot;`date &#x27;+%H:%M:%S&#x27;` compare table ---&gt; &quot;$i&quot;\n&quot;</span><br><span class="line">  mysqldump <span class="operator">-</span>h$url_from <span class="operator">-</span>u$user_from <span class="operator">-</span>p$password_from <span class="comment">--single-transaction $schema_from $i -r from/$&#123;i&#125;</span></span><br><span class="line">  mysqldump <span class="operator">-</span>h$url_to <span class="operator">-</span>u$user_to <span class="operator">-</span>p$password_to <span class="comment">--single-transaction $schema_to $i -r to/$&#123;i&#125;</span></span><br><span class="line">  grep &quot;^INSERT&quot; <span class="keyword">from</span><span class="operator">/</span>$&#123;i&#125; <span class="operator">|</span> sed <span class="operator">-</span>e <span class="string">&#x27;s/INSERT.*VALUES //g&#x27;</span> <span class="operator">-</span>e <span class="string">&#x27;s/),/)\n/g&#x27;</span> <span class="operator">-</span>e <span class="string">&#x27;s/);/)\n/g&#x27;</span> <span class="operator">&gt;</span> <span class="keyword">from</span><span class="operator">/</span>$&#123;i&#125;.ok</span><br><span class="line">  grep &quot;^INSERT&quot; <span class="keyword">to</span><span class="operator">/</span>$&#123;i&#125; <span class="operator">|</span> sed <span class="operator">-</span>e <span class="string">&#x27;s/INSERT.*VALUES //g&#x27;</span> <span class="operator">-</span>e <span class="string">&#x27;s/),/)\n/g&#x27;</span> <span class="operator">-</span>e <span class="string">&#x27;s/);/)\n/g&#x27;</span> <span class="operator">&gt;</span> <span class="keyword">to</span><span class="operator">/</span>$&#123;i&#125;.ok</span><br><span class="line">  diff <span class="keyword">from</span><span class="operator">/</span>$&#123;i&#125;.ok <span class="keyword">to</span><span class="operator">/</span>$&#123;i&#125;.ok <span class="operator">&gt;</span> diff<span class="operator">/</span>$i</span><br><span class="line">done</span><br><span class="line"></span><br><span class="line">find diff<span class="operator">/</span> <span class="operator">-</span><span class="keyword">empty</span> <span class="operator">-</span><span class="keyword">delete</span></span><br><span class="line"></span><br><span class="line"><span class="operator">&gt;</span>report.txt</span><br><span class="line">tabs<span class="operator">=</span>`ls diff<span class="operator">/</span>`</span><br><span class="line"><span class="keyword">for</span> t <span class="keyword">in</span> $tabs; do</span><br><span class="line">  shanghai<span class="operator">=</span>`grep <span class="operator">-</span>c &quot;^&lt;&quot; diff<span class="operator">/</span>$t`</span><br><span class="line">  hongkong<span class="operator">=</span>`grep <span class="operator">-</span>c &quot;^&gt;&quot; diff<span class="operator">/</span>$t`</span><br><span class="line">  echo $t  $shanghai  $hongkong <span class="operator">&gt;&gt;</span> report.txt</span><br><span class="line">done</span><br><span class="line">sort <span class="operator">-</span>n <span class="operator">-</span>k <span class="number">2</span> report.txt</span><br></pre></td></tr></table></figure>
+<h4 id="mm"><a href="#mm" class="headerlink" title="mm"></a>mm</h4><p><code>mysql -uroot -ppassword &lt; init.sql</code><br>init.sql</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">use mydb;</span><br><span class="line">#创建用户表</span><br><span class="line"><span class="keyword">CREATE TABLE</span> t_user (</span><br><span class="line">    id <span class="type">INT</span> auto_increment <span class="keyword">PRIMARY KEY</span>,</span><br><span class="line">        name <span class="type">VARCHAR</span>(<span class="number">30</span>),</span><br><span class="line">        password <span class="type">varchar</span>(<span class="number">64</span>),</span><br><span class="line">        credits <span class="type">INT</span></span><br><span class="line">)ENGINE<span class="operator">=</span>INNODB;</span><br><span class="line">#创建登录日志表</span><br><span class="line"><span class="keyword">create TABLE</span> t_login_log (</span><br><span class="line">      id <span class="type">int</span> auto_increment <span class="keyword">PRIMARY KEY</span>,</span><br><span class="line">        user_id <span class="type">int</span>,</span><br><span class="line">        ip <span class="type">varchar</span>(<span class="number">23</span>),</span><br><span class="line">        login_datetime datetime</span><br><span class="line">)ENGINE<span class="operator">=</span>INNODB;</span><br></pre></td></tr></table></figure>
+
+
+
 
       
     </div>
@@ -263,7 +285,7 @@
 
 
   <nav class="pagination">
-    <a class="extend prev" rel="prev" title="上一页" aria-label="上一页" href="/blog/page/44/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/44/">44</a><span class="page-number current">45</span><a class="page-number" href="/blog/page/46/">46</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/195/">195</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/blog/page/46/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" title="上一页" aria-label="上一页" href="/blog/page/44/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/44/">44</a><span class="page-number current">45</span><a class="page-number" href="/blog/page/46/">46</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/197/">197</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/blog/page/46/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 </div>

@@ -141,7 +141,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/blog/archives/">
-          <span class="site-state-item-count">195</span>
+          <span class="site-state-item-count">197</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -152,7 +152,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/blog/tags/">
-        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-count">26</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -178,7 +178,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://carl-zk.github.io/blog/2017/04/17/%E5%8F%91%E7%8E%B0%E4%B8%80%E6%9C%AC%E5%A5%BD%E4%B9%A6/">
+    <link itemprop="mainEntityOfPage" href="https://carl-zk.github.io/blog/2017/05/06/linux%E9%85%8D%E7%BD%AEjdk/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/blog/images/avatar.gif">
@@ -196,7 +196,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/blog/2017/04/17/%E5%8F%91%E7%8E%B0%E4%B8%80%E6%9C%AC%E5%A5%BD%E4%B9%A6/" class="post-title-link" itemprop="url">发现一本好书</a>
+          <a href="/blog/2017/05/06/linux%E9%85%8D%E7%BD%AEjdk/" class="post-title-link" itemprop="url">Linux配置jdk</a>
         </h2>
 
         <div class="post-meta-container">
@@ -207,7 +207,7 @@
       </span>
       <span class="post-meta-item-text">发表于</span>
 
-      <time title="创建时间：2017-04-17 22:47:27" itemprop="dateCreated datePublished" datetime="2017-04-17T22:47:27+08:00">2017-04-17</time>
+      <time title="创建时间：2017-05-06 21:58:38" itemprop="dateCreated datePublished" datetime="2017-05-06T21:58:38+08:00">2017-05-06</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -215,6 +215,15 @@
       </span>
       <span class="post-meta-item-text">更新于</span>
       <time title="修改时间：2024-05-18 16:19:43" itemprop="dateModified" datetime="2024-05-18T16:19:43+08:00">2024-05-18</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/blog/categories/%E7%B3%BB%E7%BB%9F%E9%85%8D%E7%BD%AE/" itemprop="url" rel="index"><span itemprop="name">系统配置</span></a>
+        </span>
     </span>
 
   
@@ -227,11 +236,12 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <blockquote>
-<p>这里主要记录一些意外发现的好东西,比如博客书籍.</p>
-</blockquote>
-<h4 id="The-Linux-Command-Line"><a href="#The-Linux-Command-Line" class="headerlink" title="The Linux Command Line"></a>The Linux Command Line</h4><p>快乐Linux命令行<br><a target="_blank" rel="noopener" href="https://billie66.github.io/TLCL/">https://billie66.github.io/TLCL/</a><br>去下pdf,成为linux大神<a target="_blank" rel="noopener" href="http://linuxcommand.org/">官网</a></p>
-<h4 id=""><a href="#" class="headerlink" title=""></a></h4><h4 id="-1"><a href="#-1" class="headerlink" title=""></a></h4><h4 id="-2"><a href="#-2" class="headerlink" title=""></a></h4><h4 id="-3"><a href="#-3" class="headerlink" title=""></a></h4><h4 id="-4"><a href="#-4" class="headerlink" title=""></a></h4><h4 id="-5"><a href="#-5" class="headerlink" title=""></a></h4><h4 id="-6"><a href="#-6" class="headerlink" title=""></a></h4>
+          <p>已经有一种习惯，每次配置jdk都会翻自己以前的博客，因为每次只要一百度，肯定会出来很多乱七八糟的东西，而且google出来的也不准确。互联网就是因为坏的东西太多，一一甄别太耗时，还是自己备份的最靠谱。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># java jdk 1u8</span><br><span class="line">export JAVA_HOME=/usr/lib/jdk</span><br><span class="line">export JRE_HOME=$&#123;JAVA_HOME&#125;/jre </span><br><span class="line">export CLASSPATH=.:$&#123;JAVA_HOME&#125;/lib:$&#123;JRE_HOME&#125;/lib</span><br><span class="line">export PATH=$&#123;JAVA_HOME&#125;/bin:$PATH</span><br></pre></td></tr></table></figure>
+
+<p>华丽丽的隐身分割线</p>
+<p>IDEA可以在terminal中直接’idea’启动，但是点击图标却报JDK not found。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ locate idea.sh</span><br><span class="line">$ vi /path/to/idea.sh</span><br><span class="line"></span><br><span class="line">在第2行添加</span><br><span class="line">export IDEA_JDK=/path/to/jdk</span><br></pre></td></tr></table></figure>
       
     </div>
 
@@ -250,7 +260,7 @@
 
 
   <nav class="pagination">
-    <a class="extend prev" rel="prev" title="上一页" aria-label="上一页" href="/blog/page/94/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/94/">94</a><span class="page-number current">95</span><a class="page-number" href="/blog/page/96/">96</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/195/">195</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/blog/page/96/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" title="上一页" aria-label="上一页" href="/blog/page/94/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/94/">94</a><span class="page-number current">95</span><a class="page-number" href="/blog/page/96/">96</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/197/">197</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/blog/page/96/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 </div>

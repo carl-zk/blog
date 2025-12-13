@@ -141,7 +141,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/blog/archives/">
-          <span class="site-state-item-count">195</span>
+          <span class="site-state-item-count">197</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -152,7 +152,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/blog/tags/">
-        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-count">26</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -178,7 +178,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://carl-zk.github.io/blog/2023/12/17/spring-cloud-%E9%85%8D%E7%BD%AE%E5%8A%A0%E5%AF%86%E5%AD%97%E6%AE%B5/">
+    <link itemprop="mainEntityOfPage" href="https://carl-zk.github.io/blog/2024/05/18/One-day/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/blog/images/avatar.gif">
@@ -196,7 +196,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/blog/2023/12/17/spring-cloud-%E9%85%8D%E7%BD%AE%E5%8A%A0%E5%AF%86%E5%AD%97%E6%AE%B5/" class="post-title-link" itemprop="url">Spring Cloud 配置加密字段</a>
+          <a href="/blog/2024/05/18/One-day/" class="post-title-link" itemprop="url">One Day</a>
         </h2>
 
         <div class="post-meta-container">
@@ -207,14 +207,7 @@
       </span>
       <span class="post-meta-item-text">发表于</span>
 
-      <time title="创建时间：2023-12-17 19:47:50" itemprop="dateCreated datePublished" datetime="2023-12-17T19:47:50+08:00">2023-12-17</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-05-18 16:19:43" itemprop="dateModified" datetime="2024-05-18T16:19:43+08:00">2024-05-18</time>
+      <time title="创建时间：2024-05-18 16:19:43" itemprop="dateCreated datePublished" datetime="2024-05-18T16:19:43+08:00">2024-05-18</time>
     </span>
 
   
@@ -227,22 +220,7 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <blockquote>
-<p>spring cloud 源码解析系列 </p>
-</blockquote>
-<p><a href="/blog/repo/spring-cloud-%E9%85%8D%E7%BD%AE%E5%8A%A0%E5%AF%86%E5%AD%97%E6%AE%B5/EncryptionBootstrapConfiguration">EncryptionBootstrapConfiguration</a></p>
-<p>spring cloud rsa 加密 等效为：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">KeyProperties</span> <span class="variable">keyProperties</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">KeyProperties</span>();</span><br><span class="line">keyProperties.getKeyStore()</span><br><span class="line">		.setLocation(<span class="keyword">new</span> <span class="title class_">FileUrlResource</span>(Paths.get(<span class="string">&quot;src/test/resources/server.jks&quot;</span>).toUri().toURL()));</span><br><span class="line">keyProperties.getKeyStore().setAlias(<span class="string">&quot;mytestkey&quot;</span>);</span><br><span class="line">keyProperties.getKeyStore().setPassword(System.getenv(<span class="string">&quot;JKS_PASSWORD&quot;</span>));</span><br><span class="line">keyProperties.getKeyStore().setType(<span class="string">&quot;jks&quot;</span>);</span><br><span class="line"><span class="type">RsaProperties</span> <span class="variable">rsaProperties</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">RsaProperties</span>();</span><br><span class="line">rsaProperties.setAlgorithm(RsaAlgorithm.DEFAULT);</span><br><span class="line">rsaProperties.setSalt(<span class="string">&quot;bloodybeaf&quot;</span>);</span><br><span class="line">rsaProperties.setStrong(<span class="literal">false</span>);</span><br><span class="line"><span class="type">TextEncryptor</span> <span class="variable">textEncryptor</span> <span class="operator">=</span> TextEncryptorUtils.createTextEncryptor(keyProperties, rsaProperties);</span><br><span class="line"><span class="type">String</span> <span class="variable">text</span> <span class="operator">=</span> <span class="string">&quot;hello world&quot;</span>;</span><br><span class="line"><span class="type">String</span> <span class="variable">encryptedText</span> <span class="operator">=</span> textEncryptor.encrypt(text);</span><br><span class="line">System.out.println(encryptedText);</span><br><span class="line"><span class="type">String</span> <span class="variable">decryptedText</span> <span class="operator">=</span> textEncryptor.decrypt(encryptedText);</span><br><span class="line">System.out.println(decryptedText);</span><br><span class="line">assertEquals(text, decryptedText);</span><br></pre></td></tr></table></figure>
-
-<p>.jks &#x3D; java keyStore<br>keystore type : pem &#x2F; jks</p>
-<p>jdk&#x2F;bin 中自带 keytool 命令</p>
-<p><code>keytool -genkey -keyalg RSA -alias &lt;alias/username&gt; -keystore keystore.jks -storepass &lt;password&gt; -keypass &lt;password&gt;</code></p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">keytool -genkey -keyalg RSA -<span class="built_in">alias</span> mytestkey -keystore server.jks -storepass xxx</span><br></pre></td></tr></table></figure>
-
-<p>java keystore to pem, <strong>这个工具很好用</strong><br><a target="_blank" rel="noopener" href="https://keystore-explorer.org/">https://keystore-explorer.org/</a></p>
-<p>.pem 为固定格式、base64 的秘钥文件</p>
-<p>注意导出时去掉勾选加密！！！</p>
-<h2 id="避坑"><a href="#避坑" class="headerlink" title="避坑"></a>避坑</h2><p>运行eclipse时，添加环境变量到windows ，需要重启eclipse才可以在项目运行时获取到新添加的变量！！！<br>例如 在 application.properties 中配置了placeholder ${jks_pass}，未重启eclipse时，重新运行application是拿不到该变量的。</p>
+          <p>hexo new draft</p>
 
       
     </div>
@@ -262,7 +240,7 @@
 
 
   <nav class="pagination">
-    <a class="extend prev" rel="prev" title="上一页" aria-label="上一页" href="/blog/page/4/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/blog/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/195/">195</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/blog/page/6/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" title="上一页" aria-label="上一页" href="/blog/page/4/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/blog/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/197/">197</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/blog/page/6/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 </div>

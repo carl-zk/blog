@@ -141,7 +141,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/blog/archives/">
-          <span class="site-state-item-count">195</span>
+          <span class="site-state-item-count">197</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -152,7 +152,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/blog/tags/">
-        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-count">26</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -178,7 +178,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://carl-zk.github.io/blog/2017/03/05/Install-OFBize/">
+    <link itemprop="mainEntityOfPage" href="https://carl-zk.github.io/blog/2017/03/08/synchronized-vs-ReentrantLock/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/blog/images/avatar.gif">
@@ -196,7 +196,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/blog/2017/03/05/Install-OFBize/" class="post-title-link" itemprop="url">Install OFBiz</a>
+          <a href="/blog/2017/03/08/synchronized-vs-ReentrantLock/" class="post-title-link" itemprop="url">Synchronized vs ReentrantLock</a>
         </h2>
 
         <div class="post-meta-container">
@@ -207,7 +207,7 @@
       </span>
       <span class="post-meta-item-text">发表于</span>
 
-      <time title="创建时间：2017-03-05 13:11:57" itemprop="dateCreated datePublished" datetime="2017-03-05T13:11:57+08:00">2017-03-05</time>
+      <time title="创建时间：2017-03-08 22:37:02" itemprop="dateCreated datePublished" datetime="2017-03-08T22:37:02+08:00">2017-03-08</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -222,7 +222,7 @@
       </span>
       <span class="post-meta-item-text">分类于</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/blog/categories/OFBiz/" itemprop="url" rel="index"><span itemprop="name">OFBiz</span></a>
+          <a href="/blog/categories/java/" itemprop="url" rel="index"><span itemprop="name">java</span></a>
         </span>
     </span>
 
@@ -236,9 +236,11 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h1 id="download"><a href="#download" class="headerlink" title="download"></a>download</h1><p><a target="_blank" rel="noopener" href="https://ofbiz.apache.org/download.html">download</a></p>
-<h1 id="install-gradle"><a href="#install-gradle" class="headerlink" title="install gradle"></a>install gradle</h1><p><a target="_blank" rel="noopener" href="https://docs.gradle.org/3.4.1/userguide/overview.html">gradle</a>是一个build,automate and deliver工具，类似ant，不过<a target="_blank" rel="noopener" href="http://localhost:4000/blog/2017/03/06/gradle/">gradle学习</a>主要针对Java项目。build scripts是采用<a target="_blank" rel="noopener" href="http://groovy-lang.org/install.html">Groovy</a>语言，原因是它比Java更简单直接，类似Python、Ruby。<br>你可以不用安装gradle，如果它是一个Gradle-based build项目，直接 <code>./gradlew tasks</code>即可。<br>我选择直接安装在&#x2F;opt&#x2F;gradle中，在~&#x2F;.zshrc中export然后source。(Ubuntu的sdk安装工具sdkman类似mac的brew)</p>
-<h1 id="first-step"><a href="#first-step" class="headerlink" title="first step"></a>first step</h1><p>进入OFBiz根目录，它是一个gradle-based的项目，但是我已经安装gradle了，所以可以直接<code>gradle cleanAll loadDefault</code></p>
+          <blockquote>
+<p>最近看到项目代码中有很多地方用到了<code>synchronized</code>，纠结它与<code>ReentrantLock</code>在性能上孰优孰劣。正好也把<code>ReadWriteLock</code>、<code>ReentrantReadWriteLock</code>、<code>StampedLock</code>也研究一下。</p>
+</blockquote>
+<p>参考：<br><a target="_blank" rel="noopener" href="https://javarevisited.blogspot.com/2013/03/reentrantlock-example-in-java-synchronized-difference-vs-lock.html">difference between synchronized vs ReentrantLock</a></p>
+<p>看了一个接一个的资料，觉得自己对Java一无所知，曾经看过的都忘记了。这就是只会用的硬伤，先看完薄的Java并发再看深入jvm，回头来解决这个博客，估计是要看源码的了，自己写代码比较一下。<br>蛋疼的渣渣，以前太自以为是了，欠了好多债啊！！！</p>
 
       
     </div>
@@ -258,7 +260,7 @@
 
 
   <nav class="pagination">
-    <a class="extend prev" rel="prev" title="上一页" aria-label="上一页" href="/blog/page/109/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/109/">109</a><span class="page-number current">110</span><a class="page-number" href="/blog/page/111/">111</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/195/">195</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/blog/page/111/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" title="上一页" aria-label="上一页" href="/blog/page/109/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/109/">109</a><span class="page-number current">110</span><a class="page-number" href="/blog/page/111/">111</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/197/">197</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/blog/page/111/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 </div>

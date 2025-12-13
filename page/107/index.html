@@ -141,7 +141,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/blog/archives/">
-          <span class="site-state-item-count">195</span>
+          <span class="site-state-item-count">197</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -152,7 +152,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/blog/tags/">
-        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-count">26</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -178,7 +178,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://carl-zk.github.io/blog/2017/03/09/%E7%AC%AC%E4%B8%80%E7%AB%A0-%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E7%9A%84%E6%8C%91%E6%88%98/">
+    <link itemprop="mainEntityOfPage" href="https://carl-zk.github.io/blog/2017/03/11/%E7%AC%AC%E4%B8%89%E7%AB%A0-Java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/blog/images/avatar.gif">
@@ -196,7 +196,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/blog/2017/03/09/%E7%AC%AC%E4%B8%80%E7%AB%A0-%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E7%9A%84%E6%8C%91%E6%88%98/" class="post-title-link" itemprop="url">第一章 并发编程的挑战</a>
+          <a href="/blog/2017/03/11/%E7%AC%AC%E4%B8%89%E7%AB%A0-Java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/" class="post-title-link" itemprop="url">第三章 Java内存模型</a>
         </h2>
 
         <div class="post-meta-container">
@@ -207,7 +207,7 @@
       </span>
       <span class="post-meta-item-text">发表于</span>
 
-      <time title="创建时间：2017-03-09 22:53:21" itemprop="dateCreated datePublished" datetime="2017-03-09T22:53:21+08:00">2017-03-09</time>
+      <time title="创建时间：2017-03-11 23:28:38" itemprop="dateCreated datePublished" datetime="2017-03-11T23:28:38+08:00">2017-03-11</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -236,17 +236,62 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>并发会有上下文切换，所以一定规模下不一定比串行快，来看一个比较：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ConcurrencyTest</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="type">int</span> <span class="variable">count</span> <span class="operator">=</span> <span class="number">2000000000</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">concurrencyFor</span><span class="params">()</span> <span class="keyword">throws</span> InterruptedException &#123;</span><br><span class="line">        <span class="type">long</span> <span class="variable">start</span> <span class="operator">=</span> System.currentTimeMillis();</span><br><span class="line">        <span class="type">Thread</span> <span class="variable">thread</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Thread</span>(<span class="keyword">new</span> <span class="title class_">Runnable</span>() &#123;</span><br><span class="line">            <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">run</span><span class="params">()</span> &#123;</span><br><span class="line">                <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; count; i++) ;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        thread.start();</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; count; i++) ;</span><br><span class="line">        thread.join();</span><br><span class="line">        <span class="type">long</span> <span class="variable">finish</span> <span class="operator">=</span> System.currentTimeMillis();</span><br><span class="line">        System.out.print(<span class="string">&quot;concurrency time=&quot;</span>);</span><br><span class="line">        System.out.println(finish - start);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">serialFor</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="type">long</span> <span class="variable">start</span> <span class="operator">=</span> System.currentTimeMillis();</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; count; i++) ;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; count; i++) ;</span><br><span class="line">        <span class="type">long</span> <span class="variable">finish</span> <span class="operator">=</span> System.currentTimeMillis();</span><br><span class="line">        System.out.print(<span class="string">&quot;serial time=&quot;</span>);</span><br><span class="line">        System.out.println(finish - start);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> InterruptedException &#123;</span><br><span class="line">        <span class="type">ConcurrencyTest</span> <span class="variable">test</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ConcurrencyTest</span>();</span><br><span class="line">        test.concurrencyFor();</span><br><span class="line">        test.serialFor();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>记得有个面试官问我一个CPU的话有没有必要写并发编程，我回答没必要。凸显了我的无知，我忘记了指令级别的优化，唉。</p>
-<p><strong>测试上下文切换</strong><br>时长：Lmbench3<br>次数：vmstat<br> <strong>查看线程信息</strong>： jstack</p>
-<p> 查看死锁</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> chapter01;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by hero on 17-3-11.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">DeadLock</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">Object</span> <span class="variable">a</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Object</span>();</span><br><span class="line">    <span class="keyword">private</span> <span class="type">Object</span> <span class="variable">b</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Object</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="keyword">new</span> <span class="title class_">DeadLock</span>().fun();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">fun</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="type">Thread</span> <span class="variable">t1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Thread</span>(<span class="keyword">new</span> <span class="title class_">Runnable</span>() &#123;</span><br><span class="line">            <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">run</span><span class="params">()</span> &#123;</span><br><span class="line">                <span class="keyword">synchronized</span> (a) &#123;</span><br><span class="line">                    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; <span class="number">100000000</span>; i++) ;</span><br><span class="line">                    <span class="keyword">synchronized</span> (b) &#123;</span><br><span class="line">                        System.out.println(<span class="string">&quot;a b&quot;</span>);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">        <span class="type">Thread</span> <span class="variable">t2</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Thread</span>(<span class="keyword">new</span> <span class="title class_">Runnable</span>() &#123;</span><br><span class="line">            <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">run</span><span class="params">()</span> &#123;</span><br><span class="line">                <span class="keyword">synchronized</span> (b) &#123;</span><br><span class="line">                    <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; <span class="number">100000000</span>; i++) ;</span><br><span class="line">                    <span class="keyword">synchronized</span> (a) &#123;</span><br><span class="line">                        System.out.println(<span class="string">&quot;b a&quot;</span>);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">        t1.start();</span><br><span class="line">        t2.start();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"> $: pgrep java</span><br><span class="line"> </span><br><span class="line"> $: jstack pid &gt; ~/temp/log   </span><br><span class="line"> 得到的结果如下</span><br><span class="line">Found one Java-level deadlock:</span><br><span class="line">=============================</span><br><span class="line">&quot;Thread-1&quot;:</span><br><span class="line">  waiting to lock monitor 0x00007fed60004e28 (object 0x000000076d0951b0, a java.lang.Object),</span><br><span class="line">  which is held by &quot;Thread-0&quot;</span><br><span class="line">&quot;Thread-0&quot;:</span><br><span class="line">  waiting to lock monitor 0x00007fed600062c8 (object 0x000000076d0951c0, a java.lang.Object),</span><br><span class="line">  which is held by &quot;Thread-1&quot;</span><br><span class="line"></span><br><span class="line">Java stack information for the threads listed above:</span><br><span class="line">===================================================</span><br><span class="line">&quot;Thread-1&quot;:</span><br><span class="line">	at chapter01.DeadLock$2.run(DeadLock.java:31)</span><br><span class="line">	- waiting to lock &lt;0x000000076d0951b0&gt; (a java.lang.Object)</span><br><span class="line">	- locked &lt;0x000000076d0951c0&gt; (a java.lang.Object)</span><br><span class="line">	at java.lang.Thread.run(Thread.java:745)</span><br><span class="line">&quot;Thread-0&quot;:</span><br><span class="line">	at chapter01.DeadLock$1.run(DeadLock.java:20)</span><br><span class="line">	- waiting to lock &lt;0x000000076d0951c0&gt; (a java.lang.Object)</span><br><span class="line">	- locked &lt;0x000000076d0951b0&gt; (a java.lang.Object)</span><br><span class="line">	at java.lang.Thread.run(Thread.java:745)</span><br><span class="line"></span><br><span class="line">Found 1 deadlock.</span><br></pre></td></tr></table></figure>
-
-<p> <strong>总结</strong>：避免死锁，减少上下文切换，根据资源限制(软、硬件)来控制并发。</p>
-
+          <h1 id="Java内存模型的基础"><a href="#Java内存模型的基础" class="headerlink" title="Java内存模型的基础"></a>Java内存模型的基础</h1><h2 id="并发编程模型的两个关键问题："><a href="#并发编程模型的两个关键问题：" class="headerlink" title="并发编程模型的两个关键问题："></a>并发编程模型的两个关键问题：</h2><ul>
+<li>线程之间如何通信。</li>
+<li>线程之间如何同步。</li>
+</ul>
+<p>命令式编程中线程通信机制：</p>
+<table>
+<thead>
+<tr>
+<th>并发模型</th>
+<th align="center">程序的公共状态</th>
+<th align="right">通信方式</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>共享内存</td>
+<td align="center">共享</td>
+<td align="right">隐式</td>
+</tr>
+<tr>
+<td>消息传递</td>
+<td align="center">无</td>
+<td align="right">显示</td>
+</tr>
+</tbody></table>
+<p>同步是指程序中用于控制不同线程间操作发生相对顺序的机制。</p>
+<table>
+<thead>
+<tr>
+<th>并发模型</th>
+<th align="center">状态</th>
+<th align="right">方式</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>共享内存</td>
+<td align="center">显式</td>
+<td align="right">显式指定某个方法或某段代码需要在线程之间互斥执行</td>
+</tr>
+<tr>
+<td>消息传递</td>
+<td align="center">隐式</td>
+<td align="right">消息的发送必须在接收之前的属性决定的</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>java的并发采用的是共享内存模型，线程之间的通信是隐式的，整个通信过程对程序员完全透明。</p>
+</blockquote>
+<h2 id="Java内存模型的抽象结构"><a href="#Java内存模型的抽象结构" class="headerlink" title="Java内存模型的抽象结构"></a>Java内存模型的抽象结构</h2><p>在Java中，所有实例域、静态域和数组元素都存储在堆内存中，线程间共享，称为“共享变量”。<br>局部变量(Local Variables)、方法定义参数(Formal Method Parameters)和异常处理器参数(Exception Handler Parameters)不会在线程间共享，它们不会有内存可见性问题，也不受JMM影响。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/blog/2017/03/11/%E7%AC%AC%E4%B8%89%E7%AB%A0-Java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -265,7 +310,7 @@
 
 
   <nav class="pagination">
-    <a class="extend prev" rel="prev" title="上一页" aria-label="上一页" href="/blog/page/106/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/106/">106</a><span class="page-number current">107</span><a class="page-number" href="/blog/page/108/">108</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/195/">195</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/blog/page/108/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" title="上一页" aria-label="上一页" href="/blog/page/106/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/106/">106</a><span class="page-number current">107</span><a class="page-number" href="/blog/page/108/">108</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/197/">197</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/blog/page/108/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 </div>

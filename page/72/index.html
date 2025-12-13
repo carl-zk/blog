@@ -141,7 +141,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/blog/archives/">
-          <span class="site-state-item-count">195</span>
+          <span class="site-state-item-count">197</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -152,7 +152,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/blog/tags/">
-        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-count">26</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -178,7 +178,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://carl-zk.github.io/blog/2017/09/17/%E7%97%85%E5%8E%86/">
+    <link itemprop="mainEntityOfPage" href="https://carl-zk.github.io/blog/2017/10/14/grub/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/blog/images/avatar.gif">
@@ -196,7 +196,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/blog/2017/09/17/%E7%97%85%E5%8E%86/" class="post-title-link" itemprop="url">病历</a>
+          <a href="/blog/2017/10/14/grub/" class="post-title-link" itemprop="url">Grub</a>
         </h2>
 
         <div class="post-meta-container">
@@ -207,7 +207,7 @@
       </span>
       <span class="post-meta-item-text">发表于</span>
 
-      <time title="创建时间：2017-09-17 21:18:53" itemprop="dateCreated datePublished" datetime="2017-09-17T21:18:53+08:00">2017-09-17</time>
+      <time title="创建时间：2017-10-14 11:31:10" itemprop="dateCreated datePublished" datetime="2017-10-14T11:31:10+08:00">2017-10-14</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -227,23 +227,23 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>真是上了年纪了，偶感风寒导致咳嗽了快一个月，再加上发烧，昨天大概是最难熬的一天了。<br>城里的医保点开的药贵不说，关键是不起作用，无奈只好把我吃过有用的药都记录一下，下次去医保直接点。</p>
-<h1 id="黑名单"><a href="#黑名单" class="headerlink" title="黑名单"></a>黑名单</h1><p>银黄片</p>
-<h1 id="推荐"><a href="#推荐" class="headerlink" title="推荐"></a>推荐</h1><h3 id="发烧感冒"><a href="#发烧感冒" class="headerlink" title="发烧感冒"></a>发烧感冒</h3><p>999板蓝根颗粒（当糖喝，反正没有副作用）<br>仁和可立克</p>
-<h3 id="咳嗽"><a href="#咳嗽" class="headerlink" title="咳嗽"></a>咳嗽</h3><p>修正 利克达 清肺抑火片<br>TAIJI 急支糖浆（既然咳嗽，那就喝吧，反正刷医保卡）</p>
-<h2 id="病历"><a href="#病历" class="headerlink" title="病历"></a>病历</h2><table>
-<thead>
-<tr>
-<th>日期</th>
-<th align="right">生病</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>2019.9.1～9.17</td>
-<td align="right">咳嗽、发烧</td>
-</tr>
-</tbody></table>
-
+          <blockquote>
+<p>目的：制作一个Linux和windows启动盘。</p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.gnu.org/software/grub/">grub官网</a><br><a target="_blank" rel="noopener" href="https://www.linux.com/learn/how-rescue-non-booting-grub-2-Linux">grub命令修复系统</a><br><a target="_blank" rel="noopener" href="http://www.winsetupfromusb.com/downloads/">多合一启动盘制作工具 WinSetupFromUSB</a><a target="_blank" rel="noopener" href="http://www.iplaysoft.com/winsetupfromusb.html">【WinSetupFromUSB教程】</a><br><a target="_blank" rel="noopener" href="https://www.pendrivelinux.com/multiboot-create-a-multiboot-usb-from-linux/">MultiSystem – Create a MultiBoot USB from Linux</a><a target="_blank" rel="noopener" href="http://www.mintos.org/skill/multisystem.html">【MultiSystem教程】</a><br><strong>GNU GRUB</strong>是一个系统开机引导应用。</p>
+<h3 id="命名规则"><a href="#命名规则" class="headerlink" title="命名规则"></a>命名规则</h3><p>(fd0) :  fd 表示floppy disk，0 表示drive number，driver号从0开始。<br>(hd0,msdos2) :  hd 表示hard disk drive，msdos 表示partition scheme，2表示partition number， partition number从1开始。<br>(hd0,msdos5) :  5表示hd0的第一个逻辑分区。(一个系统只能有4个主分区)<br>(hd1,msdos1,bsd1) :  BSD系统中，第二个硬盘第一个slice的’a’分区。<br>如何指定一个文件？<br>(hd0,msdos1)&#x2F;vmlinuz :  第一个硬盘的第一个主分区的vmlinuz文件。</p>
+<h3 id="如何用GRUB引导OS"><a href="#如何用GRUB引导OS" class="headerlink" title="如何用GRUB引导OS"></a>如何用GRUB引导OS</h3><p><strong>GRUB有两种不同的引导方式：直接引导和chain-load（引导另一种boot loader，让它去load OS）。</strong><br>Multiboot是GRUB原生支持的，它可以直接引导Linux, FreeBSD, NetBSD and OpenBSD等系统。<br>不支持Multiboot及GRUB没有明确表示支持的系统只能通过chain-load引导。</p>
+<p>Chain-loading is only supported on PC BIOS and EFI platforms.</p>
+<h3 id="GRUB-SHELL"><a href="#GRUB-SHELL" class="headerlink" title="GRUB SHELL"></a>GRUB SHELL</h3><h4 id="如何用grub命令手动引导？"><a href="#如何用grub命令手动引导？" class="headerlink" title="如何用grub命令手动引导？"></a>如何用grub命令手动引导？</h4><p>1.进入<code>grub&gt;</code>;<br>ubuntu&#x2F;debian系统开机出现画面时按一下shift键。<br>如果开机时没有选择界面，直接到输入密码界面，则需要修改&#x2F;etc&#x2F;default&#x2F;grub文件<br><code>GRUB_HIDDEN_TIMEOUT=10</code>取消注释并设置成10<br><code>GRUB_GFXMODE=640x480</code>取消注释<br>修改完执行<code>update-grub</code><br>2.在shell中</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">grub&gt;<span class="built_in">ls</span></span><br><span class="line">列出当前系统中的磁盘分区代号</span><br><span class="line">(hd0) (hd0,msdos6) (hd0,msdos5) (hd0,msdos1)</span><br><span class="line">grub&gt;<span class="built_in">ls</span> (hd0,msdos6)/</span><br><span class="line">列出分区中的文件，可看出此分区为 /</span><br><span class="line">bin    dev   initrd.img      lib32       media  proc  sbin  sys  var</span><br><span class="line">boot   etc   initrd.img.old  lib64       mnt    root  snap  tmp  vmlinuz</span><br><span class="line">cdrom  home  lib             lost+found  opt    run   srv   usr  vmlinuz.old</span><br><span class="line">grub&gt; <span class="built_in">ls</span> (hd0,msdos1)</span><br><span class="line">会列出分区信息：文件系统类型、UUID、分区大小等。</span><br><span class="line">grub&gt;<span class="built_in">ls</span> (hd0,msdos1)/</span><br><span class="line">可看出此分区为 /boot</span><br><span class="line">abi-4.10.0-19-generic         memtest86+.bin</span><br><span class="line">abi-4.10.0-35-generic         memtest86+.elf</span><br><span class="line">abi-4.10.0-37-generic         memtest86+_multiboot.bin</span><br><span class="line">config-4.10.0-19-generic      System.map-4.10.0-19-generic</span><br><span class="line">config-4.10.0-35-generic      System.map-4.10.0-35-generic</span><br><span class="line">config-4.10.0-37-generic      System.map-4.10.0-37-generic</span><br><span class="line">efi                           vmlinuz-4.10.0-19-generic</span><br><span class="line">grub                          vmlinuz-4.10.0-35-generic</span><br><span class="line">initrd.img-4.10.0-19-generic  vmlinuz-4.10.0-35-generic.efi.signed</span><br><span class="line">initrd.img-4.10.0-35-generic  vmlinuz-4.10.0-37-generic</span><br><span class="line">initrd.img-4.10.0-37-generic  vmlinuz-4.10.0-37-generic.efi.signed</span><br><span class="line">grub&gt;<span class="built_in">set</span> root=(hd0,msdos6)</span><br><span class="line">grub&gt;linux (hd0,msdos1)/vmlinuz-4.10.0-35-generic root=/dev/sda6</span><br><span class="line">grub&gt;initrd (hd0,msdos1)/initrd.img-4.10.0-35-generic</span><br><span class="line">grub&gt;boot</span><br></pre></td></tr></table></figure>
+<p>通过ls可以查到哪个分区是&#x2F;boot，哪个分区是&#x2F;。然后set root&#x3D;(hd0,msdos6)，指定根目录。然后linux (hd0,msdos1)&#x2F;vmlinuz-4.10.0-35-generic告诉GRUB加载哪个kernel，root&#x3D;&#x2F;dev&#x2F;sda6指定根目录。然后initrd (hd0,msdos1)&#x2F;initrd.img-4.10.0-35-generic指定initrd file。最后boot。<br>如果是x86系统，对应的linux16、initrd16。initrd file是加载kernel后的启动参数。<br>在*grub rescue&gt;*模式下可参考：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">grub rescue&gt; <span class="built_in">set</span> prefix=(hd0,1)/boot/grub</span><br><span class="line">grub rescue&gt; <span class="built_in">set</span> root=(hd0,1)</span><br><span class="line">grub rescue&gt; insmod normal</span><br><span class="line">grub rescue&gt; normal</span><br><span class="line">grub rescue&gt; insmod linux</span><br><span class="line">grub rescue&gt; linux /boot/vmlinuz-3.13.0-29-generic root=/dev/sda1</span><br><span class="line">grub rescue&gt; initrd /boot/initrd.img-3.13.0-29-generic</span><br><span class="line">grub rescue&gt; boot</span><br></pre></td></tr></table></figure>
+<p>等成功进入系统后，执行</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#update-grub</span></span><br><span class="line"><span class="comment">#grub-install /dev/sda</span></span><br></pre></td></tr></table></figure>
+<p>grub-install &#x2F;dev&#x2F;sda只需指定boot的所在driver，不要partition number，所以do not use a partition number like &#x2F;dev&#x2F;sda1.<br>如果还不行，就用其它工具<a target="_blank" rel="noopener" href="http://www.supergrubdisk.org/">Super Grub2 Disk</a>.</p>
+<p>以上是引导&#x2F;修复GNU&#x2F;Linux，如果是DOS&#x2F;Windows,请参考<a target="_blank" rel="noopener" href="https://www.gnu.org/software/grub/manual/grub/grub.html#Configuration">5.3.4 DOS&#x2F;Windows</a></p>
+<h3 id="写一个configuration-file"><a href="#写一个configuration-file" class="headerlink" title="写一个configuration file"></a>写一个configuration file</h3><h4 id="Simple-configuration"><a href="#Simple-configuration" class="headerlink" title="Simple configuration"></a>Simple configuration</h4><p>最推荐的一种方式，可以应对绝大多数情况。<br>使用grub-mkconfig命令生成grub.cfg文件，&#x2F;etc&#x2F;default&#x2F;grub文件控制grub-mkconfig。生成grub.cfg后，如果修改了&#x2F;etc&#x2F;default&#x2F;grub文件，需要<code>update-grub</code>来更新一下&#x2F;boot&#x2F;grub&#x2F;grub.cfg文件。grub-mkconfig使用的模板在&#x2F;usr&#x2F;local&#x2F;etc&#x2F;grub.d中。<br>&#x2F;etc&#x2F;default&#x2F;grub中是标准的键-值对，值中如果有空格则需双引号括起来。</p>
+<h4 id="Shell-like-scripting"><a href="#Shell-like-scripting" class="headerlink" title="Shell-like scripting"></a>Shell-like scripting</h4><h4 id="Multi-boot-manual-config"><a href="#Multi-boot-manual-config" class="headerlink" title="Multi-boot manual config"></a>Multi-boot manual config</h4><h4 id="Embedded-configuration"><a href="#Embedded-configuration" class="headerlink" title="Embedded configuration"></a>Embedded configuration</h4>
       
     </div>
 
@@ -262,7 +262,7 @@
 
 
   <nav class="pagination">
-    <a class="extend prev" rel="prev" title="上一页" aria-label="上一页" href="/blog/page/71/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/71/">71</a><span class="page-number current">72</span><a class="page-number" href="/blog/page/73/">73</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/195/">195</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/blog/page/73/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" title="上一页" aria-label="上一页" href="/blog/page/71/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/71/">71</a><span class="page-number current">72</span><a class="page-number" href="/blog/page/73/">73</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/197/">197</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/blog/page/73/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 </div>

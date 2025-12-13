@@ -141,7 +141,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/blog/archives/">
-          <span class="site-state-item-count">195</span>
+          <span class="site-state-item-count">197</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -152,7 +152,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/blog/tags/">
-        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-count">26</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -178,7 +178,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://carl-zk.github.io/blog/2019/04/04/%E6%9D%82%E8%AF%86/">
+    <link itemprop="mainEntityOfPage" href="https://carl-zk.github.io/blog/2019/05/02/Jenkins-CI-CD/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/blog/images/avatar.gif">
@@ -196,7 +196,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/blog/2019/04/04/%E6%9D%82%E8%AF%86/" class="post-title-link" itemprop="url">杂识</a>
+          <a href="/blog/2019/05/02/Jenkins-CI-CD/" class="post-title-link" itemprop="url">Jenkins CI/CD</a>
         </h2>
 
         <div class="post-meta-container">
@@ -207,7 +207,7 @@
       </span>
       <span class="post-meta-item-text">发表于</span>
 
-      <time title="创建时间：2019-04-04 19:51:52" itemprop="dateCreated datePublished" datetime="2019-04-04T19:51:52+08:00">2019-04-04</time>
+      <time title="创建时间：2019-05-02 12:52:07" itemprop="dateCreated datePublished" datetime="2019-05-02T12:52:07+08:00">2019-05-02</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -215,15 +215,6 @@
       </span>
       <span class="post-meta-item-text">更新于</span>
       <time title="修改时间：2024-05-18 16:19:43" itemprop="dateModified" datetime="2024-05-18T16:19:43+08:00">2024-05-18</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/blog/categories/%E7%B3%BB%E7%BB%9F%E9%85%8D%E7%BD%AE/" itemprop="url" rel="index"><span itemprop="name">系统配置</span></a>
-        </span>
     </span>
 
   
@@ -236,21 +227,24 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h2 id="windows-kill-pid-on-port"><a href="#windows-kill-pid-on-port" class="headerlink" title="windows kill pid on port"></a>windows kill pid on port</h2><p><code>netstat -ano | findstr :8080</code><br><code>taskkill /PID pid /F</code></p>
-<h2 id="find-then-rename-file"><a href="#find-then-rename-file" class="headerlink" title="find then rename file"></a>find then rename file</h2><p><code>find . -name &quot;*.txt&quot; -exec  sh -c &#39;x=&#123;&#125;; mv &quot;$x&quot; $(echo $x | sed &#39;s/\.txt/\.bat/g&#39;)&#39; \;</code></p>
-<h2 id="replace-all-string"><a href="#replace-all-string" class="headerlink" title="replace all string"></a>replace all string</h2><p><code>find ./source -type f -name &quot;*md&quot; -exec grep &quot;\!\[\](/blog&quot; &#123;&#125; \;</code><br><code>find ./source -type f -name &quot;*md&quot; -exec gsed -i &quot;s/\!\[\](\/blog/\!\[\](/g&quot; &#123;&#125; \;</code></p>
-<h2 id="MacBook-磁盘清理"><a href="#MacBook-磁盘清理" class="headerlink" title="MacBook 磁盘清理"></a>MacBook 磁盘清理</h2><blockquote>
-<p>刚买的电脑磁盘满了，有点怀疑人生。查下来发现是由于sublime的临时文件导致的。由于Mac上趁手的工具需要花钱，从磁盘中找到哪里出的问题也需要些技巧，所以在这里记下来方便以后查看。</p>
+          <blockquote>
+<p>很好奇 Jenkins 是怎么做灰度发布的，我不懂。<br>我根据对 Pipeline 的理解，然后尝试将一个 Spring Boot Web 项目编译，打包，生成镜像和部署。整个下来才发现原来我一直以为自己理解什么是滚动发布，但是实际上我不懂如何用 Jenkins 做到。</p>
 </blockquote>
-<h2 id="查看磁盘总的使用情况"><a href="#查看磁盘总的使用情况" class="headerlink" title="查看磁盘总的使用情况"></a>查看磁盘总的使用情况</h2><p><code>df -h</code><br><img src="http://ppdxz524p.bkt.clouddn.com/macClean/1.png" loading="lazy"><br>可以看到磁盘剩余89G。</p>
-<h2 id="查看文件夹大小"><a href="#查看文件夹大小" class="headerlink" title="查看文件夹大小"></a>查看文件夹大小</h2><p>有两种方式，以查看文件夹A为例：</p>
+<h2 id="Pipeline"><a href="#Pipeline" class="headerlink" title="Pipeline"></a>Pipeline</h2><p><a target="_blank" rel="noopener" href="https://jenkins.io/doc/book/pipeline/">https://jenkins.io/doc/book/pipeline/</a></p>
+<p>Pipeline 是一条流水线，涵盖了整个项目从编译、打包到测试、部署中间所有的步骤。一般在Jenkinsfile文件中定义整个 pipeline。</p>
+<p>先理解 Pipeline的几个概念。</p>
 <ul>
-<li>打开Finder，选中文件夹A，右键 -&gt; Get Info。</li>
-<li>打开终端，进入文件夹A的上一级目录，输入 <code>du -h -d 1</code><br>我使用命令方式，逐级定位出超大文件夹位置。使用命令<code>ls -ahg</code>查看超大文件夹各文件大小：<br><img src="http://ppdxz524p.bkt.clouddn.com/macClean/2.png" loading="lazy"><br>至此终于找出299G大的临时文件.channel_v3.json.swp，将其删除即可。</li>
+<li>Node<br>Jenkins service 的一部分，可以跑 Pipeline 的机器。Jenkinsfile中 agent { node { label ‘labelName’ } } 可以指定 node。刚起动的 Jenkins 只有 master 一个节点。</li>
+<li>Stage<br>自定义一组 task，可在 Jenkins UI 看到 status&#x2F;progress。</li>
+<li>Step<br>一个 task，存在于一个特定的 Stage 中。</li>
+<li><a target="_blank" rel="noopener" href="https://jenkins.io/doc/book/pipeline/syntax/#agent">agent</a><br>pipeline 运行环境，如果定义在最上面表明整个 pipeline 都在同一个 agent 中执行，也可以在每个 Stage 块中单独指定，作用于单个 Stage。</li>
 </ul>
-<h2 id="帮助"><a href="#帮助" class="headerlink" title="帮助"></a>帮助</h2><p>Finder 查看隐藏文件（夹），快捷键：<code>command + shift + .</code><br>Finder 打开显示完整路径 <code>View -&gt; Show Path Bar</code><br>Finder 中右键进入Terminal <code>Finder -&gt; Services -&gt; Services Preferences/Shortcuts/Files and Folders/New Terminal Tab at Folder</code> </p>
-<h2 id="网页不可拷贝"><a href="#网页不可拷贝" class="headerlink" title="网页不可拷贝"></a>网页不可拷贝</h2><p>contenteditable&#x3D;”true”</p>
-<h2 id="图标"><a href="#图标" class="headerlink" title="图标"></a>图标</h2><p>css 属性：<code>content: &quot;\f0f4&quot; </code><br><a target="_blank" rel="noopener" href="https://fontawesome.com/search?s=solid,brands">https://fontawesome.com/search?s=solid%2Cbrands</a><br><a target="_blank" rel="noopener" href="https://unicode-table.com/en/">https://unicode-table.com/en/</a></p>
+<h2 id="Config-Master-Node"><a href="#Config-Master-Node" class="headerlink" title="Config Master Node"></a>Config Master Node</h2><p>为了让 pipeline 都跑在 master 节点上，需要额外配置好 maven。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="built_in">exec</span> -it -u root my-jenkins bash</span><br><span class="line">wget https://www-us.apache.org/dist/maven/maven-3/3.6.1/binaries/apache-maven-3.6.1-bin.tar.gz</span><br><span class="line">tar xvzf apache-maven-3.6.1-bin.tar.gz</span><br><span class="line"><span class="built_in">ln</span> -s /apache-maven-3.6.1/bin/mvn /usr/bin/mvn</span><br><span class="line">apt-get update &amp;&amp; apt-get install vim</span><br><span class="line">vi /apache-maven-3.6.1/conf/settings.xml</span><br><span class="line">修改仓库地址 &lt;localRepository&gt;/home/.m2/repository&lt;/localRepository&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Create-Jenkinsfile"><a href="#Create-Jenkinsfile" class="headerlink" title="Create Jenkinsfile"></a>Create Jenkinsfile</h2><p><a target="_blank" rel="noopener" href="https://github.com/carl-zk/jenkins-demo">github source</a><br>Jenkinsfile</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">pipeline &#123;</span><br><span class="line">    agent &#123; label <span class="string">&#x27;master&#x27;</span> &#125;</span><br><span class="line"></span><br><span class="line">    environment &#123;</span><br><span class="line">        IMAGE_NAME = <span class="string">&#x27;jenkins-demo&#x27;</span></span><br><span class="line">        LABEL = <span class="string">&#x27;latest&#x27;</span></span><br><span class="line">        CONTAINER_NAME = <span class="string">&#x27;jenkins-demo&#x27;</span></span><br><span class="line">        PORT = 8090</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    stages &#123;</span><br><span class="line">        stage(<span class="string">&#x27;Package&#x27;</span>) &#123;</span><br><span class="line">            steps &#123;</span><br><span class="line">                sh <span class="string">&#x27;mvn -B -DskipTests=true clean package&#x27;</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        stage(<span class="string">&#x27;Build Image&#x27;</span>) &#123;</span><br><span class="line">            steps &#123;</span><br><span class="line">                script &#123;</span><br><span class="line">                    sh <span class="string">&#x27;pwd &amp;&amp; cd docker/ &amp;&amp; docker build -t $&#123;IMAGE_NAME&#125;:$&#123;LABEL&#125; .&#x27;</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        stage(<span class="string">&#x27;Deploy&#x27;</span>) &#123;</span><br><span class="line">            steps &#123;</span><br><span class="line">                sh <span class="string">&quot;&quot;</span><span class="string">&quot;</span></span><br><span class="line"><span class="string">                    docker ps -f name=<span class="variable">$&#123;CONTAINER_NAME&#125;</span> -q | xargs --no-run-if-empty docker container stop</span></span><br><span class="line"><span class="string">                    docker container ls -a -f name=<span class="variable">$&#123;CONTAINER_NAME&#125;</span> -q | xargs -r docker container rm -v</span></span><br><span class="line"><span class="string">                    docker run -d --name <span class="variable">$&#123;CONTAINER_NAME&#125;</span> -p <span class="variable">$&#123;PORT&#125;</span>:<span class="variable">$&#123;PORT&#125;</span> <span class="variable">$&#123;IMAGE_NAME&#125;</span>:<span class="variable">$&#123;LABEL&#125;</span></span></span><br><span class="line"><span class="string">                &quot;</span><span class="string">&quot;&quot;</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Jenkins 持续集成&#x2F;持续发布 待续。</p>
 
       
     </div>
@@ -270,7 +264,7 @@
 
 
   <nav class="pagination">
-    <a class="extend prev" rel="prev" title="上一页" aria-label="上一页" href="/blog/page/22/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/22/">22</a><span class="page-number current">23</span><a class="page-number" href="/blog/page/24/">24</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/195/">195</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/blog/page/24/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" title="上一页" aria-label="上一页" href="/blog/page/22/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/22/">22</a><span class="page-number current">23</span><a class="page-number" href="/blog/page/24/">24</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/197/">197</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/blog/page/24/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 </div>

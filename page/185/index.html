@@ -141,7 +141,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/blog/archives/">
-          <span class="site-state-item-count">195</span>
+          <span class="site-state-item-count">197</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -152,7 +152,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/blog/tags/">
-        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-count">26</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -178,7 +178,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://carl-zk.github.io/blog/2016/06/18/%E5%93%88%E5%A4%AB%E6%9B%BC%E7%BC%96%E7%A0%81/">
+    <link itemprop="mainEntityOfPage" href="https://carl-zk.github.io/blog/2016/06/20/Rightmost-Digit/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/blog/images/avatar.gif">
@@ -196,7 +196,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/blog/2016/06/18/%E5%93%88%E5%A4%AB%E6%9B%BC%E7%BC%96%E7%A0%81/" class="post-title-link" itemprop="url">哈夫曼编码</a>
+          <a href="/blog/2016/06/20/Rightmost-Digit/" class="post-title-link" itemprop="url">Rightmost Digit</a>
         </h2>
 
         <div class="post-meta-container">
@@ -207,7 +207,7 @@
       </span>
       <span class="post-meta-item-text">发表于</span>
 
-      <time title="创建时间：2016-06-18 23:00:18" itemprop="dateCreated datePublished" datetime="2016-06-18T23:00:18+08:00">2016-06-18</time>
+      <time title="创建时间：2016-06-20 22:38:20" itemprop="dateCreated datePublished" datetime="2016-06-20T22:38:20+08:00">2016-06-20</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -222,7 +222,7 @@
       </span>
       <span class="post-meta-item-text">分类于</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/blog/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" itemprop="url" rel="index"><span itemprop="name">数据结构</span></a>
+          <a href="/blog/categories/hdu/" itemprop="url" rel="index"><span itemprop="name">hdu</span></a>
         </span>
     </span>
 
@@ -236,12 +236,56 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <blockquote>
-<p>哈夫曼编码主要解决不定长编码问题,可以更加节省传输字节.由于每个字母都是叶结点,所以不存在一个编码是另一个编码的前缀的问题.越频繁的编码字母离根结点越近,即编码越短.<br>由传输的比特流01联想到二叉树的左右孩子,进而想出新的编码方式,这真是太伟大了.<br>priority_queue使用时需注意:<br>1.若存放实体,则直接在实体内重构比较运算符即可;<br>2.若存放指针,则需指定排序规则;<br>(c语言的编程精髓就是如何使用指针,不过时刻注意防止内存泄露问题.)</p>
-</blockquote>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stack&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;queue&gt;</span></span></span><br><span class="line">using namespace <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="type">char</span> DATA_TYPE;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">node</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    DATA_TYPE data;</span><br><span class="line">    <span class="type">float</span> rate;</span><br><span class="line">    node *lch, *rch;</span><br><span class="line">    node()</span><br><span class="line">    &#123;</span><br><span class="line">        lch = rch = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="type">bool</span> operator &lt; (<span class="type">const</span> node &amp;x) <span class="type">const</span> <span class="comment">//按rate从小到大排序</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> rate &gt; x.rate;</span><br><span class="line">    &#125;</span><br><span class="line">&#125; Node;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">cmp</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="type">bool</span> <span class="title function_">operator</span> <span class="params">()</span><span class="params">(Node *x, Node *y)</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> x-&gt;rate &gt; y-&gt;rate;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">print</span><span class="params">(Node *r, <span class="type">int</span> encodes[], <span class="type">int</span> idx)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>(r)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(!r-&gt;lch &amp;&amp; !r-&gt;rch)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;%c: &quot;</span>, r-&gt;data);</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>; i&lt;idx; i++)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>, encodes[i]);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        encodes[idx]=<span class="number">0</span>;</span><br><span class="line">        print(r-&gt;lch, encodes, idx+<span class="number">1</span>);</span><br><span class="line">        encodes[idx]=<span class="number">1</span>;</span><br><span class="line">        print(r-&gt;rch, encodes, idx+<span class="number">1</span>);</span><br><span class="line">        <span class="built_in">free</span>(r);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    DATA_TYPE dataArray[] = <span class="string">&quot;abcdefgh&quot;</span>;</span><br><span class="line">    <span class="type">float</span> rateArray[] = &#123;<span class="number">0.05</span>,<span class="number">0.29</span>,<span class="number">0.07</span>,<span class="number">0.08</span>,<span class="number">0.14</span>,<span class="number">0.23</span>,<span class="number">0.03</span>,<span class="number">0.11</span>&#125;;</span><br><span class="line">    <span class="built_in">priority_queue</span>&lt;Node*, <span class="built_in">vector</span>&lt;Node*&gt;, cmp&gt; pqueue; <span class="comment">//队列中存放指针,故需指定比较器cmp</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>; i&lt;<span class="number">8</span>; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        Node *o = (Node*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(Node));</span><br><span class="line">        o-&gt;data=dataArray[i];</span><br><span class="line">        o-&gt;rate=rateArray[i];</span><br><span class="line">        o-&gt;lch=o-&gt;rch=<span class="literal">NULL</span>;</span><br><span class="line">        pqueue.push(o);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(pqueue.size()&gt;<span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        Node *x, *y, *o = (Node*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(Node));</span><br><span class="line">        x = pqueue.top();</span><br><span class="line">        pqueue.pop();</span><br><span class="line">        y = pqueue.top();</span><br><span class="line">        pqueue.pop();</span><br><span class="line">        o-&gt;rate = x-&gt;rate + y-&gt;rate;</span><br><span class="line">        o-&gt;lch = x;</span><br><span class="line">        o-&gt;rch = y;</span><br><span class="line">        pqueue.push(o);</span><br><span class="line">    &#125;</span><br><span class="line">    Node *root = pqueue.top();</span><br><span class="line">    pqueue.pop();</span><br><span class="line">    <span class="type">int</span> encodes[<span class="number">100</span>];</span><br><span class="line">    print(root, encodes, <span class="number">0</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p><img src="http://o6ibfi17w.bkt.clouddn.com/images/huffman.png" loading="lazy"></p>
+          <p><a target="_blank" rel="noopener" href="http://acm.hdu.edu.cn/game/entry/problem/show.php?chapterid=1&sectionid=2&problemid=12">题目链接</a><br>Problem Description<br>Given a positive integer N, you should output the most right digit of N^N.</p>
+<p>Input<br>The input contains several test cases. The first line of the input is a single integer T which is the number of test cases. T test cases follow.<br>Each test case contains a single positive integer N(1&lt;&#x3D;N&lt;&#x3D;1,000,000,000).</p>
+<p>Output<br>For each test case, you should output the rightmost digit of N^N.</p>
+<p>Sample Input<br>2<br>3<br>4</p>
+<p>Sample Output<br>7<br>6</p>
+<p>Hint</p>
+<p>In the first case, 3 * 3 * 3 &#x3D; 27, so the rightmost digit is 7.<br>In the second case, 4 * 4 * 4 * 4 &#x3D; 256, so the rightmost digit is 6.</p>
+<hr />
 
+<p>在维基百科查到这样一段代码:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">double</span> <span class="title function_">power</span> <span class="params">(<span class="type">double</span> a, <span class="type">unsigned</span> <span class="type">int</span> n)</span></span><br><span class="line">&#123;</span><br><span class="line">     <span class="type">double</span> y = <span class="number">1</span>;</span><br><span class="line">     <span class="type">double</span> f = a;</span><br><span class="line">     <span class="type">unsigned</span> <span class="type">int</span> k = n;</span><br><span class="line">     <span class="keyword">while</span> (k != <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (k % <span class="number">2</span> == <span class="number">1</span>) y *= f;</span><br><span class="line">        k &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">        f *= f;</span><br><span class="line">     &#125;</span><br><span class="line">     <span class="keyword">return</span> y;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>当 a&#x3D;n&#x3D;5时:</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th align="center">5</th>
+<th align="center">2</th>
+<th align="center">1</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">5^2</td>
+<td align="center">5^4</td>
+<td align="center"></td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>当a&#x3D;n&#x3D;8时:</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th align="center">8</th>
+<th align="center">4</th>
+<th align="center">2</th>
+<th align="center">1</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">8^2</td>
+<td align="center">8^4</td>
+<td align="center">8^8</td>
+<td align="center"></td>
+</tr>
+</tbody></table>
+<p>这个算法真的达到了指数级增长,时间复杂度仅为<strong>O</strong>(log <em>n</em> ),代码优美.</p>
+<p>由此修改就可得到AC代码:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;math.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"></span><br><span class="line">using namespace <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">myPow</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> n)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> k = n;</span><br><span class="line">    <span class="type">int</span> x = a % <span class="number">10</span>, y = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span>(k != <span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(k % <span class="number">2</span> == <span class="number">1</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            y = (y * x) % <span class="number">10</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        x = (x * x) % <span class="number">10</span>;</span><br><span class="line">        k &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> y;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> t, y;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;t);</span><br><span class="line">    <span class="keyword">while</span>(t--)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;y);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, myPow(y, y));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
       
     </div>
 
@@ -260,7 +304,7 @@
 
 
   <nav class="pagination">
-    <a class="extend prev" rel="prev" title="上一页" aria-label="上一页" href="/blog/page/184/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/184/">184</a><span class="page-number current">185</span><a class="page-number" href="/blog/page/186/">186</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/195/">195</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/blog/page/186/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" title="上一页" aria-label="上一页" href="/blog/page/184/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/184/">184</a><span class="page-number current">185</span><a class="page-number" href="/blog/page/186/">186</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/197/">197</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/blog/page/186/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 </div>

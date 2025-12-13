@@ -141,7 +141,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/blog/archives/">
-          <span class="site-state-item-count">195</span>
+          <span class="site-state-item-count">197</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -152,7 +152,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/blog/tags/">
-        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-count">26</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -178,7 +178,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://carl-zk.github.io/blog/2017/03/03/sublime%E5%BF%AB%E6%8D%B7%E9%94%AE/">
+    <link itemprop="mainEntityOfPage" href="https://carl-zk.github.io/blog/2017/03/05/Install-OFBize/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/blog/images/avatar.gif">
@@ -196,7 +196,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/blog/2017/03/03/sublime%E5%BF%AB%E6%8D%B7%E9%94%AE/" class="post-title-link" itemprop="url">Sublime快捷键</a>
+          <a href="/blog/2017/03/05/Install-OFBize/" class="post-title-link" itemprop="url">Install OFBiz</a>
         </h2>
 
         <div class="post-meta-container">
@@ -207,7 +207,7 @@
       </span>
       <span class="post-meta-item-text">发表于</span>
 
-      <time title="创建时间：2017-03-03 22:19:53" itemprop="dateCreated datePublished" datetime="2017-03-03T22:19:53+08:00">2017-03-03</time>
+      <time title="创建时间：2017-03-05 13:11:57" itemprop="dateCreated datePublished" datetime="2017-03-05T13:11:57+08:00">2017-03-05</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -215,6 +215,15 @@
       </span>
       <span class="post-meta-item-text">更新于</span>
       <time title="修改时间：2024-05-18 16:19:43" itemprop="dateModified" datetime="2024-05-18T16:19:43+08:00">2024-05-18</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/blog/categories/OFBiz/" itemprop="url" rel="index"><span itemprop="name">OFBiz</span></a>
+        </span>
     </span>
 
   
@@ -227,10 +236,9 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h4 id="ctr-p"><a href="#ctr-p" class="headerlink" title="ctr+p"></a>ctr+p</h4><p>可以去任何地方</p>
-<h4 id="ctr-shift-p"><a href="#ctr-shift-p" class="headerlink" title="ctr+shift+p"></a>ctr+shift+p</h4><p>命令模式<br>设置文档语法</p>
-<h4 id="ctr-shift-d"><a href="#ctr-shift-d" class="headerlink" title="ctr+shift+d"></a>ctr+shift+d</h4><p>复制这行</p>
-<h4 id="ctr-d"><a href="#ctr-d" class="headerlink" title="ctr+d"></a>ctr+d</h4><p>ctr+k 跳过一个<br>多行游标（alt+f3, shift+鼠标右键）</p>
+          <h1 id="download"><a href="#download" class="headerlink" title="download"></a>download</h1><p><a target="_blank" rel="noopener" href="https://ofbiz.apache.org/download.html">download</a></p>
+<h1 id="install-gradle"><a href="#install-gradle" class="headerlink" title="install gradle"></a>install gradle</h1><p><a target="_blank" rel="noopener" href="https://docs.gradle.org/3.4.1/userguide/overview.html">gradle</a>是一个build,automate and deliver工具，类似ant，不过<a target="_blank" rel="noopener" href="http://localhost:4000/blog/2017/03/06/gradle/">gradle学习</a>主要针对Java项目。build scripts是采用<a target="_blank" rel="noopener" href="http://groovy-lang.org/install.html">Groovy</a>语言，原因是它比Java更简单直接，类似Python、Ruby。<br>你可以不用安装gradle，如果它是一个Gradle-based build项目，直接 <code>./gradlew tasks</code>即可。<br>我选择直接安装在&#x2F;opt&#x2F;gradle中，在~&#x2F;.zshrc中export然后source。(Ubuntu的sdk安装工具sdkman类似mac的brew)</p>
+<h1 id="first-step"><a href="#first-step" class="headerlink" title="first step"></a>first step</h1><p>进入OFBiz根目录，它是一个gradle-based的项目，但是我已经安装gradle了，所以可以直接<code>gradle cleanAll loadDefault</code></p>
 
       
     </div>
@@ -250,7 +258,7 @@
 
 
   <nav class="pagination">
-    <a class="extend prev" rel="prev" title="上一页" aria-label="上一页" href="/blog/page/111/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/111/">111</a><span class="page-number current">112</span><a class="page-number" href="/blog/page/113/">113</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/195/">195</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/blog/page/113/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" title="上一页" aria-label="上一页" href="/blog/page/111/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/111/">111</a><span class="page-number current">112</span><a class="page-number" href="/blog/page/113/">113</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/197/">197</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/blog/page/113/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 </div>

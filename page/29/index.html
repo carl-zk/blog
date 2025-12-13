@@ -141,7 +141,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/blog/archives/">
-          <span class="site-state-item-count">195</span>
+          <span class="site-state-item-count">197</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -152,7 +152,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/blog/tags/">
-        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-count">26</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -178,7 +178,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://carl-zk.github.io/blog/2018/09/23/MySQL-%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B%E5%88%86%E9%A1%B5/">
+    <link itemprop="mainEntityOfPage" href="https://carl-zk.github.io/blog/2018/11/16/%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/blog/images/avatar.gif">
@@ -196,7 +196,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/blog/2018/09/23/MySQL-%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B%E5%88%86%E9%A1%B5/" class="post-title-link" itemprop="url">MySQL 存储过程分页</a>
+          <a href="/blog/2018/11/16/%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/" class="post-title-link" itemprop="url">问题总结</a>
         </h2>
 
         <div class="post-meta-container">
@@ -207,7 +207,7 @@
       </span>
       <span class="post-meta-item-text">发表于</span>
 
-      <time title="创建时间：2018-09-23 17:19:40" itemprop="dateCreated datePublished" datetime="2018-09-23T17:19:40+08:00">2018-09-23</time>
+      <time title="创建时间：2018-11-16 14:12:09" itemprop="dateCreated datePublished" datetime="2018-11-16T14:12:09+08:00">2018-11-16</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -227,13 +227,12 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p><a target="_blank" rel="noopener" href="https://www.w3resource.com/mysql/mysql-procedure.php">https://www.w3resource.com/mysql/mysql-procedure.php</a><br><a target="_blank" rel="noopener" href="https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_substr">https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_substr</a><br><a href=""></a></p>
-<p><code>MySQL version: 5.7.9</code></p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">drop</span> <span class="keyword">procedure</span> if <span class="keyword">exists</span> pagination;</span><br><span class="line"><span class="keyword">create</span> <span class="keyword">procedure</span> pagination(<span class="keyword">in</span> i_query <span class="type">varchar</span>(<span class="number">8000</span>), <span class="keyword">in</span> i_page <span class="type">int</span>, <span class="keyword">in</span> i_size <span class="type">int</span>, <span class="keyword">out</span> o_total <span class="type">int</span>)</span><br><span class="line">  <span class="keyword">begin</span></span><br><span class="line">    <span class="keyword">set</span> <span class="variable">@limit_start</span> <span class="operator">=</span> (i_page <span class="operator">-</span> <span class="number">1</span>) <span class="operator">*</span> i_size;</span><br><span class="line">    <span class="keyword">set</span> <span class="variable">@limit_size</span> <span class="operator">=</span> i_size;</span><br><span class="line">    <span class="keyword">set</span> <span class="variable">@tmp_query</span> <span class="operator">=</span> concat(<span class="string">&#x27;select * from (&#x27;</span>, i_query, <span class="string">&#x27;) t limit ?, ?&#x27;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">set</span> <span class="variable">@tmp_total</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">set</span> <span class="variable">@tmp_stat</span> <span class="operator">=</span> concat(<span class="string">&#x27;select count(1) into @tmp_total from (&#x27;</span>, i_query, <span class="string">&#x27;) t &#x27;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">prepare</span> stmt_query <span class="keyword">from</span> <span class="variable">@tmp_query</span>;</span><br><span class="line">    <span class="keyword">execute</span> stmt_query <span class="keyword">using</span> <span class="variable">@limit_start</span>, <span class="variable">@limit_size</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">prepare</span> stmt_count <span class="keyword">from</span> <span class="variable">@tmp_stat</span>;</span><br><span class="line">    <span class="keyword">execute</span> stmt_count;</span><br><span class="line">    <span class="keyword">set</span> o_total <span class="operator">=</span> <span class="variable">@tmp_total</span>;</span><br><span class="line">  <span class="keyword">end</span>;</span><br></pre></td></tr></table></figure>
+          <h2 id="生成-ES256-秘钥对"><a href="#生成-ES256-秘钥对" class="headerlink" title="生成 ES256 秘钥对"></a>生成 ES256 秘钥对</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">openssl ecparam -genkey -name prime256v1 -noout -out ec_private.pem</span><br><span class="line">openssl ec -<span class="keyword">in</span> ec_private.pem -pubout -out ec_public.pem</span><br></pre></td></tr></table></figure>
 
-<p>参照之前写的 Oracle 版的分页，思路是一样的；比较坑的是从括号里传的变量前面不加@，在拼接SQL的时候需要另外定义变量才能使用 select count(1) into 。</p>
-<p><code>show VARIABLES like &#39;%max_allowed_packet%&#39;;</code> SQL长度限制，单位 byte.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Test</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        Class.forName(<span class="string">&quot;com.mysql.cj.jdbc.Driver&quot;</span>);</span><br><span class="line">        <span class="type">Connection</span> <span class="variable">connect</span> <span class="operator">=</span> DriverManager</span><br><span class="line">                .getConnection(<span class="string">&quot;jdbc:mysql://localhost:3306/mydb?&quot;</span></span><br><span class="line">                        + <span class="string">&quot;user=root&amp;password=password&quot;</span>);</span><br><span class="line">        <span class="type">int</span> <span class="variable">total</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="type">CallableStatement</span> <span class="variable">callableStatement</span> <span class="operator">=</span> connect.prepareCall(<span class="string">&quot;&#123;call pagination(?,?,?,?)&#125;&quot;</span>);</span><br><span class="line">        callableStatement.setString(<span class="number">1</span>, <span class="string">&quot;select * from tbl_user order by id desc&quot;</span>);</span><br><span class="line">        callableStatement.setInt(<span class="number">2</span>, <span class="number">1</span>);</span><br><span class="line">        callableStatement.setInt(<span class="number">3</span>, <span class="number">6</span>);</span><br><span class="line">        callableStatement.registerOutParameter(<span class="number">4</span>, MysqlType.INT);</span><br><span class="line">        <span class="type">ResultSet</span> <span class="variable">resultSet</span> <span class="operator">=</span> callableStatement.executeQuery();</span><br><span class="line">        total = callableStatement.getInt(<span class="number">4</span>);</span><br><span class="line">        System.out.println(<span class="string">&quot;total = &quot;</span> + total);</span><br><span class="line">        <span class="keyword">while</span> (resultSet.next()) &#123;</span><br><span class="line">            System.out.println(resultSet.getInt(<span class="string">&quot;id&quot;</span>) + <span class="string">&quot;, &quot;</span> + resultSet.getString(<span class="string">&quot;name&quot;</span>));</span><br><span class="line">        &#125;</span><br><span class="line">        connect.close();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Security.addProvider(<span class="keyword">new</span> <span class="title class_">org</span>.bouncycastle.jce.provider.BouncyCastleProvider());</span><br><span class="line"><span class="type">Reader</span> <span class="variable">rdr</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">StringReader</span>(privateKeyPem);</span><br><span class="line"><span class="type">Object</span> <span class="variable">parsed</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">org</span>.bouncycastle.openssl.PEMParser(rdr).readObject();</span><br><span class="line"><span class="type">KeyPair</span> <span class="variable">pair</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">org</span>.bouncycastle.openssl.jcajce.JcaPEMKeyConverter().getKeyPair((org.bouncycastle.openssl.PEMKeyPair) parsed);</span><br><span class="line">privateKey = pair.getPrivate();</span><br><span class="line">publicKey = pair.getPublic();</span><br></pre></td></tr></table></figure>
+
+<h2 id="Jenkins-硬盘100"><a href="#Jenkins-硬盘100" class="headerlink" title="Jenkins 硬盘100%"></a>Jenkins 硬盘100%</h2><p>部署显示成功，代码显示也是最新，但是测试发现老问题依然存在。<br>可能原因是由于硬盘满了，无法生成新镜像，服务器还是跑的老镜像，没有任何异常提示。<br>Jenkins + docker 如果当前部署失败，默认使用上一次的镜像部署，当硬盘不足以生成一个新镜像，此类情况很难排查。</p>
+
       
     </div>
 
@@ -252,7 +251,7 @@
 
 
   <nav class="pagination">
-    <a class="extend prev" rel="prev" title="上一页" aria-label="上一页" href="/blog/page/28/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/28/">28</a><span class="page-number current">29</span><a class="page-number" href="/blog/page/30/">30</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/195/">195</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/blog/page/30/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" title="上一页" aria-label="上一页" href="/blog/page/28/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/28/">28</a><span class="page-number current">29</span><a class="page-number" href="/blog/page/30/">30</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/197/">197</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/blog/page/30/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 </div>

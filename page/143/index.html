@@ -141,7 +141,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/blog/archives/">
-          <span class="site-state-item-count">195</span>
+          <span class="site-state-item-count">197</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -152,7 +152,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/blog/tags/">
-        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-count">26</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -178,7 +178,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://carl-zk.github.io/blog/2017/02/16/%E5%A4%A7%E8%AF%9D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">
+    <link itemprop="mainEntityOfPage" href="https://carl-zk.github.io/blog/2017/02/17/%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/blog/images/avatar.gif">
@@ -196,7 +196,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/blog/2017/02/16/%E5%A4%A7%E8%AF%9D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" class="post-title-link" itemprop="url">大话设计模式</a>
+          <a href="/blog/2017/02/17/%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/" class="post-title-link" itemprop="url">策略模式</a>
         </h2>
 
         <div class="post-meta-container">
@@ -207,7 +207,7 @@
       </span>
       <span class="post-meta-item-text">发表于</span>
 
-      <time title="创建时间：2017-02-16 20:15:01" itemprop="dateCreated datePublished" datetime="2017-02-16T20:15:01+08:00">2017-02-16</time>
+      <time title="创建时间：2017-02-17 10:10:54" itemprop="dateCreated datePublished" datetime="2017-02-17T10:10:54+08:00">2017-02-17</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -236,11 +236,18 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h3 id="lt-lt-大话设计模式-gt-gt"><a href="#lt-lt-大话设计模式-gt-gt" class="headerlink" title="&lt;&lt;大话设计模式&gt;&gt;"></a>&lt;&lt;大话设计模式&gt;&gt;</h3><blockquote>
-<p>首先感谢程杰老师诙谐幽默的写作,让我终于入门,并且感谢程老师不追究我的法律责任(如果要追究,我将删除所有侵权内容^_^).</p>
+          <p>策略模式主要是为了封装变化,体现在Context类中.<br>策略模式+工厂模式(如下Context类),可以更好的隔离客户端.(减少了耦合嘛)</p>
+<h4 id="策略模式解析"><a href="#策略模式解析" class="headerlink" title="策略模式解析"></a>策略模式解析</h4><blockquote>
+<p>策略模式是定义一系列算法的方法,从概念上看,所有这些算法完成的都是相同的工作,只是实现不同,它可以以相同的方式调用所有的算法,减少了各种算法类与使用算法类之间的耦合.</p>
 </blockquote>
-<p><strong>Design Pattern</strong> 容易理解,不容易掌握.*开发过程中很难在一开始就将设计模式应用进去,一般都是在重构时将代码重构为某一模式.*本人是设计的菜鸟,但是有一颗高飞的理想,无奈人老健忘,所以干脆将设计模式全章节都记录进博客中,以后在工作中反复查阅.</p>
-<h4 id="全书目录"><a href="#全书目录" class="headerlink" title="全书目录"></a>全书目录</h4>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> strategy;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by hero on 17-2-17.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">class</span> <span class="title class_">Strategy</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">abstract</span> <span class="type">double</span> <span class="title function_">acceptCash</span><span class="params">(<span class="type">double</span> money)</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> strategy;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by hero on 17-2-17.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Normal</span> <span class="keyword">extends</span> <span class="title class_">Strategy</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="type">double</span> <span class="title function_">acceptCash</span><span class="params">(<span class="type">double</span> money)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> money;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> strategy;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by hero on 17-2-17.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Rate</span> <span class="keyword">extends</span> <span class="title class_">Strategy</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">double</span> <span class="variable">rate</span> <span class="operator">=</span> <span class="number">0.9</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="type">double</span> <span class="title function_">acceptCash</span><span class="params">(<span class="type">double</span> money)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> rate * money;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> strategy;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by hero on 17-2-17.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Context</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> Strategy strategy;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Context</span><span class="params">(Type type)</span> &#123;</span><br><span class="line">        <span class="keyword">switch</span> (type) &#123;</span><br><span class="line">            <span class="keyword">case</span> NORMAL:</span><br><span class="line">                strategy = <span class="keyword">new</span> <span class="title class_">Normal</span>();</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> RATE:</span><br><span class="line">                strategy = <span class="keyword">new</span> <span class="title class_">Rate</span>();</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="type">double</span> <span class="title function_">getResult</span><span class="params">(<span class="type">double</span> money)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> strategy.acceptCash(money);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">enum</span> <span class="title class_">Type</span> &#123;NORMAL, RATE, RETURN&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> strategy;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by hero on 17-2-17.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">Context</span> <span class="variable">context</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">        context = <span class="keyword">new</span> <span class="title class_">Context</span>(Context.Type.NORMAL);</span><br><span class="line">        <span class="type">double</span> <span class="variable">accept</span> <span class="operator">=</span> context.getResult(<span class="number">100</span>);</span><br><span class="line">        System.out.println(accept);</span><br><span class="line"></span><br><span class="line">        context = <span class="keyword">new</span> <span class="title class_">Context</span>(Context.Type.RATE);</span><br><span class="line">        accept = context.getResult(<span class="number">100</span>);</span><br><span class="line">        System.out.println(accept);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/blog/2017/02/17/%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/strategy.svg" loading="lazy"></p>
+
       
     </div>
 
@@ -259,7 +266,7 @@
 
 
   <nav class="pagination">
-    <a class="extend prev" rel="prev" title="上一页" aria-label="上一页" href="/blog/page/142/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/142/">142</a><span class="page-number current">143</span><a class="page-number" href="/blog/page/144/">144</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/195/">195</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/blog/page/144/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" title="上一页" aria-label="上一页" href="/blog/page/142/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/142/">142</a><span class="page-number current">143</span><a class="page-number" href="/blog/page/144/">144</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/197/">197</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/blog/page/144/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 </div>

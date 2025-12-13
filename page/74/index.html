@@ -141,7 +141,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/blog/archives/">
-          <span class="site-state-item-count">195</span>
+          <span class="site-state-item-count">197</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -152,7 +152,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/blog/tags/">
-        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-count">26</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -178,7 +178,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://carl-zk.github.io/blog/2017/09/17/%E4%BD%BF%E7%94%A8sql-developer%E8%B0%83%E8%AF%95/">
+    <link itemprop="mainEntityOfPage" href="https://carl-zk.github.io/blog/2017/09/17/%E7%97%85%E5%8E%86/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/blog/images/avatar.gif">
@@ -196,7 +196,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/blog/2017/09/17/%E4%BD%BF%E7%94%A8sql-developer%E8%B0%83%E8%AF%95/" class="post-title-link" itemprop="url">使用Sql Developer调试</a>
+          <a href="/blog/2017/09/17/%E7%97%85%E5%8E%86/" class="post-title-link" itemprop="url">病历</a>
         </h2>
 
         <div class="post-meta-container">
@@ -207,7 +207,7 @@
       </span>
       <span class="post-meta-item-text">发表于</span>
 
-      <time title="创建时间：2017-09-17 10:57:28" itemprop="dateCreated datePublished" datetime="2017-09-17T10:57:28+08:00">2017-09-17</time>
+      <time title="创建时间：2017-09-17 21:18:53" itemprop="dateCreated datePublished" datetime="2017-09-17T21:18:53+08:00">2017-09-17</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -227,14 +227,23 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p><a target="_blank" rel="noopener" href="http://www.oracle.com/technetwork/cn/tutorials/plsql-debug-088880-zhs.html#p">参考</a></p>
-<h4 id="前提条件"><a href="#前提条件" class="headerlink" title="前提条件"></a>前提条件</h4><p>1.解锁hr用户</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">USER</span> hr UNLOCK ACCOUNT; <span class="comment">-- or alter user xx account unlock</span></span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">USER</span> hr IDENTIFIED <span class="keyword">BY</span> hr;</span><br></pre></td></tr></table></figure>
-<p>2.授予debug权限</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">GRANT</span> debug <span class="keyword">any</span> <span class="keyword">procedure</span>, debug <span class="keyword">connect</span> session <span class="keyword">TO</span> hr;</span><br></pre></td></tr></table></figure>
-<h4 id="调试存储过程"><a href="#调试存储过程" class="headerlink" title="调试存储过程"></a>调试存储过程</h4><p>1.单击一个存储过程;<br>2.右键选择<code>compile for debug</code><br>  此时左侧该存储过程会出现一个绿色的小虫。<br>3.单击行首设置断点<br>4.单击红色<code>debug</code>按钮<br>5.在<code>Parameters/Input Value</code>中填入<code>IN</code>的参数，<code>OUT</code>可以不管<br>6.单击<code>OK</code></p>
-<h4 id="truncate等待锁"><a href="#truncate等待锁" class="headerlink" title="truncate等待锁"></a>truncate等待锁</h4><p>默认情况下truncate没有获取锁会立即报错，需要设置DDL_LOCK_TIMEOUT，默认0，即NOWAIT，最大1000000（秒），大约11.5天。</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> <span class="keyword">parameter</span> ddl_lock_time;</span><br><span class="line"><span class="keyword">alter</span> session <span class="keyword">set</span> ddl_lock_timeout<span class="operator">=</span><span class="number">5</span>;</span><br></pre></td></tr></table></figure>
+          <p>真是上了年纪了，偶感风寒导致咳嗽了快一个月，再加上发烧，昨天大概是最难熬的一天了。<br>城里的医保点开的药贵不说，关键是不起作用，无奈只好把我吃过有用的药都记录一下，下次去医保直接点。</p>
+<h1 id="黑名单"><a href="#黑名单" class="headerlink" title="黑名单"></a>黑名单</h1><p>银黄片</p>
+<h1 id="推荐"><a href="#推荐" class="headerlink" title="推荐"></a>推荐</h1><h3 id="发烧感冒"><a href="#发烧感冒" class="headerlink" title="发烧感冒"></a>发烧感冒</h3><p>999板蓝根颗粒（当糖喝，反正没有副作用）<br>仁和可立克</p>
+<h3 id="咳嗽"><a href="#咳嗽" class="headerlink" title="咳嗽"></a>咳嗽</h3><p>修正 利克达 清肺抑火片<br>TAIJI 急支糖浆（既然咳嗽，那就喝吧，反正刷医保卡）</p>
+<h2 id="病历"><a href="#病历" class="headerlink" title="病历"></a>病历</h2><table>
+<thead>
+<tr>
+<th>日期</th>
+<th align="right">生病</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>2019.9.1～9.17</td>
+<td align="right">咳嗽、发烧</td>
+</tr>
+</tbody></table>
+
       
     </div>
 
@@ -253,7 +262,7 @@
 
 
   <nav class="pagination">
-    <a class="extend prev" rel="prev" title="上一页" aria-label="上一页" href="/blog/page/73/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/73/">73</a><span class="page-number current">74</span><a class="page-number" href="/blog/page/75/">75</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/195/">195</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/blog/page/75/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" title="上一页" aria-label="上一页" href="/blog/page/73/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/73/">73</a><span class="page-number current">74</span><a class="page-number" href="/blog/page/75/">75</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/197/">197</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/blog/page/75/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 </div>

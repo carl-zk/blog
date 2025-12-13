@@ -141,7 +141,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/blog/archives/">
-          <span class="site-state-item-count">195</span>
+          <span class="site-state-item-count">197</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -152,7 +152,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/blog/tags/">
-        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-count">26</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -178,7 +178,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://carl-zk.github.io/blog/2017/12/30/javascript%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97/">
+    <link itemprop="mainEntityOfPage" href="https://carl-zk.github.io/blog/2017/12/30/%E7%AC%AC3%E7%AB%A0-%E7%B1%BB%E5%9E%8B%E3%80%81%E5%80%BC%E5%92%8C%E5%8F%98%E9%87%8F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/blog/images/avatar.gif">
@@ -196,7 +196,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/blog/2017/12/30/javascript%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97/" class="post-title-link" itemprop="url">Javascript权威指南</a>
+          <a href="/blog/2017/12/30/%E7%AC%AC3%E7%AB%A0-%E7%B1%BB%E5%9E%8B%E3%80%81%E5%80%BC%E5%92%8C%E5%8F%98%E9%87%8F/" class="post-title-link" itemprop="url">第3章 类型、值和变量</a>
         </h2>
 
         <div class="post-meta-container">
@@ -207,7 +207,7 @@
       </span>
       <span class="post-meta-item-text">发表于</span>
 
-      <time title="创建时间：2017-12-30 11:05:29" itemprop="dateCreated datePublished" datetime="2017-12-30T11:05:29+08:00">2017-12-30</time>
+      <time title="创建时间：2017-12-30 13:34:06" itemprop="dateCreated datePublished" datetime="2017-12-30T13:34:06+08:00">2017-12-30</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -227,35 +227,53 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h2 id="一、概述"><a href="#一、概述" class="headerlink" title="一、概述"></a>一、概述</h2><h3 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">javascript 是弱类型语言，即不需要声明变量的类型。如：</span><br><span class="line"><span class="keyword">var</span> x = <span class="number">2</span>;</span><br><span class="line"><span class="keyword">var</span> y = <span class="string">&quot;hello world&quot;</span></span><br><span class="line">javascript最重要的两类数据类型是对象和数组：</span><br><span class="line"><span class="keyword">var</span> book = &#123;</span><br><span class="line">	<span class="attr">topic</span>: <span class="string">&quot;JavaScript&quot;</span>,</span><br><span class="line">	<span class="attr">fat</span>: <span class="literal">true</span></span><br><span class="line">&#125;</span><br><span class="line">通过<span class="string">&quot;.&quot;</span>或<span class="string">&quot;[]&quot;</span>来访问对象属性：</span><br><span class="line">book.<span class="property">topic</span></span><br><span class="line">book[<span class="string">&quot;fat&quot;</span>]</span><br><span class="line">book.<span class="property">author</span> = <span class="string">&quot;jack&quot;</span>;    <span class="comment">// 通过赋值创建一个新属性</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> primes = [<span class="number">2</span>, <span class="number">3</span>, <span class="number">5</span>, <span class="number">7</span>];</span><br><span class="line">primes[<span class="number">2</span>]</span><br><span class="line">primes.<span class="property">length</span></span><br><span class="line">primes.<span class="title function_">push</span>(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>)	<span class="comment">// 向数组中添加元素，尾插法</span></span><br><span class="line">primes.<span class="title function_">reverse</span>()	<span class="comment">// 将数组元素次序反转</span></span><br></pre></td></tr></table></figure>
-<h3 id="运算"><a href="#运算" class="headerlink" title="运算"></a>运算</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">算数运算</span><br><span class="line"><span class="keyword">var</span> count = <span class="number">0</span>;</span><br><span class="line">count++;</span><br><span class="line">count--;</span><br><span class="line">count += <span class="number">2</span>;</span><br><span class="line">count /= <span class="number">4</span>;</span><br><span class="line"></span><br><span class="line"><span class="string">&quot;3&quot;</span> + <span class="string">&quot;2&quot;</span> <span class="comment">// &quot;32&quot;，字符串连接</span></span><br><span class="line"></span><br><span class="line">关系运算</span><br><span class="line"><span class="keyword">var</span> x = <span class="number">2</span>, y = <span class="number">3</span>;</span><br><span class="line">x == y <span class="comment">// false</span></span><br><span class="line">x &lt;= y <span class="comment">// true</span></span><br><span class="line">x != y</span><br><span class="line">x &lt; y</span><br><span class="line"></span><br><span class="line"><span class="string">&quot;two&quot;</span> &gt; <span class="string">&quot;three&quot;</span> <span class="comment">// true，&quot;tw&quot;在字母表中的索引大于&quot;th&quot;</span></span><br><span class="line"></span><br><span class="line">逻辑运算</span><br><span class="line">&amp;&amp;      <span class="comment">// 与</span></span><br><span class="line">||		<span class="comment">// 或</span></span><br><span class="line">！		<span class="comment">// 反</span></span><br></pre></td></tr></table></figure>
-<h3 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">plus1</span>(<span class="params">x</span>) &#123;</span><br><span class="line">	<span class="keyword">return</span> x+<span class="number">1</span>;</span><br><span class="line">&#125; </span><br><span class="line"><span class="title function_">plus1</span>(<span class="number">3</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> square = <span class="keyword">function</span>(<span class="params">x</span>) &#123;</span><br><span class="line">	<span class="keyword">return</span> x*x;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">对象中定义函数就成了对象的方法：</span><br><span class="line"><span class="keyword">var</span> points = &#123;</span><br><span class="line">	<span class="attr">x</span>: <span class="number">3</span>,</span><br><span class="line">	<span class="attr">y</span>: <span class="number">2</span>;</span><br><span class="line">&#125;</span><br><span class="line">points.<span class="property">dist</span> = <span class="keyword">function</span>(<span class="params">p</span>)&#123;</span><br><span class="line">	<span class="keyword">var</span> a = <span class="variable language_">this</span>.<span class="property">x</span> - p.<span class="property">x</span>,</span><br><span class="line">		b = <span class="variable language_">this</span>.<span class="property">y</span> - p.<span class="property">y</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="title class_">Math</span>.<span class="title function_">sqrt</span>(a*a + b*b);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="控制语句"><a href="#控制语句" class="headerlink" title="控制语句"></a>控制语句</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(<span class="literal">true</span>) &#123;</span><br><span class="line">&#125;<span class="keyword">else</span> &#123;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">while</span>(<span class="literal">true</span>) &#123;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="面向对象编程"><a href="#面向对象编程" class="headerlink" title="面向对象编程"></a>面向对象编程</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">Point</span>(<span class="params">x, y</span>) &#123;</span><br><span class="line">	<span class="variable language_">this</span>.<span class="property">x</span> = x;</span><br><span class="line">	<span class="variable language_">this</span>.<span class="property">y</span> = y;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> p = <span class="keyword">new</span> <span class="title class_">Point</span>(<span class="number">2</span>, <span class="number">3</span>);	<span class="comment">// 使用new来创建对象</span></span><br><span class="line"><span class="title class_">Point</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">r</span> = <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="title class_">Math</span>.<span class="title function_">sqrt</span>(</span><br><span class="line">		<span class="variable language_">this</span>.<span class="property">x</span>*<span class="variable language_">this</span>.<span class="property">x</span> +</span><br><span class="line">		<span class="variable language_">this</span>.<span class="property">y</span>*<span class="variable language_">this</span>.<span class="property">y</span>;</span><br><span class="line">	);</span><br><span class="line">&#125;;</span><br><span class="line">p.<span class="title function_">r</span>()</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+          <h2 id="数字"><a href="#数字" class="headerlink" title="数字"></a>数字</h2><p>JavaScript不区分整数值和浮点数值，<br>浮点数的范围是[-5*10^-324, 1.7976931348623157*10^308]，<br>整数范围是[-2^53, 2^53]<br>需要注意的是，数字的索引值是基于32位整数的！！！</p>
+<h3 id="整型直接量"><a href="#整型直接量" class="headerlink" title="整型直接量"></a>整型直接量</h3><p>0<br>3<br>100000000<br>还可以是十六进制：<br>0xff	&#x2F;&#x2F; 255<br>0XCAF893</p>
+<h3 id="浮点型直接量"><a href="#浮点型直接量" class="headerlink" title="浮点型直接量"></a>浮点型直接量</h3><p>3.14<br>.33333<br>6.02e23 	&#x2F;&#x2F; 6.02*10^23</p>
+<h3 id="算数运算"><a href="#算数运算" class="headerlink" title="算数运算"></a>算数运算</h3><p>+、-、*、&#x2F;、%<br>另外，<br>Math.pow(2, 12) 	&#x2F;&#x2F; 2^12<br>Maht.round(.6)	&#x2F;&#x2F; 四舍五入<br>Math.ceil(.6)	&#x2F;&#x2F; 向上取整<br>Math.floor(.6)	&#x2F;&#x2F; 向下取整</p>
+<p>JavaScript在溢出、下溢或除零时不会报错！！！<br>1&#x2F;0		&#x2F;&#x2F; Infinity, Number.POSITIVE_INFINITY<br>0&#x2F;0		&#x2F;&#x2F; NaN, Number.NaN, not a number<br>Number.MIN_VALUE-1		&#x2F;&#x2F; 发生下溢，0</p>
+<h3 id="二进制浮点数和四舍五入错误"><a href="#二进制浮点数和四舍五入错误" class="headerlink" title="二进制浮点数和四舍五入错误"></a>二进制浮点数和四舍五入错误</h3><p>由于浮点数的表示方法，决定了它可以精确的表示分数：1&#x2F;2,1&#x2F;4,1&#x2F;16;但是不能精确表示1&#x2F;10,1&#x2F;100；</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> x = <span class="number">.3</span> - <span class="number">.2</span>;</span><br><span class="line"><span class="keyword">var</span> y = <span class="number">.2</span> - <span class="number">.1</span>;</span><br><span class="line">x == y 		<span class="comment">// false</span></span><br><span class="line">x == <span class="number">.1</span>		<span class="comment">// false</span></span><br><span class="line">y == <span class="number">.1</span> 	<span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+<p>这种情况同样适用于python、java、c++。</p>
+<h3 id="日期和时间"><a href="#日期和时间" class="headerlink" title="日期和时间"></a>日期和时间</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> now = <span class="keyword">new</span> <span class="title class_">Date</span>();</span><br><span class="line"><span class="keyword">var</span> later = <span class="keyword">new</span> <span class="title class_">Date</span>(<span class="number">2019</span>, <span class="number">1</span>, <span class="number">12</span>, <span class="number">22</span>, <span class="number">30</span>, <span class="number">0</span>);</span><br><span class="line"><span class="keyword">var</span> last = <span class="keyword">new</span> <span class="title class_">Date</span>(<span class="number">2017</span>, <span class="number">12</span>, <span class="number">20</span>);</span><br><span class="line"><span class="keyword">var</span> elapsed = now - then;	<span class="comment">// 间隔的毫秒数</span></span><br><span class="line">later.<span class="title function_">getFullYear</span>()</span><br><span class="line">later.<span class="title function_">getMonth</span>()</span><br><span class="line">later.<span class="title function_">getDate</span>()</span><br><span class="line">later.<span class="title function_">getDay</span>() 		<span class="comment">// 周几</span></span><br></pre></td></tr></table></figure>
+<h2 id="文本"><a href="#文本" class="headerlink" title="文本"></a>文本</h2><p>JavaScript采用UTF-16编码的Unicode字符集，没有像Java一样的Char类型，单个字符即是长度为1的字符串。</p>
+<h3 id="转义字符"><a href="#转义字符" class="headerlink" title="转义字符"></a>转义字符</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">\n 换行符</span><br><span class="line">\r 回车符</span><br><span class="line">\<span class="string">&#x27; </span></span><br></pre></td></tr></table></figure>
+<h3 id="字符串的使用"><a href="#字符串的使用" class="headerlink" title="字符串的使用"></a>字符串的使用</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> s = <span class="string">&quot;hello, &quot;</span> + <span class="string">&quot;world&quot;</span>;</span><br><span class="line">s.<span class="property">length</span></span><br><span class="line">s.<span class="title function_">charAt</span>(<span class="number">2</span>)</span><br><span class="line">s.<span class="title function_">substring</span>(<span class="number">0</span>, <span class="number">2</span>)	<span class="comment">// he</span></span><br><span class="line">s.<span class="title function_">slice</span>(<span class="number">1</span>, <span class="number">2</span>)	<span class="comment">// e</span></span><br><span class="line">s.<span class="title function_">indexOf</span>(<span class="string">&#x27;l&#x27;</span>)	<span class="comment">// 2</span></span><br><span class="line">s.<span class="title function_">lastIndexOf</span>(<span class="string">&#x27;l&#x27;</span>)</span><br><span class="line">s.<span class="title function_">indexOf</span>(<span class="string">&#x27;l&#x27;</span>, <span class="number">3</span>)	<span class="comment">// 3，在位置3之后首次出现的</span></span><br><span class="line">s.<span class="title function_">split</span>(<span class="string">&#x27;,&#x27;</span>)</span><br><span class="line">s.<span class="title function_">replace</span>(<span class="string">&#x27;h&#x27;</span>, <span class="string">&#x27;H&#x27;</span>)</span><br><span class="line">s.<span class="title function_">toUpperCase</span>()</span><br></pre></td></tr></table></figure>
+<p>注意：replace()和toUpperCase()返回一个新的字符串，原字符串并未改变！<br><a target="_blank" rel="noopener" href="https://www.w3schools.com/jsref/jsref_obj_string.asp">String Reference</a></p>
+<h3 id="模式匹配"><a href="#模式匹配" class="headerlink" title="模式匹配"></a>模式匹配</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> text = <span class="string">&#x27;testing: 1, 2, 3&#x27;</span>;</span><br><span class="line"><span class="keyword">var</span> p = <span class="regexp">/\d+/g</span>;</span><br><span class="line">p.<span class="title function_">test</span>(text)	<span class="comment">//true</span></span><br><span class="line">text.<span class="title function_">search</span>(p)	<span class="comment">//9</span></span><br><span class="line">text.<span class="title function_">match</span>(p)	<span class="comment">//[&#x27;1&#x27;, &#x27;2&#x27;, &#x27;3&#x27;]</span></span><br><span class="line">text.<span class="title function_">replace</span>(p, <span class="string">&#x27;#&#x27;</span>)	<span class="comment">//&#x27;testing: #, #, #&#x27;</span></span><br></pre></td></tr></table></figure>
+<p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions">Regular Expression</a></p>
+<h2 id="布尔值"><a href="#布尔值" class="headerlink" title="布尔值"></a>布尔值</h2><p>下面这些值会被转换成false：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="literal">undefined</span></span><br><span class="line"><span class="literal">null</span></span><br><span class="line"><span class="number">0</span></span><br><span class="line">-<span class="number">0</span></span><br><span class="line"><span class="title class_">NaN</span></span><br><span class="line"><span class="string">&quot;&quot;</span></span><br></pre></td></tr></table></figure>
+<h2 id="全局对象"><a href="#全局对象" class="headerlink" title="全局对象"></a>全局对象</h2><table>
+<thead>
+<tr>
+<th align="left">类别</th>
+<th align="left">举例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">全局属性</td>
+<td align="left">undefined,Infimity,NaN</td>
+</tr>
+<tr>
+<td align="left">全局函数</td>
+<td align="left">isNaN(),parseInt(),eval()</td>
+</tr>
+<tr>
+<td align="left">构造函数</td>
+<td align="left">Date(),RegExp(),String(),Object(),Array()</td>
+</tr>
+<tr>
+<td align="left">全局对象</td>
+<td align="left">Math,JSON</td>
+</tr>
+</tbody></table>
+<h2 id="包装对象"><a href="#包装对象" class="headerlink" title="包装对象"></a>包装对象</h2><p>对象是值和方法的集合，通过**.**来访问。如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> s = <span class="string">&#x27;hello&#x27;</span>;</span><br><span class="line">s.<span class="property">length</span></span><br></pre></td></tr></table></figure>
+<p>s是一个字符串类型(typeof查看),当用**.**来访问length或其它方法时，JavaScript就会通过new String(‘hello’)把s转换成了一个对象，访问完之后就被销毁。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> s = <span class="string">&#x27;test&#x27;</span>;</span><br><span class="line">s.<span class="property">len</span> = <span class="number">4</span>;</span><br><span class="line"><span class="keyword">var</span> t = s.<span class="property">len</span>;</span><br></pre></td></tr></table></figure>
+<p>运行结果是t为undefined，并不是4；<br>存取数字、字符串、布尔值的属性创建的临时对象被称为包装对象。包装对象只是数字、字符串和布尔值的具体实现，不必在意，只要知道它与对象的区别即可。</p>
+<h2 id="不可变的原始值和可变的对象引用"><a href="#不可变的原始值和可变的对象引用" class="headerlink" title="不可变的原始值和可变的对象引用"></a>不可变的原始值和可变的对象引用</h2><p>与Java完全一致，数字、字符串和布尔值本身不可改变，对象指向同一个实例才是相等。</p>
 
       
     </div>
@@ -275,7 +293,7 @@
 
 
   <nav class="pagination">
-    <a class="extend prev" rel="prev" title="上一页" aria-label="上一页" href="/blog/page/61/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/61/">61</a><span class="page-number current">62</span><a class="page-number" href="/blog/page/63/">63</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/195/">195</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/blog/page/63/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" title="上一页" aria-label="上一页" href="/blog/page/61/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/61/">61</a><span class="page-number current">62</span><a class="page-number" href="/blog/page/63/">63</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/197/">197</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/blog/page/63/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 </div>

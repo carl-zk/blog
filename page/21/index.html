@@ -141,7 +141,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/blog/archives/">
-          <span class="site-state-item-count">195</span>
+          <span class="site-state-item-count">197</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -152,7 +152,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/blog/tags/">
-        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-count">26</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -178,7 +178,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://carl-zk.github.io/blog/2019/05/02/Jenkins-CI-CD/">
+    <link itemprop="mainEntityOfPage" href="https://carl-zk.github.io/blog/2020/01/19/%E5%88%B7%E9%A2%98%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%9C%A8%E4%B8%8D%E5%90%8C%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84%E8%A1%A8%E7%A4%BA/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/blog/images/avatar.gif">
@@ -196,7 +196,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/blog/2019/05/02/Jenkins-CI-CD/" class="post-title-link" itemprop="url">Jenkins CI/CD</a>
+          <a href="/blog/2020/01/19/%E5%88%B7%E9%A2%98%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%9C%A8%E4%B8%8D%E5%90%8C%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84%E8%A1%A8%E7%A4%BA/" class="post-title-link" itemprop="url">刷题常用数据结构在不同语言中的表示</a>
         </h2>
 
         <div class="post-meta-container">
@@ -207,7 +207,7 @@
       </span>
       <span class="post-meta-item-text">发表于</span>
 
-      <time title="创建时间：2019-05-02 12:52:07" itemprop="dateCreated datePublished" datetime="2019-05-02T12:52:07+08:00">2019-05-02</time>
+      <time title="创建时间：2020-01-19 14:15:09" itemprop="dateCreated datePublished" datetime="2020-01-19T14:15:09+08:00">2020-01-19</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -228,24 +228,92 @@
     
     <div class="post-body" itemprop="articleBody">
           <blockquote>
-<p>很好奇 Jenkins 是怎么做灰度发布的，我不懂。<br>我根据对 Pipeline 的理解，然后尝试将一个 Spring Boot Web 项目编译，打包，生成镜像和部署。整个下来才发现原来我一直以为自己理解什么是滚动发布，但是实际上我不懂如何用 Jenkins 做到。</p>
+<p>学习一种编程语言的好方法，我个人觉得是边看官网文档，边使用。以 Python 为例，先简单浏览一下官网的入门文档，了解语言和语法特点（语法简单不、跨平台不、性能好不、编译型 or 解释型、对象回收手动 or 自动、内存管理（对象都放在哪）、哪些内置数据结构（基础类型和集合类型）、值传递 or 引用传递、深拷贝和浅拷贝、适用于）。简单学习了语法后，去 LeetCode 找俩简单题，不知道如何创建 list 或 dictionaries ，可以打开 w3c 网站。切忌想着等看完所有入门文档再 code ，读文档不必一口气看完，可以分散开；也不必先下个 IDE 和查 API 或看源码，这等你看完入门文档了再弄不迟，你要相信你始终会掌握该语言下的那个最好的 IDE 并熟练的敲快捷键跟查源码&#x2F;API的。<br>编程语言只是实现你想法的工具，没有高低之分，使用 C 并不比使用 Java 的更高贵。你选择编程，无非是被它绚丽的外表所吸引，通过它实现你内心的想法。语言的不同只是语法糖的不同，不要沦为糖衣的工具，要记住你第一次踏进编程的时候的心情，抱着追逐梦想的初心。哪个插件&#x2F;软件你觉得不爽，哪个东西你想做却迟迟没有动手，碍于这个或那个语言没学过，这就把你的初心渐渐遗忘了。会编程并不代表你成了 creator，你只是增加了成为 creator 的可能性，因为你掌握了创造软件的工具。<br>总之，做点有意思的事，做有意义的事。 </p>
 </blockquote>
-<h2 id="Pipeline"><a href="#Pipeline" class="headerlink" title="Pipeline"></a>Pipeline</h2><p><a target="_blank" rel="noopener" href="https://jenkins.io/doc/book/pipeline/">https://jenkins.io/doc/book/pipeline/</a></p>
-<p>Pipeline 是一条流水线，涵盖了整个项目从编译、打包到测试、部署中间所有的步骤。一般在Jenkinsfile文件中定义整个 pipeline。</p>
-<p>先理解 Pipeline的几个概念。</p>
-<ul>
-<li>Node<br>Jenkins service 的一部分，可以跑 Pipeline 的机器。Jenkinsfile中 agent { node { label ‘labelName’ } } 可以指定 node。刚起动的 Jenkins 只有 master 一个节点。</li>
-<li>Stage<br>自定义一组 task，可在 Jenkins UI 看到 status&#x2F;progress。</li>
-<li>Step<br>一个 task，存在于一个特定的 Stage 中。</li>
-<li><a target="_blank" rel="noopener" href="https://jenkins.io/doc/book/pipeline/syntax/#agent">agent</a><br>pipeline 运行环境，如果定义在最上面表明整个 pipeline 都在同一个 agent 中执行，也可以在每个 Stage 块中单独指定，作用于单个 Stage。</li>
+<h2 id="Python3"><a href="#Python3" class="headerlink" title="Python3"></a>Python3</h2><ul>
+<li><p>from collections import defaultdict, Counter<br>defaultdict 比普通dict多一个默认工厂，当key不存在时返回工厂值<br>  “””<br>  defaultdict(default_factory[, …]) –&gt; dict with default factory</p>
+<p>  The default factory is called without arguments to produce<br>  a new value when a key is not present, in <strong>getitem</strong> only.<br>  A defaultdict compares equal to a dict with the same items.<br>  All remaining arguments are treated the same as if they were<br>  passed to the dict constructor, including keyword arguments.<br>  “””</p>
+</li>
 </ul>
-<h2 id="Config-Master-Node"><a href="#Config-Master-Node" class="headerlink" title="Config Master Node"></a>Config Master Node</h2><p>为了让 pipeline 都跑在 master 节点上，需要额外配置好 maven。</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="built_in">exec</span> -it -u root my-jenkins bash</span><br><span class="line">wget https://www-us.apache.org/dist/maven/maven-3/3.6.1/binaries/apache-maven-3.6.1-bin.tar.gz</span><br><span class="line">tar xvzf apache-maven-3.6.1-bin.tar.gz</span><br><span class="line"><span class="built_in">ln</span> -s /apache-maven-3.6.1/bin/mvn /usr/bin/mvn</span><br><span class="line">apt-get update &amp;&amp; apt-get install vim</span><br><span class="line">vi /apache-maven-3.6.1/conf/settings.xml</span><br><span class="line">修改仓库地址 &lt;localRepository&gt;/home/.m2/repository&lt;/localRepository&gt;</span><br></pre></td></tr></table></figure>
+<p>例如：<br>defaultdict(list)<br><a target="_blank" rel="noopener" href="https://leetcode.com/problems/maximum-score-of-a-node-sequence/">2242. Maximum Score of a Node Sequence</a></p>
+<p>Counter 统计相同元素个数到dict中<br>    ‘’’<br>    Dict subclass for counting hashable items.  Sometimes called a bag<br>    or multiset.  Elements are stored as dictionary keys and their counts<br>    are stored as dictionary values.</p>
+<pre><code>&gt;&gt;&gt; c = Counter(&#39;abcdeabcdabcaba&#39;)  # count elements from a string
 
-<h2 id="Create-Jenkinsfile"><a href="#Create-Jenkinsfile" class="headerlink" title="Create Jenkinsfile"></a>Create Jenkinsfile</h2><p><a target="_blank" rel="noopener" href="https://github.com/carl-zk/jenkins-demo">github source</a><br>Jenkinsfile</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">pipeline &#123;</span><br><span class="line">    agent &#123; label <span class="string">&#x27;master&#x27;</span> &#125;</span><br><span class="line"></span><br><span class="line">    environment &#123;</span><br><span class="line">        IMAGE_NAME = <span class="string">&#x27;jenkins-demo&#x27;</span></span><br><span class="line">        LABEL = <span class="string">&#x27;latest&#x27;</span></span><br><span class="line">        CONTAINER_NAME = <span class="string">&#x27;jenkins-demo&#x27;</span></span><br><span class="line">        PORT = 8090</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    stages &#123;</span><br><span class="line">        stage(<span class="string">&#x27;Package&#x27;</span>) &#123;</span><br><span class="line">            steps &#123;</span><br><span class="line">                sh <span class="string">&#x27;mvn -B -DskipTests=true clean package&#x27;</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        stage(<span class="string">&#x27;Build Image&#x27;</span>) &#123;</span><br><span class="line">            steps &#123;</span><br><span class="line">                script &#123;</span><br><span class="line">                    sh <span class="string">&#x27;pwd &amp;&amp; cd docker/ &amp;&amp; docker build -t $&#123;IMAGE_NAME&#125;:$&#123;LABEL&#125; .&#x27;</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        stage(<span class="string">&#x27;Deploy&#x27;</span>) &#123;</span><br><span class="line">            steps &#123;</span><br><span class="line">                sh <span class="string">&quot;&quot;</span><span class="string">&quot;</span></span><br><span class="line"><span class="string">                    docker ps -f name=<span class="variable">$&#123;CONTAINER_NAME&#125;</span> -q | xargs --no-run-if-empty docker container stop</span></span><br><span class="line"><span class="string">                    docker container ls -a -f name=<span class="variable">$&#123;CONTAINER_NAME&#125;</span> -q | xargs -r docker container rm -v</span></span><br><span class="line"><span class="string">                    docker run -d --name <span class="variable">$&#123;CONTAINER_NAME&#125;</span> -p <span class="variable">$&#123;PORT&#125;</span>:<span class="variable">$&#123;PORT&#125;</span> <span class="variable">$&#123;IMAGE_NAME&#125;</span>:<span class="variable">$&#123;LABEL&#125;</span></span></span><br><span class="line"><span class="string">                &quot;</span><span class="string">&quot;&quot;</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>Jenkins 持续集成&#x2F;持续发布 待续。</p>
+&gt;&gt;&gt; c.most_common(3)                # three most common elements
+[(&#39;a&#39;, 5), (&#39;b&#39;, 4), (&#39;c&#39;, 3)]
+&gt;&gt;&gt; sorted(c)                       # list all unique elements
+[&#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;d&#39;, &#39;e&#39;]
+&gt;&gt;&gt; &#39;&#39;.join(sorted(c.elements()))   # list elements with repetitions
+&#39;aaaaabbbbcccdde&#39;
+&gt;&gt;&gt; sum(c.values())                 # total of all counts
+15
 
+&gt;&gt;&gt; c[&#39;a&#39;]                          # count of letter &#39;a&#39;
+5
+&gt;&gt;&gt; for elem in &#39;shazam&#39;:           # update counts from an iterable
+...     c[elem] += 1                # by adding 1 to each element&#39;s count
+&gt;&gt;&gt; c[&#39;a&#39;]                          # now there are seven &#39;a&#39;
+7
+&gt;&gt;&gt; del c[&#39;b&#39;]                      # remove all &#39;b&#39;
+&gt;&gt;&gt; c[&#39;b&#39;]                          # now there are zero &#39;b&#39;
+0
+
+&gt;&gt;&gt; d = Counter(&#39;simsalabim&#39;)       # make another counter
+&gt;&gt;&gt; c.update(d)                     # add in the second counter
+&gt;&gt;&gt; c[&#39;a&#39;]                          # now there are nine &#39;a&#39;
+9
+
+&gt;&gt;&gt; c.clear()                       # empty the counter
+&gt;&gt;&gt; c
+Counter()
+
+Note:  If a count is set to zero or reduced to zero, it will remain
+in the counter until the entry is deleted or the counter is cleared:
+
+&gt;&gt;&gt; c = Counter(&#39;aaabbc&#39;)
+&gt;&gt;&gt; c[&#39;b&#39;] -= 2                     # reduce the count of &#39;b&#39; by two
+&gt;&gt;&gt; c.most_common()                 # &#39;b&#39; is still in, but its count is zero
+[(&#39;a&#39;, 3), (&#39;c&#39;, 1), (&#39;b&#39;, 0)]
+
+&#39;&#39;&#39;
+</code></pre>
+<p><a target="_blank" rel="noopener" href="https://leetcode.com/problems/minimum-rounds-to-complete-all-tasks/discuss/1955622/JavaC%2B%2BPython-Sum-up-(freq-%2B-2)-3">2244. Minimum Rounds to Complete All Tasks</a></p>
+<ul>
+<li><p>from heapq import nlargest<br>  “””<br>  Find the n largest elements in a dataset.</p>
+<p>  Equivalent to:  sorted(iterable, key&#x3D;key, reverse&#x3D;True)[:n]<br>  “””</p>
+</li>
+<li><p>from itertools import product<br>  “””<br>  product(*iterables, repeat&#x3D;1) –&gt; product object</p>
+<p>  Cartesian product of input iterables.  Equivalent to nested for-loops.</p>
+<p>  For example, product(A, B) returns the same as:  ((x,y) for x in A for y in B).<br>  The leftmost iterators are in the outermost for-loop, so the output tuples<br>  cycle in a manner similar to an odometer (with the rightmost element changing<br>  on every iteration).</p>
+<p>  To compute the product of an iterable with itself, specify the number<br>  of repetitions with the optional repeat keyword argument. For example,<br>  product(A, repeat&#x3D;4) means the same as product(A, A, A, A).</p>
+<p>  product(‘ab’, range(3)) –&gt; (‘a’,0) (‘a’,1) (‘a’,2) (‘b’,0) (‘b’,1) (‘b’,2)<br>  product((0,1), (0,1), (0,1)) –&gt; (0,0,0) (0,0,1) (0,1,0) (0,1,1) (1,0,0) …<br>  “””</p>
+</li>
+</ul>
+<h2 id="TODO"><a href="#TODO" class="headerlink" title="TODO"></a>TODO</h2><table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Python</th>
+<th>Java</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>numeric</td>
+<td>int</td>
+<td>Integer</td>
+</tr>
+</tbody></table>
+<pre class="mermaid">sequenceDiagram
+    participant Alice
+    participant Bob
+    Alice->>John: Hello John, how are you?
+    loop Healthcheck
+        John->>John: Fight against hypochondria
+    end
+    Note right of John: Rational thoughts <br/>prevail...
+    John-->>Alice: Great!
+    John->>Bob: How about you?
+    Bob-->>John: Jolly good!</pre>
       
     </div>
 
@@ -264,7 +332,7 @@
 
 
   <nav class="pagination">
-    <a class="extend prev" rel="prev" title="上一页" aria-label="上一页" href="/blog/page/20/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/20/">20</a><span class="page-number current">21</span><a class="page-number" href="/blog/page/22/">22</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/195/">195</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/blog/page/22/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" title="上一页" aria-label="上一页" href="/blog/page/20/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/20/">20</a><span class="page-number current">21</span><a class="page-number" href="/blog/page/22/">22</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/197/">197</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/blog/page/22/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 </div>

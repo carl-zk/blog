@@ -141,7 +141,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/blog/archives/">
-          <span class="site-state-item-count">195</span>
+          <span class="site-state-item-count">197</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -152,7 +152,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/blog/tags/">
-        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-count">26</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -178,7 +178,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://carl-zk.github.io/blog/2022/04/25/Design-Underground-System/">
+    <link itemprop="mainEntityOfPage" href="https://carl-zk.github.io/blog/2023/12/17/spring-cloud-%E9%85%8D%E7%BD%AE%E5%8A%A0%E5%AF%86%E5%AD%97%E6%AE%B5/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/blog/images/avatar.gif">
@@ -196,7 +196,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/blog/2022/04/25/Design-Underground-System/" class="post-title-link" itemprop="url">Design Underground System</a>
+          <a href="/blog/2023/12/17/spring-cloud-%E9%85%8D%E7%BD%AE%E5%8A%A0%E5%AF%86%E5%AD%97%E6%AE%B5/" class="post-title-link" itemprop="url">Spring Cloud 配置加密字段</a>
         </h2>
 
         <div class="post-meta-container">
@@ -207,7 +207,7 @@
       </span>
       <span class="post-meta-item-text">发表于</span>
 
-      <time title="创建时间：2022-04-25 21:21:57" itemprop="dateCreated datePublished" datetime="2022-04-25T21:21:57+08:00">2022-04-25</time>
+      <time title="创建时间：2023-12-17 19:47:50" itemprop="dateCreated datePublished" datetime="2023-12-17T19:47:50+08:00">2023-12-17</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -215,15 +215,6 @@
       </span>
       <span class="post-meta-item-text">更新于</span>
       <time title="修改时间：2024-05-18 16:19:43" itemprop="dateModified" datetime="2024-05-18T16:19:43+08:00">2024-05-18</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/blog/categories/leetcode/" itemprop="url" rel="index"><span itemprop="name">leetcode</span></a>
-        </span>
     </span>
 
   
@@ -236,26 +227,22 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p><a target="_blank" rel="noopener" href="https://leetcode.com/problems/design-underground-system/">1396. Design Underground System</a></p>
-<p>python3 特性：</p>
-<ul>
-<li>dict 可以用任意key：<code>self._stat[start_where, stationName]</code></li>
-<li>defaultdict 默认值，在非类时加 <code>lambda</code>，在类时直接 <code>defaultdict(list)</code></li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> defaultdict, deque</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> numpy</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">UndergroundSystem</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="variable language_">self</span>._inMap = &#123;&#125;</span><br><span class="line">        <span class="variable language_">self</span>._stat = defaultdict(<span class="keyword">lambda</span>: numpy.array([<span class="number">0</span>, <span class="number">0</span>]))</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">checkIn</span>(<span class="params">self, <span class="built_in">id</span>: <span class="built_in">int</span>, stationName: <span class="built_in">str</span>, t: <span class="built_in">int</span></span>) -&gt; <span class="literal">None</span>:</span><br><span class="line">        <span class="variable language_">self</span>._inMap[<span class="built_in">id</span>] = (stationName, t)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">checkOut</span>(<span class="params">self, <span class="built_in">id</span>: <span class="built_in">int</span>, stationName: <span class="built_in">str</span>, t: <span class="built_in">int</span></span>) -&gt; <span class="literal">None</span>:</span><br><span class="line">        (start_where, start_time) = <span class="variable language_">self</span>._inMap[<span class="built_in">id</span>]</span><br><span class="line">        <span class="variable language_">self</span>._stat[start_where, stationName] += [t-start_time, <span class="number">1</span>]</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">getAverageTime</span>(<span class="params">self, startStation: <span class="built_in">str</span>, endStation: <span class="built_in">str</span></span>) -&gt; <span class="built_in">float</span>:</span><br><span class="line">        total, count = <span class="variable language_">self</span>._stat[startStation, endStation]</span><br><span class="line">        <span class="keyword">return</span> total / count</span><br></pre></td></tr></table></figure>
+          <blockquote>
+<p>spring cloud 源码解析系列 </p>
+</blockquote>
+<p><a href="/blog/repo/spring-cloud-%E9%85%8D%E7%BD%AE%E5%8A%A0%E5%AF%86%E5%AD%97%E6%AE%B5/EncryptionBootstrapConfiguration">EncryptionBootstrapConfiguration</a></p>
+<p>spring cloud rsa 加密 等效为：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">KeyProperties</span> <span class="variable">keyProperties</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">KeyProperties</span>();</span><br><span class="line">keyProperties.getKeyStore()</span><br><span class="line">		.setLocation(<span class="keyword">new</span> <span class="title class_">FileUrlResource</span>(Paths.get(<span class="string">&quot;src/test/resources/server.jks&quot;</span>).toUri().toURL()));</span><br><span class="line">keyProperties.getKeyStore().setAlias(<span class="string">&quot;mytestkey&quot;</span>);</span><br><span class="line">keyProperties.getKeyStore().setPassword(System.getenv(<span class="string">&quot;JKS_PASSWORD&quot;</span>));</span><br><span class="line">keyProperties.getKeyStore().setType(<span class="string">&quot;jks&quot;</span>);</span><br><span class="line"><span class="type">RsaProperties</span> <span class="variable">rsaProperties</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">RsaProperties</span>();</span><br><span class="line">rsaProperties.setAlgorithm(RsaAlgorithm.DEFAULT);</span><br><span class="line">rsaProperties.setSalt(<span class="string">&quot;bloodybeaf&quot;</span>);</span><br><span class="line">rsaProperties.setStrong(<span class="literal">false</span>);</span><br><span class="line"><span class="type">TextEncryptor</span> <span class="variable">textEncryptor</span> <span class="operator">=</span> TextEncryptorUtils.createTextEncryptor(keyProperties, rsaProperties);</span><br><span class="line"><span class="type">String</span> <span class="variable">text</span> <span class="operator">=</span> <span class="string">&quot;hello world&quot;</span>;</span><br><span class="line"><span class="type">String</span> <span class="variable">encryptedText</span> <span class="operator">=</span> textEncryptor.encrypt(text);</span><br><span class="line">System.out.println(encryptedText);</span><br><span class="line"><span class="type">String</span> <span class="variable">decryptedText</span> <span class="operator">=</span> textEncryptor.decrypt(encryptedText);</span><br><span class="line">System.out.println(decryptedText);</span><br><span class="line">assertEquals(text, decryptedText);</span><br></pre></td></tr></table></figure>
 
-<h3 id="leetcode-原题"><a href="#leetcode-原题" class="headerlink" title="leetcode 原题"></a>leetcode 原题</h3><p>An underground railway system is keeping track of customer travel times between different stations. They are using this data to calculate the average time it takes to travel from one station to another.</p>
-<p>Implement the UndergroundSystem class:</p>
-<p>void checkIn(int id, string stationName, int t)<br>A customer with a card ID equal to id, checks in at the station stationName at time t.<br>A customer can only be checked into one place at a time.<br>void checkOut(int id, string stationName, int t)<br>A customer with a card ID equal to id, checks out from the station stationName at time t.<br>double getAverageTime(string startStation, string endStation)<br>Returns the average time it takes to travel from startStation to endStation.<br>The average time is computed from all the previous traveling times from startStation to endStation that happened directly, meaning a check in at startStation followed by a check out from endStation.<br>The time it takes to travel from startStation to endStation may be different from the time it takes to travel from endStation to startStation.<br>There will be at least one customer that has traveled from startStation to endStation before getAverageTime is called.<br>You may assume all calls to the checkIn and checkOut methods are consistent. If a customer checks in at time t1 then checks out at time t2, then t1 &lt; t2. All events happen in chronological order.</p>
-<p>Example 1:</p>
-<p>Input<br>[“UndergroundSystem”,”checkIn”,”checkIn”,”checkIn”,”checkOut”,”checkOut”,”checkOut”,”getAverageTime”,”getAverageTime”,”checkIn”,”getAverageTime”,”checkOut”,”getAverageTime”]<br>[[],[45,”Leyton”,3],[32,”Paradise”,8],[27,”Leyton”,10],[45,”Waterloo”,15],[27,”Waterloo”,20],[32,”Cambridge”,22],[“Paradise”,”Cambridge”],[“Leyton”,”Waterloo”],[10,”Leyton”,24],[“Leyton”,”Waterloo”],[10,”Waterloo”,38],[“Leyton”,”Waterloo”]]</p>
-<p>Output<br>[null,null,null,null,null,null,null,14.00000,11.00000,null,11.00000,null,12.00000]</p>
-<p>Explanation<br>UndergroundSystem undergroundSystem &#x3D; new UndergroundSystem();<br>undergroundSystem.checkIn(45, “Leyton”, 3);<br>undergroundSystem.checkIn(32, “Paradise”, 8);<br>undergroundSystem.checkIn(27, “Leyton”, 10);<br>undergroundSystem.checkOut(45, “Waterloo”, 15);  &#x2F;&#x2F; Customer 45 “Leyton” -&gt; “Waterloo” in 15-3 &#x3D; 12<br>undergroundSystem.checkOut(27, “Waterloo”, 20);  &#x2F;&#x2F; Customer 27 “Leyton” -&gt; “Waterloo” in 20-10 &#x3D; 10<br>undergroundSystem.checkOut(32, “Cambridge”, 22); &#x2F;&#x2F; Customer 32 “Paradise” -&gt; “Cambridge” in 22-8 &#x3D; 14<br>undergroundSystem.getAverageTime(“Paradise”, “Cambridge”); &#x2F;&#x2F; return 14.00000. One trip “Paradise” -&gt; “Cambridge”, (14) &#x2F; 1 &#x3D; 14<br>undergroundSystem.getAverageTime(“Leyton”, “Waterloo”);    &#x2F;&#x2F; return 11.00000. Two trips “Leyton” -&gt; “Waterloo”, (10 + 12) &#x2F; 2 &#x3D; 11<br>undergroundSystem.checkIn(10, “Leyton”, 24);<br>undergroundSystem.getAverageTime(“Leyton”, “Waterloo”);    &#x2F;&#x2F; return 11.00000<br>undergroundSystem.checkOut(10, “Waterloo”, 38);  &#x2F;&#x2F; Customer 10 “Leyton” -&gt; “Waterloo” in 38-24 &#x3D; 14<br>undergroundSystem.getAverageTime(“Leyton”, “Waterloo”);    &#x2F;&#x2F; return 12.00000. Three trips “Leyton” -&gt; “Waterloo”, (10 + 12 + 14) &#x2F; 3 &#x3D; 12<br>Example 2:</p>
-<p>Input<br>[“UndergroundSystem”,”checkIn”,”checkOut”,”getAverageTime”,”checkIn”,”checkOut”,”getAverageTime”,”checkIn”,”checkOut”,”getAverageTime”]<br>[[],[10,”Leyton”,3],[10,”Paradise”,8],[“Leyton”,”Paradise”],[5,”Leyton”,10],[5,”Paradise”,16],[“Leyton”,”Paradise”],[2,”Leyton”,21],[2,”Paradise”,30],[“Leyton”,”Paradise”]]</p>
-<p>Output<br>[null,null,null,5.00000,null,null,5.50000,null,null,6.66667]</p>
-<p>Explanation<br>UndergroundSystem undergroundSystem &#x3D; new UndergroundSystem();<br>undergroundSystem.checkIn(10, “Leyton”, 3);<br>undergroundSystem.checkOut(10, “Paradise”, 8); &#x2F;&#x2F; Customer 10 “Leyton” -&gt; “Paradise” in 8-3 &#x3D; 5<br>undergroundSystem.getAverageTime(“Leyton”, “Paradise”); &#x2F;&#x2F; return 5.00000, (5) &#x2F; 1 &#x3D; 5<br>undergroundSystem.checkIn(5, “Leyton”, 10);<br>undergroundSystem.checkOut(5, “Paradise”, 16); &#x2F;&#x2F; Customer 5 “Leyton” -&gt; “Paradise” in 16-10 &#x3D; 6<br>undergroundSystem.getAverageTime(“Leyton”, “Paradise”); &#x2F;&#x2F; return 5.50000, (5 + 6) &#x2F; 2 &#x3D; 5.5<br>undergroundSystem.checkIn(2, “Leyton”, 21);<br>undergroundSystem.checkOut(2, “Paradise”, 30); &#x2F;&#x2F; Customer 2 “Leyton” -&gt; “Paradise” in 30-21 &#x3D; 9<br>undergroundSystem.getAverageTime(“Leyton”, “Paradise”); &#x2F;&#x2F; return 6.66667, (5 + 6 + 9) &#x2F; 3 &#x3D; 6.66667</p>
-<p>Constraints:</p>
-<p>1 &lt;&#x3D; id, t &lt;&#x3D; 106<br>1 &lt;&#x3D; stationName.length, startStation.length, endStation.length &lt;&#x3D; 10<br>All strings consist of uppercase and lowercase English letters and digits.<br>There will be at most 2 * 104 calls in total to checkIn, checkOut, and getAverageTime.<br>Answers within 10-5 of the actual value will be accepted.</p>
+<p>.jks &#x3D; java keyStore<br>keystore type : pem &#x2F; jks</p>
+<p>jdk&#x2F;bin 中自带 keytool 命令</p>
+<p><code>keytool -genkey -keyalg RSA -alias &lt;alias/username&gt; -keystore keystore.jks -storepass &lt;password&gt; -keypass &lt;password&gt;</code></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">keytool -genkey -keyalg RSA -<span class="built_in">alias</span> mytestkey -keystore server.jks -storepass xxx</span><br></pre></td></tr></table></figure>
+
+<p>java keystore to pem, <strong>这个工具很好用</strong><br><a target="_blank" rel="noopener" href="https://keystore-explorer.org/">https://keystore-explorer.org/</a></p>
+<p>.pem 为固定格式、base64 的秘钥文件</p>
+<p>注意导出时去掉勾选加密！！！</p>
+<h2 id="避坑"><a href="#避坑" class="headerlink" title="避坑"></a>避坑</h2><p>运行eclipse时，添加环境变量到windows ，需要重启eclipse才可以在项目运行时获取到新添加的变量！！！<br>例如 在 application.properties 中配置了placeholder ${jks_pass}，未重启eclipse时，重新运行application是拿不到该变量的。</p>
 
       
     </div>
@@ -275,7 +262,7 @@
 
 
   <nav class="pagination">
-    <a class="extend prev" rel="prev" title="上一页" aria-label="上一页" href="/blog/page/6/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/blog/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/195/">195</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/blog/page/8/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" title="上一页" aria-label="上一页" href="/blog/page/6/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/blog/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/197/">197</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/blog/page/8/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 </div>

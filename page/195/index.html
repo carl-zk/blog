@@ -141,7 +141,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/blog/archives/">
-          <span class="site-state-item-count">195</span>
+          <span class="site-state-item-count">197</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -152,7 +152,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/blog/tags/">
-        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-count">26</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -178,7 +178,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://carl-zk.github.io/blog/2016/06/01/%E5%BF%83%E7%81%B5%E9%A9%BF%E7%AB%99/">
+    <link itemprop="mainEntityOfPage" href="https://carl-zk.github.io/blog/2016/06/08/%E9%9D%A2%E8%AF%95%E7%BB%8F%E9%AA%8C%E6%80%BB%E7%BB%93/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/blog/images/avatar.gif">
@@ -196,7 +196,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/blog/2016/06/01/%E5%BF%83%E7%81%B5%E9%A9%BF%E7%AB%99/" class="post-title-link" itemprop="url">迷茫小书童</a>
+          <a href="/blog/2016/06/08/%E9%9D%A2%E8%AF%95%E7%BB%8F%E9%AA%8C%E6%80%BB%E7%BB%93/" class="post-title-link" itemprop="url">面试经验总结</a>
         </h2>
 
         <div class="post-meta-container">
@@ -207,7 +207,7 @@
       </span>
       <span class="post-meta-item-text">发表于</span>
 
-      <time title="创建时间：2016-06-01 12:28:04" itemprop="dateCreated datePublished" datetime="2016-06-01T12:28:04+08:00">2016-06-01</time>
+      <time title="创建时间：2016-06-08 00:14:50" itemprop="dateCreated datePublished" datetime="2016-06-08T00:14:50+08:00">2016-06-08</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -227,11 +227,108 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>原本在上次面试链家后决定好好学习，想在年底再去找工作，可是上周跟老板处的不是很好，冲动之下提出辞职，到今天找工作也快要一周了，拉勾网上的招聘不是很多，有些小公司我也不想去，算下来投了简历不超过10个，面试邀请只有3个。遇到的面试官都不是很有经验，有的也让我觉得无语。唉，虽然自己不是什么牛，但是踏实学习的劲头也还是有的，只不过我的性格决定了我不适合给别人打工。</p>
-<p>究竟是好事还是坏事呢，我有点要否定自己的感觉了。我赶在这个时候提出了辞职，也算是给自己了一个教训，不过既然是决定好了，而且后来想想这样做也非不可，那就顺着这个趋势走吧。</p>
-<p>我小看了“失业”，虽然对于一个程序员来说，跳槽不是什么稀罕事，换一份工作也没有那么难，但是在没有拿到任何offer之前，内心还是很悲伤的。可能这也是一个机会吧，好让我清醒清醒我之前忙碌工作的状态和它的意义，我还没有好好想过这些。</p>
-<p>我的朋友很少，所以我也能坦然独自面对。我不想成为一个虚伪的人，我也做不到这一点。我喜欢和真诚的人交朋友，我要让自己变的优秀，这样我就能接触更多牛逼的人，通常情况下，牛逼的人都很真诚。</p>
-<p>我还是不要再气馁吧，就当这是生活的考验，我会静静的等待，就像我等待爱情一样。</p>
+          <h4 id="1、青蛙跳跳"><a href="#1、青蛙跳跳" class="headerlink" title="1、青蛙跳跳"></a>1、青蛙跳跳</h4><blockquote>
+<p>n块石头，一只青蛙一次可以跳一块石头，也可以跳两块石头，请问这只青蛙有几种跳法？</p>
+</blockquote>
+<p><img src="http://o6ibfi17w.bkt.clouddn.com/image%2Ffrogstones.png" loading="lazy"></p>
+<table>
+<thead>
+<tr>
+<th>n块石头</th>
+<th>跳法枚举</th>
+<th align="right">总共T(n)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>()</td>
+<td align="right">0</td>
+</tr>
+<tr>
+<td>2</td>
+<td>(1)</td>
+<td align="right">1</td>
+</tr>
+<tr>
+<td>3</td>
+<td>(1,1)(2)</td>
+<td align="right">2</td>
+</tr>
+<tr>
+<td>4</td>
+<td>(1,1,1)(1,2)(2,1)</td>
+<td align="right">3</td>
+</tr>
+<tr>
+<td>5</td>
+<td>(1111)(112)(121)(211)(22)</td>
+<td align="right">5</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>由上表可知，第k次的跳法是在第k-1次跳法中插入1和与1加1之和。例如：当k&#x3D;3时，k-1&#x3D;2，<br>    * 第2次的跳法(1)插入1，即(1,1);<br>    * 第2次跳法的1加1，即(2);<br>    k&#x3D;3的总跳法即(1,1)(2)。<br>    n&#x3D;6时，T(n)&#x3D;8;n&#x3D;7时，T(n)&#x3D;12;则可以假设T(n)&#x3D;T(n-1)+n-3。<br>    当n≥4时，<br>    T(4)-T(3)&#x3D;1<br>    T(5)-T(4)&#x3D;2<br>    ……<br>    即T(n)-T(3)&#x3D;1+2+…+n-3&#x3D;(n-3)(n-2)&#x2F;2<br>    所以T(n)&#x3D;(n-3)(n-2)&#x2F;2+2<br>    利用数学归纳法可证明此等式成立。</p>
+</blockquote>
+<h4 id="SQL查询"><a href="#SQL查询" class="headerlink" title="SQL查询"></a>SQL查询</h4><p>1、给出一张表T，</p>
+<table>
+<thead>
+<tr>
+<th>id</th>
+<th>user_id</th>
+<th>money</th>
+<th>time</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>a</td>
+<td>10</td>
+<td>123</td>
+</tr>
+<tr>
+<td>2</td>
+<td>b</td>
+<td>8</td>
+<td>334</td>
+</tr>
+<tr>
+<td>3</td>
+<td>a</td>
+<td>22</td>
+<td>345</td>
+</tr>
+<tr>
+<td>4</td>
+<td>c</td>
+<td>32</td>
+<td>89</td>
+</tr>
+<tr>
+<td>5</td>
+<td>b</td>
+<td>23</td>
+<td>786</td>
+</tr>
+<tr>
+<td>列出每个用户最近上线收到的红包。</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>select * from T a where exists (select user_id, max(time) as mt from T b group by user_id having a.user_id&#x3D;b.user_id and a.time&#x3D;mt)</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>因为没怎么用过exist语句，所以当时没写出来，后来查了一下exist，了解了exist和in的区别，发现exist确实比较实用。</p>
+</blockquote>
+<h4 id="session共享"><a href="#session共享" class="headerlink" title="session共享"></a>session共享</h4><p>分布式系统需要考虑</p>
+<h4 id="防表单重复提交"><a href="#防表单重复提交" class="headerlink" title="防表单重复提交"></a>防表单重复提交</h4><p>在表单中增加隐藏字段uuid，如果不一致就是重复提交。</p>
+<h4 id="session持久化"><a href="#session持久化" class="headerlink" title="session持久化"></a>session持久化</h4><p>拿tomcat的实现类StandardSession来说，它在catalina.jar中，实现了Serializable，所以可以持久化。</p>
+<h4 id="锁定Integer管用吗"><a href="#锁定Integer管用吗" class="headerlink" title="锁定Integer管用吗"></a>锁定Integer管用吗</h4><p>Integer和String一样，都是final修饰的类，内部字段也是final修饰，所以synchronized(Integer a)起不到同步的效果。</p>
+<p>哇，感觉自己面试中傻傻的，恐怖！</p>
 
       
     </div>
@@ -251,7 +348,7 @@
 
 
   <nav class="pagination">
-    <a class="extend prev" rel="prev" title="上一页" aria-label="上一页" href="/blog/page/194/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/194/">194</a><span class="page-number current">195</span>
+    <a class="extend prev" rel="prev" title="上一页" aria-label="上一页" href="/blog/page/194/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/194/">194</a><span class="page-number current">195</span><a class="page-number" href="/blog/page/196/">196</a><a class="page-number" href="/blog/page/197/">197</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/blog/page/196/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 </div>
