@@ -141,18 +141,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/blog/archives/">
-          <span class="site-state-item-count">197</span>
+          <span class="site-state-item-count">196</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/blog/categories/">
-        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-count">9</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/blog/tags/">
-        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-count">25</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -178,7 +178,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://carl-zk.github.io/blog/2020/08/31/Mac%E4%B8%AD%E5%A4%84%E7%90%86txt%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81/">
+    <link itemprop="mainEntityOfPage" href="https://carl-zk.github.io/blog/2020/07/15/MySQL-8-window-functions/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/blog/images/avatar.gif">
@@ -196,7 +196,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/blog/2020/08/31/Mac%E4%B8%AD%E5%A4%84%E7%90%86txt%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81/" class="post-title-link" itemprop="url">Mac中处理txt中文乱码</a>
+          <a href="/blog/2020/07/15/MySQL-8-window-functions/" class="post-title-link" itemprop="url">MySQL 8 Window Functions</a>
         </h2>
 
         <div class="post-meta-container">
@@ -207,7 +207,7 @@
       </span>
       <span class="post-meta-item-text">发表于</span>
 
-      <time title="创建时间：2020-08-31 22:50:21" itemprop="dateCreated datePublished" datetime="2020-08-31T22:50:21+08:00">2020-08-31</time>
+      <time title="创建时间：2020-07-15 10:12:17" itemprop="dateCreated datePublished" datetime="2020-07-15T10:12:17+08:00">2020-07-15</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -228,18 +228,15 @@
     
     <div class="post-body" itemprop="articleBody">
           <blockquote>
-<p>最近下载了一本电子书，格式为TXT，打开后发现乱码，故在网上找到若干解决方法，特记于此，免于后烦。</p>
+<p>MySQL Version: since 8.0</p>
 </blockquote>
-<h2 id="合并文件"><a href="#合并文件" class="headerlink" title="合并文件"></a>合并文件</h2><p>首先，每个章节为一个独立文件，文件名格式“章节编号.txt”。需要一个shell脚本整合到一个文件中</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">file=ALL.TXT</span><br><span class="line"><span class="built_in">echo</span> &gt; <span class="variable">$file</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">cat</span> CONTENT.txt &gt;&gt; <span class="variable">$file</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> &#123;1..101&#125;</span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">        index=<span class="string">&quot;<span class="variable">$&#123;i&#125;</span>.txt&quot;</span></span><br><span class="line">        <span class="keyword">if</span> [ <span class="variable">$i</span> -lt 10 ]</span><br><span class="line">        <span class="keyword">then</span></span><br><span class="line">                index=<span class="string">&quot;0<span class="variable">$&#123;i&#125;</span>.txt&quot;</span></span><br><span class="line">        <span class="keyword">fi</span></span><br><span class="line">        <span class="built_in">echo</span> <span class="variable">$&#123;index&#125;</span></span><br><span class="line">        <span class="built_in">cat</span> <span class="variable">$&#123;index&#125;</span> &gt;&gt; <span class="variable">$file</span></span><br><span class="line">        <span class="built_in">echo</span> &gt;&gt; <span class="variable">$file</span></span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>
-<h2 id="解决乱码"><a href="#解决乱码" class="headerlink" title="解决乱码"></a>解决乱码</h2><p><a target="_blank" rel="noopener" href="https://it365.gitlab.io/zh-cn/decode/">在线监测文件编码</a><br>看到该文件编码为GB18030。<br>使用shell命令转换文件编码，命令格式如下：</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iconv -f encoding -t encoding sourcefile &gt; destinationfile</span><br></pre></td></tr></table></figure>
-<p>则具体命令为</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iconv -f GB18030 -t UTF8 A.txt &gt; B.txt</span><br></pre></td></tr></table></figure>
-<p>参考文章中有批量命令，特誊抄于此：</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find *.txt -<span class="built_in">exec</span> sh -c <span class="string">&quot;iconv -f GB18030 -t UTF8 &#123;&#125; &gt; &#123;&#125;.txt&quot;</span> \;</span><br></pre></td></tr></table></figure>
-<p>至此，转码完成，需要对文件中特殊符号<code>^M</code>做删除处理，可参考我之前文章<a href="https://carl-zk.github.io/blog/2017/05/09/Bash-Script%E5%AD%A6%E4%B9%A0/">windows格式文件转linux格式文件</a></p>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/f55ddf1e9839">https://www.jianshu.com/p/f55ddf1e9839</a><br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/46935220">https://zhuanlan.zhihu.com/p/46935220</a></p>
+<h1 id="Window-Functions"><a href="#Window-Functions" class="headerlink" title="Window Functions"></a>Window Functions</h1><blockquote>
+<p>A window function is an SQL function where the input values are taken from a “window” of one or more rows in the results set of a SELECT statement.</p>
+</blockquote>
+<p>一个window function 是一个SQL函数，它的input是从一个“SELECT语句结果集中一行或多行的 window”中获取。与普通聚合函数的区别在于它使用关键字 <code>OVER</code>。<br>window functions 不能使用<code>DISTINCT</code>关键字，同时，window functions 只能出现在结果集(result set) 和 SELECT 语句的 ORDER BY 中。</p>
+<h2 id="TOP-5-each-group"><a href="#TOP-5-each-group" class="headerlink" title="TOP 5 each group"></a>TOP 5 each group</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> t1.project_id, t1.user_id <span class="keyword">FROM</span> project_user t1 <span class="keyword">WHERE</span> <span class="number">5</span> <span class="operator">&gt;</span> (</span><br><span class="line">  <span class="keyword">SELECT</span> <span class="built_in">COUNT</span>(<span class="operator">*</span>) <span class="keyword">FROM</span> project_user t2 <span class="keyword">WHERE</span> t1.project_id<span class="operator">=</span>t2.project_id <span class="keyword">AND</span> t1.user_id<span class="operator">&gt;</span>t2.user_id</span><br><span class="line">) <span class="keyword">ORDER</span> <span class="keyword">BY</span> project_id, user_id</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> (</span><br><span class="line">  <span class="keyword">SELECT</span> project_id, user_id, <span class="built_in">RANK</span>() <span class="keyword">over</span> (<span class="keyword">PARTITION</span> <span class="keyword">BY</span> project_id <span class="keyword">ORDER</span> <span class="keyword">BY</span> user_id) <span class="keyword">as</span> rank_num <span class="keyword">FROM</span> project_user <span class="keyword">ORDER</span> <span class="keyword">BY</span> project_id, user_id</span><br><span class="line">) t <span class="keyword">WHERE</span> rank_num <span class="operator">&lt;=</span> <span class="number">5</span> </span><br></pre></td></tr></table></figure>
+
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a target="_blank" rel="noopener" href="https://www.sqlite.org/windowfunctions.html#:~:text=A%20window%20function%20is%20an,it%20is%20a%20window%20function.">Window Functions</a><br><a target="_blank" rel="noopener" href="https://www.mysqltutorial.org/mysql-window-functions/">MySQL Window Functions</a></p>
 
       
     </div>
@@ -259,7 +256,7 @@
 
 
   <nav class="pagination">
-    <a class="extend prev" rel="prev" title="上一页" aria-label="上一页" href="/blog/page/15/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/15/">15</a><span class="page-number current">16</span><a class="page-number" href="/blog/page/17/">17</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/197/">197</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/blog/page/17/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" title="上一页" aria-label="上一页" href="/blog/page/15/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/15/">15</a><span class="page-number current">16</span><a class="page-number" href="/blog/page/17/">17</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/196/">196</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/blog/page/17/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 </div>

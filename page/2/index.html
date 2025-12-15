@@ -141,18 +141,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/blog/archives/">
-          <span class="site-state-item-count">197</span>
+          <span class="site-state-item-count">196</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/blog/categories/">
-        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-count">9</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/blog/tags/">
-        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-count">25</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -178,7 +178,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://carl-zk.github.io/blog/2025/09/28/projectreactor-webflux/">
+    <link itemprop="mainEntityOfPage" href="https://carl-zk.github.io/blog/2025/09/30/virtual-thread-is-to-shake-the-world/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/blog/images/avatar.gif">
@@ -196,7 +196,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/blog/2025/09/28/projectreactor-webflux/" class="post-title-link" itemprop="url">Projectreactor & Webflux</a>
+          <a href="/blog/2025/09/30/virtual-thread-is-to-shake-the-world/" class="post-title-link" itemprop="url">Virtual Thread Is to Shake the World</a>
         </h2>
 
         <div class="post-meta-container">
@@ -206,9 +206,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2025-09-28 21:52:25 / 修改时间：23:34:04" itemprop="dateCreated datePublished" datetime="2025-09-28T21:52:25+08:00">2025-09-28</time>
+      <time title="创建时间：2025-09-30 18:08:17" itemprop="dateCreated datePublished" datetime="2025-09-30T18:08:17+08:00">2025-09-30</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-10-01 19:12:10" itemprop="dateModified" datetime="2025-10-01T19:12:10+08:00">2025-10-01</time>
     </span>
 
   
@@ -221,157 +227,151 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h1 id="reactor"><a href="#reactor" class="headerlink" title="reactor"></a>reactor</h1><table>
-<thead>
-<tr>
-<th>Aspect</th>
-<th><code>generate</code> (sync)</th>
-<th><code>push</code> (async, single thread)</th>
-<th><code>create</code> (async, multi-thread)</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><strong>Emission style</strong></td>
-<td><strong>Pull</strong> (one item per request)</td>
-<td><strong>Push</strong> (producer pushes items)</td>
-<td><strong>Push</strong> (producer pushes items)</td>
-</tr>
-<tr>
-<td><strong>Concurrency</strong></td>
-<td>Always single-threaded, synchronous</td>
-<td>Single-thread only</td>
-<td>Multi-thread allowed</td>
-</tr>
-<tr>
-<td><strong>Backpressure</strong></td>
-<td>Native: generator runs only on demand</td>
-<td>Needs overflow strategy if fast producer</td>
-<td>Needs overflow strategy if fast producer</td>
-</tr>
-<tr>
-<td><strong>Use case</strong></td>
-<td>Generate values step by step, state machine</td>
-<td>Event listener, single-thread producer</td>
-<td>Multi-threaded sources, complex bridging</td>
-</tr>
-</tbody></table>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">Flux&lt;Integer&gt; flux = Flux.generate(</span><br><span class="line">    () -&gt; <span class="number">0</span>,  <span class="comment">// initial state</span></span><br><span class="line">    (state, sink) -&gt; &#123;</span><br><span class="line">        sink.next(state);</span><br><span class="line">        <span class="keyword">if</span> (state == <span class="number">5</span>) sink.complete();</span><br><span class="line">        <span class="keyword">return</span> state + <span class="number">1</span>; <span class="comment">// next state</span></span><br><span class="line">    &#125;</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Flux&lt;String&gt; flux = Flux.push(sink -&gt; &#123;</span><br><span class="line">    someListener.onMessage(msg -&gt; sink.next(msg));</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Flux&lt;String&gt; flux = Flux.create(sink -&gt; &#123;</span><br><span class="line">    <span class="keyword">new</span> <span class="title class_">Thread</span>(() -&gt; &#123;</span><br><span class="line">        sink.next(<span class="string">&quot;A&quot;</span>);</span><br><span class="line">        sink.next(<span class="string">&quot;B&quot;</span>);</span><br><span class="line">        sink.complete();</span><br><span class="line">    &#125;).start();</span><br><span class="line">&#125;, FluxSink.OverflowStrategy.BUFFER);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+          <h1 id="virtual-thread"><a href="#virtual-thread" class="headerlink" title="virtual thread"></a>virtual thread</h1><h2 id="when-sould-you-use-virtual-threads"><a href="#when-sould-you-use-virtual-threads" class="headerlink" title="when sould you use virtual threads"></a>when sould you use virtual threads</h2><p>Virtual threads (introduced in <strong>Project Loom</strong>, JDK 21 GA) are lightweight threads managed by the JVM rather than the OS. They shine in scenarios where you need to handle <strong>lots of concurrent tasks that spend most of their time waiting (IO-bound workloads).</strong></p>
+<p>Good use cases:</p>
+<ul>
+<li><p>Servers handling many concurrent connections<br>  e.g., HTTP servers, gRPC servers, WebSocket servers.</p>
+</li>
+<li><p>High-concurrency clients<br>  e.g., calling many downstream services (DB, REST APIs, message queues).</p>
+</li>
+<li><p>Asynchronous pipelines<br>  where tasks wait on external systems but you want code to look synchronous.</p>
+</li>
+<li><p>Replacement for callback-heavy async code<br>  You can write blocking-style code, but still scale like async&#x2F;reactive.</p>
+</li>
+</ul>
+<p>Not ideal:</p>
+<ul>
+<li><p>CPU-bound parallel computations<br>  Use platform threads (classic ForkJoinPool, parallel streams, or structured concurrency with platform threads). Virtual threads don’t give extra CPU, they just multiplex blocking tasks.</p>
+</li>
+<li><p>Very short-lived tasks in huge numbers<br>  If the task just increments a counter, spawning millions of VTs gives no benefit and can be slower than batching work on a platform thread pool.</p>
+</li>
+</ul>
+<h2 id="does-a-“virtual-thread-pool”-exist"><a href="#does-a-“virtual-thread-pool”-exist" class="headerlink" title="does a “virtual thread pool” exist?"></a>does a “virtual thread pool” exist?</h2><p>Strictly speaking: <strong>NO, virtual threads don’t use a traditional pool</strong> like <code>Executors.newFixedThreadPool</code>.</p>
+<p>Instead, each virtual threads is cheap to create (thousands to millions possible). The JVM schedules them onto a small pool of <strong>carrier threads</strong> (platform threads) behind the scenes.</p>
+<p>That means:</p>
+<ul>
+<li>You can just create anew virtual thread per task (<code>Thread.ofVirtual().start(...)</code> or <code>Executors.newVirtualThreadPerTaskExecutor()</code>).</li>
+<li>No need to reuse them —— they are disposable, unlike platform threads.</li>
+<li>The JVM maintains an internal scheduler that runs VTs on carrier threads.</li>
+</ul>
+<p>So the pattern is:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> (<span class="type">var</span> <span class="variable">executor</span> <span class="operator">=</span> Executors.newVirtualThreadPerTaskExecutor()) &#123;</span><br><span class="line">    IntStream.range(<span class="number">0</span>, <span class="number">1_000_000</span>).forEach(i -&gt;</span><br><span class="line">        executor.submit(() -&gt; &#123;</span><br><span class="line">            <span class="comment">// IO-bound task</span></span><br><span class="line">            fetchFromDb(i);</span><br><span class="line">        &#125;)</span><br><span class="line">    );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+<p>Here, each task gets its own virtual thread. The JVM multiplexes them efficiently over a small number of OS threads.</p>
+<h2 id="How-to-choose-between-pool-of-platform-threads-vs-per-task-virtual-threads"><a href="#How-to-choose-between-pool-of-platform-threads-vs-per-task-virtual-threads" class="headerlink" title="How to choose between pool of platform threads vs per-task virtual threads"></a>How to choose between pool of platform threads vs per-task virtual threads</h2><ul>
+<li>User <strong>platform thread pools</strong> when:<ul>
+<li>You want to bound concurrency for CPU-bound tasks (e.g., 8 threads for 8 CPU cores).</li>
+</ul>
+</li>
+<li>User virtual threads when:<ul>
+<li>You want to scale IO-bound concurrency (e.g., 50k socket connections).</li>
+<li>Thread creation overhead is a bottleneck.</li>
+</ul>
+</li>
+</ul>
+<h1 id="VTs-or-Reactor"><a href="#VTs-or-Reactor" class="headerlink" title="VTs or Reactor"></a>VTs or Reactor</h1><h2 id="Reactor-vs-Virtual-threads-different-approaches"><a href="#Reactor-vs-Virtual-threads-different-approaches" class="headerlink" title="Reactor vs Virtual threads: different approaches"></a>Reactor vs Virtual threads: different approaches</h2><h3 id="Reactor"><a href="#Reactor" class="headerlink" title="Reactor"></a>Reactor</h3><ul>
+<li>Based on the <strong>reactive streams model</strong> (non-blocking, event-loop style).</li>
+<li>Forces you to compose async flows (Mono, Flux) to avoid blocking threads.</li>
+<li>Good for massive concurrency and <strong>backpressure control</strong>, but requires a different programming model.</li>
+</ul>
+<h3 id="Virtual-threads"><a href="#Virtual-threads" class="headerlink" title="Virtual threads"></a>Virtual threads</h3><ul>
+<li>Keep the <strong>blocking code style</strong> (imperative, linear).</li>
+<li>You can just call <code>db.query()</code> or <code>httpClient.send()</code> inside a virtual thread without worring about blocking the OS thread.</li>
+<li>The scheduler multiplexes thousands of VTs on a few carriers.</li>
+</ul>
+<p>In case you have some ideas like </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Mono.fromCallable(() -&gt; &#123;</span><br><span class="line">    <span class="keyword">try</span> (<span class="type">var</span> <span class="variable">executor</span> <span class="operator">=</span> Executors.newVirtualThreadPerTaskExecutor()) &#123;</span><br><span class="line">        <span class="keyword">return</span> executor.submit(() -&gt; blockingDbQuery()).get();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>, you could question: <em><strong>why Reactor at all for IO-heavy workloads?</strong></em><br>With VTs, you don’t need reactive chains to achieve scalability ——— <strong>a simple synchronous style in a VT can scale to tens of thousands of connections.</strong></p>
+<hr>
+<p>Reactor is still useful if:</p>
+<ul>
+<li>You need backpressure.</li>
+<li>You already have a large reactive codebase.</li>
+<li>You want integration with libraries that are natively reactive (R2DBC, reactive Kafka, etc.).</li>
+</ul>
+<p>Hybrid using is fine, you can still integrates with existing Reactor ecosystem.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Scheduler</span> <span class="variable">vtScheduler</span> <span class="operator">=</span> Scheduler.fromExecutor(Executors.newVirtualThreadPerTaskExecutor());</span><br><span class="line"></span><br><span class="line">Mono.fromCallable(() -&gt; blockingApiCall())</span><br><span class="line">    .subscribeOn(vtScheduler)</span><br><span class="line">    .flatMap(result -&gt; Mono.just(transform(result)));</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p>it’s a Reactor way you handle IO-heavy request,</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Scheduler</span> <span class="variable">vtScheduler</span> <span class="operator">=</span> Scheduler.fromExecutor(</span><br><span class="line">    Executors.newVirtualThreadPerTaskExecutor()</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line">Mono&lt;String&gt; <span class="title function_">service</span><span class="params">(String id)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> Mono.fromCallable(() -&gt; blockingDbQuery(id))</span><br><span class="line">               .subscribeOn(vtScheduler)</span><br><span class="line">               .zipWith(</span><br><span class="line">                   Mono.fromCallable(() -&gt; blockingHttpCall(id))</span><br><span class="line">                       .subscribeOn(vtScheduler)</span><br><span class="line">               )</span><br><span class="line">               .map(tuple -&gt; <span class="string">&quot;DB: &quot;</span> + tuple.getT1() + <span class="string">&quot;, HTTP: &quot;</span> + tuple.getT2());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>what does pure virtual threads looks like in IO-heavy tasks?</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">ExecutorService</span> <span class="variable">executor</span> <span class="operator">=</span> Executors.newVirtualThreadPerTaskExecutor();</span><br><span class="line"></span><br><span class="line">String <span class="title function_">service</span><span class="params">(String id)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">    Future&lt;String&gt; future = executor.submit(() -&gt; &#123;</span><br><span class="line">        <span class="type">var</span> <span class="variable">dbResult</span> <span class="operator">=</span> blockingDbQuery(id);</span><br><span class="line">        <span class="type">var</span> <span class="variable">httpResult</span> <span class="operator">=</span> blockingHttpCall(id);</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;DB: &quot;</span> + dbResult + <span class="string">&quot;, HTTP: &quot;</span> + httpResult;</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="keyword">return</span> future.get();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>or with structured concurrency:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">String <span class="title function_">service</span><span class="params">(String id)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">    <span class="keyword">try</span> (<span class="type">var</span> <span class="variable">scope</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">StructuredTaskScope</span>.ShutdownOnFailure()) &#123;</span><br><span class="line">        <span class="type">var</span> <span class="variable">dbFuture</span> <span class="operator">=</span> scope.fork(() -&gt; blockingDbQuery(id));</span><br><span class="line">        <span class="type">var</span> <span class="variable">httpFuture</span> <span class="operator">=</span> scope.fork(() -&gt; blockingHttpCall(id));</span><br><span class="line"></span><br><span class="line">        scope.join();           <span class="comment">// wait for both</span></span><br><span class="line">        scope.throwIfFailed();  <span class="comment">// propagate exception</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;DB: &quot;</span> + dbFuture.resultNow() + <span class="string">&quot;, HTTP: &quot;</span> + httpFuture.resultNow();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>that’s it, the blocking style comes back without loose high throughput.</p>
+<p>If you’re on Spring 6 &#x2F; Spring boot 3 with Loom (JDK 21), you can drop WebFlux and use Spring MVC with virtual threads instead.<br>Each request gets its own VT, so blocking is cheap:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">VirtualThreadConfig</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    ExecutorService <span class="title function_">applicationExecutor</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> Executors.newVirtualThreadPerTaskExecutor();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MyController</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@GetMapping(&quot;/service/&#123;id&#125;&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">service</span><span class="params">(<span class="meta">@PathVariable</span> String id)</span> &#123;</span><br><span class="line">        <span class="comment">// This method is blocking, but it’s OK — it runs on a virtual thread</span></span><br><span class="line">        <span class="type">var</span> <span class="variable">dbResult</span> <span class="operator">=</span> blockingDbQuery(id);</span><br><span class="line">        <span class="type">var</span> <span class="variable">httpResult</span> <span class="operator">=</span> blockingHttpCall(id);</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;DB: &quot;</span> + dbResult + <span class="string">&quot;, HTTP: &quot;</span> + httpResult;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String <span class="title function_">blockingDbQuery</span><span class="params">(String id)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;db-&quot;</span> + id;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String <span class="title function_">blockingHttpCall</span><span class="params">(String id)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;http-&quot;</span> + id;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>this is the “Loom Future”: MVC simplicity + WebFlux scalability.</p>
+<h1 id="VTs-or-Netty"><a href="#VTs-or-Netty" class="headerlink" title="VTs or Netty"></a>VTs or Netty</h1><p><strong>Virtual threads can replace the reason Netty exists</strong><br>Netty was designed because the <strong>thread-per-connection model didn’t scale</strong> (too many OS threads).<br>With VTs, you can go back to simple thread-per-connection model:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> (<span class="type">var</span> <span class="variable">listener</span> <span class="operator">=</span> AsynchronousServerSocketChannel.open()) &#123;</span><br><span class="line">    listener.bind(<span class="keyword">new</span> <span class="title class_">InetSocketAddress</span>(<span class="number">8080</span>));</span><br><span class="line">    <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">        <span class="type">var</span> <span class="variable">client</span> <span class="operator">=</span> listener.accept().get(); <span class="comment">// blocks</span></span><br><span class="line">        Thread.ofVirtual().start(() -&gt; handle(client));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Each connection just runs on its own virtual thread ——— no event loop gymnastics.</p>
 <blockquote>
-<p><strong>Rule of Thumb</strong><br>Use Flux.generate when you want a pull-based, synchronous generator (like a lazy sequence, state machine, or random number generator).<br>Use Flux.push&#x2F;create when you want to adapt to an external asynchronous source (like callbacks, listeners, or multiple threads producing data).</p>
+<p>this eliminates the core scalability problem Netty solved in 2004.</p>
 </blockquote>
-<h1 id="webflux"><a href="#webflux" class="headerlink" title="webflux"></a>webflux</h1><p>🟢 Cold, synchronous sources (run on caller thread, usually the subscriber’s thread)</p>
-<p>These methods execute inline on the same thread that subscribes, unless moved:</p>
-<p>Mono.just(…), Flux.just(…)</p>
-<p>Mono.empty(), Flux.empty()</p>
-<p>Mono.error(…), Flux.error(…)</p>
-<p>Flux.range(…), Flux.fromIterable(…), Flux.fromArray(…)</p>
-<p>Mono.fromSupplier(…) (evaluates lazily but still on caller thread)</p>
-<p>Mono.fromCallable(…)</p>
-<p>Flux.defer(…), Mono.defer(…)</p>
-<p>👉 By default: No background thread, execution happens immediately when subscribed.</p>
-<h2 id="thread-model"><a href="#thread-model" class="headerlink" title="thread model"></a>thread model</h2><p>default WebFlux app on Netty:</p>
+<p>Can VTs replace Netty?</p>
+<p>Not now, Nety is not “just” about scaling connections. It also provides:</p>
 <ul>
-<li>Boss threads: 1</li>
-<li>Worker (event loop) threads: 2 * cpu</li>
-<li>Reactor Scheduler available:<ul>
-<li>paraller: cpu</li>
-<li>boundedElastic: 10 * cpu -&gt; 1000+</li>
-<li>timer: cpu (independent scheduler, never run user code directly, wraped a ScheduledExecutorService)</li>
-<li>single: 1</li>
-<li>immediate: 0 (just current thread)</li>
+<li>Protocol implementations (HTTP, HTTP&#x2F;2, HTTP&#x2F;3, WebSockets, gRPC transport).</li>
+<li>Pipelines (handlers, encoders&#x2F;decoders, SSL&#x2F;TLS, compression).</li>
+<li>Zero-copy, pooled byte buffers for performance.</li>
+<li>Backpressure and flow control.</li>
 </ul>
-</li>
+<p>Virtual threads don’t give you any of that ——— they just let you block without guilt.</p>
+<p>What’s a minimal blocking HTTP server with VTs looks like?</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.*;</span><br><span class="line"><span class="keyword">import</span> java.net.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SimpleHttpServer</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">        <span class="keyword">try</span> (<span class="type">var</span> <span class="variable">serverSocket</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ServerSocket</span>(<span class="number">8080</span>)) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;Server listening on port 8080...&quot;</span>);</span><br><span class="line"></span><br><span class="line">            <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">                <span class="type">Socket</span> <span class="variable">client</span> <span class="operator">=</span> serverSocket.accept(); <span class="comment">// blocks</span></span><br><span class="line">                Thread.ofVirtual().start(() -&gt; handleClient(client));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">handleClient</span><span class="params">(Socket client)</span> &#123;</span><br><span class="line">        <span class="keyword">try</span> (client;</span><br><span class="line">             <span class="type">var</span> <span class="variable">reader</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">BufferedReader</span>(<span class="keyword">new</span> <span class="title class_">InputStreamReader</span>(client.getInputStream()));</span><br><span class="line">             <span class="type">var</span> <span class="variable">writer</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">BufferedWriter</span>(<span class="keyword">new</span> <span class="title class_">OutputStreamWriter</span>(client.getOutputStream()))) &#123;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// Read the first request line (ignore headers for simplicity)</span></span><br><span class="line">            <span class="type">String</span> <span class="variable">line</span> <span class="operator">=</span> reader.readLine();</span><br><span class="line">            System.out.println(<span class="string">&quot;Received: &quot;</span> + line);</span><br><span class="line"></span><br><span class="line">            <span class="comment">// Simple HTTP response</span></span><br><span class="line">            writer.write(<span class="string">&quot;HTTP/1.1 200 OK\r\n&quot;</span>);</span><br><span class="line">            writer.write(<span class="string">&quot;Content-Type: text/plain\r\n&quot;</span>);</span><br><span class="line">            writer.write(<span class="string">&quot;Connection: close\r\n&quot;</span>);</span><br><span class="line">            writer.write(<span class="string">&quot;\r\n&quot;</span>);</span><br><span class="line">            writer.write(<span class="string">&quot;Hello from Virtual Threads!\n&quot;</span>);</span><br><span class="line">            writer.flush();</span><br><span class="line"></span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>If you want non-blocking channels but still keep the simple style:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.net.*;</span><br><span class="line"><span class="keyword">import</span> java.nio.*;</span><br><span class="line"><span class="keyword">import</span> java.nio.channels.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">NioHttpServer</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        <span class="keyword">try</span> (<span class="type">var</span> <span class="variable">server</span> <span class="operator">=</span> ServerSocketChannel.open()) &#123;</span><br><span class="line">            server.bind(<span class="keyword">new</span> <span class="title class_">InetSocketAddress</span>(<span class="number">8080</span>));</span><br><span class="line"></span><br><span class="line">            System.out.println(<span class="string">&quot;NIO server listening on port 8080...&quot;</span>);</span><br><span class="line"></span><br><span class="line">            <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">                <span class="type">SocketChannel</span> <span class="variable">client</span> <span class="operator">=</span> server.accept(); <span class="comment">// blocks</span></span><br><span class="line">                Thread.ofVirtual().start(() -&gt; handle(client));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">handle</span><span class="params">(SocketChannel client)</span> &#123;</span><br><span class="line">        <span class="keyword">try</span> (client) &#123;</span><br><span class="line">            <span class="type">ByteBuffer</span> <span class="variable">buffer</span> <span class="operator">=</span> ByteBuffer.allocate(<span class="number">1024</span>);</span><br><span class="line">            client.read(buffer); <span class="comment">// blocks</span></span><br><span class="line">            buffer.flip();</span><br><span class="line"></span><br><span class="line">            <span class="type">String</span> <span class="variable">response</span> <span class="operator">=</span> <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">                HTTP/1.1 200 OK\r</span></span><br><span class="line"><span class="string">                Content-Type: text/plain\r</span></span><br><span class="line"><span class="string">                Connection: close\r</span></span><br><span class="line"><span class="string">                \r</span></span><br><span class="line"><span class="string">                Hello from Virtual Threads with NIO!</span></span><br><span class="line"><span class="string">                &quot;&quot;&quot;</span>;</span><br><span class="line"></span><br><span class="line">            client.write(ByteBuffer.wrap(response.getBytes()));</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="VTs-frameworks"><a href="#VTs-frameworks" class="headerlink" title="VTs frameworks"></a>VTs frameworks</h1><p>Helidon Níma (Helidon 4)</p>
+<p>Reactor Core (Spring Reactor &#x2F; WebFlux)</p>
+<p>Spring Boot 3.2</p>
+<h1 id="Caveats-Limitations-amp-Things-to-Watch"><a href="#Caveats-Limitations-amp-Things-to-Watch" class="headerlink" title="Caveats, Limitations &amp; Things to Watch"></a>Caveats, Limitations &amp; Things to Watch</h1><ul>
+<li><strong>Blocking calls in third-party libraries</strong>: If a library internally blocks in a way the JVM can’t detect (e.g. native sleep, synchronized locks), the benefit is diminished.</li>
+<li><strong>ThreadLocal usage</strong>: Because you may have many virtual threads, ThreadLocal data may become an issue (memory, leakage). Scoped values or other strategies are recommended. </li>
+<li><strong>Resource limits beyond threads</strong>: Database connections, file descriptors, sockets, memory — you still need to manage these.</li>
+<li><strong>Performance &amp; tuning</strong>: The new runtime behaviors may reveal new performance bottlenecks, GC overheads, scheduling latency, etc.</li>
+<li><strong>Maturity &amp; ecosystem</strong>: Many frameworks, tools, APM agents, debuggers, etc., will need adaptation to fully embrace Loom.</li>
 </ul>
-<p><strong>Best Practices</strong></p>
-<ul>
-<li><p><strong>Pure reactive stack (WebClient, R2DBC, reactive Mongo, etc.):</strong><br>  → stay on Netty event loop, no scheduler needed.</p>
-</li>
-<li><p><strong>Blocking APIs (JDBC, legacy SDKs, file IO):</strong><br>  → wrap with Mono.fromCallable(…).subscribeOn(Schedulers.boundedElastic()).</p>
-</li>
-<li><p><strong>Heavy CPU tasks (compression, JSON parsing, crypto):</strong><br>  → offload with publishOn(Schedulers.parallel()).</p>
-</li>
-<li><p><strong>Global customization</strong> (rarely needed): adjust Netty loop threads for connection-heavy apps, or override boundedElastic size for blocking-heavy apps.</p>
-</li>
-</ul>
-<p>why heavy cpu tasks, not io tasks, cauz netty born for heavy sockets tasks, it’s non-block at all.</p>
-<p>io tasks not to be block tasks for netty, don’t equal to them. even if there’s no io, it still could be a block task, e.g. <code>Thread.sleep(5000)</code> is a block task, forbidden running on event loop.</p>
+<p>ThreadLocals can blow up memory usage with millions of virtual threads.<br>Prefer Scoped Values (available in preview) or explicit context passing.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ScopedValue&lt;String&gt; USER = ScopedValue.newInstance();</span><br><span class="line"></span><br><span class="line">ScopedValue.where(USER, <span class="string">&quot;carl&quot;</span>)</span><br><span class="line">           .run(() -&gt; doWork(USER.get()));</span><br></pre></td></tr></table></figure>
+
+<p>Structured Concurrency (for Task Groups), Instead of manual <code>CompletableFuture</code> composition, use Loom’s structured concurrency API:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> (<span class="type">var</span> <span class="variable">scope</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">StructuredTaskScope</span>.ShutdownOnFailure()) &#123;</span><br><span class="line">    <span class="type">var</span> <span class="variable">task1</span> <span class="operator">=</span> scope.fork(() -&gt; fetchUser());</span><br><span class="line">    <span class="type">var</span> <span class="variable">task2</span> <span class="operator">=</span> scope.fork(() -&gt; fetchOrders());</span><br><span class="line">    scope.join();</span><br><span class="line">    scope.throwIfFailed();</span><br><span class="line">    <span class="keyword">return</span> combine(task1.resultNow(), task2.resultNow());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <hr>
-<p>🟡 Asynchronous sources (use a Reactor scheduler by default)</p>
-<p>These spawn work on an internal boundedElastic or parallel thread pool:</p>
-<p>Mono.delay(Duration) → Schedulers.parallel()</p>
-<p>Flux.interval(Duration) → Schedulers.parallel()</p>
-<p>Mono.fromRunnable(…), Mono.fromFuture(…), Mono.fromCompletionStage(…)</p>
-<p>If future already completed → current thread</p>
-<p>If not → completion thread (depends on upstream executor&#x2F;future, not Reactor itself)</p>
-<p>👉 By default: don’t run on subscriber thread, Reactor chooses.</p>
-<hr>
-<p>🔵 Blocking bridge operators (force boundedElastic by default)</p>
-<p>Reactor assumes blocking I&#x2F;O → runs on Schedulers.boundedElastic() unless you change:</p>
-<p>Mono.fromCallable(blockingFn).subscribeOn(Schedulers.boundedElastic()) (best practice)</p>
-<p>Mono.block() &#x2F; Flux.blockFirst() &#x2F; Flux.blockLast() (blocking the caller thread)</p>
-<p>Operators like flatMap with blocking calls must be explicitly shifted to boundedElastic.</p>
-<hr>
-<p>🔴 Thread-affecting operators (don’t run anything themselves but change execution)</p>
-<p>publishOn(Scheduler) → switches downstream execution thread</p>
-<p>subscribeOn(Scheduler) → changes the context where subscription and upstream happen</p>
-<hr>
-<p>⚪ Context-dependent sources</p>
-<p>Some methods inherit threads from external APIs:</p>
-<p>Flux.create(…) or Mono.create(…) → depends on how you emit (<code>caller thread</code> or async callback thread)</p>
-<p>Flux.push(…) → same, depends on emitter thread</p>
-<p>Flux.generate(…) → runs on <code>subscriber thread</code> unless you schedule</p>
-<blockquote>
-<p>✅ Quick rule of thumb<br>“Pure data” operators (just, range, fromIterable) → run on subscriber thread.<br>“Timed” operators (delay, interval) → run on Reactor’s parallel scheduler.<br>“Bridges to blocking&#x2F;async world” (fromCallable, fromFuture) → run on caller’s thread or boundedElastic&#x2F;foreign executor, unless you move them.<br>Schedulers (publishOn, subscribeOn) are the only way to force thread switch.</p>
-</blockquote>
-<p><em><strong>caller thread &#x3D; initiator of subscription, subscriber thread &#x3D; executor of signals.</strong></em></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">flux.publishOn(Schedulers.parallel())</span><br><span class="line">    .subscribe(i -&gt; System.out.println(<span class="string">&quot;sub: &quot;</span> + i + <span class="string">&quot; on &quot;</span> + Thread.currentThread().getName()));</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>caller thread &#x3D; main</li>
-<li>subscriber thread &#x3D; parallel-1</li>
-<li>Mapping still happens on ‘parallel-1’ because of <code>publishOn</code></li>
-</ul>
-<h3 id="think-about"><a href="#think-about" class="headerlink" title="think about"></a>think about</h3><p>🔹 Two philosophies</p>
-<ol>
-<li>Operators&#x2F;methods decide their scheduler (local responsibility)</li>
-</ol>
-<p>You sprinkle .subscribeOn(…) or .publishOn(…) inside every method that returns a Mono&#x2F;Flux.</p>
-<p>Pros:<br>The method guarantees safe execution (e.g., offloading a blocking call to boundedElastic).<br>Callers don’t need to know the implementation details (e.g., that it does blocking JDBC work).<br>Cons:<br>You lose flexibility: the caller cannot override your scheduler easily.<br>If multiple methods apply .subscribeOn(…), only the first one in the chain wins (because subscribeOn only affects upstream).<br>Can lead to confusion if one method hides threading decisions.</p>
-<ol start="2">
-<li>Caller decides (central responsibility)</li>
-</ol>
-<p>Your methods just describe the pipeline (Mono.just, map, flatMap, etc.) with no scheduler hints.<br>The caller (e.g., controller or service entry point) applies subscribeOn &#x2F; publishOn.</p>
-<p>Pros:<br>Clean separation of concerns: methods remain pure, deterministic pipelines.<br>Caller has full control of threading policy.<br>Easy to test synchronously (no schedulers in unit tests unless you want them).<br>Cons:<br>Risk: if a method does blocking work (e.g., JDBC, file IO, legacy API), caller must remember to schedule it properly, or it will block Netty&#x2F;event loop.</p>
-<p>🔹 Rule of Thumb</p>
-<p>👉 Don’t sprinkle subscribeOn everywhere.</p>
-<p>If your method is purely non-blocking&#x2F;reactive (using Reactor operators, R2DBC, WebClient, etc.):<br>❌ Do not configure a scheduler. Let the caller decide.</p>
-<p>If your method wraps blocking code (JDBC, file IO, legacy API, etc.):<br>✅ Apply subscribeOn(Schedulers.boundedElastic()) inside the method — because you must protect the Netty event loop.</p>
-<p>This way:</p>
-<p>Non-blocking pipelines remain transparent and flexible.<br>Blocking bridges are safe by default, without relying on the caller’s discipline.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ✅ Non-blocking service, no scheduler</span></span><br><span class="line">Mono&lt;User&gt; <span class="title function_">getUserReactive</span><span class="params">(String id)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> webClient.get()</span><br><span class="line">        .uri(<span class="string">&quot;/users/&#123;id&#125;&quot;</span>, id)</span><br><span class="line">        .retrieve()</span><br><span class="line">        .bodyToMono(User.class);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// ✅ Blocking service, safe by default</span></span><br><span class="line">Mono&lt;User&gt; <span class="title function_">getUserBlocking</span><span class="params">(String id)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> Mono.fromCallable(() -&gt; jdbcTemplate.queryForObject(<span class="string">&quot;...&quot;</span>, User.class, id))</span><br><span class="line">               .subscribeOn(Schedulers.boundedElastic());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>Caller:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Controller - doesn&#x27;t care about threading for reactive code</span></span><br><span class="line">getUserReactive(<span class="string">&quot;123&quot;</span>)</span><br><span class="line">    .map(<span class="built_in">this</span>::transform)</span><br><span class="line">    .subscribe();</span><br><span class="line"></span><br><span class="line"><span class="comment">// Blocking call is already protected by boundedElastic internally</span></span><br><span class="line">getUserBlocking(<span class="string">&quot;123&quot;</span>)</span><br><span class="line">    .map(<span class="built_in">this</span>::transform)</span><br><span class="line">    .subscribe();</span><br></pre></td></tr></table></figure>
-
-<p>✅ Best practice summary</p>
-<p>Non-blocking methods: don’t set subscribeOn.<br>Blocking methods: always set subscribeOn(Schedulers.boundedElastic()) inside the method.<br>At the top level (controllers, pipelines): only add publishOn&#x2F;subscribeOn when you need explicit control over where downstream operators run.</p>
-<p>define custom schedulers</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> reactor.core.scheduler.Scheduler;</span><br><span class="line"><span class="keyword">import</span> reactor.core.scheduler.Schedulers;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.Executors;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.ThreadFactory;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.ExecutorService;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">CustomSchedulers</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// CPU-heavy tasks: non-blocking, parallel computation</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">Scheduler</span> <span class="variable">CPU_SCHEDULER</span> <span class="operator">=</span> Schedulers.newParallel(</span><br><span class="line">            <span class="string">&quot;cpu-pool&quot;</span>,  <span class="comment">// thread name prefix</span></span><br><span class="line">            Runtime.getRuntime().availableProcessors()</span><br><span class="line">    );</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Blocking / IO-heavy tasks: e.g., DB, file I/O, network calls</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">int</span> <span class="variable">IO_POOL_SIZE</span> <span class="operator">=</span> <span class="number">50</span>;  <span class="comment">// adjust based on load</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">ExecutorService</span> <span class="variable">ioExecutor</span> <span class="operator">=</span> Executors.newFixedThreadPool(</span><br><span class="line">            IO_POOL_SIZE,</span><br><span class="line">            <span class="keyword">new</span> <span class="title class_">ThreadFactory</span>() &#123;</span><br><span class="line">                <span class="keyword">private</span> <span class="type">int</span> <span class="variable">count</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">                <span class="meta">@Override</span></span><br><span class="line">                <span class="keyword">public</span> Thread <span class="title function_">newThread</span><span class="params">(Runnable r)</span> &#123;</span><br><span class="line">                    <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Thread</span>(r, <span class="string">&quot;io-pool-&quot;</span> + count++);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">    );</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">Scheduler</span> <span class="variable">IO_SCHEDULER</span> <span class="operator">=</span> Schedulers.fromExecutorService(ioExecutor);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Cleanup on shutdown</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">shutdown</span><span class="params">()</span> &#123;</span><br><span class="line">        CPU_SCHEDULER.dispose();</span><br><span class="line">        IO_SCHEDULER.dispose();</span><br><span class="line">        ioExecutor.shutdown();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h1 id="methods-usage"><a href="#methods-usage" class="headerlink" title="methods usage"></a>methods usage</h1><h2 id="defer-amp-interval"><a href="#defer-amp-interval" class="headerlink" title="defer &amp; interval"></a>defer &amp; interval</h2><p><code>defer</code> is like a provider in spring, when inject a provider: () -&gt; new Instance() instead a : new Instance() itself.<br>it <strong>create a new Mono for every subscription</strong> by invoking the supplier lazily.</p>
-<p>say we need a loop call, </p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> Mono&lt;String&gt; <span class="title function_">pollUntilJson</span><span class="params">(String path)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> Mono.defer(() -&gt;</span><br><span class="line">                webClient.get()</span><br><span class="line">                         .uri(path)</span><br><span class="line">                         .retrieve()</span><br><span class="line">                         .bodyToMono(String.class)</span><br><span class="line">        ).flatMap(body -&gt; &#123;</span><br><span class="line">            <span class="keyword">if</span> (!body.isEmpty() &amp;&amp; body.trim().startsWith(<span class="string">&quot;&#123;&quot;</span>)) &#123;</span><br><span class="line">                <span class="keyword">return</span> Mono.just(body); <span class="comment">// ✅ Got JSON, finish</span></span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">return</span> Mono.delay(Duration.ofSeconds(<span class="number">1</span>)) <span class="comment">// delay create a non-blocking timer, so reactor will schedules it on a reactor timer, not a thread sleep.</span></span><br><span class="line">                           .then(pollUntilJson(path)); <span class="comment">// each time, we make a fresh call, not reuse the first mono which we don&#x27;t want to.</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125; <span class="comment">// since webclient is non-blocking, we don&#x27;t need a subscribeOn(boundedElastic()).</span></span><br></pre></td></tr></table></figure>
-
-<p>alternatives to delay</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Flux.interval(Duration.ofSeconds(<span class="number">1</span>))</span><br><span class="line">    .flatMap(tick -&gt;</span><br><span class="line">        webClient.get().uri(path).retrieve().bodyToMono(String.class)</span><br><span class="line">    )</span><br><span class="line">    .filter(body -&gt; isJson(body)) <span class="comment">// </span></span><br><span class="line">    .next(); <span class="comment">// take the first JSON result</span></span><br></pre></td></tr></table></figure>
-
-<p>or exponential backoff way</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Mono.defer(() -&gt; webClient.get().uri(path).retrieve().bodyToMono(String.class))</span><br><span class="line">    .filter(<span class="built_in">this</span>::isJson)</span><br><span class="line">    .retryWhen(Retry.backoff(<span class="number">10</span>, Duration.ofSeconds(<span class="number">1</span>)));</span><br></pre></td></tr></table></figure>
-
-
-
-
+<p>🗓 Project Loom Timeline &#x2F; Roadmap<br>🔹 Early Days</p>
+<p>2017: Project Loom was announced at OpenJDK (Brian Goetz &amp; Ron Pressler leading).</p>
+<p>2018–2020: Early prototypes with fibers and continuations. APIs unstable.</p>
+<p>JDK 13–16: Some incubator APIs for continuations and structured concurrency experiments.</p>
+<p>🔹 Key Milestones</p>
+<p>JDK 19 (Sept 2022)</p>
+<p>Virtual Threads introduced as a preview feature.</p>
+<p>Structured Concurrency incubated.</p>
+<p>JDK 20 (Mar 2023)</p>
+<p>Virtual Threads previewed again with refinements.</p>
+<p>Structured Concurrency incubator updated.</p>
+<p>JDK 21 (Sept 2023, LTS release)</p>
+<p>Virtual Threads finalized (no longer preview).</p>
+<p>Structured Concurrency still incubating.</p>
+<p>Scoped Values introduced in preview.</p>
+<p>JDK 22 (Mar 2024)</p>
+<p>Structured Concurrency (2nd incubator round).</p>
+<p>Scoped Values (2nd preview).</p>
+<p>JDK 23 (Sept 2024, not LTS)</p>
+<p>Ongoing improvements in Structured Concurrency &amp; Scoped Values.</p>
+<p>Tooling support (debuggers, profilers) improving for virtual threads.</p>
+<p>🔮 Near Future</p>
+<p>JDK 25 (likely next LTS in 2026)</p>
+<p>Expect Structured Concurrency and Scoped Values to become stable.</p>
+<p>Virtual thread ecosystem maturity (Spring, Hibernate, Netty alternatives adapting).</p>
+<p>JVM &#x2F; JIT &#x2F; GC optimizations specific to Loom workloads.</p>
 
       
     </div>
@@ -391,7 +391,7 @@
 
 
   <nav class="pagination">
-    <a class="extend prev" rel="prev" title="上一页" aria-label="上一页" href="/blog/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/blog/">1</a><span class="page-number current">2</span><a class="page-number" href="/blog/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/197/">197</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/blog/page/3/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" title="上一页" aria-label="上一页" href="/blog/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/blog/">1</a><span class="page-number current">2</span><a class="page-number" href="/blog/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/196/">196</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/blog/page/3/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 </div>

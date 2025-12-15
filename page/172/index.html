@@ -141,18 +141,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/blog/archives/">
-          <span class="site-state-item-count">197</span>
+          <span class="site-state-item-count">196</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/blog/categories/">
-        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-count">9</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/blog/tags/">
-        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-count">25</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -178,7 +178,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://carl-zk.github.io/blog/2016/06/23/Fibonacci/">
+    <link itemprop="mainEntityOfPage" href="https://carl-zk.github.io/blog/2016/06/22/%E6%89%BE%E6%96%B0%E6%9C%8B%E5%8F%8B/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/blog/images/avatar.gif">
@@ -196,7 +196,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/blog/2016/06/23/Fibonacci/" class="post-title-link" itemprop="url">Fibonacci</a>
+          <a href="/blog/2016/06/22/%E6%89%BE%E6%96%B0%E6%9C%8B%E5%8F%8B/" class="post-title-link" itemprop="url">找新朋友</a>
         </h2>
 
         <div class="post-meta-container">
@@ -207,7 +207,7 @@
       </span>
       <span class="post-meta-item-text">发表于</span>
 
-      <time title="创建时间：2016-06-23 00:32:40" itemprop="dateCreated datePublished" datetime="2016-06-23T00:32:40+08:00">2016-06-23</time>
+      <time title="创建时间：2016-06-22 20:00:27" itemprop="dateCreated datePublished" datetime="2016-06-22T20:00:27+08:00">2016-06-22</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -236,21 +236,19 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p><a target="_blank" rel="noopener" href="http://acm.hdu.edu.cn/game/entry/problem/show.php?chapterid=2&sectionid=2&problemid=1">题目链接</a><br>Problem Description<br>2007年到来了。经过2006年一年的修炼，数学神童zouyu终于把0到100000000的Fibonacci数列<br>(f[0]&#x3D;0,f[1]&#x3D;1;f[i] &#x3D; f[i-1]+f<a href="i%3E=2">i-2</a>)的值全部给背了下来。<br>接下来，CodeStar决定要考考他，于是每问他一个数字，他就要把答案说出来，不过有的数字太长了。所以规定超过4位的只要说出前4位就可以了，可是CodeStar自己又记不住。于是他决定编写一个程序来测验zouyu说的是否正确。</p>
-<p>Input<br>输入若干数字n(0 &lt;&#x3D; n &lt;&#x3D; 100000000)，每个数字一行。读到文件尾。</p>
-<p>Output<br>输出f[n]的前4个数字（若不足4个数字，就全部输出）。</p>
-<p>Sample Input<br>0<br>1<br>2<br>3<br>4<br>5<br>35<br>36<br>37<br>38<br>39<br>40</p>
-<p>Sample Output<br>0<br>1<br>1<br>2<br>3<br>5<br>9227<br>1493<br>2415<br>3908<br>6324<br>1023</p>
-<hr />
+          <p><a target="_blank" rel="noopener" href="http://acm.hdu.edu.cn/game/entry/problem/show.php?chapterid=2&sectionid=1&problemid=8">题目链接</a><br>Problem Description<br>新年快到了，“猪头帮协会”准备搞一个聚会，已经知道现有会员N人，把会员从1到N编号，其中会长的号码是N号，凡是和会长是老朋友的，那么该会员的号码肯定和N有大于1的公约数，否则都是新朋友，现在会长想知道究竟有几个新朋友？请你编程序帮会长计算出来。</p>
+<p>Input<br>第一行是测试数据的组数CN（Case number，1&lt;CN&lt;10000），接着有CN行正整数N（1&lt;n&lt;32768），表示会员人数。</p>
+<p>Output<br>对于每一个N，输出一行新朋友的人数，这样共有CN行输出。</p>
+<p>Sample Input<br>2<br>25608<br>24027</p>
+<p>Sample Output<br>7680<br>16016</p>
+<hr/>
 
-<p><a target="_blank" rel="noopener" href="http://blog.csdn.net/xh_reventon/article/details/8747670">参考链接</a></p>
 <blockquote>
-<p>Fibonacci的通项公式：<br><strong>F(n)&#x3D;(1&#x2F;√5)*[((1+√5)&#x2F;2)^n-((1-√5)&#x2F;2)^n]</strong>  ——————    (1)<br>(1-√5)&#x2F;2很小，所以当n大的时候，((1-√5)&#x2F;2)^n为0，可以忽律不计<br>可以通过打表得出前20项都是小于等于4位，直接输出。<br>后面通过取10的对数，然后去掉整数部分，然后取10的指数，取前四位即可</p>
+<p>递归查找时保存查询结果.<br>内存限制,只能保存部分.</p>
 </blockquote>
-<blockquote>
-<p>F(n)可以写成 a<em>10^b, 对公式(1)取对数可得:<br>*<em>lga+b&#x3D;-lg√5-n</em>lg2(1+√5)&#x3D;t*</em><br>b是t的整数部分,即[t]<br>所以a &#x3D; 10^(t-[t]);</p>
-</blockquote>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;set&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> MAX 21</span></span><br><span class="line"></span><br><span class="line">using namespace <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* Fibonacci通项公式:</span></span><br><span class="line"><span class="comment">* F(n) = (1/√5)*[((1+√5)/2)^n-((1-√5)/2)^n]</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> a[MAX];</span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">double</span> sqrt5 = <span class="built_in">sqrt</span>(<span class="number">5</span>);</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">init</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    a[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">    a[<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">2</span>; i&lt;MAX; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        a[i] = a[i<span class="number">-1</span>]+a[i<span class="number">-2</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">fibonac</span><span class="params">(<span class="type">int</span> x)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">double</span> t,y;</span><br><span class="line">    t = -<span class="built_in">log10</span>(sqrt5) + <span class="built_in">log10</span>(<span class="number">0.5</span>+<span class="number">0.5</span>*sqrt5) * x;</span><br><span class="line">    y = <span class="built_in">pow</span>(<span class="number">10</span>, t - (<span class="type">long</span> <span class="type">long</span>)t);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, (<span class="type">int</span>)(y*<span class="number">1000</span>));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    init();</span><br><span class="line">    <span class="type">int</span> x;</span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;x)!=EOF)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(x&lt;<span class="number">21</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>,a[x]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            fibonac(x);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;set&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> MAX 501</span></span><br><span class="line"></span><br><span class="line">using namespace <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> grad[MAX][MAX];</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">gcd</span><span class="params">(<span class="type">int</span> x, <span class="type">int</span> y)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>(x&lt;MAX &amp;&amp; y&lt;MAX)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(grad[x][y])</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> grad[x][y];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> grad[x][y] = y ? gcd(y, x%y):x;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> y ? gcd(y, x % y) : x;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">memset</span>(grad, <span class="number">0</span>, <span class="keyword">sizeof</span>(grad));</span><br><span class="line">    <span class="type">int</span> t, n, c;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;t);</span><br><span class="line">    <span class="keyword">while</span>(t--)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;n);</span><br><span class="line">        c = n - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">2</span>; i&lt;n; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(gcd(n, i) &gt; <span class="number">1</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                c--;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, c);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
       
     </div>
 
@@ -269,7 +267,7 @@
 
 
   <nav class="pagination">
-    <a class="extend prev" rel="prev" title="上一页" aria-label="上一页" href="/blog/page/171/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/171/">171</a><span class="page-number current">172</span><a class="page-number" href="/blog/page/173/">173</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/197/">197</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/blog/page/173/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" title="上一页" aria-label="上一页" href="/blog/page/171/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/171/">171</a><span class="page-number current">172</span><a class="page-number" href="/blog/page/173/">173</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/196/">196</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/blog/page/173/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 </div>

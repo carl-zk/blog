@@ -141,18 +141,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/blog/archives/">
-          <span class="site-state-item-count">197</span>
+          <span class="site-state-item-count">196</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/blog/categories/">
-        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-count">9</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/blog/tags/">
-        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-count">25</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -178,7 +178,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://carl-zk.github.io/blog/2017/03/04/OFBiz-Learn/">
+    <link itemprop="mainEntityOfPage" href="https://carl-zk.github.io/blog/2017/03/03/sublime%E5%BF%AB%E6%8D%B7%E9%94%AE/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/blog/images/avatar.gif">
@@ -196,7 +196,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/blog/2017/03/04/OFBiz-Learn/" class="post-title-link" itemprop="url">OFBiz Learn</a>
+          <a href="/blog/2017/03/03/sublime%E5%BF%AB%E6%8D%B7%E9%94%AE/" class="post-title-link" itemprop="url">Sublime快捷键</a>
         </h2>
 
         <div class="post-meta-container">
@@ -207,7 +207,7 @@
       </span>
       <span class="post-meta-item-text">发表于</span>
 
-      <time title="创建时间：2017-03-04 13:42:07" itemprop="dateCreated datePublished" datetime="2017-03-04T13:42:07+08:00">2017-03-04</time>
+      <time title="创建时间：2017-03-03 22:19:53" itemprop="dateCreated datePublished" datetime="2017-03-03T22:19:53+08:00">2017-03-03</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -215,15 +215,6 @@
       </span>
       <span class="post-meta-item-text">更新于</span>
       <time title="修改时间：2024-05-18 16:19:43" itemprop="dateModified" datetime="2024-05-18T16:19:43+08:00">2024-05-18</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/blog/categories/OFBiz/" itemprop="url" rel="index"><span itemprop="name">OFBiz</span></a>
-        </span>
     </span>
 
   
@@ -236,47 +227,10 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h1 id="初识OFBiz"><a href="#初识OFBiz" class="headerlink" title="初识OFBiz"></a>初识OFBiz</h1><p><a target="_blank" rel="noopener" href="https://ofbiz.apache.org/apache-ofbiz-project-overview.html">官网</a></p>
-<p>Open For Business(OFBiz) 是一个企业应用框架，类似于Spring，主要针对ERP、CRM系统。<br>OFBiz使用 <a target="_blank" rel="noopener" href="https://www.apache.org/licenses/LICENSE-2.0">Apache License Version 2.0协议</a>，你可以不公开你的代码。</p>
-<h1 id="Major-Application-Components"><a href="#Major-Application-Components" class="headerlink" title="Major Application Components"></a>Major Application Components</h1><h2 id="Common-Data"><a href="#Common-Data" class="headerlink" title="Common Data"></a>Common Data</h2><p>包括实体类等系统启动时加载的、一般很少变动的数据。</p>
-<h2 id="Content"><a href="#Content" class="headerlink" title="Content"></a>Content</h2><p>用于对数据的追踪。</p>
-<h2 id="Security"><a href="#Security" class="headerlink" title="Security"></a>Security</h2><p>访问控制。</p>
-<h2 id="Party"><a href="#Party" class="headerlink" title="Party"></a>Party</h2><p>可以是一个人，或一个Parties组。Party Group可以是一个公司，公司内部的一个机构，供应商或顾客等。<br>与Party相关的类型有</p>
-<ol>
-<li>Contact Mechanisms(地址，手机，邮箱，URL……)</li>
-<li>Roles(作为顾客，供应商，员工，经理，商人……)</li>
-<li>另一种可归为Party类的数据是Parties之间communication和agreement的信息。它可被Work Effort实体用来计划和追踪Parties之间的问题和解决方案。</li>
-</ol>
-<h2 id="Product"><a href="#Product" class="headerlink" title="Product"></a>Product</h2><p>公司出售或内部使用的商品，可以是goods或services</p>
-<h2 id="Order"><a href="#Order" class="headerlink" title="Order"></a>Order</h2><p>商品的排序。如顾客对一类商品的url请求，就会被Order package内的实体处理。</p>
-<h2 id="Facility"><a href="#Facility" class="headerlink" title="Facility"></a>Facility</h2><p>一座大楼或一个地理位置。</p>
-<h2 id="Shipment"><a href="#Shipment" class="headerlink" title="Shipment"></a>Shipment</h2><p>跟踪进出货和进出货清单。</p>
-<h2 id="Accounting"><a href="#Accounting" class="headerlink" title="Accounting"></a>Accounting</h2><p>记账。</p>
-<h2 id="Marketing"><a href="#Marketing" class="headerlink" title="Marketing"></a>Marketing</h2><p>市场信息。</p>
-<h2 id="Work-Effort"><a href="#Work-Effort" class="headerlink" title="Work Effort"></a>Work Effort</h2><p>可以是一个task，project，project phase，to-do item,Workflow Activity等。</p>
-<blockquote>
-<p>需要注意的是，OFBiz放弃了Workflow Engines，改用Event Driven Architecture(EDA)和ECAs(SECA,EECA,MECA)。ECA是Event Condition Action的缩写。SECAs用于Services，EECA用于Entity，MECAs用于Mail。</p>
-</blockquote>
-<h2 id="Human-Resources"><a href="#Human-Resources" class="headerlink" title="Human Resources"></a>Human Resources</h2><p>人力资源信息。</p>
-<p><img src="/blog/2017/03/04/OFBiz-Learn/ofbiz.png" alt="主要应用部件" loading="lazy"></p>
-<h1 id="Architecture-and-System-Organization"><a href="#Architecture-and-System-Organization" class="headerlink" title="Architecture and System Organization"></a>Architecture and System Organization</h1><h2 id="Entities-and-Services"><a href="#Entities-and-Services" class="headerlink" title="Entities and Services"></a>Entities and Services</h2><table>
-<thead>
-<tr>
-<th align="left">Entity</th>
-<th align="left">作用</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">basic entity</td>
-<td align="left">&amp;#124; 与数据库表对应</td>
-</tr>
-<tr>
-<td align="left">view-entity</td>
-<td align="left">&amp;#124; 组合实体类字段构成虚拟实体</td>
-</tr>
-</tbody></table>
-<p>使用Entity Engine可以省去写sql，可以不必维护大量的CRUD持久层类。取而代之的是相对少量的xml配置文件。<br>每个Service只负责简单的特定的任务，由ECA去调度，所以扩展时也不必改变原来的逻辑代码。</p>
-<h2 id="Web-Framework-and-XML-Mini-Languages"><a href="#Web-Framework-and-XML-Mini-Languages" class="headerlink" title="Web Framework and XML Mini-Languages"></a>Web Framework and XML Mini-Languages</h2><p>OFBiz Core Framework 提供了许多client-server、peer-to-peer框架，为了便于使用，所以推出一个‘XML Mini-Language’工具。</p>
+          <h4 id="ctr-p"><a href="#ctr-p" class="headerlink" title="ctr+p"></a>ctr+p</h4><p>可以去任何地方</p>
+<h4 id="ctr-shift-p"><a href="#ctr-shift-p" class="headerlink" title="ctr+shift+p"></a>ctr+shift+p</h4><p>命令模式<br>设置文档语法</p>
+<h4 id="ctr-shift-d"><a href="#ctr-shift-d" class="headerlink" title="ctr+shift+d"></a>ctr+shift+d</h4><p>复制这行</p>
+<h4 id="ctr-d"><a href="#ctr-d" class="headerlink" title="ctr+d"></a>ctr+d</h4><p>ctr+k 跳过一个<br>多行游标（alt+f3, shift+鼠标右键）</p>
 
       
     </div>
@@ -296,7 +250,7 @@
 
 
   <nav class="pagination">
-    <a class="extend prev" rel="prev" title="上一页" aria-label="上一页" href="/blog/page/112/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/112/">112</a><span class="page-number current">113</span><a class="page-number" href="/blog/page/114/">114</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/197/">197</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/blog/page/114/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" title="上一页" aria-label="上一页" href="/blog/page/112/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/112/">112</a><span class="page-number current">113</span><a class="page-number" href="/blog/page/114/">114</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/196/">196</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/blog/page/114/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 </div>

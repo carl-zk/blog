@@ -141,18 +141,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/blog/archives/">
-          <span class="site-state-item-count">197</span>
+          <span class="site-state-item-count">196</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/blog/categories/">
-        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-count">9</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/blog/tags/">
-        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-count">25</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -178,7 +178,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://carl-zk.github.io/blog/2019/06/01/%E5%A6%82%E4%BD%95%E5%86%99%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/">
+    <link itemprop="mainEntityOfPage" href="https://carl-zk.github.io/blog/2019/05/02/Jenkins-CI-CD/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/blog/images/avatar.gif">
@@ -196,7 +196,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/blog/2019/06/01/%E5%A6%82%E4%BD%95%E5%86%99%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/" class="post-title-link" itemprop="url">如何写单元测试</a>
+          <a href="/blog/2019/05/02/Jenkins-CI-CD/" class="post-title-link" itemprop="url">Jenkins CI/CD</a>
         </h2>
 
         <div class="post-meta-container">
@@ -207,7 +207,7 @@
       </span>
       <span class="post-meta-item-text">发表于</span>
 
-      <time title="创建时间：2019-06-01 11:11:45" itemprop="dateCreated datePublished" datetime="2019-06-01T11:11:45+08:00">2019-06-01</time>
+      <time title="创建时间：2019-05-02 12:52:07" itemprop="dateCreated datePublished" datetime="2019-05-02T12:52:07+08:00">2019-05-02</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -228,23 +228,23 @@
     
     <div class="post-body" itemprop="articleBody">
           <blockquote>
-<p>做有素养的工程师！</p>
+<p>很好奇 Jenkins 是怎么做灰度发布的，我不懂。<br>我根据对 Pipeline 的理解，然后尝试将一个 Spring Boot Web 项目编译，打包，生成镜像和部署。整个下来才发现原来我一直以为自己理解什么是滚动发布，但是实际上我不懂如何用 Jenkins 做到。</p>
 </blockquote>
-<p><a target="_blank" rel="noopener" href="https://site.mockito.org/">https://site.mockito.org/</a><br>Mockito 是Java语言下写单元测试的工具，本篇就来讲讲它的一些概念和用法。</p>
-<h2 id="为什么要写单元测试？"><a href="#为什么要写单元测试？" class="headerlink" title="为什么要写单元测试？"></a>为什么要写单元测试？</h2><p>作为一个工程师，写出来的项目要做到可读、可维护，这里的可读、可维护不单单指代码作者本人，更是指其他维护该项目的工程师。单元测试的好处不止为公司留下了可维护的代码，对工程师本人也是职业素养的提升。一个有良好单元测试的项目让你来接手，对你来说也是一件相对容易的事情。如果让你回忆一个很久之前开发的功能，你最好的方式是查看单元测试。<br>单元测试还可以迫使开发人员编写单一指责的方法、可读性高的代码。</p>
-<h2 id="什么是单元测试？"><a href="#什么是单元测试？" class="headerlink" title="什么是单元测试？"></a>什么是单元测试？</h2><p><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Unit_testing">Unit testing</a><br><a target="_blank" rel="noopener" href="https://medium.com/@Colin_But/software-testing-different-categories-of-testing-ca1375e62654">Software Testing: Different categories of Testing</a></p>
-<p>先说一下测试的种类：</p>
-<h3 id="系统测试（System-Test）："><a href="#系统测试（System-Test）：" class="headerlink" title="系统测试（System Test）："></a>系统测试（System Test）：</h3><p>有很详细的测试计划，针对系统每个功能都有完整测试用例。<br>适用于项目验收，或有重大改动时。</p>
-<h3 id="冒烟测试（Smoke-Test）："><a href="#冒烟测试（Smoke-Test）：" class="headerlink" title="冒烟测试（Smoke Test）："></a>冒烟测试（Smoke Test）：</h3><p>针对特定功能有主要的测试用例，不包含所有测试用例。<br>适用于新功能上线，简单的验证是否可用。</p>
-<h3 id="回归测试（Regression-Test）："><a href="#回归测试（Regression-Test）：" class="headerlink" title="回归测试（Regression Test）："></a>回归测试（Regression Test）：</h3><p>类似于冒烟测试，区别在于回归测试的目的在于确保老的功能正常，不要因为新的feature&#x2F;big fixes而对已有功能产生影响。</p>
-<h3 id="探索测试（Exploratory-Test）："><a href="#探索测试（Exploratory-Test）：" class="headerlink" title="探索测试（Exploratory Test）："></a>探索测试（Exploratory Test）：</h3><p>不清楚具体操作。</p>
-<h3 id="单元测试："><a href="#单元测试：" class="headerlink" title="单元测试："></a>单元测试：</h3><p>一个最小的可测试单元。</p>
-<h3 id="集成测试："><a href="#集成测试：" class="headerlink" title="集成测试："></a>集成测试：</h3><p>一组测试单元。</p>
-<h2 id="术语"><a href="#术语" class="headerlink" title="术语"></a>术语</h2><p><a target="_blank" rel="noopener" href="http://xunitpatterns.com/Mocks,%20Fakes,%20Stubs%20and%20Dummies.html">http://xunitpatterns.com/Mocks,%20Fakes,%20Stubs%20and%20Dummies.html</a></p>
-<p>system under test<a target="_blank" rel="noopener" href="http://xunitpatterns.com/SUT.html">(SUT)</a>: whatever we are testing.<br>Dummy Object: 在SUT中某个方法需要一个实例对象作为参数，但是该参数只是为了可以正常调用该方法，而不对该测试起任何影响。<br>Test Stub: 在一个SUT中，需要依赖外部的接口，为了稳定控制测试流程（Unit testing 需要保证repeatable），可以fake一个该外部接口的实现类，根据设定的参数返回指定的值。<br>Test Spy: 与Test Stub类似，区别在于Test Spy可以记录方法的入参，在result verification阶段可以验证参数是否与预期一致。<br>Mock Object: 与Test Stub类似，区别在于Mock Object预先设置了期望的接收参数，当参数与预期不符则测试失败。<br>Fake Object: 术语搞这么多，唉！Test Stub为了流程控制（control point）; Test Spy&#x2F;Mock Object 为了验证（observation point）; 而Fake Object仅仅为了提供一个外部接口简单的实现，并不记录或验证什么，例如database。</p>
-<h2 id="怎么写单元测试？"><a href="#怎么写单元测试？" class="headerlink" title="怎么写单元测试？"></a>怎么写单元测试？</h2><p><a target="_blank" rel="noopener" href="https://github.com/mockito/mockito/wiki/How-to-write-good-tests">How to write good tests</a><br><a target="_blank" rel="noopener" href="https://www.baeldung.com/mockito-series">https://www.baeldung.com/mockito-series</a></p>
-<p>单元测试的阶段：<br>Setup<br>Exercise<br>Verify<br>Teardown</p>
-<p>Rock同学推荐的好网站：<a target="_blank" rel="noopener" href="https://cyber-dojo.org/">https://cyber-dojo.org/</a></p>
+<h2 id="Pipeline"><a href="#Pipeline" class="headerlink" title="Pipeline"></a>Pipeline</h2><p><a target="_blank" rel="noopener" href="https://jenkins.io/doc/book/pipeline/">https://jenkins.io/doc/book/pipeline/</a></p>
+<p>Pipeline 是一条流水线，涵盖了整个项目从编译、打包到测试、部署中间所有的步骤。一般在Jenkinsfile文件中定义整个 pipeline。</p>
+<p>先理解 Pipeline的几个概念。</p>
+<ul>
+<li>Node<br>Jenkins service 的一部分，可以跑 Pipeline 的机器。Jenkinsfile中 agent { node { label ‘labelName’ } } 可以指定 node。刚起动的 Jenkins 只有 master 一个节点。</li>
+<li>Stage<br>自定义一组 task，可在 Jenkins UI 看到 status&#x2F;progress。</li>
+<li>Step<br>一个 task，存在于一个特定的 Stage 中。</li>
+<li><a target="_blank" rel="noopener" href="https://jenkins.io/doc/book/pipeline/syntax/#agent">agent</a><br>pipeline 运行环境，如果定义在最上面表明整个 pipeline 都在同一个 agent 中执行，也可以在每个 Stage 块中单独指定，作用于单个 Stage。</li>
+</ul>
+<h2 id="Config-Master-Node"><a href="#Config-Master-Node" class="headerlink" title="Config Master Node"></a>Config Master Node</h2><p>为了让 pipeline 都跑在 master 节点上，需要额外配置好 maven。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="built_in">exec</span> -it -u root my-jenkins bash</span><br><span class="line">wget https://www-us.apache.org/dist/maven/maven-3/3.6.1/binaries/apache-maven-3.6.1-bin.tar.gz</span><br><span class="line">tar xvzf apache-maven-3.6.1-bin.tar.gz</span><br><span class="line"><span class="built_in">ln</span> -s /apache-maven-3.6.1/bin/mvn /usr/bin/mvn</span><br><span class="line">apt-get update &amp;&amp; apt-get install vim</span><br><span class="line">vi /apache-maven-3.6.1/conf/settings.xml</span><br><span class="line">修改仓库地址 &lt;localRepository&gt;/home/.m2/repository&lt;/localRepository&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Create-Jenkinsfile"><a href="#Create-Jenkinsfile" class="headerlink" title="Create Jenkinsfile"></a>Create Jenkinsfile</h2><p><a target="_blank" rel="noopener" href="https://github.com/carl-zk/jenkins-demo">github source</a><br>Jenkinsfile</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">pipeline &#123;</span><br><span class="line">    agent &#123; label <span class="string">&#x27;master&#x27;</span> &#125;</span><br><span class="line"></span><br><span class="line">    environment &#123;</span><br><span class="line">        IMAGE_NAME = <span class="string">&#x27;jenkins-demo&#x27;</span></span><br><span class="line">        LABEL = <span class="string">&#x27;latest&#x27;</span></span><br><span class="line">        CONTAINER_NAME = <span class="string">&#x27;jenkins-demo&#x27;</span></span><br><span class="line">        PORT = 8090</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    stages &#123;</span><br><span class="line">        stage(<span class="string">&#x27;Package&#x27;</span>) &#123;</span><br><span class="line">            steps &#123;</span><br><span class="line">                sh <span class="string">&#x27;mvn -B -DskipTests=true clean package&#x27;</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        stage(<span class="string">&#x27;Build Image&#x27;</span>) &#123;</span><br><span class="line">            steps &#123;</span><br><span class="line">                script &#123;</span><br><span class="line">                    sh <span class="string">&#x27;pwd &amp;&amp; cd docker/ &amp;&amp; docker build -t $&#123;IMAGE_NAME&#125;:$&#123;LABEL&#125; .&#x27;</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        stage(<span class="string">&#x27;Deploy&#x27;</span>) &#123;</span><br><span class="line">            steps &#123;</span><br><span class="line">                sh <span class="string">&quot;&quot;</span><span class="string">&quot;</span></span><br><span class="line"><span class="string">                    docker ps -f name=<span class="variable">$&#123;CONTAINER_NAME&#125;</span> -q | xargs --no-run-if-empty docker container stop</span></span><br><span class="line"><span class="string">                    docker container ls -a -f name=<span class="variable">$&#123;CONTAINER_NAME&#125;</span> -q | xargs -r docker container rm -v</span></span><br><span class="line"><span class="string">                    docker run -d --name <span class="variable">$&#123;CONTAINER_NAME&#125;</span> -p <span class="variable">$&#123;PORT&#125;</span>:<span class="variable">$&#123;PORT&#125;</span> <span class="variable">$&#123;IMAGE_NAME&#125;</span>:<span class="variable">$&#123;LABEL&#125;</span></span></span><br><span class="line"><span class="string">                &quot;</span><span class="string">&quot;&quot;</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Jenkins 持续集成&#x2F;持续发布 待续。</p>
 
       
     </div>
@@ -264,7 +264,7 @@
 
 
   <nav class="pagination">
-    <a class="extend prev" rel="prev" title="上一页" aria-label="上一页" href="/blog/page/21/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/21/">21</a><span class="page-number current">22</span><a class="page-number" href="/blog/page/23/">23</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/197/">197</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/blog/page/23/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" title="上一页" aria-label="上一页" href="/blog/page/21/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/21/">21</a><span class="page-number current">22</span><a class="page-number" href="/blog/page/23/">23</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/196/">196</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/blog/page/23/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 </div>

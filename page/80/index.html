@@ -141,18 +141,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/blog/archives/">
-          <span class="site-state-item-count">197</span>
+          <span class="site-state-item-count">196</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/blog/categories/">
-        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-count">9</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/blog/tags/">
-        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-count">25</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -178,7 +178,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://carl-zk.github.io/blog/2017/09/03/shiro/">
+    <link itemprop="mainEntityOfPage" href="https://carl-zk.github.io/blog/2017/08/27/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%E4%B8%80/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/blog/images/avatar.gif">
@@ -196,7 +196,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/blog/2017/09/03/shiro/" class="post-title-link" itemprop="url">Shiro</a>
+          <a href="/blog/2017/08/27/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%E4%B8%80/" class="post-title-link" itemprop="url">网络编程一</a>
         </h2>
 
         <div class="post-meta-container">
@@ -207,7 +207,7 @@
       </span>
       <span class="post-meta-item-text">发表于</span>
 
-      <time title="创建时间：2017-09-03 14:23:57" itemprop="dateCreated datePublished" datetime="2017-09-03T14:23:57+08:00">2017-09-03</time>
+      <time title="创建时间：2017-08-27 15:51:45" itemprop="dateCreated datePublished" datetime="2017-08-27T15:51:45+08:00">2017-08-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -215,6 +215,15 @@
       </span>
       <span class="post-meta-item-text">更新于</span>
       <time title="修改时间：2024-05-18 16:19:43" itemprop="dateModified" datetime="2024-05-18T16:19:43+08:00">2024-05-18</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/blog/categories/java/" itemprop="url" rel="index"><span itemprop="name">java</span></a>
+        </span>
     </span>
 
   
@@ -227,16 +236,9 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <blockquote>
-<p>好的老师，能让你事半功倍、信心倍增。</p>
-</blockquote>
-<p><a target="_blank" rel="noopener" href="https://shiro.apache.org/">shiro.apache.org</a><br><a target="_blank" rel="noopener" href="http://jinnianshilongnian.iteye.com/blog/2018398">跟我学shiro</a></p>
-<p>shiro是一个安全框架，主要模块有认证(Authentication)、授权(Authorization)、加密(Cryptography)、会话管理(Session Management).</p>
-<p>&#x2F;WEB-INF&#x2F;shiro.ini</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">[main]</span><br><span class="line">securityManager = auth.MySecurityManager</span><br><span class="line">myRealm = auth.MyRealm</span><br><span class="line">securityManager.realm = $myRealm</span><br><span class="line">sessionManager = org.apache.shiro.web.session.mgt.DefaultWebSessionManager</span><br><span class="line">securityManager.sessionManager = $sessionManager</span><br><span class="line">cacheManager = org.apache.shiro.cache.MemoryConstrainedCacheManager</span><br><span class="line">securityManager.cacheManager = $cacheManager</span><br><span class="line">authc.loginUrl = /login</span><br><span class="line"></span><br><span class="line">[urls]</span><br><span class="line">/login = authc</span><br><span class="line">/houses/cowshed.jsp = perms[visit:cowshed]</span><br><span class="line">/houses/palace.jsp = authc,roles[admin]</span><br><span class="line">/users/** = authc,roles[admin]</span><br><span class="line">/pages/** = authc,roles[admin]</span><br><span class="line">/logout = logout</span><br><span class="line"></span><br><span class="line"># -----------------------------------------------------------------------------</span><br><span class="line"># Users and their (optional) assigned roles</span><br><span class="line"># username = password, role1, role2, ..., roleN</span><br><span class="line"># -----------------------------------------------------------------------------</span><br><span class="line">[users]</span><br><span class="line">root = passwd, admin</span><br><span class="line">guest = guest, guest</span><br><span class="line">presidentskroob = 12345, president</span><br><span class="line">darkhelmet = ludicrousspeed, darklord, schwartz</span><br><span class="line">lonestarr = vespa, goodguy, schwartz</span><br><span class="line"></span><br><span class="line"># -----------------------------------------------------------------------------</span><br><span class="line"># Roles with assigned permissions</span><br><span class="line"># roleName = perm1, perm2, ..., permN</span><br><span class="line"># -----------------------------------------------------------------------------</span><br><span class="line">[roles]</span><br><span class="line">admin = *</span><br><span class="line">guest = visit:cowshed</span><br><span class="line">schwartz = lightsaber:*</span><br><span class="line">goodguy = winnebago:drive:eagle5</span><br></pre></td></tr></table></figure>
-
-<h4 id="main"><a href="#main" class="headerlink" title="[main]"></a>[main]</h4><p><code>securityManager.realm = $myRealm</code>  通过反射调用manager的setRealm方法</p>
-<h4 id="urls"><a href="#urls" class="headerlink" title="[urls]"></a>[urls]</h4><p><code>/login = authc</code>  有authc就每次都触发一次认证<br><code>/houses/cowshed.jsp = perms[visit:cowshed]</code> 多个用逗号隔开<br><code>/houses/palace.jsp = authc,roles[admin]</code>  多个用逗号隔开<br>这里的urls是有顺序的，从上到下依次匹配，所以写时要注意。</p>
+          <h3 id="网络不同层的协议"><a href="#网络不同层的协议" class="headerlink" title="网络不同层的协议"></a>网络不同层的协议</h3><p><img src="/blog/2017/08/27/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%E4%B8%80/net-protocol.png" loading="lazy"></p>
+<p>传输层主要协议：<br>TCP(Transmission Control Protocol)<br>UDP(User Datagram Protocol)</p>
+<p>Java支持的协议只有TCP和UDP，以及建立在它们之上的应用层协议。</p>
 
       
     </div>
@@ -256,7 +258,7 @@
 
 
   <nav class="pagination">
-    <a class="extend prev" rel="prev" title="上一页" aria-label="上一页" href="/blog/page/79/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/79/">79</a><span class="page-number current">80</span><a class="page-number" href="/blog/page/81/">81</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/197/">197</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/blog/page/81/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" title="上一页" aria-label="上一页" href="/blog/page/79/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/79/">79</a><span class="page-number current">80</span><a class="page-number" href="/blog/page/81/">81</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/196/">196</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/blog/page/81/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 </div>

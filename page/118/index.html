@@ -141,18 +141,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/blog/archives/">
-          <span class="site-state-item-count">197</span>
+          <span class="site-state-item-count">196</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/blog/categories/">
-        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-count">9</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/blog/tags/">
-        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-count">25</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -178,7 +178,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://carl-zk.github.io/blog/2017/02/25/Listener%E4%BB%8B%E7%BB%8D/">
+    <link itemprop="mainEntityOfPage" href="https://carl-zk.github.io/blog/2017/02/25/Filter%E4%BB%8B%E7%BB%8D/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/blog/images/avatar.gif">
@@ -196,7 +196,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/blog/2017/02/25/Listener%E4%BB%8B%E7%BB%8D/" class="post-title-link" itemprop="url">Listener介绍</a>
+          <a href="/blog/2017/02/25/Filter%E4%BB%8B%E7%BB%8D/" class="post-title-link" itemprop="url">Filter介绍</a>
         </h2>
 
         <div class="post-meta-container">
@@ -207,7 +207,7 @@
       </span>
       <span class="post-meta-item-text">发表于</span>
 
-      <time title="创建时间：2017-02-25 21:56:04" itemprop="dateCreated datePublished" datetime="2017-02-25T21:56:04+08:00">2017-02-25</time>
+      <time title="创建时间：2017-02-25 20:34:43" itemprop="dateCreated datePublished" datetime="2017-02-25T20:34:43+08:00">2017-02-25</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -228,13 +228,12 @@
     
     <div class="post-body" itemprop="articleBody">
           <blockquote>
-<p>当web应用在web容器中运行时,web应用内部会不断的发生各种事件:web应用被启动、web应用被停止、用户session开始、用户session结束、用户请求到达等，通常来说这些web事件对开发者是透明的。<br>ServletAPI提供了大量监听器来监听web应用的内部事件，从而允许当web内部事件发生时回调事件监听器内的方法。<br>使用Listener只需两步：</p>
+<p>Filter可认为是Servlet的一种增强版,主要用于对用户请求进行预处理,也可以对HttpServletResponse进行后处理,是个典型的处理链. 也可对用户请求进行响应,但实际中很少这样用.</p>
 </blockquote>
-<ol>
-<li>定义Listener实现类。</li>
-<li>通过Annotation或web.xml文件中配置Listener。</li>
-</ol>
-
+<p><img src="/blog/2017/02/25/Filter%E4%BB%8B%E7%BB%8D/filter-1.svg" alt="Filter作用" loading="lazy"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">LogFilter</span> <span class="keyword">implements</span> <span class="title class_">Filter</span>&#123;</span><br><span class="line">    ...</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">doFilter</span><span class="params">(ServletRequest request, ServletResponse response, FilterChain chain)</span>&#123;</span><br><span class="line">        ...对请求进行预处理</span><br><span class="line">        chain.doFilter(request, response);</span><br><span class="line">        ...对服务器响应进行后处理</span><br><span class="line">    &#125;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="在web-xml中配置Filter"><a href="#在web-xml中配置Filter" class="headerlink" title="在web.xml中配置Filter"></a>在web.xml中配置Filter</h4><p>类似Servlet配置</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">filter</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">filter-name</span>&gt;</span><span class="tag">&lt;/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">filter-class</span>&gt;</span><span class="tag">&lt;/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">filter</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 定义Filter拦截的URL地址 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">filter-mapping</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">filter-name</span>&gt;</span><span class="tag">&lt;/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span><span class="tag">&lt;/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">filter-mapping</span>&gt;</span></span><br></pre></td></tr></table></figure>
       
     </div>
 
@@ -253,7 +252,7 @@
 
 
   <nav class="pagination">
-    <a class="extend prev" rel="prev" title="上一页" aria-label="上一页" href="/blog/page/117/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/117/">117</a><span class="page-number current">118</span><a class="page-number" href="/blog/page/119/">119</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/197/">197</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/blog/page/119/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" title="上一页" aria-label="上一页" href="/blog/page/117/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/117/">117</a><span class="page-number current">118</span><a class="page-number" href="/blog/page/119/">119</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/196/">196</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/blog/page/119/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 </div>

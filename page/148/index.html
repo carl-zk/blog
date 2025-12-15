@@ -141,18 +141,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/blog/archives/">
-          <span class="site-state-item-count">197</span>
+          <span class="site-state-item-count">196</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/blog/categories/">
-        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-count">9</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/blog/tags/">
-        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-count">25</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -178,7 +178,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://carl-zk.github.io/blog/2016/12/05/%E7%90%86%E6%83%B3/">
+    <link itemprop="mainEntityOfPage" href="https://carl-zk.github.io/blog/2016/07/07/%E4%B8%87%E8%BF%9B%E5%88%B6/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/blog/images/avatar.gif">
@@ -196,7 +196,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/blog/2016/12/05/%E7%90%86%E6%83%B3/" class="post-title-link" itemprop="url">理想</a>
+          <a href="/blog/2016/07/07/%E4%B8%87%E8%BF%9B%E5%88%B6/" class="post-title-link" itemprop="url">万进制</a>
         </h2>
 
         <div class="post-meta-container">
@@ -207,7 +207,7 @@
       </span>
       <span class="post-meta-item-text">发表于</span>
 
-      <time title="创建时间：2016-12-05 19:29:52" itemprop="dateCreated datePublished" datetime="2016-12-05T19:29:52+08:00">2016-12-05</time>
+      <time title="创建时间：2016-07-07 01:20:06" itemprop="dateCreated datePublished" datetime="2016-07-07T01:20:06+08:00">2016-07-07</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -215,6 +215,15 @@
       </span>
       <span class="post-meta-item-text">更新于</span>
       <time title="修改时间：2024-05-18 16:19:43" itemprop="dateModified" datetime="2024-05-18T16:19:43+08:00">2024-05-18</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/blog/categories/hdu/" itemprop="url" rel="index"><span itemprop="name">hdu</span></a>
+        </span>
     </span>
 
   
@@ -227,8 +236,21 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>我想在农村老家盖个养鸡场.<br>为村里盖所小学.<br>娶个老婆,陪我爸妈一起变老.</p>
+          <p><a target="_blank" rel="noopener" href="http://acm.hdu.edu.cn/showproblem.php?pid=1041">题目链接</a></p>
+<p>Computer Transformation</p>
+<p>Problem Description<br>A sequence consisting of one digit, the number 1 is initially written into a computer. At each successive time step, the computer simultaneously tranforms each digit 0 into the sequence 1 0 and each digit 1 into the sequence 0 1. So, after the first time step, the sequence 0 1 is obtained; after the second, the sequence 1 0 0 1, after the third, the sequence 0 1 1 0 1 0 0 1 and so on. </p>
+<p>How many pairs of consequitive zeroes will appear in the sequence after n steps? </p>
+<p>Input<br>Every input line contains one natural number n (0 &lt; n ≤1000).</p>
+<p>Output<br>For each input n print the number of consecutive zeroes pairs that will appear in the sequence after n steps.</p>
+<p>Sample Input<br>2<br>3</p>
+<p>Sample Output<br>1<br>1</p>
+<p>计算机会把数字1转换为01,把0转换为10,初始时数组中只有1.所以执行第1次后数组变成01,第2次变成1001,以此类推.问执行到第n步时有几对连续的00存在.</p>
+<hr/>
+这道题属于大数处理,基本上规律是很容易得到的.做了两道,就贴这一道留个纪念.
+这里是每10000进1,即传说中的万进制.计算时要注意余数用后清零.打印时高位补0.
+f[k] = f[k-1] + 2 * f[k-2] 
 
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> MAX 1001</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> MOD 10000</span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> a[MAX][<span class="number">500</span>]; <span class="comment">//&#123;0,0,1,1,3,5,11,21,43,85,171&#125;;</span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//freopen(&quot;in.txt&quot;, &quot;r&quot;, stdin);</span></span><br><span class="line">    <span class="comment">//freopen(&quot;out.txt&quot;, &quot;w&quot;, stdout);</span></span><br><span class="line">    <span class="type">int</span> n, i,j,y;</span><br><span class="line">    <span class="built_in">memset</span>(a, <span class="number">0</span>, <span class="keyword">sizeof</span>(a));</span><br><span class="line">    a[<span class="number">1</span>][<span class="number">0</span>] = <span class="number">1</span>; <span class="comment">//length of a[1]</span></span><br><span class="line">    a[<span class="number">1</span>][<span class="number">1</span>] = <span class="number">0</span>;</span><br><span class="line">    a[<span class="number">2</span>][<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">    a[<span class="number">2</span>][<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(i = <span class="number">3</span>; i &lt; MAX; i++)&#123;</span><br><span class="line">        <span class="built_in">memcpy</span>(a[i], a[i<span class="number">-1</span>], <span class="number">4</span>*(a[i<span class="number">-1</span>][<span class="number">0</span>]+<span class="number">1</span>));<span class="comment">//memcpy(dis, src, size of byte)</span></span><br><span class="line">        y = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(j = <span class="number">1</span>; j &lt;= a[i<span class="number">-2</span>][<span class="number">0</span>]; j++)&#123;</span><br><span class="line">            a[i][j] += (a[i<span class="number">-2</span>][j]&lt;&lt;<span class="number">1</span>) + y;</span><br><span class="line">            y = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">if</span>(a[i][j] &gt;= MOD)&#123;</span><br><span class="line">                y = a[i][j] / MOD;</span><br><span class="line">                a[i][j] %= MOD;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(y)&#123;</span><br><span class="line">            a[i][j] += y;</span><br><span class="line">            <span class="keyword">if</span>(j &gt; a[i][<span class="number">0</span>])a[i][<span class="number">0</span>] = j;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span>(~<span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;n))&#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>, a[n][a[n][<span class="number">0</span>]]);</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = a[n][<span class="number">0</span>]<span class="number">-1</span>; i &gt; <span class="number">0</span>; i--)&#123;</span><br><span class="line">            <span class="keyword">if</span>(a[n][i] &gt;= <span class="number">1000</span>)&#123;</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>, a[n][i]);</span><br><span class="line">            &#125;<span class="keyword">else</span> <span class="keyword">if</span>(a[n][i] &gt;= <span class="number">100</span>)&#123;</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;0%d&quot;</span>, a[n][i]);</span><br><span class="line">            &#125;<span class="keyword">else</span> <span class="keyword">if</span>(a[n][i]&gt;=<span class="number">10</span>)&#123;</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;00%d&quot;</span>, a[n][i]);</span><br><span class="line">            &#125;<span class="keyword">else</span> <span class="built_in">printf</span>(<span class="string">&quot;000%d&quot;</span>, a[n][i]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">   <span class="comment">// fclose(stdin);</span></span><br><span class="line">   <span class="comment">// fclose(stdout);</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
       
     </div>
 
@@ -247,7 +269,7 @@
 
 
   <nav class="pagination">
-    <a class="extend prev" rel="prev" title="上一页" aria-label="上一页" href="/blog/page/147/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/147/">147</a><span class="page-number current">148</span><a class="page-number" href="/blog/page/149/">149</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/197/">197</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/blog/page/149/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" title="上一页" aria-label="上一页" href="/blog/page/147/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/147/">147</a><span class="page-number current">148</span><a class="page-number" href="/blog/page/149/">149</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/196/">196</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/blog/page/149/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 </div>

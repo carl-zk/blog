@@ -141,18 +141,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/blog/archives/">
-          <span class="site-state-item-count">197</span>
+          <span class="site-state-item-count">196</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/blog/categories/">
-        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-count">9</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/blog/tags/">
-        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-count">25</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -178,7 +178,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://carl-zk.github.io/blog/2017/05/06/linux%E9%85%8D%E7%BD%AEjdk/">
+    <link itemprop="mainEntityOfPage" href="https://carl-zk.github.io/blog/2017/05/06/debian/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/blog/images/avatar.gif">
@@ -196,7 +196,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/blog/2017/05/06/linux%E9%85%8D%E7%BD%AEjdk/" class="post-title-link" itemprop="url">Linux配置jdk</a>
+          <a href="/blog/2017/05/06/debian/" class="post-title-link" itemprop="url">Debian</a>
         </h2>
 
         <div class="post-meta-container">
@@ -207,7 +207,7 @@
       </span>
       <span class="post-meta-item-text">发表于</span>
 
-      <time title="创建时间：2017-05-06 21:58:38" itemprop="dateCreated datePublished" datetime="2017-05-06T21:58:38+08:00">2017-05-06</time>
+      <time title="创建时间：2017-05-06 18:16:09" itemprop="dateCreated datePublished" datetime="2017-05-06T18:16:09+08:00">2017-05-06</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -236,12 +236,21 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>已经有一种习惯，每次配置jdk都会翻自己以前的博客，因为每次只要一百度，肯定会出来很多乱七八糟的东西，而且google出来的也不准确。互联网就是因为坏的东西太多，一一甄别太耗时，还是自己备份的最靠谱。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># java jdk 1u8</span><br><span class="line">export JAVA_HOME=/usr/lib/jdk</span><br><span class="line">export JRE_HOME=$&#123;JAVA_HOME&#125;/jre </span><br><span class="line">export CLASSPATH=.:$&#123;JAVA_HOME&#125;/lib:$&#123;JRE_HOME&#125;/lib</span><br><span class="line">export PATH=$&#123;JAVA_HOME&#125;/bin:$PATH</span><br></pre></td></tr></table></figure>
+          <p>最近看了篇关于吐槽ubuntu放弃unity转用gnome的文章，作者是deepin桌面系统的开发者。忍不住就去deepin的官网下了下装在虚机里试了试，结果样式全都是模仿的mac的。<br>作为一个linux桌面开发者，他的情怀我可以理解，不过我没打算用deepin系统，虽然样子很酷，毕竟太像mac的linux让我感觉不舒服。另外还有个顾虑，不方便说。<br>我想，既然mac的小托盘这么好，不如也在我debian8里面装一个。果然评论里有人说装个dash-to-doc和topicons就跟mac差不多了。还等啥，google一下装起来。</p>
+<p><strong>1.检查gnome-shell版本</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ gnome-shell --version</span><br></pre></td></tr></table></figure>
+<p>GNOME Shell 3.14.4</p>
+<p><strong>2.安装chrome浏览器插件</strong><br>GNOME Shell integration</p>
+<p><strong>3.点击插件进入网页</strong><br><a target="_blank" rel="noopener" href="https://extensions.gnome.org/">https://extensions.gnome.org/</a></p>
+<p><strong>4.搜索dash-to-dock，topicons</strong><br>根据shell版本选择对应的下载安装即可。</p>
+<p>我找到的是这俩<br><a target="_blank" rel="noopener" href="https://github.com/micheleg/dash-to-dock/tree/gnome-3.14">dash-to-dock</a><br><a target="_blank" rel="noopener" href="https://github.com/wincinderith/topicons">topicons</a></p>
+<p>安装过程很简单，都是<br>下载xxx.zip<br>$ unzip xxx.zip<br>$ cd xxx&#x2F;<br>$ make<br>$ make install</p>
+<p>目录 <code>~/.local/share/gnome-shell/extensions</code> 看看有没有你安装的插件</p>
+<p>Alt+F2 r 回车</p>
+<p>$ gnome-shell-extension-prefs</p>
+<p>找到对应的插件把开关置成on</p>
+<p>体验：<br>Dash To Dock 这个插件还是挺好的，TopIcons插件好多应用就没有icon，唉。</p>
 
-<p>华丽丽的隐身分割线</p>
-<p>IDEA可以在terminal中直接’idea’启动，但是点击图标却报JDK not found。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ locate idea.sh</span><br><span class="line">$ vi /path/to/idea.sh</span><br><span class="line"></span><br><span class="line">在第2行添加</span><br><span class="line">export IDEA_JDK=/path/to/jdk</span><br></pre></td></tr></table></figure>
       
     </div>
 
@@ -260,7 +269,7 @@
 
 
   <nav class="pagination">
-    <a class="extend prev" rel="prev" title="上一页" aria-label="上一页" href="/blog/page/94/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/94/">94</a><span class="page-number current">95</span><a class="page-number" href="/blog/page/96/">96</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/197/">197</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/blog/page/96/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" title="上一页" aria-label="上一页" href="/blog/page/94/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/94/">94</a><span class="page-number current">95</span><a class="page-number" href="/blog/page/96/">96</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/196/">196</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/blog/page/96/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 </div>

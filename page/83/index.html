@@ -141,18 +141,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/blog/archives/">
-          <span class="site-state-item-count">197</span>
+          <span class="site-state-item-count">196</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/blog/categories/">
-        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-count">9</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/blog/tags/">
-        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-count">25</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -178,7 +178,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://carl-zk.github.io/blog/2017/08/20/nginx/">
+    <link itemprop="mainEntityOfPage" href="https://carl-zk.github.io/blog/2017/08/19/%E8%A3%85%E6%89%AE%E5%8D%9A%E5%AE%A2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/blog/images/avatar.gif">
@@ -196,7 +196,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/blog/2017/08/20/nginx/" class="post-title-link" itemprop="url">Nginx</a>
+          <a href="/blog/2017/08/19/%E8%A3%85%E6%89%AE%E5%8D%9A%E5%AE%A2/" class="post-title-link" itemprop="url">装扮博客</a>
         </h2>
 
         <div class="post-meta-container">
@@ -207,7 +207,7 @@
       </span>
       <span class="post-meta-item-text">发表于</span>
 
-      <time title="创建时间：2017-08-20 21:09:08" itemprop="dateCreated datePublished" datetime="2017-08-20T21:09:08+08:00">2017-08-20</time>
+      <time title="创建时间：2017-08-19 22:25:50" itemprop="dateCreated datePublished" datetime="2017-08-19T22:25:50+08:00">2017-08-19</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -215,6 +215,15 @@
       </span>
       <span class="post-meta-item-text">更新于</span>
       <time title="修改时间：2024-05-18 16:19:43" itemprop="dateModified" datetime="2024-05-18T16:19:43+08:00">2024-05-18</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/blog/categories/%E7%B3%BB%E7%BB%9F%E9%85%8D%E7%BD%AE/" itemprop="url" rel="index"><span itemprop="name">系统配置</span></a>
+        </span>
     </span>
 
   
@@ -227,36 +236,35 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p><a target="_blank" rel="noopener" href="http://nginx.org/">官网</a></p>
-<h4 id="安装步骤"><a href="#安装步骤" class="headerlink" title="安装步骤"></a>安装步骤</h4><blockquote>
-<p>nginx安装跟系统版本有关</p>
-</blockquote>
-<p>我的系统是ubuntu 16.04 LTS<br>1、修改&#x2F;etc&#x2F;apt&#x2F;sources.list<br>文件末尾添加：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">deb http://nginx.org/packages/ubuntu/ xenial nginx</span><br><span class="line">deb-src http://nginx.org/packages/ubuntu/ xenial nginx</span><br></pre></td></tr></table></figure>
-<p>2、</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install nginx</span><br></pre></td></tr></table></figure>
-<p>又是遇到<a href="https://carl-zk.github.io/blog/2017/05/17/NO-PUBKEY/">NO_PUBKEY</a></p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> apt-key adv --keyserver hkp://keys.gnupg.net --recv-keys 提示中的key</span><br><span class="line"><span class="built_in">sudo</span> apt-get update</span><br><span class="line"><span class="built_in">sudo</span> apt-get install nginx</span><br></pre></td></tr></table></figure>
-<p>3、检查版本<br><code>nginx -v</code><br>4、查找nginx安装目录<br><code>sudo find / -type d -name &#39;*nginx*&#39;</code></p>
-<p>&#x2F;etc&#x2F;nginx<br>&#x2F;usr&#x2F;lib&#x2F;nginx<br>&#x2F;usr&#x2F;share&#x2F;doc&#x2F;nginx<br>&#x2F;usr&#x2F;share&#x2F;nginx<br>&#x2F;var&#x2F;cache&#x2F;nginx<br>&#x2F;var&#x2F;log&#x2F;nginx</p>
-<h5 id="Mac安装nginx"><a href="#Mac安装nginx" class="headerlink" title="Mac安装nginx"></a>Mac安装nginx</h5><p>下载nginx源码，正则匹配需要<a target="_blank" rel="noopener" href="http://mac-dev-env.patrickbougie.com/pcre/">pcre</a>库，需要下载<a href="ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre">pcre源码</a>共同编译<br><code>./configure --prefix=/etc/nginx --with-pcre=/Users/hero/tmp/pcre-8.41</code><br><code>make</code><br><code>sudo make install</code></p>
-<h4 id="入门"><a href="#入门" class="headerlink" title="入门"></a>入门</h4><ol>
-<li>启动nginx<br><code>sudo service nginx start</code><br><code>sudo nginx</code></li>
-<li>配置静态资源服务器</li>
-</ol>
-<ul>
-<li>备份<ul>
-<li><strong>&#x2F;etc&#x2F;nginx&#x2F;conf.d&#x2F;default.conf</strong></li>
-<li><strong>&#x2F;etc&#x2F;nginx&#x2F;nginx.conf</strong></li>
-</ul>
-</li>
-<li>注释掉**&#x2F;etc&#x2F;nginx&#x2F;conf.d&#x2F;default.conf**内容<br>因为nginx会同时读default和nginx.conf，导致在nginx.conf中某些配置无效，例如重复的url。<br><a href="/blog/2017/08/20/nginx/default.conf">default.conf</a>、<a href="/blog/2017/08/20/nginx/nginx.conf">nginx.conf</a></li>
-<li>目录结构<br><strong>&#x2F;home&#x2F;hero&#x2F;tmp&#x2F;nginxdemo</strong><br>—<strong>img</strong><br>——qtds.png<br>—index.html</li>
-<li>重新加载配置<br><code>sudo nginx -s reload</code><br>访问<code>http://localhost/</code></li>
-</ul>
-<p>3.nginx.conf 配置代理和url匹配规则</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">server&#123;</span><br><span class="line">listen 8090;</span><br><span class="line">root /home/hero/tmp/nginxdemo;</span><br><span class="line">&#125;</span><br><span class="line">server &#123;</span><br><span class="line">listen 80;</span><br><span class="line">server_name localhost;</span><br><span class="line">location / &#123;</span><br><span class="line">  proxy_pass http://localhost:8090;</span><br><span class="line">&#125;</span><br><span class="line">location ~ /img/*\.(png|jpg|gif)$ &#123;</span><br><span class="line">  root /home/hero/tmp/nginxdemo;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>这样对80端口的请求就被8090代理了。<br>匹配规则：～代表匹配尽可能长的前缀，后面是一个正则表达式，只要满足正则就从这个location获取，否则就交给其它满足的去处理。</p>
+          <p><a target="_blank" rel="noopener" href="https://www.w3schools.com/colors/colors_picker.asp">color picker 取色</a><br>看到别人博客闪闪的，禁不住也想秀一个。好感慨前端技术发展的速度，奈何自己后端不咋样，前端也是个白痴，唉。</p>
+<h2 id="particles-js"><a href="#particles-js" class="headerlink" title="particles.js"></a>particles.js</h2><p><a target="_blank" rel="noopener" href="https://github.com/VincentGarreau/particles.js/">particles.js github主页</a><br><a target="_blank" rel="noopener" href="http://blog.csdn.net/csdn_yudong/article/details/53128570">使用教程</a></p>
+<p data-height="265" data-theme-id="0" data-slug-hash="pnlso" data-default-tab="result" data-user="VincentGarreau" data-embed-version="2" data-pen-title="particles.js" class="codepen">See the Pen <a target="_blank" rel="noopener" href="https://codepen.io/VincentGarreau/pen/pnlso/">particles.js</a> by Vincent Garreau (<a target="_blank" rel="noopener" href="https://codepen.io/VincentGarreau">@VincentGarreau</a>) on <a target="_blank" rel="noopener" href="https://codepen.io">CodePen</a>.</p>
+<script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
+
+<h2 id="canvas-nest-js"><a href="#canvas-nest-js" class="headerlink" title="canvas-nest.js"></a>canvas-nest.js</h2><p><a target="_blank" rel="noopener" href="https://github.com/hustcc/canvas-nest.js">canvas-nest.js github主页</a><br><a target="_blank" rel="noopener" href="http://www.w3school.com.cn/html5/html_5_canvas.asp">canvas w3c</a></p>
+<h2 id="mermaid"><a href="#mermaid" class="headerlink" title="mermaid"></a>mermaid</h2><p>一个非常棒的画流程图、时序图等工具，集成到博客中也很简单。<br>集成方法：<a target="_blank" rel="noopener" href="https://www.npmjs.com/package/hexo-filter-mermaid-diagrams">https://www.npmjs.com/package/hexo-filter-mermaid-diagrams</a><br>命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">` ` ` mermaid</span><br><span class="line">sequenceDiagram</span><br><span class="line">    participant Alice</span><br><span class="line">    participant Bob</span><br><span class="line">    Alice-&gt;&gt;John: Hello John, how are you?</span><br><span class="line">    loop Healthcheck</span><br><span class="line">        John-&gt;&gt;John: Fight against hypochondria</span><br><span class="line">    end</span><br><span class="line">    Note right of John: Rational thoughts &lt;br/&gt;prevail...</span><br><span class="line">    John--&gt;&gt;Alice: Great!</span><br><span class="line">    John-&gt;&gt;Bob: How about you?</span><br><span class="line">    Bob--&gt;&gt;John: Jolly good!</span><br><span class="line">` ` `</span><br></pre></td></tr></table></figure>
+
+<p>效果：</p>
+<pre class="mermaid">sequenceDiagram
+    participant Alice
+    participant Bob
+    Alice->>John: Hello John, how are you?
+    loop Healthcheck
+        John->>John: Fight against hypochondria
+    end
+    Note right of John: Rational thoughts <br/>prevail...
+    John-->>Alice: Great!
+    John->>Bob: How about you?
+    Bob-->>John: Jolly good!</pre>
+
+<p><a target="_blank" rel="noopener" href="https://mermaidjs.github.io/">more syntax</a></p>
+<p>其它类似工具：<a target="_blank" rel="noopener" href="https://github.com/plantuml/plantuml">plantuml</a></p>
+<h2 id="mathjax"><a href="#mathjax" class="headerlink" title="mathjax"></a>mathjax</h2><p><code>&#123;% katex %&#125;
+c = \pm\sqrt&#123;a^2 + b^2&#125;
+&#123;% endkatex %&#125;</code><br><code>&#123;% mathjax %&#125;
+\frac&#123;1&#125;&#123;x^2-1&#125;
+&#123;% endmathjax %&#125;</code><br><a target="_blank" rel="noopener" href="https://latex-tutorial.com/tutorials/amsmath/">https://latex-tutorial.com/tutorials/amsmath/</a><br><a target="_blank" rel="noopener" href="https://www.overleaf.com/learn/latex/mathematical_expressions">https://www.overleaf.com/learn/latex/mathematical_expressions</a></p>
 
       
     </div>
@@ -276,7 +284,7 @@
 
 
   <nav class="pagination">
-    <a class="extend prev" rel="prev" title="上一页" aria-label="上一页" href="/blog/page/82/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/82/">82</a><span class="page-number current">83</span><a class="page-number" href="/blog/page/84/">84</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/197/">197</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/blog/page/84/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" title="上一页" aria-label="上一页" href="/blog/page/82/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/82/">82</a><span class="page-number current">83</span><a class="page-number" href="/blog/page/84/">84</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/196/">196</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/blog/page/84/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 </div>

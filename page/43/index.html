@@ -141,18 +141,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/blog/archives/">
-          <span class="site-state-item-count">197</span>
+          <span class="site-state-item-count">196</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/blog/categories/">
-        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-count">9</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/blog/tags/">
-        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-count">25</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -178,7 +178,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://carl-zk.github.io/blog/2018/04/19/hibernate/">
+    <link itemprop="mainEntityOfPage" href="https://carl-zk.github.io/blog/2018/04/18/when-IntelliJ-goes-fool/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/blog/images/avatar.gif">
@@ -196,7 +196,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/blog/2018/04/19/hibernate/" class="post-title-link" itemprop="url">Hibernate</a>
+          <a href="/blog/2018/04/18/when-IntelliJ-goes-fool/" class="post-title-link" itemprop="url">When IntelliJ Goes Fool</a>
         </h2>
 
         <div class="post-meta-container">
@@ -207,7 +207,7 @@
       </span>
       <span class="post-meta-item-text">发表于</span>
 
-      <time title="创建时间：2018-04-19 22:30:51" itemprop="dateCreated datePublished" datetime="2018-04-19T22:30:51+08:00">2018-04-19</time>
+      <time title="创建时间：2018-04-18 00:20:47" itemprop="dateCreated datePublished" datetime="2018-04-18T00:20:47+08:00">2018-04-18</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -227,17 +227,21 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h1 id="hibernate-结果集映射"><a href="#hibernate-结果集映射" class="headerlink" title="hibernate 结果集映射"></a>hibernate 结果集映射</h1><p><a target="_blank" rel="noopener" href="http://peijunlin2008.iteye.com/blog/1269266">http://peijunlin2008.iteye.com/blog/1269266</a></p>
-<h2 id="Result-gt-Map"><a href="#Result-gt-Map" class="headerlink" title="Result -&gt; Map"></a>Result -&gt; Map</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">List&lt;Map&gt; phoneCallTotalDurations = entityManager.createQuery(</span><br><span class="line">    <span class="string">&quot;select new map(&quot;</span> +</span><br><span class="line">    <span class="string">&quot;    p.number as phoneNumber , &quot;</span> +</span><br><span class="line">    <span class="string">&quot;    sum(c.duration) as totalDuration, &quot;</span> +</span><br><span class="line">    <span class="string">&quot;    avg(c.duration) as averageDuration &quot;</span> +</span><br><span class="line">    <span class="string">&quot;)  &quot;</span> +</span><br><span class="line">    <span class="string">&quot;from Call c &quot;</span> +</span><br><span class="line">    <span class="string">&quot;join c.phone p &quot;</span> +</span><br><span class="line">    <span class="string">&quot;group by p.number &quot;</span>, Map.class )</span><br><span class="line">.getResultList();</span><br></pre></td></tr></table></figure>
+          <blockquote>
+<p>hehe</p>
+</blockquote>
+<p>当已经被公认是最好用的工具后，并且你已经使用了很久，而且它也从未让你感到失望。<br>直到出现某一时刻，它卡顿了，它莫名其妙的提示一些你关也关不掉的信息，<br>你终于被弄疯掉了！！！</p>
+<p>这就是我这次使用IDEA的感受。</p>
+<p>建的包‘moc.oreh’在没有mark源文件root时只是作为了一个文件夹的名字！这样idea就死活找不到某个类，提示信息只是‘can not resolve symbol ‘moc’ ’，懵懂的我可能太较真，关不掉这个提示信息让我无法忍受，所以我尝试了漫长的求知之旅。<br>我去<code>/Applications/IntelliJ IDEA.app/Contents</code>，<br><code>/Users/hero/Library/Preferences/IntelliJIdea2018.1</code>,<br><code>/Users/hero/Library/Caches/IntelliJIdea2018.1/caches</code><br>各个目录下备份、删除，才终于发现问题完美的重现，看来并不是配置搞错了，但是idea15的提示信息是如此的简洁，让我摸不到头脑，直到我安装了最新版本的idea，这个提示信息一下子让我明白了原来是两个包名成了一个文件名。</p>
+<p>从这件事上可以学到：</p>
+<ol>
+<li>工具是如此的便利，但同时它也让你丢失了很多能力。</li>
+<li>习惯一旦养成，就会按着期望去做事，不愿改变也不愿思考。</li>
+<li>工具可能会由好变得更好，但人的演化是相反的。</li>
+<li>第4点还没想好，不过我得先睡觉了。</li>
+</ol>
+<p>最好的编译器：idea；<br>最好的笔记本：Mac；<br>这些拿到了“最好的”头衔的东西，用起来还是会让人失望。</p>
 
-<p>需要注意的点：<br>like 的写法；(in的写法类似：key in (:scope))</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.hibernate.SQLQuery;</span><br><span class="line"><span class="keyword">import</span> org.hibernate.transform.Transformers;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> List&lt;xxxVo&gt; <span class="title function_">listAllMembers</span><span class="params">(Long orderUsedTimeId, String keyword, Integer page, Integer count)</span> &#123;</span><br><span class="line">    <span class="type">String</span> <span class="variable">haskey</span> <span class="operator">=</span> <span class="string">&quot;select u.id, u.nickname, u.background, u.portrait, c.name as companyName, case when m.id is null then &#x27;0&#x27; else &#x27;1&#x27; end as isInvited from t_user u join t_company c on u.companyId=c.id left join t_meetinginvitationrecord m on u.id=m.beInvitedUserId and m.orderUsedTimeId=:orderUsedTimeId where u.nickname like :keyword&quot;</span>;</span><br><span class="line">    List&lt;Map&gt; list = Member.entityManager()</span><br><span class="line">                .createNativeQuery(haskey)</span><br><span class="line">                .setParameter(<span class="string">&quot;keyword&quot;</span>, <span class="string">&quot;%&quot;</span> + keyword + <span class="string">&quot;%&quot;</span>)</span><br><span class="line">                .setParameter(<span class="string">&quot;orderUsedTimeId&quot;</span>, orderUsedTimeId)</span><br><span class="line">                .setFirstResult((page - <span class="number">1</span>) * count)</span><br><span class="line">                .setMaxResults(count)</span><br><span class="line">                .unwrap(SQLQuery.class).setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP).list();</span><br><span class="line">    List&lt;xxxVo&gt; result = <span class="keyword">new</span> <span class="title class_">LinkedList</span>&lt;&gt;();</span><br><span class="line">    list.forEach(item -&gt; &#123;</span><br><span class="line">        <span class="type">BigInteger</span> <span class="variable">id</span> <span class="operator">=</span> (BigInteger) item.get(<span class="string">&quot;id&quot;</span>);</span><br><span class="line">        <span class="type">String</span> <span class="variable">nickname</span> <span class="operator">=</span> (String) item.get(<span class="string">&quot;nickname&quot;</span>);</span><br><span class="line">        <span class="type">String</span> <span class="variable">background</span> <span class="operator">=</span> (String) item.get(<span class="string">&quot;background&quot;</span>);</span><br><span class="line">        <span class="type">String</span> <span class="variable">portrait</span> <span class="operator">=</span> (String) item.get(<span class="string">&quot;portrait&quot;</span>);</span><br><span class="line">        <span class="type">String</span> <span class="variable">companyName</span> <span class="operator">=</span> (String) item.get(<span class="string">&quot;companyName&quot;</span>);</span><br><span class="line">        <span class="type">Boolean</span> <span class="variable">isInvited</span> <span class="operator">=</span> ((String) item.get(<span class="string">&quot;isInvited&quot;</span>)).equals(<span class="string">&quot;0&quot;</span>) ? <span class="literal">false</span> : <span class="literal">true</span>;</span><br><span class="line">        result.add(<span class="keyword">new</span> <span class="title class_">xxxVo</span>(id.longValue(), nickname, background, portrait, companyName, isInvited));</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="Result-gt-List-lt-gt"><a href="#Result-gt-List-lt-gt" class="headerlink" title="Result -&gt; List&lt;&gt;"></a>Result -&gt; List&lt;&gt;</h2><p>都不怎么好，非得选就推荐用它了。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">List&lt;Object[]&gt; persons = entityManager.createQuery(</span><br><span class="line">    <span class="string">&quot;select distinct pr, ph &quot;</span> +</span><br><span class="line">    <span class="string">&quot;from Person pr, Phone ph &quot;</span> +</span><br><span class="line">    <span class="string">&quot;where ph.person = pr and ph is not null&quot;</span>, Object[].class)</span><br><span class="line">.getResultList();</span><br></pre></td></tr></table></figure>
-
-<h2 id="Result-gt-Stream-lt-gt"><a href="#Result-gt-Stream-lt-gt" class="headerlink" title="Result -&gt; Stream&lt;&gt;"></a>Result -&gt; Stream&lt;&gt;</h2><p><a target="_blank" rel="noopener" href="http://hibernate.org/">http://hibernate.org/</a></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> ( Stream&lt;Object[]&gt; persons = session.createQuery(</span><br><span class="line">    <span class="string">&quot;select p.name, p.nickName &quot;</span> +</span><br><span class="line">    <span class="string">&quot;from Person p &quot;</span> +</span><br><span class="line">    <span class="string">&quot;where p.name like :name&quot;</span> )</span><br><span class="line">.setParameter( <span class="string">&quot;name&quot;</span>, <span class="string">&quot;J%&quot;</span> )</span><br><span class="line">.stream() ) &#123;</span><br><span class="line"></span><br><span class="line">    persons</span><br><span class="line">    .map( row -&gt; <span class="keyword">new</span> <span class="title class_">PersonNames</span>(</span><br><span class="line">            (String) row[<span class="number">0</span>],</span><br><span class="line">            (String) row[<span class="number">1</span>] ) )</span><br><span class="line">    .forEach( <span class="built_in">this</span>::process );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
 
@@ -256,7 +260,7 @@
 
 
   <nav class="pagination">
-    <a class="extend prev" rel="prev" title="上一页" aria-label="上一页" href="/blog/page/42/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/42/">42</a><span class="page-number current">43</span><a class="page-number" href="/blog/page/44/">44</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/197/">197</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/blog/page/44/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" title="上一页" aria-label="上一页" href="/blog/page/42/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/42/">42</a><span class="page-number current">43</span><a class="page-number" href="/blog/page/44/">44</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/196/">196</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/blog/page/44/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 </div>

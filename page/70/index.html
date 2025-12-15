@@ -141,18 +141,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/blog/archives/">
-          <span class="site-state-item-count">197</span>
+          <span class="site-state-item-count">196</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/blog/categories/">
-        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-count">9</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/blog/tags/">
-        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-count">25</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -178,7 +178,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://carl-zk.github.io/blog/2017/11/18/JVM%E5%8F%82%E6%95%B0%E9%82%A3%E7%82%B9%E4%BA%8B%E5%84%BF/">
+    <link itemprop="mainEntityOfPage" href="https://carl-zk.github.io/blog/2017/10/29/weblogic%E4%BD%BF%E7%94%A8%E8%87%AA%E5%AE%9A%E4%B9%89jdbc%E9%A9%B1%E5%8A%A8/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/blog/images/avatar.gif">
@@ -196,7 +196,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/blog/2017/11/18/JVM%E5%8F%82%E6%95%B0%E9%82%A3%E7%82%B9%E4%BA%8B%E5%84%BF/" class="post-title-link" itemprop="url">JVM参数那点事儿</a>
+          <a href="/blog/2017/10/29/weblogic%E4%BD%BF%E7%94%A8%E8%87%AA%E5%AE%9A%E4%B9%89jdbc%E9%A9%B1%E5%8A%A8/" class="post-title-link" itemprop="url">Weblogic使用自定义jdbc驱动</a>
         </h2>
 
         <div class="post-meta-container">
@@ -207,7 +207,7 @@
       </span>
       <span class="post-meta-item-text">发表于</span>
 
-      <time title="创建时间：2017-11-18 17:01:39" itemprop="dateCreated datePublished" datetime="2017-11-18T17:01:39+08:00">2017-11-18</time>
+      <time title="创建时间：2017-10-29 23:41:21" itemprop="dateCreated datePublished" datetime="2017-10-29T23:41:21+08:00">2017-10-29</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -215,15 +215,6 @@
       </span>
       <span class="post-meta-item-text">更新于</span>
       <time title="修改时间：2024-05-18 16:19:43" itemprop="dateModified" datetime="2024-05-18T16:19:43+08:00">2024-05-18</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/blog/categories/java/" itemprop="url" rel="index"><span itemprop="name">java</span></a>
-        </span>
     </span>
 
   
@@ -236,48 +227,30 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/edwardlauxh/archive/2010/04/25/1918603.html">JVM参数</a><br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/redcreen/archive/2011/05/04/2037057.html">JVM参数</a><br><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MjM5NjQ5MTI5OA==&mid=2651747273&idx=1&sn=7f947064a41eeecb6816a5d0838581ae&chksm=bd12aa848a65239289d5c39264e89bd175f377f6554bfe93b37ad6498cf13deff356333c5398&mpshare=1&scene=1&srcid=0108Pp81UenqcrqRmaMO1QNW&pass_ticket=w9AQASPqUnr1vwbOOlNXlTVA9QD8RoqlKcW5/RGKjfiKy9ShiDmnCQTcz4Z2UZQi#rd">美团点评JVM调优实例</a></p>
-<h3 id="JVM内存模型"><a href="#JVM内存模型" class="headerlink" title="JVM内存模型"></a>JVM内存模型</h3><p>在jdk8之前，JVM的内存模型是这个样子的：<br><img src="/blog/2017/11/18/JVM%E5%8F%82%E6%95%B0%E9%82%A3%E7%82%B9%E4%BA%8B%E5%84%BF/mem.svg" loading="lazy"></p>
-<ul>
-<li>程序计数器：可看作是当前线程所执行的字节码的行号指示器。在某一时刻，一个cpu（或多核cpu中的一核）只能被一个线程占用，java程序又是支持多线程的，所以必然将<strong>程序计数器</strong>设计成线程私有，以便于多个线程的切换&#x2F;恢复。</li>
-<li>虚拟机栈：同样是线程私有。它描述了Java方法执行的内存模型：每个方法执行都会创建一个栈帧（Stack Frame）用于存储局部变量表、操作数栈、动态链接、方法出口等信息，每个方法从调用到完成都对应一个栈帧从虚拟机栈中入栈到出栈的过程。(StackOverflowError: fun(){fun();})</li>
-<li>本地方法栈：与虚拟机栈作用类似，区别在于虚拟机栈为虚拟机执行字节码服务，本地方法栈为虚拟机使用到的Native方法服务。HotSpot虚拟机将两栈合二为一了（这体现出JVM 规范和JVM具体实现的差异）。</li>
-<li>堆：最大的一块，几乎所有对象实例都放在这里。由于垃圾收集器都采用分代收集算法，所以堆又可细分为新生代和老年代。新生代又可分为Eden空间、From Survivor空间、To Survivor空间等。</li>
-<li>方法区：也被称为永久代，存储已被加载的类的信息、常量、静态变量、即时编译器编译的代码等。又叫 Non-Heap，目的与java堆区分。jdk7开始已考虑将此块去除（字符串常量池已从方法区中搬走），jdk8中已根本性去除，之前虚拟机参数-XX:PermSize、-XX:MaxPermSize均已失效，被Metaspace（元数据区）取代，Metaspace不属于JVM内存，而是本地内存（Native Memory），默认没有上限，可用-XX:MaxMetaspaceSize指定大小。之所以移除是因为-XX:MaxPermSize很难设置，容易出现内存不足。</li>
-<li>直接内存（Direct Memory）：不是虚拟机规范中定义的内存区域，不受堆大小的限制，属于容易被忽略的内存，它也可能出现OutOfMemoryError。</li>
+          <p>翻译自<a target="_blank" rel="noopener" href="https://docs.oracle.com/middleware/1213/wls/JDBCA/third_party_drivers.htm#JDBCA231">Using JDBC Drivers with WebLogic Server</a><br><a target="_blank" rel="noopener" href="https://docs.oracle.com/cd/E13222_01/wls/docs81/jdbc/thirdparty.html#1050527">Using Third-Party Drivers with WebLogic Server</a></p>
+<p>WebLogic Server 12.1.3</p>
+<h3 id="weblogic自带的JDBC驱动"><a href="#weblogic自带的JDBC驱动" class="headerlink" title="weblogic自带的JDBC驱动"></a>weblogic自带的JDBC驱动</h3><p>The 12c version of the Oracle Thin driver is installed with Oracle WebLogic Server.</p>
+<p>ojdbc7.jar, ojdbc7_g.jar, and ojdbc7dms.jar for JDK7<br>ojdbc6.jar, ojdbc6_g.jar, and ojdbc6dms.jar for JDK 6</p>
+<blockquote>
+<p>所有驱动都在**$ORACLE_HOME&#x2F;oracle_common&#x2F;modules<strong>中，</strong>weblogic.jar**中的manifest文件或直接或间接的引用了它们，所以在weblogic server启动时会自动加载。</p>
+</blockquote>
+<h3 id="使用第三方JDBC驱动"><a href="#使用第三方JDBC驱动" class="headerlink" title="使用第三方JDBC驱动"></a>使用第三方JDBC驱动</h3><p>如果你需要使用weblogic server没有自带的驱动，你需要把驱动包加到CLASSPATH中。</p>
+<h3 id="添加或更新JDBC驱动"><a href="#添加或更新JDBC驱动" class="headerlink" title="添加或更新JDBC驱动"></a>添加或更新JDBC驱动</h3><ol>
+<li>如果要更新驱动，先备份相应的驱动包。自带的驱动在目录**$ORACLE_HOME&#x2F;oracle_common&#x2F;modules**中。</li>
+<li>将驱动jar包放到适当的地方，或直接替换原来的驱动包。</li>
+<li>决定是否需要修改CLASSPATH：<ul>
+<li>如果用新包替换，名字不变，则不需要修改CLASSPATH。</li>
+<li>如果替换后，名字改变：<ul>
+<li>只作用于指定domain，编辑domain&#x2F;bin&#x2F;** setDomainEnv.cmd&#x2F;sh**，将jar file 写到PRE_CLASSPATH最前面。</li>
+<li>作用于所有domain，编辑WL_HOME&#x2F;common&#x2F;bin&#x2F;<strong>commEnv.cmd&#x2F;sh</strong>,将jar file 写到WEBLOGIC_CLASSPATH最前面。</li>
 </ul>
-<h3 id="内存参数"><a href="#内存参数" class="headerlink" title="内存参数"></a>内存参数</h3><p>了解了虚拟机内存模型，就来看看有哪些相关的参数吧。</p>
-<table>
-<thead>
-<tr>
-<th align="left">Name</th>
-<th align="center">Description</th>
-<th align="left">Example</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">-Xms</td>
-<td align="center">堆最小值</td>
-<td align="left">-Xms32m</td>
-</tr>
-<tr>
-<td align="left">-Xmx</td>
-<td align="center">堆堆大值</td>
-<td align="left">-Xmx256m</td>
-</tr>
-<tr>
-<td align="left">-Xmn</td>
-<td align="center">新生代大小</td>
-<td align="left">-Xmn128m</td>
-</tr>
-<tr>
-<td align="left">-XX:SurvivorRatio</td>
-<td align="center">Eden&#x2F;一个Survivor</td>
-<td align="left">-XX:SurvivorRatio&#x3D;8</td>
-</tr>
-</tbody></table>
-<p>以上就是JVM启动设置的内存参数，其它Xss、MaxMetaspaceSize等最好不要动。Xmx&#x3D;Xmn+老年代，Eden与Survivor默认比例为8.可使用<code>jstat</code>命令查看具体内存使用情况。</p>
-<h3 id="GC收集器参数"><a href="#GC收集器参数" class="headerlink" title="GC收集器参数"></a>GC收集器参数</h3><h3 id="GC日志参数"><a href="#GC日志参数" class="headerlink" title="GC日志参数"></a>GC日志参数</h3><p>-XX:+PrintGC<br>-XX:+PrintGCDetails<br>-XX:+PrintGCTimeStamps<br>-XX:+PrintHeapAtGC<br>-Xloggc:filename</p>
+</li>
+</ul>
+</li>
+</ol>
+<p>welbogic 11g略有不同，自带驱动在WL_HOME&#x2F;server&#x2F;lib中。<br><a target="_blank" rel="noopener" href="https://docs.oracle.com/middleware/12213/wls/JDBCA/third_party_drivers.htm#JDBCA231">jdbc driver for weblogic server 12.2.1.3.0</a>   </p>
+<p>在weblogic server 12.2.1.3.0中，自带驱动放在**$ORACLE_HOME&#x2F;oracle_common&#x2F;modules**中，如mySQL5.1x(mysql-connector-java-commercial-5.1.22-bin.jar)、Oracle Thin Driver(ojdbc8.jar)。</p>
+<p>如果要使用weblogic没有的驱动，则直接把驱动jar放到**DOMAIN_HOME&#x2F;lib **中，它作用于整个domain。</p>
 
       
     </div>
@@ -297,7 +270,7 @@
 
 
   <nav class="pagination">
-    <a class="extend prev" rel="prev" title="上一页" aria-label="上一页" href="/blog/page/69/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/69/">69</a><span class="page-number current">70</span><a class="page-number" href="/blog/page/71/">71</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/197/">197</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/blog/page/71/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" title="上一页" aria-label="上一页" href="/blog/page/69/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/69/">69</a><span class="page-number current">70</span><a class="page-number" href="/blog/page/71/">71</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/196/">196</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/blog/page/71/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 </div>

@@ -141,18 +141,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/blog/archives/">
-          <span class="site-state-item-count">197</span>
+          <span class="site-state-item-count">196</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/blog/categories/">
-        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-count">9</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/blog/tags/">
-        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-count">25</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -178,7 +178,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://carl-zk.github.io/blog/2017/09/17/%E7%97%85%E5%8E%86/">
+    <link itemprop="mainEntityOfPage" href="https://carl-zk.github.io/blog/2017/09/17/sql%E6%9D%82%E8%B4%A7%E9%93%BA/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/blog/images/avatar.gif">
@@ -196,7 +196,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/blog/2017/09/17/%E7%97%85%E5%8E%86/" class="post-title-link" itemprop="url">病历</a>
+          <a href="/blog/2017/09/17/sql%E6%9D%82%E8%B4%A7%E9%93%BA/" class="post-title-link" itemprop="url">Sql杂货铺</a>
         </h2>
 
         <div class="post-meta-container">
@@ -207,7 +207,7 @@
       </span>
       <span class="post-meta-item-text">发表于</span>
 
-      <time title="创建时间：2017-09-17 21:18:53" itemprop="dateCreated datePublished" datetime="2017-09-17T21:18:53+08:00">2017-09-17</time>
+      <time title="创建时间：2017-09-17 12:06:51" itemprop="dateCreated datePublished" datetime="2017-09-17T12:06:51+08:00">2017-09-17</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -227,22 +227,15 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>真是上了年纪了，偶感风寒导致咳嗽了快一个月，再加上发烧，昨天大概是最难熬的一天了。<br>城里的医保点开的药贵不说，关键是不起作用，无奈只好把我吃过有用的药都记录一下，下次去医保直接点。</p>
-<h1 id="黑名单"><a href="#黑名单" class="headerlink" title="黑名单"></a>黑名单</h1><p>银黄片</p>
-<h1 id="推荐"><a href="#推荐" class="headerlink" title="推荐"></a>推荐</h1><h3 id="发烧感冒"><a href="#发烧感冒" class="headerlink" title="发烧感冒"></a>发烧感冒</h3><p>999板蓝根颗粒（当糖喝，反正没有副作用）<br>仁和可立克</p>
-<h3 id="咳嗽"><a href="#咳嗽" class="headerlink" title="咳嗽"></a>咳嗽</h3><p>修正 利克达 清肺抑火片<br>TAIJI 急支糖浆（既然咳嗽，那就喝吧，反正刷医保卡）</p>
-<h2 id="病历"><a href="#病历" class="headerlink" title="病历"></a>病历</h2><table>
-<thead>
-<tr>
-<th>日期</th>
-<th align="right">生病</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>2019.9.1～9.17</td>
-<td align="right">咳嗽、发烧</td>
-</tr>
-</tbody></table>
+          <blockquote>
+<p>select * from A left join B on …以A为主表<br>select * from A right join B on …以B为主表</p>
+</blockquote>
+<h3 id="oracle"><a href="#oracle" class="headerlink" title="oracle"></a>oracle</h3><h4 id="左、右连接"><a href="#左、右连接" class="headerlink" title="左、右连接"></a>左、右连接</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> student s, class c <span class="keyword">where</span> s.cid <span class="operator">=</span> c.id(<span class="operator">+</span>);</span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> student s <span class="keyword">left</span> <span class="keyword">join</span> class c <span class="keyword">on</span> s.cid<span class="operator">=</span>c.id;</span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> student s, class c <span class="keyword">where</span> s.cid(<span class="operator">+</span>) <span class="operator">=</span> c.id;</span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> student s <span class="keyword">right</span> <span class="keyword">join</span> class c <span class="keyword">on</span> s.cid <span class="operator">=</span> c.id;</span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> student s, class c <span class="keyword">where</span> s.cid(<span class="operator">+</span>) <span class="operator">=</span> c.id <span class="keyword">and</span> s.age <span class="operator">&lt;</span> <span class="number">20</span>;</span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> student s <span class="keyword">right</span> <span class="keyword">join</span> class c <span class="keyword">on</span> s.cid <span class="operator">=</span> c.id <span class="keyword">where</span> s.age <span class="operator">&lt;</span> <span class="number">20</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> student s, class c <span class="keyword">where</span> s.cid(<span class="operator">+</span>) <span class="operator">=</span> c.id <span class="keyword">and</span> s.age(<span class="operator">+</span>) <span class="operator">&lt;</span> <span class="number">20</span>;</span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> student s <span class="keyword">right</span> <span class="keyword">join</span> class c <span class="keyword">on</span> s.cid <span class="operator">=</span> c.id <span class="keyword">and</span> s.age <span class="operator">&lt;</span> <span class="number">20</span>;</span><br></pre></td></tr></table></figure>
+<p>其中</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> student s, class c <span class="keyword">where</span> s.cid(<span class="operator">+</span>) <span class="operator">=</span> c.id <span class="keyword">and</span> s.age <span class="operator">&lt;</span> <span class="number">20</span>;</span><br></pre></td></tr></table></figure>
+<p>与</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> student s, class c <span class="keyword">where</span> s.cid(<span class="operator">+</span>) <span class="operator">=</span> c.id <span class="keyword">and</span> s.age(<span class="operator">+</span>) <span class="operator">&lt;</span> <span class="number">20</span>;</span><br></pre></td></tr></table></figure>
+<p>的区别在于前者先按age&lt;20扫描student表，然后<code>内连接</code>class表。后者扫描class表，按条件与student表<code>右连接</code>。</p>
 
       
     </div>
@@ -262,7 +255,7 @@
 
 
   <nav class="pagination">
-    <a class="extend prev" rel="prev" title="上一页" aria-label="上一页" href="/blog/page/73/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/73/">73</a><span class="page-number current">74</span><a class="page-number" href="/blog/page/75/">75</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/197/">197</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/blog/page/75/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" title="上一页" aria-label="上一页" href="/blog/page/73/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/73/">73</a><span class="page-number current">74</span><a class="page-number" href="/blog/page/75/">75</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/196/">196</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/blog/page/75/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 </div>

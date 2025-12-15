@@ -141,18 +141,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/blog/archives/">
-          <span class="site-state-item-count">197</span>
+          <span class="site-state-item-count">196</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/blog/categories/">
-        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-count">9</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/blog/tags/">
-        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-count">25</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -178,7 +178,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://carl-zk.github.io/blog/2019/05/02/Jenkins-CI-CD/">
+    <link itemprop="mainEntityOfPage" href="https://carl-zk.github.io/blog/2019/04/21/Jenkins-Starter/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/blog/images/avatar.gif">
@@ -196,7 +196,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/blog/2019/05/02/Jenkins-CI-CD/" class="post-title-link" itemprop="url">Jenkins CI/CD</a>
+          <a href="/blog/2019/04/21/Jenkins-Starter/" class="post-title-link" itemprop="url">Jenkins Starter</a>
         </h2>
 
         <div class="post-meta-container">
@@ -207,7 +207,7 @@
       </span>
       <span class="post-meta-item-text">发表于</span>
 
-      <time title="创建时间：2019-05-02 12:52:07" itemprop="dateCreated datePublished" datetime="2019-05-02T12:52:07+08:00">2019-05-02</time>
+      <time title="创建时间：2019-04-21 04:58:32" itemprop="dateCreated datePublished" datetime="2019-04-21T04:58:32+08:00">2019-04-21</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -228,23 +228,37 @@
     
     <div class="post-body" itemprop="articleBody">
           <blockquote>
-<p>很好奇 Jenkins 是怎么做灰度发布的，我不懂。<br>我根据对 Pipeline 的理解，然后尝试将一个 Spring Boot Web 项目编译，打包，生成镜像和部署。整个下来才发现原来我一直以为自己理解什么是滚动发布，但是实际上我不懂如何用 Jenkins 做到。</p>
+<p>周末有时间搞一搞Jenkins，也算是充实一下。当业务开发久了，好多工具只知道用，不知怎么搭建，有点惭愧。<br>Jenkins官网的文档倒是挺全的，还有中文版本，只不过我天生带debug buff，什么东西刚上手总是能遇到别人遇不到的各种问题，:)。并且官网的文档不会随着版本去更新，第一次接触还是会有一些问题，所以记录下来方便自己也方便他人。</p>
 </blockquote>
-<h2 id="Pipeline"><a href="#Pipeline" class="headerlink" title="Pipeline"></a>Pipeline</h2><p><a target="_blank" rel="noopener" href="https://jenkins.io/doc/book/pipeline/">https://jenkins.io/doc/book/pipeline/</a></p>
-<p>Pipeline 是一条流水线，涵盖了整个项目从编译、打包到测试、部署中间所有的步骤。一般在Jenkinsfile文件中定义整个 pipeline。</p>
-<p>先理解 Pipeline的几个概念。</p>
-<ul>
-<li>Node<br>Jenkins service 的一部分，可以跑 Pipeline 的机器。Jenkinsfile中 agent { node { label ‘labelName’ } } 可以指定 node。刚起动的 Jenkins 只有 master 一个节点。</li>
-<li>Stage<br>自定义一组 task，可在 Jenkins UI 看到 status&#x2F;progress。</li>
-<li>Step<br>一个 task，存在于一个特定的 Stage 中。</li>
-<li><a target="_blank" rel="noopener" href="https://jenkins.io/doc/book/pipeline/syntax/#agent">agent</a><br>pipeline 运行环境，如果定义在最上面表明整个 pipeline 都在同一个 agent 中执行，也可以在每个 Stage 块中单独指定，作用于单个 Stage。</li>
-</ul>
-<h2 id="Config-Master-Node"><a href="#Config-Master-Node" class="headerlink" title="Config Master Node"></a>Config Master Node</h2><p>为了让 pipeline 都跑在 master 节点上，需要额外配置好 maven。</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="built_in">exec</span> -it -u root my-jenkins bash</span><br><span class="line">wget https://www-us.apache.org/dist/maven/maven-3/3.6.1/binaries/apache-maven-3.6.1-bin.tar.gz</span><br><span class="line">tar xvzf apache-maven-3.6.1-bin.tar.gz</span><br><span class="line"><span class="built_in">ln</span> -s /apache-maven-3.6.1/bin/mvn /usr/bin/mvn</span><br><span class="line">apt-get update &amp;&amp; apt-get install vim</span><br><span class="line">vi /apache-maven-3.6.1/conf/settings.xml</span><br><span class="line">修改仓库地址 &lt;localRepository&gt;/home/.m2/repository&lt;/localRepository&gt;</span><br></pre></td></tr></table></figure>
+<h1 id="使用Maven构建Java应用程序"><a href="#使用Maven构建Java应用程序" class="headerlink" title="使用Maven构建Java应用程序"></a>使用Maven构建Java应用程序</h1><p>参考[使用Maven构建Java应用程序](<a target="_blank" rel="noopener" href="https://jenkins.io/zh/doc/tutorials/">https://jenkins.io/zh/doc/tutorials/</a><br>build-a-java-app-with-maven&#x2F;)</p>
+<h2 id="Jenkins-安装"><a href="#Jenkins-安装" class="headerlink" title="Jenkins 安装"></a>Jenkins 安装</h2><p>宿主机上已安装docker，通过docker去安装。<br><a target="_blank" rel="noopener" href="https://hub.docker.com/r/jenkins/jenkins/">https://hub.docker.com/r/jenkins/jenkins/</a></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">docker run --name my-jenkins \</span><br><span class="line">-p 7777:8080 -p 50000:50000 \</span><br><span class="line">-v /opt/Jenkins/var/jenkins_home:/var/jenkins_home \</span><br><span class="line">-v /var/run/docker.sock:/var/run/docker.sock \</span><br><span class="line">-v <span class="string">&quot;<span class="variable">$HOME</span>&quot;</span>:/home \</span><br><span class="line">--<span class="built_in">env</span> JAVA_OPTS=<span class="string">&quot;-Duser.timezone=Asia/Shanghai&quot;</span> \</span><br><span class="line">jenkins/jenkins:lts</span><br></pre></td></tr></table></figure>
 
-<h2 id="Create-Jenkinsfile"><a href="#Create-Jenkinsfile" class="headerlink" title="Create Jenkinsfile"></a>Create Jenkinsfile</h2><p><a target="_blank" rel="noopener" href="https://github.com/carl-zk/jenkins-demo">github source</a><br>Jenkinsfile</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">pipeline &#123;</span><br><span class="line">    agent &#123; label <span class="string">&#x27;master&#x27;</span> &#125;</span><br><span class="line"></span><br><span class="line">    environment &#123;</span><br><span class="line">        IMAGE_NAME = <span class="string">&#x27;jenkins-demo&#x27;</span></span><br><span class="line">        LABEL = <span class="string">&#x27;latest&#x27;</span></span><br><span class="line">        CONTAINER_NAME = <span class="string">&#x27;jenkins-demo&#x27;</span></span><br><span class="line">        PORT = 8090</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    stages &#123;</span><br><span class="line">        stage(<span class="string">&#x27;Package&#x27;</span>) &#123;</span><br><span class="line">            steps &#123;</span><br><span class="line">                sh <span class="string">&#x27;mvn -B -DskipTests=true clean package&#x27;</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        stage(<span class="string">&#x27;Build Image&#x27;</span>) &#123;</span><br><span class="line">            steps &#123;</span><br><span class="line">                script &#123;</span><br><span class="line">                    sh <span class="string">&#x27;pwd &amp;&amp; cd docker/ &amp;&amp; docker build -t $&#123;IMAGE_NAME&#125;:$&#123;LABEL&#125; .&#x27;</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        stage(<span class="string">&#x27;Deploy&#x27;</span>) &#123;</span><br><span class="line">            steps &#123;</span><br><span class="line">                sh <span class="string">&quot;&quot;</span><span class="string">&quot;</span></span><br><span class="line"><span class="string">                    docker ps -f name=<span class="variable">$&#123;CONTAINER_NAME&#125;</span> -q | xargs --no-run-if-empty docker container stop</span></span><br><span class="line"><span class="string">                    docker container ls -a -f name=<span class="variable">$&#123;CONTAINER_NAME&#125;</span> -q | xargs -r docker container rm -v</span></span><br><span class="line"><span class="string">                    docker run -d --name <span class="variable">$&#123;CONTAINER_NAME&#125;</span> -p <span class="variable">$&#123;PORT&#125;</span>:<span class="variable">$&#123;PORT&#125;</span> <span class="variable">$&#123;IMAGE_NAME&#125;</span>:<span class="variable">$&#123;LABEL&#125;</span></span></span><br><span class="line"><span class="string">                &quot;</span><span class="string">&quot;&quot;</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>Jenkins 持续集成&#x2F;持续发布 待续。</p>
+<p>我将Jenkins端口映射到宿主机7777；<br><code>/opt/Jenkins/var/jenkins_home</code> 为空目录，Jenkins Server的所有配置文件都在这里；<br><code>-v /var/run/docker.sock:/var/run/docker.sock \</code> 运行docker命令时，关联到宿主机 Docker daemon；<br><code>-v &quot;$HOME&quot;:/home</code> home目录与宿主机一致，当Jenkins执行mvn install时，依赖包都在~&#x2F;.m2中；</p>
+<p>按照提示，应该可以顺利进入Jenkins管理页面。</p>
+<h2 id="创建第一个流水线项目"><a href="#创建第一个流水线项目" class="headerlink" title="创建第一个流水线项目"></a>创建第一个流水线项目</h2><p>Fork <a target="_blank" rel="noopener" href="https://github.com/jenkins-docs/simple-java-maven-app">https://github.com/jenkins-docs/simple-java-maven-app</a>。<br>这一部分参考文档写的差不多，我就不赘述了。只讲一点，参考文档是将simple-java-maven-app clone 到本地，如果不想这样也是可以的，直接贴URL，这时就需要一个Deploy Key：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -f /Users/carl/.ssh/jenkins/simple-java-maven-app -C <span class="string">&quot;github/simple-app&quot;</span></span><br></pre></td></tr></table></figure>
+<p>使用 <code>pbcopy &lt; simple-java-maven-app.pub</code> 将公钥设置在GitHub上，私钥配在Jenkins上即可。</p>
+<p>创建Jenkinsfile</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">pipeline &#123;</span><br><span class="line">    agent &#123;</span><br><span class="line">        docker &#123;</span><br><span class="line">            image &#x27;maven:3-alpine&#x27; </span><br><span class="line">            args &#x27;-v /root/.m2:/root/.m2&#x27; </span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    stages &#123;</span><br><span class="line">        stage(&#x27;Build&#x27;) &#123; </span><br><span class="line">            steps &#123;</span><br><span class="line">                sh &#x27;mvn -B -DskipTests clean package&#x27; </span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="第一次build失败"><a href="#第一次build失败" class="headerlink" title="第一次build失败"></a>第一次build失败</h2><p>保存并build，应该不会成功，这很正常。下面的问题需要对docker有一点点的了解。</p>
+<ol>
+<li>错误信息 “docker: not found”。<br>Jenkins Server 在执行docker命令时，找不到docker命令。<br>docker命令的运行需要两个条件：一个client，一个daemon。由于宿主机已有daemon，所以Jenkins Server上安装一个client即可。记得吗？我们启动Jenkins时已经mount好了容器到宿主机的docker socket <code>-v /var/run/docker.sock:/var/run/docker.sock</code>。<br>从<a target="_blank" rel="noopener" href="https://docs.docker.com/install/linux/docker-ce/binaries/">https://docs.docker.com/install/linux/docker-ce/binaries/</a>下载安装包，我选择的是docker-18.06.3-ce.tgz。<br>解压得到一些文件，其中docker即是client，dockerd即是daemon，我们只需要把docker复制到Jenkins 容器的&#x2F;usr&#x2F;bin目录下。</li>
+</ol>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="built_in">exec</span> -u root -it my-jenkins bash</span><br><span class="line">wget https://download.docker.com/linux/static/stable/x86_64/docker-18.06.3-ce.tgz</span><br><span class="line">tar xvzf docker-18.06.3-ce.tgz</span><br><span class="line"><span class="built_in">cp</span> docker/docker /usr/bin</span><br><span class="line"><span class="built_in">rm</span> -rf docker/ docker-18.06.3-ce.tgz</span><br></pre></td></tr></table></figure>
+
+<p>OK, 再build一次吧。</p>
+<ol start="2">
+<li>错误信息 “connect: permission denied”<br>这次错误不一样了，意思是client没有权限与daemon交互。<br>原因可能有两点：<br>  a. 宿主机docker启动时是root权限启动的。或者<br>  b. Jenkins Server 中 user jenkins 没有文件 <code>/var/run/docker.sock</code> 的rw权限。</li>
+</ol>
+<p>检查下宿主机docker是否是root启动，一般都不是。<br>修改&#x2F;var&#x2F;run&#x2F;docker.sock权限：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="built_in">exec</span> -u root -it my-jenkins bash</span><br><span class="line"><span class="built_in">ls</span> -al /var/run/docker.sock</span><br><span class="line">usermod -aG root jenkins</span><br></pre></td></tr></table></figure>
+<p>这里简单起见，直接把jenkins加入到对应权限组中。</p>
+<p>重启Jenkins Server。<br><code>Ctr+C</code> + <code>docker start -ai my-jenkins</code></p>
+<p><img src="http://ppdxz524p.bkt.clouddn.com/Jenkins-Starter/simple-pipeline.png" loading="lazy"></p>
+<p>恭喜！大功告成！</p>
+<p>希望这篇文章对你有帮助。</p>
 
       
     </div>
@@ -264,7 +278,7 @@
 
 
   <nav class="pagination">
-    <a class="extend prev" rel="prev" title="上一页" aria-label="上一页" href="/blog/page/22/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/22/">22</a><span class="page-number current">23</span><a class="page-number" href="/blog/page/24/">24</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/197/">197</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/blog/page/24/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" title="上一页" aria-label="上一页" href="/blog/page/22/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/22/">22</a><span class="page-number current">23</span><a class="page-number" href="/blog/page/24/">24</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/196/">196</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/blog/page/24/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 </div>

@@ -141,18 +141,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/blog/archives/">
-          <span class="site-state-item-count">197</span>
+          <span class="site-state-item-count">196</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/blog/categories/">
-        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-count">9</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/blog/tags/">
-        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-count">25</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -178,7 +178,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://carl-zk.github.io/blog/2017/05/17/NO-PUBKEY/">
+    <link itemprop="mainEntityOfPage" href="https://carl-zk.github.io/blog/2017/05/09/Bash-Script%E5%AD%A6%E4%B9%A0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/blog/images/avatar.gif">
@@ -196,7 +196,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/blog/2017/05/17/NO-PUBKEY/" class="post-title-link" itemprop="url">NO_PUBKEY</a>
+          <a href="/blog/2017/05/09/Bash-Script%E5%AD%A6%E4%B9%A0/" class="post-title-link" itemprop="url">Bash Script学习</a>
         </h2>
 
         <div class="post-meta-container">
@@ -207,23 +207,14 @@
       </span>
       <span class="post-meta-item-text">发表于</span>
 
-      <time title="创建时间：2017-05-17 20:12:21" itemprop="dateCreated datePublished" datetime="2017-05-17T20:12:21+08:00">2017-05-17</time>
+      <time title="创建时间：2017-05-09 22:58:50" itemprop="dateCreated datePublished" datetime="2017-05-09T22:58:50+08:00">2017-05-09</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-05-18 16:19:43" itemprop="dateModified" datetime="2024-05-18T16:19:43+08:00">2024-05-18</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/blog/categories/%E7%B3%BB%E7%BB%9F%E9%85%8D%E7%BD%AE/" itemprop="url" rel="index"><span itemprop="name">系统配置</span></a>
-        </span>
+      <time title="修改时间：2024-07-11 21:09:09" itemprop="dateModified" datetime="2024-07-11T21:09:09+08:00">2024-07-11</time>
     </span>
 
   
@@ -236,60 +227,571 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p><a target="_blank" rel="noopener" href="http://mirrors.aliyun.com/help/debian">阿里云镜像</a><br>原则上debian的sources和ubuntu的不能混着用。</p>
-<p>debian8 改了sources.list之后报这个错</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Reading package lists... Done</span><br><span class="line">W: GPG error: http://mirrors.aliyun.com trusty-security InRelease: The following signatures couldn&#x27;t be verified because the public key is not available: NO_PUBKEY 40976EAF437D05B5 NO_PUBKEY 3B4FE6ACC0B21F32</span><br><span class="line">W: GPG error: http://mirrors.aliyun.com trusty-updates InRelease: The following signatures couldn&#x27;t be verified because the public key is not available: NO_PUBKEY 40976EAF437D05B5 NO_PUBKEY 3B4FE6ACC0B21F32</span><br><span class="line">W: GPG error: http://mirrors.aliyun.com trusty-proposed InRelease: The following signatures couldn&#x27;t be verified because the public key is not available: NO_PUBKEY 40976EAF437D05B5 NO_PUBKEY 3B4FE6ACC0B21F32</span><br><span class="line">W: GPG error: http://mirrors.aliyun.com trusty-backports InRelease: The following signatures couldn&#x27;t be verified because the public key is not available: NO_PUBKEY 40976EAF437D05B5 NO_PUBKEY 3B4FE6ACC0B21F32</span><br><span class="line">W: GPG error: http://mirrors.aliyun.com trusty Release: The following signatures couldn&#x27;t be verified because the public key is not available: NO_PUBKEY 40976EAF437D05B5 NO_PUBKEY 3B4FE6ACC0B21F32</span><br></pre></td></tr></table></figure>
-<p>解决方法<br>1.<br>先<br><code>sudo apt-key adv --keyserver hkp://keys.gnupg.net --recv-keys 40976EAF437D05B5</code><br>然后<br><code>sudo apt-get update</code><br>2.<br>这个方案没试过<br><code>aptitude install debian-keyring debian-archive-keyring</code></p>
-<p>可是为什么要这个公钥？为什么要验证签名？目的是什么？<br><a target="_blank" rel="noopener" href="http://www.2cto.com/article/201405/300530.html">GNU Privacy Guard加密指南</a><br>加密技术可以保证你的文件使用加密形式存储，不管你是要把它公开到因特网，备份到服务器，用U盘携带，还是保存在笔记本里。加密你的数据，意味着除非是你认可的接收者，其他人都不可以读取，这样可以防止信息泄漏。</p>
-<p>GPG (GNU Privacy Guard)</p>
-<p>GPG是GNU Privacy Guard的缩写。它是一种基于密钥的加密方式，使用了一对密钥对消息进行加密和解密，来保证消息的安全传输。一开始，用户通过数字证书认证软件生成一对公钥和私钥。任何其他想给该用户发送加密消息的用户，需要先从证书机构的公共目录获取接收者的公钥，然后用公钥加密信息，再发送给接收者。当接收者收到加密消息后，他可以用自己的私钥来解密，而私钥是不应该被其他人拿到的。</p>
-<p>GPG 使用公钥和私钥</p>
-<p>公钥是你共享出来的一个公开密钥，它可以被发给任何你希望收到加密信息的人，他们可以使用你的公钥来加密信息。公钥本身不能用来解密自己加密过的信息，只有你自己——那个拥有对应私钥的人——能够解密。私钥是你自己的私人密码，可以用来解密用你的公钥加密过的信息。如果你把私钥泄漏给别人，那么他将可以解密并查看那些使用你的公钥加密过的信息。</p>
-<p>在终端里使用GPG</p>
-<p>如今大多数的Linux发行版都默认包含了GPG。想检查一下的话，打开终端并输入：<br>1.$ gpg –version</p>
-<p>然后你应该看到版本。如果是这样的话，你不需要做其他事情了。否则，你需要从你的发行版软件仓库里安装GPG。</p>
-<p>生成密钥</p>
-<p>想使用GPG来加密你的通讯，你需要先创建一对密码。首先，打开终端并运行下面的命令：<br>1.$ gpg –gen-key</p>
-<p>然后会有如下提示：<br>1.Pleaseselect what kind of key you want:<br>2.(1) DSA andElgamal(default)<br>3.(2) DSA (sign only)<br>4.(5) RSA (sign only)<br>5.Your selection?</p>
-<p>这里要选择数字1，因为它可以用来加密和解密，第二和第三个选项只能让你给信息签名。按下数字1，然后按回车。</p>
-<p>然后会有如下提示：<br>1.1 DSA key-pair will have 1024 bits.<br>2.2 ELG-E keys may be between 1024and4096 bits long.<br>3.3What key-size do you want?(2048)</p>
-<p>这里最好输入“2048”，就像GPG推荐的那样。如果你不希望你的密钥过期的话（在后面的提示里，选择0）。如果有提示说信息是否正确的话，回答Yes，然后输入你的真实名字，email地址，以及一个说明（可选的）。如果一切顺利，按下“哦”（对应着OK）然后回车。</p>
-<p>在这之后，会提示你输入一个密码，密码会要求重复输入一次。通常，请使用一个难于破解的加强密码，而不推荐用名字&#x2F;地址&#x2F;生日&#x2F;单词等等来做密码。</p>
-<p>在输好密码之后，请按照终端里的提示信息做：我们需要生成大量的随机数，建议您在生成素数的过程中做一下这些动作（敲击键盘，移动鼠标，读写硬盘），这样会让随机数生成器有机会获取更大的熵。</p>
-<p>生成好密钥以后，你应该会看到一条类似的提示信息：gpg: key 083C39A4 marked as ultimately trusted. public and secret key created and signed</p>
-<p>密钥服务器</p>
-<p>密钥服务器是用来发布你的公钥，并将其分发到其他人的服务器，这样其他用户可以轻松的根据你数据库中的名字（或者e-mail地址）来获取你的公钥，并给你发送加密信息。这样可以避免把公钥直接拷贝给你的朋友的方式，而让其他人直接通过在线数据库来找到你。</p>
-<p>上传你的公钥到密钥服务器：</p>
-<p>$ gpg –send-keys –keyserver [keyservers.address.com][yourpublicid]<br>你需要把keyservers.address.com替换成你选择的服务器（或者用mit.edu，它会跟其他服务器做同步），还需要把命令行中的yourpublicid替换成你的。最终执行的命令看上去会大概是下面这样子：</p>
-<p>$ gpg –send-keys –keyserver hkp:&#x2F;&#x2F;pgp.mit.edu 083C39A4<br>加密文件</p>
-<p>如果你想给你的朋友发送一个用他的公钥加密过的文件，可以用下面的命令：</p>
-<p>$ gpg -o encrypted_file.gpg –encrypt -r key-id original.file<br>命令解释：</p>
-<p>-o encrypted_file.gpg &#x3D;指定输出文件<br>–encrypt &#x3D;做加密<br>-r &#x3D;接收者的KEY-ID，比如这里就填你朋友的KEY-ID。<br>original.file &#x3D;指定要加密的文件<br>解密文件</p>
-<p>如果有人给你发送了一个用你的公钥加密过的文件，你可以按下面的方式解密：</p>
-<p>$ gpg –decrypt filename.gpg<br>对称加密</p>
-<p>你还可以使用GPG做对称加密，来给文件加上一个密码。这种不同于公钥加密的方式，在对称加密中，同一个密钥用于加密和解密。这种方式在处理信息的时候会简单点，但是保密性没那么好，因为需要把密码告诉接收者。下面是用密码加密文件的命令：</p>
-<p>$ gpg -c filename.txt<br>解密这个文件，用下面的命令：</p>
-<p>$ gpg filename.txt<br>然后，会提示你输入密码，之后就开始解密文件。</p>
-<p>文档数字签名</p>
-<p>数字签名非常类似于你在信件或者重要文件的末尾签上自己的名字，它表示这份文件确实是由你发出来的。通过数字签名，它会计算整个文件内容的SHA1哈希值，然后把这个值附加到签名末尾。如果文件内容被篡改，签名的校验就会失败，可以用来鉴定伪造。如果用户自己在签名后编辑了这份文件，签名校验也会失败，因为此时文件的SHA1哈希值已经和之前签名时不同了。</p>
-<p>对一份文件做数字签名，运行下面的命令：</p>
-<p>$ gpg –clearsign filename.txt<br>生成销毁密钥</p>
-<p>销毁密钥可以在你的私钥泄漏或者怀疑泄漏的时候，吊销你的公钥。使用下面的命令创建一个销毁密钥：</p>
-<p>$ gpg –output revoke.asc –gen-revoke keyid<br>把销毁密钥保存到一个安全的地方，任何人都可以用它让你的密钥失效。（你可以用对称加密方式来加密你的销毁密钥文件。）</p>
-<p>在终端里使用GPG的一些技巧</p>
-<p>通过下面的命令可以查看你已经导入的GPG密钥：</p>
-<p>$ gpg –list-keys<br>之后应该会列出来用你e-mail注册的密钥列表（因为这里只有一个密钥，它只列出了你自己的密钥），然后，你可以看到自己的KEY-ID，就可以通过上文介绍的命令提交给密钥服务器。</p>
-<p>显示你的密钥链中的私钥和公钥。</p>
-<p>$ gpg –list-public-keys # 会列出来公钥<br>$ gpg –list-secret-keys # 会列出来私钥<br>导入密钥</p>
-<p>$ gpg –import KEYFILE<br>命令中的KEYFILE应该是需要导入的公钥文件名。（如果文件不在主目录中，使用cd命令切换到该文件的目录下，再执行上面的命令）</p>
-<p>导出公钥到文件</p>
-<p>用下面的命令可以将你的公钥导出为ASCII格式：</p>
-<p>$ gpg –export-a &gt; publickey.asc</p>
-<hr>
-<p>关于Richard White</p>
-<p>Richard是一位技术爱好者，在不止一个场合他被称为极客。他还是三本书的作者，最近的一本《数字时代的隐私》即将在2014年5月份出版精装本。他还是数字时代网站的主编和驱动者，数字时代的目的是提供资源和工具来实现和维护匿名，安全和隐私。Ricard经常写一些和隐私相关的文章，最近忙着写《CLI艺术》，收集开源的命令行软件。关于GNU Privacy Guard的更多信息以及如何使用GPG软件的图形界面工具，你可以访问White的数字时代网站</p>
-<p>这次折腾主要是为了安装mysql-server和workbench，先是把源都替换成aliyun的，然后逐个解决bug。虽然都一一解决了，但是这中间暴露一些问题，就是没有办法系统的掌握linux如何管理依赖，apt-get的原理。</p>
-<p><a target="_blank" rel="noopener" href="http://www.jb51.net/article/52257.htm">mysqld_safe启动脚本</a></p>
+          <blockquote>
+<p>不看<a target="_blank" rel="noopener" href="http://linuxcommand.org/index.php">TLCL</a>,学会shell script也惘然！</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">#!bin/bash -e 或 set -e 执行报错就停止</span><br><span class="line">-x 打印每条</span><br><span class="line">command &amp; 后台执行</span><br><span class="line">jobs --show back tasks</span><br><span class="line">fg %job_number 把task从back挪出来，可以用ctr+c停掉</span><br><span class="line">ctr+z 停process</span><br><span class="line">bg %job_number </span><br><span class="line">kill -15/20</span><br></pre></td></tr></table></figure>
+
+<h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><h3 id="windows格式文件转linux格式文件"><a href="#windows格式文件转linux格式文件" class="headerlink" title="windows格式文件转linux格式文件"></a>windows格式文件转linux格式文件</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed -i <span class="string">&#x27;s/^M//g&#x27;</span> file</span><br></pre></td></tr></table></figure>
+<p>^M&#x3D;Ctrl+v,Ctrl+m<br><em>注意：Mac中安装gnu-sed替换原生sed，然后增加别名即可</em><br><em>alias sed&#x3D;”&#x2F;usr&#x2F;local&#x2F;opt&#x2F;gnu-sed&#x2F;bin&#x2F;gsed”</em> </p>
+<p>windows 下 java项目编码由gbk改为utf8</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">find . -name &#x27;*.java&#x27; -exec bash -c &quot;iconv -f gbk -t utf-8 &#x27;&#123;&#125;&#x27;.utf8&quot; \;</span><br><span class="line">find . -name &#x27;*.java&#x27; -exec rm -rf &#123;&#125; \;</span><br><span class="line">find . -name &#x27;*.utf8&#x27; | awk -F &quot;.&quot; &#x27;&#123;print $2&#125;&#x27; | xargs -i -t mv ./&#123;&#125;.java.utf8 ./&#123;&#125;.java;</span><br></pre></td></tr></table></figure>
+
+<h3 id="截取文件"><a href="#截取文件" class="headerlink" title="截取文件"></a>截取文件</h3><h4 id="从第3行到最后"><a href="#从第3行到最后" class="headerlink" title="从第3行到最后"></a>从第3行到最后</h4><p><code>tail -n +3 file &gt; newfile</code><br>or<br><code>sed &#39;1,2d&#39; file &gt; newFile</code></p>
+<h4 id="sed"><a href="#sed" class="headerlink" title="sed"></a>sed</h4><p><code>sed &#39;3d&#39; file</code>  删除第3行<br><code>sed &#39;2,3d&#39; file</code> 删除第2到第3行<br><code>sed &#39;2,$d&#39; file</code> 删除第2行到最后<br><code>sed &#39;/key/d&#39; file</code> 删除文件中包含key的行</p>
+<h4 id="vi"><a href="#vi" class="headerlink" title="vi"></a>vi</h4><blockquote>
+<p>Mac中vi 语法高亮+行号<br>  cp &#x2F;usr&#x2F;share&#x2F;vim&#x2F;vimrc ~&#x2F;.vimrc<br>  vi ~&#x2F;.vimrc<br>  syntax on<br>  set nu!</p>
+</blockquote>
+<p><code>/key</code> 从当前行向下查找<br><code>?key</code> 从当前行向上查找<br><code>:%s/old/new/g</code> 全部替换<br><code>:s/old/new</code> 只替换当前行第一个<br><code>:s/old/new/g</code> 替换当前行所有<br><code>:2,$s/old/new/g</code> 第2行到文件末</p>
+<p>vi file1 file2<br>:bn 切换<br>:bp<br>:buffers 文件列表</p>
+<p>O -insert above line<br>I -insert lien heading<br>r -replace one char<br>R -replace until Esc<br>cw -change current word with next text<br>C -change until Esc<br>cc -change whole line<br>dw -delete word<br>D -delete to tail</p>
+<p>?string -search backward</p>
+<p>:.&#x3D; -current line number<br>:&#x3D; -total line number</p>
+<p>:w newfile -write into another file</p>
+<h1 id="入门大全"><a href="#入门大全" class="headerlink" title="入门大全"></a>入门大全</h1><h2 id="脚本文件"><a href="#脚本文件" class="headerlink" title="脚本文件"></a>脚本文件</h2><p>文件首行一般为所用shell类型：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&#x27;hello world&#x27;</span></span><br></pre></td></tr></table></figure>
+<p>or</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&#x27;hello world&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>现在所有Linux、Unix系统都有<code>bash/sh</code>，而bash是对sh的增强版本，所以推荐直接用bash。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">echo &#x27;$(cal)&#x27; 单引号使特殊字符失效</span><br><span class="line"></span><br><span class="line">## string</span><br><span class="line">foo=&quot;fdjslj jfd&quot;</span><br><span class="line">echo $&#123;#foo&#125; 长度</span><br><span class="line">echo $&#123;foo:5:2&#125; 截取</span><br><span class="line">test -z &quot;$foo&quot; &amp;&amp; echo yes 必须用引号括起来</span><br><span class="line"></span><br><span class="line">arr=(&quot;a&quot; &quot;b&quot; &quot;c&quot;)</span><br><span class="line">for i in &quot;$&#123;arr[@]&#125;&quot;; do 必须用引号括起来，最优方式</span><br><span class="line">  echo $i</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+
+<h2 id="输出重定向"><a href="#输出重定向" class="headerlink" title="输出重定向"></a>输出重定向</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">0 标准输入</span><br><span class="line">1 标准输出</span><br><span class="line">2 错误</span><br><span class="line"></span><br><span class="line">2&gt;err.log 错误信息重定向到err.log</span><br><span class="line">&gt;&amp;2 错误输入到/var/log/auth.log (Ubuntu系统下)</span><br><span class="line"></span><br><span class="line">./run.sh &gt; mylog 2&gt;&amp;1 或 ./run.sh &amp;&gt;mylog</span><br><span class="line"></span><br><span class="line">2&gt;/dev/null 不处理 </span><br><span class="line"></span><br><span class="line">&gt; 清空再写入</span><br><span class="line">&gt;&gt; 追加到行末</span><br></pre></td></tr></table></figure>
+<p>demo</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="built_in">log</span>=<span class="string">&quot;mylog&quot;</span> </span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;hello world&quot;</span> &gt;<span class="variable">$log</span> 2&gt;&amp;1</span><br><span class="line">sl &gt;&gt;<span class="variable">$log</span> 2&gt;&amp;1</span><br></pre></td></tr></table></figure>
+<p>日志记录的正确方式</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line">LOG_FILE=mylog</span><br><span class="line"><span class="built_in">exec</span> 1&gt;&gt;<span class="variable">$LOG_FILE</span> 2&gt;&amp;1</span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;hello&quot;</span> </span><br><span class="line"><span class="built_in">ls</span> .</span><br><span class="line">sl</span><br></pre></td></tr></table></figure>
+<p>这样，脚本执行过程中的所有输出均输出到文件mylog中。</p>
+<blockquote>
+<p>单引号和双引号的区别：单引号内容为纯文本，双引号内容可以被解析，如：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">str=<span class="string">&#x27;hello world&#x27;</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;<span class="variable">$str</span>&quot;</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&#x27;$str&#x27;</span></span><br></pre></td></tr></table></figure>
+<p>结果为</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hello world          </span><br><span class="line"><span class="variable">$str</span>              </span><br></pre></td></tr></table></figure>
+</blockquote>
+<p><strong>here doc</strong> 可以使用tab键控制文本格式，但只为方便阅读，不作用于输出</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line"><span class="comment"># 普通</span></span><br><span class="line"><span class="built_in">cat</span> &lt;&lt; <span class="string">eof</span></span><br><span class="line"><span class="string">  hh</span></span><br><span class="line"><span class="string">eof</span></span><br><span class="line"><span class="comment"># here document</span></span><br><span class="line"><span class="built_in">cat</span> &lt;&lt;- <span class="string">_EOF_</span></span><br><span class="line"><span class="string">  hello world</span></span><br><span class="line"><span class="string">  haha</span></span><br><span class="line"><span class="string">    123</span></span><br><span class="line"><span class="string">_EOF_</span></span><br><span class="line"><span class="comment"># here string</span></span><br><span class="line"><span class="built_in">cat</span> &lt;&lt;&lt; <span class="string">&quot;hello world&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>cat &lt; file_name<br>cat &gt; file_name</p>
+<h2 id="文本处理三大利器-amp-正则表达式"><a href="#文本处理三大利器-amp-正则表达式" class="headerlink" title="文本处理三大利器 &amp; 正则表达式"></a>文本处理三大利器 &amp; 正则表达式</h2><p><code>.*?</code> : question mark for Non Greedy mode<br><code>&lt;([A-Z]&#123;1,9&#125;)&gt;[^&lt;]*&lt;/\\1&gt;</code> : <code>\\1</code> for previous group match item </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">^ (caret): Matches the start of a string.</span><br><span class="line">$ (dollar): Matches the end of a string.</span><br><span class="line">. (dot): Matches any single character except a newline character.</span><br><span class="line">[] (square brackets): Defines a character class, matching any one character within the brackets.</span><br><span class="line">&#123;&#125; (curly brackets): Specifies a specific quantity of characters to match.</span><br><span class="line">- (hyphen): Specifies a range of characters when used within square brackets.</span><br><span class="line">? (question mark): Makes the preceding character optional, matching zero or one occurrence.</span><br><span class="line">* (asterisk): Matches zero or more occurrences of the preceding character.</span><br><span class="line">+ (plus): Matches one or more occurrences of the preceding character.</span><br><span class="line">() (parentheses): Groups expressions together.</span><br><span class="line">| (pipe): Indicates an OR condition between two expressions.</span><br><span class="line">\ (backslash): Escapes a metacharacter, allowing it to be matched as a literal character.</span><br></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://www.elastic.co/guide/en/beats/heartbeat/current/regexp-support.html">regex-support from elastic</a></p>
+<table>
+<thead>
+<tr>
+<th>Pattern</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Single Characters</strong></td>
+<td></td>
+</tr>
+<tr>
+<td>x</td>
+<td>single character</td>
+</tr>
+<tr>
+<td>.</td>
+<td>any character</td>
+</tr>
+<tr>
+<td>[xyz]</td>
+<td>character class</td>
+</tr>
+<tr>
+<td>[^xyz]</td>
+<td>negated character class</td>
+</tr>
+<tr>
+<td>[[:alpha:]]</td>
+<td>ASCII character class</td>
+</tr>
+<tr>
+<td>[[:^alpha:]]</td>
+<td>negated ASCII character class</td>
+</tr>
+<tr>
+<td>\d</td>
+<td>Perl character class</td>
+</tr>
+<tr>
+<td>\D</td>
+<td>negated Perl character class</td>
+</tr>
+<tr>
+<td>\pN</td>
+<td>Unicode character class (one-letter name)</td>
+</tr>
+<tr>
+<td>\p{Greek}</td>
+<td>Unicode character class</td>
+</tr>
+<tr>
+<td>\PN</td>
+<td>negated Unicode character class (one-letter name)</td>
+</tr>
+<tr>
+<td>\P{Greek}</td>
+<td>negated Unicode character class</td>
+</tr>
+<tr>
+<td><strong>Composites</strong></td>
+<td></td>
+</tr>
+<tr>
+<td>xy</td>
+<td>x followed by y</td>
+</tr>
+<tr>
+<td>x</td>
+<td>y</td>
+</tr>
+<tr>
+<td><strong>Repetitions</strong></td>
+<td></td>
+</tr>
+<tr>
+<td>x*</td>
+<td>zero or more x</td>
+</tr>
+<tr>
+<td>x+</td>
+<td>one or more x</td>
+</tr>
+<tr>
+<td>x?</td>
+<td>zero or one x</td>
+</tr>
+<tr>
+<td>x{n,m}</td>
+<td>n or n+1 or …​ or m x, prefer more</td>
+</tr>
+<tr>
+<td>x{n,}</td>
+<td>n or more x, prefer more</td>
+</tr>
+<tr>
+<td>x{n}</td>
+<td>exactly n x</td>
+</tr>
+<tr>
+<td>x*?</td>
+<td>zero or more x, prefer fewer</td>
+</tr>
+<tr>
+<td>x+?</td>
+<td>one or more x, prefer fewer</td>
+</tr>
+<tr>
+<td>x??</td>
+<td>zero or one x, prefer zero</td>
+</tr>
+<tr>
+<td>x{n,m}?</td>
+<td>n or n+1 or …​ or m x, prefer fewer</td>
+</tr>
+<tr>
+<td>x{n,}?</td>
+<td>n or more x, prefer fewer</td>
+</tr>
+<tr>
+<td>x{n}?</td>
+<td>exactly n x</td>
+</tr>
+<tr>
+<td><strong>Grouping</strong></td>
+<td></td>
+</tr>
+<tr>
+<td>(re)</td>
+<td>numbered capturing group (submatch)</td>
+</tr>
+<tr>
+<td>(?P<name>re)</td>
+<td>named &amp; numbered capturing group (submatch)</td>
+</tr>
+<tr>
+<td>(?:re)</td>
+<td>non-capturing group</td>
+</tr>
+<tr>
+<td>(?i)abc</td>
+<td>set flags within current group, non-capturing</td>
+</tr>
+<tr>
+<td>(?i:re)</td>
+<td>set flags during re, non-capturing</td>
+</tr>
+<tr>
+<td>(?i)PaTTeRN</td>
+<td>case-insensitive (default false)</td>
+</tr>
+<tr>
+<td>(?m)multiline</td>
+<td>multi-line mode: ^ and $ match begin&#x2F;end line in addition to begin&#x2F;end text (default false)</td>
+</tr>
+<tr>
+<td>(?s)pattern.</td>
+<td>let . match \n (default false)</td>
+</tr>
+<tr>
+<td>(?U)x*abc</td>
+<td>ungreedy: swap meaning of x* and x*?, x+ and x+?, etc (default false)</td>
+</tr>
+<tr>
+<td><strong>Empty Strings</strong></td>
+<td></td>
+</tr>
+<tr>
+<td>^</td>
+<td>at beginning of text or line (m&#x3D;true)</td>
+</tr>
+<tr>
+<td>$</td>
+<td>at end of text (like \z not \Z) or line (m&#x3D;true)</td>
+</tr>
+<tr>
+<td>\A</td>
+<td>at beginning of text</td>
+</tr>
+<tr>
+<td>\b</td>
+<td>at ASCII word boundary (\w on one side and \W, \A, or \z on the other)</td>
+</tr>
+<tr>
+<td>\B</td>
+<td>not at ASCII word boundary</td>
+</tr>
+<tr>
+<td>\z</td>
+<td>at end of text</td>
+</tr>
+<tr>
+<td><strong>Escape Sequences</strong></td>
+<td></td>
+</tr>
+<tr>
+<td>\a</td>
+<td>bell (same as \007)</td>
+</tr>
+<tr>
+<td>\f</td>
+<td>form feed (same as \014)</td>
+</tr>
+<tr>
+<td>\t</td>
+<td>horizontal tab (same as \011)</td>
+</tr>
+<tr>
+<td>\n</td>
+<td>newline (same as \012)</td>
+</tr>
+<tr>
+<td>\r</td>
+<td>carriage return (same as \015)</td>
+</tr>
+<tr>
+<td>\v</td>
+<td>vertical tab character (same as \013)</td>
+</tr>
+<tr>
+<td>*</td>
+<td>literal *, for any punctuation character *</td>
+</tr>
+<tr>
+<td>\123</td>
+<td>octal character code (up to three digits)</td>
+</tr>
+<tr>
+<td>\x7F</td>
+<td>two-digit hex character code</td>
+</tr>
+<tr>
+<td>\x{10FFFF}</td>
+<td>hex character code</td>
+</tr>
+<tr>
+<td>\Q…\E</td>
+<td>literal text … even if … has punctuation</td>
+</tr>
+<tr>
+<td><strong>ASCII Character Classes</strong></td>
+<td></td>
+</tr>
+<tr>
+<td>[[:alnum:]]</td>
+<td>alphanumeric (same as [0-9A-Za-z])</td>
+</tr>
+<tr>
+<td>[[:alpha:]]</td>
+<td>alphabetic (same as [A-Za-z])</td>
+</tr>
+<tr>
+<td>[[:ascii:]]</td>
+<td>ASCII (same as \x00-\x7F])</td>
+</tr>
+<tr>
+<td>[[:blank:]]</td>
+<td>blank (same as [\t ])</td>
+</tr>
+<tr>
+<td>[[:cntrl:]]</td>
+<td>control (same as [\x00-\x1F\x7F])</td>
+</tr>
+<tr>
+<td>[[:digit:]]</td>
+<td>digits (same as [0-9])</td>
+</tr>
+<tr>
+<td>[[:graph:]]</td>
+<td>graphical (same as [!-~] &#x3D;&#x3D; [A-Za-z0-9!”#$%&amp;’()*+,-.&#x2F;:;&lt;&#x3D;&gt;?@[\]^_&#96; {</td>
+</tr>
+<tr>
+<td>[[:lower:]]</td>
+<td>lower case (same as [a-z])</td>
+</tr>
+<tr>
+<td>[[:print:]]</td>
+<td>printable (same as [ -~] &#x3D;&#x3D; [ [:graph:]])</td>
+</tr>
+<tr>
+<td>[[:punct:]]</td>
+<td>punctuation (same as [!-&#x2F;:-@[-&#96;{-~])</td>
+</tr>
+<tr>
+<td>[[:space:]]</td>
+<td>whitespace (same as [\t\n\v\f\r ])</td>
+</tr>
+<tr>
+<td>[[:upper:]]</td>
+<td>upper case (same as [A-Z])</td>
+</tr>
+<tr>
+<td>[[:word:]]</td>
+<td>word characters (same as [0-9A-Za-z_])</td>
+</tr>
+<tr>
+<td>[[:xdigit:]]</td>
+<td>hex digit (same as [0-9A-Fa-f])</td>
+</tr>
+<tr>
+<td><strong>Supported Perl Character Classes</strong></td>
+<td></td>
+</tr>
+<tr>
+<td>\d</td>
+<td>digits (same as [0-9])</td>
+</tr>
+<tr>
+<td>\D</td>
+<td>not digits (same as [^0-9])</td>
+</tr>
+<tr>
+<td>\s</td>
+<td>whitespace (same as [\t\n\f\r ])</td>
+</tr>
+<tr>
+<td>\S</td>
+<td>not whitespace (same as [^\t\n\f\r ])</td>
+</tr>
+<tr>
+<td>\w</td>
+<td>word characters (same as [0-9A-Za-z_])</td>
+</tr>
+<tr>
+<td>\W</td>
+<td>not word characters (same as [^0-9A-Za-z_])</td>
+</tr>
+</tbody></table>
+<p><a target="_blank" rel="noopener" href="https://www.ibm.com/docs/en/nsm/61.1?topic=expressions-regular-expression-syntax#JL1078292394b__BABCCCCA">Regular expression syntax</a></p>
+<table>
+<thead>
+<tr>
+<th>Token</th>
+<th>Matches</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>.</td>
+<td>Any character.</td>
+</tr>
+<tr>
+<td>^</td>
+<td>The start of a line (a zero-length string).</td>
+</tr>
+<tr>
+<td>$</td>
+<td>The end of a line; a new line or the end of the search buffer.</td>
+</tr>
+<tr>
+<td>&lt;</td>
+<td>The start of a word (where a word is a string of alphanumeric characters).</td>
+</tr>
+<tr>
+<td>&gt;</td>
+<td>The end of a word (the zero length string between an alphanumeric character and a non-alphanumeric character).</td>
+</tr>
+<tr>
+<td>\b</td>
+<td>Any word boundary (this is equivalent to (&lt;¦&gt;) ).</td>
+</tr>
+<tr>
+<td>\d</td>
+<td>A digit character.</td>
+</tr>
+<tr>
+<td>\D</td>
+<td>Any non-digit character.</td>
+</tr>
+<tr>
+<td>\w</td>
+<td>A word character (alphanumeric or underscore).</td>
+</tr>
+<tr>
+<td>\W</td>
+<td>Any character that is not a word character (alphanumeric or underscore).</td>
+</tr>
+<tr>
+<td>\s</td>
+<td>A whitespace character.</td>
+</tr>
+<tr>
+<td>\S</td>
+<td>Any non-whitespace character.</td>
+</tr>
+<tr>
+<td>\c</td>
+<td>Special characters and escaping. The following characters are interpreted according to the C language conventions: \0, \a, \f, \n, \r, \t, \v. To specify a character in hexadecimal, use the \xNN syntax. For example, \x41 is the ASCII character A.</td>
+</tr>
+<tr>
+<td>\</td>
+<td>All characters apart from those described above may be escaped using the backslash prefix. For example, to specify a plain left-bracket use [.</td>
+</tr>
+<tr>
+<td>[]</td>
+<td>Any one of the specified characters in a set. An explicit set of characters may be specified as in [aeiou] as well as character ranges, such as [0-9A-Fa-f], which match any hexadecimal digit. The dash (-) loses its special meaning when escaped, such as in [A-Z] or when it is the first or last character in a set, such as in [-xyz0-9].  All of the above backslash-escaping rules may be used within []. For example, the expression [\x41-\x45] is equivalent to [A-D] in ASCII. To use a closing bracket in a set, either escape it using []] or use it as the first character in the set, such as []xyz].  POSIX-style character classes are also allowed inside a character set. The syntax for character classes is [:class:]. The supported character classes are:  [:alnum:] - alphanumeric characters. [:alpha:] - alphabetic characters. [:blank:] - space and TAB characters. [:cntrl:] - control characters. [:digit:] - numeric characters. [:graph:] - characters that are both printable and visible. [:lower:] - lowercase alphabetic characters. [:print:] - printable characters (characters that are not control characters). [:punct:] - punctuation characters (characters that are not letters, digits, control characters, or spaces). [:space:] - space characters (such as space, TAB and form feed). [:upper:] - uppercase alphabetic characters. [:xdigit:] - characters that are hexadecimal digits.  Brackets are permitted within the set’s brackets. For example, [a-z0-9!] is equivalent to [[:lower:][:digit:]!] in the C locale.</td>
+</tr>
+<tr>
+<td>[^]</td>
+<td>Inverts the behavior of a character set [] as described above. For example, [^[:alpha:]] matches any character that is not alphabetical. The ^ caret symbol only has this special meaning when it is the first character in a bracket set.</td>
+</tr>
+<tr>
+<td>{n}</td>
+<td>Exactly n occurrences of the previous expression, where 0 &lt;&#x3D; n &lt;&#x3D; 255. For example, a{3} matches aaa.</td>
+</tr>
+<tr>
+<td>{n,m}</td>
+<td>Between n and m occurrences of the previous expression, where 0 &lt;&#x3D; n &lt;&#x3D; m &lt;&#x3D; 255. For example, a 32-bit hexadecimal number can be described as 0x[[:xdigit:]]{1,8}.</td>
+</tr>
+<tr>
+<td>{n,}</td>
+<td>At least n or more (up to infinity) occurrences of the previous expression.</td>
+</tr>
+<tr>
+<td>*</td>
+<td>Zero or more of the previous expression.</td>
+</tr>
+<tr>
+<td>+</td>
+<td>One or more of the previous expression.</td>
+</tr>
+<tr>
+<td>?</td>
+<td>Zero or one of the previous expression.</td>
+</tr>
+<tr>
+<td>(exp)</td>
+<td>Grouping; any series of expressions may be grouped in parentheses so as to apply a postfix or bar (¦) operator to a group of successive expressions. For example:  ab+ matches all of abbb (ab)+ matches all of ababab</td>
+</tr>
+<tr>
+<td>¦</td>
+<td>Alternate expressions (logical OR). The vertical bar (¦) has the lowest precedence of all tokens in the regular expression language. This means that ab¦cd matches all of cd but does not match abd (in this case use a(b¦c)d ).</td>
+</tr>
+</tbody></table>
+<h3 id="grep"><a href="#grep" class="headerlink" title="grep"></a>grep</h3><p>基础表达式<br><code>^ $ . [ ] *</code></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep <span class="string">&quot;^[a-z]&quot;</span> /etc/passwd</span><br></pre></td></tr></table></figure>
+<p>扩展表达式<br><code>( ) &#123; &#125; ? + |</code><br>扩展表达式可以使用正则，如</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep -E &quot;^[a-z]&#123;1,6&#125;&quot; /etc/passwd</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"> ~/tmp  <span class="keyword">for</span> i <span class="keyword">in</span> &#123;1..10&#125;; <span class="keyword">do</span> <span class="built_in">echo</span> <span class="string">&quot;(<span class="variable">$&#123;RANDOM:0:3&#125;</span>) <span class="variable">$&#123;RANDOM:0:3&#125;</span>-<span class="variable">$&#123;RANDOM:0:4&#125;</span>&quot;</span> &gt;&gt; phonelist.txt; <span class="keyword">done</span>             INT</span><br><span class="line"> ~/tmp  <span class="built_in">cat</span> phonelist.txt                                                                                           ok</span><br><span class="line">(238) 501-1131</span><br><span class="line">(782) 181-1403</span><br><span class="line">(170) 816-1059</span><br><span class="line">(180) 984-1900</span><br><span class="line">(691) 237-1956</span><br><span class="line">(191) 499-5170</span><br><span class="line">(246) 229-1708</span><br><span class="line">(777) 282-3094</span><br><span class="line">(154) 118-2033</span><br><span class="line">(820) 176-1289</span><br><span class="line"></span><br><span class="line">~/tmp  grep -Ev <span class="string">&#x27;^\([[:digit:]]&#123;3&#125;\)? [[:digit:]]&#123;3&#125;-[[:digit:]]&#123;4&#125;$&#x27;</span> phonelist.txt</span><br></pre></td></tr></table></figure>
+
+
+<p><code>zgrep &#39;899&#39; phonelist.tar.gz</code> zgrep 可查询二进制文件是否包含<br>grep -rl –binary-file&#x3D;binary ‘exp’ .</p>
+<h3 id="sed-1"><a href="#sed-1" class="headerlink" title="sed"></a>sed</h3><p>输出文件的第k行<br><code>sed -n kp file</code><br>输出第k到m行<br><code>sed -n &quot;k,mp&quot; file</code></p>
+<p>逐行比较两个文件：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;file1=<span class="variable">$1</span>, file2=<span class="variable">$2</span>&quot;</span></span><br><span class="line">na=`grep -c <span class="string">&quot;.*&quot;</span> <span class="variable">$1</span>`</span><br><span class="line">nb=`grep -c <span class="string">&quot;.*&quot;</span> <span class="variable">$2</span>`</span><br><span class="line"><span class="keyword">if</span> ((<span class="variable">$na</span> != <span class="variable">$nb</span>)); <span class="keyword">then</span></span><br><span class="line">  <span class="built_in">echo</span> <span class="string">&quot;diff lines number: <span class="variable">$na</span> : <span class="variable">$nb</span>&quot;</span></span><br><span class="line">  <span class="built_in">exit</span> 1</span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"><span class="keyword">for</span> ((i=<span class="number">1</span>; i&lt;=<span class="variable">$na</span>; i++)); <span class="keyword">do</span></span><br><span class="line">  la=`sed -n <span class="variable">$&#123;i&#125;</span>p <span class="variable">$1</span>`</span><br><span class="line">  lb=`sed -n <span class="variable">$&#123;i&#125;</span>p <span class="variable">$2</span>`</span><br><span class="line">  <span class="keyword">if</span> [[ <span class="variable">$la</span> != <span class="variable">$lb</span> ]]; <span class="keyword">then</span></span><br><span class="line">    <span class="built_in">printf</span> <span class="string">&quot;%s: file1=%s, file2=%s\n&quot;</span>  <span class="variable">$i</span> <span class="variable">$la</span> <span class="variable">$lb</span></span><br><span class="line">    <span class="built_in">exit</span> 1</span><br><span class="line">  <span class="keyword">fi</span></span><br><span class="line"><span class="keyword">done</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;check result : same file&quot;</span></span><br><span class="line"><span class="built_in">exit</span></span><br></pre></td></tr></table></figure>
+<h3 id="awk"><a href="#awk" class="headerlink" title="awk"></a>awk</h3><p>awk ‘{print}’ file<br>awk -F’:’ ‘{print $1}’ &#x2F;etc&#x2F;passwd<br>awk ‘&#x2F;regexp&#x2F; {print $1} file<br>awk ‘BEGIN {} {} END{}’ file</p>
+<p>统计每个人每月的加班情况<br>要求：加班结束时间必须大于等于19：30, 加班时长&#x3D;（加班结束时间-18:30）&#x2F;8, 保留2位小数，小数位不进位。</p>
+<p>加班记录的文档：record</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">张三            2016/5/1 19:30</span><br><span class="line">李四  2017/5/1 20:30</span><br><span class="line">jack    2016/6/1  21:29</span><br><span class="line">张三            2016/3/1 15:30</span><br><span class="line">李四  2017/9/1 22:10</span><br><span class="line">jack    2015/2/1  21:29</span><br><span class="line">张三            2016/5/10 23:30</span><br><span class="line">李四  2017/5/12 21:00</span><br></pre></td></tr></table></figure>
+<p>每一列分别代表：姓名、日期、下班时间，中间既可以是n空格，也可以是n个tab，或者二者的组合。</p>
+<p>处理脚本：cal_work.sh</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># read me</span></span><br><span class="line"><span class="built_in">echo</span> -e <span class="string">&quot;输入文件格式必须满足：\n\</span></span><br><span class="line"><span class="string">user  2016/4/1 17:33\n&quot;</span> <span class="comment">## 大致格式是这样，只要有空格或tab隔开就行</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">log</span>=<span class="string">&quot;work.log&quot;</span>  <span class="comment">## 日志记录</span></span><br><span class="line"></span><br><span class="line">file=<span class="variable">$1</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 备份之前结果</span></span><br><span class="line"><span class="keyword">if</span> [[ -e result_day ]]; <span class="keyword">then</span></span><br><span class="line">  bak_time=`<span class="built_in">date</span> +%Y%m%d%H%M%S`</span><br><span class="line">  <span class="built_in">mv</span> result_day result_day.bak.<span class="variable">$&#123;bak_time&#125;</span></span><br><span class="line">  <span class="built_in">mv</span> result_month result_month.bak.<span class="variable">$&#123;bak_time&#125;</span></span><br><span class="line">  <span class="built_in">echo</span> <span class="string">&quot;`date &quot;</span>+%F %T<span class="string">&quot;` back result_day result_month&quot;</span> &gt;&gt; <span class="variable">$log</span></span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;展示格式化之后的文档:&quot;</span> </span><br><span class="line">awk -F <span class="string">&#x27;[/:\t&quot; &quot;]&#x27;</span> <span class="string">&#x27;&#123;gsub(&quot;\t&quot;, &quot; &quot;);gsub(&quot; +&quot;, &quot; &quot;)&#125; &#123;print NR, $1, $2, $3, $4, $5, $6, NF&#125;&#x27;</span> <span class="variable">$file</span> | <span class="built_in">head</span> -n5</span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> -e <span class="string">&quot;\n`date &quot;</span>+%F %T<span class="string">&quot;` start process file : <span class="variable">$file</span>&quot;</span> | <span class="built_in">tee</span> -a <span class="variable">$log</span></span><br><span class="line">awk -F <span class="string">&#x27;[/:\t&quot; &quot;]&#x27;</span> <span class="string">&#x27;&#123;gsub(&quot;\t&quot;, &quot; &quot;);gsub(&quot; +&quot;, &quot; &quot;)&#125; &#123;total=0;hour=$5-19;minute=$6-30; if(minute&lt;0) &#123;minute=30;hour-=1;&#125; else &#123;minute=0;&#125;; if(hour&gt;=0 &amp;&amp; minute&gt;=0) &#123;total=hour*60+minute+60;&#125;&#125; &#123;if(total&gt;0) &#123;total=total/480;total=substr(total, 1, index(total, &quot;.&quot;)+2);print NR, $1, $2, $3, $4, hour, minute, total&#125;&#125;&#x27;</span> <span class="variable">$file</span> &gt; result_temp1</span><br><span class="line"></span><br><span class="line"><span class="comment"># 提取user year day到文档temp2</span></span><br><span class="line">awk <span class="string">&#x27;&#123;print $2, $3, $4&#125;&#x27;</span> result_temp1 | <span class="built_in">sort</span> -u &gt; result_temp2</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> <span class="built_in">read</span> line</span><br><span class="line">  <span class="keyword">do</span></span><br><span class="line">    <span class="comment">## awk 正则匹配 变量：外面&#x27;&#x27;，里面&quot;&quot;</span></span><br><span class="line">    <span class="comment">## awk printf 变量：外面&quot;&quot;,中间&#x27;&#x27;,里面&quot;&quot;</span></span><br><span class="line">    awk <span class="string">&#x27;BEGIN &#123;total=0;&#125; &#123;if($0~/&#x27;</span><span class="string">&quot;<span class="variable">$line</span>&quot;</span><span class="string">&#x27;/) &#123;total=total+$8;&#125;&#125; END &#123;printf(&quot;%s %.2f\n&quot;, &quot;&#x27;</span><span class="string">&quot;<span class="variable">$line</span>&quot;</span><span class="string">&#x27;&quot;, total)&#125;&#x27;</span> result_temp1 &gt;&gt; result_temp3</span><br><span class="line"><span class="keyword">done</span> &lt; result_temp2</span><br><span class="line"></span><br><span class="line"><span class="comment"># human readable format</span></span><br><span class="line">awk <span class="string">&#x27;&#123;printf(&quot;%s %d/%d/%d %.2f\n&quot;, $2, $3, $4, $5, $8)&#125;&#x27;</span> result_temp1 &gt; result_day</span><br><span class="line">awk <span class="string">&#x27;&#123;printf(&quot;%s %d/%d %.2f\n&quot;, $1, $2, $3, $4)&#125;&#x27;</span> result_temp3 &gt; result_month</span><br><span class="line"></span><br><span class="line"><span class="built_in">rm</span> -f result_temp1 result_temp2 result_temp3</span><br><span class="line"><span class="built_in">echo</span> -e <span class="string">&quot;`date &quot;</span>+%F %T<span class="string">&quot;` process done : result_day result_month&quot;</span> | <span class="built_in">tee</span> -a <span class="variable">$log</span></span><br></pre></td></tr></table></figure>
+
+<p>统计结果:<br>jack 2015 2 0.31<br>jack 2016 6 0.31<br>张三 2016 5 0.74<br>李四 2017 5 0.56<br>李四 2017 9 0.43<br>注：每人每个月加班时长，单位(天)</p>
+<p>awk printf打印单引号：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">awk <span class="string">&#x27;&#123;printf(&quot;&#x27;</span>\&#x27;<span class="string">&#x27;%s&#x27;</span>\&#x27;<span class="string">&#x27;&quot;, $1)&#125;&#x27;</span> file</span><br></pre></td></tr></table></figure>
+<p>awk 正则匹配</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">awk <span class="string">&#x27;&#123;if($0~/regExp/)printf(&quot;%s&quot;, $0)&#125;&#x27;</span> file</span><br></pre></td></tr></table></figure>
+<p>文件a中存的key值，文件b中存的‘key value’值，从文件a找b中对应的value：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="keyword">while</span> <span class="built_in">read</span> key; <span class="keyword">do</span></span><br><span class="line">  awk <span class="string">&#x27;&#123;if($0~/&#x27;</span><span class="string">&quot;(<span class="variable">$key</span>)&quot;</span><span class="string">&#x27;/)printf(&quot;%s\n&quot;, $0)&#125;&#x27;</span> fileb</span><br><span class="line"><span class="keyword">done</span> &lt; filea</span><br></pre></td></tr></table></figure>
+
+
+
+
+<h2 id="控制流语句"><a href="#控制流语句" class="headerlink" title="控制流语句"></a>控制流语句</h2><h3 id="if"><a href="#if" class="headerlink" title="if"></a>if</h3><p><a target="_blank" rel="noopener" href="http://ryanstutorials.net/bash-scripting-tutorial/bash-if-statements.php">tutorial网站</a></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> [ &lt;some <span class="built_in">test</span>&gt; ]; <span class="keyword">then</span></span><br><span class="line">  &lt;commands&gt;</span><br><span class="line"><span class="keyword">elif</span> [  ]; <span class="keyword">then</span></span><br><span class="line"><span class="keyword">else</span></span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure>
+<ol>
+<li><p>文件<br>-d FILE | FILE exists and is a directory.<br>-e FILE | FILE exists.<br>-r FILE | FILE exists and the read permission is granted.<br>-s FILE | FILE exists and it’s size is greater than zero (ie. it is not empty).<br>-w FILE | FILE exists and the write permission is granted.<br>-x FILE | FILE exists and the execute permission is granted.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> [ -d passwd ];<span class="keyword">then</span> <span class="built_in">echo</span> <span class="string">&#x27;yes&#x27;</span>;<span class="keyword">else</span> <span class="built_in">echo</span> <span class="string">&#x27;no&#x27;</span>; <span class="keyword">fi</span></span><br></pre></td></tr></table></figure></li>
+<li><p>字符串<br>-n STRING | The length of STRING is greater than zero.<br>-z STRING | The lengh of STRING is zero (ie it is empty).<br>STRING1 &#x3D; STRING2 | STRING1 is equal to STRING2<br>STRING1 !&#x3D; STRING2  | STRING1 is not equal to STRING2<br>增强版的 ** [[ ]] ** 除了 ** [ ] ** 所有的功能外，还增加了一个重要特性：** string &#x3D;~ regex **</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line">s1=-5</span><br><span class="line">s2=ab</span><br><span class="line"><span class="function"><span class="title">test</span></span> () &#123;</span><br><span class="line">  <span class="built_in">echo</span> param=<span class="variable">$1</span></span><br><span class="line">  <span class="keyword">if</span> [[ <span class="variable">$1</span> =~ ^-[0-9]+$ ]]; <span class="keyword">then</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="variable">$1</span></span><br><span class="line">  <span class="keyword">fi</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">test</span> <span class="variable">$s1</span></span><br><span class="line"><span class="built_in">test</span> <span class="variable">$s2</span></span><br></pre></td></tr></table></figure>
+<p>输出:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">param=-5</span><br><span class="line">-5</span><br><span class="line">param=ab</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>数字<br>INTEGER1 -eq INTEGER2 | INTEGER1 is numerically equal to INTEGER2<br>INTEGER1 -ne INTEGER2 | INTEGER1 is numerically not equal to INTEGER2<br>INTEGER1 -gt INTEGER2 | INTEGER1 is numerically greater than INTEGER2<br>INTEGER1 -lt INTEGER2 | INTEGER1 is numerically less than INTEGER2<br>INTEGER1 -ge INTEGER2 | INTEGER1 is greater or equal INTEGER2<br>INTEGER1 -le INTEGER2 | INTEGER1 is less or equal INTEGER2</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="comment"># test-integer: evaluate the value of an integer.</span></span><br><span class="line">INT=-5</span><br><span class="line"><span class="keyword">if</span> [ -z <span class="string">&quot;<span class="variable">$INT</span>&quot;</span> ]; <span class="keyword">then</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;INT is empty.&quot;</span> &gt;&amp;2</span><br><span class="line">    <span class="built_in">exit</span> 1</span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"><span class="keyword">if</span> [ <span class="variable">$INT</span> -eq 0 ]; <span class="keyword">then</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;INT is zero.&quot;</span></span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">    <span class="keyword">if</span> [ <span class="variable">$INT</span> -lt 0 ]; <span class="keyword">then</span></span><br><span class="line">        <span class="built_in">echo</span> <span class="string">&quot;INT is negative.&quot;</span></span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="built_in">echo</span> <span class="string">&quot;INT is positive.&quot;</span></span><br><span class="line">    <span class="keyword">fi</span></span><br><span class="line">    <span class="keyword">if</span> [ $((INT % <span class="number">2</span>)) -eq 0 ]; <span class="keyword">then</span></span><br><span class="line">        <span class="built_in">echo</span> <span class="string">&quot;INT is even.&quot;</span></span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="built_in">echo</span> <span class="string">&quot;INT is odd.&quot;</span></span><br><span class="line">    <span class="keyword">fi</span> </span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure>
+<p>与 ** [[ ]] ** 类似，** (( )) ** 是对数字版的增强：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line">s=<span class="string">&quot;123&quot;</span></span><br><span class="line"><span class="keyword">if</span> ((<span class="variable">$s</span> &gt; <span class="number">0</span>));<span class="keyword">then</span></span><br><span class="line">  <span class="keyword">if</span> (( ((<span class="variable">$s</span> % <span class="number">2</span>)) &gt; 0)); <span class="keyword">then</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;<span class="variable">$&#123;s&#125;</span>mod2=`expr <span class="variable">$s</span> % 2`&quot;</span></span><br><span class="line">  <span class="keyword">elif</span> (( ((<span class="variable">$s</span> % <span class="number">3</span>)) == 0)); <span class="keyword">then</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;oh no&quot;</span></span><br><span class="line">    <span class="built_in">exit</span> 1</span><br><span class="line">  <span class="keyword">fi</span></span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="and、or、not"><a href="#and、or、not" class="headerlink" title="and、or、not"></a>and、or、not</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line">MIN_VAL=-100</span><br><span class="line">MAX_VAL=100</span><br><span class="line">val=23</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> [[ (<span class="variable">$val</span> -gt 10) &amp;&amp; (<span class="variable">$val</span> -lt 50) ]]; <span class="keyword">then</span></span><br><span class="line">  <span class="built_in">echo</span> <span class="built_in">yes</span></span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> [[ !($((<span class="variable">$val</span> % <span class="number">2</span>)) -eq 0) || (<span class="variable">$val</span> -le <span class="variable">$MAX_VAL</span>)]]; <span class="keyword">then</span></span><br><span class="line">  <span class="built_in">echo</span> <span class="built_in">yes</span></span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure>
+<h3 id="for"><a href="#for" class="headerlink" title="for"></a>for</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> variable [<span class="keyword">in</span> worlds]; <span class="keyword">do</span></span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> &#123;a..g&#125;; <span class="keyword">do</span></span><br><span class="line">  <span class="built_in">echo</span> <span class="variable">$i</span></span><br><span class="line"><span class="keyword">done</span></span><br><span class="line"></span><br><span class="line">i=1</span><br><span class="line"><span class="keyword">for</span> ((i=<span class="number">0</span>; i&lt;<span class="number">5</span>; i++));<span class="keyword">do</span></span><br><span class="line">  <span class="built_in">echo</span> <span class="variable">$i</span></span><br><span class="line"><span class="keyword">done</span></span><br><span class="line"><span class="comment"># 读文件</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> `<span class="built_in">cat</span> file`; <span class="keyword">do</span></span><br><span class="line">  wget <span class="string">&quot;<span class="variable">$i</span>&quot;</span></span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>
+<h3 id="while"><a href="#while" class="headerlink" title="while"></a>while</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">i=1</span><br><span class="line"><span class="keyword">while</span> ((<span class="variable">$i</span> &lt; <span class="number">5</span>)); <span class="keyword">do</span></span><br><span class="line">  <span class="built_in">echo</span> <span class="variable">$i</span></span><br><span class="line">  ((i++))</span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>
+<p>while 还可以用于读文件</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> <span class="built_in">read</span> line; <span class="keyword">do</span></span><br><span class="line">  <span class="built_in">echo</span> <span class="variable">$line</span></span><br><span class="line"><span class="keyword">done</span> &lt; file</span><br></pre></td></tr></table></figure>
+<h3 id="case"><a href="#case" class="headerlink" title="case"></a>case</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">case</span> word <span class="keyword">in</span></span><br><span class="line">  [pattern [|pattern]]...) <span class="built_in">command</span></span><br><span class="line">                        ;;</span><br><span class="line">  *) </span><br><span class="line">    <span class="built_in">exit</span> 1</span><br><span class="line">    ;;</span><br><span class="line"><span class="keyword">esac</span></span><br></pre></td></tr></table></figure>
+<p>如果想一次匹配多个，则：<code>;;&amp;</code></p>
+<h2 id="set-方便debug"><a href="#set-方便debug" class="headerlink" title="set 方便debug"></a>set 方便debug</h2><p><a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2017/11/bash-set.html">bash-set</a><br>全部</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#！/bin/bash -x</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>部分</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">#！/bin/bash</span><br><span class="line"></span><br><span class="line">set -x    # turn on tracing</span><br><span class="line"></span><br><span class="line">set +x    # turn off tracing</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="字符串截取"><a href="#字符串截取" class="headerlink" title="字符串截取"></a>字符串截取</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">截取URL：</span><br><span class="line">s=http://www.xxx.com//123</span><br><span class="line"><span class="comment"># 1.从左边开始删除第一个//及左边所有字符</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$&#123;s#*//&#125;</span></span><br><span class="line"><span class="comment"># 2.从左边开始删除最后一个//及左边所有字符</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$&#123;s##*//&#125;</span></span><br><span class="line"><span class="comment"># 3.从右边开始删除第一个//及右边所有字符</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$&#123;s%//*&#125;</span></span><br><span class="line"><span class="comment"># 4.从右边开始删除最后一个//及右边所有字符</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$&#123;s%%//*&#125;</span></span><br></pre></td></tr></table></figure>
+<p>demo</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## s.sh</span></span><br><span class="line">s=<span class="string">&quot;http://www.fuck.com//123//4/5&quot;</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$s</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$&#123;s#*/&#125;</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$&#123;s##*/&#125;</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$&#123;s%/*&#125;</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$&#123;s%%/*&#125;</span></span><br><span class="line"></span><br><span class="line">结果：</span><br><span class="line">http://www.fuck.com//123//4/5</span><br><span class="line">/www.fuck.com//123//4/5</span><br><span class="line">5</span><br><span class="line">http://www.fuck.com//123//4</span><br><span class="line">http:</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="随机字符串和数字"><a href="#随机字符串和数字" class="headerlink" title="随机字符串和数字"></a>随机字符串和数字</h2><p>生成不大于120的正整数</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">expr</span> `<span class="built_in">cat</span> /dev/urandom | <span class="built_in">od</span> -An -N1 -tu1` % 120 </span><br></pre></td></tr></table></figure>
+<p>生成长度最小为3的字符串</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cat</span> /dev/urandom | sed <span class="string">&#x27;s/[^a-zA-Z]//g&#x27;</span> | strings -n3 | <span class="built_in">head</span> -n1</span><br></pre></td></tr></table></figure>
+
+<h2 id="find"><a href="#find" class="headerlink" title="find"></a>find</h2><p>搜文件并删除</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find . -name <span class="string">&quot;.DS_Store&quot;</span> -<span class="built_in">exec</span> <span class="built_in">rm</span> -rf &#123;&#125; \;</span><br></pre></td></tr></table></figure>
+
+<p>每次匹配，ls都执行一次<br><code>find /usr/bin -type f -name &#39;*zip&#39; -ok ls -l &#39;&#123;&#125;&#39; &#39;;&#39;</code></p>
+<p>所有结果传递，ls执行一次<br><code>find /usr/bin -type f -name &#39;*zip&#39; -exec ls -l &#39;&#123;&#125;&#39; +</code><br>or<br><code>find /usr/bin -type f -name &#39;*zip&#39; | xargs ls -l</code></p>
+<p><code>find / -regex &#39;.*[^-_./0-9a-zA-Z].*&#39;</code> find with regex</p>
+<h2 id="Networking"><a href="#Networking" class="headerlink" title="Networking"></a>Networking</h2><p>ping<br>traceroute xxx.com<br>ip a<br>netstat<br>ftp<br>wget<br>ssh<br>sftp</p>
+<h2 id="Searching-For-Files"><a href="#Searching-For-Files" class="headerlink" title="Searching For Files"></a>Searching For Files</h2><p>locate<br>find<br>xargs<br>touch<br>stat</p>
+<h2 id="Text-Processing"><a href="#Text-Processing" class="headerlink" title="Text Processing"></a>Text Processing</h2><p>cat<br>sort<br>uniq<br>cut<br>paste<br>join<br>comm<br>diff<br>patch<br>tr<br>sed<br>aspell</p>
+<h2 id="exit-status"><a href="#exit-status" class="headerlink" title="exit status"></a>exit status</h2><p><code>echo $?</code></p>
+<p><code>exit</code><br><code>exit 2</code><br><code>return 1</code></p>
+<h2 id="ps-netstat"><a href="#ps-netstat" class="headerlink" title="ps netstat"></a>ps netstat</h2><p>ps -ef|grep java<br>ps -aux|grep java<br>ps -eo pid,vsz,cmd –sort vsz|grep java</p>
+<p>netstat -an|grep 80<br>netstat -an|grep 80|cut -d’:’ -f 2|cut -b 1-30|sort|uniq</p>
 
       
     </div>
@@ -309,7 +811,7 @@
 
 
   <nav class="pagination">
-    <a class="extend prev" rel="prev" title="上一页" aria-label="上一页" href="/blog/page/92/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/92/">92</a><span class="page-number current">93</span><a class="page-number" href="/blog/page/94/">94</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/197/">197</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/blog/page/94/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" title="上一页" aria-label="上一页" href="/blog/page/92/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/92/">92</a><span class="page-number current">93</span><a class="page-number" href="/blog/page/94/">94</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/196/">196</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/blog/page/94/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 </div>
