@@ -2,6 +2,12 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://carl-zk.github.io/blog/2026/05/30/understanding-cloud-native-infrastructure/</loc>
+    <title>Understanding Cloud-Native Infrastructure</title>
+    <date>2026-05-30T12:36:22.000Z</date>
+  </url>
+  
+  <url>
     <loc>https://carl-zk.github.io/blog/2026/05/30/linux/</loc>
     <title>Linux</title>
     <date>2026-05-30T04:42:49.000Z</date>

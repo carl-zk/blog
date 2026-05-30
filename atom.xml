@@ -6,7 +6,7 @@
   <link href="https://carl-zk.github.io/blog/atom.xml" rel="self"/>
   
   <link href="https://carl-zk.github.io/blog/"/>
-  <updated>2026-05-30T06:13:23.257Z</updated>
+  <updated>2026-05-30T13:30:42.515Z</updated>
   <id>https://carl-zk.github.io/blog/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Understanding Cloud-Native Infrastructure</title>
+    <link href="https://carl-zk.github.io/blog/2026/05/30/understanding-cloud-native-infrastructure/"/>
+    <id>https://carl-zk.github.io/blog/2026/05/30/understanding-cloud-native-infrastructure/</id>
+    <published>2026-05-30T12:36:22.000Z</published>
+    <updated>2026-05-30T13:30:42.515Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt;since I want to know what’s cloud-native and why it is the future, this is how I learn.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&quot;Roadmap&quot;&gt;&lt;a href=&quot;#Roadmap&quot; class=&quot;headerlink&quot; title=&quot;Roadmap&quot;&gt;&lt;/a&gt;Roadmap&lt;/h2&gt;&lt;h3 id=&quot;Container-fundamentals&quot;&gt;&lt;a href=&quot;#Container-fundamentals&quot; class=&quot;headerlink&quot; title=&quot;Container fundamentals&quot;&gt;&lt;/a&gt;Container fundamentals&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;Linux fundamentals&lt;/strong&gt;&lt;/p&gt;
+&lt;figure class=&quot;highlight plaintext&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br</summary>
+      
+    
+    
+    
+    
+    <category term="cloud-native" scheme="https://carl-zk.github.io/blog/tags/cloud-native/"/>
+    
+    <category term="linux-kernal" scheme="https://carl-zk.github.io/blog/tags/linux-kernal/"/>
+    
+    <category term="namespace" scheme="https://carl-zk.github.io/blog/tags/namespace/"/>
+    
+  </entry>
   
   <entry>
     <title>Linux</title>
