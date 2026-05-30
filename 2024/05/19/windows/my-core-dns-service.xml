@@ -1,0 +1,10 @@
+<service>
+  <id>my-core-dns-service</id>
+  <name>CoreDNS Service (powered by WinSW)</name>
+  <description>This service is a CoreDNS service</description>
+  <executable>D:\installed\coreDNS\coredns.exe</executable>
+  <workingdirectory>D:\installed\coreDNS</workingdirectory>
+  <onfailure action="restart" delay="10 sec"/>
+  <startmode>Automatic</startmode>
+  <log mode="reset"/>
+</service>

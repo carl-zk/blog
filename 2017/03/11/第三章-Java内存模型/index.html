@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/blog/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/blog/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"carl-zk.github.io","root":"/blog/","images":"/blog/images","scheme":"Muse","darkmode":false,"version":"8.25.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/blog/js/config.js" defer></script>
+
+    <meta name="description" content="Java内存模型的基础并发编程模型的两个关键问题： 线程之间如何通信。 线程之间如何同步。  命令式编程中线程通信机制：    并发模型 程序的公共状态 通信方式    共享内存 共享 隐式   消息传递 无 显示   同步是指程序中用于控制不同线程间操作发生相对顺序的机制。    并发模型 状态 方式    共享内存 显式 显式指定某个方法或某段代码需要在线程之间互斥执行   消息传递 隐式 消">
+<meta property="og:type" content="article">
+<meta property="og:title" content="第三章 Java内存模型">
+<meta property="og:url" content="https://carl-zk.github.io/blog/2017/03/11/%E7%AC%AC%E4%B8%89%E7%AB%A0-Java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/index.html">
+<meta property="og:site_name" content="一叶轻舟渡万江">
+<meta property="og:description" content="Java内存模型的基础并发编程模型的两个关键问题： 线程之间如何通信。 线程之间如何同步。  命令式编程中线程通信机制：    并发模型 程序的公共状态 通信方式    共享内存 共享 隐式   消息传递 无 显示   同步是指程序中用于控制不同线程间操作发生相对顺序的机制。    并发模型 状态 方式    共享内存 显式 显式指定某个方法或某段代码需要在线程之间互斥执行   消息传递 隐式 消">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://carl-zk.github.io/blog/2017/03/11/%E7%AC%AC%E4%B8%89%E7%AB%A0-Java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/jmm.svg">
+<meta property="og:image" content="https://carl-zk.github.io/blog/2017/03/11/%E7%AC%AC%E4%B8%89%E7%AB%A0-Java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/wrong.svg">
+<meta property="article:published_time" content="2017-03-11T15:28:38.000Z">
+<meta property="article:modified_time" content="2026-05-30T02:33:09.984Z">
+<meta property="article:author" content="carl-zk">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://carl-zk.github.io/blog/2017/03/11/%E7%AC%AC%E4%B8%89%E7%AB%A0-Java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/jmm.svg">
+
+
+<link rel="canonical" href="https://carl-zk.github.io/blog/2017/03/11/%E7%AC%AC%E4%B8%89%E7%AB%A0-Java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://carl-zk.github.io/blog/2017/03/11/%E7%AC%AC%E4%B8%89%E7%AB%A0-Java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/","path":"2017/03/11/第三章-Java内存模型/","title":"第三章 Java内存模型"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>第三章 Java内存模型 | 一叶轻舟渡万江</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/blog/js/utils.js" defer></script><script src="/blog/js/motion.js" defer></script><script src="/blog/js/sidebar.js" defer></script><script src="/blog/js/next-boot.js" defer></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/blog/css/noscript.css">
+  </noscript>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><link rel="alternate" href="/blog/atom.xml" title="一叶轻舟渡万江" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/blog/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">一叶轻舟渡万江</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">泰山不拒细壤故能成其高 江海不择细流故能就其深</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/blog/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/blog/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/blog/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/blog/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/blog/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%9F%BA%E7%A1%80"><span class="nav-number">1.</span> <span class="nav-text">Java内存模型的基础</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E6%A8%A1%E5%9E%8B%E7%9A%84%E4%B8%A4%E4%B8%AA%E5%85%B3%E9%94%AE%E9%97%AE%E9%A2%98%EF%BC%9A"><span class="nav-number">1.1.</span> <span class="nav-text">并发编程模型的两个关键问题：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E7%9A%84%E6%8A%BD%E8%B1%A1%E7%BB%93%E6%9E%84"><span class="nav-number">1.2.</span> <span class="nav-text">Java内存模型的抽象结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%8E%E6%BA%90%E4%BB%A3%E7%A0%81%E5%88%B0%E6%8C%87%E4%BB%A4%E5%BA%8F%E5%88%97%E7%9A%84%E9%87%8D%E6%8E%92%E5%BA%8F"><span class="nav-number">1.3.</span> <span class="nav-text">从源代码到指令序列的重排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%88%86%E7%B1%BB"><span class="nav-number">1.4.</span> <span class="nav-text">并发编程模型的分类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#happens-before%E7%AE%80%E4%BB%8B"><span class="nav-number">1.5.</span> <span class="nav-text">happens-before简介</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%87%8D%E6%8E%92%E5%BA%8F"><span class="nav-number">2.</span> <span class="nav-text">重排序</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E4%BE%9D%E8%B5%96%E6%80%A7"><span class="nav-number">2.1.</span> <span class="nav-text">数据依赖性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#as-if-serial%E8%AF%AD%E4%B9%89"><span class="nav-number">2.2.</span> <span class="nav-text">as-if-serial语义</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#volatile%E7%9A%84%E5%86%85%E5%AD%98%E8%AF%AD%E4%B9%89"><span class="nav-number">3.</span> <span class="nav-text">volatile的内存语义</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#volatile%E7%9A%84%E7%89%B9%E6%80%A7"><span class="nav-number">3.1.</span> <span class="nav-text">volatile的特性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#volatile%E5%86%99-%E8%AF%BB%E5%BB%BA%E7%AB%8B%E7%9A%84happens-before%E5%85%B3%E7%B3%BB"><span class="nav-number">3.2.</span> <span class="nav-text">volatile写-读建立的happens-before关系</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#volatile%E5%86%99-%E8%AF%BB%E7%9A%84%E5%86%85%E5%AD%98%E8%AF%AD%E4%B9%89"><span class="nav-number">3.3.</span> <span class="nav-text">volatile写-读的内存语义</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%94%81%E7%9A%84%E5%86%85%E5%AD%98%E8%AF%AD%E4%B9%89"><span class="nav-number">4.</span> <span class="nav-text">锁的内存语义</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%94%81%E7%9A%84%E9%87%8A%E6%94%BE-%E8%8E%B7%E5%8F%96%E5%BB%BA%E7%AB%8B%E7%9A%84happens-before%E5%85%B3%E7%B3%BB"><span class="nav-number">4.1.</span> <span class="nav-text">锁的释放-获取建立的happens-before关系</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%94%81%E5%86%85%E5%AD%98%E8%AF%AD%E4%B9%89%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="nav-number">4.2.</span> <span class="nav-text">锁内存语义的实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#concurrent%E5%8C%85%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="nav-number">4.3.</span> <span class="nav-text">concurrent包的实现</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#final%E5%9F%9F%E7%9A%84%E5%86%85%E5%AD%98%E8%AF%AD%E4%B9%89"><span class="nav-number">5.</span> <span class="nav-text">final域的内存语义</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">carl-zk</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/blog/archives/">
+          <span class="site-state-item-count">197</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/blog/categories/">
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/blog/tags/">
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://carl-zk.github.io/blog/2017/03/11/%E7%AC%AC%E4%B8%89%E7%AB%A0-Java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/blog/images/avatar.gif">
+      <meta itemprop="name" content="carl-zk">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一叶轻舟渡万江">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="第三章 Java内存模型 | 一叶轻舟渡万江">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          第三章 Java内存模型
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2017-03-11 23:28:38" itemprop="dateCreated datePublished" datetime="2017-03-11T23:28:38+08:00">2017-03-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2026-05-30 10:33:09" itemprop="dateModified" datetime="2026-05-30T10:33:09+08:00">2026-05-30</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/blog/categories/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E7%9A%84%E8%89%BA%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">并发编程的艺术</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="Java内存模型的基础"><a href="#Java内存模型的基础" class="headerlink" title="Java内存模型的基础"></a>Java内存模型的基础</h1><h2 id="并发编程模型的两个关键问题："><a href="#并发编程模型的两个关键问题：" class="headerlink" title="并发编程模型的两个关键问题："></a>并发编程模型的两个关键问题：</h2><ul>
+<li>线程之间如何通信。</li>
+<li>线程之间如何同步。</li>
+</ul>
+<p>命令式编程中线程通信机制：</p>
+<table>
+<thead>
+<tr>
+<th>并发模型</th>
+<th align="center">程序的公共状态</th>
+<th align="right">通信方式</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>共享内存</td>
+<td align="center">共享</td>
+<td align="right">隐式</td>
+</tr>
+<tr>
+<td>消息传递</td>
+<td align="center">无</td>
+<td align="right">显示</td>
+</tr>
+</tbody></table>
+<p>同步是指程序中用于控制不同线程间操作发生相对顺序的机制。</p>
+<table>
+<thead>
+<tr>
+<th>并发模型</th>
+<th align="center">状态</th>
+<th align="right">方式</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>共享内存</td>
+<td align="center">显式</td>
+<td align="right">显式指定某个方法或某段代码需要在线程之间互斥执行</td>
+</tr>
+<tr>
+<td>消息传递</td>
+<td align="center">隐式</td>
+<td align="right">消息的发送必须在接收之前的属性决定的</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>java的并发采用的是共享内存模型，线程之间的通信是隐式的，整个通信过程对程序员完全透明。</p>
+</blockquote>
+<h2 id="Java内存模型的抽象结构"><a href="#Java内存模型的抽象结构" class="headerlink" title="Java内存模型的抽象结构"></a>Java内存模型的抽象结构</h2><p>在Java中，所有实例域、静态域和数组元素都存储在堆内存中，线程间共享，称为“共享变量”。<br>局部变量(Local Variables)、方法定义参数(Formal Method Parameters)和异常处理器参数(Exception Handler Parameters)不会在线程间共享，它们不会有内存可见性问题，也不受JMM影响。</p>
+<span id="more"></span>
+<p><img src="/blog/2017/03/11/%E7%AC%AC%E4%B8%89%E7%AB%A0-Java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/jmm.svg" loading="lazy"><br>注：本地内存是JMM的抽象概念，并不真实存在。</p>
+<p>如果线程A与线程B通信，必须经历下面2个步骤：</p>
+<ul>
+<li>线程A把本地内存A中更新过的共享变量刷新到主内存中去。</li>
+<li>线程B到主内存中去读取线程A之前已更新过的共享变量。</li>
+</ul>
+<p><strong>JVM通过控制主内存与每个线程的本地内存之间的交互，来为Java程序员提供内存可见性保证。</strong></p>
+<h2 id="从源代码到指令序列的重排序"><a href="#从源代码到指令序列的重排序" class="headerlink" title="从源代码到指令序列的重排序"></a>从源代码到指令序列的重排序</h2><ol>
+<li>编译器优化的重排序。(编译器重排序)</li>
+<li>指令级并行的重排序。(处理器重排序)</li>
+<li>内存系统的重排序。(处理器重排序)</li>
+</ol>
+<h2 id="并发编程模型的分类"><a href="#并发编程模型的分类" class="headerlink" title="并发编程模型的分类"></a>并发编程模型的分类</h2><p>每个处理器的缓冲区仅对它所在的处理器可见，所以会导致处理器对内存的读&#x2F;写操作的执行顺序，不一定与内存实际发生的读&#x2F;写操作顺序一致。</p>
+<ul>
+<li>|processorA|processorB<br>——|:——-|———:<br>代码|a&#x3D;1;  &#x2F;&#x2F;A1 <br/>x&#x3D;b;  &#x2F;&#x2F;A2| b&#x3D;2;  &#x2F;&#x2F;B1<br/>y&#x3D;a;  &#x2F;&#x2F;B2<br>运行结果|初始状态: a&#x3D;b&#x3D;0<br/>处理器允许执行后得到的结果: x&#x3D;y&#x3D;0<br><img src="/blog/2017/03/11/%E7%AC%AC%E4%B8%89%E7%AB%A0-Java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/wrong.svg" loading="lazy"></li>
+</ul>
+<h2 id="happens-before简介"><a href="#happens-before简介" class="headerlink" title="happens-before简介"></a>happens-before简介</h2><p>表述操作之间的内存可见性。<br>与程序员密切相关的happens-before规则：</p>
+<ul>
+<li>程序顺序规则：一个线程中的每个操作，happens-before于该线程之后的任意操作。</li>
+<li>监视器锁规则：对一个锁的解锁，happens-before于随后对这个锁的加锁。</li>
+<li>volatile变量规则：对一个volatile域的写，happens-before于任意后续对这个volatile域的读。</li>
+<li>传递性：如果A happens-before B，B happens-before C，那么A happens-before C。</li>
+</ul>
+<p>happens-before规则让程序员很容易理解JMM内存可见性保证，避免去学习复杂的重排序规则和这些规则的具体实现。</p>
+<h1 id="重排序"><a href="#重排序" class="headerlink" title="重排序"></a>重排序</h1><blockquote>
+<p>重排序是指编译器和处理器为了优化程序性能而对指令序列进行重新排序的一种手段。</p>
+</blockquote>
+<h2 id="数据依赖性"><a href="#数据依赖性" class="headerlink" title="数据依赖性"></a>数据依赖性</h2><table>
+<thead>
+<tr>
+<th>名称</th>
+<th>代码示例</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>写后读</td>
+<td>a&#x3D;1;<br/>b&#x3D;a;</td>
+<td>写一个变量之后，再读这个变量</td>
+</tr>
+<tr>
+<td>写后写</td>
+<td>a&#x3D;1;<br/>a&#x3D;2;</td>
+<td>写一个变量之后，再写这个变量</td>
+</tr>
+<tr>
+<td>读后写</td>
+<td>a&#x3D;b;<br/>b&#x3D;1;</td>
+<td>读一个变量之后，再写这个变量</td>
+</tr>
+</tbody></table>
+<p>上面3种情况，只要重排序2个操作就会出现错误。<br>这里所说的数据依赖仅指单个处理器中执行的指令序列和单个线程中执行的操作，不同处理器和不同线程之间的数据依赖不被编译器和处理器考虑。</p>
+<h2 id="as-if-serial语义"><a href="#as-if-serial语义" class="headerlink" title="as-if-serial语义"></a>as-if-serial语义</h2><blockquote>
+<p>不管怎么重排序，(单线程)程序的执行结果不能被改变。编译器、runtime、处理器都必须遵从。</p>
+</blockquote>
+<h1 id="volatile的内存语义"><a href="#volatile的内存语义" class="headerlink" title="volatile的内存语义"></a>volatile的内存语义</h1><h2 id="volatile的特性"><a href="#volatile的特性" class="headerlink" title="volatile的特性"></a>volatile的特性</h2><ul>
+<li>可见性。对一个volatile变量的读，总是能看到(任意线程)对这个volatile变量最后的写入。</li>
+<li>原子性。对任意单个volatile变量的读&#x2F;写具有原子性，但类似于volatile++这种复合操作不具有原子性。</li>
+</ul>
+<h2 id="volatile写-读建立的happens-before关系"><a href="#volatile写-读建立的happens-before关系" class="headerlink" title="volatile写-读建立的happens-before关系"></a>volatile写-读建立的happens-before关系</h2><p>斗胆的质疑一下本书作者，这里可能出错了，我不能认同把volatile真的类比成锁的获取和释放，然后可以对一个普通int型值进行读写的控制。下面是我实验代码，它的结果是不固定的，即书中happens-before的关系第2、3条不能成立：<br>额，N年之后，回头看到这里，发现其实下面的代码不能证明happens-before原则有错误。happens-before是规范，它的具体实现才有可能出错，而一个规范怎么会有错误呢。两个线程都是从主内存读b，这就代表了如果前面一个线程刚修改了b后面的线程会“立刻”看到修改后的值，仅此而已。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> chapter01;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by hero on 17-3-12.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SerialConsistent</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="variable">a</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">volatile</span> <span class="type">boolean</span> <span class="variable">b</span> <span class="operator">=</span> <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="variable">t</span> <span class="operator">=</span> <span class="number">5</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">write</span><span class="params">()</span> &#123;</span><br><span class="line">        a = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            Thread.sleep(<span class="number">501</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        b = <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">read</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (b) &#123;</span><br><span class="line">            t = a;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> InterruptedException &#123;</span><br><span class="line">        <span class="type">SerialConsistent</span> <span class="variable">test</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">SerialConsistent</span>();</span><br><span class="line">        test.run();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">run</span><span class="params">()</span> <span class="keyword">throws</span> InterruptedException &#123;</span><br><span class="line">        <span class="type">Thread</span> <span class="variable">t1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Thread</span>(<span class="keyword">new</span> <span class="title class_">Runnable</span>() &#123;</span><br><span class="line">            <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">run</span><span class="params">()</span> &#123;</span><br><span class="line">                write();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        <span class="type">Thread</span> <span class="variable">t2</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Thread</span>(<span class="keyword">new</span> <span class="title class_">Runnable</span>() &#123;</span><br><span class="line">            <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">run</span><span class="params">()</span> &#123;</span><br><span class="line">                read();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">        t1.start();</span><br><span class="line">        TimeUnit.MILLISECONDS.sleep(<span class="number">500</span>);    <span class="comment">//保证t1在t2之前执行</span></span><br><span class="line">        t2.start();</span><br><span class="line"></span><br><span class="line">        t1.join();</span><br><span class="line">        t2.join();</span><br><span class="line"></span><br><span class="line">        System.out.println(t);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="volatile写-读的内存语义"><a href="#volatile写-读的内存语义" class="headerlink" title="volatile写-读的内存语义"></a>volatile写-读的内存语义</h2><p>线程A执行volatile变量写操作之后，线程B在读该变量时，本地内存会被JVM置为无效，必须从主内存读。</p>
+<h1 id="锁的内存语义"><a href="#锁的内存语义" class="headerlink" title="锁的内存语义"></a>锁的内存语义</h1><h2 id="锁的释放-获取建立的happens-before关系"><a href="#锁的释放-获取建立的happens-before关系" class="headerlink" title="锁的释放-获取建立的happens-before关系"></a>锁的释放-获取建立的happens-before关系</h2><p>书中，这个happens-before递推关系是成立的。<br>下面的栗子证明，锁的happens-before会保证多线程的内存可见的传递性。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> chapter01;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.TimeUnit;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.locks.ReentrantLock;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by hero on 17-3-12.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ReentrantLockExample</span> &#123;</span><br><span class="line">    <span class="type">int</span> <span class="variable">a</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">    <span class="type">ReentrantLock</span> <span class="variable">lock</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ReentrantLock</span>();</span><br><span class="line">    <span class="type">int</span> <span class="variable">t</span> <span class="operator">=</span> <span class="number">5</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> InterruptedException &#123;</span><br><span class="line">        <span class="type">ReentrantLockExample</span> <span class="variable">test</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ReentrantLockExample</span>();</span><br><span class="line">        test.run();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">write</span><span class="params">()</span> &#123;</span><br><span class="line">        lock.lock();</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            TimeUnit.MILLISECONDS.sleep(<span class="number">500</span>);</span><br><span class="line">            a++;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            lock.unlock();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">read</span><span class="params">()</span> &#123;</span><br><span class="line">        lock.lock();</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            t = a;</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            lock.unlock();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">run</span><span class="params">()</span> <span class="keyword">throws</span> InterruptedException &#123;</span><br><span class="line">        <span class="type">Thread</span> <span class="variable">t1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Thread</span>(<span class="keyword">new</span> <span class="title class_">Runnable</span>() &#123;</span><br><span class="line">            <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">run</span><span class="params">()</span> &#123;</span><br><span class="line">                write();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        <span class="type">Thread</span> <span class="variable">t2</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Thread</span>(<span class="keyword">new</span> <span class="title class_">Runnable</span>() &#123;</span><br><span class="line">            <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">run</span><span class="params">()</span> &#123;</span><br><span class="line">                read();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">        t1.start();</span><br><span class="line">        TimeUnit.MILLISECONDS.sleep(<span class="number">200</span>);</span><br><span class="line">        t2.start();</span><br><span class="line"></span><br><span class="line">        t1.join();</span><br><span class="line">        t2.join();</span><br><span class="line"></span><br><span class="line">        System.out.println(t);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="锁内存语义的实现"><a href="#锁内存语义的实现" class="headerlink" title="锁内存语义的实现"></a>锁内存语义的实现</h2><p>以上面代码为例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="title function_">ReentrantLock</span><span class="params">()</span> &#123;</span><br><span class="line">    sync = <span class="keyword">new</span> <span class="title class_">NonfairSync</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>默认非公平锁，那么lock的调用顺序则是：</p>
+<ol>
+<li>先CAS，成功则将当前线程设为独占者。(state：0无独占者，1有)，失败则</li>
+<li>当前state&#x3D;0则CAS，失败则有可能进入等待队列。state&#x3D;1，则比较当前线程是否是独占者。</li>
+</ol>
+<p>公平锁的lock调用顺序是：</p>
+<ol>
+<li>先取状态state，满足公平条件后才能获取锁。</li>
+</ol>
+<p>公平锁和非公平锁的释放完全一样：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">protected</span> <span class="keyword">final</span> <span class="type">boolean</span> <span class="title function_">tryRelease</span><span class="params">(<span class="type">int</span> releases)</span> &#123;</span><br><span class="line">    <span class="type">int</span> <span class="variable">c</span> <span class="operator">=</span> getState() - releases;</span><br><span class="line">    <span class="keyword">if</span> (Thread.currentThread() != getExclusiveOwnerThread())</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">IllegalMonitorStateException</span>();</span><br><span class="line">    <span class="type">boolean</span> <span class="variable">free</span> <span class="operator">=</span> <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">if</span> (c == <span class="number">0</span>) &#123;</span><br><span class="line">        free = <span class="literal">true</span>;</span><br><span class="line">        setExclusiveOwnerThread(<span class="literal">null</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    setState(c);</span><br><span class="line">    <span class="keyword">return</span> free;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="concurrent包的实现"><a href="#concurrent包的实现" class="headerlink" title="concurrent包的实现"></a>concurrent包的实现</h2><p>由于Java的CAS同时具有volatile读和写的内存语义，因此Java线程之间的通信有下面4种：</p>
+<ul>
+<li>线程A写volatile变量，随后线程B读这个volatile变量。</li>
+<li>线程A写volatile变量，随后线程B用CAS更新这个volatile变量。</li>
+<li>线程A用CAS更新一个volatile变量，随后线程B用CAS更新这个volatile变量。</li>
+<li>线程A用CAS更新一个volatile变量，随后线程B读这个volatile变量。</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="http://ifeve.com/sun-misc-unsafe/#header"> sun.misc.Unsafe</a><br>unsafe的CAS是原子性的，至于它为什么叫unsafe，琢磨一下上面这个文章。</p>
+<h1 id="final域的内存语义"><a href="#final域的内存语义" class="headerlink" title="final域的内存语义"></a>final域的内存语义</h1><p>我感觉作者错了，普通int怎么会从构造函数中’逃逸’出来，我用程序试了没出现初始值没写入普通域的情况。<br>另外，如果构造函数中的普通域可以重排到构造函数之外，，，你不觉得这不是优化，而是编译器的bug么？<br>有些东西确实很难用代码“亲眼看见”结果，但是原理是高于实现的，所以，是存在逃逸的可能性的。</p>
+<p>读一读<a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/specs/">Java language specification</a>吧!</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/blog/2017/03/11/%E7%AC%AC%E4%BA%8C%E7%AB%A0-Java%E5%B9%B6%E5%8F%91%E6%9C%BA%E5%88%B6%E7%9A%84%E5%BA%95%E5%B1%82%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/" rel="prev" title="第二章 Java并发机制的底层实现原理">
+                  <i class="fa fa-angle-left"></i> 第二章 Java并发机制的底层实现原理
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/blog/2017/03/12/ReentrantLock/" rel="next" title="ReentrantLock">
+                  ReentrantLock <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">carl-zk</span>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/carl-zk" class="github-corner" title="在 GitHub 上关注我" aria-label="在 GitHub 上关注我" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>

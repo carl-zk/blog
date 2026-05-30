@@ -1,0 +1,147 @@
+#!/bin/sh
+#
+# ---------------------------------------------------------------------
+# IntelliJ IDEA startup script.
+# ---------------------------------------------------------------------
+#
+
+# java jdk 1u8
+export JAVA_HOME=/usr/lib/jdk
+export JRE_HOME=${JAVA_HOME}/jre
+export CLASSPATH=.:${JAVA_HOME}/lib:${JRE_HOME}/lib
+
+message()
+{
+  TITLE="Cannot start IntelliJ IDEA"
+  if [ -n "`which zenity`" ]; then
+    zenity --error --title="$TITLE" --text="$1"
+  elif [ -n "`which kdialog`" ]; then
+    kdialog --error "$1" --title "$TITLE"
+  elif [ -n "`which xmessage`" ]; then
+    xmessage -center "ERROR: $TITLE: $1"
+  elif [ -n "`which notify-send`" ]; then
+    notify-send "ERROR: $TITLE: $1"
+  else
+    echo "ERROR: $TITLE\n$1"
+  fi
+}
+
+isJDK()
+{
+  if [ -z $1 ] || [ ! -x "$1/bin/java" ]; then
+    return 1
+  else
+    return 0
+  fi
+}
+
+UNAME=`which uname`
+GREP=`which egrep`
+GREP_OPTIONS=""
+CUT=`which cut`
+READLINK=`which readlink`
+XARGS=`which xargs`
+DIRNAME=`which dirname`
+MKTEMP=`which mktemp`
+RM=`which rm`
+CAT=`which cat`
+TR=`which tr`
+
+if [ -z "$UNAME" -o -z "$GREP" -o -z "$CUT" -o -z "$MKTEMP" -o -z "$RM" -o -z "$CAT" -o -z "$TR" ]; then
+  message "Required tools are missing - check beginning of \"$0\" file for details."
+  exit 1
+fi
+
+OS_TYPE=`"$UNAME" -s`
+
+# ---------------------------------------------------------------------
+# Ensure IDE_HOME points to the directory where the IDE is installed.
+# ---------------------------------------------------------------------
+SCRIPT_LOCATION=$0
+if [ -x "$READLINK" ]; then
+  while [ -L "$SCRIPT_LOCATION" ]; do
+    SCRIPT_LOCATION=`"$READLINK" -e "$SCRIPT_LOCATION"`
+  done
+fi
+
+IDE_HOME="/home/hero/local/idea"
+IDE_BIN_HOME="$IDE_HOME/bin"
+
+# ---------------------------------------------------------------------
+# Locate a JDK installation directory which will be used to run the IDE.
+# Try (in order): IDEA_JDK, idea.jdk, ../jre, JDK_HOME, JAVA_HOME, "java" in PATH.
+# ---------------------------------------------------------------------
+
+JDK="$JAVA_HOME"
+
+JAVA_BIN="$JDK/bin/java"
+if [ ! -x "$JAVA_BIN" ]; then
+  JAVA_BIN="$JDK/jre/bin/java"
+fi
+
+if [ -z "$JDK" ] || [ ! -x "$JAVA_BIN" ]; then
+  message "No JDK found. Please validate either IDEA_JDK, JDK_HOME or JAVA_HOME environment variable points to valid JDK installation."
+  exit 1
+fi
+
+VERSION_LOG=`"$MKTEMP" -t java.version.log.XXXXXX`
+JAVA_TOOL_OPTIONS= "$JAVA_BIN" -version 2> "$VERSION_LOG"
+"$GREP" "64-Bit|x86_64|amd64" "$VERSION_LOG" > /dev/null
+BITS=$?
+"$RM" -f "$VERSION_LOG"
+test ${BITS} -eq 0 && BITS="64" || BITS=""
+
+# ---------------------------------------------------------------------
+# Collect JVM options and IDE properties.
+# ---------------------------------------------------------------------
+if [ -n "$IDEA_PROPERTIES" ]; then
+  IDE_PROPERTIES_PROPERTY="-Didea.properties.file=$IDEA_PROPERTIES"
+fi
+
+VM_OPTIONS_FILE="/home/hero/local/idea/bin/idea.vmoptions"
+
+VM_OPTIONS=""
+if [ -r "$VM_OPTIONS_FILE" ]; then
+  VM_OPTIONS=`"$CAT" "$VM_OPTIONS_FILE" | "$GREP" -v "^#.*"`
+else
+  message "Cannot find VM options file"
+fi
+
+IS_EAP="false"
+if [ "$IS_EAP" = "true" ]; then
+  OS_NAME=`echo "$OS_TYPE" | "$TR" '[:upper:]' '[:lower:]'`
+  AGENT_LIB="yjpagent-$OS_NAME$BITS"
+  if [ -r "$IDE_BIN_HOME/lib$AGENT_LIB.so" ]; then
+    AGENT="-agentlib:$AGENT_LIB=disablealloc,delay=10000,probe_disable=*,sessionname=IntelliJIdea2017.1"
+  fi
+fi
+
+CLASSPATH="$IDE_HOME/lib/bootstrap.jar"
+CLASSPATH="$CLASSPATH:$IDE_HOME/lib/extensions.jar"
+CLASSPATH="$CLASSPATH:$IDE_HOME/lib/util.jar"
+CLASSPATH="$CLASSPATH:$IDE_HOME/lib/jdom.jar"
+CLASSPATH="$CLASSPATH:$IDE_HOME/lib/log4j.jar"
+CLASSPATH="$CLASSPATH:$IDE_HOME/lib/trove4j.jar"
+CLASSPATH="$CLASSPATH:$IDE_HOME/lib/jna.jar"
+CLASSPATH="$CLASSPATH:$JDK/lib/tools.jar"
+if [ -n "$IDEA_CLASSPATH" ]; then
+  CLASSPATH="$CLASSPATH:$IDEA_CLASSPATH"
+fi
+
+# ---------------------------------------------------------------------
+# Run the IDE.
+# ---------------------------------------------------------------------
+IFS="$(printf '\n\t')"
+LD_LIBRARY_PATH="$IDE_BIN_HOME:$LD_LIBRARY_PATH" "$JAVA_BIN" \
+  ${AGENT} \
+  "-Xbootclasspath/a:$IDE_HOME/lib/boot.jar" \
+  -classpath "$CLASSPATH" \
+  ${VM_OPTIONS} \
+  "-XX:ErrorFile=$HOME/java_error_in_IDEA_%p.log" \
+  "-XX:HeapDumpPath=$HOME/java_error_in_IDEA.hprof" \
+  -Didea.paths.selector=IntelliJIdea2017.1 \
+  "-Djb.vmOptionsFile=$VM_OPTIONS_FILE" \
+  ${IDE_PROPERTIES_PROPERTY} \
+  -Didea.jre.check=true \
+  com.intellij.idea.Main \
+  "$@"
