@@ -22,6 +22,9 @@ tags:
 - zsh, oh-my-zsh, theme选awsomepanda
 - jdk, [termurin](https://adoptium.net/temurin/releases)，不叫openjdk但仍然是openjdk
 - Intellij IDEA, 已不区分Community/Ultimate
+- copyQ, system settigns shortcut Ctrl+I
+- jdownloader2, nonideal :(
+- Steam, `steam --reset` if any probloms
 
 安装的都在 /snap, /opt.  
 config目录 ~/.config  
