@@ -6,7 +6,7 @@
   <link href="https://carl-zk.github.io/blog/atom.xml" rel="self"/>
   
   <link href="https://carl-zk.github.io/blog/"/>
-  <updated>2026-05-30T13:30:42.515Z</updated>
+  <updated>2026-06-05T11:40:11.616Z</updated>
   <id>https://carl-zk.github.io/blog/</id>
   
   <author>
@@ -15,6 +15,24 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Start With Minikube</title>
+    <link href="https://carl-zk.github.io/blog/2026/06/04/start-with-minikube/"/>
+    <id>https://carl-zk.github.io/blog/2026/06/04/start-with-minikube/</id>
+    <published>2026-06-03T17:07:46.000Z</published>
+    <updated>2026-06-05T11:40:11.616Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;prepare&quot;&gt;&lt;a href=&quot;#prepare&quot; class=&quot;headerlink&quot; title=&quot;prepare&quot;&gt;&lt;/a&gt;prepare&lt;/h2&gt;&lt;h3 id=&quot;ubuntu&quot;&gt;&lt;a href=&quot;#ubuntu&quot; class=&quot;headerlink&quot; title=&quot;ubuntu&quot;&gt;&lt;/a&gt;ubuntu&lt;/h3&gt;&lt;figure class=&quot;highlight plaintext&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class</summary>
+      
+    
+    
+    
+    
+  </entry>
   
   <entry>
     <title>Understanding Cloud-Native Infrastructure</title>
@@ -49,7 +67,7 @@
     <link href="https://carl-zk.github.io/blog/2026/05/30/linux/"/>
     <id>https://carl-zk.github.io/blog/2026/05/30/linux/</id>
     <published>2026-05-30T04:42:49.000Z</published>
-    <updated>2026-05-30T06:13:23.257Z</updated>
+    <updated>2026-05-31T03:37:19.663Z</updated>
     
     
       

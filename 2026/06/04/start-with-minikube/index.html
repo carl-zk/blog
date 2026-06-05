@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.2.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/blog/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/blog/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"carl-zk.github.io","root":"/blog/","images":"/blog/images","scheme":"Muse","darkmode":false,"version":"8.25.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/blog/js/config.js" defer></script>
+
+    <meta name="description" content="prepareubuntu123456789101112131415161718192021222324252627282930313233343536➜  ~ cat &#x2F;etc&#x2F;os-releasePRETTY_NAME&#x3D;&quot;Ubuntu 26.04 LTS&quot;NAME&#x3D;&quot;Ubuntu&quot;VERSION_ID&#x3D;&quot;26.04&quot;VERSION&#x3D;&amp;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Start With Minikube">
+<meta property="og:url" content="https://carl-zk.github.io/blog/2026/06/04/start-with-minikube/index.html">
+<meta property="og:site_name" content="一叶轻舟渡万江">
+<meta property="og:description" content="prepareubuntu123456789101112131415161718192021222324252627282930313233343536➜  ~ cat &#x2F;etc&#x2F;os-releasePRETTY_NAME&#x3D;&quot;Ubuntu 26.04 LTS&quot;NAME&#x3D;&quot;Ubuntu&quot;VERSION_ID&#x3D;&quot;26.04&quot;VERSION&#x3D;&amp;">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-06-03T17:07:46.000Z">
+<meta property="article:modified_time" content="2026-06-05T11:40:11.616Z">
+<meta property="article:author" content="carl-zk">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://carl-zk.github.io/blog/2026/06/04/start-with-minikube/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://carl-zk.github.io/blog/2026/06/04/start-with-minikube/","path":"2026/06/04/start-with-minikube/","title":"Start With Minikube"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Start With Minikube | 一叶轻舟渡万江</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/blog/js/utils.js" defer></script><script src="/blog/js/motion.js" defer></script><script src="/blog/js/sidebar.js" defer></script><script src="/blog/js/next-boot.js" defer></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/blog/css/noscript.css">
+  </noscript>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><link rel="alternate" href="/blog/atom.xml" title="一叶轻舟渡万江" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/blog/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">一叶轻舟渡万江</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">泰山不拒细壤故能成其高 江海不择细流故能就其深</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/blog/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/blog/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/blog/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/blog/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/blog/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#prepare"><span class="nav-number">1.</span> <span class="nav-text">prepare</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ubuntu"><span class="nav-number">1.1.</span> <span class="nav-text">ubuntu</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#docker"><span class="nav-number">1.2.</span> <span class="nav-text">docker</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#docker-proxy"><span class="nav-number">1.2.1.</span> <span class="nav-text">docker proxy</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#install"><span class="nav-number">2.</span> <span class="nav-text">install</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#start-nginx-pod"><span class="nav-number">3.</span> <span class="nav-text">start nginx pod</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#via-proxy-or-not"><span class="nav-number">3.1.</span> <span class="nav-text">via proxy or not</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#help"><span class="nav-number">3.2.</span> <span class="nav-text">help</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#check-shell-environment-variables"><span class="nav-number">3.2.1.</span> <span class="nav-text">check shell environment variables</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#check-current-shell-variables"><span class="nav-number">3.2.2.</span> <span class="nav-text">check current shell variables</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#check-listening-proxy-processes"><span class="nav-number">3.2.3.</span> <span class="nav-text">check listening proxy processes</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#where-is-proxy-come-from"><span class="nav-number">3.2.4.</span> <span class="nav-text">where is proxy come from</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#temporarily-disable-it-from-the-terminal"><span class="nav-number">3.2.5.</span> <span class="nav-text">temporarily disable it from the terminal</span></a></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">carl-zk</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/blog/archives/">
+          <span class="site-state-item-count">199</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/blog/categories/">
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/blog/tags/">
+        <span class="site-state-item-count">29</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://carl-zk.github.io/blog/2026/06/04/start-with-minikube/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/blog/images/avatar.gif">
+      <meta itemprop="name" content="carl-zk">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="一叶轻舟渡万江">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Start With Minikube | 一叶轻舟渡万江">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Start With Minikube
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2026-06-04 01:07:46" itemprop="dateCreated datePublished" datetime="2026-06-04T01:07:46+08:00">2026-06-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2026-06-05 19:40:11" itemprop="dateModified" datetime="2026-06-05T19:40:11+08:00">2026-06-05</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="prepare"><a href="#prepare" class="headerlink" title="prepare"></a>prepare</h2><h3 id="ubuntu"><a href="#ubuntu" class="headerlink" title="ubuntu"></a>ubuntu</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">➜  ~ cat /etc/os-release</span><br><span class="line">PRETTY_NAME=&quot;Ubuntu 26.04 LTS&quot;</span><br><span class="line">NAME=&quot;Ubuntu&quot;</span><br><span class="line">VERSION_ID=&quot;26.04&quot;</span><br><span class="line">VERSION=&quot;26.04 LTS (Resolute Raccoon)&quot;</span><br><span class="line">VERSION_CODENAME=resolute</span><br><span class="line">ID=ubuntu</span><br><span class="line">ID_LIKE=debian</span><br><span class="line">HOME_URL=&quot;https://www.ubuntu.com/&quot;</span><br><span class="line">SUPPORT_URL=&quot;https://help.ubuntu.com/&quot;</span><br><span class="line">BUG_REPORT_URL=&quot;https://bugs.launchpad.net/ubuntu/&quot;</span><br><span class="line">PRIVACY_POLICY_URL=&quot;https://www.ubuntu.com/legal/terms-and-policies/privacy-policy&quot;</span><br><span class="line">UBUNTU_CODENAME=resolute</span><br><span class="line">LOGO=ubuntu-logo</span><br><span class="line">➜  ~ lsb_release -a          </span><br><span class="line">No LSB modules are available.</span><br><span class="line">Distributor ID:	Ubuntu</span><br><span class="line">Description:	Ubuntu 26.04 LTS</span><br><span class="line">Release:	26.04</span><br><span class="line">Codename:	resolute</span><br><span class="line">➜  ~ hostnamectl                   </span><br><span class="line"> Static hostname: fly</span><br><span class="line">       Icon name: computer-desktop</span><br><span class="line">         Chassis: desktop 🖥️</span><br><span class="line">      Machine ID: 27599bc381e34ba291abba28a17da750</span><br><span class="line">         Boot ID: 356f955395f14109bb5d122d99b027a6</span><br><span class="line">Operating System: Ubuntu 26.04 LTS                </span><br><span class="line">          Kernel: Linux 7.0.0-22-generic</span><br><span class="line">    Architecture: x86-64</span><br><span class="line"> Hardware Vendor: ASUS</span><br><span class="line">  Hardware Model: ROG STRIX B760-G GAMING WIFI</span><br><span class="line">    Hardware SKU: SKU</span><br><span class="line">Hardware Version: System Version</span><br><span class="line">Firmware Version: 0812</span><br><span class="line">   Firmware Date: Mon 2023-02-27</span><br><span class="line">    Firmware Age: 3y 3month 1w </span><br></pre></td></tr></table></figure>
+<h3 id="docker"><a href="#docker" class="headerlink" title="docker"></a>docker</h3><blockquote>
+<p>using docker for container runtime  </p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">➜  ~ docker version</span><br><span class="line">Client: Docker Engine - Community</span><br><span class="line"> Version:           29.5.3</span><br><span class="line"> API version:       1.54</span><br><span class="line"> Go version:        go1.26.4</span><br><span class="line"> Git commit:        d1c06ef</span><br><span class="line"> Built:             Wed Jun  3 18:00:10 2026</span><br><span class="line"> OS/Arch:           linux/amd64</span><br><span class="line"> Context:           default</span><br><span class="line"></span><br><span class="line">Server: Docker Engine - Community</span><br><span class="line"> Engine:</span><br><span class="line">  Version:          29.5.3</span><br><span class="line">  API version:      1.54 (minimum version 1.40)</span><br><span class="line">  Go version:       go1.26.4</span><br><span class="line">  Git commit:       285b471</span><br><span class="line">  Built:            Wed Jun  3 18:00:10 2026</span><br><span class="line">  OS/Arch:          linux/amd64</span><br><span class="line">  Experimental:     false</span><br><span class="line"> containerd:</span><br><span class="line">  Version:          v2.2.4</span><br><span class="line">  GitCommit:        193637f7ee8ae5f5aa5248f49e7baa3e6164966e</span><br><span class="line"> runc:</span><br><span class="line">  Version:          1.3.5</span><br><span class="line">  GitCommit:        v1.3.5-0-g488fc13e</span><br><span class="line"> docker-init:</span><br><span class="line">  Version:          0.19.0</span><br><span class="line">  GitCommit:        de40ad0</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>或者 <code>docker info</code><br>docker desktop 不是必要的.</p>
+<h4 id="docker-proxy"><a href="#docker-proxy" class="headerlink" title="docker proxy"></a>docker proxy</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">➜  ~ docker info | grep -i proxy</span><br><span class="line"> HTTP Proxy: http://127.0.0.1:10808</span><br><span class="line"> HTTPS Proxy: http://127.0.0.1:10808</span><br><span class="line"> No Proxy: localhost,127.0.0.1</span><br><span class="line">  EnableUserlandProxy: true</span><br><span class="line">  UserlandProxyPath: /usr/bin/docker-proxy</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>如果没有proxy, 就配置国内 docker镜像库。</p>
+<h2 id="install"><a href="#install" class="headerlink" title="install"></a>install</h2><blockquote>
+<p>本来配置的rootless docker, 后来发现遇到一些问题，最终还是换回default模式。学习kubtectl才是重点。</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">minikube delete --all</span><br><span class="line"></span><br><span class="line">docker context use default</span><br><span class="line"></span><br><span class="line">minikube start \</span><br><span class="line">  --driver=docker \</span><br><span class="line">  --container-runtime=containerd</span><br><span class="line">或</span><br><span class="line">minikube start \</span><br><span class="line">  --driver=docker \</span><br><span class="line">  --image-mirror-country=cn</span><br></pre></td></tr></table></figure>
+<p>设置 <code>alias kubectl=&quot;minikube kubectl --&quot;</code>  </p>
+<p>确保下面的info中没有异常，否则就执行<code>minikube delete --all</code>重新尝试其它方式。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br></pre></td><td class="code"><pre><span class="line">➜  ~ kubectl describe node minikube</span><br><span class="line">Name:               minikube</span><br><span class="line">Roles:              control-plane</span><br><span class="line">Labels:             beta.kubernetes.io/arch=amd64</span><br><span class="line">                    beta.kubernetes.io/os=linux</span><br><span class="line">                    kubernetes.io/arch=amd64</span><br><span class="line">                    kubernetes.io/hostname=minikube</span><br><span class="line">                    kubernetes.io/os=linux</span><br><span class="line">                    minikube.k8s.io/commit=c93a4cb9311efc66b90d33ea03f75f2c4120e9b0</span><br><span class="line">                    minikube.k8s.io/name=minikube</span><br><span class="line">                    minikube.k8s.io/primary=true</span><br><span class="line">                    minikube.k8s.io/updated_at=2026_06_05T12_07_43_0700</span><br><span class="line">                    minikube.k8s.io/version=v1.38.1</span><br><span class="line">                    node-role.kubernetes.io/control-plane=</span><br><span class="line">                    node.kubernetes.io/exclude-from-external-load-balancers=</span><br><span class="line">Annotations:        node.alpha.kubernetes.io/ttl: 0</span><br><span class="line">                    volumes.kubernetes.io/controller-managed-attach-detach: true</span><br><span class="line">CreationTimestamp:  Fri, 05 Jun 2026 12:07:31 +0800</span><br><span class="line">Taints:             &lt;none&gt;</span><br><span class="line">Unschedulable:      false</span><br><span class="line">Lease:</span><br><span class="line">  HolderIdentity:  minikube</span><br><span class="line">  AcquireTime:     &lt;unset&gt;</span><br><span class="line">  RenewTime:       Fri, 05 Jun 2026 12:51:25 +0800</span><br><span class="line">Conditions:</span><br><span class="line">  Type             Status  LastHeartbeatTime                 LastTransitionTime                Reason                       Message</span><br><span class="line">  ----             ------  -----------------                 ------------------                ------                       -------</span><br><span class="line">  MemoryPressure   False   Fri, 05 Jun 2026 12:49:31 +0800   Fri, 05 Jun 2026 12:07:30 +0800   KubeletHasSufficientMemory   kubelet has sufficient memory available</span><br><span class="line">  DiskPressure     False   Fri, 05 Jun 2026 12:49:31 +0800   Fri, 05 Jun 2026 12:07:30 +0800   KubeletHasNoDiskPressure     kubelet has no disk pressure</span><br><span class="line">  PIDPressure      False   Fri, 05 Jun 2026 12:49:31 +0800   Fri, 05 Jun 2026 12:07:30 +0800   KubeletHasSufficientPID      kubelet has sufficient PID available</span><br><span class="line">  Ready            True    Fri, 05 Jun 2026 12:49:31 +0800   Fri, 05 Jun 2026 12:07:44 +0800   KubeletReady                 kubelet is posting ready status</span><br><span class="line">Addresses:</span><br><span class="line">  InternalIP:  192.168.49.2</span><br><span class="line">  Hostname:    minikube</span><br><span class="line">Capacity:</span><br><span class="line">  cpu:                24</span><br><span class="line">  ephemeral-storage:  1348412444Ki</span><br><span class="line">  hugepages-1Gi:      0</span><br><span class="line">  hugepages-2Mi:      0</span><br><span class="line">  memory:             32138292Ki</span><br><span class="line">  pods:               110</span><br><span class="line">Allocatable:</span><br><span class="line">  cpu:                24</span><br><span class="line">  ephemeral-storage:  1348412444Ki</span><br><span class="line">  hugepages-1Gi:      0</span><br><span class="line">  hugepages-2Mi:      0</span><br><span class="line">  memory:             32138292Ki</span><br><span class="line">  pods:               110</span><br><span class="line">System Info:</span><br><span class="line">  Machine ID:                 86e0bfeb3f77427722393c2969964edb</span><br><span class="line">  System UUID:                93f21ac7-2188-40d8-a2be-f752eb8da7fe</span><br><span class="line">  Boot ID:                    356f9553-95f1-4109-bb5d-122d99b027a6</span><br><span class="line">  Kernel Version:             7.0.0-22-generic</span><br><span class="line">  OS Image:                   Debian GNU/Linux 12 (bookworm)</span><br><span class="line">  Operating System:           linux</span><br><span class="line">  Architecture:               amd64</span><br><span class="line">  Container Runtime Version:  docker://29.2.1</span><br><span class="line">  Kubelet Version:            v1.35.1</span><br><span class="line">  Kube-Proxy Version:         </span><br><span class="line">PodCIDR:                      10.244.0.0/24</span><br><span class="line">PodCIDRs:                     10.244.0.0/24</span><br><span class="line">Non-terminated Pods:          (7 in total)</span><br><span class="line">  Namespace                   Name                                CPU Requests  CPU Limits  Memory Requests  Memory Limits  Age</span><br><span class="line">  ---------                   ----                                ------------  ----------  ---------------  -------------  ---</span><br><span class="line">  kube-system                 coredns-764897d7b-wcvfv             100m (0%)     0 (0%)      70Mi (0%)        170Mi (0%)     43m</span><br><span class="line">  kube-system                 etcd-minikube                       100m (0%)     0 (0%)      100Mi (0%)       0 (0%)         43m</span><br><span class="line">  kube-system                 kube-apiserver-minikube             250m (1%)     0 (0%)      0 (0%)           0 (0%)         43m</span><br><span class="line">  kube-system                 kube-controller-manager-minikube    200m (0%)     0 (0%)      0 (0%)           0 (0%)         43m</span><br><span class="line">  kube-system                 kube-proxy-bnrcp                    0 (0%)        0 (0%)      0 (0%)           0 (0%)         43m</span><br><span class="line">  kube-system                 kube-scheduler-minikube             100m (0%)     0 (0%)      0 (0%)           0 (0%)         43m</span><br><span class="line">  kube-system                 storage-provisioner                 0 (0%)        0 (0%)      0 (0%)           0 (0%)         43m</span><br><span class="line">Allocated resources:</span><br><span class="line">  (Total limits may be over 100 percent, i.e., overcommitted.)</span><br><span class="line">  Resource           Requests    Limits</span><br><span class="line">  --------           --------    ------</span><br><span class="line">  cpu                750m (3%)   0 (0%)</span><br><span class="line">  memory             170Mi (0%)  170Mi (0%)</span><br><span class="line">  ephemeral-storage  0 (0%)      0 (0%)</span><br><span class="line">  hugepages-1Gi      0 (0%)      0 (0%)</span><br><span class="line">  hugepages-2Mi      0 (0%)      0 (0%)</span><br><span class="line">Events:</span><br><span class="line">  Type    Reason          Age   From             Message</span><br><span class="line">  ----    ------          ----  ----             -------</span><br><span class="line">  Normal  RegisteredNode  43m   node-controller  Node minikube event: Registered Node minikube in Controller</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">➜  ~ kubectl get pods -A           </span><br><span class="line">NAMESPACE     NAME                               READY   STATUS    RESTARTS      AGE</span><br><span class="line">kube-system   coredns-764897d7b-wcvfv            1/1     Running   0             47m</span><br><span class="line">kube-system   etcd-minikube                      1/1     Running   0             48m</span><br><span class="line">kube-system   kube-apiserver-minikube            1/1     Running   0             48m</span><br><span class="line">kube-system   kube-controller-manager-minikube   1/1     Running   1             48m</span><br><span class="line">kube-system   kube-proxy-bnrcp                   1/1     Running   0             47m</span><br><span class="line">kube-system   kube-scheduler-minikube            1/1     Running   0             48m</span><br><span class="line">kube-system   storage-provisioner                1/1     Running   1 (47m ago)   48m</span><br></pre></td></tr></table></figure>
+
+<h2 id="start-nginx-pod"><a href="#start-nginx-pod" class="headerlink" title="start nginx pod"></a>start nginx pod</h2><h3 id="via-proxy-or-not"><a href="#via-proxy-or-not" class="headerlink" title="via proxy or not"></a>via proxy or not</h3><p>由于没有配置minikube 使用宿主机代理，每次镜像拉取需要先docker pull, 再把镜像加载到minikube</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker pull nginx:latest</span><br><span class="line">minikube image load nginx:latest</span><br></pre></td></tr></table></figure>
+<p>另一个方案是直接让minikube使用宿主机代理:<br>假设你的宿主机 IP 是 192.168.1.100（不是 127.0.0.1）：<br>确认代理对外监听（0.0.0.0 或宿主机局域网 IP）：<br><code>ss -tlnp | grep 10808</code><br>删除旧 Minikube：<br><code>minikube delete</code><br>重建 Minikube 并设置 docker 环境变量：  </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">minikube start \</span><br><span class="line">  --driver=docker \</span><br><span class="line">  --docker-env HTTP_PROXY=http://192.168.1.100:10808 \</span><br><span class="line">  --docker-env HTTPS_PROXY=http://192.168.1.100:10808 \</span><br><span class="line">  --docker-env NO_PROXY=localhost,127.0.0.1,192.168.49.2</span><br></pre></td></tr></table></figure>
+<p>这样 Minikube 内的 containerd 就能通过代理访问 Docker Hub。</p>
+<p>nginx-pod.yaml</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">apiVersion: v1</span><br><span class="line">kind: Pod</span><br><span class="line">metadata:</span><br><span class="line">  name: nginx-pod</span><br><span class="line">  labels:</span><br><span class="line">    app: nginx</span><br><span class="line">spec:</span><br><span class="line">  containers:</span><br><span class="line">  - name: nginx-container</span><br><span class="line">    image: nginx:latest</span><br><span class="line">    imagePullPolicy: IfNotPresent # local image first</span><br><span class="line">    ports:</span><br><span class="line">    - containerPort: 80</span><br></pre></td></tr></table></figure>
+<p>因为latest标签的存在，kubelet默认取远程镜像。所以设置imagePullPolicy或指定版本。</p>
+<p><code>kubectl apply -f nginx-pod.yaml</code></p>
+<p><code>kubectl port-forward nginx-pod 8080:80</code></p>
+<h3 id="help"><a href="#help" class="headerlink" title="help"></a>help</h3><h4 id="check-shell-environment-variables"><a href="#check-shell-environment-variables" class="headerlink" title="check shell environment variables"></a>check shell environment variables</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">➜  apt env | grep -i proxy          </span><br><span class="line">ALL_PROXY=socks://127.0.0.1:10808</span><br><span class="line">FTP_PROXY=ftp://127.0.0.1:10808</span><br><span class="line">HTTPS_PROXY=http://127.0.0.1:10808</span><br><span class="line">HTTP_PROXY=http://127.0.0.1:10808</span><br><span class="line">NO_PROXY=localhost,127.0.0.0/8,::1</span><br><span class="line">all_proxy=socks://127.0.0.1:10808</span><br><span class="line">ftp_proxy=ftp://127.0.0.1:10808</span><br><span class="line">http_proxy=http://127.0.0.1:10808</span><br><span class="line">https_proxy=http://127.0.0.1:10808</span><br><span class="line">no_proxy=localhost,127.0.0.0/8,::1</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h4 id="check-current-shell-variables"><a href="#check-current-shell-variables" class="headerlink" title="check current shell variables"></a>check current shell variables</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">➜  apt echo $http_proxy</span><br><span class="line">echo $https_proxy</span><br><span class="line">echo $HTTP_PROXY</span><br><span class="line">echo $HTTPS_PROXY</span><br><span class="line">echo $ALL_PROXY</span><br><span class="line">http://127.0.0.1:10808</span><br><span class="line">http://127.0.0.1:10808</span><br><span class="line">http://127.0.0.1:10808</span><br><span class="line">http://127.0.0.1:10808</span><br><span class="line">socks://127.0.0.1:10808</span><br></pre></td></tr></table></figure>
+<h4 id="check-listening-proxy-processes"><a href="#check-listening-proxy-processes" class="headerlink" title="check listening proxy processes"></a>check listening proxy processes</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">➜  apt ss -tlnp | grep -E &quot;7890|1080|8080&quot;</span><br><span class="line">LISTEN 0      4096       127.0.0.1:10808      0.0.0.0:*    users:((&quot;xray&quot;,pid=182024,fd=4))</span><br></pre></td></tr></table></figure>
+
+<h4 id="where-is-proxy-come-from"><a href="#where-is-proxy-come-from" class="headerlink" title="where is proxy come from"></a>where is proxy come from</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">➜  ~ gsettings get org.gnome.system.proxy mode</span><br><span class="line">&#x27;manual&#x27;</span><br><span class="line">➜  ~ gsettings list-recursively org.gnome.system.proxy</span><br><span class="line">org.gnome.system.proxy autoconfig-url &#x27;&#x27;</span><br><span class="line">org.gnome.system.proxy ignore-hosts [&#x27;localhost&#x27;, &#x27;127.0.0.0/8&#x27;, &#x27;::1&#x27;]</span><br><span class="line">org.gnome.system.proxy mode &#x27;manual&#x27;</span><br><span class="line">org.gnome.system.proxy use-same-proxy true</span><br><span class="line">org.gnome.system.proxy.ftp host &#x27;127.0.0.1&#x27;</span><br><span class="line">org.gnome.system.proxy.ftp port 10808</span><br><span class="line">org.gnome.system.proxy.http authentication-password &#x27;&#x27;</span><br><span class="line">org.gnome.system.proxy.http authentication-user &#x27;&#x27;</span><br><span class="line">org.gnome.system.proxy.http enabled false</span><br><span class="line">org.gnome.system.proxy.http host &#x27;127.0.0.1&#x27;</span><br><span class="line">org.gnome.system.proxy.http port 10808</span><br><span class="line">org.gnome.system.proxy.http use-authentication false</span><br><span class="line">org.gnome.system.proxy.https host &#x27;127.0.0.1&#x27;</span><br><span class="line">org.gnome.system.proxy.https port 10808</span><br><span class="line">org.gnome.system.proxy.socks host &#x27;127.0.0.1&#x27;</span><br><span class="line">org.gnome.system.proxy.socks port 10808</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="temporarily-disable-it-from-the-terminal"><a href="#temporarily-disable-it-from-the-terminal" class="headerlink" title="temporarily disable it from the terminal"></a>temporarily disable it from the terminal</h4><p><code>env -u http_proxy -u https_proxy -u HTTP_PROXY -u HTTPS_PROXY -u ALL_PROXY bash</code></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/blog/2026/05/30/understanding-cloud-native-infrastructure/" rel="prev" title="Understanding Cloud-Native Infrastructure">
+                  <i class="fa fa-angle-left"></i> Understanding Cloud-Native Infrastructure
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">carl-zk</span>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/carl-zk" class="github-corner" title="在 GitHub 上关注我" aria-label="在 GitHub 上关注我" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>
