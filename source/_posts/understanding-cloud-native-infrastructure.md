@@ -111,3 +111,59 @@ Meaning:
 
 This shift is much bigger than simply "learning Kubernetes".  
 `Kubernetes is a distributed control system, NOT a container deployment tool.`
+
+## Future Architecture (2026+)
+Most cloud-native platforms are moving toward:
+```
+                    Gateway API
+                         |
+                ----------------
+                |              |
+             Istio         Cilium
+                |
+              Envoy
+```
+The API becomes standardized.
+
+The implementation becomes replaceable.
+
+This is exactly what Kubernetes did with:
+
+Container Runtime Interface (CRI)
+
+allowing:
+
+Docker
+containerd
+CRI-O
+
+to be swapped underneath.
+
+Gateway API is doing the same thing for networking.
+```
+Learn Kubernetes Services thoroughly
+    ClusterIP
+    NodePort
+    LoadBalancer
+Learn Ingress
+    NGINX Ingress Controller
+Learn Gateway API
+    Gateway
+    HTTPRoute
+    GRPCRoute
+    ReferenceGrant
+Learn Envoy
+    listeners
+    routes
+    clusters
+    xDS
+Learn Istio
+    sidecar mode
+    ambient mode
+    traffic management
+    mTLS
+Learn Cilium
+    eBPF
+    Gateway API support
+    Service Mesh
+```
