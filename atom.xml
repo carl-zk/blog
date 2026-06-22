@@ -6,7 +6,7 @@
   <link href="https://carl-zk.github.io/blog/atom.xml" rel="self"/>
   
   <link href="https://carl-zk.github.io/blog/"/>
-  <updated>2026-06-05T11:40:11.616Z</updated>
+  <updated>2026-06-22T16:09:18.792Z</updated>
   <id>https://carl-zk.github.io/blog/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Local LLM</title>
+    <link href="https://carl-zk.github.io/blog/2026/06/23/Local-LLM/"/>
+    <id>https://carl-zk.github.io/blog/2026/06/23/Local-LLM/</id>
+    <published>2026-06-22T16:02:08.000Z</published>
+    <updated>2026-06-22T16:09:18.792Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;h3 id=&quot;LM-Studio&quot;&gt;&lt;a href=&quot;#LM-Studio&quot; class=&quot;headerlink&quot; title=&quot;LM Studio&quot;&gt;&lt;/a&gt;LM Studio&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;qwen3.5-9b&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;params:&lt;br&gt;context length: 16K&lt;br&gt;Gpu offload: 32&lt;br&gt;Cpu pool size: 10&lt;br&gt;Evaluation Batch Size: 2048&lt;br&gt;Physical Batch size: 128&lt;br&gt;Max concurrent Predictions: 2&lt;/p&gt;
+&lt;h3 id=&quot;VS-Code&quot;&gt;&lt;a href=&quot;#VS-Code&quot; class=&quot;headerlink&quot; title=&quot;VS Code&quot;&gt;&lt;/a&gt;VS Code&lt;/h3&gt;&lt;p&gt;** Continue **&lt;/p&gt;
+&lt;p&gt;config.yaml&lt;/p&gt;
+&lt;figure class=&quot;highlight yaml&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span </summary>
+      
+    
+    
+    
+    
+  </entry>
   
   <entry>
     <title>Start With Minikube</title>
@@ -39,7 +61,7 @@
     <link href="https://carl-zk.github.io/blog/2026/05/30/understanding-cloud-native-infrastructure/"/>
     <id>https://carl-zk.github.io/blog/2026/05/30/understanding-cloud-native-infrastructure/</id>
     <published>2026-05-30T12:36:22.000Z</published>
-    <updated>2026-05-30T13:30:42.515Z</updated>
+    <updated>2026-06-05T17:41:48.972Z</updated>
     
     
       

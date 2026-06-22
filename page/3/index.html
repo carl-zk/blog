@@ -141,7 +141,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/blog/archives/">
-          <span class="site-state-item-count">199</span>
+          <span class="site-state-item-count">200</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -178,7 +178,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://carl-zk.github.io/blog/2026/05/30/linux/">
+    <link itemprop="mainEntityOfPage" href="https://carl-zk.github.io/blog/2026/05/30/understanding-cloud-native-infrastructure/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/blog/images/avatar.gif">
@@ -196,7 +196,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/blog/2026/05/30/linux/" class="post-title-link" itemprop="url">Linux</a>
+          <a href="/blog/2026/05/30/understanding-cloud-native-infrastructure/" class="post-title-link" itemprop="url">Understanding Cloud-Native Infrastructure</a>
         </h2>
 
         <div class="post-meta-container">
@@ -207,23 +207,14 @@
       </span>
       <span class="post-meta-item-text">发表于</span>
 
-      <time title="创建时间：2026-05-30 12:42:49" itemprop="dateCreated datePublished" datetime="2026-05-30T12:42:49+08:00">2026-05-30</time>
+      <time title="创建时间：2026-05-30 20:36:22" itemprop="dateCreated datePublished" datetime="2026-05-30T20:36:22+08:00">2026-05-30</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2026-05-31 11:37:19" itemprop="dateModified" datetime="2026-05-31T11:37:19+08:00">2026-05-31</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/blog/categories/%E7%B3%BB%E7%BB%9F%E9%85%8D%E7%BD%AE/" itemprop="url" rel="index"><span itemprop="name">系统配置</span></a>
-        </span>
+      <time title="修改时间：2026-06-06 01:41:48" itemprop="dateModified" datetime="2026-06-06T01:41:48+08:00">2026-06-06</time>
     </span>
 
   
@@ -236,44 +227,79 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h2 id="dual-system"><a href="#dual-system" class="headerlink" title="dual-system"></a>dual-system</h2><p>现在装双系统变的更简单了。<br>准备一个U盘或移动硬盘，备份好，</p>
-<ol>
-<li>用<a target="_blank" rel="noopener" href="https://www.ventoy.net/en/doc_start.html">Ventoy</a>烧录；它就是一个引导程序，不用烧录so文件。</li>
-<li>将ubuntu .so文件复制进去； 可以复制任意个so.</li>
-<li>windows 磁盘管理，切割一块空白区域。</li>
-<li>我的是F2打开开机引导，如果是双系统，后面要选择“alongside with windows”,具体的忘了，差不多是这个。</li>
-<li>中间不需要手动选择分区，也不用划分区，最新的ubuntu都是自动的，swap区也不需要。</li>
-</ol>
-<h2 id="ubuntu"><a href="#ubuntu" class="headerlink" title="ubuntu"></a>ubuntu</h2><blockquote>
-<p>first of all <code>sudo apt-update</code></p>
+          <blockquote>
+<p>since I want to know what’s cloud-native and why it is the future, this is how I learn.</p>
 </blockquote>
-<ul>
-<li>v2rayn + chrome, ”一分机场“</li>
-<li>ibus-rime + double-pinyin， 小鹤双拼</li>
-<li>vs code，必须用.deb安装，否则ibus中文输入失效</li>
-<li>zsh, oh-my-zsh, theme选awsomepanda</li>
-<li>jdk, <a target="_blank" rel="noopener" href="https://adoptium.net/temurin/releases">termurin</a>，不叫openjdk但仍然是openjdk</li>
-<li>Intellij IDEA, 已不区分Community&#x2F;Ultimate</li>
-<li>copyQ, system settigns shortcut Ctrl+I</li>
-<li>jdownloader2, nonideal :(</li>
-<li>Steam, <code>steam --reset</code> if any probloms</li>
-</ul>
-<p>安装的都在 &#x2F;snap, &#x2F;opt.<br>config目录 ~&#x2F;.config<br>不用担心dnsleak了，coreDNS用不到了  </p>
-<h3 id="env"><a href="#env" class="headerlink" title="env"></a>env</h3><ul>
-<li><p>.zsh</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># develop</span><br><span class="line">export JAVA_HOME=/home/carl/local/jdk-25.0.3+9 </span><br><span class="line">export PATH=$PATH:$&#123;JAVA_HOME&#125;/bin</span><br><span class="line">export IDE_HOME=/home/carl/local/idea-IU-261.24374.151</span><br><span class="line">export PATH=$PATH:$&#123;IDE_HOME&#125;/bin</span><br></pre></td></tr></table></figure>
-<p>如果频繁换版本，就设置软连接 ln -s 指向具体版本，以后不用改变量。</p>
-</li>
-<li><p>.gitconfig</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">[user]</span><br><span class="line">        name = carl</span><br><span class="line">        email = zxfspace@gmail.com</span><br><span class="line">        signingkey = 55E2D3919A960DFC</span><br><span class="line">[init]</span><br><span class="line">        defaultBranch = main</span><br><span class="line">[commit]</span><br><span class="line">        gpgsign = true</span><br><span class="line">[alias]</span><br><span class="line">        st = status</span><br><span class="line">        co = checkout</span><br><span class="line">        b = branch</span><br><span class="line">        cm = commit -m</span><br><span class="line">        lg = log --graph --oneline --decorate --all</span><br><span class="line">[color]</span><br><span class="line">        ui = auto</span><br><span class="line">[diff]</span><br><span class="line">        algorithm = histogram</span><br><span class="line">[pull]</span><br><span class="line">        ff = only</span><br><span class="line">[includeIf &quot;gitdir:~/work/&quot;]</span><br><span class="line">        path = ~/work/.gitconfig</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>~&#x2F;.config&#x2F;ibus&#x2F;rime&#x2F;default.custom.yaml</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">patch:</span><br><span class="line">  schema_list:</span><br><span class="line">    - &#123;schema: double_pinyin_flypy&#125;</span><br><span class="line">  ascii_composer:</span><br><span class="line">    switch_key:</span><br><span class="line">      Shift_L: commit_code</span><br><span class="line">      Shift_R: commit_code</span><br></pre></td></tr></table></figure>
-<p>左右shift切换中英文。</p>
-</li>
-</ul>
-<h2 id="HHKB"><a href="#HHKB" class="headerlink" title="HHKB"></a>HHKB</h2><p><img src="/blog/2026/05/30/linux/hhkb1.png" loading="lazy"><br><img src="/blog/2026/05/30/linux/hhkb2.png" loading="lazy"></p>
+<h2 id="Roadmap"><a href="#Roadmap" class="headerlink" title="Roadmap"></a>Roadmap</h2><h3 id="Container-fundamentals"><a href="#Container-fundamentals" class="headerlink" title="Container fundamentals"></a>Container fundamentals</h3><p><strong>Linux fundamentals</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">namespace</span><br><span class="line">cgroups</span><br><span class="line">process isolation</span><br><span class="line">virtual networking</span><br><span class="line">iptables/ipvs</span><br><span class="line">overlay filesystem</span><br></pre></td></tr></table></figure>
 
+<p><strong>Docker&#x2F;containerd</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">image layering</span><br><span class="line">OCI runtime</span><br><span class="line">container networking</span><br><span class="line">bridge/veth</span><br><span class="line">volume mounting</span><br></pre></td></tr></table></figure>
+
+<h3 id="Kubernetes-core-architecture"><a href="#Kubernetes-core-architecture" class="headerlink" title="Kubernetes core architecture"></a>Kubernetes core architecture</h3><p><strong>Control Plane</strong></p>
+<ul>
+<li>kube-apiserver<br>  The center of everything.  </li>
+<li>etcd<br>  Distributed state storage.  </li>
+<li>scheduler<br>  How pods get assigned to nodes.  </li>
+<li>controller-manager<br>  Why Kubernetes is declarative.</li>
+</ul>
+<p><strong>Node side</strong>  </p>
+<ul>
+<li>kubelet<br>  Actual node agent.  </li>
+<li>container runtime<br>  Usually containerd.  </li>
+<li>kube-proxy<br>  Networking + Service implementation.</li>
+</ul>
+<h3 id="Networking"><a href="#Networking" class="headerlink" title="Networking"></a>Networking</h3><ul>
+<li>service<br>  how service discovery works.</li>
+<li>coreDNS<br>  how dns resolution works.  </li>
+<li>kube-proxy<br>  iptables vs ipvs.  </li>
+<li>CNI ()    </li>
+<li>Ingress &#x2F; Gateway API<br>  North-sourth traffic.  </li>
+<li>Service Mesh basics</li>
+</ul>
+<h3 id="Storage"><a href="#Storage" class="headerlink" title="Storage"></a>Storage</h3><ul>
+<li>PersistenVolume</li>
+<li>CSI drivers</li>
+<li>StatefulSet</li>
+<li>Distributed storage concepts</li>
+</ul>
+<h3 id="Observability"><a href="#Observability" class="headerlink" title="Observability"></a>Observability</h3><ul>
+<li>Metrics<br>  Prometheus  </li>
+<li>Logging<br>  Loki &#x2F; ELK  </li>
+<li>Tracing<br>  OpenTelemetry</li>
+</ul>
+<h3 id="GitOps"><a href="#GitOps" class="headerlink" title="GitOps"></a>GitOps</h3><p>Argo CD</p>
+<h3 id="Service-Mesh"><a href="#Service-Mesh" class="headerlink" title="Service Mesh"></a>Service Mesh</h3><p><strong>Envoy</strong>  </p>
+<p><strong>Istio</strong>  </p>
+<ul>
+<li>sidecar injection</li>
+<li>xDS</li>
+<li>traffic management</li>
+<li>mTLS</li>
+<li>retries</li>
+<li>canary routing</li>
+</ul>
+<h3 id="Platform-engineering"><a href="#Platform-engineering" class="headerlink" title="Platform engineering"></a>Platform engineering</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">internal Developer Platform  </span><br><span class="line">automation</span><br><span class="line">templates</span><br><span class="line">operators</span><br><span class="line">self-service</span><br></pre></td></tr></table></figure>
+
+<p>after all previous stages, the biggest mindset change you get is<br>Traditional Java backend mindset: <code>Application-centric</code><br>Cloud-native mindset: <code>Platform-centric</code><br>Meaning:</p>
+<ul>
+<li>applications are disposable</li>
+<li>infrastructure becomes programmable</li>
+<li>reconciliation replaces imperative operations</li>
+<li>networking becomes software-defined</li>
+</ul>
+<p>This shift is much bigger than simply “learning Kubernetes”.<br><code>Kubernetes is a distributed control system, NOT a container deployment tool.</code></p>
+<h2 id="Future-Architecture-2026"><a href="#Future-Architecture-2026" class="headerlink" title="Future Architecture (2026+)"></a>Future Architecture (2026+)</h2><p>Most cloud-native platforms are moving toward:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">       Gateway API</span><br><span class="line">            |</span><br><span class="line">   ----------------</span><br><span class="line">   |              |</span><br><span class="line">Istio         Cilium</span><br><span class="line">   |</span><br><span class="line"> Envoy</span><br></pre></td></tr></table></figure>
+<p>The API becomes standardized.</p>
+<p>The implementation becomes replaceable.</p>
+<p>This is exactly what Kubernetes did with:</p>
+<p>Container Runtime Interface (CRI)</p>
+<p>allowing:</p>
+<p>Docker<br>containerd<br>CRI-O</p>
+<p>to be swapped underneath.</p>
+<p>Gateway API is doing the same thing for networking.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">Learn Kubernetes Services thoroughly</span><br><span class="line">    ClusterIP</span><br><span class="line">    NodePort</span><br><span class="line">    LoadBalancer</span><br><span class="line">Learn Ingress</span><br><span class="line">    NGINX Ingress Controller</span><br><span class="line">Learn Gateway API</span><br><span class="line">    Gateway</span><br><span class="line">    HTTPRoute</span><br><span class="line">    GRPCRoute</span><br><span class="line">    ReferenceGrant</span><br><span class="line">Learn Envoy</span><br><span class="line">    listeners</span><br><span class="line">    routes</span><br><span class="line">    clusters</span><br><span class="line">    xDS</span><br><span class="line">Learn Istio</span><br><span class="line">    sidecar mode</span><br><span class="line">    ambient mode</span><br><span class="line">    traffic management</span><br><span class="line">    mTLS</span><br><span class="line">Learn Cilium</span><br><span class="line">    eBPF</span><br><span class="line">    Gateway API support</span><br><span class="line">    Service Mesh</span><br></pre></td></tr></table></figure>
       
     </div>
 
@@ -292,7 +318,7 @@
 
 
   <nav class="pagination">
-    <a class="extend prev" rel="prev" title="上一页" aria-label="上一页" href="/blog/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/blog/">1</a><a class="page-number" href="/blog/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/blog/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/199/">199</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/blog/page/4/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" title="上一页" aria-label="上一页" href="/blog/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/blog/">1</a><a class="page-number" href="/blog/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/blog/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/200/">200</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/blog/page/4/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 </div>

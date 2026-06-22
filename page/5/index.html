@@ -141,7 +141,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/blog/archives/">
-          <span class="site-state-item-count">199</span>
+          <span class="site-state-item-count">200</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -178,7 +178,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://carl-zk.github.io/blog/2025/09/30/virtual-thread-is-to-shake-the-world/">
+    <link itemprop="mainEntityOfPage" href="https://carl-zk.github.io/blog/2025/12/13/%E6%8A%95%E8%B5%84%E5%85%A5%E9%97%A8/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/blog/images/avatar.gif">
@@ -196,7 +196,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/blog/2025/09/30/virtual-thread-is-to-shake-the-world/" class="post-title-link" itemprop="url">Virtual Thread Is to Shake the World</a>
+          <a href="/blog/2025/12/13/%E6%8A%95%E8%B5%84%E5%85%A5%E9%97%A8/" class="post-title-link" itemprop="url">投资入门</a>
         </h2>
 
         <div class="post-meta-container">
@@ -207,7 +207,7 @@
       </span>
       <span class="post-meta-item-text">发表于</span>
 
-      <time title="创建时间：2025-09-30 18:08:17" itemprop="dateCreated datePublished" datetime="2025-09-30T18:08:17+08:00">2025-09-30</time>
+      <time title="创建时间：2025-12-13 15:28:05" itemprop="dateCreated datePublished" datetime="2025-12-13T15:28:05+08:00">2025-12-13</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -215,6 +215,15 @@
       </span>
       <span class="post-meta-item-text">更新于</span>
       <time title="修改时间：2026-05-30 10:33:09" itemprop="dateModified" datetime="2026-05-30T10:33:09+08:00">2026-05-30</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/blog/categories/%E9%87%91%E8%9E%8D%E7%90%86%E8%B4%A2/" itemprop="url" rel="index"><span itemprop="name">金融理财</span></a>
+        </span>
     </span>
 
   
@@ -227,151 +236,49 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h1 id="virtual-thread"><a href="#virtual-thread" class="headerlink" title="virtual thread"></a>virtual thread</h1><h2 id="when-sould-you-use-virtual-threads"><a href="#when-sould-you-use-virtual-threads" class="headerlink" title="when sould you use virtual threads"></a>when sould you use virtual threads</h2><p>Virtual threads (introduced in <strong>Project Loom</strong>, JDK 21 GA) are lightweight threads managed by the JVM rather than the OS. They shine in scenarios where you need to handle <strong>lots of concurrent tasks that spend most of their time waiting (IO-bound workloads).</strong></p>
-<p>Good use cases:</p>
-<ul>
-<li><p>Servers handling many concurrent connections<br>  e.g., HTTP servers, gRPC servers, WebSocket servers.</p>
+          <h2 id="简单入门财报"><a href="#简单入门财报" class="headerlink" title="简单入门财报"></a>简单入门财报</h2><p>财务报表包括: 现金流量表&#x2F;利润表&#x2F;资产负债表.<br>现金流量表是收付实现制, 利润表是权责发生制, 负债表体现公司家底.<br>现金流量表包括: 经营活动&#x2F;投资活动&#x2F;筹资活动.</p>
+<h3 id="资产负债表"><a href="#资产负债表" class="headerlink" title="资产负债表"></a>资产负债表</h3><p>流动资产<br>货币资金 1<br>应收账款 2<br>预付账款 2<br>预收<br>固定资产 3<br>(1你的钱; 2别人欠你的钱,预付是你提前给别人的钱)</p>
+<p>资产&#x3D;负债+所有者权益(自己的净资产) </p>
+<p>注意, 借来的钱也看作你的资产, 其实它是负债.</p>
+<h4 id="如何读懂资产负债表"><a href="#如何读懂资产负债表" class="headerlink" title="如何读懂资产负债表"></a>如何读懂资产负债表</h4><ol>
+<li><p>资产<br><strong>流动资产</strong><br>货币资金</p>
+<p>应收票据<br>应收账款<br>应收款项融资<br>预付款项</p>
+<p>存货<br><strong>非流动资产</strong><br>固定资产<br>在建工程<br>无形资产<br>商誉</p>
 </li>
-<li><p>High-concurrency clients<br>  e.g., calling many downstream services (DB, REST APIs, message queues).</p>
+<li><p>负债<br><strong>流动负债</strong><br>短期借款<br>应付票据<br>应付票款<br>预收款项(合同负债)<br><strong>非流动负债</strong><br>长期借款</p>
 </li>
-<li><p>Asynchronous pipelines<br>  where tasks wait on external systems but you want code to look synchronous.</p>
+<li><p>所有者权益<br>只看总和</p>
 </li>
-<li><p>Replacement for callback-heavy async code<br>  You can write blocking-style code, but still scale like async&#x2F;reactive.</p>
-</li>
-</ul>
-<p>Not ideal:</p>
-<ul>
-<li><p>CPU-bound parallel computations<br>  Use platform threads (classic ForkJoinPool, parallel streams, or structured concurrency with platform threads). Virtual threads don’t give extra CPU, they just multiplex blocking tasks.</p>
-</li>
-<li><p>Very short-lived tasks in huge numbers<br>  If the task just increments a counter, spawning millions of VTs gives no benefit and can be slower than batching work on a platform thread pool.</p>
-</li>
-</ul>
-<h2 id="does-a-“virtual-thread-pool”-exist"><a href="#does-a-“virtual-thread-pool”-exist" class="headerlink" title="does a “virtual thread pool” exist?"></a>does a “virtual thread pool” exist?</h2><p>Strictly speaking: <strong>NO, virtual threads don’t use a traditional pool</strong> like <code>Executors.newFixedThreadPool</code>.</p>
-<p>Instead, each virtual threads is cheap to create (thousands to millions possible). The JVM schedules them onto a small pool of <strong>carrier threads</strong> (platform threads) behind the scenes.</p>
-<p>That means:</p>
-<ul>
-<li>You can just create anew virtual thread per task (<code>Thread.ofVirtual().start(...)</code> or <code>Executors.newVirtualThreadPerTaskExecutor()</code>).</li>
-<li>No need to reuse them —— they are disposable, unlike platform threads.</li>
-<li>The JVM maintains an internal scheduler that runs VTs on carrier threads.</li>
-</ul>
-<p>So the pattern is:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> (<span class="type">var</span> <span class="variable">executor</span> <span class="operator">=</span> Executors.newVirtualThreadPerTaskExecutor()) &#123;</span><br><span class="line">    IntStream.range(<span class="number">0</span>, <span class="number">1_000_000</span>).forEach(i -&gt;</span><br><span class="line">        executor.submit(() -&gt; &#123;</span><br><span class="line">            <span class="comment">// IO-bound task</span></span><br><span class="line">            fetchFromDb(i);</span><br><span class="line">        &#125;)</span><br><span class="line">    );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>Here, each task gets its own virtual thread. The JVM multiplexes them efficiently over a small number of OS threads.</p>
-<h2 id="How-to-choose-between-pool-of-platform-threads-vs-per-task-virtual-threads"><a href="#How-to-choose-between-pool-of-platform-threads-vs-per-task-virtual-threads" class="headerlink" title="How to choose between pool of platform threads vs per-task virtual threads"></a>How to choose between pool of platform threads vs per-task virtual threads</h2><ul>
-<li>User <strong>platform thread pools</strong> when:<ul>
-<li>You want to bound concurrency for CPU-bound tasks (e.g., 8 threads for 8 CPU cores).</li>
-</ul>
-</li>
-<li>User virtual threads when:<ul>
-<li>You want to scale IO-bound concurrency (e.g., 50k socket connections).</li>
-<li>Thread creation overhead is a bottleneck.</li>
-</ul>
-</li>
-</ul>
-<h1 id="VTs-or-Reactor"><a href="#VTs-or-Reactor" class="headerlink" title="VTs or Reactor"></a>VTs or Reactor</h1><h2 id="Reactor-vs-Virtual-threads-different-approaches"><a href="#Reactor-vs-Virtual-threads-different-approaches" class="headerlink" title="Reactor vs Virtual threads: different approaches"></a>Reactor vs Virtual threads: different approaches</h2><h3 id="Reactor"><a href="#Reactor" class="headerlink" title="Reactor"></a>Reactor</h3><ul>
-<li>Based on the <strong>reactive streams model</strong> (non-blocking, event-loop style).</li>
-<li>Forces you to compose async flows (Mono, Flux) to avoid blocking threads.</li>
-<li>Good for massive concurrency and <strong>backpressure control</strong>, but requires a different programming model.</li>
-</ul>
-<h3 id="Virtual-threads"><a href="#Virtual-threads" class="headerlink" title="Virtual threads"></a>Virtual threads</h3><ul>
-<li>Keep the <strong>blocking code style</strong> (imperative, linear).</li>
-<li>You can just call <code>db.query()</code> or <code>httpClient.send()</code> inside a virtual thread without worring about blocking the OS thread.</li>
-<li>The scheduler multiplexes thousands of VTs on a few carriers.</li>
-</ul>
-<p>In case you have some ideas like </p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Mono.fromCallable(() -&gt; &#123;</span><br><span class="line">    <span class="keyword">try</span> (<span class="type">var</span> <span class="variable">executor</span> <span class="operator">=</span> Executors.newVirtualThreadPerTaskExecutor()) &#123;</span><br><span class="line">        <span class="keyword">return</span> executor.submit(() -&gt; blockingDbQuery()).get();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<p>, you could question: <em><strong>why Reactor at all for IO-heavy workloads?</strong></em><br>With VTs, you don’t need reactive chains to achieve scalability ——— <strong>a simple synchronous style in a VT can scale to tens of thousands of connections.</strong></p>
-<hr>
-<p>Reactor is still useful if:</p>
-<ul>
-<li>You need backpressure.</li>
-<li>You already have a large reactive codebase.</li>
-<li>You want integration with libraries that are natively reactive (R2DBC, reactive Kafka, etc.).</li>
-</ul>
-<p>Hybrid using is fine, you can still integrates with existing Reactor ecosystem.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Scheduler</span> <span class="variable">vtScheduler</span> <span class="operator">=</span> Scheduler.fromExecutor(Executors.newVirtualThreadPerTaskExecutor());</span><br><span class="line"></span><br><span class="line">Mono.fromCallable(() -&gt; blockingApiCall())</span><br><span class="line">    .subscribeOn(vtScheduler)</span><br><span class="line">    .flatMap(result -&gt; Mono.just(transform(result)));</span><br></pre></td></tr></table></figure>
-
-<hr>
-<p>it’s a Reactor way you handle IO-heavy request,</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Scheduler</span> <span class="variable">vtScheduler</span> <span class="operator">=</span> Scheduler.fromExecutor(</span><br><span class="line">    Executors.newVirtualThreadPerTaskExecutor()</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line">Mono&lt;String&gt; <span class="title function_">service</span><span class="params">(String id)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> Mono.fromCallable(() -&gt; blockingDbQuery(id))</span><br><span class="line">               .subscribeOn(vtScheduler)</span><br><span class="line">               .zipWith(</span><br><span class="line">                   Mono.fromCallable(() -&gt; blockingHttpCall(id))</span><br><span class="line">                       .subscribeOn(vtScheduler)</span><br><span class="line">               )</span><br><span class="line">               .map(tuple -&gt; <span class="string">&quot;DB: &quot;</span> + tuple.getT1() + <span class="string">&quot;, HTTP: &quot;</span> + tuple.getT2());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>what does pure virtual threads looks like in IO-heavy tasks?</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">ExecutorService</span> <span class="variable">executor</span> <span class="operator">=</span> Executors.newVirtualThreadPerTaskExecutor();</span><br><span class="line"></span><br><span class="line">String <span class="title function_">service</span><span class="params">(String id)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">    Future&lt;String&gt; future = executor.submit(() -&gt; &#123;</span><br><span class="line">        <span class="type">var</span> <span class="variable">dbResult</span> <span class="operator">=</span> blockingDbQuery(id);</span><br><span class="line">        <span class="type">var</span> <span class="variable">httpResult</span> <span class="operator">=</span> blockingHttpCall(id);</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;DB: &quot;</span> + dbResult + <span class="string">&quot;, HTTP: &quot;</span> + httpResult;</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="keyword">return</span> future.get();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>or with structured concurrency:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">String <span class="title function_">service</span><span class="params">(String id)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">    <span class="keyword">try</span> (<span class="type">var</span> <span class="variable">scope</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">StructuredTaskScope</span>.ShutdownOnFailure()) &#123;</span><br><span class="line">        <span class="type">var</span> <span class="variable">dbFuture</span> <span class="operator">=</span> scope.fork(() -&gt; blockingDbQuery(id));</span><br><span class="line">        <span class="type">var</span> <span class="variable">httpFuture</span> <span class="operator">=</span> scope.fork(() -&gt; blockingHttpCall(id));</span><br><span class="line"></span><br><span class="line">        scope.join();           <span class="comment">// wait for both</span></span><br><span class="line">        scope.throwIfFailed();  <span class="comment">// propagate exception</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;DB: &quot;</span> + dbFuture.resultNow() + <span class="string">&quot;, HTTP: &quot;</span> + httpFuture.resultNow();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>that’s it, the blocking style comes back without loose high throughput.</p>
-<p>If you’re on Spring 6 &#x2F; Spring boot 3 with Loom (JDK 21), you can drop WebFlux and use Spring MVC with virtual threads instead.<br>Each request gets its own VT, so blocking is cheap:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">VirtualThreadConfig</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    ExecutorService <span class="title function_">applicationExecutor</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> Executors.newVirtualThreadPerTaskExecutor();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MyController</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@GetMapping(&quot;/service/&#123;id&#125;&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">service</span><span class="params">(<span class="meta">@PathVariable</span> String id)</span> &#123;</span><br><span class="line">        <span class="comment">// This method is blocking, but it’s OK — it runs on a virtual thread</span></span><br><span class="line">        <span class="type">var</span> <span class="variable">dbResult</span> <span class="operator">=</span> blockingDbQuery(id);</span><br><span class="line">        <span class="type">var</span> <span class="variable">httpResult</span> <span class="operator">=</span> blockingHttpCall(id);</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;DB: &quot;</span> + dbResult + <span class="string">&quot;, HTTP: &quot;</span> + httpResult;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String <span class="title function_">blockingDbQuery</span><span class="params">(String id)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;db-&quot;</span> + id;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String <span class="title function_">blockingHttpCall</span><span class="params">(String id)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;http-&quot;</span> + id;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>this is the “Loom Future”: MVC simplicity + WebFlux scalability.</p>
-<h1 id="VTs-or-Netty"><a href="#VTs-or-Netty" class="headerlink" title="VTs or Netty"></a>VTs or Netty</h1><p><strong>Virtual threads can replace the reason Netty exists</strong><br>Netty was designed because the <strong>thread-per-connection model didn’t scale</strong> (too many OS threads).<br>With VTs, you can go back to simple thread-per-connection model:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> (<span class="type">var</span> <span class="variable">listener</span> <span class="operator">=</span> AsynchronousServerSocketChannel.open()) &#123;</span><br><span class="line">    listener.bind(<span class="keyword">new</span> <span class="title class_">InetSocketAddress</span>(<span class="number">8080</span>));</span><br><span class="line">    <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">        <span class="type">var</span> <span class="variable">client</span> <span class="operator">=</span> listener.accept().get(); <span class="comment">// blocks</span></span><br><span class="line">        Thread.ofVirtual().start(() -&gt; handle(client));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>Each connection just runs on its own virtual thread ——— no event loop gymnastics.</p>
+</ol>
+<h3 id="利润表"><a href="#利润表" class="headerlink" title="利润表"></a>利润表</h3><p>营业收入: 现金交易&#x2F;赊账<br>营业成本: 营业税金及附加&#x2F;销售费&#x2F;管理费&#x2F;财务费&#x2F;研发费<br>投资收益&#x2F;资产减值损失(商誉)<br>营业利润&#x2F;营业外收入&#x2F;营业外支出<br>利润总额<br>净利润<br>归属于母公司所有者净利润</p>
+<p>毛利&#x3D;营业收入-营业成本</p>
+<h3 id="现金流量表"><a href="#现金流量表" class="headerlink" title="现金流量表"></a>现金流量表</h3><p>经营&#x2F;投资&#x2F;筹资 —- 这些都只看净额即可</p>
+<p>好的公司的经营性净额要是正的. (自己造血)</p>
+<p>投资净额一般为负, 为负不代表一定不好, 例如用于扩张.</p>
+<p>筹资净额为正: 可能筹资能力很强;<br>为负: 看经营情况,可能用不着筹资, 反而开始还钱和分红.</p>
+<p>注意:</p>
+<ol>
+<li>经营性净额为正</li>
+<li>现金收入比率(销售商品,提供劳务收到的现金 &#x2F; 营业收入): &#x3D;1极好, 太小情况不乐观</li>
+<li>净利润现金含量(经营性净额 &#x2F; 净利润): 越近1越好</li>
+</ol>
+<h2 id="杜邦分析法"><a href="#杜邦分析法" class="headerlink" title="杜邦分析法"></a>杜邦分析法</h2><p>净资产收益率(ROE, 净利润 &#x2F; 所有者权益) : 销售净利率&#x2F;总资产周转率(销售收入 &#x2F; 总资产家)&#x2F;权益乘数 , ROE&#x3D;这三个相乘</p>
+<p>公司赚钱的3个因素:<br>销售净利率: 很赚钱 (消费品牌和科技产品, 茅台型公司)<br>总资产周转率: 快速周转 (薄利多销的制造业,零售业, 沃尔玛型)<br>权益乘数: 用别人的钱 (总资产 &#x2F; 净资产, 高杠杆的银行,房地产, 银行性)</p>
+<p>很难有公司同时兼有其中3种甚至2种</p>
+<p>ROE档位: &gt;&#x3D; 20% 常青藤; &gt;&#x3D;15% 重点大学; &gt;&#x3D;10% 有书读, 这是底线; &lt;10%: 不及格.</p>
+<h2 id="七步成诗法"><a href="#七步成诗法" class="headerlink" title="七步成诗法"></a>七步成诗法</h2><p>读财报原则: 横向(同行)&#x2F;纵向(自己历史), 看3-5家同行, 3-5年历史数据</p>
+<p>一 扣非ROE<br>扣除非经常性损益<br>常年&gt;15%</p>
+<p>二 营业收入<br>现金收入比率(销售商品,提供劳务收到的现金 &#x2F; 营业收入)</p>
 <blockquote>
-<p>this eliminates the core scalability problem Netty solved in 2004.</p>
+<p>0.8</p>
 </blockquote>
-<p>Can VTs replace Netty?</p>
-<p>Not now, Nety is not “just” about scaling connections. It also provides:</p>
-<ul>
-<li>Protocol implementations (HTTP, HTTP&#x2F;2, HTTP&#x2F;3, WebSockets, gRPC transport).</li>
-<li>Pipelines (handlers, encoders&#x2F;decoders, SSL&#x2F;TLS, compression).</li>
-<li>Zero-copy, pooled byte buffers for performance.</li>
-<li>Backpressure and flow control.</li>
-</ul>
-<p>Virtual threads don’t give you any of that ——— they just let you block without guilt.</p>
-<p>What’s a minimal blocking HTTP server with VTs looks like?</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.*;</span><br><span class="line"><span class="keyword">import</span> java.net.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SimpleHttpServer</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">        <span class="keyword">try</span> (<span class="type">var</span> <span class="variable">serverSocket</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ServerSocket</span>(<span class="number">8080</span>)) &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;Server listening on port 8080...&quot;</span>);</span><br><span class="line"></span><br><span class="line">            <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">                <span class="type">Socket</span> <span class="variable">client</span> <span class="operator">=</span> serverSocket.accept(); <span class="comment">// blocks</span></span><br><span class="line">                Thread.ofVirtual().start(() -&gt; handleClient(client));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">handleClient</span><span class="params">(Socket client)</span> &#123;</span><br><span class="line">        <span class="keyword">try</span> (client;</span><br><span class="line">             <span class="type">var</span> <span class="variable">reader</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">BufferedReader</span>(<span class="keyword">new</span> <span class="title class_">InputStreamReader</span>(client.getInputStream()));</span><br><span class="line">             <span class="type">var</span> <span class="variable">writer</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">BufferedWriter</span>(<span class="keyword">new</span> <span class="title class_">OutputStreamWriter</span>(client.getOutputStream()))) &#123;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// Read the first request line (ignore headers for simplicity)</span></span><br><span class="line">            <span class="type">String</span> <span class="variable">line</span> <span class="operator">=</span> reader.readLine();</span><br><span class="line">            System.out.println(<span class="string">&quot;Received: &quot;</span> + line);</span><br><span class="line"></span><br><span class="line">            <span class="comment">// Simple HTTP response</span></span><br><span class="line">            writer.write(<span class="string">&quot;HTTP/1.1 200 OK\r\n&quot;</span>);</span><br><span class="line">            writer.write(<span class="string">&quot;Content-Type: text/plain\r\n&quot;</span>);</span><br><span class="line">            writer.write(<span class="string">&quot;Connection: close\r\n&quot;</span>);</span><br><span class="line">            writer.write(<span class="string">&quot;\r\n&quot;</span>);</span><br><span class="line">            writer.write(<span class="string">&quot;Hello from Virtual Threads!\n&quot;</span>);</span><br><span class="line">            writer.flush();</span><br><span class="line"></span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>If you want non-blocking channels but still keep the simple style:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.net.*;</span><br><span class="line"><span class="keyword">import</span> java.nio.*;</span><br><span class="line"><span class="keyword">import</span> java.nio.channels.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">NioHttpServer</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        <span class="keyword">try</span> (<span class="type">var</span> <span class="variable">server</span> <span class="operator">=</span> ServerSocketChannel.open()) &#123;</span><br><span class="line">            server.bind(<span class="keyword">new</span> <span class="title class_">InetSocketAddress</span>(<span class="number">8080</span>));</span><br><span class="line"></span><br><span class="line">            System.out.println(<span class="string">&quot;NIO server listening on port 8080...&quot;</span>);</span><br><span class="line"></span><br><span class="line">            <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">                <span class="type">SocketChannel</span> <span class="variable">client</span> <span class="operator">=</span> server.accept(); <span class="comment">// blocks</span></span><br><span class="line">                Thread.ofVirtual().start(() -&gt; handle(client));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">handle</span><span class="params">(SocketChannel client)</span> &#123;</span><br><span class="line">        <span class="keyword">try</span> (client) &#123;</span><br><span class="line">            <span class="type">ByteBuffer</span> <span class="variable">buffer</span> <span class="operator">=</span> ByteBuffer.allocate(<span class="number">1024</span>);</span><br><span class="line">            client.read(buffer); <span class="comment">// blocks</span></span><br><span class="line">            buffer.flip();</span><br><span class="line"></span><br><span class="line">            <span class="type">String</span> <span class="variable">response</span> <span class="operator">=</span> <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">                HTTP/1.1 200 OK\r</span></span><br><span class="line"><span class="string">                Content-Type: text/plain\r</span></span><br><span class="line"><span class="string">                Connection: close\r</span></span><br><span class="line"><span class="string">                \r</span></span><br><span class="line"><span class="string">                Hello from Virtual Threads with NIO!</span></span><br><span class="line"><span class="string">                &quot;&quot;&quot;</span>;</span><br><span class="line"></span><br><span class="line">            client.write(ByteBuffer.wrap(response.getBytes()));</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h1 id="VTs-frameworks"><a href="#VTs-frameworks" class="headerlink" title="VTs frameworks"></a>VTs frameworks</h1><p>Helidon Níma (Helidon 4)</p>
-<p>Reactor Core (Spring Reactor &#x2F; WebFlux)</p>
-<p>Spring Boot 3.2</p>
-<h1 id="Caveats-Limitations-amp-Things-to-Watch"><a href="#Caveats-Limitations-amp-Things-to-Watch" class="headerlink" title="Caveats, Limitations &amp; Things to Watch"></a>Caveats, Limitations &amp; Things to Watch</h1><ul>
-<li><strong>Blocking calls in third-party libraries</strong>: If a library internally blocks in a way the JVM can’t detect (e.g. native sleep, synchronized locks), the benefit is diminished.</li>
-<li><strong>ThreadLocal usage</strong>: Because you may have many virtual threads, ThreadLocal data may become an issue (memory, leakage). Scoped values or other strategies are recommended. </li>
-<li><strong>Resource limits beyond threads</strong>: Database connections, file descriptors, sockets, memory — you still need to manage these.</li>
-<li><strong>Performance &amp; tuning</strong>: The new runtime behaviors may reveal new performance bottlenecks, GC overheads, scheduling latency, etc.</li>
-<li><strong>Maturity &amp; ecosystem</strong>: Many frameworks, tools, APM agents, debuggers, etc., will need adaptation to fully embrace Loom.</li>
-</ul>
-<p>ThreadLocals can blow up memory usage with millions of virtual threads.<br>Prefer Scoped Values (available in preview) or explicit context passing.</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ScopedValue&lt;String&gt; USER = ScopedValue.newInstance();</span><br><span class="line"></span><br><span class="line">ScopedValue.where(USER, <span class="string">&quot;carl&quot;</span>)</span><br><span class="line">           .run(() -&gt; doWork(USER.get()));</span><br></pre></td></tr></table></figure>
-
-<p>Structured Concurrency (for Task Groups), Instead of manual <code>CompletableFuture</code> composition, use Loom’s structured concurrency API:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> (<span class="type">var</span> <span class="variable">scope</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">StructuredTaskScope</span>.ShutdownOnFailure()) &#123;</span><br><span class="line">    <span class="type">var</span> <span class="variable">task1</span> <span class="operator">=</span> scope.fork(() -&gt; fetchUser());</span><br><span class="line">    <span class="type">var</span> <span class="variable">task2</span> <span class="operator">=</span> scope.fork(() -&gt; fetchOrders());</span><br><span class="line">    scope.join();</span><br><span class="line">    scope.throwIfFailed();</span><br><span class="line">    <span class="keyword">return</span> combine(task1.resultNow(), task2.resultNow());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<hr>
-<p>🗓 Project Loom Timeline &#x2F; Roadmap<br>🔹 Early Days</p>
-<p>2017: Project Loom was announced at OpenJDK (Brian Goetz &amp; Ron Pressler leading).</p>
-<p>2018–2020: Early prototypes with fibers and continuations. APIs unstable.</p>
-<p>JDK 13–16: Some incubator APIs for continuations and structured concurrency experiments.</p>
-<p>🔹 Key Milestones</p>
-<p>JDK 19 (Sept 2022)</p>
-<p>Virtual Threads introduced as a preview feature.</p>
-<p>Structured Concurrency incubated.</p>
-<p>JDK 20 (Mar 2023)</p>
-<p>Virtual Threads previewed again with refinements.</p>
-<p>Structured Concurrency incubator updated.</p>
-<p>JDK 21 (Sept 2023, LTS release)</p>
-<p>Virtual Threads finalized (no longer preview).</p>
-<p>Structured Concurrency still incubating.</p>
-<p>Scoped Values introduced in preview.</p>
-<p>JDK 22 (Mar 2024)</p>
-<p>Structured Concurrency (2nd incubator round).</p>
-<p>Scoped Values (2nd preview).</p>
-<p>JDK 23 (Sept 2024, not LTS)</p>
-<p>Ongoing improvements in Structured Concurrency &amp; Scoped Values.</p>
-<p>Tooling support (debuggers, profilers) improving for virtual threads.</p>
-<p>🔮 Near Future</p>
-<p>JDK 25 (likely next LTS in 2026)</p>
-<p>Expect Structured Concurrency and Scoped Values to become stable.</p>
-<p>Virtual thread ecosystem maturity (Spring, Hibernate, Netty alternatives adapting).</p>
-<p>JVM &#x2F; JIT &#x2F; GC optimizations specific to Loom workloads.</p>
+<p>三 毛利率<br>代表产品的竞争力<br>要与同行比较, 挑市值接近的 (如果感兴趣, 可深入比较如销售费用 &#x2F; 营业收入, 管理费用 &#x2F; 营业收入)</p>
+<p>四 净利润<br>股价&#x3D;净利润*市盈率(总市值 &#x2F; 净利润, 股价 &#x2F; 每股收益)<br>看净利润率<br>看净利润的含金量: 净利润现金含量(经营性净额 &#x2F; 净利润): 越近1越好, 过大也不是好事,比如900%<br>看净利润是否有水分: 扣除非经常性损益金额, 扣非净利润 &#x2F; 净利润, &#x3D;1最好, 偶尔一次&lt;0.75需要查一下扣非损益</p>
+<p>五 总资产周转率<br>与同行对比总资产周转率(销售收入 &#x2F; 总资产)<br>2C的再看开存货周转率<br>2B的再看应收账款周转率</p>
+<p>带利息的负债是坏负债, 应该越小越好, 如短期借款.<br>好的负债如应付票据,应付账款,预收款项,合同负债, 这些体现了在上下游的话语权.</p>
+<p>所以, 看资产负债率(资产 &#x2F; 净资产)是没有意义的, 因为负债有好坏. 看到高负债率可以查带息负债率.<br>如果某公司的坏负债是0, 但负债率40%, 说明它是占用了上下游的钱.</p>
+<p>六 看”现金及其等价物 &#x2F; 带息负债”<br>一次性还债能力, 要大于1</p>
+<p>七 做决定<br>ROE的分数<br>ROE的质量: 盈利能力?周转能力?杠杆?靠哪一项赚钱<br>ROE的稳定性: 近5年</p>
 
       
     </div>
@@ -391,7 +298,7 @@
 
 
   <nav class="pagination">
-    <a class="extend prev" rel="prev" title="上一页" aria-label="上一页" href="/blog/page/4/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/blog/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/199/">199</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/blog/page/6/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" title="上一页" aria-label="上一页" href="/blog/page/4/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/blog/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/200/">200</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/blog/page/6/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 </div>
