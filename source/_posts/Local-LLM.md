@@ -28,20 +28,25 @@ schema: v1
 models:
   - name: qwen
     provider: openai
-    model: qwen3.5-9b
+    model: qwen2.5-coder-14b-instruct
     apiBase: http://127.0.0.1:1234/v1
     apiKey: dummy
 
     requestOptions:
       timeout: 300000
 
-  - name: nomic-embed-text
-    provider: ollama
-    model: nomic-embed-text
     roles:
       - chat
+      - autocomplete
+      - apply
+
+  - name: nomic-embed-text
+    provider: openai
+    model: text-embedding-nomic-embed-text-v2-moe
+    apiBase: http://127.0.0.1:1234/v1
+    apiKey: dummy
+    roles:
       - embed
-      - edit
 
 context:
   - provider: codebase
@@ -49,7 +54,3 @@ context:
   - provider: folder
   - provider: repo-map
 ```
-
-### todo 
-ollama 貌似没用， 可能Continue在使用自带的Indexing.
- 
